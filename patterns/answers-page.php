@@ -1,9 +1,9 @@
 <?php
 /**
- * Title: Short answers page
+ * Title: FAQs page
  * Slug: injil-help/answers-page
  * Categories: injil-help
- * Description: All short answers. Each item feeds FAQPage schema.
+ * Description: All FAQs. Each item feeds FAQPage schema.
  */
 ?>
 <!-- wp:group {"className":"ih-section-head","layout":{"type":"default"}} -->
@@ -16,7 +16,7 @@
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:heading {"level":1} -->
-<h1 class="wp-block-heading">Short answers</h1>
+<h1 class="wp-block-heading">FAQs</h1>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-intro"} -->
 <p class="ih-intro">Each answer is under sixty words and carries a label: scholarly consensus, minority view, or Islamic position. The full evidence sits in the linked article.</p>
