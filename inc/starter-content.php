@@ -56,7 +56,7 @@ function injil_help_markup_to_blocks( $lines ) {
 			continue;
 		}
 		if ( 0 === strpos( $line, '- ' ) ) {
-			$list[] = wp_kses_post( substr( $line, 2 ) );
+			$list[] = wp_kses_post( $footnote( substr( $line, 2 ) ) );
 			continue;
 		}
 		$flush();
