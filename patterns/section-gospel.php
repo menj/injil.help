@@ -99,5 +99,16 @@
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">What the Qur’an and the traditions say of his second coming.</p>
 <!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
+<p class="ih-k">Bonus chapter</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/bonus/">An Epistle unto the Congregation of Paul</a></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"ih-d"} -->
+<p class="ih-d">A letter to the followers of Paul, in the manner of the Pauline epistles.</p>
+<!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
