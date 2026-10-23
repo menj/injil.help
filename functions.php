@@ -7,8 +7,9 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'INJIL_HELP_VERSION', '2.5.2' );
+define( 'INJIL_HELP_VERSION', '2.6.0' );
 
+require_once get_stylesheet_directory() . '/inc/options.php';
 require_once get_stylesheet_directory() . '/inc/seo.php';
 
 /**
@@ -238,11 +239,14 @@ add_action(
 	5
 );
 
-/* Brandmark as favicon when no Site Icon is set. */
+/* Favicon: custom URL, else the brandmark (always, or when no Site Icon is set). */
 add_action(
 	'wp_head',
 	function () {
-		if ( ! has_site_icon() ) {
+		$custom = injil_help_get_option( 'favicon_url' );
+		if ( $custom ) {
+			printf( '<link rel="icon" href="%s">' . "\n", esc_url( $custom ) );
+		} elseif ( injil_help_get_option( 'favicon_force' ) || ! has_site_icon() ) {
 			printf( '<link rel="icon" type="image/svg+xml" href="%s">' . "\n", esc_url( get_stylesheet_directory_uri() . '/assets/brandmark.svg' ) );
 		}
 	}

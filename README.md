@@ -21,9 +21,11 @@ The theme header carries `GitHub Theme URI` and `Primary Branch: main`, so [Git 
 ## Structure
 
 - `style.css`, `theme.json`, `functions.php`: header, tokens, setup
+- `inc/options.php`: Appearance > Theme Options (tabbed: Colours, Branding, SEO)
 - `inc/seo.php`: titles, meta description, Open Graph, schema
 - `parts/`, `templates/`, `patterns/`: block markup
 - `assets/fonts/`: bundled fonts
+- `assets/css/`, `assets/js/`: Theme Options page styles and script
 - `assets/brandmark.svg`: brandmark (header, footer, fallback favicon)
 - `assets/images/`: placeholder cover art
 
