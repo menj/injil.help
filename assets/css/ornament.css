@@ -17,6 +17,7 @@ body.ih-orn-rich{--ih-orn-op:.085}
 .ih-orn .wp-block-button:not(.ih-btn-gloss) .wp-block-button__link::after,
 .ih-orn .ih-section-head::after,
 .ih-orn .ih-section-head h1::after,
+.ih-orn .ih-section-head h2::after,
 .ih-orn .ih-entry::after{
  content:"";
  -webkit-mask:var(--ih-i) center/contain no-repeat;
@@ -65,7 +66,8 @@ body.ih-orn-rich{--ih-orn-op:.085}
 .ih-orn .wp-block-post-content:has(.ih-tint-green) .ih-section-head::after{--ih-i:url(../icons/star.svg);background:var(--wp--preset--color--accent-1)}
 .ih-orn .wp-block-post-content:has(.ih-tint-gold) .ih-section-head::after{--ih-i:url(../icons/lamp.svg);background:var(--wp--preset--color--accent-3)}
 .ih-orn .wp-block-post-content:has(.ih-tint-lapis) .ih-section-head::after{--ih-i:url(../icons/book.svg);background:var(--wp--preset--color--accent-4)}
-.ih-orn .ih-section-head h1::after{
+.ih-orn .ih-section-head h1::after,
+.ih-orn .ih-section-head h2::after{
  --ih-i:url(../images/divider.svg);
  display:block;width:min(240px,60%);height:20px;margin-top:12px;
  background:var(--wp--preset--color--accent-3);
@@ -73,7 +75,7 @@ body.ih-orn-rich{--ih-orn-op:.085}
 
 /* Entry cards: section icon on the kicker, lift on hover, arrow on the right. */
 .ih-orn .ih-entry{transition:transform .22s ease,box-shadow .22s ease}
-.ih-orn .ih-entry:hover{transform:translateY(-3px);box-shadow:0 10px 24px color-mix(in srgb,var(--wp--preset--color--contrast) 14%,transparent),inset 0 0 0 1.5px var(--wp--preset--color--accent-1)}
+html .ih-orn .ih-entry:hover{transform:translateY(-3px);box-shadow:0 10px 24px color-mix(in srgb,var(--wp--preset--color--contrast) 14%,transparent),inset 0 0 0 1.5px var(--wp--preset--color--accent-1)}
 .ih-orn .ih-entry .ih-k{display:flex;align-items:center;gap:.5em}
 .ih-orn .ih-entry .ih-k::before{
  --ih-i:url(../icons/scroll.svg);
@@ -100,7 +102,7 @@ body.ih-orn-rich{--ih-orn-op:.085}
 .ih-orn .ih-section-head h2::before,.ih-orn .ih-footer h2::before{display:none}
 
 /* Lists and quotations. */
-.ih-orn .wp-block-post-content ul.wp-block-list:not(.ih-footnotes) > li::marker{content:"◆  ";color:var(--wp--preset--color--accent-3);font-size:.75em}
+.ih-orn .wp-block-post-content ul.wp-block-list:not(.ih-footnotes) > li:not(.ih-s)::marker{content:"◆  ";color:var(--wp--preset--color--accent-3);font-size:.75em}
 .ih-orn .wp-block-quote{position:relative;padding-top:var(--wp--preset--spacing--30)}
 .ih-orn .wp-block-quote::before{
  --ih-i:url(../icons/quote.svg);
@@ -144,10 +146,11 @@ body.ih-orn-rich{--ih-orn-op:.085}
 
 /* Motion: cards and answers rise into view. ornament.js adds .ih-js and .is-in. */
 @media (prefers-reduced-motion:no-preference){
- .ih-js .ih-reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+ .ih-js .ih-reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease,box-shadow .22s ease}
  .ih-js .ih-reveal.is-in{opacity:1;transform:none}
 }
 @media (prefers-reduced-motion:reduce){
+ html .ih-orn .ih-entry:hover{transform:none}
  .ih-orn .ih-entry,.ih-orn .ih-entry::after,.ih-orn .wp-block-button:not(.ih-btn-gloss) .wp-block-button__link::after{transition:none}
 }
 
