@@ -47,7 +47,7 @@ Manuscript images load from Wikimedia Commons (Special:FilePath URLs, sized by ?
 
 == Branding ==
 * Brandmark: assets/brandmark.svg (an open codex with rays of light, Qur'an 5:46). It appears as the link before the site title in the header and at the top of the footer's first column (class ih-mark; the footer adds ih-mark-foot).
-* Favicon: if no Site Icon is set under Settings > General > Site Icon (or in the Site Editor), the theme outputs assets/brandmark.svg as an SVG favicon. A Site Icon always takes precedence. Some older browsers ignore SVG favicons, so set a PNG Site Icon for full coverage.
+* Favicon: if no Site Icon is set under Settings > General > Site Icon (or in the Site Editor), the theme outputs assets/brandmark.svg as an SVG favicon. A Site Icon takes precedence unless Theme Options > Branding is set to force the brandmark or to use a custom favicon URL. Some older browsers ignore SVG favicons, so set a PNG Site Icon for full coverage.
 
 == Theme Options ==
 Appearance > Theme Options is a tabbed page (stored in the injil_help_options option):

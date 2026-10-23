@@ -127,11 +127,13 @@ function injil_help_find_page( $path ) {
  * Create every missing page. Returns the number created.
  */
 function injil_help_populate() {
-	// A short lock stops two requests (for example a double click) both creating the same page.
-	if ( get_transient( 'injil_help_populating' ) ) {
-		return 0;
+	// add_option() is an atomic insert, so only one request can take the lock; a lock older than a minute is stale.
+	if ( ! add_option( 'injil_help_populating', time(), '', false ) ) {
+		if ( time() - (int) get_option( 'injil_help_populating' ) < MINUTE_IN_SECONDS ) {
+			return 0;
+		}
+		update_option( 'injil_help_populating', time(), false );
 	}
-	set_transient( 'injil_help_populating', 1, MINUTE_IN_SECONDS );
 
 	$created = 0;
 
@@ -185,7 +187,7 @@ function injil_help_populate() {
 	flush_rewrite_rules();
 
 	update_option( 'injil_help_populated', INJIL_HELP_VERSION );
-	delete_transient( 'injil_help_populating' );
+	delete_option( 'injil_help_populating' );
 	return $created;
 }
 
