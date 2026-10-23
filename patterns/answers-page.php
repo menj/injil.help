@@ -131,5 +131,61 @@
 <!-- wp:paragraph {"className":"ih-full"} -->
 <p class="ih-full"><?php esc_html_e( 'Full evidence:', 'injil-help' ); ?> <a href="/gospel-according-to-islam/how-composed/">How this gospel was composed</a></p>
 <!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"is-style-answer-item","layout":{"type":"default"}} -->
+<div class="wp-block-group is-style-answer-item"><!-- wp:paragraph {"className":"is-style-label-islamic"} -->
+<p class="is-style-label-islamic"><?php esc_html_e( 'Islamic position', 'injil-help' ); ?></p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Does the Qur’an mean the four gospels or the Diatessaron?</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"ih-answer-text"} -->
+<p class="ih-answer-text">Christian writers disagree: one says the four gospels, another says Tatian’s single harmonised gospel. The Qur’an says only that the Injīl was given to ʿĪsā. Whichever book Christians held, the question is what he was given, and no document given to him survives.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"className":"ih-full"} -->
+<p class="ih-full"><?php esc_html_e( 'Full evidence:', 'injil-help' ); ?> <a href="/resources/responses/">Responses to named articles</a></p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"is-style-answer-item","layout":{"type":"default"}} -->
+<div class="wp-block-group is-style-answer-item"><!-- wp:paragraph {"className":"is-style-label-consensus"} -->
+<p class="is-style-label-consensus"><?php esc_html_e( 'Scholarly consensus', 'injil-help' ); ?></p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Do the oldest Bible manuscripts prove today’s Bible is unchanged?</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"ih-answer-text"} -->
+<p class="ih-answer-text">No. Codex Sinaiticus and Codex Vaticanus date from the fourth century, not from Jesus’ lifetime. Both omit John 7:53-8:11 and Mark 16:9-20, which many Bibles print, and no Greek manuscript before the fourteenth century has 1 John 5:7 as the King James Version prints it.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"className":"ih-full"} -->
+<p class="ih-full"><?php esc_html_e( 'Full evidence:', 'injil-help' ); ?> <a href="/resources/responses/">Responses to named articles</a></p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"is-style-answer-item","layout":{"type":"default"}} -->
+<div class="wp-block-group is-style-answer-item"><!-- wp:paragraph {"className":"is-style-label-islamic"} -->
+<p class="is-style-label-islamic"><?php esc_html_e( 'Islamic position', 'injil-help' ); ?></p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Do Muslims really believe in all the prophets?</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"ih-answer-text"} -->
+<p class="ih-answer-text">Yes. The Qur’an says God sent messengers it names and messengers it does not name (4:164), so belief does not depend on knowing every name or owning every book. Christians likewise rely on a church to say which books count. The Qur’an claims revelation, not one man’s opinion.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"className":"ih-full"} -->
+<p class="ih-full"><?php esc_html_e( 'Full evidence:', 'injil-help' ); ?> <a href="/resources/responses/">Responses to named articles</a></p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"is-style-answer-item","layout":{"type":"default"}} -->
+<div class="wp-block-group is-style-answer-item"><!-- wp:paragraph {"className":"is-style-label-islamic"} -->
+<p class="is-style-label-islamic"><?php esc_html_e( 'Islamic position', 'injil-help' ); ?></p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Does Islam teach there is no forgiveness?</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"ih-answer-text"} -->
+<p class="ih-answer-text">No. The Qur’an tells sinners not to despair of God’s mercy and says He forgives all sins to the one who repents (39:53). No soul bears another’s burden (6:164), so forgiveness comes by repentance, not atonement. Whether atonement is needed is the point in dispute, not proof that forgiveness is missing.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"className":"ih-full"} -->
+<p class="ih-full"><?php esc_html_e( 'Full evidence:', 'injil-help' ); ?> <a href="/resources/responses/">Responses to named articles</a></p>
+<!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
