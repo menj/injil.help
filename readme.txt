@@ -10,7 +10,7 @@ Child theme of Twenty Twenty-Five for injil.help.
 == Install ==
 1. Install and keep Twenty Twenty-Five (the parent). Do not delete it.
 2. Upload this folder to wp-content/themes/injil-help/ and activate "The Rightly-Guided Injīl". Set Settings > General > Site Title to "The Rightly-Guided Injīl" (the header and footer read it from there).
-3. (Automatic) On activation the theme creates all 48 pages listed under Theme Options > Content, sets pretty permalinks, and fills them with content. Skip to step 6 unless you want to rebuild a page.
+3. (Automatic) On activation the theme creates all 48 pages listed under Theme Options > Content, sets pretty permalinks, and fills them with content. Steps 4 and 5 below are then done for you; follow them only to rebuild a page by hand.
 3a. Optional: create categories for the parts: The Four Gospels, Paul, Jesus in the Qur'an, The Gospel According to Islam, Resources.
 4. Create the section pages /gospels/, /paul/, /quran/, /gospel-according-to-islam/, /resources/ and /answers/. Give each the "Section index" template and insert its matching "Section index: ..." pattern (or "FAQs page").
 5. Create /method/ (insert "Criterion statement"), /corrections/ ("Corrections log"), and the article pages the section entries link to. Edit the entry links in each pattern as articles go live.
