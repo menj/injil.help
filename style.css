@@ -199,7 +199,7 @@ p.ih-cite{margin:0;font-size:13px;color:var(--wp--preset--color--muted)}
 @media (max-width:700px){.ih-entries-list .ih-entry{display:flex}}
 .ih-aside{border:1.5px solid var(--wp--preset--color--accent-3);border-radius:var(--ih-r-md);padding:18px 22px;max-width:760px;margin-top:var(--wp--preset--spacing--30) !important}
 
-/* Short answers */
+/* FAQs */
 .ih-answers-band{display:block;background:var(--wp--preset--color--accent-5);border-radius:var(--ih-r-lg);padding:clamp(24px,4vw,48px)}
 .ih-answers-band > * + *{margin-top:var(--wp--preset--spacing--30) !important}
 .ih-answers{gap:12px !important}
@@ -273,6 +273,7 @@ p.ih-cite{margin:0;font-size:13px;color:var(--wp--preset--color--muted)}
 
 /* Brandmark: open codex with rays of light (Q 5:46) */
 .ih-mark{display:block;width:40px;height:40px;flex-shrink:0;background:url(assets/brandmark.svg) center/contain no-repeat}
+.ih-mark-foot{margin-bottom:var(--wp--preset--spacing--20)}
 
 /* Collapse the menu to its overlay button below 1180px, where seven glossed items no longer fit beside the title */
 @media (min-width:600px) and (max-width:1179px){

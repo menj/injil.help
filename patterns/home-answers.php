@@ -1,9 +1,9 @@
 <?php
 /**
- * Title: Home section: Short answers
+ * Title: Home section: FAQs
  * Slug: injil-help/home-answers
  * Categories: injil-help
- * Description: Six short answers with labels and evidence links. Feeds FAQPage schema.
+ * Description: Six FAQs with labels and evidence links. Feeds FAQPage schema.
  */
 ?>
 <!-- wp:group {"tagName":"section","className":"ih-section ih-answers-band","layout":{"type":"default"}} -->
@@ -17,7 +17,7 @@
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:heading -->
-<h2 class="wp-block-heading"><a href="/answers/">Short answers</a></h2>
+<h2 class="wp-block-heading"><a href="/answers/">FAQs</a></h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-intro"} -->
 <p class="ih-intro">The questions people search for most, each answered in under sixty words, labelled, and linked to the article that sets out the evidence.</p>
@@ -110,6 +110,6 @@
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 <!-- wp:paragraph {"className":"ih-full"} -->
-<p class="ih-full"><a href="/answers/">All answers, with references</a></p>
+<p class="ih-full"><a href="/answers/">All FAQs, with references</a></p>
 <!-- /wp:paragraph --></section>
 <!-- /wp:group -->

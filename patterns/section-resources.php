@@ -61,7 +61,7 @@
 <p class="ih-k">Reference</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/answers/">Short answers</a></h3>
+<h3 class="wp-block-heading"><a href="/answers/">FAQs</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">The questions people search for most, answered and labelled.</p>
