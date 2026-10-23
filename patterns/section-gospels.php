@@ -86,7 +86,7 @@
 <h3 class="wp-block-heading"><a href="/gospels/thomas/">The Gospel of Thomas</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
-<p class="ih-d">One hundred and fourteen sayings with no narrative, set beside their parallels in the four gospels.</p>
+<p class="ih-d">A sayings collection with no narrative: what it is, when it was written, and where its sayings are used in this gospel.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
