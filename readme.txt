@@ -41,5 +41,27 @@ Licensing: Sabon Next LT is a commercial Linotype face; confirm your licence cov
 == Images ==
 Manuscript images load from Wikimedia Commons (Special:FilePath URLs, sized by ?width=), each with its credit and a link to its Commons page in the caption. All are public domain except the Kairouan Qur'an photograph (Richard Mortel, CC BY 2.0), which must keep its credit. To host them yourself, download from the linked Commons page into the Media Library and swap the URL. Readers' browsers contact upload.wikimedia.org; mention this in the privacy policy.
 
+== Branding ==
+* Brandmark: assets/brandmark.svg (an open codex with rays of light, Qur'an 5:46). It appears as the link before the site title in the header and at the top of the footer's first column (class ih-mark; the footer adds ih-mark-foot).
+* Favicon: if no Site Icon is set under Appearance > Customize > Site Identity, the theme outputs assets/brandmark.svg as an SVG favicon. A Site Icon always takes precedence. Some older browsers ignore SVG favicons, so set a PNG Site Icon for full coverage.
+
+== Customising colours ==
+Colours are tokens in theme.json (Appearance > Editor > Styles > Colors, or edit settings.color.palette). Change a value there and every pattern follows, because the stylesheet reads them as CSS variables (var(--wp--preset--color--SLUG)).
+* base #f6f1e6 Parchment; contrast #2a2420 Ink; accent-1 #1f5c4a Qur'anic green; accent-2 #9b2c2c Rubric red; accent-3 #c39a3f Gold; accent-4 #2d4a7a Lapis; accent-5 #ece3d1 Vellum; accent-6 #d8cbb2 Rule; muted #6b6158.
+* Tints: green-deep, green-tint, red-tint, lapis-tint, gold-tint.
+* Radii and font roles are variables at the top of style.css (--ih-r-sm, --ih-r-md, --ih-r-lg, --ih-serif, --ih-sans, --ih-display, --ih-greek, --ih-quran).
+The theme has no settings screen; all configuration is through the Site Editor and theme.json.
+
+== Releasing ==
+Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add a Changelog entry here, merge to main, and tag the commit with the same number (for example v2.5.1). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
+
+== Changelog ==
+= 2.5.1 =
+* Version bump so Git Updater offers 2.5.0 changes.
+= 2.5.0 =
+* "Answers" and "Short answers" renamed "FAQs" in the header, footer, patterns and docs (the page slug stays /answers/).
+* Brandmark added to the footer.
+* New screenshot.
+
 == Design ==
 After Ahmad Shafaat, The Gospel According to Islam (Vantage Press, 1985): chapter-and-verse layout, verse numbers in the margin, rubric-red chapter heads, notes beside the text. Palette: parchment, ink, Qur'anic green, rubric red, gold, lapis.
