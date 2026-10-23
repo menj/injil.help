@@ -9,6 +9,7 @@
 defined( 'ABSPATH' ) || exit;
 
 require_once get_stylesheet_directory() . '/inc/gospel-islam-thomas.php';
+require_once get_stylesheet_directory() . '/inc/quran-jesus.php';
 
 /**
  * Parse the data file.
@@ -102,6 +103,7 @@ function injil_help_gospel_islam_pages() {
 			);
 			$body[] = '<span class="ih-v">' . $v . '</span> ' . $text;
 		}
+		$body = array_merge( $body, injil_help_quran_chapter_lines( $n ) );
 		if ( ! empty( $thomas[ (string) $n ] ) ) {
 			$body = array_merge( $body, $thomas[ (string) $n ] );
 		}

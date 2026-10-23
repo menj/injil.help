@@ -10,7 +10,7 @@ Child theme of Twenty Twenty-Five for injil.help.
 == Install ==
 1. Install and keep Twenty Twenty-Five (the parent). Do not delete it.
 2. Upload this folder to wp-content/themes/injil-help/ and activate "The Rightly-Guided Injīl". Set Settings > General > Site Title to "The Rightly-Guided Injīl" (the header and footer read it from there).
-3. (Automatic) On activation the theme creates all 72 pages listed under Theme Options > Content, sets pretty permalinks, and fills them with content. Steps 4 and 5 below are then done for you; follow them only to rebuild a page by hand.
+3. (Automatic) On activation the theme creates all 73 pages listed under Theme Options > Content, sets pretty permalinks, and fills them with content. Steps 4 and 5 below are then done for you; follow them only to rebuild a page by hand.
 3a. Optional: create categories for the parts: The Four Gospels, Paul of Tarsus, Jesus in the Qur'an, The Gospel According to Islam, Resources.
 4. Create the section pages /gospels/, /paul/, /quran/, /gospel-according-to-islam/, /resources/ and /answers/. Give each the "Section index" template and insert its matching "Section index: ..." pattern (or "FAQs page").
 5. Create /method/ (insert "Criterion statement"), /corrections/ ("Corrections log"), and the article pages the section entries link to. Edit the entry links in each pattern as articles go live.
@@ -69,8 +69,9 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 
 == Changelog ==
 = 3.0.0 =
+* The compiled Qur'anic passages on Jesus (145 verses with headings and footnotes, inc/data/quran-jesus.txt, inc/quran-jesus.php) sit beside the chapters of The Gospel According to Islam that follow them, and are gathered on /quran/passages/.
 * The Gospel According to Islam now uses Dr. Ahmad Shafaat's text (Vantage Press, 1985) as its base: 27 chapters in verse form with the author's notes as numbered footnotes, plus the Introduction. The pages carry only the text and notes; all credits are on the separate Credits page (/credits/), linked from the footer. Source and parsing: inc/data/gospel-islam.txt and inc/gospel-islam.php.
-* The earlier Gospel of Thomas sections are carried into the matching chapters (2, 8, 9, 22, 24, 26). Starter content is now 72 pages.
+* The earlier Gospel of Thomas sections are carried into the matching chapters (2, 8, 9, 22, 24, 26). Starter content is now 73 pages.
 = 2.13.0 =
 * New page /resources/responses/: four published articles (Samuel Green, John MacArthur, Entrusted to the Dirt, Stand to Reason) with their claims stated and answered; four new FAQs; cross-links from the Objections page, Resources index and Source library. Starter content is now 49 pages.
 = 2.12.0 =

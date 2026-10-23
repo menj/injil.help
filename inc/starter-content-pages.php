@@ -401,6 +401,8 @@ function injil_help_starter_pages() {
 			),
 		),
 
+		injil_help_quran_page(),
+
 		// The Gospel According to Islam.
 		array( 'path' => 'gospel-according-to-islam', 'title' => 'The Gospel According to Islam', 'template' => $section, 'pattern' => 'section-gospel', 'excerpt' => 'A gospel retold with the Qur’an as the measure.' ),
 		array( 'path' => 'gospel-according-to-islam/how-composed', 'title' => 'How this gospel was composed', 'pattern' => 'how-composed', 'excerpt' => 'The rules used to compose the gospel: what is kept, what is left out, and why.' ),
@@ -635,6 +637,7 @@ function injil_help_starter_pages() {
 			'body' => array(
 				'## Texts',
 				'- <strong>The Gospel According to Islam</strong>, chapters 1 to 27 and the Introduction: Dr. Ahmad Shafaat, <em>The Gospel According to Islam</em> (New York: Vantage Press, 1985). Spelling and scanning errors were corrected.',
+				'- <strong>The Qur’anic passages on Jesus</strong>, with their headings and footnotes: Alham Ahmed, <em>The Gospel According to the Quran: Jesus and His Teachings</em> (Toronto: Noor Lal Foundation, 2021), in the translation <em>The Clear Quran</em> by Dr. Mustafa Khattab (Al-Furqaan Foundation, theclearquran.org), which the compiler acknowledges using with the foundation’s permission.',
 				'- <strong>An Epistle unto the Congregation of Paul of Tarsus</strong>: an English rendering of the Malay letter <em>Epistel Kepada Jemaat Paulus</em>, with footnotes added by this website.',
 				'- <strong>Gospel of Thomas</strong>: sayings are numbered as in the standard edition. The summaries are this website’s own, prepared from Thomas O. Lambdin’s translation in <em>The Nag Hammadi Library in English</em>, ed. James M. Robinson (Leiden: E. J. Brill, 1988).',
 				'- All other text, including the chapter titles, the colour-coded Gospel of Thomas sections and their notes, the answers and the replies: this website.',
