@@ -531,6 +531,28 @@ function injil_help_starter_pages() {
 			),
 		),
 
+		array(
+			'path' => 'gospel-according-to-islam/bonus', 'title' => 'Bonus: An Epistle unto the Congregation of Paul', 'excerpt' => 'A letter to the followers of Paul, in the manner of the Pauline epistles.',
+			'body' => array(
+				'@islamic',
+				'I, a bondservant set free from the shadow of Paul, who aforetime walked in the darkness of a false revelation and am now returned unto the doctrine undefiled, write unto thee that yet holdest fast to every gospel that hath been bent from its true course: grace and peace be unto thee from God, Most High and Glorious, and from ʿĪsā al-Masīḥ, His servant, whom He hath held in honour.',
+				'I give thanks unto God, Most High and Glorious, who in His bounty hath opened the eyes of some among His servants, and loosed them from the fetters of a faith inherited without understanding. Wherefore I write, not with the pen of malice, but with the ink of love, born of the light of truth that hath visited the heart and stirred the soul.',
+				'Thou hast heard how I, in time past, did defend Paul with all my zeal, reading out his letters and guarding him against every reproach. Yet when I was tried with proofs and with light, it was made plain unto me that the gospel I had defended was not the Gospel of ʿĪsā al-Masīḥ, but another gospel: not from heaven, but from the tongue of one who professed to have seen a light upon the road, with no witness, no confirmation, and no testimony of the congregation, and who thereupon named himself an apostle of Christ Jesus.',
+				'Hast thou forgotten that Paul never met ʿĪsā al-Masīḥ? That he never sat to hear His sayings? And knowest thou not that Peter, James, yea, Barnabas himself, did rebuke him and withdrew from his way? How then art thou turned so swiftly from the teaching of ʿĪsā al-Masīḥ, who never laid claim to godhead for Himself, unto one who maketh Him a god upon feeble reasoning and false speech?',
+				'Try every spirit. Weigh each saying, and examine every claim. Be not beguiled by the glitter of sweet words that lead astray, for even the adversary doth disguise himself as an angel of light. And is it not the disguised one who cometh bearing the gospel of Christ Jesus, which heaven hath never confirmed?',
+				'Knowest thou not that the tale of the Damascus event, as he told it, is at variance with itself? What then is this? A revelation, or his own contriving? If it came from heaven, would not its course be steadfast? If it were truly from God, Most High and Glorious, would it not sound one note? Or is the holy word mingled with confused speech, until the whole world is bewildered who is in the right and who is corrupt?',
+				'I bear witness with all my soul and understanding that the gospel which setteth aside the law, putteth away circumcision, and exalteth ʿĪsā al-Masīḥ to be Lord Sovereign, is no gospel of heaven. If ʿĪsā al-Masīḥ Himself hath said, “I am come not to destroy the law,” how then saith Paul, “Ye are not under the law”? Do two voices proceed from one Lord, or hath enmity arisen among them that wrote?',
+				'Brother, I say not this to cast thee down, but that thou mayest awake. Hast thou searched out whom thou followest? If ʿĪsā al-Masīḥ never taught godhead for Himself, and yet thou dost worship Him, who then hath turned thy worship aside? Dost thou not tremble, lest thou stand one day before God, Most High and Glorious, and perceive that he whom thou didst follow was one who was never sent, yet styled himself a servant of Christ Jesus?',
+				'I write with a flood of tears: forsake Paul, and return unto the true teaching of ʿĪsā al-Masīḥ. Follow Him as a servant of God, Most High and Glorious, and not as a Lord Sovereign lifted up by the tongues of men. Worship Him alone who is One, and not him whom words and the devices of men have made a god.',
+				'Carry my greeting to all that seek the truth in the true ʿĪsā al-Masīḥ. Hold fast to the oneness of God, and shun the gospel that came not from heaven, nor from an apostle, nor from ʿĪsā al-Masīḥ, but from one who repeateth the name of Christ Jesus as a shield for his error.',
+				'This letter have I written with mine own hand, as a token that I live no more in the shadow of Paul.',
+				'The grace of God, Most High and Glorious, who sent ʿĪsā al-Masīḥ as His servant, and not as a Lord Sovereign held on high, be with thee that seekest the truth. And mayest thou be loosed from that shadow, and return unto the teaching of the true messenger. Amen.',
+				'I, who aforetime walked in the shadow of Paul, am now turned unto ʿĪsā al-Masīḥ, peace be upon him, servant of the true Lord Sovereign.',
+				'## About this chapter',
+				'This chapter is an English rendering, in the manner of the Authorised Version, of the Malay letter <em>Epistel Kepada Jemaat Paulus</em> (“An Epistle unto the Congregation of Paul”). It follows the form of the Pauline letters: salutation, thanksgiving, exhortation, an autograph line, and a benediction. It states the Islamic position and is set apart from the chapters above as a bonus. For the evidence behind its claims, see <a href="/paul/acts-galatians/">Acts against Galatians</a> and <a href="/paul/james/">James and the Jerusalem church</a>.',
+			),
+		),
+
 		// Resources.
 		array( 'path' => 'resources', 'title' => 'Resources', 'template' => $section, 'pattern' => 'section-resources', 'excerpt' => 'Timeline, glossary, source library, FAQs and objections.' ),
 		array(
