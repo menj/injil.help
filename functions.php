@@ -7,9 +7,10 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'INJIL_HELP_VERSION', '2.6.0' );
+define( 'INJIL_HELP_VERSION', '2.7.0' );
 
 require_once get_stylesheet_directory() . '/inc/options.php';
+require_once get_stylesheet_directory() . '/inc/starter-content.php';
 require_once get_stylesheet_directory() . '/inc/seo.php';
 
 /**

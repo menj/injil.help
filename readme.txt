@@ -10,9 +10,13 @@ Child theme of Twenty Twenty-Five for injil.help.
 == Install ==
 1. Install and keep Twenty Twenty-Five (the parent). Do not delete it.
 2. Upload this folder to wp-content/themes/injil-help/ and activate "The Rightly-Guided Injīl". Set Settings > General > Site Title to "The Rightly-Guided Injīl" (the header and footer read it from there).
-3. Create categories for the parts: The Four Gospels, Paul, Jesus in the Qur'an, The Gospel According to Islam, Resources.
+3. (Automatic) On activation the theme creates all 44 pages listed under Theme Options > Content, sets pretty permalinks, and fills them with content. Skip to step 6 unless you want to rebuild a page.
+3a. Optional: create categories for the parts: The Four Gospels, Paul, Jesus in the Qur'an, The Gospel According to Islam, Resources.
 4. Create the section pages /gospels/, /paul/, /quran/, /gospel-according-to-islam/, /resources/ and /answers/. Give each the "Section index" template and insert its matching "Section index: ..." pattern (or "FAQs page").
 5. Create /method/ (insert "Criterion statement"), /corrections/ ("Corrections log"), and the article pages the section entries link to. Edit the entry links in each pattern as articles go live.
+
+== Starter content ==
+The theme ships its own pages and creates them on activation (inc/starter-content-pages.php): the pillar page /the-islamic-dilemma/, /method/, /corrections/, /answers/, the five section pages and their entries (four gospels, synoptic problem, discrepancy tables, six Paul pages, six Qur'an pages, six chapters of the gospel, timeline, glossary, source library, objections), plus About, Terms, Privacy, Contact and Sitemap. Existing pages are never overwritten. Appearance > Theme Options > Content lists every page and creates any that are missing (for example after you delete one). Pages are published; edit them in the block editor. The articles are concise drafts with sources; expand them as you write.
 
 == Structure ==
 Modelled on apostleofdoom.org: a title-page hero; each part of the study as a block with a gloss (Greek for New Testament parts, Arabic for Qur'anic parts, each with its verse), an intro, a "Read first" link and numbered entries; a band of FAQs with "Full evidence" links; a footer of study, reference and method links.
@@ -49,6 +53,7 @@ Manuscript images load from Wikimedia Commons (Special:FilePath URLs, sized by ?
 Appearance > Theme Options is a tabbed page (stored in the injil_help_options option):
 * Colours: nine palette overrides with colour pickers; empty keeps the default.
 * Branding: show or hide the footer brandmark; always use the brandmark as favicon even with a Site Icon; custom favicon URL.
+* Content: lists every starter page with its status and creates missing ones.
 * SEO: theme SEO output automatic, always on or always off; home title and description; pillar page title; default social image URL.
 The page's CSS and JS live in assets/css/admin.css and assets/js/admin.js.
 
@@ -63,6 +68,10 @@ The same nine colours can be set without code under Appearance > Theme Options >
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add a Changelog entry here, merge to main, and tag the commit with the same number (for example v2.5.1). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 2.7.0 =
+* Starter content: 44 pages created on activation, with a Content tab in Theme Options to create any that are missing.
+* "Paul" is now "Paul of Tarsus" in the main navigation and footer.
+* Body text is justified.
 = 2.6.0 =
 * New tabbed Theme Options page (Colours, Branding, SEO) under Appearance.
 = 2.5.2 =

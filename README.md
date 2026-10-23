@@ -22,6 +22,7 @@ The theme header carries `GitHub Theme URI` and `Primary Branch: main`, so [Git 
 
 - `style.css`, `theme.json`, `functions.php`: header, tokens, setup
 - `inc/options.php`: Appearance > Theme Options (tabbed: Colours, Branding, SEO)
+- `inc/starter-content.php`, `inc/starter-content-pages.php`: pages created on activation
 - `inc/seo.php`: titles, meta description, Open Graph, schema
 - `parts/`, `templates/`, `patterns/`: block markup
 - `assets/fonts/`: bundled fonts
