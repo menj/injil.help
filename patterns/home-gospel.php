@@ -37,7 +37,7 @@
 <!-- wp:group {"className":"ih-entries ih-tint-gold","layout":{"type":"grid","minimumColumnWidth":"15rem"}} -->
 <div class="wp-block-group ih-entries ih-tint-gold"><!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Chapter · I</p>
+<p class="ih-k">Chapter · II</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/gospel-according-to-islam/2/">The annunciation and the birth</a></h3>
@@ -48,7 +48,7 @@
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Chapter · II</p>
+<p class="ih-k">Chapter · V</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/gospel-according-to-islam/5/">John the Baptist</a></h3>
@@ -59,7 +59,7 @@
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Chapter · III</p>
+<p class="ih-k">Chapter · VIII</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/gospel-according-to-islam/8/">The Beatitudes</a></h3>
@@ -70,7 +70,7 @@
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Chapter · IV</p>
+<p class="ih-k">Chapter · XX</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/gospel-according-to-islam/20/">Jerusalem</a></h3>
@@ -81,7 +81,7 @@
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Chapter · V</p>
+<p class="ih-k">Chapter · XXIV</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/gospel-according-to-islam/24/">The hour and the Counsellor</a></h3>
@@ -92,7 +92,7 @@
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Chapter · VI</p>
+<p class="ih-k">Chapter · XXVI</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/gospel-according-to-islam/26/">The trial and the road to Emmaus</a></h3>
