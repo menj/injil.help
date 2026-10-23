@@ -74,7 +74,7 @@ add_action(
 		$desc  = trim( injil_help_meta_description() );
 		$url   = is_singular() ? get_permalink() : ( is_front_page() ? home_url( '/' ) : '' );
 		$title = wp_get_document_title();
-		$img   = is_singular() && has_post_thumbnail() ? get_the_post_thumbnail_url( null, 'large' ) : apply_filters( 'injil_help_default_og_image', '' );
+		$img   = is_singular() && has_post_thumbnail() ? get_the_post_thumbnail_url( null, 'large' ) : apply_filters( 'injil_help_default_og_image', 'https://commons.wikimedia.org/wiki/Special:FilePath/Birmingham_Quran_manuscript.jpg?width=1200' );
 
 		if ( $desc ) {
 			printf( '<meta name="description" content="%s">' . "\n", esc_attr( $desc ) );

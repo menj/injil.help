@@ -35,7 +35,7 @@
 <!-- /wp:column -->
 <!-- wp:column {"verticalAlignment":"center","width":"38%"} -->
 <div class="wp-block-column is-vertically-aligned-center" style="flex-basis:38%"><!-- wp:image {"sizeSlug":"large","linkDestination":"custom","className":"ih-plate ih-cover-image"} -->
-<figure class="wp-block-image size-large ih-plate ih-cover-image"><a href="https://commons.wikimedia.org/wiki/File:Birmingham_Quran_manuscript.jpg"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Birmingham_Quran_manuscript.jpg?width=1400" alt="Two parchment folios of the Birmingham Qur'an manuscript in Hijazi script"/></a><figcaption class="wp-element-caption">Birmingham Qur&#039;an manuscript, folios 1v and 2r, with the close of Sūrat Maryam. University of Birmingham. Public domain. <a href="https://commons.wikimedia.org/wiki/File:Birmingham_Quran_manuscript.jpg">Wikimedia Commons</a></figcaption></figure>
+<figure class="wp-block-image size-large ih-plate ih-cover-image"><a href="https://commons.wikimedia.org/wiki/File:Birmingham_Quran_manuscript.jpg"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Birmingham_Quran_manuscript.jpg?width=1400" alt="Birmingham Qur'an manuscript: two parchment folios in Hijazi script carrying Sūrat Maryam, radiocarbon dated to the seventh century" title="Birmingham Qur'an manuscript"/></a><figcaption class="wp-element-caption">Birmingham Qur&#039;an manuscript, folios 1v and 2r, with the close of Sūrat Maryam. University of Birmingham. Public domain. <a href="https://commons.wikimedia.org/wiki/File:Birmingham_Quran_manuscript.jpg">Wikimedia Commons</a></figcaption></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div>
