@@ -107,6 +107,7 @@ function injil_help_render_options() {
 		'colours'  => __( 'Colours', 'injil-help' ),
 		'branding' => __( 'Branding', 'injil-help' ),
 		'seo'      => __( 'SEO', 'injil-help' ),
+		'content'  => __( 'Content', 'injil-help' ),
 	);
 	?>
 	<div class="wrap ih-options">
@@ -182,6 +183,37 @@ function injil_help_render_options() {
 						<td><input type="url" class="large-text" id="ih-og" name="<?php echo esc_attr( $name ); ?>[og_image]" value="<?php echo esc_attr( $o['og_image'] ); ?>" placeholder="https://"><p class="description"><?php esc_html_e( 'Used when a page has no featured image. Empty uses the Birmingham Qur’an manuscript from Wikimedia Commons.', 'injil-help' ); ?></p></td>
 					</tr>
 				</table>
+			</section>
+
+			<section class="ih-panel" id="panel-content" role="tabpanel" aria-labelledby="tab-content">
+				<?php
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				if ( isset( $_GET['ih_created'] ) ) {
+					printf( '<div class="notice notice-success inline"><p>%s</p></div>', esc_html( sprintf( /* translators: %d: number of pages */ _n( '%d page created.', '%d pages created.', (int) $_GET['ih_created'], 'injil-help' ), (int) $_GET['ih_created'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				}
+				$missing = 0;
+				?>
+				<p class="description"><?php esc_html_e( 'The theme creates these pages when it is activated. Use the button to create any that are missing. Existing pages are never changed or overwritten.', 'injil-help' ); ?></p>
+				<ul class="ih-pages">
+					<?php foreach ( injil_help_starter_pages() as $def ) : ?>
+						<?php
+						$page = injil_help_find_page( $def['path'] );
+						$missing += $page ? 0 : 1;
+						?>
+						<li class="<?php echo $page ? 'is-ok' : 'is-missing'; ?>">
+							<span class="ih-dot" aria-hidden="true"></span>
+							<?php if ( $page ) : ?>
+								<a href="<?php echo esc_url( get_permalink( $page ) ); ?>"><?php echo esc_html( $def['title'] ); ?></a>
+							<?php else : ?>
+								<?php echo esc_html( $def['title'] ); ?>
+							<?php endif; ?>
+							<code>/<?php echo esc_html( $def['path'] ); ?>/</code>
+						</li>
+					<?php endforeach; ?>
+				</ul>
+				<p>
+					<a class="button button-primary" href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=injil_help_populate' ), 'injil_help_populate' ) ); ?>"><?php echo esc_html( $missing ? sprintf( /* translators: %d: missing pages */ __( 'Create %d missing pages', 'injil-help' ), $missing ) : __( 'Check again', 'injil-help' ) ); ?></a>
+				</p>
 			</section>
 
 			<?php submit_button(); ?>
