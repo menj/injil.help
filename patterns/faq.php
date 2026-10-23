@@ -1,0 +1,27 @@
+<?php
+/**
+ * Title: FAQ
+ * Slug: injil-help/faq
+ * Categories: injil-help
+ * Description: Questions as Details blocks. Each "FAQ item" feeds FAQPage schema.
+ * Keywords: faq, schema, aeo
+ */
+?>
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Questions</h2>
+<!-- /wp:heading -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Did Jesus claim to be God?</summary><!-- wp:paragraph -->
+<p>[40-60 word answer, labelled, linking to the John vs Synoptics page.]</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Who wrote the gospels?</summary><!-- wp:paragraph -->
+<p>[40-60 word answer, linking to Part I.]</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>What does the Qur&#039;an say about Jesus?</summary><!-- wp:paragraph -->
+<p>[40-60 word answer, linking to the verse index.]</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->

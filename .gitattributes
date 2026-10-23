@@ -1,0 +1,10 @@
+* text=auto eol=lf
+*.ttf binary
+*.otf binary
+*.woff binary
+*.woff2 binary
+*.png binary
+*.jpg binary
+.gitignore export-ignore
+.gitattributes export-ignore
+README.md export-ignore

@@ -1,0 +1,861 @@
+{
+ "$schema": "https://schemas.wp.org/wp/6.6/theme.json",
+ "version": 3,
+ "settings": {
+  "appearanceTools": true,
+  "color": {
+   "defaultPalette": false,
+   "defaultGradients": false,
+   "gradients": [],
+   "palette": [
+    {
+     "color": "#f6f1e6",
+     "name": "Parchment",
+     "slug": "base"
+    },
+    {
+     "color": "#2a2420",
+     "name": "Ink",
+     "slug": "contrast"
+    },
+    {
+     "color": "#1f5c4a",
+     "name": "Qur'anic green",
+     "slug": "accent-1"
+    },
+    {
+     "color": "#9b2c2c",
+     "name": "Rubric red",
+     "slug": "accent-2"
+    },
+    {
+     "color": "#c39a3f",
+     "name": "Gold",
+     "slug": "accent-3"
+    },
+    {
+     "color": "#2d4a7a",
+     "name": "Lapis",
+     "slug": "accent-4"
+    },
+    {
+     "color": "#ece3d1",
+     "name": "Vellum",
+     "slug": "accent-5"
+    },
+    {
+     "color": "#d8cbb2",
+     "name": "Rule",
+     "slug": "accent-6"
+    },
+    {
+     "color": "#6b6158",
+     "name": "Muted ink",
+     "slug": "muted"
+    },
+    {
+     "color": "#174538",
+     "name": "Green deep",
+     "slug": "green-deep"
+    },
+    {
+     "color": "#dcebe3",
+     "name": "Green tint",
+     "slug": "green-tint"
+    },
+    {
+     "color": "#f4dcd6",
+     "name": "Red tint",
+     "slug": "red-tint"
+    },
+    {
+     "color": "#dde4f0",
+     "name": "Lapis tint",
+     "slug": "lapis-tint"
+    },
+    {
+     "color": "#f3e5c2",
+     "name": "Gold tint",
+     "slug": "gold-tint"
+    }
+   ]
+  },
+  "layout": {
+   "contentSize": "720px",
+   "wideSize": "1240px"
+  },
+  "spacing": {
+   "defaultSpacingSizes": false,
+   "spacingSizes": [
+    {
+     "name": "Tiny",
+     "size": "8px",
+     "slug": "10"
+    },
+    {
+     "name": "X-Small",
+     "size": "16px",
+     "slug": "20"
+    },
+    {
+     "name": "Small",
+     "size": "24px",
+     "slug": "30"
+    },
+    {
+     "name": "Regular",
+     "size": "clamp(32px, 4vw, 48px)",
+     "slug": "40"
+    },
+    {
+     "name": "Large",
+     "size": "clamp(48px, 6vw, 80px)",
+     "slug": "50"
+    },
+    {
+     "name": "X-Large",
+     "size": "clamp(64px, 9vw, 128px)",
+     "slug": "60"
+    }
+   ]
+  },
+  "typography": {
+   "defaultFontSizes": false,
+   "fluid": true,
+   "writingMode": true,
+   "fontFamilies": [
+    {
+     "name": "Sabon Next LT",
+     "slug": "sabon",
+     "fontFamily": "\"Sabon Next LT\", \"SBL BibLit\", \"EB Garamond\", Georgia, serif",
+     "fontFace": [
+      {
+       "fontFamily": "Sabon Next LT",
+       "fontStyle": "normal",
+       "fontWeight": "400",
+       "src": [
+        "file:./assets/fonts/SabonNextLT.ttf"
+       ]
+      },
+      {
+       "fontFamily": "Sabon Next LT",
+       "fontStyle": "italic",
+       "fontWeight": "400",
+       "src": [
+        "file:./assets/fonts/SabonNextLTItalic.ttf"
+       ]
+      },
+      {
+       "fontFamily": "Sabon Next LT",
+       "fontStyle": "normal",
+       "fontWeight": "700",
+       "src": [
+        "file:./assets/fonts/SabonNextLTBold.ttf"
+       ]
+      },
+      {
+       "fontFamily": "Sabon Next LT",
+       "fontStyle": "italic",
+       "fontWeight": "700",
+       "src": [
+        "file:./assets/fonts/SabonNextLTBoldItalic.ttf"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "EB Garamond",
+     "slug": "garamond",
+     "fontFamily": "\"EB Garamond\", \"SBL BibLit\", Garamond, serif",
+     "fontFace": [
+      {
+       "fontFamily": "EB Garamond",
+       "fontStyle": "normal",
+       "fontWeight": "400 800",
+       "src": [
+        "file:./assets/fonts/EBGaramond-Variable.ttf"
+       ]
+      },
+      {
+       "fontFamily": "EB Garamond",
+       "fontStyle": "italic",
+       "fontWeight": "400 800",
+       "src": [
+        "file:./assets/fonts/EBGaramond-Italic-Variable.ttf"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Kagnue",
+     "slug": "kagnue",
+     "fontFamily": "Kagnue, \"EB Garamond\", serif",
+     "fontFace": [
+      {
+       "fontFamily": "Kagnue",
+       "fontStyle": "normal",
+       "fontWeight": "400",
+       "src": [
+        "file:./assets/fonts/Kagnue-Regular.ttf"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Kagnue Outline",
+     "slug": "kagnue-outline",
+     "fontFamily": "\"Kagnue Outline\", Kagnue, serif",
+     "fontFace": [
+      {
+       "fontFamily": "Kagnue Outline",
+       "fontStyle": "normal",
+       "fontWeight": "400",
+       "src": [
+        "file:./assets/fonts/Kagnue-Outline.ttf"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Evangelion CPA",
+     "slug": "evangelion",
+     "fontFamily": "\"Evangelion CPA\", \"EB Garamond\", serif",
+     "fontFace": [
+      {
+       "fontFamily": "Evangelion CPA",
+       "fontStyle": "normal",
+       "fontWeight": "400",
+       "src": [
+        "file:./assets/fonts/EvangelionCPA-Regular.ttf"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "SBL Greek",
+     "slug": "sbl-greek",
+     "fontFamily": "\"SBL Greek\", \"EB Garamond\", serif",
+     "fontFace": [
+      {
+       "fontFamily": "SBL Greek",
+       "fontStyle": "normal",
+       "fontWeight": "400",
+       "src": [
+        "file:./assets/fonts/SBL_grk.ttf"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "SBL Hebrew",
+     "slug": "sbl-hebrew",
+     "fontFamily": "\"SBL Hebrew\", serif",
+     "fontFace": [
+      {
+       "fontFamily": "SBL Hebrew",
+       "fontStyle": "normal",
+       "fontWeight": "400",
+       "src": [
+        "file:./assets/fonts/SBL_Hbrw.ttf"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "SBL BibLit",
+     "slug": "sbl-biblit",
+     "fontFamily": "\"SBL BibLit\", \"Sabon Next LT\", serif",
+     "fontFace": [
+      {
+       "fontFamily": "SBL BibLit",
+       "fontStyle": "normal",
+       "fontWeight": "400",
+       "src": [
+        "file:./assets/fonts/SBL_BLit.ttf"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "KFGQPC Hafs",
+     "slug": "hafs",
+     "fontFamily": "\"KFGQPC Hafs\", Amiri, serif",
+     "fontFace": [
+      {
+       "fontFamily": "KFGQPC Hafs",
+       "fontStyle": "normal",
+       "fontWeight": "400",
+       "src": [
+        "file:./assets/fonts/KFGQPC-Hafs-Uthmanic.ttf"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Amiri",
+     "slug": "amiri",
+     "fontFamily": "Amiri, \"Noto Naskh Arabic\", serif",
+     "fontFace": [
+      {
+       "fontFamily": "Amiri",
+       "fontStyle": "normal",
+       "fontWeight": "400",
+       "src": [
+        "file:./assets/fonts/Amiri-Regular.ttf"
+       ]
+      },
+      {
+       "fontFamily": "Amiri",
+       "fontStyle": "normal",
+       "fontWeight": "700",
+       "src": [
+        "file:./assets/fonts/Amiri-Bold.ttf"
+       ]
+      },
+      {
+       "fontFamily": "Amiri",
+       "fontStyle": "italic",
+       "fontWeight": "400",
+       "src": [
+        "file:./assets/fonts/Amiri-Italic.ttf"
+       ]
+      },
+      {
+       "fontFamily": "Amiri",
+       "fontStyle": "italic",
+       "fontWeight": "700",
+       "src": [
+        "file:./assets/fonts/Amiri-BoldItalic.ttf"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Noto Naskh Arabic",
+     "slug": "naskh",
+     "fontFamily": "\"Noto Naskh Arabic\", Amiri, serif",
+     "fontFace": [
+      {
+       "fontFamily": "Noto Naskh Arabic",
+       "fontStyle": "normal",
+       "fontWeight": "400 700",
+       "src": [
+        "file:./assets/fonts/NotoNaskhArabic-Variable.ttf"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Dubidam Arabic",
+     "slug": "dubidam",
+     "fontFamily": "\"Dubidam Arabic\", \"Noto Naskh Arabic\", sans-serif",
+     "fontFace": [
+      {
+       "fontFamily": "Dubidam Arabic",
+       "fontStyle": "normal",
+       "fontWeight": "300",
+       "src": [
+        "file:./assets/fonts/DubidamArabic-Light.otf"
+       ]
+      },
+      {
+       "fontFamily": "Dubidam Arabic",
+       "fontStyle": "normal",
+       "fontWeight": "400",
+       "src": [
+        "file:./assets/fonts/DubidamArabic-Regular.otf"
+       ]
+      },
+      {
+       "fontFamily": "Dubidam Arabic",
+       "fontStyle": "normal",
+       "fontWeight": "700",
+       "src": [
+        "file:./assets/fonts/DubidamArabic-Bold.otf"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Arslan Wessam",
+     "slug": "arslan",
+     "fontFamily": "\"Arslan Wessam\", Amiri, serif",
+     "fontFace": [
+      {
+       "fontFamily": "Arslan Wessam",
+       "fontStyle": "normal",
+       "fontWeight": "400",
+       "src": [
+        "file:./assets/fonts/ArslanWessam.ttf"
+       ]
+      },
+      {
+       "fontFamily": "Arslan Wessam",
+       "fontStyle": "normal",
+       "fontWeight": "700",
+       "src": [
+        "file:./assets/fonts/ArslanWessam-Bold.ttf"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Estrangelo Edessa",
+     "slug": "estrangelo",
+     "fontFamily": "\"Estrangelo Edessa\", serif",
+     "fontFace": [
+      {
+       "fontFamily": "Estrangelo Edessa",
+       "fontStyle": "normal",
+       "fontWeight": "400",
+       "src": [
+        "file:./assets/fonts/EstrangeloEdessa.ttf"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Noto Sans Cuneiform",
+     "slug": "cuneiform",
+     "fontFamily": "\"Noto Sans Cuneiform\", sans-serif",
+     "fontFace": [
+      {
+       "fontFamily": "Noto Sans Cuneiform",
+       "fontStyle": "normal",
+       "fontWeight": "400",
+       "src": [
+        "file:./assets/fonts/NotoSansCuneiform-Regular.ttf"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Special Elite",
+     "slug": "special-elite",
+     "fontFamily": "\"Special Elite\", \"Courier New\", monospace",
+     "fontFace": [
+      {
+       "fontFamily": "Special Elite",
+       "fontStyle": "normal",
+       "fontWeight": "400",
+       "src": [
+        "file:./assets/fonts/SpecialElite-Regular.ttf"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Ferments",
+     "slug": "ferments",
+     "fontFamily": "Ferments, cursive",
+     "fontFace": [
+      {
+       "fontFamily": "Ferments",
+       "fontStyle": "normal",
+       "fontWeight": "400",
+       "src": [
+        "file:./assets/fonts/Ferments.ttf"
+       ]
+      },
+      {
+       "fontFamily": "Ferments",
+       "fontStyle": "italic",
+       "fontWeight": "400",
+       "src": [
+        "file:./assets/fonts/Ferments-Slant.ttf"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Angel",
+     "slug": "angel",
+     "fontFamily": "Angel, \"EB Garamond\", serif",
+     "fontFace": [
+      {
+       "fontFamily": "Angel",
+       "fontStyle": "normal",
+       "fontWeight": "400",
+       "src": [
+        "file:./assets/fonts/Angel.ttf"
+       ]
+      }
+     ]
+    }
+   ],
+   "fontSizes": [
+    {
+     "name": "Small",
+     "slug": "small",
+     "size": "15px",
+     "fluid": false
+    },
+    {
+     "name": "Medium",
+     "slug": "medium",
+     "size": "18px",
+     "fluid": false
+    },
+    {
+     "name": "Large",
+     "slug": "large",
+     "size": "22px",
+     "fluid": {
+      "min": "20px",
+      "max": "22px"
+     }
+    },
+    {
+     "name": "Extra Large",
+     "slug": "x-large",
+     "size": "34px",
+     "fluid": {
+      "min": "27px",
+      "max": "34px"
+     }
+    },
+    {
+     "name": "Extra Extra Large",
+     "slug": "xx-large",
+     "size": "68px",
+     "fluid": {
+      "min": "42px",
+      "max": "68px"
+     }
+    }
+   ]
+  }
+ },
+ "styles": {
+  "color": {
+   "background": "var:preset|color|base",
+   "text": "var:preset|color|contrast"
+  },
+  "spacing": {
+   "blockGap": "var:preset|spacing|20",
+   "padding": {
+    "left": "var:preset|spacing|30",
+    "right": "var:preset|spacing|30"
+   }
+  },
+  "typography": {
+   "fontFamily": "var:preset|font-family|sabon",
+   "fontSize": "var:preset|font-size|medium",
+   "fontWeight": "400",
+   "lineHeight": "1.6",
+   "letterSpacing": "0"
+  },
+  "elements": {
+   "heading": {
+    "typography": {
+     "fontFamily": "var:preset|font-family|garamond",
+     "fontWeight": "600",
+     "lineHeight": "1.1",
+     "letterSpacing": "-0.01em"
+    }
+   },
+   "h1": {
+    "typography": {
+     "fontSize": "var:preset|font-size|xx-large"
+    }
+   },
+   "h2": {
+    "typography": {
+     "fontSize": "var:preset|font-size|x-large"
+    }
+   },
+   "h3": {
+    "typography": {
+     "fontSize": "var:preset|font-size|large"
+    }
+   },
+   "h4": {
+    "typography": {
+     "fontSize": "var:preset|font-size|medium",
+     "fontFamily": "var:preset|font-family|garamond"
+    }
+   },
+   "h5": {
+    "typography": {
+     "fontSize": "var:preset|font-size|small",
+     "fontFamily": "var:preset|font-family|garamond"
+    }
+   },
+   "h6": {
+    "typography": {
+     "fontSize": "var:preset|font-size|small",
+     "fontFamily": "var:preset|font-family|evangelion",
+     "textTransform": "uppercase",
+     "letterSpacing": "0.12em"
+    }
+   },
+   "link": {
+    "color": {
+     "text": "var:preset|color|accent-1"
+    },
+    "typography": {
+     "textDecoration": "underline"
+    },
+    ":hover": {
+     "color": {
+      "text": "var:preset|color|accent-2"
+     }
+    }
+   },
+   "button": {
+    "border": {
+     "radius": "999px"
+    },
+    "color": {
+     "background": "var:preset|color|accent-1",
+     "text": "var:preset|color|base"
+    },
+    "spacing": {
+     "padding": {
+      "top": "11px",
+      "bottom": "11px",
+      "left": "22px",
+      "right": "22px"
+     }
+    },
+    "typography": {
+     "fontFamily": "var:preset|font-family|garamond",
+     "fontSize": "var:preset|font-size|medium",
+     "fontWeight": "600"
+    },
+    ":hover": {
+     "color": {
+      "background": "var:preset|color|green-deep",
+      "text": "var:preset|color|base"
+     }
+    },
+    ":focus": {
+     "outline": {
+      "color": "var:preset|color|accent-3",
+      "offset": "3px",
+      "style": "solid",
+      "width": "2px"
+     }
+    }
+   },
+   "caption": {
+    "typography": {
+     "fontSize": "var:preset|font-size|small"
+    },
+    "color": {
+     "text": "var:preset|color|muted"
+    }
+   }
+  },
+  "blocks": {
+   "core/separator": {
+    "border": {
+     "width": "1px 0 0 0",
+     "color": "var:preset|color|accent-6",
+     "style": "solid"
+    },
+    "color": {
+     "text": "var:preset|color|accent-6"
+    }
+   },
+   "core/button": {
+    "variations": {
+     "outline": {
+      "border": {
+       "width": "1.5px",
+       "color": "var:preset|color|accent-1",
+       "radius": "999px"
+      },
+      "color": {
+       "background": "transparent",
+       "text": "var:preset|color|accent-1"
+      },
+      "spacing": {
+       "padding": {
+        "top": "9.5px",
+        "bottom": "9.5px",
+        "left": "20.5px",
+        "right": "20.5px"
+       }
+      }
+     }
+    }
+   },
+   "core/quote": {
+    "border": {
+     "radius": "14px",
+     "width": "0"
+    },
+    "color": {
+     "background": "var:preset|color|accent-5"
+    },
+    "spacing": {
+     "padding": {
+      "top": "var:preset|spacing|30",
+      "bottom": "var:preset|spacing|30",
+      "left": "var:preset|spacing|30",
+      "right": "var:preset|spacing|30"
+     }
+    },
+    "typography": {
+     "fontFamily": "var:preset|font-family|garamond",
+     "fontSize": "var:preset|font-size|large",
+     "fontStyle": "italic"
+    }
+   },
+   "core/pullquote": {
+    "border": {
+     "radius": "22px",
+     "width": "0"
+    },
+    "color": {
+     "background": "var:preset|color|green-tint",
+     "text": "var:preset|color|accent-1"
+    },
+    "typography": {
+     "fontFamily": "var:preset|font-family|garamond",
+     "fontSize": "var:preset|font-size|x-large",
+     "fontWeight": "500",
+     "textAlign": "left"
+    }
+   },
+   "core/site-title": {
+    "typography": {
+     "fontFamily": "var:preset|font-family|kagnue",
+     "fontSize": "var:preset|font-size|x-large",
+     "fontWeight": "400",
+     "letterSpacing": "-0.01em"
+    },
+    "elements": {
+     "link": {
+      "color": {
+       "text": "var:preset|color|accent-1"
+      },
+      "typography": {
+       "textDecoration": "none"
+      }
+     }
+    }
+   },
+   "core/navigation": {
+    "typography": {
+     "fontSize": "var:preset|font-size|small",
+     "fontWeight": "500",
+     "fontFamily": "var:preset|font-family|evangelion"
+    },
+    "elements": {
+     "link": {
+      "typography": {
+       "textDecoration": "none"
+      },
+      ":hover": {
+       "color": {
+        "text": "var:preset|color|accent-2"
+       }
+      }
+     }
+    }
+   },
+   "core/post-terms": {
+    "typography": {
+     "fontSize": "var:preset|font-size|small",
+     "fontWeight": "600",
+     "textTransform": "uppercase",
+     "letterSpacing": "0.12em",
+     "fontFamily": "var:preset|font-family|evangelion"
+    },
+    "elements": {
+     "link": {
+      "color": {
+       "text": "var:preset|color|accent-2"
+      },
+      "typography": {
+       "textDecoration": "none"
+      }
+     }
+    }
+   },
+   "core/post-date": {
+    "typography": {
+     "fontSize": "var:preset|font-size|small"
+    },
+    "color": {
+     "text": "var:preset|color|muted"
+    }
+   },
+   "core/post-title": {
+    "elements": {
+     "link": {
+      "color": {
+       "text": "var:preset|color|contrast"
+      },
+      "typography": {
+       "textDecoration": "none"
+      },
+      ":hover": {
+       "color": {
+        "text": "var:preset|color|accent-1"
+       }
+      }
+     }
+    }
+   },
+   "core/search": {
+    "border": {
+     "radius": "999px"
+    }
+   },
+   "core/code": {
+    "border": {
+     "radius": "8px",
+     "width": "0"
+    },
+    "color": {
+     "background": "var:preset|color|accent-5"
+    },
+    "typography": {
+     "fontFamily": "var:preset|font-family|special-elite"
+    }
+   },
+   "core/table": {
+    "typography": {
+     "fontSize": "var:preset|font-size|small"
+    }
+   },
+   "core/image": {
+    "border": {
+     "radius": "14px"
+    }
+   }
+  }
+ },
+ "customTemplates": [
+  {
+   "name": "page-wide",
+   "title": "Wide page (tables)",
+   "postTypes": [
+    "page",
+    "post"
+   ]
+  },
+  {
+   "name": "page-section",
+   "title": "Section index",
+   "postTypes": [
+    "page"
+   ]
+  }
+ ],
+ "templateParts": [
+  {
+   "name": "header",
+   "title": "Header",
+   "area": "header"
+  },
+  {
+   "name": "footer",
+   "title": "Footer",
+   "area": "footer"
+  }
+ ]
+}
