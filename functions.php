@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'INJIL_HELP_VERSION', '2.5.0' );
+define( 'INJIL_HELP_VERSION', '2.5.1' );
 
 require_once get_stylesheet_directory() . '/inc/seo.php';
 
