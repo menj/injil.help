@@ -26,7 +26,8 @@ The theme header carries `GitHub Theme URI` and `Primary Branch: main`, so [Git 
 - `inc/seo.php`: titles, meta description, Open Graph, schema
 - `parts/`, `templates/`, `patterns/`: block markup
 - `assets/fonts/`: bundled fonts
-- `assets/css/`, `assets/js/`: Theme Options page styles and script
+- `assets/css/`, `assets/js/`: Theme Options page styles and script, plus the ornament layer (`ornament.css`, `ornament.js`)
+- `assets/icons/`: line icons used as CSS masks
 - `assets/brandmark.svg`: brandmark (header, footer, fallback favicon)
 - `assets/images/`: placeholder cover art
 

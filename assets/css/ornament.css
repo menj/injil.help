@@ -1,0 +1,159 @@
+/*
+ * Ornament layer: icons, pattern, banners and motion.
+ * Everything is drawn with CSS masks, so each decoration takes its colour from the
+ * theme's palette tokens (Appearance > Theme Options > Colours). The whole layer
+ * is controlled by Theme Options > Branding > Ornament: body.ih-orn is present for
+ * Subtle and Rich, absent for Off. The pattern strength is --ih-orn-op.
+ */
+
+body.ih-orn-subtle{--ih-orn-op:.045}
+body.ih-orn-rich{--ih-orn-op:.085}
+
+/* A reusable mask helper: set --ih-i to url(icon) on an element drawn with ::before / ::after. */
+.ih-orn .ih-entry .ih-k::before,
+.ih-orn .wp-block-post-content h2::before,
+.ih-orn .wp-block-quote::before,
+.ih-orn .ih-badge::before,
+.ih-orn .wp-block-button:not(.ih-btn-gloss) .wp-block-button__link::after,
+.ih-orn .ih-section-head::after,
+.ih-orn .ih-section-head h1::after,
+.ih-orn .ih-entry::after{
+ content:"";
+ -webkit-mask:var(--ih-i) center/contain no-repeat;
+ mask:var(--ih-i) center/contain no-repeat;
+}
+
+/* Page pattern: an eight-pointed star lattice in the gold token, behind everything. */
+.ih-orn::before{
+ content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+ background:var(--wp--preset--color--accent-3);
+ opacity:var(--ih-orn-op,.07);
+ -webkit-mask:url(../images/pattern-star.svg) 0 0/112px 112px repeat;
+ mask:url(../images/pattern-star.svg) 0 0/112px 112px repeat;
+}
+
+/* Cover hero: colour wash and a pattern layer. */
+.ih-orn .ih-cover{
+ position:relative;overflow:hidden;
+ background-image:
+  radial-gradient(circle at 88% 12%,color-mix(in srgb,var(--wp--preset--color--accent-3) 26%,transparent),transparent 46%),
+  radial-gradient(circle at 8% 92%,color-mix(in srgb,var(--wp--preset--color--accent-4) 34%,transparent),transparent 52%);
+}
+.ih-orn .ih-cover::before{
+ content:"";position:absolute;inset:0;pointer-events:none;
+ background:var(--wp--preset--color--accent-3);opacity:.14;
+ -webkit-mask:url(../images/pattern-star.svg) 0 0/132px 132px repeat;
+ mask:url(../images/pattern-star.svg) 0 0/132px 132px repeat;
+}
+.ih-orn .ih-cover > *{position:relative}
+
+/* Section heads: soft tinted band, watermark icon, flourish under the title. */
+.ih-orn .ih-section-head{
+ position:relative;overflow:hidden;
+ padding:var(--wp--preset--spacing--40) var(--wp--preset--spacing--30);
+ border-radius:var(--ih-r-lg);
+ background:linear-gradient(135deg,var(--wp--preset--color--accent-5),transparent 75%);
+}
+.ih-orn .ih-section-head > *{position:relative;z-index:1}
+.ih-orn .ih-section-head::after{
+ --ih-i:url(../icons/book.svg);
+ position:absolute;inset-inline-end:var(--wp--preset--spacing--30);top:var(--wp--preset--spacing--30);
+ width:clamp(96px,16vw,180px);aspect-ratio:1;transform:rotate(-8deg);
+ background:var(--wp--preset--color--accent-1);opacity:.1;pointer-events:none;
+}
+.ih-orn .wp-block-post-content:has(.ih-tint-red) .ih-section-head::after{--ih-i:url(../icons/quill.svg);background:var(--wp--preset--color--accent-2)}
+.ih-orn .wp-block-post-content:has(.ih-tint-green) .ih-section-head::after{--ih-i:url(../icons/star.svg);background:var(--wp--preset--color--accent-1)}
+.ih-orn .wp-block-post-content:has(.ih-tint-gold) .ih-section-head::after{--ih-i:url(../icons/lamp.svg);background:var(--wp--preset--color--accent-3)}
+.ih-orn .wp-block-post-content:has(.ih-tint-lapis) .ih-section-head::after{--ih-i:url(../icons/book.svg);background:var(--wp--preset--color--accent-4)}
+.ih-orn .ih-section-head h1::after{
+ --ih-i:url(../images/divider.svg);
+ display:block;width:min(240px,60%);height:20px;margin-top:12px;
+ background:var(--wp--preset--color--accent-3);
+}
+
+/* Entry cards: section icon on the kicker, lift on hover, arrow on the right. */
+.ih-orn .ih-entry{transition:transform .22s ease,box-shadow .22s ease}
+.ih-orn .ih-entry:hover{transform:translateY(-3px);box-shadow:0 10px 24px color-mix(in srgb,var(--wp--preset--color--contrast) 14%,transparent),inset 0 0 0 1.5px var(--wp--preset--color--accent-1)}
+.ih-orn .ih-entry .ih-k{display:flex;align-items:center;gap:.5em}
+.ih-orn .ih-entry .ih-k::before{
+ --ih-i:url(../icons/scroll.svg);
+ flex:none;width:1.25em;height:1.25em;background:var(--wp--preset--color--accent-1);
+}
+.ih-orn .ih-tint-lapis .ih-entry .ih-k::before{--ih-i:url(../icons/book.svg);background:var(--wp--preset--color--accent-4)}
+.ih-orn .ih-tint-red .ih-entry .ih-k::before{--ih-i:url(../icons/quill.svg);background:var(--wp--preset--color--accent-2)}
+.ih-orn .ih-tint-green .ih-entry .ih-k::before{--ih-i:url(../icons/star.svg);background:var(--wp--preset--color--accent-1)}
+.ih-orn .ih-tint-gold .ih-entry .ih-k::before{--ih-i:url(../icons/lamp.svg);background:#8a6a1f}
+.ih-orn .ih-entry::after{
+ --ih-i:url(../icons/arrow-right.svg);
+ position:absolute;inset-inline-end:16px;bottom:14px;width:18px;height:18px;
+ background:var(--wp--preset--color--accent-1);opacity:0;transform:translateX(-6px);
+ transition:opacity .22s ease,transform .22s ease;pointer-events:none;
+}
+.ih-orn .ih-entry:hover::after,.ih-orn .ih-entry:focus-within::after{opacity:.85;transform:none}
+
+/* Headings in running text: a small star before each h2. */
+.ih-orn .wp-block-post-content h2:not(.ih-capsule-q)::before{
+ --ih-i:url(../icons/star.svg);
+ display:inline-block;width:.8em;height:.8em;margin-inline-end:.45em;vertical-align:-.04em;
+ background:var(--wp--preset--color--accent-3);
+}
+.ih-orn .ih-section-head h2::before,.ih-orn .ih-footer h2::before{display:none}
+
+/* Lists and quotations. */
+.ih-orn .wp-block-post-content ul.wp-block-list:not(.ih-footnotes) > li::marker{content:"◆  ";color:var(--wp--preset--color--accent-3);font-size:.75em}
+.ih-orn .wp-block-quote{position:relative;padding-top:var(--wp--preset--spacing--30)}
+.ih-orn .wp-block-quote::before{
+ --ih-i:url(../icons/quote.svg);
+ display:block;width:30px;height:30px;margin-bottom:6px;background:var(--wp--preset--color--accent-3);
+}
+
+/* Saying marks: an icon inside each coloured badge. */
+.ih-orn .ih-badge::before{
+ --ih-i:url(../icons/check-circle.svg);
+ display:inline-block;width:1.05em;height:1.05em;margin-inline-end:.35em;vertical-align:-.17em;background:#fff;
+}
+.ih-orn .ih-s-beyond .ih-badge::before{--ih-i:url(../icons/compass.svg)}
+.ih-orn .ih-s-unclear .ih-badge::before{--ih-i:url(../icons/help-circle.svg)}
+.ih-orn .ih-s-conflict .ih-badge::before{--ih-i:url(../icons/x-circle.svg)}
+.ih-orn .ih-s-notneeded .ih-badge::before{--ih-i:url(../icons/minus-circle.svg)}
+
+/* Buttons: trailing arrow (not on the glossed hero buttons, which carry a second line). */
+.ih-orn .wp-block-button:not(.ih-btn-gloss) .wp-block-button__link::after{
+ --ih-i:url(../icons/arrow-right.svg);
+ display:inline-block;width:1em;height:1em;margin-inline-start:.5em;vertical-align:-.15em;background:currentColor;
+ transition:transform .2s ease;
+}
+.ih-orn .wp-block-button:not(.ih-btn-gloss) .wp-block-button__link:hover::after{transform:translateX(3px)}
+
+/* Footer: pattern over the green. */
+.ih-orn .ih-footer{position:relative;overflow:hidden}
+.ih-orn .ih-footer::before{
+ content:"";position:absolute;inset:0;pointer-events:none;
+ background:var(--wp--preset--color--gold-tint);opacity:.08;
+ -webkit-mask:url(../images/pattern-star.svg) 0 0/120px 120px repeat;
+ mask:url(../images/pattern-star.svg) 0 0/120px 120px repeat;
+}
+.ih-orn .ih-footer > *{position:relative}
+
+/* Manuscript plates: a matted frame with a soft shadow. */
+.ih-orn .ih-plate img{
+ padding:8px;background:var(--wp--preset--color--base);
+ border:1px solid var(--wp--preset--color--accent-6);
+ box-shadow:0 12px 28px color-mix(in srgb,var(--wp--preset--color--contrast) 18%,transparent);
+}
+
+/* Motion: cards and answers rise into view. ornament.js adds .ih-js and .is-in. */
+@media (prefers-reduced-motion:no-preference){
+ .ih-js .ih-reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+ .ih-js .ih-reveal.is-in{opacity:1;transform:none}
+}
+@media (prefers-reduced-motion:reduce){
+ .ih-orn .ih-entry,.ih-orn .ih-entry::after,.ih-orn .wp-block-button:not(.ih-btn-gloss) .wp-block-button__link::after{transition:none}
+}
+
+/* Small screens: lighter pattern, smaller watermark. */
+@media (max-width:600px){
+ .ih-orn::before{background-size:88px 88px}
+ .ih-orn .ih-section-head{padding:var(--wp--preset--spacing--30) var(--wp--preset--spacing--20)}
+ .ih-orn .ih-section-head::after{width:84px;opacity:.07}
+}

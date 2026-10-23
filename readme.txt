@@ -57,6 +57,12 @@ Appearance > Theme Options is a tabbed page (stored in the injil_help_options op
 * SEO: theme SEO output automatic, always on or always off; home title and description; pillar page title; default social image URL.
 The page's CSS and JS live in assets/css/admin.css and assets/js/admin.js.
 
+== Ornament ==
+Icons, pattern, banners and motion are a separate layer: assets/css/ornament.css (loaded after style.css), assets/js/ornament.js (optional reveal-on-scroll), assets/icons/*.svg (line icons) and assets/images/pattern-star.svg and divider.svg. Everything is drawn with CSS masks, so each decoration takes its colour from the palette tokens and follows Theme Options > Colours.
+* Star lattice behind the page, a colour wash and pattern on the front-page hero, a tinted banner with a watermark icon on each section page (book for the gospels, quill for Paul of Tarsus, star for the Qur'an, lamp for The Gospel According to Islam), a flourish under each section title.
+* Entry cards carry a section icon, lift on hover and show an arrow; headings carry a small star; saying badges carry an icon (check, compass, question, cross, minus); manuscript images are matted and framed; the footer carries the pattern.
+* Theme Options > Branding > Ornament: Rich, Subtle (fainter pattern) or Off, and a switch for the reveal animation. Off removes the layer and loads neither file. Motion respects the visitor's reduced-motion setting.
+
 == Customising colours ==
 Colours are tokens in theme.json (Appearance > Editor > Styles > Colors, or edit settings.color.palette). Change a value there and every pattern follows, because the stylesheet reads them as CSS variables (var(--wp--preset--color--SLUG)).
 * base #f6f1e6 Parchment; contrast #2a2420 Ink; accent-1 #1f5c4a Qur'anic green; accent-2 #9b2c2c Rubric red; accent-3 #c39a3f Gold; accent-4 #2d4a7a Lapis; accent-5 #ece3d1 Vellum; accent-6 #d8cbb2 Rule; muted #6b6158.
@@ -68,6 +74,8 @@ The same nine colours can be set without code under Appearance > Theme Options >
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add a Changelog entry here, merge to main, and tag the commit with the same number (for example v2.5.1). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 3.1.0 =
+* New ornament layer: star-lattice background, tinted section banners with watermark icons, hero wash, icons on cards, headings and badges, framed manuscript images, patterned footer and a gentle reveal on scroll. Switchable under Theme Options > Branding > Ornament (Rich, Subtle, Off).
 = 3.0.0 =
 * The compiled Qur'anic passages on Jesus (145 verses with headings and footnotes, inc/data/quran-jesus.txt, inc/quran-jesus.php) sit beside the chapters of The Gospel According to Islam that follow them, and are gathered on /quran/passages/.
 * The Gospel According to Islam now uses Dr. Ahmad Shafaat's text (Vantage Press, 1985) as its base: 27 chapters in verse form with the author's notes as numbered footnotes, plus the Introduction. The pages carry only the text and notes; all credits are on the separate Credits page (/credits/), linked from the footer. Source and parsing: inc/data/gospel-islam.txt and inc/gospel-islam.php.
