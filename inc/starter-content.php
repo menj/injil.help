@@ -16,12 +16,21 @@ require_once get_stylesheet_directory() . '/inc/starter-content-pages.php';
  * "## " heading, "- " list item, "> " quote, "@consensus|@minority|@islamic"
  * claim label, anything else a paragraph. Blank lines are ignored. Inline
  * "{{fn:text}}" becomes a numbered footnote; the notes are listed at the end.
+ * A list item may start with [agree], [beyond], [unclear], [conflict] or
+ * [notneeded] to show a colour-coded status badge.
  */
 function injil_help_markup_to_blocks( $lines ) {
 	$labels = array(
 		'consensus' => __( 'Scholarly consensus', 'injil-help' ),
 		'minority'  => __( 'Minority view', 'injil-help' ),
 		'islamic'   => __( 'Islamic position', 'injil-help' ),
+	);
+	$status = array(
+		'agree'     => __( 'Agrees', 'injil-help' ),
+		'beyond'    => __( 'Beyond the measure', 'injil-help' ),
+		'unclear'   => __( 'Unclear', 'injil-help' ),
+		'conflict'  => __( 'Conflicts', 'injil-help' ),
+		'notneeded' => __( 'Not needed', 'injil-help' ),
 	);
 	$out    = '';
 	$notes  = array();
@@ -38,13 +47,25 @@ function injil_help_markup_to_blocks( $lines ) {
 			$text
 		);
 	};
-	$flush  = function () use ( &$out, &$list ) {
+	$flush  = function () use ( &$out, &$list, &$notes, $status, &$footnote ) {
 		if ( ! $list ) {
 			return;
 		}
 		$out .= "<!-- wp:list -->\n<ul class=\"wp-block-list\">";
 		foreach ( $list as $item ) {
-			$out .= "<!-- wp:list-item -->\n<li>" . $item . "</li>\n<!-- /wp:list-item -->";
+			$class = '';
+			$badge = '';
+			if ( preg_match( '/^\[(agree|beyond|unclear|conflict|notneeded)\]\s*/', $item, $m ) ) {
+				$class = 'ih-s ih-s-' . $m[1];
+				$badge = '<span class="ih-badge">' . esc_html( $status[ $m[1] ] ) . '</span> ';
+				$item  = substr( $item, strlen( $m[0] ) );
+			}
+			$item = $badge . wp_kses_post( $footnote( $item ) );
+			if ( $class ) {
+				$out .= '<!-- wp:list-item {"className":"' . $class . "\"} -->\n<li class=\"" . $class . '">' . $item . "</li>\n<!-- /wp:list-item -->";
+			} else {
+				$out .= "<!-- wp:list-item -->\n<li>" . $item . "</li>\n<!-- /wp:list-item -->";
+			}
 		}
 		$out .= "</ul>\n<!-- /wp:list -->\n";
 		$list = array();
@@ -56,7 +77,7 @@ function injil_help_markup_to_blocks( $lines ) {
 			continue;
 		}
 		if ( 0 === strpos( $line, '- ' ) ) {
-			$list[] = wp_kses_post( $footnote( substr( $line, 2 ) ) );
+			$list[] = substr( $line, 2 );
 			continue;
 		}
 		$flush();
