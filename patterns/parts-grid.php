@@ -48,7 +48,7 @@
 <h3 class="wp-block-heading"><a href="/gospel-according-to-islam/">The Gospel According to Islam</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"fontSize":"small"} -->
-<p class="has-small-font-size">An original narrative in six stages. Every verse tagged by source, with notes beside it.</p>
+<p class="has-small-font-size">A gospel in 27 chapters after Dr. Ahmad Shafaat, with notes beside each chapter.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:group {"layout":{"type":"default"}} -->
