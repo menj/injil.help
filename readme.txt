@@ -39,7 +39,7 @@ Licensing: Sabon Next LT is a commercial Linotype face; confirm your licence cov
 * Set a default social image with the injil_help_default_og_image filter.
 
 == Images ==
-Manuscript images load from Wikimedia Commons (Special:FilePath URLs, sized by ?width=), each with its credit and a link to its Commons page in the caption. All are public domain except the Kairouan Qur'an photograph (Richard Mortel, CC BY 2.0), which must keep its credit. To host them yourself, download from the linked Commons page into the Media Library and swap the URL. Readers' browsers contact upload.wikimedia.org; mention this in the privacy policy.
+Manuscript images load from Wikimedia Commons (Special:FilePath URLs, sized by ?width=), each with its credit and a link to its Commons page in the caption. All are public domain except the Kairouan Qur'an photograph (Richard Mortel, CC BY 2.0), which must keep its credit. Every image carries a descriptive alt attribute (what it is, its date and holding institution) and a short title; keep that pattern for new images, and write alt text for the subject, not for decoration. WordPress adds lazy loading itself. The default Open Graph image is the Birmingham Qur'an manuscript; override it with the injil_help_default_og_image filter. To host them yourself, download from the linked Commons page into the Media Library and swap the URL. Readers' browsers contact upload.wikimedia.org; mention this in the privacy policy.
 
 == Branding ==
 * Brandmark: assets/brandmark.svg (an open codex with rays of light, Qur'an 5:46). It appears as the link before the site title in the header and at the top of the footer's first column (class ih-mark; the footer adds ih-mark-foot).
@@ -56,6 +56,8 @@ The theme has no settings screen; all configuration is through the Site Editor a
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add a Changelog entry here, merge to main, and tag the commit with the same number (for example v2.5.1). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 2.5.2 =
+* Keyword-rich alt text and titles on all manuscript images; default Open Graph image set.
 = 2.5.1 =
 * Version bump so Git Updater offers 2.5.0 changes.
 = 2.5.0 =
