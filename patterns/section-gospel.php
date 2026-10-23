@@ -105,7 +105,7 @@
 <p class="ih-k">Bonus chapter</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/bonus/">An Epistle unto the Congregation of Paul</a></h3>
+<h3 class="wp-block-heading"><a href="/bonus/epistle/">An Epistle unto the Congregation of Paul</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">A letter to the followers of Paul, in the manner of the Pauline epistles.</p>

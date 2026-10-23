@@ -5,7 +5,7 @@ Description: Child theme of Twenty Twenty-Five for injil.help, after Ahmad Shafa
 Author: Mohd Elfie Nieshaem Juferi
 Author URI: https://menj.org
 Template: twentytwentyfive
-Version: 2.9.0
+Version: 2.9.1
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -281,6 +281,10 @@ p.ih-cite{margin:0;font-size:13px;color:var(--wp--preset--color--muted)}
 .ih-footer .wp-block-column > p:not(.ih-eyebrow,.ih-gloss){text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
 .wp-block-post-content :where(td,th,figcaption,summary) p{text-align:start}
 
+/* Footnotes */
+.ih-fnref a{text-decoration:none;font-family:var(--ih-sans);font-weight:600;color:var(--wp--preset--color--accent-2);padding:0 .1em}
+.wp-block-post-content .ih-footnotes li{font-size:var(--wp--preset--font-size--small);text-align:start;hyphens:manual;margin-bottom:.5em}
+.ih-footnotes li:target{background:var(--wp--preset--color--gold-tint)}
 /* Collapse the menu to its overlay button below 1180px, where seven glossed items no longer fit beside the title */
 @media (min-width:600px) and (max-width:1179px){
  .ih-header .ih-nav .wp-block-navigation__responsive-container-open:not(.always-shown){display:flex}

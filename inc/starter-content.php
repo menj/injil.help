@@ -14,7 +14,8 @@ require_once get_stylesheet_directory() . '/inc/starter-content-pages.php';
  * Convert the compact page markup to blocks.
  *
  * "## " heading, "- " list item, "> " quote, "@consensus|@minority|@islamic"
- * claim label, anything else a paragraph. Blank lines are ignored.
+ * claim label, anything else a paragraph. Blank lines are ignored. Inline
+ * "{{fn:text}}" becomes a numbered footnote; the notes are listed at the end.
  */
 function injil_help_markup_to_blocks( $lines ) {
 	$labels = array(
@@ -23,7 +24,20 @@ function injil_help_markup_to_blocks( $lines ) {
 		'islamic'   => __( 'Islamic position', 'injil-help' ),
 	);
 	$out    = '';
+	$notes  = array();
 	$list   = array();
+	// Replace {{fn:...}} with a numbered superscript link and collect the note.
+	$footnote = function ( $text ) use ( &$notes ) {
+		return preg_replace_callback(
+			'/\{\{fn:(.*?)\}\}/s',
+			function ( $m ) use ( &$notes ) {
+				$notes[] = trim( $m[1] );
+				$n       = count( $notes );
+				return sprintf( '<sup class="ih-fnref"><a href="#fn-%1$d" id="fnref-%1$d">%1$d</a></sup>', $n );
+			},
+			$text
+		);
+	};
 	$flush  = function () use ( &$out, &$list ) {
 		if ( ! $list ) {
 			return;
@@ -55,10 +69,20 @@ function injil_help_markup_to_blocks( $lines ) {
 		} elseif ( '[page-list]' === $line ) {
 			$out .= "<!-- wp:page-list /-->\n";
 		} else {
-			$out .= "<!-- wp:paragraph -->\n<p>" . wp_kses_post( $line ) . "</p>\n<!-- /wp:paragraph -->\n";
+			$out .= "<!-- wp:paragraph -->\n<p>" . wp_kses_post( $footnote( $line ) ) . "</p>\n<!-- /wp:paragraph -->\n";
 		}
 	}
 	$flush();
+
+	if ( $notes ) {
+		$out .= "<!-- wp:heading -->\n<h2 class=\"wp-block-heading\" id=\"notes\">" . esc_html__( 'Notes', 'injil-help' ) . "</h2>\n<!-- /wp:heading -->\n";
+		$out .= "<!-- wp:list {\"ordered\":true,\"className\":\"ih-footnotes\"} -->\n<ol class=\"wp-block-list ih-footnotes\">";
+		foreach ( $notes as $i => $note ) {
+			$n    = $i + 1;
+			$out .= sprintf( "<!-- wp:list-item -->\n<li id=\"fn-%1\$d\">%2\$s <a href=\"#fnref-%1\$d\" aria-label=\"%3\$s\">↩</a></li>\n<!-- /wp:list-item -->", $n, wp_kses_post( $note ), esc_attr__( 'Back to the text', 'injil-help' ) );
+		}
+		$out .= "</ol>\n<!-- /wp:list -->\n";
+	}
 	return $out;
 }
 
