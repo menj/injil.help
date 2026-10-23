@@ -48,7 +48,7 @@
 <h3 class="wp-block-heading"><a href="/gospel-according-to-islam/">The Gospel According to Islam</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"fontSize":"small"} -->
-<p class="has-small-font-size">A gospel in 27 chapters, with notes beside each chapter.</p>
+<p class="has-small-font-size">A gospel in 27 sections, with notes beside each section.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:group {"layout":{"type":"default"}} -->

@@ -20,7 +20,7 @@
 <h2 class="wp-block-heading"><a href="/gospel-according-to-islam/">The Gospel According to Islam</a></h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-intro"} -->
-<p class="ih-intro">The life of ʿĪsā ibn Maryam told as a gospel in 27 chapters, with notes on each chapter.</p>
+<p class="ih-intro">The life of ʿĪsā ibn Maryam told as a gospel in 27 sections, with notes on each section.</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"sizeSlug":"large","linkDestination":"custom","className":"ih-plate"} -->
 <figure class="wp-block-image size-large ih-plate"><a href="https://commons.wikimedia.org/wiki/File:Parchment_copy_of_the_Quran_written_in_Eastern_Kufic%2C_Kairouan%2C_Tunisia%2C_1020%2C_The_David_Collection%2C_Copenhagen_(1)_(36270866531).jpg"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Parchment_copy_of_the_Quran_written_in_Eastern_Kufic%2C_Kairouan%2C_Tunisia%2C_1020%2C_The_David_Collection%2C_Copenhagen_(1)_(36270866531).jpg?width=1200" alt="Qur'an parchment page in Eastern Kufic script, Kairouan, Tunisia, 1020 CE, The David Collection, Copenhagen" title="Qur'an parchment page in Eastern Kufic script"/></a><figcaption class="wp-element-caption">Qur&#039;an in Eastern Kufic, Kairouan, 1020. The David Collection, Copenhagen. Photo: Richard Mortel, CC BY 2.0. <a href="https://commons.wikimedia.org/wiki/File:Parchment_copy_of_the_Quran_written_in_Eastern_Kufic%2C_Kairouan%2C_Tunisia%2C_1020%2C_The_David_Collection%2C_Copenhagen_(1)_(36270866531).jpg">Wikimedia Commons</a></figcaption></figure>
@@ -37,7 +37,7 @@
 <!-- wp:group {"className":"ih-entries ih-tint-gold","layout":{"type":"grid","minimumColumnWidth":"15rem"}} -->
 <div class="wp-block-group ih-entries ih-tint-gold"><!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Chapter · II</p>
+<p class="ih-k">Section · II</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/gospel-according-to-islam/2/">The annunciation and the birth</a></h3>
@@ -48,7 +48,7 @@
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Chapter · V</p>
+<p class="ih-k">Section · V</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/gospel-according-to-islam/5/">John the Baptist</a></h3>
@@ -59,7 +59,7 @@
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Chapter · VIII</p>
+<p class="ih-k">Section · VIII</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/gospel-according-to-islam/8/">The Beatitudes</a></h3>
@@ -70,7 +70,7 @@
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Chapter · XX</p>
+<p class="ih-k">Section · XX</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/gospel-according-to-islam/20/">Jerusalem</a></h3>
@@ -81,7 +81,7 @@
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Chapter · XXIV</p>
+<p class="ih-k">Section · XXIV</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/gospel-according-to-islam/24/">The hour and the Counsellor</a></h3>
@@ -92,7 +92,7 @@
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Chapter · XXVI</p>
+<p class="ih-k">Section · XXVI</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/gospel-according-to-islam/26/">The trial and the road to Emmaus</a></h3>
