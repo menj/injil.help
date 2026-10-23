@@ -84,7 +84,7 @@ html .ih-orn .ih-entry:hover{transform:translateY(-3px);box-shadow:0 10px 24px c
 .ih-orn .ih-tint-lapis .ih-entry .ih-k::before{--ih-i:url(../icons/book.svg);background:var(--wp--preset--color--accent-4)}
 .ih-orn .ih-tint-red .ih-entry .ih-k::before{--ih-i:url(../icons/quill.svg);background:var(--wp--preset--color--accent-2)}
 .ih-orn .ih-tint-green .ih-entry .ih-k::before{--ih-i:url(../icons/star.svg);background:var(--wp--preset--color--accent-1)}
-.ih-orn .ih-tint-gold .ih-entry .ih-k::before{--ih-i:url(../icons/lamp.svg);background:#8a6a1f}
+.ih-orn .ih-tint-gold .ih-entry .ih-k::before{--ih-i:url(../icons/lamp.svg);background:var(--ih-gold-ink)}
 .ih-orn .ih-entry::after{
  --ih-i:url(../icons/arrow-right.svg);
  position:absolute;inset-inline-end:16px;bottom:14px;width:18px;height:18px;

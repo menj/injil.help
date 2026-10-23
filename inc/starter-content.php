@@ -82,11 +82,11 @@ function injil_help_markup_to_blocks( $lines ) {
 		}
 		$flush();
 		if ( 0 === strpos( $line, '### ' ) ) {
-			$out .= "<!-- wp:heading {\"level\":3} -->\n<h3 class=\"wp-block-heading\">" . wp_kses_post( substr( $line, 4 ) ) . "</h3>\n<!-- /wp:heading -->\n";
+			$out .= "<!-- wp:heading {\"level\":3} -->\n<h3 class=\"wp-block-heading\">" . wp_kses_post( $footnote( substr( $line, 4 ) ) ) . "</h3>\n<!-- /wp:heading -->\n";
 		} elseif ( 0 === strpos( $line, '## ' ) ) {
-			$out .= "<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">" . wp_kses_post( substr( $line, 3 ) ) . "</h2>\n<!-- /wp:heading -->\n";
+			$out .= "<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">" . wp_kses_post( $footnote( substr( $line, 3 ) ) ) . "</h2>\n<!-- /wp:heading -->\n";
 		} elseif ( 0 === strpos( $line, '> ' ) ) {
-			$out .= "<!-- wp:quote -->\n<blockquote class=\"wp-block-quote\"><!-- wp:paragraph -->\n<p>" . wp_kses_post( substr( $line, 2 ) ) . "</p>\n<!-- /wp:paragraph --></blockquote>\n<!-- /wp:quote -->\n";
+			$out .= "<!-- wp:quote -->\n<blockquote class=\"wp-block-quote\"><!-- wp:paragraph -->\n<p>" . wp_kses_post( $footnote( substr( $line, 2 ) ) ) . "</p>\n<!-- /wp:paragraph --></blockquote>\n<!-- /wp:quote -->\n";
 		} elseif ( preg_match( '/^@(consensus|minority|islamic)$/', $line, $m ) ) {
 			$out .= '<!-- wp:paragraph {"className":"is-style-label-' . $m[1] . "\"} -->\n<p class=\"is-style-label-" . $m[1] . '">' . esc_html( $labels[ $m[1] ] ) . "</p>\n<!-- /wp:paragraph -->\n";
 		} elseif ( '[page-list]' === $line ) {
@@ -127,6 +127,12 @@ function injil_help_find_page( $path ) {
  * Create every missing page. Returns the number created.
  */
 function injil_help_populate() {
+	// A short lock stops two requests (for example a double click) both creating the same page.
+	if ( get_transient( 'injil_help_populating' ) ) {
+		return 0;
+	}
+	set_transient( 'injil_help_populating', 1, MINUTE_IN_SECONDS );
+
 	$created = 0;
 
 	foreach ( injil_help_starter_pages() as $order => $def ) {
@@ -179,6 +185,7 @@ function injil_help_populate() {
 	flush_rewrite_rules();
 
 	update_option( 'injil_help_populated', INJIL_HELP_VERSION );
+	delete_transient( 'injil_help_populating' );
 	return $created;
 }
 

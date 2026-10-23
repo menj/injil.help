@@ -5,7 +5,7 @@ Description: Child theme of Twenty Twenty-Five for injil.help, after Ahmad Shafa
 Author: Mohd Elfie Nieshaem Juferi
 Author URI: https://menj.org
 Template: twentytwentyfive
-Version: 3.1.0
+Version: 3.1.1
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -18,6 +18,7 @@ Update URI: https://github.com/menj/injil.help
 */
 
 :root{
+ --ih-gold-ink:color-mix(in srgb,var(--wp--preset--color--accent-3) 52%,var(--wp--preset--color--contrast));
  --ih-r-sm:8px;--ih-r-md:14px;--ih-r-lg:22px;--ih-r-pill:999px;
  --ih-rule:1px solid var(--wp--preset--color--accent-6);
  --ih-serif:var(--wp--preset--font-family--garamond);
@@ -77,11 +78,11 @@ h1,h2,h3{text-wrap:balance}
 /* Pill labels: claim status and verse source */
 p[class*="is-style-label-"]{display:inline-block;margin:0;padding:3px 12px;border-radius:var(--ih-r-pill);font-family:var(--ih-sans);font-size:13px;font-weight:600;letter-spacing:.04em;line-height:1.5;white-space:nowrap;border:1px solid transparent}
 p.is-style-label-consensus{background:var(--wp--preset--color--lapis-tint);color:var(--wp--preset--color--accent-4)}
-p.is-style-label-minority{background:var(--wp--preset--color--gold-tint);color:#6e4d10}
+p.is-style-label-minority{background:var(--wp--preset--color--gold-tint);color:var(--ih-gold-ink)}
 p.is-style-label-islamic{background:var(--wp--preset--color--accent-1);color:var(--wp--preset--color--base)}
 p.is-style-label-quran{background:var(--wp--preset--color--accent-1);color:var(--wp--preset--color--base)}
 p.is-style-label-nt{background:var(--wp--preset--color--lapis-tint);color:var(--wp--preset--color--accent-4)}
-p.is-style-label-editorial{background:transparent;color:#6e4d10;border:1px dashed var(--wp--preset--color--accent-3)}
+p.is-style-label-editorial{background:transparent;color:var(--ih-gold-ink);border:1px dashed var(--wp--preset--color--accent-3)}
 
 /* Answer capsule */
 .is-style-answer-capsule{background:var(--wp--preset--color--green-tint);border-radius:var(--ih-r-lg);padding:var(--wp--preset--spacing--30) var(--wp--preset--spacing--30) var(--wp--preset--spacing--20)}
@@ -277,7 +278,7 @@ p.ih-cite{margin:0;font-size:13px;color:var(--wp--preset--color--muted)}
 .ih-no-footer-mark .ih-mark-foot{display:none}
 
 /* Justified body text; headings, captions, glosses, tables and Arabic stay as set */
-.wp-block-post-content :where(p,li):not([class*="has-text-align"],.ih-gloss,.ih-eyebrow,.ih-cite,.ih-k,.ih-numeral,.ih-ar,.ih-quran,.wp-element-caption,.ih-legal *),
+.wp-block-post-content :where(p,li):not([class*="has-text-align"],.ih-intro,.ih-d,.ih-gloss,.ih-eyebrow,.ih-cite,.ih-k,.ih-numeral,.ih-ar,.ih-quran,.wp-element-caption,.ih-legal *),
 .ih-footer .wp-block-column > p:not(.ih-eyebrow,.ih-gloss){text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
 .wp-block-post-content :where(td,th,figcaption,summary) p{text-align:start}
 
@@ -286,7 +287,7 @@ p.ih-cite{margin:0;font-size:13px;color:var(--wp--preset--color--muted)}
 .ih-badge{display:inline-block;font-family:var(--ih-sans);font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.1em .6em;margin-inline-end:.5em;border-radius:var(--ih-r-pill);background:var(--ih-mark);color:#fff;vertical-align:.1em}
 .ih-s-agree{--ih-mark:var(--wp--preset--color--accent-1);--ih-tint:var(--wp--preset--color--green-tint)}
 .ih-s-beyond{--ih-mark:var(--wp--preset--color--accent-4);--ih-tint:var(--wp--preset--color--lapis-tint)}
-.ih-s-unclear{--ih-mark:#8a6a1f;--ih-tint:var(--wp--preset--color--gold-tint)}
+.ih-s-unclear{--ih-mark:var(--ih-gold-ink);--ih-tint:var(--wp--preset--color--gold-tint)}
 .ih-s-conflict{--ih-mark:var(--wp--preset--color--accent-2);--ih-tint:var(--wp--preset--color--red-tint)}
 .ih-s-notneeded{--ih-mark:var(--wp--preset--color--muted);--ih-tint:var(--wp--preset--color--accent-5)}
 /* Verse numbers in the gospel chapters */
