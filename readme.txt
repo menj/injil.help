@@ -15,7 +15,7 @@ Child theme of Twenty Twenty-Five for injil.help.
 5. Create /method/ (insert "Criterion statement"), /corrections/ ("Corrections log"), and the article pages the section entries link to. Edit the entry links in each pattern as articles go live.
 
 == Structure ==
-Modelled on apostleofdoom.org: a title-page hero; each part of the study as a block with a gloss (Greek for New Testament parts, Arabic for Qur'anic parts, each with its verse), an intro, a "Read first" link and numbered entries; a band of short answers with "Full evidence" links; a footer of study, reference and method links.
+Modelled on apostleofdoom.org: a title-page hero; each part of the study as a block with a gloss (Greek for New Testament parts, Arabic for Qur'anic parts, each with its verse), an intro, a "Read first" link and numbered entries; a band of FAQs with "Full evidence" links; a footer of study, reference and method links.
 
 == What it adds ==
 * Patterns (category "injil.help"): front-page hero, parts grid, criterion statement, answer capsule, discrepancy table (resurrection accounts), Qur'an verse index, gospel verse, how-this-gospel-was-composed, objection and reply, FAQ, corrections log.

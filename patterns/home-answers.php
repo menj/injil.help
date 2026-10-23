@@ -110,6 +110,6 @@
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 <!-- wp:paragraph {"className":"ih-full"} -->
-<p class="ih-full"><a href="/answers/">All answers, with references</a></p>
+<p class="ih-full"><a href="/answers/">All FAQs, with references</a></p>
 <!-- /wp:paragraph --></section>
 <!-- /wp:group -->
