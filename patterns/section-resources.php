@@ -80,6 +80,17 @@
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
+<p class="ih-k">Reference</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading"><a href="/resources/responses/">Responses to named articles</a></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"ih-d"} -->
+<p class="ih-d">Four published articles on the Gospel and Islam, their claims stated fairly and answered.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
 <p class="ih-k">Record</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
