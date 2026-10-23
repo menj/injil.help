@@ -28,6 +28,8 @@ function injil_help_option_defaults() {
 	return array(
 		'colors'         => array(),
 		'footer_mark'    => 1,
+		'ornament'       => 'rich',
+		'animate'        => 1,
 		'favicon_force'  => 0,
 		'favicon_url'    => '',
 		'schema'         => 'auto',
@@ -54,6 +56,8 @@ function injil_help_sanitize_options( $in ) {
 		}
 	}
 	$out['footer_mark']      = empty( $in['footer_mark'] ) ? 0 : 1;
+	$out['ornament']         = in_array( $in['ornament'] ?? 'rich', array( 'rich', 'subtle', 'off' ), true ) ? $in['ornament'] : 'rich';
+	$out['animate']          = empty( $in['animate'] ) ? 0 : 1;
 	$out['favicon_force']    = empty( $in['favicon_force'] ) ? 0 : 1;
 	$out['favicon_url']      = esc_url_raw( $in['favicon_url'] ?? '' );
 	$out['schema']           = in_array( $in['schema'] ?? 'auto', array( 'auto', 'on', 'off' ), true ) ? $in['schema'] : 'auto';
@@ -135,6 +139,18 @@ function injil_help_render_options() {
 
 			<section class="ih-panel" id="panel-branding" role="tabpanel" aria-labelledby="tab-branding">
 				<table class="form-table" role="presentation">
+					<tr>
+						<th scope="row"><label for="ih-ornament"><?php esc_html_e( 'Ornament', 'injil-help' ); ?></label></th>
+						<td>
+							<select id="ih-ornament" name="<?php echo esc_attr( $name ); ?>[ornament]">
+								<option value="rich" <?php selected( $o['ornament'], 'rich' ); ?>><?php esc_html_e( 'Rich: pattern, icons, banners and frames', 'injil-help' ); ?></option>
+								<option value="subtle" <?php selected( $o['ornament'], 'subtle' ); ?>><?php esc_html_e( 'Subtle: the same, with a fainter pattern', 'injil-help' ); ?></option>
+								<option value="off" <?php selected( $o['ornament'], 'off' ); ?>><?php esc_html_e( 'Off: plain pages', 'injil-help' ); ?></option>
+							</select>
+							<p class="description"><?php esc_html_e( 'The star pattern, section icons, tinted banners, badges and image frames. Everything takes its colour from the Colours tab.', 'injil-help' ); ?></p>
+							<label><input type="checkbox" name="<?php echo esc_attr( $name ); ?>[animate]" value="1" <?php checked( $o['animate'] ); ?>> <?php esc_html_e( 'Let cards and answers rise into view as the page scrolls', 'injil-help' ); ?></label>
+						</td>
+					</tr>
 					<tr>
 						<th scope="row"><?php esc_html_e( 'Footer brandmark', 'injil-help' ); ?></th>
 						<td><label><input type="checkbox" name="<?php echo esc_attr( $name ); ?>[footer_mark]" value="1" <?php checked( $o['footer_mark'] ); ?>> <?php esc_html_e( 'Show the brandmark at the top of the footer', 'injil-help' ); ?></label></td>
@@ -251,6 +267,11 @@ add_filter(
 	function ( $classes ) {
 		if ( ! injil_help_get_option( 'footer_mark' ) ) {
 			$classes[] = 'ih-no-footer-mark';
+		}
+		$orn = injil_help_get_option( 'ornament' );
+		if ( 'off' !== $orn ) {
+			$classes[] = 'ih-orn';
+			$classes[] = 'ih-orn-' . ( 'subtle' === $orn ? 'subtle' : 'rich' );
 		}
 		return $classes;
 	}
