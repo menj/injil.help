@@ -24,6 +24,12 @@ The theme header carries `GitHub Theme URI` and `Primary Branch: main`, so [Git 
 - `inc/seo.php`: titles, meta description, Open Graph, schema
 - `parts/`, `templates/`, `patterns/`: block markup
 - `assets/fonts/`: bundled fonts
+- `assets/brandmark.svg`: brandmark (header, footer, fallback favicon)
+- `assets/images/`: placeholder cover art
+
+## Documentation
+
+`readme.txt` is the full manual: install, structure, patterns and block styles, fonts and licences, SEO, images, branding and favicon, colour customisation, release steps and changelog.
 
 ## Licence
 
