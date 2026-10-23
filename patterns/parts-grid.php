@@ -23,10 +23,10 @@
 <p class="ih-numeral">II</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/paul/">Paul</a></h3>
+<h3 class="wp-block-heading"><a href="/paul/">Paul of Tarsus</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"fontSize":"small"} -->
-<p class="has-small-font-size">Acts against Galatians. Paul against Jesus on law, sonship and atonement. James and the Jerusalem church.</p>
+<p class="has-small-font-size">Acts against Galatians. Paul of Tarsus against Jesus on law, sonship and atonement. James and the Jerusalem church.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-tint-green","layout":{"type":"default"}} -->
@@ -48,7 +48,7 @@
 <h3 class="wp-block-heading"><a href="/gospel-according-to-islam/">The Gospel According to Islam</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"fontSize":"small"} -->
-<p class="has-small-font-size">A gospel in 27 chapters after Dr. Ahmad Shafaat, with notes beside each chapter.</p>
+<p class="has-small-font-size">A gospel in 27 chapters, with notes beside each chapter.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:group {"layout":{"type":"default"}} -->

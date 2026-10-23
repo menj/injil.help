@@ -19,7 +19,7 @@
 <h1 class="wp-block-heading">The Gospel According to Islam</h1>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-intro"} -->
-<p class="ih-intro">The life of ʿĪsā ibn Maryam told as a gospel in 27 chapters, in verse form, with notes on each chapter. The text is by Dr. Ahmad Shafaat (Vantage Press, 1985), used here as the base of this gospel, with the Gospel of Thomas and new notes added.</p>
+<p class="ih-intro">The life of ʿĪsā ibn Maryam told as a gospel in 27 chapters, in verse form, with notes on each chapter.</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"sizeSlug":"large","linkDestination":"custom","className":"ih-plate"} -->
 <figure class="wp-block-image size-large ih-plate"><a href="https://commons.wikimedia.org/wiki/File:Parchment_copy_of_the_Quran_written_in_Eastern_Kufic%2C_Kairouan%2C_Tunisia%2C_1020%2C_The_David_Collection%2C_Copenhagen_(1)_(36270866531).jpg"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Parchment_copy_of_the_Quran_written_in_Eastern_Kufic%2C_Kairouan%2C_Tunisia%2C_1020%2C_The_David_Collection%2C_Copenhagen_(1)_(36270866531).jpg?width=1200" alt="Qur'an parchment page in Eastern Kufic script, Kairouan, Tunisia, 1020, The David Collection" title="Qur'an parchment page in Eastern Kufic script"/></a><figcaption class="wp-element-caption">Qur&#039;an in Eastern Kufic, Kairouan, 1020. The David Collection, Copenhagen. Photo: Richard Mortel, CC BY 2.0. <a href="https://commons.wikimedia.org/wiki/File:Parchment_copy_of_the_Quran_written_in_Eastern_Kufic%2C_Kairouan%2C_Tunisia%2C_1020%2C_The_David_Collection%2C_Copenhagen_(1)_(36270866531).jpg">Wikimedia Commons</a></figcaption></figure>
@@ -39,32 +39,10 @@
 <p class="ih-k">Front matter</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/about-the-book/">About this book</a></h3>
-<!-- /wp:heading -->
-<!-- wp:paragraph {"className":"ih-d"} -->
-<p class="ih-d">How the book is described: a Muslim gospel, told in the form of the canonical gospels.</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group -->
-<!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
-<div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Front matter</p>
-<!-- /wp:paragraph -->
-<!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/gospel-according-to-islam/introduction/">Introduction</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Why a new Gospel is justified, and what a Gospel is.</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group -->
-<!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
-<div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Front matter</p>
-<!-- /wp:paragraph -->
-<!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/the-author/">About the author</a></h3>
-<!-- /wp:heading -->
-<!-- wp:paragraph {"className":"ih-d"} -->
-<p class="ih-d">Dr. Ahmad Shafaat.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
@@ -369,10 +347,10 @@
 <p class="ih-k">Bonus chapter</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/bonus/epistle/">An Epistle unto the Congregation of Paul</a></h3>
+<h3 class="wp-block-heading"><a href="/bonus/epistle/">An Epistle unto the Congregation of Paul of Tarsus</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
-<p class="ih-d">A letter to the followers of Paul, in the manner of the Pauline epistles.</p>
+<p class="ih-d">A letter to the followers of Paul of Tarsus, in the manner of the Pauline epistles.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->

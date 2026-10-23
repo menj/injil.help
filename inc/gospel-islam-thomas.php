@@ -12,13 +12,13 @@ function injil_help_gospel_thomas_sections() {
 	return array(
 		'2' => array(
 					'## From the Gospel of Thomas',
-					'The Gospel of Thomas is a collection of sayings and tells nothing of the birth. The stories of the infancy found under the name of Thomas belong to a different and later work, the Infancy Gospel of Thomas. It keeps one saying that touches on the mother of Jesus:{{fn:Saying numbers follow the standard edition. The wording is our own digest of Thomas O. Lambdin’s translation in <em>The Nag Hammadi Library in English</em>, ed. James M. Robinson, 3rd ed. (Leiden: E. J. Brill, 1988). See <a href="/gospels/thomas/">The Gospel of Thomas</a>.}}',
+					'The Gospel of Thomas is a collection of sayings and tells nothing of the birth. The stories of the infancy found under the name of Thomas belong to a different and later work, the Infancy Gospel of Thomas. It keeps one saying that touches on the mother of Jesus:',
 					'- [agree] <strong>Thomas 79.</strong> A woman calls blessed the womb that bore him. Jesus calls blessed those who hear the Father’s word and keep it. Days will come when people bless the womb that never bore. (Compare Luke 11:27-28.){{fn:Luke 11:27-28. Thomas says “the Father’s word” where Luke says “the word of God”, and it is read here as Luke has it (see the note on “Father” on <a href="/gospels/thomas/set-aside/">the page of sayings set aside</a>). Agrees with Qur’an 3:42-47, where Maryam is honoured, and with 19:30-31, where the child states what he was commanded.}}',
 					'Sayings that conflict with the Qur’an, and sayings that only repeat another, are listed with the reason for each on <a href="/gospels/thomas/set-aside/">the page of sayings set aside</a>.',
 		),
 		'8' => array(
 					'## From the Gospel of Thomas',
-					'The Gospel of Thomas keeps many sayings of the teacher. Each carries a colour mark: green agrees with the Qur’an as the measure, blue is beyond the measure (the Qur’an says nothing either way), gold is unclear. The note on each gives its canonical parallel and the Qur’anic verse, or the reason for the mark.{{fn:Saying numbers follow the standard edition. The wording is our own digest of Thomas O. Lambdin’s translation in <em>The Nag Hammadi Library in English</em>, ed. James M. Robinson, 3rd ed. (Leiden: E. J. Brill, 1988). See <a href="/gospels/thomas/">The Gospel of Thomas</a>.}}',
+					'The Gospel of Thomas keeps many sayings of the teacher. Each carries a colour mark: green agrees with the Qur’an as the measure, blue is beyond the measure (the Qur’an says nothing either way), gold is unclear. The note on each gives its canonical parallel and the Qur’anic verse, or the reason for the mark.',
 					'- [unclear] <strong>Thomas 4.</strong> An old man should ask a week-old child about the place of life. The first will be last, and all will become one.{{fn:A riddle about an old man and a small child. Its sense is not given and no reading settles it.}}',
 					'- [unclear] <strong>Thomas 7.</strong> A lion eaten by a man is blessed, because it becomes human. A man eaten by a lion is cursed.{{fn:The lion and the man. No parallel and no clear sense.}}',
 					'- [unclear] <strong>Thomas 8.</strong> The wise fisherman keeps one large fish and throws back all the small ones. Let those with ears hear.{{fn:The wise fisherman. A parable found only here; Matthew 13:47-48 has a net, but the point is different.}}',
@@ -75,7 +75,7 @@ function injil_help_gospel_thomas_sections() {
 		),
 		'9' => array(
 					'## From the Gospel of Thomas',
-					'The Gospel of Thomas keeps sayings that stand beside the Qur’anic portrait of Yaḥyā and of the first helpers. Each saying carries a colour mark: green agrees with the Qur’an, blue is beyond the measure, gold is unclear.{{fn:Saying numbers follow the standard edition. The wording is our own digest of Thomas O. Lambdin’s translation in <em>The Nag Hammadi Library in English</em>, ed. James M. Robinson, 3rd ed. (Leiden: E. J. Brill, 1988). See <a href="/gospels/thomas/">The Gospel of Thomas</a>.}}',
+					'The Gospel of Thomas keeps sayings that stand beside the Qur’anic portrait of Yaḥyā and of the first helpers. Each saying carries a colour mark: green agrees with the Qur’an, blue is beyond the measure, gold is unclear.',
 					'- [beyond] <strong>Thomas 13.</strong> Asked whom he resembles, Peter answers a righteous angel and Matthew a wise philosopher. Thomas says he cannot say. Jesus tells Thomas three things he will not repeat, for the others would stone him.{{fn:Rests on secret teaching given to Thomas alone. The Qur’an records no hidden doctrine, and ʿĪsā brings clear proofs (3:49-50).}}',
 					'- [agree] <strong>Thomas 46.</strong> No one born of woman is greater than John the Baptist, yet whoever becomes a child will know the kingdom and surpass John. (Compare Matthew 11:11.){{fn:Matthew 11:11; Luke 7:28. Qur’an 3:39 and 19:12-15 honour Yaḥyā as noble, chaste and a prophet.}}',
 					'- [agree] <strong>Thomas 73.</strong> The harvest is large and the workers are few. Ask the Lord to send workers. (Compare Matthew 9:37-38.){{fn:Matthew 9:37-38; Luke 10:2. Qur’an 3:52 and 61:14, where ʿĪsā asks who will be God’s helpers.}}',
@@ -85,7 +85,7 @@ function injil_help_gospel_thomas_sections() {
 		),
 		'22' => array(
 					'## From the Gospel of Thomas',
-					'The Gospel of Thomas has no Jerusalem narrative, but it keeps sayings that belong to these days. Green agrees with the Qur’an, blue is beyond the measure.{{fn:Saying numbers follow the standard edition. The wording is our own digest of Thomas O. Lambdin’s translation in <em>The Nag Hammadi Library in English</em>, ed. James M. Robinson, 3rd ed. (Leiden: E. J. Brill, 1988). See <a href="/gospels/thomas/">The Gospel of Thomas</a>.}}',
+					'The Gospel of Thomas has no Jerusalem narrative, but it keeps sayings that belong to these days. Green agrees with the Qur’an, blue is beyond the measure.',
 					'- [agree] <strong>Thomas 39.</strong> The Pharisees and scribes have hidden the keys of knowledge and neither enter nor let others enter. Be as wise as serpents and as innocent as doves. (Compare Matthew 23:13; 10:16.){{fn:Matthew 23:13; Luke 11:52. Qur’an 2:75-79 and 3:78 on those who conceal and distort the Book.}}',
 					'- [agree] <strong>Thomas 40.</strong> A vine planted apart from the Father is unsound and will be uprooted and destroyed. (Compare Matthew 15:13.){{fn:Matthew 15:13, which reads “my heavenly Father”. Qur’an 14:26: the evil word is like a bad tree, uprooted.}}',
 					'- [agree] <strong>Thomas 65.</strong> A vineyard owner sends servants to collect his share from tenants, who beat them. He sends his son, whom they kill. (Compare Mark 12:1-9.){{fn:Mark 12:1-9; Matthew 21:33-41; Luke 20:9-16. The Qur’an records the killing of messengers (2:87; 3:21). It does not say that ʿĪsā was killed (4:157); the parable is read here of the people’s habit toward messengers.}}',
@@ -97,7 +97,7 @@ function injil_help_gospel_thomas_sections() {
 		),
 		'24' => array(
 					'## From the Gospel of Thomas',
-					'The Gospel of Thomas keeps sayings on watching, on the end and on the kingdom. Green agrees with the Qur’an, blue is beyond the measure, gold is unclear.{{fn:Saying numbers follow the standard edition. The wording is our own digest of Thomas O. Lambdin’s translation in <em>The Nag Hammadi Library in English</em>, ed. James M. Robinson, 3rd ed. (Leiden: E. J. Brill, 1988). See <a href="/gospels/thomas/">The Gospel of Thomas</a>.}}',
+					'The Gospel of Thomas keeps sayings on watching, on the end and on the kingdom. Green agrees with the Qur’an, blue is beyond the measure, gold is unclear.',
 					'- [beyond] <strong>Thomas 11.</strong> This heaven and the one above it will pass. The dead do not live. Those who were one became two, and the question is what they will do as two.{{fn:The heaven that passes away and the one that became two. It depends on Thomas’s own doctrine of an original unity.}}',
 					'- [unclear] <strong>Thomas 18.</strong> The end is where the beginning is. Blessed is the one who stands at the beginning and will not taste death.{{fn:The end is where the beginning is. It belongs to Thomas’s scheme of origin and return, and its sense is obscure.}}',
 					'- [beyond] <strong>Thomas 38.</strong> The disciples have long wanted to hear these words and have no one else to hear them from. A time will come when they look for Jesus and do not find him.{{fn:A time will come when the disciples look for Jesus and do not find him. No source confirms it; compare John 7:34.}}',
@@ -107,7 +107,7 @@ function injil_help_gospel_thomas_sections() {
 		),
 		'26' => array(
 					'## From the Gospel of Thomas',
-					'The Gospel of Thomas has no account of an arrest, a trial or a crucifixion, so it neither confirms nor contradicts Qur’an 4:157.{{fn:Saying numbers follow the standard edition. The wording is our own digest of Thomas O. Lambdin’s translation in <em>The Nag Hammadi Library in English</em>, ed. James M. Robinson (Leiden: E. J. Brill, 1988). See <a href="/gospels/thomas/">The Gospel of Thomas</a>.}}',
+					'The Gospel of Thomas has no account of an arrest, a trial or a crucifixion, so it neither confirms nor contradicts Qur’an 4:157.',
 					'Sayings of Thomas that are not used are listed, each with its reason, on <a href="/gospels/thomas/set-aside/">the page of sayings set aside</a>.',
 		),
 	);

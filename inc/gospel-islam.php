@@ -1,8 +1,7 @@
 <?php
 /**
- * The Gospel According to Islam: chapter and front-matter pages built from
- * inc/data/gospel-islam.txt (text and notes by Ahmad Shafaat, The Gospel
- * According to Islam, Vantage Press, 1985).
+ * The Gospel According to Islam: chapter and introduction pages built from
+ * inc/data/gospel-islam.txt. Credits are on the separate Credits page.
  *
  * @package injil-help
  */
@@ -66,10 +65,6 @@ function injil_help_gospel_islam_data() {
 	return $data;
 }
 
-function injil_help_gospel_credit_line() {
-	return 'Text and notes: Ahmad Shafaat, <em>The Gospel According to Islam</em> (New York: Vantage Press, 1985). Spelling and scanning errors have been corrected. The sections headed “From the Gospel of Thomas” and their notes were added by this website.';
-}
-
 /** Page definitions for the front matter and the 27 chapters. */
 function injil_help_gospel_islam_pages() {
 	$data  = injil_help_gospel_islam_data();
@@ -78,16 +73,13 @@ function injil_help_gospel_islam_pages() {
 	$pages = array();
 
 	$front = array(
-		'about'        => array( 'about-the-book', 'The book, as its publisher describes it.' ),
-		'introduction' => array( 'introduction', 'The author’s introduction to The Gospel According to Islam.' ),
-		'author'       => array( 'the-author', 'About Dr. Ahmad Shafaat, author of The Gospel According to Islam.' ),
+		'introduction' => array( 'introduction', 'Introduction to The Gospel According to Islam.' ),
 	);
 	foreach ( $front as $k => $f ) {
 		if ( empty( $data['front'][ $k ] ) ) {
 			continue;
 		}
 		$body   = $data['front'][ $k ]['paras'];
-		$body[] = injil_help_gospel_credit_line();
 		$pages[] = array(
 			'path'    => $base . '/' . $f[0],
 			'title'   => $data['front'][ $k ]['title'],
@@ -122,7 +114,6 @@ function injil_help_gospel_islam_pages() {
 			$nav[] = '<a href="/' . $base . '/' . ( $n + 1 ) . '/">Chapter ' . ( $n + 1 ) . ' →</a>';
 		}
 		$body[] = implode( ' · ', $nav );
-		$body[] = injil_help_gospel_credit_line();
 		$pages[] = array(
 			'path'    => $base . '/' . $n,
 			/* translators: 1: chapter number, 2: chapter title */
