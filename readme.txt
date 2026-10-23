@@ -10,7 +10,7 @@ Child theme of Twenty Twenty-Five for injil.help.
 == Install ==
 1. Install and keep Twenty Twenty-Five (the parent). Do not delete it.
 2. Upload this folder to wp-content/themes/injil-help/ and activate "The Rightly-Guided Injīl". Set Settings > General > Site Title to "The Rightly-Guided Injīl" (the header and footer read it from there).
-3. (Automatic) On activation the theme creates all 44 pages listed under Theme Options > Content, sets pretty permalinks, and fills them with content. Skip to step 6 unless you want to rebuild a page.
+3. (Automatic) On activation the theme creates all 45 pages listed under Theme Options > Content, sets pretty permalinks, and fills them with content. Skip to step 6 unless you want to rebuild a page.
 3a. Optional: create categories for the parts: The Four Gospels, Paul, Jesus in the Qur'an, The Gospel According to Islam, Resources.
 4. Create the section pages /gospels/, /paul/, /quran/, /gospel-according-to-islam/, /resources/ and /answers/. Give each the "Section index" template and insert its matching "Section index: ..." pattern (or "FAQs page").
 5. Create /method/ (insert "Criterion statement"), /corrections/ ("Corrections log"), and the article pages the section entries link to. Edit the entry links in each pattern as articles go live.
@@ -68,8 +68,10 @@ The same nine colours can be set without code under Appearance > Theme Options >
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add a Changelog entry here, merge to main, and tag the commit with the same number (for example v2.5.1). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 2.8.0 =
+* New page /gospels/thomas/: a digest of the 114 sayings of the Gospel of Thomas in our own words, with canonical parallels and credit to T. O. Lambdin's translation. Added to the Gospels index and the Source library.
 = 2.7.0 =
-* Starter content: 44 pages created on activation, with a Content tab in Theme Options to create any that are missing.
+* Starter content: 45 pages created on activation, with a Content tab in Theme Options to create any that are missing.
 * "Paul" is now "Paul of Tarsus" in the main navigation and footer.
 * Body text is justified.
 = 2.6.0 =
