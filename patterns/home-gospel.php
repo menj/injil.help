@@ -20,7 +20,7 @@
 <h2 class="wp-block-heading"><a href="/gospel-according-to-islam/">The Gospel According to Islam</a></h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-intro"} -->
-<p class="ih-intro">The life of ʿĪsā ibn Maryam retold in six chapters, in verse form, with every verse tagged by source and a note beside it.</p>
+<p class="ih-intro">The life of ʿĪsā ibn Maryam told as a gospel in 27 chapters, with notes on each chapter.</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"sizeSlug":"large","linkDestination":"custom","className":"ih-plate"} -->
 <figure class="wp-block-image size-large ih-plate"><a href="https://commons.wikimedia.org/wiki/File:Parchment_copy_of_the_Quran_written_in_Eastern_Kufic%2C_Kairouan%2C_Tunisia%2C_1020%2C_The_David_Collection%2C_Copenhagen_(1)_(36270866531).jpg"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Parchment_copy_of_the_Quran_written_in_Eastern_Kufic%2C_Kairouan%2C_Tunisia%2C_1020%2C_The_David_Collection%2C_Copenhagen_(1)_(36270866531).jpg?width=1200" alt="Qur'an parchment page in Eastern Kufic script, Kairouan, Tunisia, 1020, The David Collection" title="Qur'an parchment page in Eastern Kufic script"/></a><figcaption class="wp-element-caption">Qur&#039;an in Eastern Kufic, Kairouan, 1020. The David Collection, Copenhagen. Photo: Richard Mortel, CC BY 2.0. <a href="https://commons.wikimedia.org/wiki/File:Parchment_copy_of_the_Quran_written_in_Eastern_Kufic%2C_Kairouan%2C_Tunisia%2C_1020%2C_The_David_Collection%2C_Copenhagen_(1)_(36270866531).jpg">Wikimedia Commons</a></figcaption></figure>
@@ -37,46 +37,13 @@
 <!-- wp:group {"className":"ih-entries ih-tint-gold","layout":{"type":"grid","minimumColumnWidth":"15rem"}} -->
 <div class="wp-block-group ih-entries ih-tint-gold"><!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Chapter · I</p>
-<!-- /wp:paragraph -->
-<!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/1/">The birth</a></h3>
-<!-- /wp:heading -->
-<!-- wp:paragraph {"className":"ih-d"} -->
-<p class="ih-d">Maryam in the sanctuary, the announcement, and the infant who speaks.</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group -->
-<!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
-<div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
 <p class="ih-k">Chapter · II</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/2/">The ministry</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/2/">The annunciation and the birth</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
-<p class="ih-d">John the Baptist, the call, and the first disciples.</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group -->
-<!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
-<div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Chapter · III</p>
-<!-- /wp:paragraph -->
-<!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/3/">The teaching and the signs</a></h3>
-<!-- /wp:heading -->
-<!-- wp:paragraph {"className":"ih-d"} -->
-<p class="ih-d">The law upheld, the signs given by permission of God.</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group -->
-<!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
-<div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Chapter · IV</p>
-<!-- /wp:paragraph -->
-<!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/4/">Jerusalem</a></h3>
-<!-- /wp:heading -->
-<!-- wp:paragraph {"className":"ih-d"} -->
-<p class="ih-d">The Temple, the priests, and the plot.</p>
+<p class="ih-d">Maryam, the angel, the palm tree, and the infant who speaks.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
@@ -84,21 +51,54 @@
 <p class="ih-k">Chapter · V</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/5/">The end of his earthly mission</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/5/">John the Baptist</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
-<p class="ih-d">The plan of his enemies, and the plan of God.</p>
+<p class="ih-d">The prophet in the wilderness, and the call to repent.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Chapter · VI</p>
+<p class="ih-k">Chapter · VIII</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/6/">The return</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/8/">The Beatitudes</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
-<p class="ih-d">What the Qur’an and the traditions say of his second coming.</p>
+<p class="ih-d">The sabbath made for man, and the blessings of the poor in spirit.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
+<p class="ih-k">Chapter · XX</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/20/">Jerusalem</a></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"ih-d"} -->
+<p class="ih-d">The entry on a colt, and the cleansing of the temple.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
+<p class="ih-k">Chapter · XXIV</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/24/">The hour and the Counsellor</a></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"ih-d"} -->
+<p class="ih-d">The promise of the one who comes after.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
+<p class="ih-k">Chapter · XXVI</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/26/">The trial and the road to Emmaus</a></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"ih-d"} -->
+<p class="ih-d">Pilate, Barabbas, and the man who walks with two travellers.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group --></section>

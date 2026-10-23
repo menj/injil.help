@@ -98,13 +98,13 @@
 <p class="is-style-label-islamic"><?php esc_html_e( 'Islamic position', 'injil-help' ); ?></p>
 <!-- /wp:paragraph -->
 <!-- wp:heading -->
-<h2 class="wp-block-heading">Did Paul and Jesus teach the same thing about the law?</h2>
+<h2 class="wp-block-heading">Did Paul of Tarsus and Jesus teach the same thing about the law?</h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-answer-text"} -->
-<p class="ih-answer-text">In Matthew, Jesus says not a stroke of the law will pass away (5:18). Paul tells the Galatians that no one is justified by works of the law (2:16) and that Christ redeemed them from its curse (3:13). Paul also records his own clash with Peter over the law at Antioch (2:11-14).</p>
+<p class="ih-answer-text">In Matthew, Jesus says not a stroke of the law will pass away (5:18). Paul of Tarsus tells the Galatians that no one is justified by works of the law (2:16) and that Christ redeemed them from its curse (3:13). Paul of Tarsus also records his own clash with Peter over the law at Antioch (2:11-14).</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"className":"ih-full"} -->
-<p class="ih-full"><?php esc_html_e( 'Full evidence:', 'injil-help' ); ?> <a href="/paul/paul-against-jesus/">Paul against Jesus</a></p>
+<p class="ih-full"><?php esc_html_e( 'Full evidence:', 'injil-help' ); ?> <a href="/paul/paul-against-jesus/">Paul of Tarsus against Jesus</a></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:group {"className":"is-style-answer-item","layout":{"type":"default"}} -->

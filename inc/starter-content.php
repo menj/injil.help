@@ -13,7 +13,7 @@ require_once get_stylesheet_directory() . '/inc/starter-content-pages.php';
 /**
  * Convert the compact page markup to blocks.
  *
- * "## " heading, "- " list item, "> " quote, "@consensus|@minority|@islamic"
+ * "## " heading, "### " sub-heading, "- " list item, "> " quote, "@consensus|@minority|@islamic"
  * claim label, anything else a paragraph. Blank lines are ignored. Inline
  * "{{fn:text}}" becomes a numbered footnote; the notes are listed at the end.
  * A list item may start with [agree], [beyond], [unclear], [conflict] or
@@ -81,7 +81,9 @@ function injil_help_markup_to_blocks( $lines ) {
 			continue;
 		}
 		$flush();
-		if ( 0 === strpos( $line, '## ' ) ) {
+		if ( 0 === strpos( $line, '### ' ) ) {
+			$out .= "<!-- wp:heading {\"level\":3} -->\n<h3 class=\"wp-block-heading\">" . wp_kses_post( substr( $line, 4 ) ) . "</h3>\n<!-- /wp:heading -->\n";
+		} elseif ( 0 === strpos( $line, '## ' ) ) {
 			$out .= "<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">" . wp_kses_post( substr( $line, 3 ) ) . "</h2>\n<!-- /wp:heading -->\n";
 		} elseif ( 0 === strpos( $line, '> ' ) ) {
 			$out .= "<!-- wp:quote -->\n<blockquote class=\"wp-block-quote\"><!-- wp:paragraph -->\n<p>" . wp_kses_post( substr( $line, 2 ) ) . "</p>\n<!-- /wp:paragraph --></blockquote>\n<!-- /wp:quote -->\n";

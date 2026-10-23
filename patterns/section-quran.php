@@ -109,5 +109,19 @@
 <!-- wp:paragraph {"className":"ih-meta"} -->
 <p class="ih-meta">61:6</p>
 <!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
+<p class="ih-k">All the passages</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading"><a href="/quran/passages/">The Qur’an on Jesus</a></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"ih-d"} -->
+<p class="ih-d">Every passage on Jesus and his teachings, with headings and notes.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"className":"ih-meta"} -->
+<p class="ih-meta">145 verses</p>
+<!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
