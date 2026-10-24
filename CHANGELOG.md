@@ -2,6 +2,11 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.5.1
+
+- Fix: the entry cards on the home sections and the index pages no longer stretch to the height of the section head beside them (the grid's rows were filling the stretched container), so the coloured boxes fit their text again.
+- Prose pass against the house writing rules: the composition page's departures list is plain bullets and its "not a translation, not a harmony, not a life" run is positive statements; "the measure is its rule" replaces "not its rule"; the pillar page's "reads them as free-standing statements" sentence, "What is worth noting", two "in order to" and "Nobody knows" rewritten.
+
 ## 3.5.0
 
 - The Gospel According to Islam is set like a printed Bible: a running head, the section numeral, an argument line (title, verse count, the Qur'anic passages in the section), numbered verses, the Qur'an's own chapter-and-verse numbers in green, two columns on wide screens with a rule between, and the notes at the foot of the text in small type as a reference apparatus. Theme Options > Content > Gospel text layout chooses two columns, one column or plain paragraphs; the markup is the same in every case (assets/css/bible.css; body class ih-gospel-columns, -single or -plain).
