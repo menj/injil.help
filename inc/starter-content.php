@@ -1,7 +1,8 @@
 <?php
 /**
  * Starter content: creates the site's pages on theme activation, and on demand
- * from Appearance > Theme Options > Content. Existing pages are never changed.
+ * from Appearance > Theme Options > Content. After a theme update, and from the
+ * "Update all pages" button, existing pages are rewritten from the theme's text.
  *
  * @package injil-help
  */
@@ -125,7 +126,9 @@ function injil_help_find_page( $path ) {
 
 /**
  * Create every missing page. Returns the number created. With $overwrite, pages
- * that already exist are rewritten from the theme's text (title, content, excerpt).
+ * that already exist are rewritten from the theme's text (title, content, excerpt);
+ * a page whose stored text already matches is left alone, and no revision is kept
+ * for the rewrite, so a version bump touches only the pages that changed.
  */
 function injil_help_populate( $overwrite = false ) {
 	// add_option() is an atomic insert, so only one request can take the lock; a lock older than a minute is stale.
@@ -137,6 +140,7 @@ function injil_help_populate( $overwrite = false ) {
 	}
 
 	$created = 0;
+	add_filter( 'wp_revisions_to_keep', '__return_zero', 99 );
 
 	foreach ( injil_help_starter_pages() as $order => $def ) {
 		$existing = injil_help_find_page( $def['path'] );
@@ -147,13 +151,19 @@ function injil_help_populate( $overwrite = false ) {
 		if ( '' === $content ) {
 			continue;
 		}
+		$excerpt = $def['excerpt'] ?? '';
 		if ( $existing ) {
+			if ( $existing->post_title === $def['title'] && $existing->post_content === $content && $existing->post_excerpt === $excerpt ) {
+				continue;
+			}
 			$done = wp_update_post(
-				array(
-					'ID'           => $existing->ID,
-					'post_title'   => $def['title'],
-					'post_content' => $content,
-					'post_excerpt' => $def['excerpt'] ?? '',
+				wp_slash(
+					array(
+						'ID'           => $existing->ID,
+						'post_title'   => $def['title'],
+						'post_content' => $content,
+						'post_excerpt' => $excerpt,
+					)
 				)
 			);
 			if ( $done && ! is_wp_error( $done ) ) {
@@ -178,14 +188,14 @@ function injil_help_populate( $overwrite = false ) {
 			'post_name'    => $slug,
 			'post_parent'  => $parent ? $parent->ID : 0,
 			'post_content' => $content,
-			'post_excerpt' => $def['excerpt'] ?? '',
+			'post_excerpt' => $excerpt,
 			'menu_order'   => $order,
 		);
 		if ( $id ) {
 			$args['ID'] = $id;
-			wp_update_post( $args );
+			wp_update_post( wp_slash( $args ) );
 		} else {
-			$id = wp_insert_post( $args );
+			$id = wp_insert_post( wp_slash( $args ) );
 		}
 		if ( $id && ! is_wp_error( $id ) ) {
 			if ( ! empty( $def['template'] ) ) {
@@ -195,12 +205,14 @@ function injil_help_populate( $overwrite = false ) {
 		}
 	}
 
-	// Pretty permalinks are required for the section URLs.
+	remove_filter( 'wp_revisions_to_keep', '__return_zero', 99 );
+
+	// Pretty permalinks are required for the section URLs. Pages need no new rewrite rules, so flush only when the structure changed.
 	if ( ! get_option( 'permalink_structure' ) ) {
 		global $wp_rewrite;
 		$wp_rewrite->set_permalink_structure( '/%postname%/' );
+		flush_rewrite_rules();
 	}
-	flush_rewrite_rules();
 
 	update_option( 'injil_help_populated', INJIL_HELP_VERSION );
 	delete_option( 'injil_help_populating' );

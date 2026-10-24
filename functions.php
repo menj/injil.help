@@ -7,11 +7,12 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'INJIL_HELP_VERSION', '3.2.1' );
+define( 'INJIL_HELP_VERSION', '3.3.0' );
 
 require_once get_stylesheet_directory() . '/inc/options.php';
 require_once get_stylesheet_directory() . '/inc/starter-content.php';
 require_once get_stylesheet_directory() . '/inc/seo.php';
+require_once get_stylesheet_directory() . '/inc/share.php';
 
 /**
  * Styles: front end and editor.
@@ -199,23 +200,23 @@ add_action(
 
 		if ( ! is_front_page() && $post instanceof WP_Post ) {
 			$graph[] = array(
-			'@type'            => 'Article',
-			'headline'         => wp_strip_all_tags( get_the_title( $post ) ),
-			'description'      => wp_strip_all_tags( get_the_excerpt( $post ) ),
-			'datePublished'    => get_the_date( 'c', $post ),
-			'dateModified'     => get_the_modified_date( 'c', $post ),
-			'inLanguage'       => get_bloginfo( 'language' ),
-			'mainEntityOfPage' => get_permalink( $post ),
-			'author'           => array(
-				'@type' => 'Person',
-				'name'  => get_the_author_meta( 'display_name', $post->post_author ),
-			),
-			'publisher'        => array(
-				'@type' => 'Organization',
-				'name'  => get_bloginfo( 'name' ),
-				'url'   => home_url( '/' ),
-			),
-		);
+				'@type'            => 'Article',
+				'headline'         => wp_strip_all_tags( get_the_title( $post ) ),
+				'description'      => wp_strip_all_tags( get_the_excerpt( $post ) ),
+				'datePublished'    => get_the_date( 'c', $post ),
+				'dateModified'     => get_the_modified_date( 'c', $post ),
+				'inLanguage'       => get_bloginfo( 'language' ),
+				'mainEntityOfPage' => get_permalink( $post ),
+				'author'           => array(
+					'@type' => 'Person',
+					'name'  => get_the_author_meta( 'display_name', $post->post_author ),
+				),
+				'publisher'        => array(
+					'@type' => 'Organization',
+					'name'  => get_bloginfo( 'name' ),
+					'url'   => home_url( '/' ),
+				),
+			);
 		}
 
 		$faq = array();

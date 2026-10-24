@@ -5,7 +5,7 @@ Description: Child theme of Twenty Twenty-Five for injil.help, after Ahmad Shafa
 Author: Mohd Elfie Nieshaem Juferi
 Author URI: https://menj.org
 Template: twentytwentyfive
-Version: 3.2.1
+Version: 3.3.0
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -285,7 +285,7 @@ p.ih-cite{margin:0;font-size:13px;color:var(--wp--preset--color--muted)}
 
 /* Saying status marks: agree, beyond the measure, unclear, conflict, not needed */
 .ih-s{list-style:none;margin-inline-start:0;padding:.55em .9em;border-inline-start:4px solid var(--ih-mark,var(--wp--preset--color--accent-6));background:var(--ih-tint,transparent);border-radius:0 var(--ih-r-sm) var(--ih-r-sm) 0;margin-bottom:.5em}
-.ih-badge{display:inline-block;font-family:var(--ih-sans);font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.1em .6em;margin-inline-end:.5em;border-radius:var(--ih-r-pill);background:var(--ih-mark);color:#fff;vertical-align:.1em}
+.ih-badge{display:inline-block;font-family:var(--ih-sans);font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.1em .6em;margin-inline-end:.5em;border-radius:var(--ih-r-pill);background:var(--ih-mark);color:var(--wp--preset--color--base);vertical-align:.1em}
 .ih-s-agree{--ih-mark:var(--wp--preset--color--accent-1);--ih-tint:var(--wp--preset--color--green-tint)}
 .ih-s-beyond{--ih-mark:var(--wp--preset--color--accent-4);--ih-tint:var(--wp--preset--color--lapis-tint)}
 .ih-s-unclear{--ih-mark:var(--ih-gold-ink);--ih-tint:var(--wp--preset--color--gold-tint)}

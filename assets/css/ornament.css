@@ -112,7 +112,7 @@ html .ih-orn .ih-entry:hover{transform:translateY(-3px);box-shadow:0 10px 24px c
 /* Saying marks: an icon inside each coloured badge. */
 .ih-orn .ih-badge::before{
  --ih-i:url(../icons/check-circle.svg);
- display:inline-block;width:1.05em;height:1.05em;margin-inline-end:.35em;vertical-align:-.17em;background:#fff;
+ display:inline-block;width:1.05em;height:1.05em;margin-inline-end:.35em;vertical-align:-.17em;background:var(--wp--preset--color--base);
 }
 .ih-orn .ih-s-beyond .ih-badge::before{--ih-i:url(../icons/compass.svg)}
 .ih-orn .ih-s-unclear .ih-badge::before{--ih-i:url(../icons/help-circle.svg)}

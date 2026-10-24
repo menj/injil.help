@@ -27,6 +27,11 @@ function injil_help_is_pillar() {
 	return is_page( INJIL_HELP_PILLAR_SLUG );
 }
 
+/** Default social image: the bundled Birmingham Qur'an manuscript (public domain), or the URL set in Theme Options. */
+function injil_help_default_og_image() {
+	return apply_filters( 'injil_help_default_og_image', get_stylesheet_directory_uri() . '/assets/images/og-default.jpg' );
+}
+
 /* Title tag. */
 add_filter(
 	'document_title_parts',
@@ -74,7 +79,7 @@ add_action(
 		$desc  = trim( injil_help_meta_description() );
 		$url   = is_singular() ? get_permalink() : ( is_front_page() ? home_url( '/' ) : '' );
 		$title = wp_get_document_title();
-		$img   = is_singular() && has_post_thumbnail() ? get_the_post_thumbnail_url( null, 'large' ) : apply_filters( 'injil_help_default_og_image', 'https://commons.wikimedia.org/wiki/Special:FilePath/Birmingham_Quran_manuscript.jpg?width=1200' );
+		$img   = is_singular() && has_post_thumbnail() ? get_the_post_thumbnail_url( null, 'large' ) : injil_help_default_og_image();
 
 		if ( $desc ) {
 			printf( '<meta name="description" content="%s">' . "\n", esc_attr( $desc ) );

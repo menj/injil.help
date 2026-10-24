@@ -645,6 +645,7 @@ function injil_help_starter_pages() {
 				'Manuscript images load from Wikimedia Commons. Each carries its credit and a link to its Commons page in its caption.',
 				'## Design',
 				'Built on the Twenty Twenty-Five theme. Typefaces keep their own licences; see the licence files in the theme’s font folder.',
+				'Share icons are from the Minimalist Social Icons Pack (GPL). The LinkedIn icon is by <a href="https://fontawesome.com">Font Awesome</a>, CC BY 4.0.',
 			),
 		),
 		array(

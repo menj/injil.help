@@ -16,7 +16,7 @@ Child theme of Twenty Twenty-Five for injil.help.
 5. Create /method/ (insert "Criterion statement"), /corrections/ ("Corrections log"), and the article pages the section entries link to. Edit the entry links in each pattern as articles go live.
 
 == Starter content ==
-The theme ships its own pages and creates them on activation (inc/starter-content-pages.php): the pillar page /the-islamic-dilemma/, /method/, /corrections/, /answers/, the five section pages and their entries (four gospels, synoptic problem, discrepancy tables, six Paul of Tarsus pages, six Qur'an pages, the 27 chapters of The Gospel According to Islam with their front matter, timeline, glossary, source library, objections), plus About, Terms, Privacy, Contact, Credits and Sitemap. Existing pages are never overwritten. Appearance > Theme Options > Content lists every page and creates any that are missing (for example after you delete one). Pages are published; edit them in the block editor. The articles are concise drafts with sources; expand them as you write.
+The theme ships its own pages and creates them on activation (inc/starter-content-pages.php): the pillar page /the-islamic-dilemma/, /method/, /corrections/, /answers/, the five section pages and their entries (four gospels, synoptic problem, discrepancy tables, six Paul of Tarsus pages, six Qur'an pages, the 27 chapters of The Gospel According to Islam with their front matter, timeline, glossary, source library, objections), plus About, Terms, Privacy, Contact, Credits and Sitemap. Appearance > Theme Options > Content lists every page and creates any that are missing (for example after you delete one). Pages are published; edit them in the block editor. The articles are concise drafts with sources; expand them as you write. After a theme update, every starter page whose text changed in the new version is rewritten from the theme (once per version, on the first admin screen load); pages whose text did not change are left alone, and no revision is kept for the rewrite. Theme Options > Content has an "Update all pages from the theme" button that does the same on demand. Edits made to a starter page are therefore replaced when that page's text changes in a release; keep your own writing on pages the theme does not list.
 
 == Structure ==
 Modelled on apostleofdoom.org: a title-page hero; each part of the study as a block with a gloss (Greek for New Testament parts, Arabic for Qur'anic parts, each with its verse), an intro, a "Read first" link and numbered entries; a band of FAQs with "Full evidence" links; a footer of study, reference and method links.
@@ -26,6 +26,7 @@ Modelled on apostleofdoom.org: a title-page hero; each part of the study as a bl
 * Block styles: ornament separator, claim labels (consensus / minority / Islamic position), verse source labels (Qur'an / NT-attested / Editorial), answer capsule, gospel verse, objection and reply, criterion box, discrepancy table, FAQ item.
 * Schema: Article on single posts and pages; FAQPage built from Details blocks set to "FAQ item". Turns itself off when Yoast, Rank Math or SEOPress is active. Override with the injil_help_output_schema filter.
 * Template "Wide page (tables)" for posts heavy with comparison tables.
+* Share row under the content of posts and pages (inc/share.php): X, Facebook, WhatsApp, Telegram, Reddit, LinkedIn, Bluesky, Threads, Pinterest and LINE, plus Copy link and a More… button that opens the device's share sheet where the browser supports the Web Share API. Icons are CSS masks in assets/icons/social/, coloured by the palette; styles in assets/css/share.css, script in assets/js/share.js. Networks, post types and the label are set under Theme Options > Sharing; add or remove a network with the injil_help_share_networks filter.
 
 == Fonts ==
 Bundled in assets/fonts and declared in theme.json, so every face is available in the editor's font picker. Roles:
@@ -43,7 +44,7 @@ Licensing: Sabon Next LT is a commercial Linotype face; confirm your licence cov
 * Set a default social image with the injil_help_default_og_image filter.
 
 == Images ==
-Manuscript images load from Wikimedia Commons (Special:FilePath URLs, sized by ?width=), each with its credit and a link to its Commons page in the caption. All are public domain except the Kairouan Qur'an photograph (Richard Mortel, CC BY 2.0), which must keep its credit. Every image carries a descriptive alt attribute (what it is, its date and holding institution) and a short title; keep that pattern for new images, and write alt text for the subject, not for decoration. WordPress adds lazy loading itself. The default Open Graph image is the Birmingham Qur'an manuscript; override it with the injil_help_default_og_image filter. To host them yourself, download from the linked Commons page into the Media Library and swap the URL. Readers' browsers contact upload.wikimedia.org; mention this in the privacy policy.
+Manuscript images load from Wikimedia Commons (Special:FilePath URLs, sized by ?width=), each with its credit and a link to its Commons page in the caption. All are public domain except the Kairouan Qur'an photograph (Richard Mortel, CC BY 2.0), which must keep its credit. Every image carries a descriptive alt attribute (what it is, its date and holding institution) and a short title; keep that pattern for new images, and write alt text for the subject, not for decoration. WordPress adds lazy loading itself. The default Open Graph image is a bundled copy of the Birmingham Qur'an manuscript (assets/images/og-default.jpg, public domain, 1280 × 833); replace it under Theme Options > SEO or with the injil_help_default_og_image filter. To host the manuscript images yourself, download from the linked Commons page into the Media Library and swap the URL. Readers' browsers contact upload.wikimedia.org; mention this in the privacy policy.
 
 == Branding ==
 * Brandmark: assets/brandmark.svg (an open codex with rays of light, Qur'an 5:46). It appears as the link before the site title in the header and at the top of the footer's first column (class ih-mark; the footer adds ih-mark-foot).
@@ -52,10 +53,11 @@ Manuscript images load from Wikimedia Commons (Special:FilePath URLs, sized by ?
 == Theme Options ==
 Appearance > Theme Options is a tabbed page (stored in the injil_help_options option):
 * Colours: nine palette overrides with colour pickers; empty keeps the default.
-* Branding: show or hide the footer brandmark; always use the brandmark as favicon even with a Site Icon; custom favicon URL.
-* Content: lists every starter page with its status and creates missing ones.
+* Branding: ornament layer (Rich, Subtle, Off) and the reveal animation; show or hide the footer brandmark; always use the brandmark as favicon even with a Site Icon; custom favicon URL.
+* Sharing: show or hide the share row, on posts and/or pages; which networks, in order; the row's label.
+* Content: lists every starter page with its status, creates missing ones, and rewrites all of them from the theme on demand.
 * SEO: theme SEO output automatic, always on or always off; home title and description; pillar page title; default social image URL.
-The page's CSS and JS live in assets/css/admin.css and assets/js/admin.js.
+The page's CSS and JS live in assets/css/admin.css and assets/js/admin.js; its own colours follow the Colours tab.
 
 == Ornament ==
 Icons, pattern, banners and motion are a separate layer: assets/css/ornament.css (loaded after style.css), assets/js/ornament.js (optional reveal-on-scroll), assets/icons/*.svg (line icons) and assets/images/pattern-star.svg and divider.svg. Everything is drawn with CSS masks, so each decoration takes its colour from the palette tokens and follows Theme Options > Colours.
@@ -74,6 +76,13 @@ The same nine colours can be set without code under Appearance > Theme Options >
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add a Changelog entry here, merge to main, and tag the commit with the same number (for example v2.5.1). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 3.3.0 =
+* Share row under posts and pages: X, Facebook, WhatsApp, Telegram, Reddit, LinkedIn, Bluesky, Threads, Pinterest and LINE, with Copy link and a native share button where the browser allows. Icons from the Minimalist Social Icons Pack as palette-coloured masks. New Theme Options > Sharing tab.
+* The default social image is now bundled (assets/images/og-default.jpg) instead of hotlinked from Wikimedia Commons.
+* Theme updates rewrite only the starter pages whose text changed, keep no revision for the rewrite, and flush rewrite rules only when permalinks had to be set. Page text is slashed before saving, so backslashes survive.
+* The Resources section is back on the front page.
+* Theme Options page colours follow the Colours tab; badge text and icons use the parchment token instead of white.
+* languages/ folder added for translation files; readme corrected on page rewriting.
 = 3.2.1 =
 * Starter pages now update themselves: after a theme update, the first admin screen load rewrites every starter page from the new text (once per version). Edits made to those pages are replaced. Theme Options > Content also has an "Update all pages from the theme" button.
 * Main navigation links no longer underline on hover.
@@ -123,6 +132,8 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 * New screenshot.
 
 == Credits ==
+Share icons (assets/icons/social/): Minimalist Social Icons Pack, GPL. The LinkedIn icon originates from Font Awesome Free (https://fontawesome.com), CC BY 4.0; the credit is carried on the Credits page. The brand marks remain trademarks of their owners. assets/icons/share.svg and link.svg are the theme's own.
+Default social image: Birmingham Qur'an manuscript (Cadbury Research Library, University of Birmingham), public domain, via Wikimedia Commons.
 The Gospel According to Islam: text and notes by Ahmad Shafaat (New York: Vantage Press, 1985), used as the base text of this website's gospel. Spelling and scanning errors in the supplied text were corrected; the Gospel of Thomas sections and their notes were added by this website. Gospel of Thomas saying numbers follow the standard edition; the summaries are the website's own, prepared from T. O. Lambdin's translation in The Nag Hammadi Library in English (Brill, 1988).
 
 == Design ==

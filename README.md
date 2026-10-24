@@ -21,15 +21,17 @@ The theme header carries `GitHub Theme URI` and `Primary Branch: main`, so [Git 
 ## Structure
 
 - `style.css`, `theme.json`, `functions.php`: header, tokens, setup
-- `inc/options.php`: Appearance > Theme Options (tabbed: Colours, Branding, SEO)
+- `inc/options.php`: Appearance > Theme Options (tabbed: Colours, Branding, Sharing, SEO, Content)
+- `inc/share.php`: share row on posts and pages, Web Share button
 - `inc/starter-content.php`, `inc/starter-content-pages.php`: pages created on activation
 - `inc/seo.php`: titles, meta description, Open Graph, schema
 - `parts/`, `templates/`, `patterns/`: block markup
 - `assets/fonts/`: bundled fonts
-- `assets/css/`, `assets/js/`: Theme Options page styles and script, plus the ornament layer (`ornament.css`, `ornament.js`)
-- `assets/icons/`: line icons used as CSS masks
+- `assets/css/`, `assets/js/`: Theme Options page styles and script, the ornament layer (`ornament.css`, `ornament.js`) and the share row (`share.css`, `share.js`)
+- `assets/icons/`: line icons used as CSS masks; `assets/icons/social/`: share icons from the Minimalist Social Icons Pack (GPL; LinkedIn by Font Awesome, CC BY 4.0)
+- `languages/`: drop `injil-help-{locale}.mo` files here
 - `assets/brandmark.svg`: brandmark (header, footer, fallback favicon)
-- `assets/images/`: placeholder cover art
+- `assets/images/`: placeholder cover art, pattern, divider and the default social image
 
 ## Documentation
 

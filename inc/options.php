@@ -26,17 +26,21 @@ function injil_help_color_fields() {
 
 function injil_help_option_defaults() {
 	return array(
-		'colors'         => array(),
-		'footer_mark'    => 1,
-		'ornament'       => 'rich',
-		'animate'        => 1,
-		'favicon_force'  => 0,
-		'favicon_url'    => '',
-		'schema'         => 'auto',
-		'home_title'     => '',
+		'colors'           => array(),
+		'footer_mark'      => 1,
+		'ornament'         => 'rich',
+		'animate'          => 1,
+		'favicon_force'    => 0,
+		'favicon_url'      => '',
+		'share'            => 1,
+		'share_networks'   => array( 'x', 'facebook', 'whatsapp', 'telegram', 'reddit', 'linkedin', 'bluesky', 'threads' ),
+		'share_types'      => array( 'post', 'page' ),
+		'share_label'      => '',
+		'schema'           => 'auto',
+		'home_title'       => '',
 		'home_description' => '',
-		'pillar_title'   => '',
-		'og_image'       => '',
+		'pillar_title'     => '',
+		'og_image'         => '',
 	);
 }
 
@@ -60,6 +64,10 @@ function injil_help_sanitize_options( $in ) {
 	$out['animate']          = empty( $in['animate'] ) ? 0 : 1;
 	$out['favicon_force']    = empty( $in['favicon_force'] ) ? 0 : 1;
 	$out['favicon_url']      = esc_url_raw( $in['favicon_url'] ?? '' );
+	$out['share']            = empty( $in['share'] ) ? 0 : 1;
+	$out['share_networks']   = array_values( array_intersect( array_keys( injil_help_share_networks() ), array_map( 'sanitize_key', (array) ( $in['share_networks'] ?? array() ) ) ) );
+	$out['share_types']      = array_values( array_intersect( array( 'post', 'page' ), array_map( 'sanitize_key', (array) ( $in['share_types'] ?? array() ) ) ) );
+	$out['share_label']      = sanitize_text_field( $in['share_label'] ?? '' );
 	$out['schema']           = in_array( $in['schema'] ?? 'auto', array( 'auto', 'on', 'off' ), true ) ? $in['schema'] : 'auto';
 	$out['home_title']       = sanitize_text_field( $in['home_title'] ?? '' );
 	$out['home_description'] = sanitize_textarea_field( $in['home_description'] ?? '' );
@@ -101,6 +109,8 @@ add_action(
 				}
 				wp_enqueue_style( 'wp-color-picker' );
 				wp_enqueue_style( 'injil-help-admin', get_stylesheet_directory_uri() . '/assets/css/admin.css', array( 'wp-color-picker' ), INJIL_HELP_VERSION );
+				// The page's own colours follow the Colours tab.
+				wp_add_inline_style( 'injil-help-admin', injil_help_color_css() );
 				wp_enqueue_script( 'injil-help-admin', get_stylesheet_directory_uri() . '/assets/js/admin.js', array( 'wp-color-picker' ), INJIL_HELP_VERSION, true );
 			}
 		);
@@ -113,6 +123,7 @@ function injil_help_render_options() {
 	$tabs = array(
 		'colours'  => __( 'Colours', 'injil-help' ),
 		'branding' => __( 'Branding', 'injil-help' ),
+		'sharing'  => __( 'Sharing', 'injil-help' ),
 		'seo'      => __( 'SEO', 'injil-help' ),
 		'content'  => __( 'Content', 'injil-help' ),
 	);
@@ -172,6 +183,38 @@ function injil_help_render_options() {
 				</table>
 			</section>
 
+			<section class="ih-panel" id="panel-sharing" role="tabpanel" aria-labelledby="tab-sharing">
+				<p class="description"><?php esc_html_e( 'A row of share links under the content of posts and pages. Where the browser allows it, a Copy link button and a More… button (the device’s own share sheet) are added. Icons take their colour from the Colours tab.', 'injil-help' ); ?></p>
+				<table class="form-table" role="presentation">
+					<tr>
+						<th scope="row"><?php esc_html_e( 'Share row', 'injil-help' ); ?></th>
+						<td>
+							<label><input type="checkbox" name="<?php echo esc_attr( $name ); ?>[share]" value="1" <?php checked( $o['share'] ); ?>> <?php esc_html_e( 'Show share links', 'injil-help' ); ?></label>
+							<p class="ih-inline-choices">
+								<label><input type="checkbox" name="<?php echo esc_attr( $name ); ?>[share_types][]" value="post" <?php checked( in_array( 'post', (array) $o['share_types'], true ) ); ?>> <?php esc_html_e( 'On posts', 'injil-help' ); ?></label>
+								<label><input type="checkbox" name="<?php echo esc_attr( $name ); ?>[share_types][]" value="page" <?php checked( in_array( 'page', (array) $o['share_types'], true ) ); ?>> <?php esc_html_e( 'On pages', 'injil-help' ); ?></label>
+							</p>
+							<p class="description"><?php esc_html_e( 'The front page never shows the row.', 'injil-help' ); ?></p>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row"><?php esc_html_e( 'Networks', 'injil-help' ); ?></th>
+						<td>
+							<div class="ih-networks">
+								<?php foreach ( injil_help_share_networks() as $key => $net ) : ?>
+									<label><input type="checkbox" name="<?php echo esc_attr( $name ); ?>[share_networks][]" value="<?php echo esc_attr( $key ); ?>" <?php checked( in_array( $key, (array) $o['share_networks'], true ) ); ?>> <span class="ih-net-icon ih-share-<?php echo esc_attr( $key ); ?>" aria-hidden="true"></span><?php echo esc_html( $net[0] ); ?></label>
+								<?php endforeach; ?>
+							</div>
+							<p class="description"><?php esc_html_e( 'Shown in this order. Pinterest uses the page’s featured image, or the default social image from the SEO tab.', 'injil-help' ); ?></p>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row"><label for="ih-share-label"><?php esc_html_e( 'Label', 'injil-help' ); ?></label></th>
+						<td><input type="text" class="regular-text" id="ih-share-label" name="<?php echo esc_attr( $name ); ?>[share_label]" value="<?php echo esc_attr( $o['share_label'] ); ?>" placeholder="<?php esc_attr_e( 'Share', 'injil-help' ); ?>"></td>
+					</tr>
+				</table>
+			</section>
+
 			<section class="ih-panel" id="panel-seo" role="tabpanel" aria-labelledby="tab-seo">
 				<table class="form-table" role="presentation">
 					<tr>
@@ -199,7 +242,7 @@ function injil_help_render_options() {
 					</tr>
 					<tr>
 						<th scope="row"><label for="ih-og"><?php esc_html_e( 'Default social image URL', 'injil-help' ); ?></label></th>
-						<td><input type="url" class="large-text" id="ih-og" name="<?php echo esc_attr( $name ); ?>[og_image]" value="<?php echo esc_attr( $o['og_image'] ); ?>" placeholder="https://"><p class="description"><?php esc_html_e( 'Used when a page has no featured image. Empty uses the Birmingham Qur’an manuscript from Wikimedia Commons.', 'injil-help' ); ?></p></td>
+						<td><input type="url" class="large-text" id="ih-og" name="<?php echo esc_attr( $name ); ?>[og_image]" value="<?php echo esc_attr( $o['og_image'] ); ?>" placeholder="https://"><p class="description"><?php esc_html_e( 'Used when a page has no featured image. Empty uses the Birmingham Qur’an manuscript bundled with the theme (1280 × 833).', 'injil-help' ); ?></p></td>
 					</tr>
 				</table>
 			</section>
