@@ -166,5 +166,17 @@
         "alt": "Giotto, The Raising of Lazarus, Scrovegni Chapel, Padua, about 1305",
         "caption": "Giotto, The Raising of Lazarus (about 1305), Scrovegni Chapel, Padua. The Qur'an: he brought the dead to life, by God's permission (3:49; 5:110).",
         "credit": "Public domain."
+    },
+    "gospels/discrepancies/nativity": {
+        "file": "Giotto - Scrovegni - -17- - Nativity, Birth of Jesus.jpg",
+        "alt": "Giotto, The Nativity, Scrovegni Chapel, Padua, about 1305",
+        "caption": "Giotto, The Nativity (about 1305), Scrovegni Chapel, Padua: the manger of Luke; Matthew has a house, magi and a star.",
+        "credit": "Public domain."
+    },
+    "gospels/discrepancies/crucifixion": {
+        "file": "Giotto - Scrovegni - -35- - Crucifixion.jpg",
+        "alt": "Giotto, The Crucifixion, Scrovegni Chapel, Padua, about 1305",
+        "caption": "Giotto, The Crucifixion (about 1305), Scrovegni Chapel, Padua. The four accounts of the day, the hour and the last words differ, and the Qur'an says it was made to appear so to them (4:157).",
+        "credit": "Public domain."
     }
 }
