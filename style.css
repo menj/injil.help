@@ -139,7 +139,9 @@ p.is-style-label-editorial{background:transparent;color:var(--ih-gold-ink);borde
 
 /* ---------- v2.1: structure after apostleofdoom.org ---------- */
 /* Arabic: .ih-ar is any Arabic (Amiri, RTL). KFGQPC Hafs is reserved for the Qur'an and applied only through .ih-quran. */
-.ih-ar{font-family:var(--wp--preset--font-family--amiri);direction:rtl;unicode-bidi:isolate;text-align:left;letter-spacing:0 !important}
+.ih-ar{font-family:var(--wp--preset--font-family--amiri);direction:rtl;unicode-bidi:isolate;text-align:right;letter-spacing:0 !important}
+/* Glosses are single lines set beside Latin text, so they sit flush left with it. */
+.ih-gloss.ih-ar{text-align:left}
 .ih-quran,.ih-ar.ih-quran{font-family:var(--ih-quran)}
 .ih-gloss{display:block;font-family:var(--ih-greek);font-size:12px;font-weight:400;letter-spacing:.1em;color:var(--wp--preset--color--accent-2);line-height:1.3}
 .ih-gloss.ih-ar{font-size:14px}
