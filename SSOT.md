@@ -1,12 +1,14 @@
 # Single source of truth
 
-The fixed facts about The Rightly-Guided Injīl theme. When another document, a comment or a pattern disagrees with this file, this file is right and the other is to be corrected. Keep it short and factual; explanations belong in `readme.txt`.
+The fixed facts about The Injil theme. When another document, a comment or a pattern disagrees with this file, this file is right and the other is to be corrected. Keep it short and factual; explanations belong in `readme.txt`.
 
 ## Identity
 
 | Fact | Value |
 |---|---|
-| Theme name | The Rightly-Guided Injīl |
+| Theme name | The Injil (the site title stays The Rightly-Guided Injīl) |
+| Author | MENJ, https://menj.blog |
+| Theme URI | https://github.com/menj/injil.help |
 | Folder and text domain | `injil-help` |
 | Parent theme | Twenty Twenty-Five (`twentytwentyfive`), must stay installed |
 | Site | https://injil.help |

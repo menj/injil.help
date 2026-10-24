@@ -1,4 +1,4 @@
-# The Rightly-Guided Injīl: technical reference
+# The Injil: technical reference
 
 A block child theme of Twenty Twenty-Five for [injil.help](https://injil.help). This file is for theme developers, web developers and hosts: how the theme is built, how it boots, where every piece of behaviour lives, what the server needs, and how to work on it. The general-audience manual is `readme.txt`; the fixed facts are in `SSOT.md`; the history is `CHANGELOG.md`; the roadmap is `UPGRADING.md`.
 
@@ -55,7 +55,7 @@ A block child theme of Twenty Twenty-Five for [injil.help](https://injil.help). 
 ## Install and update
 
 1. Install Twenty Twenty-Five. Clone or unzip this repository to `wp-content/themes/injil-help` (the folder name must be `injil-help`).
-2. Activate "The Rightly-Guided Injīl". `after_switch_theme` creates every page, sets permalinks, bins the untouched sample post, page and comment and replaces the default tagline.
+2. Activate "The Injil". `after_switch_theme` creates every page, sets permalinks, bins the untouched sample post, page and comment and replaces the default tagline.
 3. Updates: Git Updater reads the header and offers the release whose tag matches `Version:`. On the first admin screen load after the update, `admin_init` rewrites the starter pages whose text changed and leaves edited ones alone (see [Starter content lifecycle](#starter-content-lifecycle)). Take a database backup before updating.
 4. Release procedure: bump both version strings together, add the entry to `CHANGELOG.md` and to the Changelog section of `readme.txt`, note anything an existing site must do in `UPGRADING.md`, merge to `main`, tag `vX.Y.Z`.
 
