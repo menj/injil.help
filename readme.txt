@@ -83,6 +83,7 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 
 == Changelog ==
 = 3.5.1 =
+* The dilemma section on the front page is drawn as a diagram: the two horns side by side with "or" between them, a labelled rule joining them to the assumption they share, which now spans the width beneath them and says in a line why it fails. The cards used to sit in an open-ended grid that left a fourth empty column on wide screens.
 * Fix: the entry cards on the home sections and the index pages no longer stretch to the height of the section head beside them (the grid's rows were filling the stretched container), so the coloured boxes fit their text again.
 * Prose pass against the house writing rules: the composition page's departures list is plain bullets and its "not a translation, not a harmony, not a life" run is positive statements; "the measure is its rule" replaces "not its rule"; the pillar page's "reads them as free-standing statements" sentence, "What is worth noting", two "in order to" and "Nobody knows" rewritten.
 = 3.5.0 =
