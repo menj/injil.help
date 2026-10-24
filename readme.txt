@@ -18,6 +18,15 @@ Child theme of Twenty Twenty-Five for injil.help.
 == Starter content ==
 The theme ships its own pages and creates them on activation (inc/starter-content-pages.php): the pillar page /the-islamic-dilemma/, /method/, /corrections/, /answers/, the five section pages and their entries (four gospels, synoptic problem, discrepancy tables, six Paul of Tarsus pages, six Qur'an pages, the 27 chapters of The Gospel According to Islam with their front matter, timeline, glossary, source library, objections), plus About, Terms, Privacy, Contact, Credits and Sitemap. Appearance > Theme Options > Content lists every page and creates any that are missing (for example after you delete one). Pages are published; edit them in the block editor. The articles are concise and sourced, and every page is complete when it is created: there is no placeholder text anywhere in the theme. On the first activation the theme also bins WordPress's own sample post, sample page and sample comment (if they were never edited) and replaces the "Just another WordPress site" tagline, so a new install is ready for visitors as it stands. After a theme update, every starter page whose text changed in the new version is rewritten from the theme (once per version, on the first admin screen load); pages whose text did not change are left alone, and no revision is kept for the rewrite. Theme Options > Content has an "Update all pages from the theme" button that does the same on demand. Edits made to a starter page are therefore replaced when that page's text changes in a release; keep your own writing on pages the theme does not list.
 
+== Content data ==
+Everything a visitor reads is data in inc/data/, all of it JSON, so the text can be edited, translated or reviewed without touching PHP:
+* pages/pillar.json, gospels.json, paul.json, quran.json, gospel.json, bonus.json, resources.json, site.json: the starter pages, one file per part of the site, in site order. Each entry has path, title and excerpt, and either pattern (a block pattern supplies the content) or body (lines of compact markup: "## " heading, "### " sub-heading, "- " list item, "> " quote, "@consensus" / "@minority" / "@islamic" claim label, "[agree]" and the other colour marks at the start of a list item, inline {{fn:...}} footnotes, "[page-list]" for the sitemap). template names a page template.
+* narrative.json: The Narrative of Jesus, Son of Mary. chapters > sections > lines, with "### " Qur'anic headings and [^n] note markers; notes keyed by number, one numbering through the whole.
+* gospel-islam.json: the 27 section titles and the Introduction.
+* quran-jesus.json: the Qur'anic passages on Jesus, 13 surahs, 45 passages, 145 verses, with headings and footnotes.
+* thomas.json: the Gospel of Thomas sections, keyed by the section they are woven into.
+inc/starter-content-pages.php loads the page files; inc/gospel-islam.php and inc/quran-jesus.php build the gospel sections and the Qur'an page.
+
 == Structure ==
 Modelled on apostleofdoom.org: a title-page hero; each part of the study as a block with a gloss (Greek for New Testament parts, Arabic for Qur'anic parts, each with its verse), an intro, a "Read first" link and numbered entries; a band of FAQs with "Full evidence" links; a footer of study, reference and method links.
 
@@ -77,6 +86,8 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 
 == Changelog ==
 = 3.3.0 =
+* All content is now JSON under inc/data/: the starter pages (pages/*.json), the narrative, the section titles and Introduction, the Qur'anic passages and the Gospel of Thomas sections. The .txt data files and the PHP arrays are gone; the pages render identically.
+* The four gospels, the synoptic problem, the discrepancy index and the six Paul of Tarsus pages are written in full (800 to 1,200 words each, with sources), in place of the earlier outlines.
 * Share row under posts and pages: X, Facebook, WhatsApp, Telegram, Reddit, LinkedIn, Bluesky, Threads, Pinterest and LINE, with Copy link and a native share button where the browser allows. Icons from the Minimalist Social Icons Pack as palette-coloured masks. New Theme Options > Sharing tab.
 * The default social image is now bundled (assets/images/og-default.jpg) instead of hotlinked from Wikimedia Commons.
 * Theme updates rewrite only the starter pages whose text changed, keep no revision for the rewrite, and flush rewrite rules only when permalinks had to be set. Page text is slashed before saving, so backslashes survive.

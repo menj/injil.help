@@ -1,119 +1,89 @@
 <?php
 /**
- * The Gospel According to Islam: chapter and introduction pages built from
- * inc/data/gospel-islam.txt. Credits are on the separate Credits page.
+ * The Gospel According to Islam: the Introduction and the 27 section pages, built
+ * from inc/data/gospel-islam.json (section titles, front matter), narrative.json
+ * (the text and notes) and thomas.json (the Gospel of Thomas sections). Credits are
+ * on the separate Credits page.
  *
  * @package injil-help
  */
 
 defined( 'ABSPATH' ) || exit;
 
-require_once get_stylesheet_directory() . '/inc/gospel-islam-thomas.php';
 require_once get_stylesheet_directory() . '/inc/quran-jesus.php';
 
+/** Decode one JSON data file, or an empty array if it is missing or malformed. */
+function injil_help_data_file( $name ) {
+	$file = get_stylesheet_directory() . '/inc/data/' . $name . '.json';
+	if ( ! is_readable( $file ) ) {
+		return array();
+	}
+	$data = json_decode( (string) file_get_contents( $file ), true );
+	return is_array( $data ) ? $data : array();
+}
+
+/** Gospel of Thomas sections woven into the chapters, keyed by section number; each a list of page-markup lines. */
+function injil_help_gospel_thomas_sections() {
+	return injil_help_data_file( 'thomas' );
+}
+
 /**
- * Parse the data file.
- *
- * Lines: "@chapter N", "@title ...", "@notes", "@front key"; in a chapter,
- * "N verse text" (with [[k]] note markers) and, after @notes, "k|note text".
- * In a front section every other line is a paragraph.
+ * Section titles and front matter from gospel-islam.json:
+ * { "section_titles": { "1": "...", ... }, "front": { "introduction": { "title", "paragraphs": [...] } } }.
  */
 function injil_help_gospel_islam_data() {
 	static $data = null;
 	if ( null !== $data ) {
 		return $data;
 	}
-	$data  = array(
+	$json = injil_help_data_file( 'gospel-islam' );
+	$data = array(
 		'chapters' => array(),
 		'front'    => array(),
 	);
-	$lines = file( get_stylesheet_directory() . '/inc/data/gospel-islam.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES );
-	if ( ! $lines ) {
-		return $data;
+	foreach ( (array) ( $json['section_titles'] ?? array() ) as $n => $title ) {
+		$data['chapters'][ (int) $n ] = array( 'title' => (string) $title );
 	}
-	$kind = '';
-	$key  = '';
-	$mode = '';
-	foreach ( $lines as $line ) {
-		if ( preg_match( '/^@chapter (\d+)$/', $line, $m ) ) {
-			$kind = 'chapters';
-			$key  = (int) $m[1];
-			$mode = 'verses';
-			$data['chapters'][ $key ] = array(
-				'title'  => '',
-				'verses' => array(),
-				'notes'  => array(),
-			);
-		} elseif ( preg_match( '/^@front (\w+)$/', $line, $m ) ) {
-			$kind = 'front';
-			$key  = $m[1];
-			$data['front'][ $key ] = array(
-				'title' => '',
-				'paras' => array(),
-			);
-		} elseif ( preg_match( '/^@title (.*)$/', $line, $m ) ) {
-			$data[ $kind ][ $key ]['title'] = $m[1];
-		} elseif ( '@notes' === $line ) {
-			$mode = 'notes';
-		} elseif ( 'chapters' === $kind && 'verses' === $mode && preg_match( '/^(\d+) (.*)$/', $line, $m ) ) {
-			$data['chapters'][ $key ]['verses'][ (int) $m[1] ] = $m[2];
-		} elseif ( 'chapters' === $kind && 'notes' === $mode && preg_match( '/^(\d+)\|(.*)$/', $line, $m ) ) {
-			$data['chapters'][ $key ]['notes'][ (int) $m[1] ] = $m[2];
-		} elseif ( 'front' === $kind ) {
-			$data['front'][ $key ]['paras'][] = $line;
-		}
+	foreach ( (array) ( $json['front'] ?? array() ) as $key => $f ) {
+		$data['front'][ $key ] = array(
+			'title' => (string) ( $f['title'] ?? '' ),
+			'paras' => array_values( (array) ( $f['paragraphs'] ?? array() ) ),
+		);
 	}
 	return $data;
 }
 
 /**
- * Load the Narrative of Jesus, Son of Mary (inc/data/narrative/).
- *
- * chN.txt hold "@chapter N Title", "@section N" and the paragraphs, "### " for the
- * Qur'anic headings, with [^n] note markers. notes-N.txt hold "n|note" lines, the
- * numbering running through the whole narrative.
+ * The Narrative of Jesus, Son of Mary, from narrative.json:
+ * { "chapters": [ { "number", "title", "sections": [ { "number", "lines": [...] } ] } ], "notes": { "n": "note" } }.
+ * Lines carry "### " for the Qur'anic headings and [^n] note markers; the note
+ * numbering runs through the whole narrative.
  */
 function injil_help_narrative_data() {
 	static $d = null;
 	if ( null !== $d ) {
 		return $d;
 	}
-	$d       = array(
+	$d    = array(
 		'sections' => array(),
 		'chapters' => array(),
 		'notes'    => array(),
 	);
-	$dir     = get_stylesheet_directory() . '/inc/data/narrative/';
-	$chapter = 0;
-	$sec     = 0;
-	foreach ( array( 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6' ) as $f ) {
-		$lines = file( $dir . $f . '.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES );
-		if ( ! $lines ) {
-			continue;
-		}
-		foreach ( $lines as $line ) {
-			if ( preg_match( '/^@chapter (\d+) (.+)$/', $line, $m ) ) {
-				$chapter                   = (int) $m[1];
-				$d['chapters'][ $chapter ] = $m[2];
-			} elseif ( preg_match( '/^@section (\d+)$/', $line, $m ) ) {
-				$sec                   = (int) $m[1];
-				$d['sections'][ $sec ] = array(
-					'chapter' => $chapter,
-					'lines'   => array(),
-				);
-			} elseif ( $sec ) {
-				$d['sections'][ $sec ]['lines'][] = $line;
-			}
+	$json = injil_help_data_file( 'narrative' );
+	foreach ( (array) ( $json['chapters'] ?? array() ) as $chapter ) {
+		$num                   = (int) ( $chapter['number'] ?? 0 );
+		$d['chapters'][ $num ] = (string) ( $chapter['title'] ?? '' );
+		foreach ( (array) ( $chapter['sections'] ?? array() ) as $section ) {
+			$d['sections'][ (int) ( $section['number'] ?? 0 ) ] = array(
+				'chapter' => $num,
+				'lines'   => array_values( (array) ( $section['lines'] ?? array() ) ),
+			);
 		}
 	}
-	foreach ( array( 'notes-1', 'notes-2' ) as $f ) {
-		$lines = file( $dir . $f . '.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES );
-		foreach ( $lines ? $lines : array() as $line ) {
-			if ( preg_match( '/^(\d+)\|(.*)$/', $line, $m ) ) {
-				$d['notes'][ (int) $m[1] ] = $m[2];
-			}
-		}
+	foreach ( (array) ( $json['notes'] ?? array() ) as $k => $note ) {
+		$d['notes'][ (int) $k ] = (string) $note;
 	}
+	ksort( $d['sections'] );
 	return $d;
 }
 

@@ -1,7 +1,7 @@
 <?php
 /**
  * The Qur'anic passages on Jesus, with headings and footnotes, from
- * inc/data/quran-jesus.txt, gathered on one page under /quran/. The narrative of
+ * inc/data/quran-jesus.json, gathered on one page under /quran/. The narrative of
  * The Gospel According to Islam carries its own selection of passages in place.
  * Credits are on the separate Credits page.
  *
@@ -11,10 +11,9 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Parse the data file.
- *
- * Lines: "@surah N Title", "## a-b Heading" (the verse range of the passage),
- * and "n verse text" with inline {{fn:...}} footnotes.
+ * The compilation from quran-jesus.json:
+ * { "surahs": { "n": "Title" }, "passages": [ { "surah", "verses_range", "heading", "verses": { "n": "text" } } ] }.
+ * Verse text carries inline {{fn:...}} footnotes.
  *
  * @return array{surahs: array<int,string>, blocks: array<string,array>}
  */
@@ -23,30 +22,26 @@ function injil_help_quran_data() {
 	if ( null !== $data ) {
 		return $data;
 	}
-	$data  = array(
+	$data = array(
 		'surahs' => array(),
 		'blocks' => array(),
 	);
-	$lines = file( get_stylesheet_directory() . '/inc/data/quran-jesus.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES );
-	if ( ! $lines ) {
-		return $data;
+	$json = injil_help_data_file( 'quran-jesus' );
+	foreach ( (array) ( $json['surahs'] ?? array() ) as $n => $title ) {
+		$data['surahs'][ (int) $n ] = (string) $title;
 	}
-	$surah = 0;
-	$key   = '';
-	foreach ( $lines as $line ) {
-		if ( preg_match( '/^@surah (\d+) (.*)$/', $line, $m ) ) {
-			$surah                  = (int) $m[1];
-			$data['surahs'][ $surah ] = $m[2];
-		} elseif ( preg_match( '/^## ([\d-]+) (.*)$/', $line, $m ) ) {
-			$key                    = $surah . ':' . $m[1];
-			$data['blocks'][ $key ] = array(
-				'surah'   => $surah,
-				'heading' => $m[2],
-				'verses'  => array(),
-			);
-		} elseif ( $key && preg_match( '/^(\d+) (.*)$/', $line, $m ) ) {
-			$data['blocks'][ $key ]['verses'][ (int) $m[1] ] = $m[2];
+	foreach ( (array) ( $json['passages'] ?? array() ) as $p ) {
+		$surah  = (int) ( $p['surah'] ?? 0 );
+		$key    = $surah . ':' . ( $p['verses_range'] ?? '' );
+		$verses = array();
+		foreach ( (array) ( $p['verses'] ?? array() ) as $v => $text ) {
+			$verses[ (int) $v ] = (string) $text;
 		}
+		$data['blocks'][ $key ] = array(
+			'surah'   => $surah,
+			'heading' => (string) ( $p['heading'] ?? '' ),
+			'verses'  => $verses,
+		);
 	}
 	return $data;
 }
