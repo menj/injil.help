@@ -89,6 +89,7 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 
 == Changelog ==
 = 3.3.0 =
+* Al-Faruqi's Divine Transcendence and Its Expression (1983) cited on John (the Semitic sense of the titles and sayings; the Gnostic source of the Logos), Paul of Tarsus against Jesus (the mystery religions and the dying god) and A servant and a messenger (transcendence as the ground of the denials); added to the source library; the Credits page and readme state the arabesque principle behind the ornament.
 * Stronger parallax: the lattice, the hero's three layers, the section-banner watermarks and tints, the manuscript plates, the card grids and the footer pattern move at different speeds as the page scrolls. Theme Options > Branding > Parallax depth: Strong, Gentle or Off.
 * Structured data rebuilt as one JSON-LD graph per page (inc/schema.php): Organization with logo and sameAs, Person, WebSite with sitelinks search, typed page nodes (WebPage, CollectionPage with ItemList, ProfilePage, ContactPage, SearchResultsPage), BreadcrumbList, Article/BlogPosting with images and word count, Book for the gospel sections, ImageObject licence metadata for every manuscript image, FAQPage wherever there are FAQ items. New Theme Options > SEO fields for the author, profile links and logo.
 * Six SEO FAQs on every main page: the pillar page, the measure, the five section indexes and the composition page.
@@ -160,3 +161,4 @@ The Gospel According to Islam: text and notes by Ahmad Shafaat (New York: Vantag
 
 == Design ==
 After Ahmad Shafaat, The Gospel According to Islam (Vantage Press, 1985): chapter-and-verse layout, verse numbers in the margin, rubric-red chapter heads, notes beside the text. Palette: parchment, ink, Qur'anic green, rubric red, gold, lapis.
+The ornament layer follows Ismail al-Faruqi, Divine Transcendence and Its Expression (ABIM, Kuala Lumpur, 1983), pp. 28-32: stylisation and geometry as the refusal to let anything in nature stand for the divine, and the endlessly repeating pattern as the expression of God's inexpressibility. Hence the eight-pointed star lattice, the line icons, and no figurative image of anything sacred; the only pictures are manuscripts.
