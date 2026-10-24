@@ -177,7 +177,7 @@ Appearance › Theme Options (`inc/options.php`), one option array `injil_help_o
 | Branding | `ornament` rich\|subtle\|off, `animate` 0\|1, `parallax` strong\|gentle\|off, `footer_mark`, `favicon_force`, `favicon_url` |
 | Sharing | `share`, `share_types` (post, page), `share_networks` (ordered subset of the network keys), `share_label` |
 | SEO | `schema` auto\|on\|off, `home_title`, `home_description`, `pillar_title`, `og_image`, `author_name`, `author_url`, `same_as` (one URL per line), `org_logo` |
-| Content | no keys; lists every starter page with status (missing, written, edited) and runs the two populate actions, `gospel_layout` columns\|single\|plain |
+| Content | `gospel_layout` columns\|single\|plain (the Bible layout of the gospel sections); lists every starter page with status (missing, written, edited) and runs the two populate actions |
 
 `injil_help_get_option( $key )` merges the stored array over `injil_help_option_defaults()`. `injil_help_color_css()` emits the overrides as `:root` custom properties on the front end and in the editor (`enqueue_block_assets`). The page's own CSS and JS are `assets/css/admin.css` and `assets/js/admin.js` (tabs with remembered selection, colour pickers); the admin CSS reads the palette tokens so it follows the Colours tab.
 
