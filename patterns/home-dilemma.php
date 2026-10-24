@@ -26,29 +26,35 @@
 <p class="ih-intro">A Christian argument holds that the Qur&#039;an traps itself. It tells the people of the Injīl to judge by it (5:47), yet it denies what the four gospels teach. It forces a choice between two options. Both rest on one assumption.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
-<!-- wp:group {"className":"ih-horns","layout":{"type":"grid","minimumColumnWidth":"16rem"}} -->
-<div class="wp-block-group ih-horns"><!-- wp:group {"className":"ih-horn ih-horn-red","layout":{"type":"default"}} -->
-<div class="wp-block-group ih-horn ih-horn-red"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">If the gospels survive intact</p>
+<!-- wp:group {"className":"ih-horns","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-horns"><!-- wp:group {"className":"ih-horn ih-horn-red ih-horn-1","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-horn ih-horn-red ih-horn-1"><!-- wp:paragraph {"className":"ih-k"} -->
+<p class="ih-k">Horn 1 · If the gospels survive intact</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"className":"ih-horn-text"} -->
-<p class="ih-horn-text">If the gospels are preserved, the Qur&#039;an is wrong to contradict them.</p>
+<p class="ih-horn-text">The Qur&#039;an is wrong to contradict them.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
-<!-- wp:group {"className":"ih-horn ih-horn-red","layout":{"type":"default"}} -->
-<div class="wp-block-group ih-horn ih-horn-red"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">If the gospels were altered</p>
+<!-- wp:paragraph {"className":"ih-horn-or"} -->
+<p class="ih-horn-or">or</p>
+<!-- /wp:paragraph -->
+<!-- wp:group {"className":"ih-horn ih-horn-red ih-horn-2","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-horn ih-horn-red ih-horn-2"><!-- wp:paragraph {"className":"ih-k"} -->
+<p class="ih-k">Horn 2 · If the gospels were altered</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"className":"ih-horn-text"} -->
-<p class="ih-horn-text">If the gospels are corrupted, the Qur&#039;an is wrong to affirm them.</p>
+<p class="ih-horn-text">The Qur&#039;an is wrong to affirm them.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
-<!-- wp:group {"className":"ih-horn ih-horn-green","layout":{"type":"default"}} -->
-<div class="wp-block-group ih-horn ih-horn-green"><!-- wp:paragraph {"className":"ih-k"} -->
+<!-- wp:paragraph {"className":"ih-horn-join"} -->
+<p class="ih-horn-join">Both horns rest on one assumption</p>
+<!-- /wp:paragraph -->
+<!-- wp:group {"className":"ih-horn ih-horn-green ih-horn-base","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-horn ih-horn-green ih-horn-base"><!-- wp:paragraph {"className":"ih-k"} -->
 <p class="ih-k">The assumption</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"className":"ih-horn-text"} -->
-<p class="ih-horn-text">That the Injīl the Qur&#039;an affirms is the four gospels. It is not.</p>
+<p class="ih-horn-text">That the Injīl the Qur&#039;an affirms is the four gospels. The Qur&#039;an says the Injīl was given to ʿĪsā (5:46); the four gospels were written about him, by others, decades later. Remove the assumption and both horns fall.</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"className":"ih-full"} -->
 <p class="ih-full"><a href="/the-islamic-dilemma/">Read the answer</a></p>

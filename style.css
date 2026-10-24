@@ -5,7 +5,7 @@ Description: Custom child theme of Twenty Twenty-Five built for one site, The Ri
 Author: MENJ
 Author URI: https://menj.blog
 Template: twentytwentyfive
-Version: 3.5.0
+Version: 3.5.1
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -190,7 +190,7 @@ p.ih-cite{margin:0;font-size:13px;color:var(--wp--preset--color--muted)}
 .is-style-read-first .ih-rf-link{font-family:var(--ih-serif);font-weight:600;font-size:19px}
 .is-style-read-first .ih-rf-link a{color:var(--wp--preset--color--contrast);text-decoration:none}
 
-.ih-entries{gap:12px !important}
+.ih-entries{gap:12px !important;align-content:start;align-self:start} /* the card grid sits beside the section head; without this its rows stretch to the head's height and the cards fill with empty space */
 .ih-entry{position:relative;background:var(--wp--preset--color--accent-5);border-radius:var(--ih-r-md);padding:18px 20px;margin:0 !important;display:flex;flex-direction:column;gap:6px}
 .ih-entry > *{margin:0 !important}
 .ih-entry:hover{box-shadow:inset 0 0 0 1.5px var(--wp--preset--color--accent-1)}
@@ -273,13 +273,28 @@ p.ih-cite{margin:0;font-size:13px;color:var(--wp--preset--color--muted)}
 /* The Islamic Dilemma */
 .ih-dilemma{margin-block-start:var(--wp--preset--spacing--50) !important}
 .ih-dilemma > * + *{margin-top:var(--wp--preset--spacing--30) !important}
-.ih-horns{gap:12px !important}
+/* The dilemma as a diagram: the two horns side by side with "or" between them, the assumption they share beneath, joined by a labelled rule */
+.ih-horns{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:14px 14px;align-items:stretch}
+.ih-horn-1{grid-column:1}
+.ih-horn-or{grid-column:2;align-self:center;justify-self:center;margin:0 !important;font-family:var(--ih-sans);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--wp--preset--color--accent-2);border:1.5px solid var(--wp--preset--color--accent-2);border-radius:var(--ih-r-pill);padding:.35em .8em;background:var(--wp--preset--color--base);text-align:center !important}
+.ih-horn-2{grid-column:3}
+.ih-horn-join{grid-column:1 / -1;margin:4px 0 0 !important;display:flex;align-items:center;gap:14px;font-family:var(--ih-sans);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--wp--preset--color--accent-1);text-align:center !important;hyphens:manual}
+.ih-horn-join::before,.ih-horn-join::after{content:"";flex:1;border-top:1.5px solid var(--wp--preset--color--accent-1);opacity:.6}
+.ih-horn-join::before{border-inline-start:1.5px solid var(--wp--preset--color--accent-1);height:14px;border-top-left-radius:6px;align-self:flex-start;margin-inline-start:12%}
+.ih-horn-join::after{border-inline-end:1.5px solid var(--wp--preset--color--accent-1);height:14px;border-top-right-radius:6px;align-self:flex-start;margin-inline-end:12%}
+.ih-horn-base{grid-column:1 / -1;border:1.5px solid var(--wp--preset--color--accent-1)}
+.ih-horn-base .ih-horn-text{font-weight:400;font-size:19px}
+@media (max-width:700px){
+ .ih-horns{grid-template-columns:1fr}
+ .ih-horn-1,.ih-horn-or,.ih-horn-2,.ih-horn-join,.ih-horn-base{grid-column:1}
+ .ih-horn-join::before,.ih-horn-join::after{height:0;border-inline-start:0;border-inline-end:0;margin:0}
+}
 .ih-horn{border-radius:var(--ih-r-md);padding:22px;margin:0 !important;display:flex;flex-direction:column;gap:8px}
 .ih-horn > *{margin:0 !important}
 .ih-horn-red{background:var(--wp--preset--color--red-tint)}
 .ih-horn-green{background:var(--wp--preset--color--green-tint)}
 .ih-horn-green .ih-k{color:var(--wp--preset--color--accent-1)}
-.ih-horn-text{font-family:var(--ih-serif);font-weight:600;font-size:22px;line-height:1.2}
+.ih-horn-text{font-family:var(--ih-serif);font-weight:600;font-size:22px;line-height:1.2;text-align:start !important;hyphens:manual}
 .ih-points{display:flex;flex-direction:column;gap:12px}
 .ih-point{background:var(--wp--preset--color--accent-5);border-radius:var(--ih-r-md);padding:22px 24px;margin:0 !important;display:flex;flex-direction:column;gap:8px}
 .ih-point > *{margin:0 !important}

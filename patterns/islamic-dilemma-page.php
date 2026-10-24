@@ -176,7 +176,7 @@
 <h2 class="wp-block-heading">How the verses work</h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>The dilemma reads the verses on earlier scripture as free-standing statements that the Bible is divinely vouched for. They are arguments. They address specific Jewish and Christian communities in the Ḥijāz and Medina, and hold them to their own scripture: if they truly revered what they were given, they would recognise its continuity with what is now sent to Muḥammad (5:43-48, 68). Where those verses use confirmation to settle a point for listeners who had never heard the stories of Moses and Jesus, they tell them that these stories stand in continuity with revelation their neighbours already accepted.</p>
+<p>The verses on earlier scripture are arguments. They address specific Jewish and Christian communities in the Ḥijāz and Medina, and hold them to their own scripture: if they truly revered what they were given, they would recognise its continuity with what is now sent to Muḥammad (5:43-48, 68). Where those verses use confirmation to settle a point for listeners who had never heard the stories of Moses and Jesus, they tell them that these stories stand in continuity with revelation their neighbours already accepted.</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph -->
 <p>The Qur’an speaks across four registers, which the dilemma collapses into one:</p>

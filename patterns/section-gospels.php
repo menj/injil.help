@@ -137,7 +137,7 @@
 <!-- /wp:heading -->
 <!-- wp:details {"className":"is-style-faq"} -->
 <details class="wp-block-details is-style-faq"><summary>Who wrote the four gospels?</summary><!-- wp:paragraph -->
-<p>Nobody knows. All four are anonymous; the names Matthew, Mark, Luke and John were attached in the second century, on traditions the gospels themselves do not support. Matthew and Luke copied most of Mark, which an eyewitness would not have needed to do. See <a href="/gospels/mark/">Mark</a> and <a href="/gospels/matthew/">Matthew</a>.</p>
+<p>No one knows. All four are anonymous; the names Matthew, Mark, Luke and John were attached in the second century, on traditions the gospels themselves do not support. Matthew and Luke copied most of Mark, which an eyewitness would not have needed to do. See <a href="/gospels/mark/">Mark</a> and <a href="/gospels/matthew/">Matthew</a>.</p>
 <!-- /wp:paragraph --></details>
 <!-- /wp:details -->
 <!-- wp:details {"className":"is-style-faq"} -->
