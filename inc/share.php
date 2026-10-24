@@ -77,10 +77,11 @@ function injil_help_share_markup( $post = null ) {
 	}
 	// Buttons for the Web Share API and the clipboard; share.js removes "hidden" when each is available.
 	$items .= sprintf(
-		'<li class="ih-share-item ih-share-copy" hidden><button type="button" class="ih-share-link" data-copy="%1$s" data-done="%2$s"><span class="ih-share-icon" aria-hidden="true"></span><span class="ih-share-name">%3$s</span></button></li>',
+		'<li class="ih-share-item ih-share-copy" hidden><button type="button" class="ih-share-link" data-copy="%1$s" data-done="%2$s" data-fail="%4$s"><span class="ih-share-icon" aria-hidden="true"></span><span class="ih-share-name">%3$s</span></button></li>',
 		esc_attr( get_permalink( $post ) ),
 		esc_attr__( 'Copied', 'injil-help' ),
-		esc_html__( 'Copy link', 'injil-help' )
+		esc_html__( 'Copy link', 'injil-help' ),
+		esc_attr__( 'Could not copy; copy the address by hand', 'injil-help' )
 	);
 	$items .= sprintf(
 		'<li class="ih-share-item ih-share-native" hidden><button type="button" class="ih-share-link" data-share-title="%1$s" data-share-url="%2$s"><span class="ih-share-icon" aria-hidden="true"></span><span class="ih-share-name">%3$s</span></button></li>',

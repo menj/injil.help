@@ -124,13 +124,23 @@ function injil_help_find_page( $path ) {
 	return $page && 'trash' !== $page->post_status ? $page : null;
 }
 
+const INJIL_HELP_HASH_META = '_injil_help_hash';
+
+/** True when a starter page's stored content has been edited since the theme last wrote it. */
+function injil_help_page_is_edited( $post ) {
+	$hash = get_post_meta( $post->ID, INJIL_HELP_HASH_META, true );
+	return $hash && $hash !== md5( $post->post_content );
+}
+
 /**
- * Create every missing page. Returns the number created. With $overwrite, pages
- * that already exist are rewritten from the theme's text (title, content, excerpt);
- * a page whose stored text already matches is left alone, and no revision is kept
- * for the rewrite, so a version bump touches only the pages that changed.
+ * Create every missing page. Returns the number created or rewritten. With $overwrite,
+ * pages that already exist are rewritten from the theme's text (title, content,
+ * excerpt), except pages edited since the theme wrote them, which are kept unless
+ * $force is set (the "Update all pages" button). A page whose stored text already
+ * matches is left alone, and no revision is kept for the rewrite. Each page the
+ * theme writes carries a hash of that content, which is how an edit is detected.
  */
-function injil_help_populate( $overwrite = false ) {
+function injil_help_populate( $overwrite = false, $force = false ) {
 	// add_option() is an atomic insert, so only one request can take the lock; a lock older than a minute is stale.
 	if ( ! add_option( 'injil_help_populating', time(), '', false ) ) {
 		if ( time() - (int) get_option( 'injil_help_populating' ) < MINUTE_IN_SECONDS ) {
@@ -139,10 +149,17 @@ function injil_help_populate( $overwrite = false ) {
 		update_option( 'injil_help_populating', time(), false );
 	}
 
+	// No page definitions (a missing or malformed data file): do nothing and do not record the version, so the run is retried.
+	$pages = injil_help_starter_pages();
+	if ( ! $pages ) {
+		delete_option( 'injil_help_populating' );
+		return 0;
+	}
+
 	$created = 0;
 	add_filter( 'wp_revisions_to_keep', '__return_zero', 99 );
 
-	foreach ( injil_help_starter_pages() as $order => $def ) {
+	foreach ( $pages as $order => $def ) {
 		$existing = injil_help_find_page( $def['path'] );
 		if ( $existing && ! $overwrite ) {
 			continue;
@@ -156,6 +173,9 @@ function injil_help_populate( $overwrite = false ) {
 			if ( $existing->post_title === $def['title'] && $existing->post_content === $content && $existing->post_excerpt === $excerpt ) {
 				continue;
 			}
+			if ( ! $force && injil_help_page_is_edited( $existing ) ) {
+				continue;
+			}
 			$done = wp_update_post(
 				wp_slash(
 					array(
@@ -167,6 +187,7 @@ function injil_help_populate( $overwrite = false ) {
 				)
 			);
 			if ( $done && ! is_wp_error( $done ) ) {
+				update_post_meta( $existing->ID, INJIL_HELP_HASH_META, md5( $content ) );
 				++$created;
 			}
 			continue;
@@ -193,7 +214,10 @@ function injil_help_populate( $overwrite = false ) {
 		);
 		if ( $id ) {
 			$args['ID'] = $id;
-			wp_update_post( wp_slash( $args ) );
+			$done       = wp_update_post( wp_slash( $args ) );
+			if ( ! $done || is_wp_error( $done ) ) {
+				$id = 0;
+			}
 		} else {
 			$id = wp_insert_post( wp_slash( $args ) );
 		}
@@ -201,6 +225,7 @@ function injil_help_populate( $overwrite = false ) {
 			if ( ! empty( $def['template'] ) ) {
 				update_post_meta( $id, '_wp_page_template', $def['template'] );
 			}
+			update_post_meta( $id, INJIL_HELP_HASH_META, md5( $content ) );
 			++$created;
 		}
 	}
@@ -253,6 +278,8 @@ add_action(
 /**
  * After a theme update, rewrite the starter pages from the new text. Runs once per
  * version, on the first admin screen load by someone who can edit theme options.
+ * Pages edited since the theme wrote them are kept; Theme Options > Content lists
+ * them and its "Update all pages" button rewrites them too.
  */
 add_action(
 	'admin_init',
@@ -273,7 +300,7 @@ add_action(
 		}
 		check_admin_referer( 'injil_help_populate' );
 		$overwrite = ! empty( $_GET['overwrite'] );
-		$n         = injil_help_populate( $overwrite );
+		$n         = injil_help_populate( $overwrite, $overwrite );
 		wp_safe_redirect( add_query_arg( array( 'page' => 'injil-help-options', $overwrite ? 'ih_updated' : 'ih_created' => $n ), admin_url( 'themes.php' ) ) . '#content' );
 		exit;
 	}

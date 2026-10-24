@@ -29,6 +29,7 @@ button.ih-share-link{font:inherit;font-family:var(--ih-sans);font-size:14px;font
  flex:none;width:18px;height:18px;background:currentColor;
  -webkit-mask:var(--ih-i) center/contain no-repeat;mask:var(--ih-i) center/contain no-repeat;
 }
+.ih-share-copy.is-failed .ih-share-link{border-color:var(--wp--preset--color--accent-2);color:var(--wp--preset--color--accent-2)}
 .ih-share-copy.is-done .ih-share-link{background:var(--wp--preset--color--accent-1);border-color:var(--wp--preset--color--accent-1);color:var(--wp--preset--color--base)}
 
 /* One mask per network; the files are assets/icons/social/{network}.svg */
