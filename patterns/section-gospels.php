@@ -133,7 +133,7 @@
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 <!-- wp:heading -->
-<h2 class="wp-block-heading">Questions about the four gospels</h2>
+<h2 class="wp-block-heading">Questions about the gospels</h2>
 <!-- /wp:heading -->
 <!-- wp:details {"className":"is-style-faq"} -->
 <details class="wp-block-details is-style-faq"><summary>Who wrote the four gospels?</summary><!-- wp:paragraph -->

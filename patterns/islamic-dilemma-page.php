@@ -37,7 +37,7 @@
 <h2 class="wp-block-heading">Where the argument came from</h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>Its modern home is Answering Islam, where Sam Shamoun’s articles on the Qur’an’s witness to the Bible and on <em>taḥrīf</em> (corruption) make the case, and the circle around David Wood, Acts 17 Apologetics and the late Nabeel Qureshi carried it into video and gave it its syllogistic form. The argument is older than its name. Karl Pfander’s <em>Mīzān al-Ḥaqq</em> (“The Balance of Truth”, drafted in German in 1829 and printed in Persian in the 1830s) reasoned from the Qur’an’s respect for the earlier scriptures to the duty of Muslims to accept them. A letter of 1732 by the Christian writer Isṭifān Ward, known only in summary, argues that Qur’an 3:84, 5:46 and 2:87 attest the authenticity of the Torah and Gospel, which is the first horn of the dilemma almost three centuries before Shamoun and Wood.</p>
+<p>The argument is older than its name. A dilemma of the same shape was pressed against Christianity itself by the pagan critics Celsus and Julian, as Robert Wilken records, long before it was turned on Islam. The ninth-century Christian apology written under the name of al-Kindī reasoned from the Qur’an’s respect for the earlier scriptures against its Muslim correspondent. A letter of 1732 by the Christian writer Isṭifān Ward, known only in summary, argues that Qur’an 3:84, 5:46 and 2:87 attest the authenticity of the Torah and Gospel, which is the first horn of the dilemma. Karl Pfander’s <em>Mīzān al-Ḥaqq</em> (“The Balance of Truth”, drafted in German in 1829 and printed in Persian in the 1830s) made the same move the centrepiece of a missionary apologetic, and Muslim scholars answered it in its own day. Its modern home is Answering Islam, where Sam Shamoun’s articles on the Qur’an’s witness to the Bible and on <em>taḥrīf</em> (corruption) make the case; the circle around David Wood, Acts 17 Apologetics and the late Nabeel Qureshi gave it its name, its two-horned form and its reach on video from the 2010s.</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading -->
 <h2 class="wp-block-heading">The argument, stated fairly</h2>
@@ -71,10 +71,7 @@
 <h3 class="wp-block-heading">The Injīl is not the four gospels</h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>The Qur&#039;an speaks of one Injīl that God gave to ʿĪsā (5:46). The church received four books written about him, anonymous, in Greek, decades after his ministry. Luke says he compiled his from earlier accounts (1:1-4). The dilemma treats the revelation and the biographies as one thing.</p>
-<!-- /wp:paragraph -->
-<!-- wp:paragraph -->
-<p>Every Qur’anic use of <em>al-Injīl</em> is singular, as Sidney Griffith notes; the plural <em>anājīl</em> never occurs. It is a revelation given to ʿĪsā, as the Torah was given to Mūsā (5:46). <em>Al-Tawrāh</em> is likewise always singular. Neither names a multi-book canon.</p>
+<p>The Qur&#039;an speaks of one Injīl that God gave to ʿĪsā, as the Torah was given to Mūsā (5:46). Every Qur’anic use of <em>al-Injīl</em> is singular, as Sidney Griffith notes, and the plural <em>anājīl</em> never occurs; <em>al-Tawrāh</em> is likewise always singular, and neither names a multi-book canon. The church received four books written about him, anonymous, in Greek, decades after his ministry. Luke says he compiled his from earlier accounts (1:1-4). The dilemma treats the revelation and the biographies as one thing.</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph -->
 <p>There was also no single Bible for the Qur’an’s first audience to confirm. Tatian’s harmony of the four gospels, not the separate four, was the dominant gospel in the Syriac world of the late seventh century, on Griffith’s evidence. The Syriac New Testament of the Church of the East, the Peshitta, had twenty-two books, without 2 Peter, 2 and 3 John, Jude and Revelation. And Irenaeus, about 180 CE, is the first Christian to argue formally for four gospels, against those who held to one. The prior question is always which Bible, in which language, with which canon.</p>
@@ -97,7 +94,7 @@
 <p><em>Muṣaddiq</em> is applied in the Qur’an to a message or a prophet, never to a textual canon; Jesus is said to confirm Moses (3:50; 5:46). The same verse shows that confirming is not endorsing everything: Jesus confirms the Torah and makes lawful some of what it forbade.</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph -->
-<p>On <em>muhaymin</em>, Ibn Kathīr, on the authority of Ibn ʿAbbās and others, lists its senses as trustworthy (<em>amīn</em>), witness (<em>shāhid</em>) and dominant over every earlier scripture. Al-Ṭabarī says the Qur’an is the trustworthy custodian: whatever in the earlier books conforms to it is true, and whatever disagrees with it is false. A guardian keeps what is true and does not hand over its authority.</p>
+<p>On <em>muhaymin</em>, Ibn Kathīr, on the authority of Ibn ʿAbbās and others, lists its senses as trustworthy (<em>amīn</em>), witness (<em>shāhid</em>) and dominant over every earlier scripture. Al-Ṭabarī says the Qur’an is the trustworthy custodian: whatever in the earlier books conforms to it is true, and whatever disagrees with it is false. The guardian does not hand its authority over to what it guards.</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"className":"ih-full"} -->
 <p class="ih-full"><a href="/method/">The measure</a></p>
@@ -165,10 +162,10 @@
 <h3 class="wp-block-heading">Muslims have always read the gospels this way</h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>Medieval Muslim scholars quoted all four gospels, more than 1,270 times across twenty authors in one survey, and sorted what agreed with the Qur&#039;an from what did not. The Gospel According to Islam on this website continues that practice.</p>
+<p>The Prophet’s own instruction, recorded in al-Bukhārī (7362), was “do not believe the People of the Book and do not disbelieve them, but say: we believe in God and in what was revealed to us”. Ibn Ḥajar reads it as reserve, with the Qur’an as the criterion. That is how the scholars went on to read: medieval Muslim authors quoted all four gospels, more than 1,270 times across twenty authors in one survey, and sorted what agreed with the Qur&#039;an from what did not. In the fifteenth century Ibrāhīm al-Biqāʿī defended the use of the Bible in commentary, against a rival who accused him of glorifying it, and said that the Qur’an, the Prophet, the Companions and the scholars of every age had referred to the earlier scriptures.</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph -->
-<p>The Prophet’s own instruction, recorded in al-Bukhārī (7362), was “do not believe the People of the Book and do not disbelieve them, but say: we believe in God and in what was revealed to us”. Ibn Ḥajar reads it as reserve, with the Qur’an as the criterion. In the fifteenth century Ibrāhīm al-Biqāʿī defended the use of the Bible in commentary, against a rival who accused him of glorifying it, and said that the Qur’an, the Prophet, the Companions and the scholars of every age had referred to the earlier scriptures.</p>
+<p>The Gospel According to Islam on this website continues that practice: the gospels read with the Qur’an as the measure, and what agrees with it kept.</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"className":"ih-full"} -->
 <p class="ih-full"><a href="/gospel-according-to-islam/">The Gospel According to Islam</a></p>
@@ -242,7 +239,7 @@
 <!-- /wp:heading -->
 <!-- wp:details {"className":"is-style-faq"} -->
 <details class="wp-block-details is-style-faq"><summary>Who popularised the Islamic Dilemma?</summary><!-- wp:paragraph -->
-<p>The name and the two-horned form were spread online from the 2010s by David Wood of Acts 17 Apologetics, in videos and debates, and by Sam Shamoun of Answering Islam, who had used the argument in writing before that. The argument itself is older. Karl Gottlieb Pfander&#039;s <em>Mīzān al-Ḥaqq</em> (The Balance of Truth, 1830s) argued from the Qur&#039;an&#039;s affirmation of the earlier scriptures that they could not have been corrupted, and the ninth-century Christian apology written under the name of al-Kindī made the same move against its Muslim correspondent. A letter of 1732 by Isṭifān Ward already argued the first horn from 3:84, 5:46 and 2:87, and a dilemma of the same shape was pressed against Christianity itself by the pagan critics Celsus and Julian, as Robert Wilken records, before it was turned on Islam. Muslim scholars answered each of them in turn; this website answers the current form.</p>
+<p>In its present name and two-horned form, David Wood of Acts 17 Apologetics, in videos and debates from the 2010s, and Sam Shamoun of Answering Islam, who had used the argument in writing before that. The argument itself runs back through Pfander’s <em>Mīzān al-Ḥaqq</em> (1830s), Isṭifān Ward’s letter of 1732 and the ninth-century apology under the name of al-Kindī to a dilemma of the same shape that Celsus and Julian pressed against Christianity; the section “Where the argument came from” above gives the line. Muslim scholars answered each form in its day; this website answers the current one.</p>
 <!-- /wp:paragraph --></details>
 <!-- /wp:details -->
 <!-- wp:details {"className":"is-style-faq"} -->
@@ -267,7 +264,7 @@
 <!-- /wp:details -->
 <!-- wp:details {"className":"is-style-faq"} -->
 <details class="wp-block-details is-style-faq"><summary>Is the Islamic Dilemma a good argument?</summary><!-- wp:paragraph -->
-<p>It is valid only if the Injīl the Qur’an affirms is identical with the four gospels. That is the assumption both horns share, and the Qur’an itself denies it: the Injīl was given to Jesus; the gospels were written by others. Once the assumption goes, there is no dilemma, only the ordinary task of telling the revelation from the record. The four answers above set it out.</p>
+<p>It is valid only if the Injīl the Qur’an affirms is identical with the four gospels. That is the assumption both horns share, and the Qur’an itself denies it: the Injīl was given to Jesus; the gospels were written by others. Once the assumption goes, there is no dilemma, only the ordinary task of telling the revelation from the record. The six answers above set it out.</p>
 <!-- /wp:paragraph --></details>
 <!-- /wp:details -->
 <!-- wp:details {"className":"is-style-faq"} -->
