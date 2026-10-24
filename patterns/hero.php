@@ -18,15 +18,15 @@
 <!-- wp:paragraph {"className":"ih-cover-sub"} -->
 <p class="ih-cover-sub">The four gospels, Paul of Tarsus, and the Jesus of the Qur&#039;an</p>
 <!-- /wp:paragraph -->
-<!-- wp:paragraph {"className":"ih-gloss ih-ar ih-cover-gloss"} -->
-<p class="ih-gloss ih-ar ih-cover-gloss" dir="rtl" lang="ar">فِيهِ هُدٗى وَنُورٞ</p>
+<!-- wp:paragraph {"className":"ih-gloss ih-ar ih-quran ih-cover-gloss"} -->
+<p class="ih-gloss ih-ar ih-quran ih-cover-gloss" dir="rtl" lang="ar">فِيهِ هُدٗى وَنُورٞ</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"className":"ih-cover-lede"} -->
 <p class="ih-cover-lede">The Islamic Dilemma says the Qur&#039;an cannot confirm the gospels and contradict them at once. This website answers it from the gospels themselves: four anonymous books that disagree with each other, a Paul of Tarsus at odds with the men who knew ʿĪsā ibn Maryam, and the Qur&#039;an as the measure over both.</p>
 <!-- /wp:paragraph -->
 <!-- wp:buttons -->
 <div class="wp-block-buttons"><!-- wp:button {"className":"ih-btn-gloss"} -->
-<div class="wp-block-button ih-btn-gloss"><a class="wp-block-button__link wp-element-button" href="/the-islamic-dilemma/" title="مهيمنا: a guardian over it (Q 5:48)">The dilemma, answered<span class="ih-gloss ih-ar" dir="rtl" lang="ar">مُهَيۡمِنًا</span></a></div>
+<div class="wp-block-button ih-btn-gloss"><a class="wp-block-button__link wp-element-button" href="/the-islamic-dilemma/" title="مهيمنا: a guardian over it (Q 5:48)">The dilemma, answered<span class="ih-gloss ih-ar ih-quran" dir="rtl" lang="ar">مُهَيۡمِنًا</span></a></div>
 <!-- /wp:button -->
 <!-- wp:button {"className":"is-style-outline ih-btn-gloss"} -->
 <div class="wp-block-button is-style-outline ih-btn-gloss"><a class="wp-block-button__link wp-element-button" href="/gospels/" title="ΕΥΑΓΓΕΛΙΟΝ: good news (Mark 1:1)">Start with the gospels<span class="ih-gloss">ΕΥΑΓΓΕΛΙΟΝ</span></a></div>

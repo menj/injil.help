@@ -41,7 +41,7 @@ Modelled on apostleofdoom.org: a title-page hero; each part of the study as a bl
 Bundled in assets/fonts and declared in theme.json, so every face is available in the editor's font picker. Roles:
 * Sabon Next LT: body text. EB Garamond: headings. Kagnue: site title and display. Evangelion CPA: labels, kickers, navigation.
 * SBL Greek, SBL Hebrew, SBL BibLit: biblical languages and transliteration (also applied by lang="grc", lang="he").
-* KFGQPC Hafs Uthmanic: Qur'anic text (class ih-quran). Noto Naskh Arabic: hadith (class ih-hadith). Amiri: other Arabic (lang="ar"). Dubidam Arabic, Arslan Wessam: Arabic display.
+* KFGQPC Hafs Uthmanic (v2.2, the King Fahd Complex face): reserved strictly for Qur'anic text. It is applied only through the class ih-quran; every Qur'anic gloss in the header, footer and section heads carries ih-gloss ih-ar ih-quran. Noto Naskh Arabic: hadith (class ih-hadith). Amiri: all other Arabic (class ih-ar, or lang="ar"). Do not set Hafs on anything that is not the Qur'an. Dubidam Arabic, Arslan Wessam: Arabic display.
 * Estrangelo Edessa: Syriac (lang="syc"). Noto Sans Cuneiform (lang="akk"). Special Elite: corrections log (class ih-record). Ferments, Angel: available, unused by default.
 
 Licensing: Sabon Next LT is a commercial Linotype face; confirm your licence covers web embedding before going live. Angel is freeware and asks for its README to be kept with the font (assets/fonts/Angel-README.txt). The rest are OFL or free for use; keep their licence files.
@@ -86,6 +86,8 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 
 == Changelog ==
 = 3.3.0 =
+* KFGQPC Hafs is now applied only through the class ih-quran and is reserved for Qur'anic text; ih-ar alone is generic Arabic in Amiri. Every Qur'anic gloss carries ih-quran, dir="rtl" and lang="ar".
+* Section index pages carry an overview of the part and a pointer to the next; the corrections log explains how corrections work; the resurrection table has notes on reading it.
 * All content is now JSON under inc/data/: the starter pages (pages/*.json), the narrative, the section titles and Introduction, the Qur'anic passages and the Gospel of Thomas sections. The .txt data files and the PHP arrays are gone; the pages render identically.
 * The article pages are written in full in place of the earlier outlines: the four gospels, the synoptic problem and the discrepancy index; the six Paul of Tarsus pages; the six Qur'an pages (800 to 1,300 words each, with sources). The timeline runs from 6 BCE to 1985 in four periods; the glossary covers the Arabic, Greek, Hebrew and Syriac terms and the vocabulary of New Testament scholarship; the source library indexes every work cited by kind; About, Contact, Terms, Privacy and Bonus chapters are full pages, and the privacy policy describes the share links.
 * Share row under posts and pages: X, Facebook, WhatsApp, Telegram, Reddit, LinkedIn, Bluesky, Threads, Pinterest and LINE, with Copy link and a native share button where the browser allows. Icons from the Minimalist Social Icons Pack as palette-coloured masks. New Theme Options > Sharing tab.

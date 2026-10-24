@@ -138,7 +138,9 @@ p.is-style-label-editorial{background:transparent;color:var(--ih-gold-ink);borde
 .wp-block-details.is-style-faq[open] summary::after{content:"\2212"}
 
 /* ---------- v2.1: structure after apostleofdoom.org ---------- */
-.ih-ar{font-family:var(--ih-quran);direction:rtl;unicode-bidi:isolate;text-align:left;letter-spacing:0 !important}
+/* Arabic: .ih-ar is any Arabic (Amiri, RTL). KFGQPC Hafs is reserved for the Qur'an and applied only through .ih-quran. */
+.ih-ar{font-family:var(--wp--preset--font-family--amiri);direction:rtl;unicode-bidi:isolate;text-align:left;letter-spacing:0 !important}
+.ih-quran,.ih-ar.ih-quran{font-family:var(--ih-quran)}
 .ih-gloss{display:block;font-family:var(--ih-greek);font-size:12px;font-weight:400;letter-spacing:.1em;color:var(--wp--preset--color--accent-2);line-height:1.3}
 .ih-gloss.ih-ar{font-size:14px}
 p.ih-gloss{margin:0;font-size:18px}
@@ -237,7 +239,7 @@ p.ih-cite{margin:0;font-size:13px;color:var(--wp--preset--color--muted)}
 :lang(he),:lang(hbo){font-family:var(--wp--preset--font-family--sbl-hebrew)}
 :lang(syc),:lang(arc){font-family:var(--wp--preset--font-family--estrangelo)}
 :lang(akk),:lang(sux){font-family:var(--wp--preset--font-family--cuneiform)}
-.ih-quran,.ih-ar{font-family:var(--ih-quran)}
+.ih-quran{font-family:var(--ih-quran)}
 .ih-hadith{font-family:var(--wp--preset--font-family--naskh);direction:rtl}
 .ih-translit{font-family:var(--wp--preset--font-family--sbl-biblit)}
 .ih-record,.ih-record td,.ih-record th{font-family:var(--wp--preset--font-family--special-elite) !important}

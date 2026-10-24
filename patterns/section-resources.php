@@ -8,8 +8,8 @@
 ?>
 <!-- wp:group {"className":"ih-section-head","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-section-head"><!-- wp:group {"className":"ih-gloss-row","layout":{"type":"flex","flexWrap":"wrap","verticalAlignment":"bottom"}} -->
-<div class="wp-block-group ih-gloss-row"><!-- wp:paragraph {"className":"ih-gloss ih-ar"} -->
-<p class="ih-gloss ih-ar">ٱلۡبَيِّنَٰتِ</p>
+<div class="wp-block-group ih-gloss-row"><!-- wp:paragraph {"className":"ih-gloss ih-ar ih-quran"} -->
+<p class="ih-gloss ih-ar ih-quran" dir="rtl" lang="ar">ٱلۡبَيِّنَٰتِ</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"className":"ih-cite"} -->
 <p class="ih-cite">the clear proofs · Q 2:87</p>
