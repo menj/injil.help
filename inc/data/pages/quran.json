@@ -1,0 +1,123 @@
+[
+    {
+        "path": "quran",
+        "title": "Jesus in the Qur’an",
+        "template": "page-section",
+        "pattern": "section-quran",
+        "excerpt": "What the Qur’an says of ʿĪsā ibn Maryam, passage by passage."
+    },
+    {
+        "path": "quran/birth",
+        "title": "The annunciation and the birth",
+        "excerpt": "The angels and Maryam, the palm tree, and the infant who speaks.",
+        "body": [
+            "@islamic",
+            "The Qur’an tells of Maryam in two places. Sūrat Āl ʿImrān (3:42-47) has the angels announce a word from God, whose name is the Messiah, ʿĪsā ibn Maryam. Sūrat Maryam (19:16-34) tells the story in full.",
+            "## The announcement",
+            "Maryam withdraws to an eastern place. A spirit sent by God appears as a man and announces a pure boy. She asks how, since no man has touched her. The answer is that God creates what He wills (3:47; 19:20-21).",
+            "## The birth",
+            "The pains of labour bring her to the trunk of a palm tree. She wishes she had died before this. A voice calls to her from beneath: do not grieve, a stream has been placed below you, and the palm will drop ripe dates (19:23-26).",
+            "## The infant speaks",
+            "She brings the child to her people, who accuse her. She points to him. He says: “I am the servant of God. He has given me the Book and made me a prophet” (19:30). The speech is a defence of Maryam and a statement of what he is.",
+            "## Compare",
+            "Luke 1-2 and Matthew 1-2 tell of the virgin birth; neither has the palm tree or the infant’s speech. The infant who speaks appears in the Arabic Infancy Gospel, a later text.",
+            "## Sources",
+            "- Gabriel Said Reynolds, <em>The Qur’ān and Its Biblical Subtext</em>.",
+            "- Ṭabarī, <em>Jāmiʿ al-bayān</em>, on 3:42-47 and 19:16-34."
+        ]
+    },
+    {
+        "path": "quran/signs",
+        "title": "The signs",
+        "excerpt": "The bird of clay, the blind and the leper healed, the dead raised, by the permission of God.",
+        "body": [
+            "@islamic",
+            "Qur’an 3:49 and 5:110 list the signs given to ʿĪsā. Each is stated to be by the permission of God, and the phrase is repeated for every sign.",
+            "- He fashions from clay the shape of a bird and breathes into it, and it becomes a bird.",
+            "- He heals the blind from birth and the leper.",
+            "- He gives life to the dead.",
+            "- He tells people what they eat and what they store in their houses (3:49).",
+            "## Compare",
+            "The healing of the blind and the lepers, and the raising of the dead, appear in the gospels (Mark 8:22-26; Luke 7:11-17; John 11). The clay birds do not. They appear in the Infancy Gospel of Thomas, a second-century text, where the child Jesus makes sparrows from clay on the Sabbath.",
+            "## The refrain",
+            "In every case the Qur’an says “by My permission” (5:110) or “by God’s permission” (3:49). The sign is a gift to the messenger, not a power of his own. This is the Qur’anic measure applied to the miracle stories.",
+            "## Sources",
+            "- Gabriel Said Reynolds, <em>The Qur’ān and Its Biblical Subtext</em>.",
+            "- Bart Ehrman, <em>Lost Scriptures</em>, on the Infancy Gospel of Thomas."
+        ]
+    },
+    {
+        "path": "quran/servant",
+        "title": "A servant and a messenger",
+        "excerpt": "What the Qur’an calls him, and what it says he is not.",
+        "body": [
+            "@islamic",
+            "The Qur’an names ʿĪsā a servant (<em>ʿabd</em>), a prophet, and a messenger. It also names him the Messiah, a word from God, and a spirit from Him (4:171). It denies that he is the third of three and denies that he is God’s son.",
+            "## What he is",
+            "- A servant of God: 19:30; 43:59; 4:172.",
+            "- A messenger: 3:49; 5:75; 61:6.",
+            "- The Messiah, a word from God and a spirit from Him: 4:171.",
+            "## What he is not",
+            "Those who say that God is the Messiah, son of Maryam, have disbelieved (5:17, 5:72). Those who say that God is the third of three have disbelieved (5:73). Qur’an 4:171 tells the People of the Book not to go beyond bounds in their religion and not to say “three”.",
+            "## The final scene",
+            "In 5:116-117 God asks ʿĪsā whether he told people to take him and his mother as gods besides God. He replies that he said only what he was commanded: worship God, my Lord and your Lord.",
+            "## Sources",
+            "- Ṭabarī and Ibn Kathīr, commentary on 4:171 and 5:116-117."
+        ]
+    },
+    {
+        "path": "quran/table",
+        "title": "The table from heaven",
+        "excerpt": "The disciples ask for a sign, and receive it with a warning.",
+        "body": [
+            "@islamic",
+            "Sūrat al-Māʾida, “The Table”, takes its name from 5:112-115. The disciples ask whether God can send down a table from heaven. ʿĪsā tells them to fear God. They say they wish to eat from it, to have their hearts at rest, and to bear witness.",
+            "## The prayer and the answer",
+            "ʿĪsā prays: “O God, our Lord, send down to us a table from heaven to be a festival for the first of us and the last of us, and a sign from You” (5:114). God answers that He will send it down, and that whoever disbelieves after it will receive a punishment such as no one in the worlds has received (5:115).",
+            "## Compare",
+            "The gospels have the feeding of the multitudes (Mark 6:30-44; 8:1-10) and the Last Supper (Mark 14:22-25). The Qur’an does not say which, if either, it recalls. Commentators have connected the table with each.",
+            "## Sources",
+            "- Ṭabarī and Ibn Kathīr, commentary on 5:112-115.",
+            "- Gabriel Said Reynolds, <em>The Qur’ān and Its Biblical Subtext</em>."
+        ]
+    },
+    {
+        "path": "quran/raised",
+        "title": "The end of his earthly mission",
+        "excerpt": "Neither killed nor crucified, but raised to God.",
+        "body": [
+            "@islamic",
+            "Qur’an 4:157-158 says of those who boast that they killed the Messiah, ʿĪsā ibn Maryam, the messenger of God: “They did not kill him, nor did they crucify him, but it was made to appear so to them. … God raised him to Himself.”",
+            "## Related verses",
+            "- 3:55: “O ʿĪsā, I will take you (<em>mutawaffīka</em>) and raise you to Myself.”",
+            "- 5:117: “When You took me (<em>tawaffaytanī</em>), You were the watcher over them.”",
+            "- 19:33: “Peace upon me the day I was born, the day I die, and the day I am raised alive.”",
+            "## How Muslims have read it",
+            "The majority of classical commentators hold that God raised ʿĪsā alive and that someone else was made to look like him. Some early commentators read <em>tawaffā</em> in 3:55 as death, followed by raising. The disagreement concerns the manner, not the denial that he was crucified.",
+            "## The historical question",
+            "The crucifixion of Jesus under Pontius Pilate is accepted by nearly all historians, including non-Christian ones, as one of the surest facts about him. That is the scholarly consensus and this website states it plainly. The Qur’an’s statement is a different kind of claim, and the two are set side by side here without blending them.",
+            "## Sources",
+            "- Ṭabarī, <em>Jāmiʿ al-bayān</em>, on 4:157-158.",
+            "- Mahmoud Ayoub, “Towards an Islamic Christology II: The Death of Jesus, Reality or Delusion?”, <em>The Muslim World</em> 70 (1980)."
+        ]
+    },
+    {
+        "path": "quran/ahmad",
+        "title": "The good news of Aḥmad",
+        "excerpt": "The messenger he announced.",
+        "body": [
+            "@islamic",
+            "Qur’an 61:6 reports that ʿĪsā said to the Children of Israel: “I am the messenger of God to you, confirming what came before me of the Torah and giving good news of a messenger who will come after me, whose name is Aḥmad.”",
+            "## The Muslim reading",
+            "Muslim scholars have read the verse as foretelling Muḥammad, the name Aḥmad being from the same root as Muḥammad. Ibn Isḥāq, in the earliest biography, connects the promise with the “Paraclete” of John 15:26 (Guillaume, <em>The Life of Muhammad</em>, p. 104).",
+            "## The scholarly reading",
+            "@consensus",
+            "Scholars of the New Testament identify the Paraclete (<em>paraklētos</em>) of John 14-16 with the Holy Spirit, which John 14:26 states directly. Some Muslim writers argue that the original Greek was <em>periklytos</em>, “the praised one”, which would translate Aḥmad. No Greek manuscript has that reading.",
+            "## Where this page stands",
+            "The verse is the Qur’an’s own witness. The identification with a passage of John rests on a reading the manuscripts do not support. Both points are stated so the reader can weigh them.",
+            "## Sources",
+            "- Alfred Guillaume (trans.), <em>The Life of Muhammad</em>.",
+            "- Raymond Brown, <em>The Gospel According to John XIII-XXI</em>, on the Paraclete."
+        ]
+    }
+]

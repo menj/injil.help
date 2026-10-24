@@ -1,0 +1,120 @@
+[
+    {
+        "path": "paul",
+        "title": "Paul of Tarsus",
+        "template": "page-section",
+        "pattern": "section-paul",
+        "excerpt": "Paul of Tarsus against the men who knew ʿĪsā ibn Maryam: his letters, the account in Acts, and the Jerusalem church."
+    },
+    {
+        "path": "paul/acts-galatians",
+        "title": "Acts against Galatians",
+        "excerpt": "Two accounts of the same years that cannot both be right: Damascus, Jerusalem, and the council.",
+        "body": [
+            "@consensus",
+            "Paul of Tarsus describes his early career in Galatians 1-2. Luke describes it in Acts 9-15. The two cover the same ground and differ at several points.",
+            "## After the conversion",
+            "Galatians 1:15-17: Paul of Tarsus says he did not consult anyone but went away to Arabia and then returned to Damascus. Acts 9:19-25 has him spend days with the disciples in Damascus and preach in the synagogues, with no journey to Arabia.",
+            "## The first visit to Jerusalem",
+            "Galatians 1:18-20: after three years he went up to Jerusalem to visit Cephas, stayed fifteen days, and saw no other apostle except James. Acts 9:26-30: Barnabas brings him to the apostles, and he moves freely among them in Jerusalem.",
+            "## The council",
+            "Galatians 2:1-10 reports a meeting fourteen years later with Barnabas and Titus, at which the leaders “added nothing” to him. Acts 15 reports a council at which James proposes a decree: gentiles are to abstain from idol meat, blood, strangled animals and sexual immorality. Paul of Tarsus never mentions the decree in his letters, and in 1 Corinthians 8-10 he treats idol meat as a matter of conscience.",
+            "## How scholars handle it",
+            "Where the two disagree, historians generally prefer Paul of Tarsus’s own letters to the later account in Acts, since Paul of Tarsus writes first-hand and within his own lifetime. This page rests on that rule.",
+            "## Sources",
+            "- Hans Dieter Betz, <em>Galatians</em>, Hermeneia.",
+            "- Joseph Fitzmyer, <em>The Acts of the Apostles</em>, Anchor Bible."
+        ]
+    },
+    {
+        "path": "paul/paul-against-jesus",
+        "title": "Paul of Tarsus against Jesus",
+        "excerpt": "On the law, on sonship, and on atonement, set against the teaching recorded in the gospels.",
+        "body": [
+            "@islamic",
+            "The Islamic position, argued here, is that Paul of Tarsus’s teaching departs from the teaching of Jesus recorded in the gospels. Most Christian scholars disagree and hold that Paul of Tarsus faithfully interprets Jesus. Both readings are set out so the reader can judge.",
+            "## The law",
+            "Matthew 5:17-19: Jesus has not come to abolish the law, and whoever relaxes the least commandment will be called least in the kingdom. Galatians 2:16: no one is justified by works of the law. Romans 10:4: Christ is the end of the law.",
+            "## What must one do?",
+            "Mark 10:17-19: asked what to do to inherit eternal life, Jesus lists the commandments. Romans 3:28: a person is justified by faith apart from works of the law.",
+            "## The Christian reply",
+            "Christian interpreters answer that Jesus fulfilled the law and that Paul of Tarsus speaks of the ritual boundary markers (circumcision, food laws) that separated Jew from gentile, not of the moral law. Scholars of the “new perspective” on Paul of Tarsus, such as E. P. Sanders and James Dunn, develop this reading.",
+            "## Where this page stands",
+            "The Qur’an speaks of Jesus confirming the Torah (3:50; 5:46). On the matter of the law, the Qur’anic portrait is closer to Matthew 5 than to Galatians. That is the argument; the evidence is above.",
+            "## Sources",
+            "- E. P. Sanders, <em>Paul and Palestinian Judaism</em>.",
+            "- James D. G. Dunn, <em>The Theology of Paul the Apostle</em>."
+        ]
+    },
+    {
+        "path": "paul/james",
+        "title": "James and the Jerusalem church",
+        "excerpt": "The brother who led the first community, and what it required of Paul of Tarsus.",
+        "body": [
+            "@consensus",
+            "James, called the brother of the Lord, led the Jerusalem community after Jesus. Paul of Tarsus names him among the “pillars” (Galatians 2:9) and the first apostle he met after three years (1:19).",
+            "## The men from James",
+            "Galatians 2:12 reports that men came “from James” to Antioch, and that Peter withdrew from eating with gentiles. Paul of Tarsus opposed Peter to his face. The episode shows that the Jerusalem leaders did not share Paul of Tarsus’s position on table fellowship.",
+            "## Acts 21",
+            "Acts 21:18-25 has James and the elders report that thousands of Jews have believed and are all zealous for the law, and that they have heard Paul of Tarsus teaches Jews to forsake Moses. Paul of Tarsus is asked to take part in a purification rite to show that he too lives in observance of the law.",
+            "## The death of James",
+            "Josephus (Antiquities 20.200) records the stoning of “James, the brother of Jesus who was called Christ” in 62 CE, on the order of the high priest Ananus. Hegesippus, quoted by Eusebius (Ecclesiastical History 2.23), describes James as strictly observant.",
+            "## Sources",
+            "- Richard Bauckham, <em>Jude and the Relatives of Jesus in the Early Church</em>.",
+            "- Josephus, <em>Jewish Antiquities</em>, book 20."
+        ]
+    },
+    {
+        "path": "paul/ebionites",
+        "title": "The Ebionites",
+        "excerpt": "The early Jewish followers of Jesus who kept the law and rejected Paul of Tarsus.",
+        "body": [
+            "@consensus",
+            "The Ebionites (from the Hebrew <em>ebyonim</em>, “the poor”) were a Jewish-Christian group known to us chiefly from the church fathers, who opposed them. They are attested from the second century.",
+            "## What the fathers report",
+            "Irenaeus (Against Heresies 1.26.2) says the Ebionites used only the Gospel of Matthew, rejected Paul of Tarsus as an apostate from the law, practised circumcision and followed Jewish customs. Eusebius (Ecclesiastical History 3.27) says they held Jesus to be a plain man, born of Joseph and Mary.",
+            "## What is uncertain",
+            "Our sources are hostile and later than the group’s origins. Scholars debate whether the Ebionites descend directly from the Jerusalem church or arose afterwards. No Ebionite writing survives intact.",
+            "## Why it matters here",
+            "The existence of Jewish followers of Jesus who kept the law and refused Paul of Tarsus shows that his version of the message was contested from the start. See <a href=\"/paul/james/\">James and the Jerusalem church</a>.",
+            "## Sources",
+            "- Irenaeus, <em>Against Heresies</em>, book 1.",
+            "- Eusebius, <em>Ecclesiastical History</em>, book 3.",
+            "- Oskar Skarsaune and Reidar Hvalvik (eds.), <em>Jewish Believers in Jesus: The Early Centuries</em>."
+        ]
+    },
+    {
+        "path": "paul/seven-letters",
+        "title": "The seven letters",
+        "excerpt": "Which letters scholars accept as Paul of Tarsus’s own, and why the argument here rests on them alone.",
+        "body": [
+            "@consensus",
+            "Thirteen letters carry Paul of Tarsus’s name. Scholars sort them into three groups.",
+            "- Undisputed (seven): Romans, 1 Corinthians, 2 Corinthians, Galatians, Philippians, 1 Thessalonians and Philemon.",
+            "- Disputed: Ephesians, Colossians and 2 Thessalonians. Scholars divide on authorship.",
+            "- Widely held to be later: 1 and 2 Timothy and Titus (the Pastoral Letters).",
+            "## The rule used on this website",
+            "Where a claim about Paul of Tarsus’s own teaching is made, it rests on the seven undisputed letters. A saying from Ephesians or the Pastorals is not used to show what Paul of Tarsus himself taught. This keeps the argument within ground that critical scholarship broadly accepts.",
+            "## Sources",
+            "- Raymond Brown, <em>An Introduction to the New Testament</em>.",
+            "- Bart Ehrman, <em>Forged: Writing in the Name of God</em>."
+        ]
+    },
+    {
+        "path": "paul/false-apostles",
+        "title": "The false apostles",
+        "excerpt": "Paul of Tarsus’s own charge against his rivals (2 Corinthians 11:13), and who stood on the other side of it.",
+        "body": [
+            "@consensus",
+            "In 2 Corinthians 11:13 Paul of Tarsus writes of “false apostles, deceitful workers, disguising themselves as apostles of Christ”. In 11:5 and 12:11 he calls them the “super-apostles”. The rivals are never named.",
+            "## Who were they?",
+            "Scholars disagree. Some identify them with Jewish-Christian missionaries from Jerusalem, perhaps linked to the “men from James”. Others see itinerant preachers of a different kind. The letter gives only Paul of Tarsus’s side.",
+            "## An accusation with two edges",
+            "Galatians 1:6-9 curses anyone who preaches a gospel different from his own, and 2:4 speaks of “false brothers”. The charge of falsehood runs in both directions: Paul of Tarsus’s opponents, whose letters are lost, would have said the same of him.",
+            "@islamic",
+            "The Islamic reading takes the dispute as evidence that the first community was divided over Paul of Tarsus, and that the side which lost the argument did not leave a record. The evidence for that claim is the Ebionite testimony and Acts 21.",
+            "## Sources",
+            "- Margaret Thrall, <em>The Second Epistle to the Corinthians</em>, International Critical Commentary."
+        ]
+    }
+]

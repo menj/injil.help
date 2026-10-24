@@ -1,0 +1,15 @@
+[
+    {
+        "path": "gospel-according-to-islam",
+        "title": "The Gospel According to Islam",
+        "template": "page-section",
+        "pattern": "section-gospel",
+        "excerpt": "A gospel retold with the Qur’an as the measure."
+    },
+    {
+        "path": "gospel-according-to-islam/how-composed",
+        "title": "How this gospel was composed",
+        "pattern": "how-composed",
+        "excerpt": "The rules used to compose the gospel: what is kept, what is left out, and why."
+    }
+]

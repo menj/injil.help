@@ -1,0 +1,67 @@
+[
+    {
+        "path": "about-the-author",
+        "title": "About the author",
+        "excerpt": "Who writes injil.help.",
+        "body": [
+            "This website is written by Mohd Elfie Nieshaem Juferi, an apologist writing from the Islamic side of the question of the Injīl.",
+            "The writer’s other work is at <a href=\"https://menj.org\">menj.org</a>. The method used here is set out on <a href=\"/method/\">the measure</a>, and every correction is listed in the <a href=\"/corrections/\">corrections log</a>."
+        ]
+    },
+    {
+        "path": "terms-of-use",
+        "title": "Terms of use",
+        "excerpt": "Terms for using injil.help.",
+        "body": [
+            "The text of this website is offered for study and discussion. You may quote it with credit and a link back to the page. You may not republish whole articles without permission.",
+            "Manuscript images are loaded from Wikimedia Commons under the licence named in each caption. Those licences govern their reuse.",
+            "The content is offered in good faith and is corrected when errors are found. It is not legal, medical or professional advice. Comments and correspondence must be civil. Abuse will be removed."
+        ]
+    },
+    {
+        "path": "privacy-policy",
+        "title": "Privacy policy",
+        "excerpt": "What this website collects and what loads from other sites.",
+        "body": [
+            "This website runs on WordPress. WordPress sets cookies for logged-in users and for people who leave a comment. The theme itself sets no tracking cookies.",
+            "Manuscript images load from Wikimedia Commons (upload.wikimedia.org). When a page with an image opens, your browser contacts Wikimedia’s servers, and Wikimedia can see your IP address under its own privacy policy.",
+            "If you send a message through the contact details given on the contact page, the message is used to reply to you and is not shared.",
+            "If analytics, a comment system or an email service is added later, this page will be updated to name it."
+        ]
+    },
+    {
+        "path": "contact",
+        "title": "Contact",
+        "excerpt": "How to reach the author.",
+        "body": [
+            "To report an error, send the page address and what you found. Corrections are recorded in the <a href=\"/corrections/\">corrections log</a>.",
+            "The writer can be reached through <a href=\"https://menj.org\">menj.org</a>."
+        ]
+    },
+    {
+        "path": "credits",
+        "title": "Credits",
+        "excerpt": "Sources and credits for the texts, images and design of injil.help.",
+        "body": [
+            "## Texts",
+            "- <strong>The Gospel According to Islam</strong>, sections 1 to 27 and the Introduction: Dr. Ahmad Shafaat, <em>The Gospel According to Islam</em> (New York: Vantage Press, 1985). Spelling and scanning errors were corrected. The text and notes follow the arrangement of <em>The Narrative of Jesus, Son of Mary</em>, in which the Qur’anic passages are set among the sections and the notes are numbered through the whole.",
+            "- <strong>The Qur’anic passages on Jesus</strong>, with their headings and footnotes: Alham Ahmed, <em>The Gospel According to the Quran: Jesus and His Teachings</em> (Toronto: Noor Lal Foundation, 2021), in the translation <em>The Clear Quran</em> by Dr. Mustafa Khattab (Al-Furqaan Foundation, theclearquran.org), which the compiler acknowledges using with the foundation’s permission.",
+            "- <strong>An Epistle unto the Congregation of Paul of Tarsus</strong>: an English rendering of the Malay letter <em>Epistel Kepada Jemaat Paulus</em>, with footnotes added by this website.",
+            "- <strong>Gospel of Thomas</strong>: sayings are numbered as in the standard edition. The summaries are this website’s own, prepared from Thomas O. Lambdin’s translation in <em>The Nag Hammadi Library in English</em>, ed. James M. Robinson (Leiden: E. J. Brill, 1988).",
+            "- All other text, including the section titles, the colour-coded Gospel of Thomas sections and their notes, the answers and the replies: this website.",
+            "## Images",
+            "Manuscript images load from Wikimedia Commons. Each carries its credit and a link to its Commons page in its caption.",
+            "## Design",
+            "Built on the Twenty Twenty-Five theme. Typefaces keep their own licences; see the licence files in the theme’s font folder.",
+            "Share icons are from the Minimalist Social Icons Pack (GPL). The LinkedIn icon is by <a href=\"https://fontawesome.com\">Font Awesome</a>, CC BY 4.0."
+        ]
+    },
+    {
+        "path": "sitemap",
+        "title": "Sitemap",
+        "excerpt": "Every page on injil.help.",
+        "body": [
+            "[page-list]"
+        ]
+    }
+]

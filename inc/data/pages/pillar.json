@@ -1,0 +1,28 @@
+[
+    {
+        "path": "the-islamic-dilemma",
+        "title": "The Islamic Dilemma, Answered",
+        "template": "page-section",
+        "pattern": "islamic-dilemma-page",
+        "excerpt": "The Islamic Dilemma, answered: what the argument claims, why it fails, and the strongest Christian reply."
+    },
+    {
+        "path": "method",
+        "title": "The measure",
+        "pattern": "criterion-statement",
+        "excerpt": "The criterion this website uses to weigh every claim."
+    },
+    {
+        "path": "corrections",
+        "title": "Corrections log",
+        "pattern": "corrections-log",
+        "excerpt": "Every error found, what the page said, and what it says now."
+    },
+    {
+        "path": "answers",
+        "title": "FAQs",
+        "template": "page-section",
+        "pattern": "answers-page",
+        "excerpt": "The questions people search for most, answered and labelled."
+    }
+]
