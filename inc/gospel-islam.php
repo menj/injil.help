@@ -2,8 +2,8 @@
 /**
  * The Gospel According to Islam: the Introduction and the 27 section pages, built
  * from inc/data/gospel-islam.json (section titles, front matter), narrative.json
- * (the text and notes) and thomas.json (the Gospel of Thomas sections). Credits are
- * on the separate Credits page.
+ * (the text and notes), thomas.json (the Gospel of Thomas sections) and basilides.json
+ * (the Gospel of Basilides, at the crucifixion). Credits are on the separate Credits page.
  *
  * @package injil-help
  */
@@ -25,6 +25,17 @@ function injil_help_data_file( $name ) {
 /** Gospel of Thomas sections woven into the chapters, keyed by section number; each a list of page-markup lines. */
 function injil_help_gospel_thomas_sections() {
 	return injil_help_data_file( 'thomas' );
+}
+
+/** Everything woven into a section after Shafaat's text: Thomas, then Basilides. Keyed by section number. */
+function injil_help_gospel_woven_sections() {
+	$out = array();
+	foreach ( array( injil_help_gospel_thomas_sections(), injil_help_data_file( 'basilides' ) ) as $set ) {
+		foreach ( (array) $set as $n => $lines ) {
+			$out[ (string) $n ] = array_merge( $out[ (string) $n ] ?? array(), array_values( (array) $lines ) );
+		}
+	}
+	return $out;
 }
 
 /**
@@ -134,7 +145,7 @@ function injil_help_narrative_link_notes( $text, $current ) {
 function injil_help_gospel_islam_pages() {
 	$data  = injil_help_gospel_islam_data();
 	$base  = 'gospel-according-to-islam';
-	$thomas = injil_help_gospel_thomas_sections();
+	$thomas = injil_help_gospel_woven_sections();
 	$pages = array();
 
 	$front = array(

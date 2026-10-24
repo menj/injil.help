@@ -24,7 +24,7 @@ The article text, the gospel, the Qur'anic passages and the page list are data i
 * narrative.json: The Narrative of Jesus, Son of Mary. chapters > sections > lines, with "### " Qur'anic headings and [^n] note markers; notes keyed by number, one numbering through the whole.
 * gospel-islam.json: the 27 section titles and the Introduction.
 * quran-jesus.json: the Qur'anic passages on Jesus, 13 surahs, 45 passages, 145 verses, with headings and footnotes.
-* thomas.json: the Gospel of Thomas sections, keyed by the section they are woven into.
+* thomas.json: the Gospel of Thomas sections, keyed by the section they are woven into. basilides.json: the Gospel of Basilides passage woven into section 26, in the same form.
 inc/starter-content-pages.php loads the page files; inc/gospel-islam.php and inc/quran-jesus.php build the gospel sections and the Qur'an page.
 
 == Structure ==
@@ -89,6 +89,7 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 
 == Changelog ==
 = 3.3.0 =
+* The Gospel of Basilides (Irenaeus, Against Heresies 1.24.4: Simon of Cyrene crucified in Jesus's likeness) is woven into section 26 of The Gospel According to Islam as a green-marked passage, with the laughter Irenaeus attributes to Jesus set aside and the note saying so; inc/data/basilides.json, merged with the Thomas sections by injil_help_gospel_woven_sections().
 * Al-Faruqi's Divine Transcendence and Its Expression (1983) cited on John (the Semitic sense of the titles and sayings; the Gnostic source of the Logos), Paul of Tarsus against Jesus (the mystery religions and the dying god) and A servant and a messenger (transcendence as the ground of the denials); added to the source library; the Credits page and readme state the arabesque principle behind the ornament.
 * Stronger parallax: the lattice, the hero's three layers, the section-banner watermarks and tints, the manuscript plates, the card grids and the footer pattern move at different speeds as the page scrolls. Theme Options > Branding > Parallax depth: Strong, Gentle or Off.
 * Structured data rebuilt as one JSON-LD graph per page (inc/schema.php): Organization with logo and sameAs, Person, WebSite with sitelinks search, typed page nodes (WebPage, CollectionPage with ItemList, ProfilePage, ContactPage, SearchResultsPage), BreadcrumbList, Article/BlogPosting with images and word count, Book for the gospel sections, ImageObject licence metadata for every manuscript image, FAQPage wherever there are FAQ items. New Theme Options > SEO fields for the author, profile links and logo.

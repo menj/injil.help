@@ -84,6 +84,12 @@
 <p>One rule of reading is worth stating. Thomas often says "the Father" where Matthew says "heaven" or Mark says "God". Where the canonical parallel makes the same point in other words, the saying is used and the note says so. A saying is set aside only when "Father" carries a claim of sonship or shared nature, which the Qur'an rejects (5:18; 19:35; 112:3). The Qur'an itself does not call God "Father", so this is a reading and not a settled rule, and it is applied in the open.</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading -->
+<h2 class="wp-block-heading">The Gospel of Basilides</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>One further passage is woven in, at <a href="/gospel-according-to-islam/26/">section 26</a>, where the gospels have Simon of Cyrene carry the cross. The Gospel of Basilides, if it was a gospel, is lost; what Basilides taught about the crucifixion in Alexandria in the early second century is known only from Irenaeus, who reported it around 180 CE in order to condemn it: that Simon was made to look like Jesus and Jesus like Simon, that Simon was crucified in his place, and that Jesus was not crucified but returned to the One who sent him. Tested against the measure, the substitution agrees with Qur’an 4:157 and with the reading of the classical commentators, and it is kept, marked green, with a note giving Irenaeus as the source and stating his hostility. One detail in Irenaeus’s report is set aside and the note says so: that Jesus stood by laughing at those who thought they held him. That is the Gnostic contempt for the body speaking, not the Qur’an’s messenger of mercy, and the rule for Thomas applies to Basilides too: what conflicts with the Qur’an is left out, and the reader is told.</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
 <h2 class="wp-block-heading">The measure, applied</h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
@@ -113,6 +119,9 @@
 <!-- /wp:list-item -->
 <!-- wp:list-item -->
 <li><strong>Gospel of Thomas sections, colour marks and their notes:</strong> this website, from Thomas O. Lambdin's translation in <em>The Nag Hammadi Library in English</em>, ed. James M. Robinson, 3rd ed. (Leiden: E. J. Brill, 1988).</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><strong>The Gospel of Basilides, at section 26:</strong> this website, paraphrasing Irenaeus, <em>Against Heresies</em> 1.24.4; on the lost gospel, Bart D. Ehrman, “The Lost Gospel of Basilides”, <em>The Bart Ehrman Blog</em>, 1 July 2023.</li>
 <!-- /wp:list-item -->
 <!-- wp:list-item -->
 <li><strong>Section titles, cross-links, the pages around the gospel, and every correction:</strong> this website. See the <a href="/credits/">Credits</a> page and the <a href="/corrections/">corrections log</a>.</li>
