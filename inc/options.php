@@ -30,6 +30,7 @@ function injil_help_option_defaults() {
 		'footer_mark'      => 1,
 		'ornament'         => 'rich',
 		'animate'          => 1,
+		'parallax'         => 'strong',
 		'favicon_force'    => 0,
 		'favicon_url'      => '',
 		'share'            => 1,
@@ -66,6 +67,7 @@ function injil_help_sanitize_options( $in ) {
 	$out['footer_mark']      = empty( $in['footer_mark'] ) ? 0 : 1;
 	$out['ornament']         = in_array( $in['ornament'] ?? 'rich', array( 'rich', 'subtle', 'off' ), true ) ? $in['ornament'] : 'rich';
 	$out['animate']          = empty( $in['animate'] ) ? 0 : 1;
+	$out['parallax']         = in_array( $in['parallax'] ?? 'strong', array( 'strong', 'gentle', 'off' ), true ) ? $in['parallax'] : 'strong';
 	$out['favicon_force']    = empty( $in['favicon_force'] ) ? 0 : 1;
 	$out['favicon_url']      = esc_url_raw( $in['favicon_url'] ?? '' );
 	$out['share']            = empty( $in['share'] ) ? 0 : 1;
@@ -171,6 +173,15 @@ function injil_help_render_options() {
 							</select>
 							<p class="description"><?php esc_html_e( 'The star pattern, section icons, tinted banners, badges and image frames. Everything takes its colour from the Colours tab.', 'injil-help' ); ?></p>
 							<label><input type="checkbox" name="<?php echo esc_attr( $name ); ?>[animate]" value="1" <?php checked( $o['animate'] ); ?>> <?php esc_html_e( 'Let cards and answers rise into view as the page scrolls', 'injil-help' ); ?></label>
+							<p class="ih-inline-choices">
+								<label for="ih-parallax"><?php esc_html_e( 'Parallax depth', 'injil-help' ); ?></label>
+								<select id="ih-parallax" name="<?php echo esc_attr( $name ); ?>[parallax]">
+									<option value="strong" <?php selected( $o['parallax'], 'strong' ); ?>><?php esc_html_e( 'Strong', 'injil-help' ); ?></option>
+									<option value="gentle" <?php selected( $o['parallax'], 'gentle' ); ?>><?php esc_html_e( 'Gentle', 'injil-help' ); ?></option>
+									<option value="off" <?php selected( $o['parallax'], 'off' ); ?>><?php esc_html_e( 'Off', 'injil-help' ); ?></option>
+								</select>
+							</p>
+							<p class="description"><?php esc_html_e( 'Layers move at different speeds as the page scrolls: the star lattice behind the page, the hero image and text, the section banners and their watermark icons, the manuscript plates, the card grids and the footer pattern. Switched off for visitors who ask for reduced motion.', 'injil-help' ); ?></p>
 						</td>
 					</tr>
 					<tr>
@@ -341,6 +352,10 @@ add_filter(
 		if ( 'off' !== $orn ) {
 			$classes[] = 'ih-orn';
 			$classes[] = 'ih-orn-' . ( 'subtle' === $orn ? 'subtle' : 'rich' );
+			$px = injil_help_get_option( 'parallax' );
+			if ( 'off' !== $px ) {
+				$classes[] = 'ih-px-' . ( 'gentle' === $px ? 'gentle' : 'strong' );
+			}
 		}
 		return $classes;
 	}

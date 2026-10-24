@@ -75,7 +75,7 @@ body.ih-orn-rich{--ih-orn-op:.085}
 
 /* Entry cards: section icon on the kicker, lift on hover, arrow on the right. */
 .ih-orn .ih-entry{transition:transform .22s ease,box-shadow .22s ease}
-html .ih-orn .ih-entry:hover{transform:translateY(-3px);box-shadow:0 10px 24px color-mix(in srgb,var(--wp--preset--color--contrast) 14%,transparent),inset 0 0 0 1.5px var(--wp--preset--color--accent-1)}
+html .ih-orn .ih-entry:hover,html.ih-px .ih-orn .ih-entries > .ih-entry:hover{transform:translateY(-3px);box-shadow:0 10px 24px color-mix(in srgb,var(--wp--preset--color--contrast) 14%,transparent),inset 0 0 0 1.5px var(--wp--preset--color--accent-1)}
 .ih-orn .ih-entry .ih-k{display:flex;align-items:center;gap:.5em}
 .ih-orn .ih-entry .ih-k::before{
  --ih-i:url(../icons/scroll.svg);
@@ -142,6 +142,40 @@ html .ih-orn .ih-entry:hover{transform:translateY(-3px);box-shadow:0 10px 24px c
  padding:8px;background:var(--wp--preset--color--base);
  border:1px solid var(--wp--preset--color--accent-6);
  box-shadow:0 12px 28px color-mix(in srgb,var(--wp--preset--color--contrast) 18%,transparent);
+}
+
+/*
+ * Parallax. ornament.js sets --ih-sy on the root and --ih-p (-1 to 1) on each layer;
+ * the depth comes from body.ih-px-strong (1) or .ih-px-gentle (.45). Layers move at
+ * different rates: the lattice behind the page drifts against the scroll, the hero
+ * image rises faster than its text, watermark icons sweep across the section banners,
+ * plates lift, card grids shear a little, the footer pattern slides. Everything is a
+ * transform, so nothing reflows. Off entirely under prefers-reduced-motion.
+ */
+body.ih-px-strong{--ih-px:1}
+body.ih-px-gentle{--ih-px:.45}
+@media (prefers-reduced-motion:no-preference){
+ html.ih-px body.ih-orn::before{top:-40vh;bottom:-40vh;transform:translate3d(0,calc(var(--ih-sy,0) * -0.14px * var(--ih-px,1)),0)}
+ html.ih-px .ih-cover{--ih-p:0}
+ html.ih-px .ih-cover::before{transform:translate3d(0,calc(var(--ih-p,0) * 90px * var(--ih-px,1)),0) scale(1.15)}
+ html.ih-px .ih-cover > .wp-block-columns{transform:translate3d(0,calc(var(--ih-p,0) * -36px * var(--ih-px,1)),0)}
+ html.ih-px .ih-cover .ih-plate{transform:translate3d(0,calc(var(--ih-p,0) * -110px * var(--ih-px,1)),0)}
+ html.ih-px .ih-cover .ih-plate img{transform:scale(calc(1 + .06 * var(--ih-px,1)))}
+ html.ih-px .ih-section-head::after{transform:translate3d(calc(var(--ih-p,0) * -40px * var(--ih-px,1)),calc(var(--ih-p,0) * -120px * var(--ih-px,1)),0) rotate(calc(-8deg + var(--ih-p,0) * -10deg * var(--ih-px,1)))}
+ html.ih-px .ih-section-head{background-position:calc(50% + var(--ih-p,0) * 30% * var(--ih-px,1)) 0;background-size:160% 160%}
+ html.ih-px .ih-plate:not(.ih-cover .ih-plate){transform:translate3d(0,calc(var(--ih-p,0) * -70px * var(--ih-px,1)),0)}
+ html.ih-px .ih-entries > .ih-entry:nth-child(odd),html.ih-px .ih-horns > .ih-horn:nth-child(odd){transform:translate3d(0,calc(var(--ih-p,0) * -22px * var(--ih-px,1)),0)}
+ html.ih-px .ih-entries > .ih-entry:nth-child(even),html.ih-px .ih-horns > .ih-horn:nth-child(even){transform:translate3d(0,calc(var(--ih-p,0) * 22px * var(--ih-px,1)),0)}
+ html.ih-px .ih-answers-band{--ih-p:0;background-image:radial-gradient(circle at calc(20% + var(--ih-p,0) * 30%) 0,color-mix(in srgb,var(--wp--preset--color--accent-3) 22%,transparent),transparent 55%)}
+ html.ih-px .ih-footer::before{transform:translate3d(0,calc(var(--ih-p,0) * -80px * var(--ih-px,1)),0) scale(1.2)}
+ html.ih-px .ih-cover::before,html.ih-px .ih-cover .ih-plate,html.ih-px .ih-section-head::after,html.ih-px .ih-plate{will-change:transform}
+ /* The reveal transition and the parallax transform meet on cards and plates: let the card's own reveal finish, then follow the scroll. */
+ html.ih-px .ih-js .ih-reveal.is-in{transition:opacity .5s ease,transform .18s linear,box-shadow .22s ease}
+}
+@media (max-width:600px){
+ html.ih-px .ih-cover .ih-plate{transform:translate3d(0,calc(var(--ih-p,0) * -40px * var(--ih-px,1)),0)}
+ html.ih-px .ih-section-head::after{transform:translate3d(0,calc(var(--ih-p,0) * -50px * var(--ih-px,1)),0) rotate(-8deg)}
+ html.ih-px .ih-entries > .ih-entry,html.ih-px .ih-horns > .ih-horn{transform:none}
 }
 
 /* Motion: cards and answers rise into view. ornament.js adds .ih-js and .is-in. */

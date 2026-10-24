@@ -24,7 +24,7 @@ add_action(
 		wp_enqueue_style( 'injil-help', get_stylesheet_uri(), array(), INJIL_HELP_VERSION );
 		if ( 'off' !== injil_help_get_option( 'ornament' ) ) {
 			wp_enqueue_style( 'injil-help-ornament', get_stylesheet_directory_uri() . '/assets/css/ornament.css', array( 'injil-help' ), INJIL_HELP_VERSION );
-			if ( injil_help_get_option( 'animate' ) ) {
+			if ( injil_help_get_option( 'animate' ) || 'off' !== injil_help_get_option( 'parallax' ) ) {
 				wp_enqueue_script( 'injil-help-ornament', get_stylesheet_directory_uri() . '/assets/js/ornament.js', array(), INJIL_HELP_VERSION, array( 'in_footer' => true, 'strategy' => 'defer' ) );
 			}
 		}
