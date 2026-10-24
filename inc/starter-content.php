@@ -9,6 +9,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
+require_once get_stylesheet_directory() . '/inc/images.php';
+
 require_once get_stylesheet_directory() . '/inc/starter-content-pages.php';
 
 /**
@@ -185,9 +187,9 @@ function injil_help_markup_to_blocks( $lines ) {
 function injil_help_page_content( $def ) {
 	if ( ! empty( $def['pattern'] ) ) {
 		$pattern = WP_Block_Patterns_Registry::get_instance()->get_registered( 'injil-help/' . $def['pattern'] );
-		return $pattern ? $pattern['content'] : '';
+		return $pattern ? injil_help_add_page_image( $def['path'], $pattern['content'], true ) : '';
 	}
-	return injil_help_markup_to_blocks( $def['body'] ?? array() );
+	return injil_help_add_page_image( $def['path'], injil_help_markup_to_blocks( $def['body'] ?? array() ), false );
 }
 
 /**
@@ -405,6 +407,7 @@ function injil_help_populate( $overwrite = false, $force = false ) {
 	}
 
 	update_option( 'injil_help_populated', INJIL_HELP_VERSION );
+	delete_option( 'injil_help_featured' ); // the featured-image pass runs again on the next admin loads
 	delete_option( 'injil_help_populating' );
 	return $created;
 }
