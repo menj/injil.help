@@ -140,6 +140,10 @@
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
+<!-- wp:paragraph {"className":"ih-next"} -->
+<p class="ih-next">The argument has also been restated as a secular case with two steps and four exits, and answered by a historical-critical reply that grants its first step. Both are taken point by point on <a href="/the-islamic-dilemma/secular-form/">The Islamic Dilemma without theology</a>.</p>
+<!-- /wp:paragraph -->
+
 <!-- wp:heading -->
 <h2 class="wp-block-heading">Questions about the Islamic Dilemma</h2>
 <!-- /wp:heading -->

@@ -182,6 +182,9 @@ function injil_help_gospel_islam_pages() {
 		if ( ! empty( $thomas[ (string) $n ] ) ) {
 			$body = array_merge( $body, $thomas[ (string) $n ] );
 		}
+		if ( function_exists( 'injil_help_tafsir_section_lines' ) ) {
+			$body = array_merge( $body, injil_help_tafsir_section_lines( (int) $n ) );
+		}
 		$nav = array();
 		if ( $n > 1 ) {
 			$nav[] = '<a href="/' . $base . '/' . ( $n - 1 ) . '/">← Section ' . ( $n - 1 ) . '</a>';

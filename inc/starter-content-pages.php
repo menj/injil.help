@@ -15,6 +15,7 @@
 defined( 'ABSPATH' ) || exit;
 
 require_once get_stylesheet_directory() . '/inc/gospel-islam.php';
+require_once get_stylesheet_directory() . '/inc/tafsir.php';
 
 /** One JSON file of page definitions, or an empty list if it is missing or malformed. */
 function injil_help_pages_file( $name ) {
@@ -37,6 +38,7 @@ function injil_help_starter_pages() {
 		injil_help_pages_file( 'paul' ),
 		injil_help_pages_file( 'quran' ),
 		array( injil_help_quran_page() ),
+		injil_help_tafsir_pages(),
 		injil_help_pages_file( 'gospel' ),
 		injil_help_gospel_islam_pages(),
 		injil_help_pages_file( 'bonus' ),

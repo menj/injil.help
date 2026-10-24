@@ -39,7 +39,7 @@
 <h2 class="wp-block-heading">How to read it</h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>Each page gives the Qur’anic text in full, with the classical commentators, and then a “Compare” section naming the gospel passages. The position on these pages is the Islamic one and is labelled as such; where the scholarly consensus runs against it, as on the crucifixion, the page says so and does not soften it. The full text of every passage, with the compilation’s headings and footnotes, is on <a href="/quran/passages/">The Qur’an on Jesus</a>, and the same passages stand inside the gospel where they fall in the story.</p>
+<p>Each page gives the Qur’anic text in full, with the classical commentators, and then a “Compare” section naming the gospel passages. The position on these pages is the Islamic one and is labelled as such; where the scholarly consensus runs against it, as on the crucifixion, the page says so and does not soften it. The full text of every passage, with the compilation’s headings and footnotes, is on <a href="/quran/passages/">The Qur’an on Jesus</a>, and the same passages stand inside the gospel where they fall in the story. What the classical commentators wrote on the verses that tell his story, eight works from al-Ṭabarī to al-Saʿdī translated in full, is on <a href="/quran/commentaries/">the classical commentaries</a>.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entries ih-entries-list ih-tint-green","layout":{"type":"grid","minimumColumnWidth":"15rem"}} -->

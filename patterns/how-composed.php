@@ -93,6 +93,10 @@
 <h2 class="wp-block-heading">The measure, applied</h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
+<p>Beneath the text of fourteen of the sections stands a block headed “From the commentaries”: what the classical Muslim commentators wrote on the Qur’anic verses that section rests on, each work given in full and folded away until opened. Eight works are translated, from al-Ṭabarī in the tenth century to al-Saʿdī in the twentieth, on the verses that tell the story of Jesus; the same texts, gathered by passage, are on <a href="/quran/commentaries/">the classical commentaries</a>. They are the Islamic record of how these verses were read, and the gospel is meant to be read with them.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
 <p>Everything above answers to one rule, stated in full on <a href="/method/">the measure</a>. The Qur'an judges which gospel material is kept. Where gospel material agrees with the Qur'an, it is used. Where it contradicts the Qur'an, it is set aside, and the page says so. Where the Qur'an is silent, material is used only if mainstream critical scholarship treats it as early, and it is labelled as such. The Qur'an calls itself a guardian over the earlier scripture (<em>muhaymin</em>, 5:48), and that is the office it holds here. The rule is not a licence to keep what is congenial. A saying of Thomas that is pleasant but conflicts with the Qur'an is set aside, and the reason is printed; a gospel passage that is hard but agrees with the Qur'an is kept.</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph -->
@@ -121,7 +125,7 @@
 <li><strong>Gospel of Thomas sections, colour marks and their notes:</strong> this website, from Thomas O. Lambdin's translation in <em>The Nag Hammadi Library in English</em>, ed. James M. Robinson, 3rd ed. (Leiden: E. J. Brill, 1988).</li>
 <!-- /wp:list-item -->
 <!-- wp:list-item -->
-<li><strong>The witnesses to the substitution, at section 26:</strong> this website, paraphrasing Irenaeus, <em>Against Heresies</em> 1.24.4 (Basilides), the Second Treatise of the Great Seth (NHC VII, 2, after Roger A. Bullard and Joseph A. Gibbons) and the Coptic Apocalypse of Peter (NHC VII, 3, after James Brashler and Roger A. Bullard), both in <em>The Nag Hammadi Library in English</em> (Brill, 1988); on the lost gospel, Bart D. Ehrman, “The Lost Gospel of Basilides”, <em>The Bart Ehrman Blog</em>, 1 July 2023.</li>
+<li><strong>The witnesses to the substitution, at section 26:</strong> this website, paraphrasing Irenaeus, <em>Against Heresies</em> 1.24.4 (Basilides), the Second Treatise of the Great Seth (NHC VII, 2, after Roger A. Bullard and Joseph A. Gibbons) and the Coptic Apocalypse of Peter (NHC VII, 3, after James Brashler and Roger A. Bullard), both in <em>The Nag Hammadi Library in English</em> (Brill, 1988); on the lost gospel, Bart D. Ehrman, “The Lost Gospel of Basilides”, <em>The Bart Ehrman Blog</em>, 1 July 2023, and J. Arendzen, “Basilides”, <em>The Catholic Encyclopedia</em>, vol. 2 (1907).</li>
 <!-- /wp:list-item -->
 <!-- wp:list-item -->
 <li><strong>Section titles, cross-links, the pages around the gospel, and every correction:</strong> this website. See the <a href="/credits/">Credits</a> page and the <a href="/corrections/">corrections log</a>.</li>

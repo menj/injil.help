@@ -5,7 +5,7 @@ Description: Child theme of Twenty Twenty-Five for injil.help, after Ahmad Shafa
 Author: Mohd Elfie Nieshaem Juferi
 Author URI: https://menj.org
 Template: twentytwentyfive
-Version: 3.3.0
+Version: 3.4.0
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -136,6 +136,15 @@ p.is-style-label-editorial{background:transparent;color:var(--ih-gold-ink);borde
 .wp-block-details.is-style-faq summary::-webkit-details-marker{display:none}
 .wp-block-details.is-style-faq summary::after{content:"+";font-family:var(--ih-sans);color:var(--wp--preset--color--accent-1)}
 .wp-block-details.is-style-faq[open] summary::after{content:"\2212"}
+/* Folded commentary blocks (the classical commentaries woven into the gospel sections) */
+.wp-block-details.is-style-fold{border-top:1px solid var(--wp--preset--color--accent-5);border-bottom:1px solid var(--wp--preset--color--accent-5);padding:var(--wp--preset--spacing--20) 0;margin:var(--wp--preset--spacing--20) 0}
+.wp-block-details.is-style-fold + .wp-block-details.is-style-fold{border-top:0;margin-top:0}
+.wp-block-details.is-style-fold summary{font-family:var(--ih-serif);font-weight:600;font-size:var(--wp--preset--font-size--medium);cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:1rem;align-items:baseline}
+.wp-block-details.is-style-fold summary::-webkit-details-marker{display:none}
+.wp-block-details.is-style-fold summary::after{content:"+";font-family:var(--ih-sans);color:var(--wp--preset--color--accent-2);flex:none}
+.wp-block-details.is-style-fold[open] summary::after{content:"\2212"}
+.wp-block-details.is-style-fold[open] summary{margin-bottom:var(--wp--preset--spacing--20)}
+.wp-block-details.is-style-fold h3{font-size:var(--wp--preset--font-size--medium);margin-top:var(--wp--preset--spacing--30)}
 
 /* ---------- v2.1: structure after apostleofdoom.org ---------- */
 /* Arabic: .ih-ar is any Arabic (Amiri, RTL). KFGQPC Hafs is reserved for the Qur'an and applied only through .ih-quran. */
@@ -246,6 +255,8 @@ p.ih-cite{margin:0;font-size:13px;color:var(--wp--preset--color--muted)}
 .ih-translit{font-family:var(--wp--preset--font-family--sbl-biblit)}
 .ih-record,.ih-record td,.ih-record th{font-family:var(--wp--preset--font-family--special-elite) !important}
 .wp-block-site-title{font-family:var(--ih-display)}
+/* Kagnue, the display face, also carries the large titles of the section index pages and the home sections, and the big numerals; it lacks the dotted transliteration letters, so it is not used for page titles that may carry them. */
+.ih-section-head h1,.ih-section-head h2,.ih-numeral{font-family:var(--ih-display);font-weight:400;letter-spacing:.01em}
 .ih-k,.ih-eyebrow,.ih-chapter-head,p[class*="is-style-label-"]{font-family:var(--ih-sans)}
 .ih-k,.ih-eyebrow{letter-spacing:.14em}
 .ih-cover-gloss{font-size:26px !important;color:var(--wp--preset--color--accent-3) !important;margin-bottom:var(--wp--preset--spacing--20) !important}

@@ -72,6 +72,7 @@ function injil_help_markup_to_blocks( $lines ) {
 		$list = array();
 	};
 
+	$question = '';
 	foreach ( $lines as $line ) {
 		$line = trim( $line );
 		if ( '' === $line ) {
@@ -82,6 +83,25 @@ function injil_help_markup_to_blocks( $lines ) {
 			continue;
 		}
 		$flush();
+		// "? Question" followed by its answer paragraph renders as a collapsible FAQ entry, which the structured data collects as FAQPage.
+		if ( '' !== $question ) {
+			$out .= '<!-- wp:details {"className":"is-style-faq"} -->' . "\n" . '<details class="wp-block-details is-style-faq"><summary>' . wp_kses_post( $question ) . "</summary><!-- wp:paragraph -->\n<p>" . wp_kses_post( $footnote( $line ) ) . "</p>\n<!-- /wp:paragraph --></details>\n<!-- /wp:details -->\n";
+			$question = '';
+			continue;
+		}
+		if ( 0 === strpos( $line, '? ' ) ) {
+			$question = substr( $line, 2 );
+			continue;
+		}
+		// "[details] Title" ... "[/details]" folds the lines between into a collapsible block.
+		if ( 0 === strpos( $line, '[details] ' ) ) {
+			$out .= '<!-- wp:details {"className":"is-style-fold"} -->' . "\n" . '<details class="wp-block-details is-style-fold"><summary>' . wp_kses_post( $footnote( substr( $line, 10 ) ) ) . "</summary>\n";
+			continue;
+		}
+		if ( '[/details]' === $line ) {
+			$out .= "</details>\n<!-- /wp:details -->\n";
+			continue;
+		}
 		if ( 0 === strpos( $line, '### ' ) ) {
 			$out .= "<!-- wp:heading {\"level\":3} -->\n<h3 class=\"wp-block-heading\">" . wp_kses_post( $footnote( substr( $line, 4 ) ) ) . "</h3>\n<!-- /wp:heading -->\n";
 		} elseif ( 0 === strpos( $line, '## ' ) ) {
