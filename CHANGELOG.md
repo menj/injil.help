@@ -2,6 +2,10 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.5.2
+
+- Images for the nativity and crucifixion tables (Giotto's Scrovegni Chapel frescoes, public domain), confirmed on Commons. Thirty pages now carry one; the good news of Aḥmad, the borrowing page and the composition page still do not.
+
 ## 3.5.1
 
 - Images from Wikimedia Commons on twenty-eight article pages (the five gospels and the Thomas pages, the discrepancy tables, the six Paul of Tarsus pages, the two Islamic Dilemma pages and the measure, the Qur'an theme pages, the source library and the objections): each a public-domain or CC0 manuscript page or painting chosen for the page, set as a plate near the top with its caption, credit and a link to its Commons page. The same image is sideloaded into the Media Library and set as the page's featured image, a few pages per admin screen load, so the Open Graph card and the structured data carry it. The map is inc/data/images.json (file name, alt, caption, credit), read by inc/images.php; the pages still without one are the nativity and crucifixion tables, the good news of Aḥmad, the borrowing page and the composition page.
