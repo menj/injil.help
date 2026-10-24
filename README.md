@@ -31,7 +31,7 @@ The theme header carries `GitHub Theme URI` and `Primary Branch: main`, so [Git 
 - `assets/icons/`: line icons used as CSS masks; `assets/icons/social/`: share icons from the Minimalist Social Icons Pack (GPL; LinkedIn by Font Awesome, CC BY 4.0)
 - `languages/`: drop `injil-help-{locale}.mo` files here
 - `assets/brandmark.svg`: brandmark (header, footer, fallback favicon)
-- `assets/images/`: placeholder cover art, pattern, divider and the default social image
+- `assets/images/`: star pattern, divider and the default social image
 
 ## Documentation
 

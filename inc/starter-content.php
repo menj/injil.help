@@ -219,10 +219,32 @@ function injil_help_populate( $overwrite = false ) {
 	return $created;
 }
 
+/**
+ * A new WordPress site ships a "Hello world!" post, a "Sample Page" and a sample
+ * comment, and the tagline "Just another WordPress site". On first activation
+ * the three are moved to the bin (if they were never edited) and the tagline is
+ * replaced, so nothing from the installer reaches a visitor.
+ */
+function injil_help_remove_sample_content() {
+	foreach ( array( 'post' => 'hello-world', 'page' => 'sample-page' ) as $type => $slug ) {
+		$sample = get_page_by_path( $slug, OBJECT, $type );
+		if ( $sample && 'trash' !== $sample->post_status && $sample->post_modified_gmt === $sample->post_date_gmt ) {
+			wp_trash_post( $sample->ID );
+		}
+	}
+	foreach ( get_comments( array( 'author_email' => 'wapuu@wordpress.example', 'status' => 'approve' ) ) as $comment ) {
+		wp_trash_comment( $comment );
+	}
+	if ( 'Just another WordPress site' === get_option( 'blogdescription' ) ) {
+		update_option( 'blogdescription', __( 'The Islamic Dilemma, answered', 'injil-help' ) );
+	}
+}
+
 add_action(
 	'after_switch_theme',
 	function () {
 		if ( ! get_option( 'injil_help_populated' ) ) {
+			injil_help_remove_sample_content();
 			injil_help_populate();
 		}
 	}

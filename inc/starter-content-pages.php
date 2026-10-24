@@ -189,7 +189,7 @@ function injil_help_starter_pages() {
 			'body' => array(
 				'Each table sets the four gospels side by side, with chapter and verse, and records only what the texts say. Interpretation is kept apart from the table.',
 				'- <a href="/gospels/discrepancies/resurrection/">The resurrection accounts</a>: who goes to the tomb, who is there, what is said, and where Jesus appears.',
-				'More tables will be added here as they are completed: the genealogies (Matthew 1 and Luke 3), the nativity, the Last Supper and the crucifixion. Every new table is announced in the <a href="/corrections/">corrections log</a> if it changes an existing page.',
+				'A table that changes an existing page is announced in the <a href="/corrections/">corrections log</a>.',
 			),
 		),
 		array( 'path' => 'gospels/discrepancies/resurrection', 'title' => 'The resurrection accounts compared', 'template' => 'page-wide', 'pattern' => 'discrepancy-resurrection', 'excerpt' => 'The four resurrection accounts set side by side, with references.' ),
