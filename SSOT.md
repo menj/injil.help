@@ -85,7 +85,7 @@ Shafaat (1985) for the gospel text; Alham Ahmed and The Clear Quran for the pass
 
 ## Rules for contributors
 
-- Shafaat's 1985 text is the starting point of the gospel, not its rule. Where it or his notes depart from the Qur'an as the measure they are changed, and every departure is listed under "Where this gospel departs from Shafaat" on the composition page. The end of the story follows 4:157-158 and 3:55: not killed, not crucified, raised to God, another seen in his likeness and no name given for him.
+- Shafaat's 1985 text is the starting point of the gospel, and the measure is its rule. Where it or his notes depart from the Qur'an as the measure they are changed, and every departure is listed under "Where this gospel departs from Shafaat" on the composition page. The end of the story follows 4:157-158 and 3:55: not killed, not crucified, raised to God, another seen in his likeness and no name given for him.
 - The verse division of the gospel is the `[v]` markers in `narrative.json`, numbered at build time. Move, add or remove them with the text; never hard-code a verse number.
 - Content changes go in `inc/data/` or `patterns/`, never in PHP strings.
 - JS and CSS are separate files in `assets/js/` and `assets/css/`.
