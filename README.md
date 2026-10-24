@@ -12,11 +12,21 @@ The folder must be named `injil-help` so the text domain and pattern slugs resol
 
 ## Setup
 
-See `readme.txt` for page slugs, the pillar page at `/the-islamic-dilemma/`, SEO, image credits and font licences.
+Activation creates the whole site: 166 pages, pretty permalinks, the sample post and page removed. See `readme.txt` for the page list, the pillar page at `/the-islamic-dilemma/`, Theme Options, SEO, image credits and font licences.
+
+## Content
+
+- The Islamic Dilemma answered (`/the-islamic-dilemma/`), with its secular restatement and the historical-critical reply answered point by point (`/the-islamic-dilemma/secular-form/`), and the measure the site reads by (`/method/`).
+- The four gospels, the Gospel of Thomas, the synoptic problem and the discrepancy tables; six pages on Paul of Tarsus; six pages on Jesus in the Qur'an and the compilation of passages.
+- The classical commentaries on Jesus (`/quran/commentaries/`): al-Ṭabarī, al-Baghawī, al-Qurṭubī, Ibn Kathīr, Tanwīr al-Miqbās, al-Jalālayn, al-Durr al-Manthūr and al-Saʿdī on 3:33-64, 4:155-159, 5:110-120, 19:16-37, 21:91, 23:50, 43:57-65, 57:27 and 61:6, translated in full (about 315,000 words), on 92 pages and folded into the gospel sections where the verses fall.
+- The Gospel According to Islam: the Introduction and 27 sections of Ahmad Shafaat's text with the Qur'anic passages, the Gospel of Thomas, the early witnesses to the substitution and the commentaries woven in; how it was composed.
+- Resources: timeline, glossary, source library, objections and replies, responses to named articles; FAQs on every main page.
+
+All of it is data in `inc/data/` (JSON) and `patterns/`; the page bodies use a compact markup documented in `readme.txt`.
 
 ## Updates
 
-The theme header carries `GitHub Theme URI` and `Primary Branch: main`, so [Git Updater](https://git-updater.com) can update it from this repository. Bump `Version:` in `style.css` and `INJIL_HELP_VERSION` in `functions.php` together on every release, and tag the commit with the same number (e.g. `v2.4.0`).
+The theme header carries `GitHub Theme URI` and `Primary Branch: main`, so [Git Updater](https://git-updater.com) can update it from this repository. Bump `Version:` in `style.css` and `INJIL_HELP_VERSION` in `functions.php` together on every release, and tag the commit with the same number (e.g. `v3.4.0`).
 
 ## Structure
 
@@ -39,7 +49,10 @@ The theme header carries `GitHub Theme URI` and `Primary Branch: main`, so [Git 
 
 ## Documentation
 
-`readme.txt` is the full manual: install, structure, patterns and block styles, fonts and licences, SEO, images, branding and favicon, colour customisation, release steps and changelog.
+- `readme.txt`: the user-facing manual that WordPress and Git Updater read: install, starter content, data and markup, patterns and block styles, fonts and licences, SEO and structured data, images, branding, Theme Options, ornament, colours, release steps and the changelog.
+- `SSOT.md`: the single source of truth: every fixed fact about the theme (slugs, data files, options, tokens, filters, rules). When documents disagree, this one is right.
+- `CHANGELOG.md`: the full version history.
+- `UPGRADING.md`: what each release does to an existing site and what to do before and after updating.
 
 ## Licence
 
