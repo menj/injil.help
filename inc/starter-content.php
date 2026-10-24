@@ -124,9 +124,10 @@ function injil_help_find_page( $path ) {
 }
 
 /**
- * Create every missing page. Returns the number created.
+ * Create every missing page. Returns the number created. With $overwrite, pages
+ * that already exist are rewritten from the theme's text (title, content, excerpt).
  */
-function injil_help_populate() {
+function injil_help_populate( $overwrite = false ) {
 	// add_option() is an atomic insert, so only one request can take the lock; a lock older than a minute is stale.
 	if ( ! add_option( 'injil_help_populating', time(), '', false ) ) {
 		if ( time() - (int) get_option( 'injil_help_populating' ) < MINUTE_IN_SECONDS ) {
@@ -138,11 +139,26 @@ function injil_help_populate() {
 	$created = 0;
 
 	foreach ( injil_help_starter_pages() as $order => $def ) {
-		if ( injil_help_find_page( $def['path'] ) ) {
+		$existing = injil_help_find_page( $def['path'] );
+		if ( $existing && ! $overwrite ) {
 			continue;
 		}
 		$content = injil_help_page_content( $def );
 		if ( '' === $content ) {
+			continue;
+		}
+		if ( $existing ) {
+			$done = wp_update_post(
+				array(
+					'ID'           => $existing->ID,
+					'post_title'   => $def['title'],
+					'post_content' => $content,
+					'post_excerpt' => $def['excerpt'] ?? '',
+				)
+			);
+			if ( $done && ! is_wp_error( $done ) ) {
+				++$created;
+			}
 			continue;
 		}
 		$parts  = explode( '/', $def['path'] );
@@ -200,7 +216,21 @@ add_action(
 	}
 );
 
-/** Run from the Theme Options > Content tab. */
+/**
+ * After a theme update, rewrite the starter pages from the new text. Runs once per
+ * version, on the first admin screen load by someone who can edit theme options.
+ */
+add_action(
+	'admin_init',
+	function () {
+		$done = get_option( 'injil_help_populated' );
+		if ( $done && version_compare( (string) $done, INJIL_HELP_VERSION, '<' ) && current_user_can( 'edit_theme_options' ) ) {
+			injil_help_populate( true );
+		}
+	}
+);
+
+/** Run from the Theme Options > Content tab. The update button passes overwrite=1. */
 add_action(
 	'admin_post_injil_help_populate',
 	function () {
@@ -208,8 +238,9 @@ add_action(
 			wp_die( esc_html__( 'You do not have permission to do this.', 'injil-help' ), 403 );
 		}
 		check_admin_referer( 'injil_help_populate' );
-		$n = injil_help_populate();
-		wp_safe_redirect( add_query_arg( array( 'page' => 'injil-help-options', 'ih_created' => $n ), admin_url( 'themes.php' ) ) . '#content' );
+		$overwrite = ! empty( $_GET['overwrite'] );
+		$n         = injil_help_populate( $overwrite );
+		wp_safe_redirect( add_query_arg( array( 'page' => 'injil-help-options', $overwrite ? 'ih_updated' : 'ih_created' => $n ), admin_url( 'themes.php' ) ) . '#content' );
 		exit;
 	}
 );

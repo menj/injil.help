@@ -42,6 +42,12 @@
 		} );
 	} );
 
+	$( '[data-confirm]' ).on( 'click', function ( e ) {
+		if ( ! window.confirm( $( this ).data( 'confirm' ) ) ) {
+			e.preventDefault();
+		}
+	} );
+
 	$( '.ih-color' ).wpColorPicker();
 	fromHash();
 }( jQuery ) );
