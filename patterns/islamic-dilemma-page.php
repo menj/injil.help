@@ -128,7 +128,7 @@
 <h4 class="wp-block-heading">Best Christian reply</h4>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>The strongest reply says that “the Injīl” can only mean the gospel scriptures the church possessed, since the Qur&#039;an addresses Christians as “the people of the Injīl” and tells them to judge by it. A command to follow a book presupposes that the book is sound. This is the argument Karl Pfander made against Muslim readers in <em>Mīzān al-Ḥaqq</em> (“The Balance of Truth”, published in the 1830s), and it is the form the Islamic Dilemma takes today in the online writing of Answering Islam and in videos by Acts 17 Apologetics.</p>
+<p>The strongest reply says that “the Injīl” can only mean the gospel scriptures the church possessed, since the Qur&#039;an addresses Christians as “the people of the Injīl” and tells them to judge by it. A command to follow a book presupposes that the book is sound. This is the argument Karl Pfander made against Muslim readers in <em>Mīzān al-Ḥaqq</em> (“The Balance of Truth”, drafted in German in 1829 and printed in Persian in the 1830s), and it is the form the Islamic Dilemma takes today in online Christian apologetics.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:group {"layout":{"type":"default"}} -->
@@ -145,7 +145,7 @@
 <!-- /wp:heading -->
 <!-- wp:details {"className":"is-style-faq"} -->
 <details class="wp-block-details is-style-faq"><summary>Who popularised the Islamic Dilemma?</summary><!-- wp:paragraph -->
-<p>The argument is older than the name. Karl Pfander used its logic in <em>Mīzān al-Ḥaqq</em> in the 1830s: the Qur&#039;an honours the earlier scriptures, so Muslims must accept them as they stand. The phrase “the Islamic Dilemma” spread through online Christian apologetics from the 2010s, in the writing of Answering Islam, which has argued the same case since the 1990s, and in videos by Acts 17 Apologetics.</p>
+<p>The argument is older than the name. Karl Pfander used its logic in <em>Mīzān al-Ḥaqq</em>, drafted in 1829 and printed in Persian in the 1830s: the Qur&#039;an honours the earlier scriptures, so Muslims must accept them as they stand. The phrase “the Islamic Dilemma” spread through online Christian apologetics from the 2010s, notably in the videos of David Wood and Acts 17 Apologetics.</p>
 <!-- /wp:paragraph --></details>
 <!-- /wp:details -->
 <!-- wp:details {"className":"is-style-faq"} -->

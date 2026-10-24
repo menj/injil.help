@@ -74,6 +74,9 @@ The same nine colours can be set without code under Appearance > Theme Options >
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add a Changelog entry here, merge to main, and tag the commit with the same number (for example v2.5.1). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 3.3.2 =
+* Fact-check of the Thomas correlation page and the Islamic Dilemma page: Goodacre's book title corrected (The Case for Thomas's Familiarity with the Synoptics); the note's limits stated on the page; Pfander's dates and the popularisers named only where checked.
+
 = 3.3.1 =
 * New page /gospels/thomas/correlation/: a statistical test of whether the order of the parallel sayings in Thomas follows Matthew, Mark, Luke or Q (no significant correlation), with both data tables. Linked from the Thomas introduction; credited on Credits and the Source library.
 
