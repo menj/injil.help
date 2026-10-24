@@ -86,10 +86,10 @@ Colours are tokens in theme.json (Appearance > Editor > Styles > Colors, or edit
 The same nine colours can be set without code under Appearance > Theme Options > Colours; they override theme.json and apply to the site and the editor.
 
 == Documentation ==
-This file is the user-facing manual that WordPress and Git Updater read. The repository also carries README.md (overview and structure), SSOT.md (the single source of truth: every fixed fact about the theme, its slugs, data files, options, tokens and rules), CHANGELOG.md (the full version history; the Changelog section below mirrors it) and UPGRADING.md (what each release changes on an existing site and what to do before and after updating).
+This file is the user-facing manual that WordPress and Git Updater read. The repository also carries README.md (overview and structure), SSOT.md (the single source of truth: every fixed fact about the theme, its slugs, data files, options, tokens and rules), CHANGELOG.md (the full version history; the Changelog section below mirrors it) and UPGRADING.md (the roadmap: improvements, features and content to add, the work that would make the theme fool-proof, and notes on updating an existing site).
 
 == Releasing ==
-Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add the entry to CHANGELOG.md and to the Changelog section here, note anything an existing site must know in UPGRADING.md, merge to main, and tag the commit with the same number (for example v3.4.0). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
+Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add the entry to CHANGELOG.md and to the Changelog section here, note anything an existing site must know under "Updating an existing site" in UPGRADING.md, merge to main, and tag the commit with the same number (for example v3.4.0). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
 = 3.4.0 =

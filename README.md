@@ -52,7 +52,7 @@ The theme header carries `GitHub Theme URI` and `Primary Branch: main`, so [Git 
 - `readme.txt`: the user-facing manual that WordPress and Git Updater read: install, starter content, data and markup, patterns and block styles, fonts and licences, SEO and structured data, images, branding, Theme Options, ornament, colours, release steps and the changelog.
 - `SSOT.md`: the single source of truth: every fixed fact about the theme (slugs, data files, options, tokens, filters, rules). When documents disagree, this one is right.
 - `CHANGELOG.md`: the full version history.
-- `UPGRADING.md`: what each release does to an existing site and what to do before and after updating.
+- `UPGRADING.md`: how to take the theme further: improvements, features and content to add, and the work that would make it fool-proof to run; with notes on updating an existing site.
 
 ## Licence
 
