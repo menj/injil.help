@@ -118,6 +118,39 @@
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Questions about the resources</h2>
+<!-- /wp:heading -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Where can I check the sources used on this website?</summary><!-- wp:paragraph -->
+<p>Every article lists its sources at the foot, and the <a href="/resources/sources/">source library</a> indexes all of them by kind, from the Qur’an and the Greek New Testament to the commentaries, the church fathers, the critical scholarship and the manuscripts, with the pages that lean on each.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Is there a timeline of the gospels and the Qur’an?</summary><!-- wp:paragraph -->
+<p>Yes. The <a href="/resources/timeline/">timeline</a> runs from the birth of Jesus to the Qur’an and beyond, with every gospel, letter, council and manuscript dated, so the distance between an event and its earliest record can be seen at a glance.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>How do I report an error on this website?</summary><!-- wp:paragraph -->
+<p>Through the <a href="/contact/">contact page</a>, giving the page, the sentence and the source that shows it is wrong. A report that is right is corrected on the page and recorded in the <a href="/corrections/">corrections log</a> with what the page said and what it now says.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Has this website ever been wrong?</summary><!-- wp:paragraph -->
+<p>Yes, and the <a href="/corrections/">corrections log</a> says where: scanning errors in the printed gospel text, two broken links, and a count of Thomas sayings that was revised. The log is kept newest first and never pruned.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Where are Christian objections answered?</summary><!-- wp:paragraph -->
+<p>On <a href="/resources/objections/">Objections and replies</a>, which states each objection in the form a Christian apologist would accept and answers it, and on <a href="/resources/responses/">Responses to named articles</a>, which answers four published articles claim by claim. The <a href="/answers/">FAQs</a> give the short answers.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>What do Injīl, taḥrīf and muhaymin mean?</summary><!-- wp:paragraph -->
+<p>Injīl is the Qur’an’s word for the revelation given to Jesus. Taḥrīf is alteration, of meaning or of text. Muhaymin, “guardian”, is what the Qur’an calls itself over the earlier scripture (5:48), and gives this website its measure. These and sixty other terms are in the <a href="/resources/glossary/">glossary</a>.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
 <!-- wp:group {"className":"ih-aside ih-next","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-aside ih-next"><!-- wp:paragraph {"className":"ih-k"} -->
 <p class="ih-k">Where this leads</p>

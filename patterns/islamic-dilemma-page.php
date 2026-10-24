@@ -158,3 +158,18 @@
 <p>No. The verse tells the people of the Injīl to judge by what God revealed in it. The Qur&#039;an names the Injīl as a revelation given to ʿĪsā (5:46), not four accounts written about him decades later by others. The command reaches the revelation within those books, which the Qur&#039;an, as guardian over them (5:48), identifies.</p>
 <!-- /wp:paragraph --></details>
 <!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Does the Qur’an say the Bible is corrupted?</summary><!-- wp:paragraph -->
+<p>It says some of the People of the Book wrote scripture with their own hands and called it God’s (2:79), moved words from their places (4:46; 5:13), and forgot part of what they were given (5:14). It does not say every book was wholly replaced, and this website does not rest its case on that charge. See <a href="/method/">the measure</a>.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>What is the Injīl according to the Qur’an?</summary><!-- wp:paragraph -->
+<p>The revelation God gave to Jesus, “guidance and light” (5:46), confirming the Torah. It is always singular. The four gospels are books written about Jesus by others, decades later; they contain the Injīl and other things, and the Qur’an, as guardian over them (5:48), is the measure of which is which.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Is the Islamic Dilemma a good argument?</summary><!-- wp:paragraph -->
+<p>It is valid only if the Injīl the Qur’an affirms is identical with the four gospels. That is the assumption both horns share, and the Qur’an itself denies it: the Injīl was given to Jesus; the gospels were written by others. Once the assumption goes, there is no dilemma, only the ordinary task of telling the revelation from the record. The four answers above set it out.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->

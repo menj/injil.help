@@ -41,6 +41,10 @@ function injil_help_option_defaults() {
 		'home_description' => '',
 		'pillar_title'     => '',
 		'og_image'         => '',
+		'author_name'      => '',
+		'author_url'       => '',
+		'same_as'          => "https://menj.org\nhttps://apostleofdoom.org",
+		'org_logo'         => '',
 	);
 }
 
@@ -73,6 +77,10 @@ function injil_help_sanitize_options( $in ) {
 	$out['home_description'] = sanitize_textarea_field( $in['home_description'] ?? '' );
 	$out['pillar_title']     = sanitize_text_field( $in['pillar_title'] ?? '' );
 	$out['og_image']         = esc_url_raw( $in['og_image'] ?? '' );
+	$out['author_name']      = sanitize_text_field( $in['author_name'] ?? '' );
+	$out['author_url']       = esc_url_raw( $in['author_url'] ?? '' );
+	$out['same_as']          = implode( "\n", array_filter( array_map( 'esc_url_raw', array_map( 'trim', explode( "\n", (string) ( $in['same_as'] ?? '' ) ) ) ) ) );
+	$out['org_logo']         = esc_url_raw( $in['org_logo'] ?? '' );
 	return $out;
 }
 
@@ -225,7 +233,7 @@ function injil_help_render_options() {
 								<option value="on" <?php selected( $o['schema'], 'on' ); ?>><?php esc_html_e( 'Always on', 'injil-help' ); ?></option>
 								<option value="off" <?php selected( $o['schema'], 'off' ); ?>><?php esc_html_e( 'Always off', 'injil-help' ); ?></option>
 							</select>
-							<p class="description"><?php esc_html_e( 'Titles, meta description, Open Graph and Article, FAQPage, WebSite and BreadcrumbList schema.', 'injil-help' ); ?></p>
+							<p class="description"><?php esc_html_e( 'Titles, meta description, Open Graph, and the JSON-LD graph: Organization, Person, WebSite with sitelinks search, WebPage, BreadcrumbList, Article, FAQPage, ImageObject licence metadata, ItemList and Book.', 'injil-help' ); ?></p>
 						</td>
 					</tr>
 					<tr>
@@ -243,6 +251,16 @@ function injil_help_render_options() {
 					<tr>
 						<th scope="row"><label for="ih-og"><?php esc_html_e( 'Default social image URL', 'injil-help' ); ?></label></th>
 						<td><input type="url" class="large-text" id="ih-og" name="<?php echo esc_attr( $name ); ?>[og_image]" value="<?php echo esc_attr( $o['og_image'] ); ?>" placeholder="https://"><p class="description"><?php esc_html_e( 'Used when a page has no featured image. Empty uses the Birmingham Qur’an manuscript bundled with the theme (1280 × 833).', 'injil-help' ); ?></p></td>
+					</tr>
+					<tr>
+						<th scope="row"><?php esc_html_e( 'Structured data', 'injil-help' ); ?></th>
+						<td>
+							<p class="description"><?php esc_html_e( 'The Organization and Person nodes in the JSON-LD graph on every page. Empty name and URL fall back to the author of each page.', 'injil-help' ); ?></p>
+							<p><label for="ih-author-name"><?php esc_html_e( 'Author name', 'injil-help' ); ?></label><br><input type="text" class="regular-text" id="ih-author-name" name="<?php echo esc_attr( $name ); ?>[author_name]" value="<?php echo esc_attr( $o['author_name'] ); ?>"></p>
+							<p><label for="ih-author-url"><?php esc_html_e( 'Author URL', 'injil-help' ); ?></label><br><input type="url" class="regular-text" id="ih-author-url" name="<?php echo esc_attr( $name ); ?>[author_url]" value="<?php echo esc_attr( $o['author_url'] ); ?>" placeholder="https://"></p>
+							<p><label for="ih-same-as"><?php esc_html_e( 'Profile links (sameAs), one per line', 'injil-help' ); ?></label><br><textarea class="large-text code" rows="3" id="ih-same-as" name="<?php echo esc_attr( $name ); ?>[same_as]"><?php echo esc_textarea( $o['same_as'] ); ?></textarea></p>
+							<p><label for="ih-org-logo"><?php esc_html_e( 'Organization logo URL', 'injil-help' ); ?></label><br><input type="url" class="regular-text" id="ih-org-logo" name="<?php echo esc_attr( $name ); ?>[org_logo]" value="<?php echo esc_attr( $o['org_logo'] ); ?>" placeholder="https://"><br><span class="description"><?php esc_html_e( 'Empty uses the Site Icon, or the brandmark when none is set. Google asks for at least 112 × 112 pixels.', 'injil-help' ); ?></span></p>
+						</td>
 					</tr>
 				</table>
 			</section>

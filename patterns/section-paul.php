@@ -118,6 +118,39 @@
 <p>The full case against Paul of Tarsus is set out at <a href="https://apostleofdoom.org">apostleofdoom.org</a>.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Questions about Paul of Tarsus</h2>
+<!-- /wp:heading -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Did Paul of Tarsus ever meet Jesus?</summary><!-- wp:paragraph -->
+<p>No. He never claims to have known Jesus in the flesh. His authority rests on a vision he says he received alone (Galatians 1:11-17; 1 Corinthians 15:8), and he says he did not consult the apostles in Jerusalem for three years afterwards. See <a href="/paul/acts-galatians/">Acts against Galatians</a>.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Why do Muslims reject Paul of Tarsus?</summary><!-- wp:paragraph -->
+<p>Because the doctrines that separate Christianity from the teaching of Jesus recorded in the gospels, that he was divine, that his death atoned for sin, and that the law no longer binds, come from Paul of Tarsus’s letters, not from Jesus, and were contested by the apostles who had known him. See <a href="/paul/paul-against-jesus/">Paul of Tarsus against Jesus</a>.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Did Paul of Tarsus and Jesus teach the same thing?</summary><!-- wp:paragraph -->
+<p>Not on the law. Jesus in Matthew says not one stroke of the law will pass and whoever relaxes the least commandment will be called least (5:17-19); Paul of Tarsus says Christ is the end of the law and those who seek to be justified by it are cut off from Christ (Romans 10:4; Galatians 5:4). Asked how to gain eternal life, Jesus said keep the commandments (Mark 10:19).</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Which letters did Paul of Tarsus actually write?</summary><!-- wp:paragraph -->
+<p>Seven, by the broad agreement of scholars: Romans, 1 and 2 Corinthians, Galatians, Philippians, 1 Thessalonians and Philemon. Ephesians, Colossians and 2 Thessalonians are disputed; the Pastoral Letters were written in his name a generation later. Every claim on this website rests on the seven. See <a href="/paul/seven-letters/">the seven letters</a>.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Who were the Ebionites?</summary><!-- wp:paragraph -->
+<p>Jewish followers of Jesus, attested from the second century, who kept the law of Moses, held Jesus to be a man and a prophet, used only Matthew, and called Paul of Tarsus an apostate from the law. The church fathers who describe them counted them heretics. See <a href="/paul/ebionites/">the Ebionites</a>.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>What was the dispute between Paul of Tarsus and James?</summary><!-- wp:paragraph -->
+<p>James, the brother of Jesus, led the Jerusalem church, which kept the law. Men from James made Peter stop eating with gentiles at Antioch, and Paul of Tarsus opposed Peter to his face (Galatians 2:11-14). Years later James’s church required Paul of Tarsus to prove publicly that he did not teach Jews to abandon Moses (Acts 21:20-24). See <a href="/paul/james/">James and the Jerusalem church</a>.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
 <!-- wp:group {"className":"ih-aside ih-next","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-aside ih-next"><!-- wp:paragraph {"className":"ih-k"} -->
 <p class="ih-k">Where this leads</p>

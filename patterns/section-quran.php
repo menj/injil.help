@@ -142,6 +142,39 @@
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Questions about Jesus in the Qur’an</h2>
+<!-- /wp:heading -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>What does the Qur’an say about Jesus?</summary><!-- wp:paragraph -->
+<p>That he is ʿĪsā son of Maryam, the Messiah, a word from God and a spirit from Him, born of a virgin, a prophet and messenger sent to Israel with signs, who called people to worship God alone, was neither killed nor crucified but raised to God, and foretold a messenger after him. Ninety-three verses speak of him; see <a href="/quran/passages/">The Qur’an on Jesus</a>.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Does the Qur’an say Jesus was crucified?</summary><!-- wp:paragraph -->
+<p>No. Qur’an 4:157 says those who claimed to have killed the Messiah did not kill him and did not crucify him, but it was made to appear so to them, and God raised him to Himself. Historians hold the crucifixion to be well attested; this website states both plainly. See <a href="/quran/raised/">the end of his earthly mission</a>.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Is Jesus the Son of God in Islam?</summary><!-- wp:paragraph -->
+<p>No. The Qur’an calls him a servant and messenger of God and says it is not for God to take a son (19:35; 112:3). On the Day of Judgement he disowns any claim to be worshipped: he said only what he was commanded, worship God, my Lord and your Lord (5:116-117). See <a href="/quran/servant/">a servant and a messenger</a>.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Does the Qur’an teach the virgin birth of Jesus?</summary><!-- wp:paragraph -->
+<p>Yes. Maryam asks how she can have a child when no man has touched her, and is told that God creates what He wills (3:47; 19:20-21). The Qur’an treats the birth as a sign of God’s power, like the creation of Adam without a father (3:59), not as proof of the child’s divinity. See <a href="/quran/birth/">the annunciation and the birth</a>.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>What miracles did Jesus perform according to the Qur’an?</summary><!-- wp:paragraph -->
+<p>He healed the blind from birth and the leper, raised the dead, made a bird from clay and breathed life into it, spoke in the cradle, told people what they had stored in their houses, and prayed down a table from heaven, each one “by God’s permission” (3:49; 5:110-115). See <a href="/quran/signs/">the signs</a>.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Who is Aḥmad in Qur’an 61:6?</summary><!-- wp:paragraph -->
+<p>The messenger Jesus foretold: “giving good news of a messenger who will come after me, whose name is Aḥmad.” Aḥmad, “most praised”, is from the same root as Muḥammad, and Muslims have always read the verse of him. Whether John’s Paraclete preserves the prophecy is discussed on <a href="/quran/ahmad/">the good news of Aḥmad</a>.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
 <!-- wp:group {"className":"ih-aside ih-next","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-aside ih-next"><!-- wp:paragraph {"className":"ih-k"} -->
 <p class="ih-k">Where this leads</p>

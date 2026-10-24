@@ -124,3 +124,36 @@
 <!-- wp:paragraph -->
 <p>If any sentence of the gospel seems to you to break the rule stated here, the <a href="/contact/">contact page</a> says how to report it. A reported error is corrected on the page and recorded in the log, with what the page said and what it says now.</p>
 <!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Questions about how the gospel was composed</h2>
+<!-- /wp:heading -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Whose words are in The Gospel According to Islam?</summary><!-- wp:paragraph -->
+<p>Ahmad Shafaat’s, from his 1985 book, for the Introduction and all twenty-seven sections and their 235 notes. The Qur’anic passages are in Mustafa Khattab’s Clear Quran translation, from Alham Ahmed’s compilation. The Gospel of Thomas sections and their notes are this website’s own, from Lambdin’s translation.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>What was changed in Shafaat’s text?</summary><!-- wp:paragraph -->
+<p>Only scanning errors in the copy it was typed from: stray marks, broken references such as “Micah 5:2” and “Mark 11:1-11”, and “Bethsaida!” for Bethsaida. “Paul” in the notes is written “Paul of Tarsus”. His wording was not otherwise rewritten, and every correction is in the <a href="/corrections/">corrections log</a>.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Where do the Qur’anic passages in the gospel come from?</summary><!-- wp:paragraph -->
+<p>From <em>The Gospel According to the Quran</em> (Alham Ahmed, 2021), which gathers 145 verses on Jesus in 45 passages under headings. Twenty-two passages stand inside the sections where they fall in the story; all of them are on <a href="/quran/passages/">The Qur’an on Jesus</a> in the order of the Qur’an.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>How were the sayings of Thomas chosen?</summary><!-- wp:paragraph -->
+<p>Every one of the 114 was tested against the measure. Seventy are placed in the gospel: forty agree with the Qur’an, sixteen are beyond it, fourteen are unclear, each with a colour mark and a note. Forty-four are set aside, thirty-seven for conflict and seven for repeating another, with the reason for each on <a href="/gospels/thomas/set-aside/">the set-aside page</a>.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>What do the colour marks mean?</summary><!-- wp:paragraph -->
+<p>Green: agrees with the Qur’an. Blue: beyond the measure, the Qur’an says nothing either way. Gold: unclear, the text or sense is uncertain. Red: conflicts with the Qur’an. Grey: repeats a saying already used. Red and grey appear only on the set-aside page, never in the gospel.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Is this a translation of the lost Injīl?</summary><!-- wp:paragraph -->
+<p>No. No manuscript of the Injīl given to Jesus survives and this website does not claim to have one. This is a gospel in Shafaat’s sense, the story of Jesus told to bring out its meaning for faith and history, written in the light of the Qur’an, with every source named so that the reader can check it.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->

@@ -132,6 +132,39 @@
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Questions about the four gospels</h2>
+<!-- /wp:heading -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Who wrote the four gospels?</summary><!-- wp:paragraph -->
+<p>Nobody knows. All four are anonymous; the names Matthew, Mark, Luke and John were attached in the second century, on traditions the gospels themselves do not support. Matthew and Luke copied most of Mark, which an eyewitness would not have needed to do. See <a href="/gospels/mark/">Mark</a> and <a href="/gospels/matthew/">Matthew</a>.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>When were the gospels written?</summary><!-- wp:paragraph -->
+<p>Mark around 65 to 75 CE, Matthew and Luke around 80 to 90, John around 90 to 110: forty to eighty years after the crucifixion, in Greek, outside Palestine. The letters of Paul of Tarsus, from about 50 CE, are older than any of them. The <a href="/resources/timeline/">timeline</a> sets every date in order.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Were the gospel writers eyewitnesses?</summary><!-- wp:paragraph -->
+<p>No. Luke says in his preface that he was not, and that he worked from earlier accounts handed down by those who were (Luke 1:1-4). Mark and Matthew explain Jewish customs and translate Aramaic for readers who knew neither. John ends by attributing its testimony to an unnamed disciple, in a chapter added after the gospel had already closed.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Do the four gospels contradict each other?</summary><!-- wp:paragraph -->
+<p>Yes, on the genealogies, the date and place of the birth, the day of the crucifixion, the last words, and almost every detail of the resurrection morning. The <a href="/gospels/discrepancies/">discrepancy tables</a> set the texts side by side with chapter and verse, so the reader can check rather than take it on trust.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>What is the synoptic problem?</summary><!-- wp:paragraph -->
+<p>The question of why Matthew, Mark and Luke share whole sentences in the same order. The answer held by most scholars is that Mark was written first and the other two copied him, adding a shared collection of sayings (Q) and material of their own. On any solution the three are not independent witnesses. See <a href="/gospels/synoptic-problem/">the synoptic problem</a>.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Is the Gospel of Thomas a real gospel?</summary><!-- wp:paragraph -->
+<p>It is a real early Christian text: 114 sayings of Jesus with no story, found at Nag Hammadi in 1945 and dated between the late first and mid second century. About half its sayings have parallels in the synoptics. It is not in the canon. This website tests each saying against the Qur’an; see <a href="/gospels/thomas/">the Gospel of Thomas</a>.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
 <!-- wp:group {"className":"ih-aside ih-next","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-aside ih-next"><!-- wp:paragraph {"className":"ih-k"} -->
 <p class="ih-k">Where this leads</p>

@@ -48,7 +48,9 @@ Licensing: Sabon Next LT is a commercial Linotype face; confirm your licence cov
 
 == SEO: "the Islamic Dilemma" ==
 * Create the pillar page at /the-islamic-dilemma/ (slug exactly "the-islamic-dilemma"), give it the "Wide page (tables)" template or the default, and insert the pattern "The Islamic Dilemma, answered (pillar page)". Write its excerpt as the meta description, keyword first, under 160 characters.
-* The theme sets the home title to "The Islamic Dilemma, Answered | <site name>", the pillar title to "The Islamic Dilemma, Answered: Qur'an 5:47 and the Injīl", and outputs meta description, Open Graph, WebSite, Article, BreadcrumbList and FAQPage schema. Change the strings with the injil_help_seo_defaults filter. With Yoast, Rank Math or SEOPress active, the theme outputs none of this; set the same values in the plugin.
+* The theme sets the home title to "The Islamic Dilemma, Answered | <site name>", the pillar title to "The Islamic Dilemma, Answered: Qur'an 5:47 and the Injīl", and outputs meta description and Open Graph tags. Change the strings with the injil_help_seo_defaults filter. With Yoast, Rank Math or SEOPress active, the theme outputs none of this; set the same values in the plugin.
+* Structured data (inc/schema.php): one JSON-LD @graph per page, built from the types Google Search documents that this site has content for. On every page: Organization (name, URL, logo, sameAs), Person (the author; name, URL and profile links from Theme Options > SEO, falling back to the page author), WebSite (with the sitelinks SearchAction on the front page), and a page node typed by what the page is: WebPage, CollectionPage (section indexes, with an ItemList of their entries; archives), ProfilePage (About the author, mainEntity the Person), ContactPage, SearchResultsPage. Below the front page, BreadcrumbList from the page hierarchy. On article pages and posts, Article or BlogPosting with headline, images, author, publisher, dates, word count and section; the 27 gospel sections and the Introduction are isPartOf a Book node for Shafaat's work. Every manuscript figure becomes an ImageObject with contentUrl, caption, creditText, acquireLicensePage (its Commons page), license (read from the caption: Public domain or CC BY) and creator where a photographer is named; the default social image carries the same. Every page with FAQ items (Details blocks styled "FAQ item", or "Short answer" groups) gets a FAQPage. Nodes reference each other by @id. Filter injil_help_schema_graph to change the graph; injil_help_output_schema to turn it off.
+* FAQs: every main page carries six questions and answers written as search queries, under the entries on the section indexes and at the foot of the pillar page, the measure and the composition page; the front page carries six in its FAQ band and the FAQs page twelve. Each feeds that page's FAQPage markup.
 * The keyword appears in the home kicker and lede, the home dilemma section, the first nav item, the first two FAQs, and the footer. Link to /the-islamic-dilemma/ from every new article that touches Qur'an 5:47, taḥrīf or the identity of the Injīl, with varied anchor text.
 * Set a default social image with the injil_help_default_og_image filter.
 
@@ -65,7 +67,7 @@ Appearance > Theme Options is a tabbed page (stored in the injil_help_options op
 * Branding: ornament layer (Rich, Subtle, Off) and the reveal animation; show or hide the footer brandmark; always use the brandmark as favicon even with a Site Icon; custom favicon URL.
 * Sharing: show or hide the share row, on posts and/or pages; which networks, in order; the row's label.
 * Content: lists every starter page with its status, creates missing ones, and rewrites all of them from the theme on demand.
-* SEO: theme SEO output automatic, always on or always off; home title and description; pillar page title; default social image URL.
+* SEO: theme SEO output automatic, always on or always off; home title and description; pillar page title; default social image URL; structured data: author name and URL, profile links (sameAs), organization logo URL.
 The page's CSS and JS live in assets/css/admin.css and assets/js/admin.js; its own colours follow the Colours tab.
 
 == Ornament ==
@@ -86,6 +88,8 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 
 == Changelog ==
 = 3.3.0 =
+* Structured data rebuilt as one JSON-LD graph per page (inc/schema.php): Organization with logo and sameAs, Person, WebSite with sitelinks search, typed page nodes (WebPage, CollectionPage with ItemList, ProfilePage, ContactPage, SearchResultsPage), BreadcrumbList, Article/BlogPosting with images and word count, Book for the gospel sections, ImageObject licence metadata for every manuscript image, FAQPage wherever there are FAQ items. New Theme Options > SEO fields for the author, profile links and logo.
+* Six SEO FAQs on every main page: the pillar page, the measure, the five section indexes and the composition page.
 * KFGQPC Hafs is now applied only through the class ih-quran and is reserved for Qur'anic text; ih-ar alone is generic Arabic in Amiri. Every Qur'anic gloss carries ih-quran, dir="rtl" and lang="ar".
 * Section index pages carry an overview of the part and a pointer to the next; the corrections log explains how corrections work; the resurrection table has notes on reading it.
 * All content is now JSON under inc/data/: the starter pages (pages/*.json), the narrative, the section titles and Introduction, the Qur'anic passages and the Gospel of Thomas sections. The .txt data files and the PHP arrays are gone; the pages render identically.

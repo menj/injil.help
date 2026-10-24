@@ -1,8 +1,8 @@
 <?php
 /**
  * SEO for the target keyword "the Islamic Dilemma".
- * Title, meta description, canonical, Open Graph, and WebSite / BreadcrumbList
- * schema. Every part steps aside when Yoast, Rank Math or SEOPress is active.
+ * Title, meta description, canonical and Open Graph. Structured data is in
+ * inc/schema.php. Every part steps aside when Yoast, Rank Math or SEOPress is active.
  *
  * @package injil-help
  */
@@ -102,79 +102,4 @@ add_action(
 		printf( '<meta name="twitter:card" content="%s">' . "\n", $img ? 'summary_large_image' : 'summary' );
 	},
 	1
-);
-
-/* WebSite and BreadcrumbList schema; Article "about" for the pillar page. */
-add_filter(
-	'injil_help_schema_graph',
-	function ( $graph ) {
-		if ( is_front_page() ) {
-			$graph[] = array(
-				'@type'           => 'WebSite',
-				'@id'             => home_url( '/#website' ),
-				'url'             => home_url( '/' ),
-				'name'            => get_bloginfo( 'name' ),
-				'alternateName'   => 'injil.help',
-				'description'     => injil_help_seo_defaults()['home_description'],
-				'inLanguage'      => get_bloginfo( 'language' ),
-				'about'           => array(
-					'@type' => 'Thing',
-					'name'  => 'The Islamic Dilemma',
-				),
-				'potentialAction' => array(
-					'@type'       => 'SearchAction',
-					'target'      => home_url( '/?s={search_term_string}' ),
-					'query-input' => 'required name=search_term_string',
-				),
-			);
-		}
-		if ( is_singular() && ! is_front_page() ) {
-			$items = array(
-				array(
-					'@type'    => 'ListItem',
-					'position' => 1,
-					'name'     => get_bloginfo( 'name' ),
-					'item'     => home_url( '/' ),
-				),
-			);
-			$post  = get_queried_object();
-			$pos   = 2;
-			foreach ( array_reverse( get_post_ancestors( $post ) ) as $ancestor ) {
-				$items[] = array(
-					'@type'    => 'ListItem',
-					'position' => $pos++,
-					'name'     => get_the_title( $ancestor ),
-					'item'     => get_permalink( $ancestor ),
-				);
-			}
-			$items[] = array(
-				'@type'    => 'ListItem',
-				'position' => $pos,
-				'name'     => wp_strip_all_tags( get_the_title( $post ) ),
-				'item'     => get_permalink( $post ),
-			);
-			$graph[] = array(
-				'@type'           => 'BreadcrumbList',
-				'itemListElement' => $items,
-			);
-		}
-		if ( injil_help_is_pillar() ) {
-			foreach ( $graph as &$node ) {
-				if ( 'Article' === ( $node['@type'] ?? '' ) ) {
-					$node['about']    = array(
-						array(
-							'@type' => 'Thing',
-							'name'  => 'The Islamic Dilemma',
-						),
-						array(
-							'@type' => 'Thing',
-							'name'  => 'Injil',
-						),
-					);
-					$node['keywords'] = 'the Islamic Dilemma, Quran 5:47, Injil, tahrif, the four gospels';
-				}
-			}
-		}
-		return $graph;
-	}
 );
