@@ -75,6 +75,7 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 
 == Changelog ==
 = 3.2.2 =
+* Discrepancy tables: the Gospel of Thomas now has a column on the resurrection table (no account in any row) and a note, and the index page says so.
 * Credits and the Thomas page now also cite the Patterson and Meyer translation (The Complete Gospels) as a second text used for checking; no wording from it is reproduced.
 * The gospels section is now The Five Gospels: Mark, Matthew, Luke, John and Thomas. Titles, intros, footer, hero, 404 and links updated; the front page now lists the Gospel of Thomas. Statements about the four canonical gospels (Irenaeus, Qur'an 5:47, the Diatessaron) are unchanged.
 

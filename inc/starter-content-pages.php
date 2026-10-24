@@ -188,12 +188,12 @@ function injil_help_starter_pages() {
 		array(
 			'path' => 'gospels/discrepancies', 'title' => 'The discrepancy tables', 'excerpt' => 'Genealogies, nativity, Last Supper, crucifixion and resurrection, set side by side with references.',
 			'body' => array(
-				'Each table sets the four gospels side by side, with chapter and verse, and records only what the texts say. Interpretation is kept apart from the table.',
+				'Each table sets the four canonical gospels side by side, with chapter and verse, and records only what the texts say. The Gospel of Thomas has a column too; it is a sayings collection with no narrative, so it is empty wherever the others tell a story, and the table says so. Interpretation is kept apart from the table.',
 				'- <a href="/gospels/discrepancies/resurrection/">The resurrection accounts</a>: who goes to the tomb, who is there, what is said, and where Jesus appears.',
 				'More tables will be added here as they are completed: the genealogies (Matthew 1 and Luke 3), the nativity, the Last Supper and the crucifixion. Every new table is announced in the <a href="/corrections/">corrections log</a> if it changes an existing page.',
 			),
 		),
-		array( 'path' => 'gospels/discrepancies/resurrection', 'title' => 'The resurrection accounts compared', 'template' => 'page-wide', 'pattern' => 'discrepancy-resurrection', 'excerpt' => 'The four resurrection accounts set side by side, with references.' ),
+		array( 'path' => 'gospels/discrepancies/resurrection', 'title' => 'The resurrection accounts compared', 'template' => 'page-wide', 'pattern' => 'discrepancy-resurrection', 'excerpt' => 'The four resurrection accounts set side by side, with references, and the Gospel of Thomas, which has none.' ),
 
 		// Paul of Tarsus.
 		array( 'path' => 'paul', 'title' => 'Paul of Tarsus', 'template' => $section, 'pattern' => 'section-paul', 'excerpt' => 'Paul of Tarsus against the men who knew ʿĪsā ibn Maryam: his letters, the account in Acts, and the Jerusalem church.' ),
