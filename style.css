@@ -200,6 +200,13 @@ p.ih-cite{margin:0;font-size:13px;color:var(--wp--preset--color--muted)}
 .ih-entries-list .ih-entry h3{font-size:26px}
 @media (max-width:700px){.ih-entries-list .ih-entry{display:flex}}
 .ih-aside{border:1.5px solid var(--wp--preset--color--accent-3);border-radius:var(--ih-r-md);padding:18px 22px;max-width:760px;margin-top:var(--wp--preset--spacing--30) !important}
+.ih-aside > * + *{margin-top:8px}
+.ih-next .ih-k{color:var(--wp--preset--color--accent-1)}
+/* Section index: the overview between the head and the entries */
+.ih-overview{max-width:760px;margin-top:var(--wp--preset--spacing--30)}
+.ih-overview h2{font-size:var(--wp--preset--font-size--large);margin-top:var(--wp--preset--spacing--30)}
+.ih-overview h2:first-child{margin-top:0}
+.ih-overview p{margin-top:var(--wp--preset--spacing--10)}
 
 /* FAQs */
 .ih-answers-band{display:block;background:var(--wp--preset--color--accent-5);border-radius:var(--ih-r-lg);padding:clamp(24px,4vw,48px)}

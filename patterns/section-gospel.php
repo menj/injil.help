@@ -33,6 +33,26 @@
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
+<!-- wp:group {"className":"ih-overview","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-overview"><!-- wp:heading -->
+<h2 class="wp-block-heading">What this is</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>A gospel is the story of Jesus told so as to bring out its meaning for faith and for history. This one is told in the light of the revelation given to Muḥammad. The words are Ahmad Shafaat’s, from <em>The Gospel According to Islam</em> (1985), a book about the size of Mark, built on the ninety-three Qur’anic verses and filled out from the New Testament, with the results of critical scholarship kept in view and extensive notes on every passage. The text here follows the arrangement of <em>The Narrative of Jesus, Son of Mary</em>: twenty-seven sections in six chapters, in paragraphs rather than numbered verses, opening with the Opening of the Qur’an and closing with the Qur’an’s own words on the oneness of God, with the Qur’anic passages on Jesus standing in the story under their own headings and the 235 notes running through the whole. Seventy sayings of the Gospel of Thomas, tested against the measure, are placed in the sections they belong to, each with a colour mark and a note.</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2 class="wp-block-heading">How to read it</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>Start with <a href="/gospel-according-to-islam/how-composed/">How this gospel was composed</a>, which sets out every source and every rule, and with the author’s own <a href="/gospel-according-to-islam/introduction/">Introduction</a>, in which he explains why a new gospel is justified and asks the Christian reader to read it as a book from another church. Then read the sections in order; each carries the name of its chapter, the text, its notes at the foot, and links to the previous section, the next and the contents, so the whole can be read through from <a href="/gospel-according-to-islam/1/">section 1</a> to <a href="/gospel-according-to-islam/27/">section 27</a>. A green verse number marks the Qur’an speaking. A raised number leads to a note, and the notes are where the gospel shows its workings: the Qur’anic and New Testament passages behind each sentence, where and why the text departs from a gospel source, and the scholarship that bears on it. The colour marks on the sayings of Thomas are explained on <a href="/gospels/thomas/">the Gospel of Thomas</a>.</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The six chapters</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p><strong>Birth and Childhood</strong> (sections 1 to 4) runs from the family of ʿImrān to the boy in the Temple. <strong>John and the Beginning of the Ministry</strong> (5 to 8) is the Baptist, the baptism and temptation, Capernaum and the Beatitudes. <strong>The Ministry in Galilee</strong> (9 to 13) and <strong>Preaching, Signs and the Disciples</strong> (14 to 18) carry the teaching, the healings, the bird of clay and the table from heaven, the sending of the twelve and the vision. <strong>Jerusalem</strong> (19 to 24) is the entry, the cleansing of the Temple, the questions, the last supper and the promise of the Counsellor. <strong>Arrest, Trial and Aftermath</strong> (25 to 27) is Gethsemane, the trial, the empty tomb and the reports, with the Qur’anic text standing where the gospels have the cross.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
 <!-- wp:group {"className":"ih-entries ih-entries-list ih-tint-gold","layout":{"type":"grid","minimumColumnWidth":"15rem"}} -->
 <div class="wp-block-group ih-entries ih-entries-list ih-tint-gold"><!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
@@ -353,4 +373,12 @@
 <p class="ih-d">A letter to the followers of Paul of Tarsus, in the manner of the Pauline epistles.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"ih-aside ih-next","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-aside ih-next"><!-- wp:paragraph {"className":"ih-k"} -->
+<p class="ih-k">Where this leads</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>Behind every page of the gospel is an apparatus: dates, terms, the works cited and the record of what has been corrected. The next part, <a href="/resources/">Resources</a>, holds it, together with the objections to this website’s case and the replies.</p>
+<!-- /wp:paragraph --></div>
 <!-- /wp:group -->

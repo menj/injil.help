@@ -25,6 +25,23 @@
 <figure class="wp-block-image size-large ih-plate"><a href="https://commons.wikimedia.org/wiki/File:Ann_Arbor%2C_University_of_Michigan_P.Mich.inv._6238_(Papyrus_46)_fol._158r_Eph_6%2C_20%E2%80%93Gal_1%2C_8.jpg"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Ann_Arbor%2C_University_of_Michigan_P.Mich.inv._6238_(Papyrus_46)_fol._158r_Eph_6%2C_20%E2%80%93Gal_1%2C_8.jpg?width=900" alt="Papyrus 46 (c. 200 CE, University of Michigan), an early Greek manuscript of Paul of Tarsus's letters, open at the close of Ephesians and the opening of Galatians" title="Papyrus 46"/></a><figcaption class="wp-element-caption">Papyrus 46, folio 158r: the close of Ephesians and the opening of Galatians. University of Michigan. Public domain. <a href="https://commons.wikimedia.org/wiki/File:Ann_Arbor%2C_University_of_Michigan_P.Mich.inv._6238_(Papyrus_46)_fol._158r_Eph_6%2C_20%E2%80%93Gal_1%2C_8.jpg">Wikimedia Commons</a></figcaption></figure>
 <!-- /wp:image --></div>
 <!-- /wp:group -->
+<!-- wp:group {"className":"ih-overview","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-overview"><!-- wp:heading -->
+<h2 class="wp-block-heading">What this part shows</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>Paul of Tarsus never met ʿĪsā ibn Maryam. He says so himself, and he says that the gospel he preached came to him by a revelation that no one else saw and that he did not learn from the men who had walked with Jesus (Galatians 1:11-17). His letters are the oldest Christian writings that survive, older than any gospel, and they are the source of the doctrines that divide Islam from Christianity: that Jesus was in the form of God, that his death was a sacrifice for sin, that faith in that death and not keeping the law is what saves. This part sets his teaching against the teaching the gospels record, and sets his account of himself against the account of the men who opposed him.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>The pages run from the evidence to the verdict. <a href="/paul/seven-letters/">The seven letters</a> establishes which of the thirteen letters in his name are his, and the rule that every claim here rests on those seven alone. <a href="/paul/acts-galatians/">Acts against Galatians</a> sets his own sworn account of his early years beside Luke’s and shows where they cannot both be right. <a href="/paul/paul-against-jesus/">Paul of Tarsus against Jesus</a> is the centre: the law, salvation, the person of Jesus and the meaning of his death, in the words of each. <a href="/paul/james/">James and the Jerusalem church</a> is the community led by the brother of Jesus, which kept the law and required Paul of Tarsus to prove he was not teaching Jews to abandon it. <a href="/paul/ebionites/">The Ebionites</a> are what became of that community, and what they said of him. <a href="/paul/false-apostles/">The false apostles</a> asks who, in the first Christian quarrel, the phrase fits.</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2 class="wp-block-heading">How to read it</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>Every quotation of Paul of Tarsus on these pages is from the seven undisputed letters, and every quotation of Jesus is from the gospels with chapter and verse; the reader can check both. The Christian reply is given on each page in the form its best scholars give it, and then answered. The position argued is the Islamic one, and the pages say so. A reader who wants the whole case against Paul of Tarsus will find it at <a href="https://apostleofdoom.org">apostleofdoom.org</a>; these pages give the part of it that bears on the Injīl.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
 <!-- wp:group {"className":"ih-entries ih-entries-list ih-tint-red","layout":{"type":"grid","minimumColumnWidth":"15rem"}} -->
 <div class="wp-block-group ih-entries ih-entries-list ih-tint-red"><!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
@@ -99,5 +116,13 @@
 <!-- wp:group {"className":"ih-aside","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-aside"><!-- wp:paragraph -->
 <p>The full case against Paul of Tarsus is set out at <a href="https://apostleofdoom.org">apostleofdoom.org</a>.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"ih-aside ih-next","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-aside ih-next"><!-- wp:paragraph {"className":"ih-k"} -->
+<p class="ih-k">Where this leads</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>If the Christ of the churches is Paul of Tarsus’s, the question is what Jesus was before him. The next part, <a href="/quran/">Jesus in the Qur’an</a>, gives the measure: ninety-three verses on ʿĪsā ibn Maryam, what they affirm, what they deny, and the gospel passages each one confirms or corrects.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
