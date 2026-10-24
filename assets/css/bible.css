@@ -1,0 +1,39 @@
+/*
+ * The Injil: Bible layout for the sections of The Gospel According to Islam.
+ * Running head, section numeral, argument line, verse numbers, two columns and the
+ * reference apparatus at the foot of the text. The layout is chosen under
+ * Appearance > Theme Options > Content (body class ih-gospel-columns, -single, -plain);
+ * the markup is the same in every case. Colours come from the theme tokens.
+ */
+
+/* Running head above the text, as on a printed page */
+.ih-running-head{font-family:var(--ih-sans);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--wp--preset--color--muted);text-align:center !important;border-bottom:1px solid var(--wp--preset--color--accent-6);padding-bottom:8px;margin-bottom:var(--wp--preset--spacing--30)}
+
+/* The text block */
+.ih-bible{font-family:var(--ih-serif);line-height:1.5}
+.ih-bible > p{margin-block:0 .65em}
+.ih-bible .ih-argument{font-style:italic;font-size:var(--wp--preset--font-size--small);color:var(--wp--preset--color--muted);text-align:center !important;hyphens:manual;margin-bottom:var(--wp--preset--spacing--20);column-span:all}
+.ih-bible .ih-chapter-num{float:left;font-family:var(--ih-display);font-size:4em;line-height:.78;margin:.1em .16em 0 0;color:var(--wp--preset--color--accent-2);text-align:start !important}
+.ih-bible h3{font-family:var(--ih-sans);font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--wp--preset--color--accent-1);margin:1.2em 0 .45em;break-after:avoid-column;page-break-after:avoid}
+.ih-bible .ih-v{margin-inline-start:.1em}
+
+/* Two columns on wide screens, with a rule between, as in a reference Bible */
+@media (min-width:900px){
+ .ih-gospel-columns .ih-bible{column-count:2;column-gap:2.6rem;column-rule:1px solid var(--wp--preset--color--accent-6);column-fill:balance}
+ .ih-gospel-columns .ih-bible > p{break-inside:auto}
+ .ih-gospel-columns .ih-apparatus{column-count:2;column-gap:2rem}
+}
+
+/* The notes of the text at its foot, in small type under a rule */
+.wp-block-post-content .ih-apparatus{border-top:1px solid var(--wp--preset--color--accent-6);padding-top:12px;margin-top:var(--wp--preset--spacing--30);margin-bottom:var(--wp--preset--spacing--50)}
+.wp-block-post-content .ih-apparatus li{font-size:14px;line-height:1.45;margin-bottom:.35em;break-inside:avoid;text-align:start}
+.wp-block-post-content .ih-apparatus li::marker{font-family:var(--ih-sans);font-weight:600;color:var(--wp--preset--color--accent-2)}
+
+/* Plain layout: paragraphs only */
+.ih-gospel-plain .ih-bible .ih-v,.ih-gospel-plain .ih-bible .ih-chapter-num,.ih-gospel-plain .ih-running-head{display:none}
+
+/* Print: always two columns */
+@media print{
+ .ih-bible{column-count:2;column-gap:2rem}
+ .ih-apparatus{column-count:2}
+}

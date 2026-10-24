@@ -36,6 +36,8 @@ Whichever is chosen, document the server settings a site needs (`max_input_vars`
 
 **Arabic beside the English.** The Arabic of the commentaries is public domain and already in hand (about 200,000 words). Ship it as separate JSON files loaded on demand and show it paragraph by paragraph behind a toggle, in Amiri, with the Qur'anic lemmas in KFGQPC Hafs. The same for the gospel's Qur'anic passages.
 
+**Red-letter edition.** Mark the words of Jesus in the narrative data with a span token (`[r]` … `[/r]`) and set them in rubric, as many printed Bibles do, with a switch beside the layout option; the parser already carries the verse and reference tokens the feature would sit beside.
+
 **Parallel view.** For a verse, show the Qur'an, the gospel section and the commentaries side by side; for a gospel section, the synoptic parallels (Matthew, Mark, Luke, John, Thomas) in columns. The data for both exists.
 
 **Glossary tooltips.** The glossary is data; mark its terms in the text on first use per page and show the definition on hover and focus.
@@ -64,11 +66,11 @@ Whichever is chosen, document the server settings a site needs (`max_input_vars`
 
 **Hadith.** A page of the Prophet's reports about Jesus from the Ṣaḥīḥ collections (his description, the descent, "the prophets are brothers") in Arabic (Noto Naskh) and English, measured and cross-linked to the commentaries that cite them.
 
-**Infancy and apocryphal gospels.** The Infancy Gospel of Thomas and the Arabic Infancy Gospel (the clay birds, the cradle), the Gospel of the Hebrews and the Ebionites, the Diatessaron: each read against the measure as the Gospel of Thomas was, with a set-aside page.
+**More apocryphal gospels.** The Infancy Gospel of James and the Infancy Gospel of Thomas are woven in since 3.5.0 (sections 1, 2, 4, 5, 14) and the borrowing charge is answered. Still to do: the Arabic Infancy Gospel (the cradle speech), the Gospel of the Hebrews and the Ebionites, the Diatessaron, each read against the measure with a set-aside page; and a set-aside page for the infancy gospels' rejected items, which are at present only described in the section notes.
 
 **Paul of Tarsus.** A table of Acts against the letters on every point where they differ; Marcion and the first canon; the Jerusalem church after James.
 
-**The four gospels.** A harmony table mapping each section of The Gospel According to Islam to its source verses in the four gospels and Thomas, generated from the notes; a page on the manuscripts themselves with the plates already used.
+**The five gospels.** A harmony table mapping each section of The Gospel According to Islam to its source verses in the four gospels and Thomas, generated from the notes; a manuscripts page for the canonical gospels with the plates already used, to stand beside the extracanonical table added in 3.5.0; rerun the sayings-order correlation from Koester's list with the figures in the repository, since the page reports the note's figures and says so.
 
 **Responses.** Keep answering named articles and videos on the responses page as they appear, in the same form (claim stated as made, then answered), and grow the FAQs from search queries that reach the site.
 
@@ -80,6 +82,7 @@ Whichever is chosen, document the server settings a site needs (`max_input_vars`
 
 Git Updater reads the theme header and offers the release whose tag matches `Version:`. After the update, the first load of any admin screen rewrites the starter pages whose text changed, keeps pages you edited (marked "edited, kept on update" on the Content tab), keeps no revisions, and flushes rewrite rules only if permalinks had to be set. "Update all pages from the theme" replaces every page, edited ones included, after a confirmation. Take a database backup before updating; open the Content tab once after.
 
+- **3.5.0.** Nine new pages (the two full texts of Thomas, the sayings-order test, four discrepancy tables, the manuscripts table and the borrowing page); the Content tab lists 175. The first part of the site is renamed The Five Gospels; if you created a category named The Four Gospels, rename it. Gospel sections 1, 2, 4, 5 and 14 gain the infancy-gospel items and are rewritten on the first admin load unless you edited them. The pillar page is extended, not replaced; an edited copy is kept and must be updated by hand or with "Update all pages from the theme". All 27 gospel sections are rewritten in the Bible layout (sections 25 to 27 in substance) and are replaced on the first admin load unless edited; verse anchors (`#v12` on a section page, `#q4-157` for a Qur'anic verse) resolve again; choose two columns, one column or plain under Theme Options › Content › Gospel text layout.
 - **3.4.0.** 93 new pages (the commentaries and the secular-form page); the Content tab lists 166. Fourteen gospel sections carry the folded commentaries and are large (section 2 about 560 KB): use a page cache; raise `max_input_vars` and `post_max_size` if those sections are to be saved in the editor. Sections you edited before 3.4.0 do not receive the commentaries until rewritten. Kagnue now sets the section index and home section titles and the large numerals. Rolling back leaves the new pages in place; delete them from the Content tab.
 - **3.3.0.** Content moved to JSON under `inc/data/`; nineteen article pages, the indexes, the composition page and the gospel sections rewritten; the hash check that protects edited pages begins here; the share row appears under every post and page (Theme Options › Sharing); the structured data is one graph per page and stops when an SEO plugin is active; Parallax depth added under Branding.
 - **3.2.1.** First release to rewrite starter pages on update; edits were replaced in this version only.

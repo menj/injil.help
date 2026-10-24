@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'INJIL_HELP_VERSION', '3.4.0' );
+define( 'INJIL_HELP_VERSION', '3.5.0' );
 
 require_once get_stylesheet_directory() . '/inc/options.php';
 require_once get_stylesheet_directory() . '/inc/starter-content.php';
@@ -22,6 +22,9 @@ add_action(
 	'wp_enqueue_scripts',
 	function () {
 		wp_enqueue_style( 'injil-help', get_stylesheet_uri(), array(), INJIL_HELP_VERSION );
+		if ( is_singular() && false !== strpos( (string) get_post_field( 'post_content', get_queried_object_id() ), 'ih-bible' ) ) {
+			wp_enqueue_style( 'injil-help-bible', get_stylesheet_directory_uri() . '/assets/css/bible.css', array( 'injil-help' ), INJIL_HELP_VERSION );
+		}
 		if ( 'off' !== injil_help_get_option( 'ornament' ) ) {
 			wp_enqueue_style( 'injil-help-ornament', get_stylesheet_directory_uri() . '/assets/css/ornament.css', array( 'injil-help' ), INJIL_HELP_VERSION );
 			if ( injil_help_get_option( 'animate' ) || 'off' !== injil_help_get_option( 'parallax' ) ) {

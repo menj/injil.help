@@ -1,9 +1,9 @@
 <?php
 /**
- * Title: Section index: The Four Gospels
+ * Title: Section index: The Five Gospels
  * Slug: injil-help/section-gospels
  * Categories: injil-help
- * Description: Full index page for The Four Gospels. Insert on the /gospels/ page with the Section index template.
+ * Description: Full index page for The Five Gospels. Insert on the /gospels/ page with the Section index template.
  */
 ?>
 <!-- wp:group {"className":"ih-section-head","layout":{"type":"default"}} -->
@@ -16,10 +16,10 @@
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:heading {"level":1} -->
-<h1 class="wp-block-heading">The Four Gospels</h1>
+<h1 class="wp-block-heading">The Five Gospels</h1>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-intro"} -->
-<p class="ih-intro">Four anonymous books, who wrote them, when, from what sources and for whom, and where they disagree.</p>
+<p class="ih-intro">Five books, Mark, Matthew, Luke, John and Thomas: who wrote them, when, from what sources and for whom, and where they disagree.</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"sizeSlug":"large","linkDestination":"custom","className":"ih-plate"} -->
 <figure class="wp-block-image size-large ih-plate"><a href="https://commons.wikimedia.org/wiki/File:Manchester%2C_John_Rylands_Library_Ms_Greek_P_457_(Papyrus_52)_recto_John_18%2C_31-33.jpg"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Manchester%2C_John_Rylands_Library_Ms_Greek_P_457_(Papyrus_52)_recto_John_18%2C_31-33.jpg?width=900" alt="Papyrus 52 (P52, c. 125 CE): the oldest known fragment of a gospel, John 18:31-33 in Greek, John Rylands Library, Manchester" title="Papyrus 52 (P52)"/></a><figcaption class="wp-element-caption">Papyrus 52, John 18:31-33, the oldest known fragment of a gospel. John Rylands Library, Manchester. Public domain. <a href="https://commons.wikimedia.org/wiki/File:Manchester%2C_John_Rylands_Library_Ms_Greek_P_457_(Papyrus_52)_recto_John_18%2C_31-33.jpg">Wikimedia Commons</a></figcaption></figure>
@@ -97,7 +97,7 @@
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Outside the four</p>
+<p class="ih-k">Gospel · V</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/gospels/thomas/">The Gospel of Thomas</a></h3>
@@ -133,7 +133,7 @@
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 <!-- wp:heading -->
-<h2 class="wp-block-heading">Questions about the four gospels</h2>
+<h2 class="wp-block-heading">Questions about the gospels</h2>
 <!-- /wp:heading -->
 <!-- wp:details {"className":"is-style-faq"} -->
 <details class="wp-block-details is-style-faq"><summary>Who wrote the four gospels?</summary><!-- wp:paragraph -->

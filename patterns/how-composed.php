@@ -22,11 +22,37 @@
 <h2 class="wp-block-heading">The base text: Ahmad Shafaat, 1985</h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>The words of the gospel are those of Dr. Ahmad Shafaat, <em>The Gospel According to Islam</em> (New York: Vantage Press, 1985). Shafaat set himself a clear task. The Qur'an has ninety-three verses that refer to Jesus, and between them they speak to almost every part of his story: his family, birth and childhood, the nature of his person and his titles, his signs and his message, his rejection by the Jews, his death and exaltation, and the meaning of his work for Jewish history and for the history of the world. Shafaat took that outline and filled it out with material drawn mainly from the New Testament, sometimes changed to agree with the Qur'anic revelation, to form a gospel of about the size of Mark. He then added extensive notes to explain and support the text, with references to the Qur'an and the New Testament throughout, and he kept the results and debates of modern critical research in view as he wrote. His introduction, in which he explains why a new gospel is justified and asks the Christian reader to read it as he would read a book from another church, is given in full on the <a href="/gospel-according-to-islam/introduction/">Introduction</a> page.</p>
+<p>The words of the gospel are those of Dr. Ahmad Shafaat, <em>The Gospel According to Islam</em> (New York: Vantage Press, 1985). Shafaat set himself a clear task. He counted ninety-three verses of the Qur'an that refer to Jesus, and between them they speak to almost every part of his story: his family, birth and childhood, the nature of his person and his titles, his signs and his message, his rejection by the Jews, his death and exaltation, and the meaning of his work for Jewish history and for the history of the world. Shafaat took that outline and filled it out with material drawn mainly from the New Testament, sometimes changed to agree with the Qur'anic revelation, to form a gospel of about the size of Mark. He then added extensive notes to explain and support the text, with references to the Qur'an and the New Testament throughout, and he kept the results and debates of modern critical research in view as he wrote. His introduction, in which he explains why a new gospel is justified and asks the Christian reader to read it as he would read a book from another church, is given in full on the <a href="/gospel-according-to-islam/introduction/">Introduction</a> page.</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph -->
-<p>Shafaat's book has twenty-seven chapters. On this website they are the twenty-seven sections, in his order, under his titles. His wording was not rewritten. The only changes to his text are corrections of scanning errors in the copy from which it was typed: stray marks, broken references such as "Micah 5:2" and "Mark 11:1-11", and "Bethsaida!" for Bethsaida. In the notes, "Paul" is written "Paul of Tarsus", as on every other page of this website. Every correction of this kind is listed in the <a href="/corrections/">corrections log</a>.</p>
+<p>Shafaat's book has twenty-seven chapters. On this website they are the twenty-seven sections, in his order, under his titles, with two titles changed where the text changed. His text is the base of this gospel, not its rule: the rule is <a href="/method/">the measure</a>, and where his text or his notes departed from the Qur'an they have been changed. Scanning errors in the copy from which it was typed were corrected (stray marks, broken references such as "Micah 5:2" and "Mark 11:1-11", "Bethsaida!" for Bethsaida), and in the notes "Paul" is written "Paul of Tarsus", as on every other page of this website; those corrections are in the <a href="/corrections/">corrections log</a>. The departures of substance are listed here.</p>
 <!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Where this gospel departs from Shafaat</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>Shafaat wrote in 1985 as a historian as much as a believer, and in a few places his reconstruction follows his own reading of the sources rather than the Qur'an. This website takes the Qur'an as the measure of his text as of every other, and has changed the following. Each change is marked in the notes of the section where it falls.</p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li><strong>The end of the story</strong> (<a href="/gospel-according-to-islam/26/">sections 26</a> and <a href="/gospel-according-to-islam/27/">27</a>). Shafaat proposed that a namesake, Jesus Barabbas, was crucified by a clerical error, that Jesus was released, walked to Emmaus and Galilee, fell ill and died, and that the reports of his rising grew from his escape. The text now follows the Qur'an: they did not kill him, nor crucify him, but it was made to appear so to them, and God raised him to Himself (4:157-158; 3:55), with the classical commentators' reading that another was seen in his likeness, no name given for him, the empty tomb as Mark leaves it (16:1-8), the reports that went round as the sources record them, and his return before the Hour (4:159; 43:61). The notes to the end of the story are this website's.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><strong>The Messiah.</strong> Shafaat read the Qur'an's "his name will be the Messiah" (3:45) as a reserve about the title, and his notes have Jesus "exploring" and "resolving" that he was the Messiah through a dream (his notes 19, 127, 129, 130, 132, 136, 148). The Qur'an gives the title without reserve, from the angel's mouth, and those notes are rewritten: the reticence before the crowds is prudence, not doubt.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><strong>The signs.</strong> Shafaat's note on the healing of Simon's mother-in-law called a miracle "as much a product of the faith of the miracle worker as of his subjects". The Qur'an attributes every sign of Jesus to God's permission (3:49; 5:110), and the note (74) says so. The notes on the temptation (60, 61) no longer read the devil's words as thoughts in the mind of Jesus.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><strong>The chronology.</strong> Shafaat dated the birth by Luke's census and so made Jesus "approaching forty" at his baptism. The text reads "about thirty" (Luke 3:23), in step with the website's <a href="/resources/timeline/">timeline</a>, and note 55 gives both datings.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><strong>Words for God.</strong> Where Shafaat's own composition had Jesus say "my heavenly Father" (section 10), and where he kept Mark's "only the Father" (section 24), the text reads "the Lord", as the Qur'an has Jesus speak (7:187; 19:36); the note says what Mark reads. Quotations of the gospels elsewhere, such as the Beatitudes, keep their wording. "Through thy seed I shall save the world" (section 3) is restored to Genesis 22:18 as it stands.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><strong>Tone.</strong> Shafaat's phrase "a messianic trinity" for the three figures Israel awaited (note 33), his note comparing the difference over Muhammad to the difference over the pope (22), and his note on what Christianity "lacked" (176) are rewritten in the plain terms this website uses everywhere. The compiler's footnote on the substitute at the cross, on the Qur'anic passages, is aligned with the commentators: the Qur'an names no one.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
 <!-- wp:heading -->
 <h2 class="wp-block-heading">The arrangement: The Narrative of Jesus, Son of Mary</h2>
 <!-- /wp:heading -->
@@ -50,7 +76,7 @@
 <li><strong>Jerusalem</strong> (sections 19 to 24): the rich man and the request of James and John; the entry into Jerusalem and the cleansing of the temple; the questions in the temple; the vineyard; the last supper and the Man of perfection; the hour and the promise of the Counsellor.</li>
 <!-- /wp:list-item -->
 <!-- wp:list-item -->
-<li><strong>Arrest, Trial and Aftermath</strong> (sections 25 to 27): Gethsemane, the arrest and Peter's denial; the trial, Barabbas and the road to Emmaus; the empty tomb, the death of Jesus and the reports.</li>
+<li><strong>Arrest, Trial and Aftermath</strong> (sections 25 to 27): Gethsemane, the arrest and Peter's denial; the trial, Barabbas and the raising of Jesus; the empty tomb, the reports and the return.</li>
 <!-- /wp:list-item --></ol>
 <!-- /wp:list -->
 <!-- wp:paragraph -->
@@ -69,7 +95,7 @@
 <h2 class="wp-block-heading">The notes</h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>There are 235 notes, and they are Shafaat's own. They are numbered in one sequence through the whole narrative, so that note 127 means the same thing on every page, and each note is printed at the foot of the section in which its marker appears. A raised number in the text leads to the note; an arrow at the end of the note leads back. Where a note refers to another ("see note 19", "notes 49 and 50"), the reference is a link to that note on its own page. The notes do three things: they give the Qur'anic and New Testament passages behind each sentence of the text; they explain where and why Shafaat departed from a gospel source; and they set out the critical scholarship that bears on a passage, with the dates and manuscripts that matter. They are the apparatus of the gospel, and a reader who wants to know why a sentence reads as it does should start there.</p>
+<p>There are 237 notes. Most are Shafaat's own; those this website rewrote are listed above, with the reason, and the notes to the last three sections are the website's. Each note is printed at the foot of the text of the section in which its marker appears, in small type under a rule, as in a reference Bible, and numbered from 1 on each page. A raised number in the text leads to the note; an arrow at the end of the note leads back. Where a note refers to another ("see note 19", "notes 49 and 50"), the reference is a link to that note on its own page. The notes do three things: they give the Qur'anic and New Testament passages behind each sentence of the text; they explain where and why Shafaat departed from a gospel source; and they set out the critical scholarship that bears on a passage, with the dates and manuscripts that matter. They are the apparatus of the gospel, and a reader who wants to know why a sentence reads as it does should start there.</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading -->
 <h2 class="wp-block-heading">The Gospel of Thomas</h2>
@@ -147,7 +173,7 @@
 <!-- /wp:details -->
 <!-- wp:details {"className":"is-style-faq"} -->
 <details class="wp-block-details is-style-faq"><summary>What was changed in Shafaat’s text?</summary><!-- wp:paragraph -->
-<p>Only scanning errors in the copy it was typed from: stray marks, broken references such as “Micah 5:2” and “Mark 11:1-11”, and “Bethsaida!” for Bethsaida. “Paul” in the notes is written “Paul of Tarsus”. His wording was not otherwise rewritten, and every correction is in the <a href="/corrections/">corrections log</a>.</p>
+<p>Scanning errors in the copy it was typed from, listed in the <a href="/corrections/">corrections log</a>; “Paul” in the notes written “Paul of Tarsus”; and the departures listed under “Where this gospel departs from Shafaat” above, where his text or notes conflicted with the Qur’an as the measure: chiefly the end of the story, which now follows 4:157-158 and 3:55, the notes on the Messiah and on the signs, and the chronology of the baptism. Everything else is his.</p>
 <!-- /wp:paragraph --></details>
 <!-- /wp:details -->
 <!-- wp:details {"className":"is-style-faq"} -->

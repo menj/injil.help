@@ -5,8 +5,9 @@
  * The pages are data, kept as JSON in inc/data/pages/, one file per part of the
  * site. Each entry has "path", "title" and "excerpt", and either "pattern" (the
  * block pattern of that slug supplies the content) or "body" (lines of the compact
- * markup described in injil_help_markup_to_blocks()); "template" names a page
- * template. The 27 sections of The Gospel According to Islam and the page of
+ * markup described in injil_help_markup_to_blocks()); "body_file" names a JSON
+ * file in inc/data/ whose list of lines is appended to "body" (the full texts of
+ * the Gospel of Thomas are kept that way); "template" names a page template. The 27 sections of The Gospel According to Islam and the page of
  * Qur'anic passages are built from their own data files and spliced in here.
  *
  * @package injil-help
@@ -24,7 +25,21 @@ function injil_help_pages_file( $name ) {
 		return array();
 	}
 	$rows = json_decode( (string) file_get_contents( $file ), true );
-	return is_array( $rows ) ? $rows : array();
+	if ( ! is_array( $rows ) ) {
+		return array();
+	}
+	foreach ( $rows as &$row ) {
+		if ( ! empty( $row['body_file'] ) ) {
+			$lines = injil_help_data_file( (string) $row['body_file'] );
+			if ( ! $lines ) {
+				return array(); // a missing or malformed text file fails the whole page file, so nothing half-made is published
+			}
+			$row['body'] = array_merge( array_values( (array) ( $row['body'] ?? array() ) ), array_values( $lines ) );
+			unset( $row['body_file'] );
+		}
+	}
+	unset( $row );
+	return $rows;
 }
 
 function injil_help_starter_pages() {

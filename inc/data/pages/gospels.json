@@ -1,10 +1,10 @@
 [
     {
         "path": "gospels",
-        "title": "The Four Gospels",
+        "title": "The Five Gospels",
         "template": "page-section",
         "pattern": "section-gospels",
-        "excerpt": "Mark, Matthew, Luke and John examined: authorship, sources, dates and discrepancies."
+        "excerpt": "Mark, Matthew, Luke, John and Thomas examined: authorship, sources, dates and discrepancies."
     },
     {
         "path": "gospels/mark",
@@ -124,22 +124,52 @@
             "@consensus",
             "The Gospel of Thomas is a collection of 114 sayings attributed to Jesus. It has no birth story, no miracles, no arrest, no crucifixion and no resurrection. Its opening line names the writer as Didymos Judas Thomas, and the name is a claim of authority, not evidence of authorship.",
             "## Manuscripts",
-            "The text survives complete only in Coptic, in a codex found at Nag Hammadi in Egypt in 1945 and copied in the fourth century. Three Greek fragments from Oxyrhynchus, copied around 200 CE, show that the work is older than the Coptic copy.",
+            "The text survives complete only in Coptic, in Nag Hammadi Codex II, tractate 2, found in Egypt in 1945 and copied in the fourth or fifth century. Three Greek manuscripts from Oxyrhynchus show that the work is older than the Coptic copy: P.Oxy. 1 (late second or early third century) has most of sayings 26-30 and 77 and sayings 31-33; P.Oxy. 654 (middle or late third century) has the prologue and sayings 1-7; and P.Oxy. 655 (third century) has parts of sayings 24 and 36-39. See <a href=\"/resources/manuscripts/\">the manuscripts of the extracanonical gospels</a>.",
             "## Date and sources",
-            "Scholars date the work anywhere from the late first century to the middle of the second, and they divide on whether it depends on the canonical gospels or preserves independent tradition. About half its sayings have a parallel in Matthew, Mark or Luke. The rest are unique to Thomas, and many carry an ascetic and mystical tone that the Qur’an does not share.",
+            "Scholars date the work anywhere from the middle of the first century to the middle of the second; Peter Kirby’s survey at Early Christian Writings gives 50 to 140 CE. Ron Cameron places it between the mid-first and the late second century, and thinks a late first-century date likelier if it began as a freestanding collection of sayings. Stephen Patterson argues for about 70 to 80 CE, with the present form coming from eastern Syria, where the Judas Thomas tradition flourished. The first writer to name the work beyond doubt is Hippolytus of Rome (writing 222 to 235 CE), who quotes a variant of saying 4.",
+            "Scholars divide on whether it depends on the canonical gospels. Patterson argues that it reflects a parallel and separate tradition, as does Stevan Davies, from the different order of the sayings; Cameron holds that dependence has not been convincingly shown. A statistical test of the order of the parallel sayings finds no significant correlation with Matthew, Mark, Luke or Q; it is set out on <a href=\"/gospels/thomas/correlation/\">its own page</a>. Cameron adds that the text was unstable in transmission, since the Greek copies and the Coptic differ. About half its sayings have a parallel in Matthew, Mark or Luke. The rest are unique to Thomas, and many carry an ascetic and mystical tone that the Qur’an does not share.",
             "@minority",
-            "A minority of scholars hold that Thomas preserves sayings older than the canonical gospels. Others, such as Nicholas Perrin, argue that it was composed from them and from a harmony of the four, the Diatessaron.",
+            "A minority of scholars hold that Thomas preserves sayings older than those in the canonical gospels. On the other side, Nicholas Perrin argues that it was composed from Tatian’s Diatessaron, the second-century harmony of the four, and Mark Goodacre that it shows signs of Matthew’s and Luke’s own editing; both answer the argument from the order of the sayings, and <a href=\"/gospels/thomas/correlation/\">the correlation page</a> sets out their reply beside the test.",
             "## How it is used here",
-            "The sayings of Thomas are not set out on a page of their own. Those that agree with the Qur’an as the measure, and those that are beyond it or unclear, are woven into the sections of <a href=\"/gospel-according-to-islam/\">The Gospel According to Islam</a>, each with its saying number, a colour mark and a note. 44 sayings that conflict with the Qur’an or only repeat another are listed, with the reason for each, on <a href=\"/gospels/thomas/set-aside/\">the page of sayings set aside</a>.",
+            "The full text is on its own page, in <a href=\"/gospels/thomas/sayings/\">Mark Mattison’s public-domain translation</a> and in <a href=\"/gospels/thomas/sayings-patterson-meyer/\">the Patterson and Meyer translation</a>. Those sayings that agree with the Qur’an as the measure, and those that are beyond it or unclear, are woven into the sections of <a href=\"/gospel-according-to-islam/\">The Gospel According to Islam</a>, each with its saying number, a colour mark and a note. 44 sayings that conflict with the Qur’an or only repeat another are listed, with the reason for each, on <a href=\"/gospels/thomas/set-aside/\">the page of sayings set aside</a>.",
             "## The colour marks",
             "- [agree] Agrees with the Qur’an as the measure.",
             "- [beyond] Beyond the measure: the Qur’an says nothing either way. Included, and marked.",
             "- [unclear] Unclear: the text or its sense is uncertain. Included, and marked.",
             "## Sources",
             "- Thomas O. Lambdin (trans.), “The Gospel of Thomas”, in <em>The Nag Hammadi Library in English</em>, ed. James M. Robinson, 3rd ed. (Leiden: E. J. Brill, 1988). Saying numbers here follow this edition; the wording used in the chapters is our own digest of it.",
+            "- Mark M. Mattison (trans.), <em>The Gospel of Thomas</em>, public domain, gospels.net; and the manuscript information at gospels.net/manuscript. Printed in full on <a href=\"/gospels/thomas/sayings/\">its own page</a>.",
+            "- Stephen Patterson and Marvin Meyer (trans.), “The Gospel of Thomas”, in Robert J. Miller (ed.), <em>The Complete Gospels: Annotated Scholars Version</em> (Polebridge Press, 1992, 1994). Printed in full, with permission, on <a href=\"/gospels/thomas/sayings-patterson-meyer/\">its own page</a>.",
+            "- “Correlation Analysis” of the order of sayings in the Gospel of Thomas, a statistical note on the order of the parallel sayings, using Helmut Koester’s list of parallels; with R. McL. Wilson, <em>Studies in the Gospel of Thomas</em> (London: Mowbray, 1960), and Stephen J. Patterson, <em>The Gospel of Thomas Within the Development of Early Christianity</em> (Claremont dissertation, 1988).",
+            "- Peter Kirby, “Gospel of Thomas”, <em>Early Christian Writings</em>, earlychristianwritings.com/thomas.html, which summarises the manuscripts, the dating and the debate over independence, citing Ron Cameron, Stephen Patterson and Stevan Davies.",
             "- Helmut Koester, <em>Ancient Christian Gospels</em>.",
             "- Nicholas Perrin, <em>Thomas and Tatian</em>."
         ]
+    },
+    {
+        "path": "gospels/thomas/correlation",
+        "title": "Does Thomas depend on the synoptic gospels? The sayings-order test",
+        "template": "page-wide",
+        "pattern": "thomas-correlation",
+        "excerpt": "A statistical test of whether the order of the parallel sayings in the Gospel of Thomas follows their order in Matthew, Mark, Luke or Q."
+    },
+    {
+        "path": "gospels/thomas/sayings",
+        "title": "The Gospel of Thomas: full text",
+        "excerpt": "All 114 sayings of the Gospel of Thomas in the public-domain translation by Mark M. Mattison.",
+        "body": [
+            "The full text of the Gospel of Thomas in the translation by Mark M. Mattison, based on the Coptic text of Nag Hammadi Codex II, 2. Square brackets mark gaps in the manuscript, round brackets mark words added for sense, and slashes mark a correction of a scribal error. This website’s own digest of each saying, with colour marks and notes, is in <a href=\"/gospel-according-to-islam/\">The Gospel According to Islam</a>. For the date, the manuscripts and the colour marks, see <a href=\"/gospels/thomas/\">the introduction to Thomas</a>. A second translation is on <a href=\"/gospels/thomas/sayings-patterson-meyer/\">its own page</a>."
+        ],
+        "body_file": "thomas-mattison"
+    },
+    {
+        "path": "gospels/thomas/sayings-patterson-meyer",
+        "title": "The Gospel of Thomas: Patterson and Meyer translation",
+        "excerpt": "All 114 sayings of the Gospel of Thomas in the Patterson and Meyer translation, used with permission.",
+        "body": [
+            "The full text of the Gospel of Thomas in the translation by Stephen Patterson and Marvin Meyer, used with permission. Square brackets mark words missing or damaged in the manuscript; round brackets mark words added for sense. The public-domain translation by Mark M. Mattison is on <a href=\"/gospels/thomas/sayings/\">its own page</a>."
+        ],
+        "body_file": "thomas-patterson-meyer"
     },
     {
         "path": "gospels/thomas/set-aside",
@@ -193,7 +223,7 @@
             "- [notneeded] <strong>Thomas 93.</strong> Do not give what is holy to dogs or throw pearls to swine. (Compare Matthew 7:6.) Parallel to Matthew 7:6. Not needed.",
             "- [conflict] <strong>Thomas 100.</strong> Shown a gold coin and told Caesar demands taxes, Jesus says to give Caesar what is Caesar’s, God what is God’s, and to him what is his. (Compare Mark 12:13-17.) The coin and Caesar (Mark 12:13-17). Thomas adds “give me what is mine”, which sets Jesus beside God.",
             "- [conflict] <strong>Thomas 101.</strong> Whoever does not hate father and mother as Jesus does cannot be his disciple, and whoever does not love them as he does likewise. His true mother gave him life. Hate father and mother “as I do”. See saying 55 and Qur’an 17:23.",
-            "- [conflict] <strong>Thomas 105.</strong> Whoever knows the father and the mother will be called the son of a harlot. Whoever knows the father and the mother will be called the son of a harlot. The Qur’an clears Maryam of any such charge (19:28-33; 4:156).",
+            "- [conflict] <strong>Thomas 105.</strong> Whoever knows the father and the mother will be called the son of a harlot. The Qur’an clears Maryam of any such charge (19:28-33; 4:156).",
             "- [notneeded] <strong>Thomas 106.</strong> When you make the two one you become sons of man, and when you tell the mountain to move it will move. (Compare Matthew 17:20.) As in saying 48. Not needed.",
             "- [conflict] <strong>Thomas 108.</strong> Whoever drinks from Jesus’ mouth will become like him, and what is hidden will be revealed. Whoever drinks from Jesus’ mouth will become like him, and he will become that person. The Qur’an says ʿĪsā is a man, like Adam (3:59).",
             "- [conflict] <strong>Thomas 109.</strong> The kingdom is like a man whose field hides treasure that he does not know about. His son sells the field. The buyer finds the treasure and lends money at interest. (Compare Matthew 13:44.) The hidden treasure ends with the buyer lending at interest. The Qur’an forbids it (2:275), and Matthew 13:44 has no such ending.",
@@ -217,6 +247,7 @@
             "Karl Lachmann observed in 1835 that Matthew and Luke agree in order only where they agree with Mark, and the conclusion that Mark is the middle term, used by both, has held the field since Heinrich Julius Holtzmann set it out in 1863. The supporting arguments are cumulative. Mark’s Greek is rougher, and it is easier to see Matthew and Luke polishing it than Mark roughening theirs. Mark’s hard sayings are softened by the other two, not the reverse: Jesus “could do no deed of power” in Nazareth (Mark 6:5) becomes “did not do many” (Matthew 13:58); “Why do you call me good?” (Mark 10:18) becomes “Why do you ask me about what is good?” (Matthew 19:17); Mark’s Jesus does not know the day or the hour (13:32), and some manuscripts of Matthew drop the words “nor the Son”. Matthew and Luke each add what Mark lacks, a birth story and resurrection appearances, and add different ones. An abbreviator who had Matthew and Luke in front of him and left out the Lord’s Prayer and the resurrection appearances is harder to imagine than two editors who supplied them.",
             "## Q",
             "If Matthew and Luke each used Mark, the double tradition needs a source too, since neither seems to have known the other’s special material or the other’s order for the shared sayings. Christian Hermann Weisse proposed in 1838 that they drew on a lost collection of sayings; it has been called Q, from German <em>Quelle</em>, since the 1890s. The Gospel of Thomas, found at Nag Hammadi in 1945, showed that a gospel consisting only of sayings was a real literary form (see <a href=\"/gospels/thomas/\">the Gospel of Thomas</a>). No copy of Q survives, and its wording is reconstructed from the places where Matthew and Luke agree. B. H. Streeter’s four-source hypothesis of 1924 (Mark, Q, M and L) remains the standard textbook account.",
+            "Q is reconstructed by comparing Matthew and Luke, and is numbered by Luke’s verses. In the reconstruction in <em>The Critical Edition of Q</em>, which is the base of Mark M. Mattison’s public-domain translation at gospels.net, it holds the preaching of John the Baptist and the temptation (Q 3-4), the beatitudes and the love of enemies (Q 6), the centurion’s servant (Q 7), the instructions for the mission (Q 10), the Lord’s Prayer and “ask, seek, knock” (Q 11), the woes on the Pharisees (Q 11), the sayings on anxiety (Q 12), the mustard seed and the yeast (Q 13), the great dinner (Q 14), the lost sheep (Q 15) and the coming of the Son of Humanity (Q 17). It is almost all sayings, with little story. The Gospel of Thomas is also a collection of sayings, and about half of its sayings have parallels in the gospels, which is one reason Thomas and Q are often read together.",
             "@minority",
             "A minority of scholars reject Q. The Farrer hypothesis, developed by Austin Farrer, Michael Goulder and Mark Goodacre, holds that Luke used Matthew as well as Mark, which accounts for the double tradition without a lost document and explains the “minor agreements” where Matthew and Luke agree against Mark in Markan passages. The older Griesbach or Two-Gospel hypothesis, revived by William Farmer, holds that Matthew was first, that Luke used Matthew, and that Mark abbreviated both. A few scholars still defend the independence of the three, but almost none who work on the texts themselves.",
             "## What every solution has in common",
@@ -227,7 +258,8 @@
             "- Mark Goodacre, <em>The Synoptic Problem: A Way Through the Maze</em>.",
             "- B. H. Streeter, <em>The Four Gospels: A Study of Origins</em> (1924).",
             "- Bart Ehrman, <em>The New Testament: A Historical Introduction to the Early Christian Writings</em>, chapters on the synoptic problem.",
-            "- E. P. Sanders and Margaret Davies, <em>Studying the Synoptic Gospels</em>."
+            "- E. P. Sanders and Margaret Davies, <em>Studying the Synoptic Gospels</em>.",
+            "- James M. Robinson, Paul Hoffmann and John S. Kloppenborg (eds.), <em>The Critical Edition of Q</em> (Minneapolis: Fortress Press, 2000), and Mark M. Mattison’s public-domain translation of Q at gospels.net/quelle."
         ]
     },
     {
@@ -236,11 +268,15 @@
         "excerpt": "Genealogies, nativity, Last Supper, crucifixion and resurrection, set side by side with references.",
         "body": [
             "@consensus",
-            "The four gospels disagree with one another at many points, in matters large and small. That they do is not a Muslim claim; it is in every critical introduction to the New Testament and in the footnotes of every study Bible. What a reader needs is to see the texts side by side, with chapter and verse, so that the disagreement can be checked rather than asserted. That is what the tables on this website do. Each sets the four accounts in parallel columns, records only what the texts say, and keeps interpretation apart from the table. A table that changes an existing page is announced in the <a href=\"/corrections/\">corrections log</a>.",
+            "The four gospels disagree with one another at many points, in matters large and small. That they do is not a Muslim claim; it is in every critical introduction to the New Testament and in the footnotes of every study Bible. What a reader needs is to see the texts side by side, with chapter and verse, so that the disagreement can be checked rather than asserted. That is what the tables on this website do. Each sets the four accounts in parallel columns, records only what the texts say, and keeps interpretation apart from the table. The Gospel of Thomas has a column too; it is a sayings collection with no narrative, so it is empty wherever the others tell a story, and the table says so. A table that changes an existing page is announced in the <a href=\"/corrections/\">corrections log</a>.",
             "## The tables",
+            "- <a href=\"/gospels/discrepancies/genealogies/\">The genealogies</a>: Matthew 1 and Luke 3 give different fathers for Joseph and different lines from David. Mark and John give none.",
+            "- <a href=\"/gospels/discrepancies/nativity/\">The birth of Jesus</a>: the visitors, the journey, Herod and Egypt in Matthew and Luke, and the gospels that have no birth story.",
+            "- <a href=\"/gospels/discrepancies/last-supper/\">The last supper</a>: whether it was a Passover meal, the words over bread and cup, and what John tells instead.",
+            "- <a href=\"/gospels/discrepancies/crucifixion/\">The crucifixion</a>: the day, the hour, who carries the cross, the last words and the women.",
             "- <a href=\"/gospels/discrepancies/resurrection/\">The resurrection accounts</a>: who goes to the tomb, when, what they find, who speaks to them, what they are told, what they do, and where Jesus appears.",
-            "## The five areas",
-            "The resurrection table is the first because the resurrection is the claim on which the Christian reading of Jesus rests, and because the disagreements there are the hardest to reconcile. The other four areas are set out in brief below, with references, so that the reader can go to the texts.",
+            "## The five areas in brief",
+            "The resurrection table was the first because the resurrection is the claim on which the Christian reading of Jesus rests, and because the disagreements there are the hardest to reconcile. Each area is summarised below with its references; the tables linked above give the texts in parallel.",
             "### The genealogies",
             "Matthew 1:1-17 traces Jesus from Abraham to Joseph in forty-two generations arranged as three fourteens; Luke 3:23-38 traces him from Joseph back to Adam in seventy-seven. From David to Joseph the lines run through different sons of David (Solomon in Matthew, Nathan in Luke), share only Shealtiel and Zerubbabel, and arrive at different fathers for Joseph (Jacob in Matthew, Heli in Luke). Both trace descent through Joseph while stating that Joseph was not the father. The usual harmonisations, that one list is Mary’s or that a levirate marriage joined two lines, are not in the texts and were first proposed in the third century.",
             "### The nativity",
@@ -252,7 +288,12 @@
             "### The resurrection",
             "The women who go to the tomb are three in Mark, two in Matthew, several in Luke and one in John. They find a young man (Mark), an angel who descends in an earthquake (Matthew), two men (Luke) or, later, two angels (John). They are told to send the disciples to Galilee (Mark, Matthew) or reminded of what Jesus said in Galilee and told to stay in Jerusalem (Luke). They say nothing to anyone (Mark 16:8) or run to tell the disciples (Matthew, Luke, John). Jesus appears first in Galilee (Matthew), in Jerusalem and Emmaus on the same day (Luke), in Jerusalem and then at the Sea of Tiberias (John), or, in the oldest text of Mark, not at all. The full table is on <a href=\"/gospels/discrepancies/resurrection/\">its own page</a>.",
             "## How to read the tables",
+            "Each cell gives the text in brief with its reference, in <code>chapter:verse</code> form. A cell that says “None” means the gospel has no such passage. “No account” in the Thomas column means that Thomas, which contains sayings and almost no story, does not tell it.",
             "A discrepancy is not the same as an error, and a table is not an argument. Two of the differences above may be no more than two witnesses noticing different things. But a reader who has been told that the gospels are four independent and consistent testimonies should see for himself that they are not, before deciding what to make of the Qur’an’s statement that they are confirmed in part and corrected in part. The measure this website uses is stated on <a href=\"/method/\">the measure</a>; the tables are the evidence it works on.",
+            "## Related",
+            "- <a href=\"/gospels/synoptic-problem/\">The synoptic problem</a>: why Matthew, Mark and Luke share whole sentences.",
+            "- <a href=\"/gospels/thomas/\">The Gospel of Thomas</a> and its <a href=\"/gospels/thomas/sayings/\">full text</a>.",
+            "- <a href=\"/method/\">The measure</a>: the rule this website applies to every claim.",
             "## Sources",
             "- Raymond Brown, <em>The Birth of the Messiah</em>, on the genealogies and the two nativities.",
             "- Raymond Brown, <em>The Death of the Messiah</em>, two volumes, on the passion narratives.",
@@ -261,10 +302,38 @@
         ]
     },
     {
+        "path": "gospels/discrepancies/genealogies",
+        "title": "The genealogies compared",
+        "template": "page-wide",
+        "pattern": "discrepancy-genealogies",
+        "excerpt": "The genealogies of Jesus in Matthew and Luke set side by side, with Mark, John and Thomas, which give none."
+    },
+    {
+        "path": "gospels/discrepancies/nativity",
+        "title": "The birth accounts compared",
+        "template": "page-wide",
+        "pattern": "discrepancy-nativity",
+        "excerpt": "The birth of Jesus in Matthew and Luke set side by side, with Mark, John and Thomas, which tell none."
+    },
+    {
+        "path": "gospels/discrepancies/last-supper",
+        "title": "The last supper compared",
+        "template": "page-wide",
+        "pattern": "discrepancy-last-supper",
+        "excerpt": "The last meal of Jesus in the four gospels set side by side, with the Gospel of Thomas."
+    },
+    {
+        "path": "gospels/discrepancies/crucifixion",
+        "title": "The crucifixion accounts compared",
+        "template": "page-wide",
+        "pattern": "discrepancy-crucifixion",
+        "excerpt": "The crucifixion in the four gospels set side by side, with the Gospel of Thomas."
+    },
+    {
         "path": "gospels/discrepancies/resurrection",
         "title": "The resurrection accounts compared",
         "template": "page-wide",
         "pattern": "discrepancy-resurrection",
-        "excerpt": "The four resurrection accounts set side by side, with references."
+        "excerpt": "The four resurrection accounts set side by side, with references, and the Gospel of Thomas, which has none."
     }
 ]

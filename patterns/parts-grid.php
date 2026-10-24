@@ -12,7 +12,7 @@
 <p class="ih-numeral">I</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospels/">The Four Gospels</a></h3>
+<h3 class="wp-block-heading"><a href="/gospels/">The Five Gospels</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"fontSize":"small"} -->
 <p class="has-small-font-size">Authorship, dates, sources and audience. The synoptic problem. Discrepancy tables from the genealogies to the resurrection.</p>
