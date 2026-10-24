@@ -190,6 +190,92 @@ function injil_help_page_content( $def ) {
 	return injil_help_markup_to_blocks( $def['body'] ?? array() );
 }
 
+/**
+ * WordPress refuses a purely numeric slug on a page: wp_unique_post_slug() renames "2" to "2-2",
+ * and the page rewrite rules read /parent/2/ as page 2 of the parent. The gospel sections and
+ * the commentary parts use numeric slugs, so the theme allows them under those parents, routes
+ * them, and repairs pages an earlier version created under the renamed slugs.
+ */
+const INJIL_HELP_RULES = '2'; // bump when the rewrite rules change; populate() flushes when the stored value differs
+
+add_filter(
+	'wp_unique_post_slug_is_bad_hierarchical_slug',
+	function ( $bad, $slug, $post_type, $post_parent ) {
+		if ( 'page' === $post_type && $post_parent && preg_match( '/^\d+$/', $slug ) ) {
+			$uri = (string) get_page_uri( (int) $post_parent );
+			if ( 'gospel-according-to-islam' === $uri || 0 === strpos( $uri, 'quran/commentaries/' ) ) {
+				return false;
+			}
+		}
+		return $bad;
+	},
+	10,
+	4
+);
+
+add_action(
+	'init',
+	function () {
+		add_rewrite_rule( '^gospel-according-to-islam/([0-9]+)/?$', 'index.php?pagename=gospel-according-to-islam/$matches[1]', 'top' );
+		add_rewrite_rule( '^quran/commentaries/([a-z0-9-]+)/([a-z-]+)/([0-9]+)/?$', 'index.php?pagename=quran/commentaries/$matches[1]/$matches[2]/$matches[3]', 'top' );
+	}
+);
+
+/**
+ * A page that an earlier version created under a numeric slug WordPress renamed ("2-2", and
+ * "2-3", "2-4" from later runs that could not find it): rename the oldest copy back to the
+ * numeric slug and bin the duplicates that were never edited. Returns the repaired page or null.
+ */
+function injil_help_repair_numeric_slug( $path ) {
+	$parts = explode( '/', $path );
+	$slug  = array_pop( $parts );
+	if ( ! $parts || ! preg_match( '/^\d+$/', $slug ) ) {
+		return null;
+	}
+	$parent = injil_help_find_page( implode( '/', $parts ) );
+	if ( ! $parent ) {
+		return null;
+	}
+	$ids = get_posts(
+		array(
+			'post_type'        => 'page',
+			'post_parent'      => $parent->ID,
+			'post_status'      => 'publish',
+			'posts_per_page'   => -1,
+			'orderby'          => 'ID',
+			'order'            => 'ASC',
+			'fields'           => 'ids',
+			'suppress_filters' => true,
+		)
+	);
+	$keep = 0;
+	foreach ( $ids as $id ) {
+		if ( ! preg_match( '/^' . preg_quote( $slug, '/' ) . '-\d+$/', (string) get_post_field( 'post_name', $id ) ) ) {
+			continue;
+		}
+		if ( ! $keep ) {
+			$keep = (int) $id;
+			continue;
+		}
+		$copy = get_post( $id );
+		if ( $copy && ! injil_help_page_is_edited( $copy ) ) {
+			wp_trash_post( $id );
+		}
+	}
+	if ( ! $keep ) {
+		return null;
+	}
+	wp_update_post(
+		array(
+			'ID'        => $keep,
+			'post_name' => $slug,
+		)
+	);
+	clean_post_cache( $keep );
+	$page = get_post( $keep );
+	return $page && $slug === $page->post_name ? $page : null;
+}
+
 function injil_help_find_page( $path ) {
 	$page = get_page_by_path( $path, OBJECT, 'page' );
 	return $page && 'trash' !== $page->post_status ? $page : null;
@@ -232,6 +318,9 @@ function injil_help_populate( $overwrite = false, $force = false ) {
 
 	foreach ( $pages as $order => $def ) {
 		$existing = injil_help_find_page( $def['path'] );
+		if ( ! $existing ) {
+			$existing = injil_help_repair_numeric_slug( $def['path'] );
+		}
 		if ( $existing && ! $overwrite ) {
 			continue;
 		}
@@ -308,6 +397,11 @@ function injil_help_populate( $overwrite = false, $force = false ) {
 		global $wp_rewrite;
 		$wp_rewrite->set_permalink_structure( '/%postname%/' );
 		flush_rewrite_rules();
+	}
+	// The rules for the numeric slugs are registered on init; flush once when they change.
+	if ( get_option( 'injil_help_rules' ) !== INJIL_HELP_RULES ) {
+		flush_rewrite_rules();
+		update_option( 'injil_help_rules', INJIL_HELP_RULES, false );
 	}
 
 	update_option( 'injil_help_populated', INJIL_HELP_VERSION );
