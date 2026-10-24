@@ -74,6 +74,9 @@ The same nine colours can be set without code under Appearance > Theme Options >
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add a Changelog entry here, merge to main, and tag the commit with the same number (for example v2.5.1). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 3.3.1 =
+* New page /gospels/thomas/correlation/: a statistical test of whether the order of the parallel sayings in Thomas follows Matthew, Mark, Luke or Q (no significant correlation), with both data tables. Linked from the Thomas introduction; credited on Credits and the Source library.
+
 = 3.3.0 =
 * Every placeholder is gone. The pillar page, the measure page and the corrections log carry real text; two editor patterns that held only drafting prompts and an unused cover image were removed.
 * Gospel of Thomas: full text on its own page in Mark M. Mattison's public-domain translation, and a second page in the Patterson and Meyer translation (used with permission). Dating, manuscripts and the independence debate are taken from Peter Kirby's Early Christian Writings and gospels.net; credited on the Thomas, Credits and Source library pages.
