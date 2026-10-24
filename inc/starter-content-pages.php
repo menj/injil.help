@@ -11,6 +11,16 @@ defined( 'ABSPATH' ) || exit;
 
 require_once get_stylesheet_directory() . '/inc/gospel-islam.php';
 
+/**
+ * Full text of the Gospel of Thomas from a data file in inc/data/. One line per
+ * paragraph, in the compact page markup. Mattison's translation is in the public
+ * domain; Patterson and Meyer's is used with the website owner's permission.
+ */
+function injil_help_thomas_full_text( $file, $intro ) {
+	$lines = file( get_stylesheet_directory() . '/inc/data/' . $file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES );
+	return array_merge( array( $intro ), $lines ? $lines : array() );
+}
+
 function injil_help_starter_pages() {
 	$section = 'page-section';
 
@@ -88,24 +98,30 @@ function injil_help_starter_pages() {
 				'@consensus',
 				'The Gospel of Thomas is a collection of 114 sayings attributed to Jesus. It has no birth story, no miracles, no arrest, no crucifixion and no resurrection. Its opening line names the writer as Didymos Judas Thomas, and the name is a claim of authority, not evidence of authorship.',
 				'## Manuscripts',
-				'The text survives complete only in Coptic, in a codex found at Nag Hammadi in Egypt in 1945 and copied in the fourth century. Three Greek fragments from Oxyrhynchus, copied around 200 CE, show that the work is older than the Coptic copy.',
+				'The text survives complete only in Coptic, in Nag Hammadi Codex II, tractate 2, found in Egypt in 1945 and copied in the fourth or fifth century. Three Greek manuscripts from Oxyrhynchus show that the work is older than the Coptic copy: P.Oxy. 1 (late second or early third century) has most of sayings 26-30 and 77 and sayings 31-33; P.Oxy. 654 (middle or late third century) has the prologue and sayings 1-7; and P.Oxy. 655 (third century) has parts of sayings 24 and 36-39. See <a href="/resources/manuscripts/">the manuscripts of the extracanonical gospels</a>.',
 				'## Date and sources',
-				'Scholars date the work anywhere from the late first century to the middle of the second, and they divide on whether it depends on the canonical gospels or preserves independent tradition. About half its sayings have a parallel in Matthew, Mark or Luke. The rest are unique to Thomas, and many carry an ascetic and mystical tone that the Qur’an does not share.',
+				'Scholars date the work anywhere from the middle of the first century to the middle of the second; Peter Kirby’s survey at Early Christian Writings gives 50 to 140 CE. Ron Cameron places it between the mid-first and the late second century, and thinks a late first-century date likelier if it began as a freestanding collection of sayings. Stephen Patterson argues for about 70 to 80 CE, with the present form coming from eastern Syria, where the Judas Thomas tradition flourished. The first writer to name the work beyond doubt is Hippolytus of Rome (writing 222 to 235 CE), who quotes a variant of saying 4.',
+				'Scholars divide on whether it depends on the canonical gospels. Patterson argues that it reflects a parallel and separate tradition, as does Stevan Davies, from the different order of the sayings; Cameron holds that dependence has not been convincingly shown. Cameron adds that the text was unstable in transmission, since the Greek copies and the Coptic differ. About half its sayings have a parallel in Matthew, Mark or Luke. The rest are unique to Thomas, and many carry an ascetic and mystical tone that the Qur’an does not share.',
 				'@minority',
 				'A minority of scholars hold that Thomas preserves sayings older than the canonical gospels. Others, such as Nicholas Perrin, argue that it was composed from them and from a harmony of the four, the Diatessaron.',
 				'## How it is used here',
-				'The sayings of Thomas are not set out on a page of their own. Those that agree with the Qur’an as the measure, and those that are beyond it or unclear, are woven into the sections of <a href="/gospel-according-to-islam/">The Gospel According to Islam</a>, each with its saying number, a colour mark and a note. 44 sayings that conflict with the Qur’an or only repeat another are listed, with the reason for each, on <a href="/gospels/thomas/set-aside/">the page of sayings set aside</a>.',
+				'The full text is on its own page, in <a href="/gospels/thomas/sayings/">Mark Mattison’s public-domain translation</a> and in <a href="/gospels/thomas/sayings-patterson-meyer/">the Patterson and Meyer translation</a>. Those sayings that agree with the Qur’an as the measure, and those that are beyond it or unclear, are woven into the chapters of <a href="/gospel-according-to-islam/">The Gospel According to Islam</a>, each with its saying number, a colour mark and a note. 44 sayings that conflict with the Qur’an or only repeat another are listed, with the reason for each, on <a href="/gospels/thomas/set-aside/">the page of sayings set aside</a>.',
 				'## The colour marks',
 				'- [agree] Agrees with the Qur’an as the measure.',
 				'- [beyond] Beyond the measure: the Qur’an says nothing either way. Included, and marked.',
 				'- [unclear] Unclear: the text or its sense is uncertain. Included, and marked.',
 				'## Sources',
 				'- Thomas O. Lambdin (trans.), “The Gospel of Thomas”, in <em>The Nag Hammadi Library in English</em>, ed. James M. Robinson, 3rd ed. (Leiden: E. J. Brill, 1988). Saying numbers here follow this edition; the wording used in the chapters is our own digest of it.',
-				'- Stephen Patterson and Marvin Meyer (trans.), “The Gospel of Thomas”, in Robert J. Miller (ed.), <em>The Complete Gospels: Annotated Scholars Version</em> (Polebridge Press, 1992, 1994). Read beside Lambdin to check the sense of each saying; none of its wording is reproduced here.',
+				'- Stephen Patterson and Marvin Meyer (trans.), “The Gospel of Thomas”, in Robert J. Miller (ed.), <em>The Complete Gospels: Annotated Scholars Version</em> (Polebridge Press, 1992, 1994). Printed in full, with permission, on <a href=\"/gospels/thomas/sayings-patterson-meyer/\">its own page</a>.',
+				'- Mark M. Mattison (trans.), <em>The Gospel of Thomas</em>, public domain, gospels.net; and the manuscript information at gospels.net/manuscript.',
+				'- Stephen Patterson and Marvin Meyer (trans.), “The Gospel of Thomas”, in Robert J. Miller (ed.), <em>The Complete Gospels</em> (Polebridge Press, 1992, 1994), used with permission.',
+				'- Peter Kirby, “Gospel of Thomas”, <em>Early Christian Writings</em>, earlychristianwritings.com/thomas.html, which summarises the manuscripts, the dating and the debate over independence, citing Ron Cameron, Stephen Patterson and Stevan Davies.',
 				'- Helmut Koester, <em>Ancient Christian Gospels</em>.',
 				'- Nicholas Perrin, <em>Thomas and Tatian</em>.',
 			),
 		),
+		array( 'path' => 'gospels/thomas/sayings', 'title' => 'The Gospel of Thomas: full text', 'excerpt' => 'All 114 sayings of the Gospel of Thomas in the public-domain translation by Mark M. Mattison.', 'body' => injil_help_thomas_full_text( 'thomas-mattison.txt', 'The full text of the Gospel of Thomas in the translation by Mark M. Mattison, based on the Coptic text of Nag Hammadi Codex II, 2. Square brackets mark gaps in the manuscript, round brackets mark words added for sense, and slashes mark a correction of a scribal error. This website’s own digest of each saying, with colour marks and notes, is in <a href="/gospel-according-to-islam/">The Gospel According to Islam</a>. For the date, the manuscripts and the colour marks, see <a href="/gospels/thomas/">the introduction to Thomas</a>. A second translation is on <a href="/gospels/thomas/sayings-patterson-meyer/">its own page</a>.' ) ),
+		array( 'path' => 'gospels/thomas/sayings-patterson-meyer', 'title' => 'The Gospel of Thomas: Patterson and Meyer translation', 'excerpt' => 'All 114 sayings of the Gospel of Thomas in the Patterson and Meyer translation, used with permission.', 'body' => array_merge( injil_help_thomas_full_text( 'thomas-patterson-meyer.txt', 'The full text of the Gospel of Thomas in the translation by Stephen Patterson and Marvin Meyer, used with permission. Square brackets mark words missing or damaged in the manuscript; round brackets mark words added for sense. The public-domain translation by Mark M. Mattison is on <a href="/gospels/thomas/sayings/">its own page</a>.' ), array( '## Credit', 'Stephen Patterson and Marvin Meyer (trans.), “The Gospel of Thomas”, in Robert J. Miller (ed.), <em>The Complete Gospels: Annotated Scholars Version</em> (Polebridge Press, 1992, 1994). Also published in <em>The Nag Hammadi Library</em>. Used with permission.' ) ) ),
 		array(
 			'path' => 'gospels/thomas/set-aside', 'title' => 'Sayings of Thomas set aside', 'excerpt' => 'The sayings of the Gospel of Thomas that are not used in this gospel, each with the reason.',
 			'body' => array(
@@ -176,6 +192,7 @@ function injil_help_starter_pages() {
 				'Most scholars hold that Mark was written first and that Matthew and Luke each used it. Matthew and Luke seldom agree against Mark in order, and Mark’s rougher Greek is more easily explained as the original than as a simplification.',
 				'## Q',
 				'About 230 verses are shared by Matthew and Luke but absent from Mark, chiefly sayings. The usual explanation is a second source, called Q (German <em>Quelle</em>, “source”). No copy of Q survives.',
+				'Q is reconstructed by comparing Matthew and Luke, and is numbered by Luke’s verses. In the reconstruction in <em>The Critical Edition of Q</em>, which is the base of Mark M. Mattison’s public-domain translation at gospels.net, it holds the preaching of John the Baptist and the temptation (Q 3-4), the beatitudes and the love of enemies (Q 6), the centurion’s servant (Q 7), the instructions for the mission (Q 10), the Lord’s Prayer and “ask, seek, knock” (Q 11), the woes on the Pharisees (Q 11), the sayings on anxiety (Q 12), the mustard seed and the yeast (Q 13), the great dinner (Q 14), the lost sheep (Q 15) and the coming of the Son of Humanity (Q 17). It is almost all sayings, with little story. The Gospel of Thomas is also a collection of sayings, and about half of its sayings have parallels in the gospels, which is one reason Thomas and Q are often read together.',
 				'@minority',
 				'A minority of scholars reject Q. The Farrer hypothesis holds that Luke used Matthew as well as Mark. The older Griesbach hypothesis holds that Mark abbreviated Matthew and Luke. Both remove the need for Q.',
 				'## Why it matters here',
@@ -183,16 +200,32 @@ function injil_help_starter_pages() {
 				'## Sources',
 				'- Mark Goodacre, <em>The Synoptic Problem: A Way Through the Maze</em>.',
 				'- Bart Ehrman, <em>The New Testament: A Historical Introduction to the Early Christian Writings</em>.',
+				'- James M. Robinson, Paul Hoffmann and John S. Kloppenborg (eds.), <em>The Critical Edition of Q</em> (Minneapolis: Fortress Press, 2000), and Mark M. Mattison’s public-domain translation of Q at gospels.net/quelle.',
 			),
 		),
 		array(
 			'path' => 'gospels/discrepancies', 'title' => 'The discrepancy tables', 'excerpt' => 'Genealogies, nativity, Last Supper, crucifixion and resurrection, set side by side with references.',
 			'body' => array(
 				'Each table sets the four canonical gospels side by side, with chapter and verse, and records only what the texts say. The Gospel of Thomas has a column too; it is a sayings collection with no narrative, so it is empty wherever the others tell a story, and the table says so. Interpretation is kept apart from the table.',
+				'## The tables',
+				'- <a href="/gospels/discrepancies/genealogies/">The genealogies</a>: Matthew 1 and Luke 3 give different fathers for Joseph and different lines from David. Mark and John give none.',
+				'- <a href="/gospels/discrepancies/nativity/">The birth of Jesus</a>: the visitors, the journey, Herod and Egypt in Matthew and Luke, and the gospels that have no birth story.',
+				'- <a href="/gospels/discrepancies/last-supper/">The last supper</a>: whether it was a Passover meal, the words over bread and cup, and what John tells instead.',
+				'- <a href="/gospels/discrepancies/crucifixion/">The crucifixion</a>: the day, the hour, who carries the cross, the last words and the women.',
 				'- <a href="/gospels/discrepancies/resurrection/">The resurrection accounts</a>: who goes to the tomb, who is there, what is said, and where Jesus appears.',
-				'More tables will be added here as they are completed: the genealogies (Matthew 1 and Luke 3), the nativity, the Last Supper and the crucifixion. Every new table is announced in the <a href="/corrections/">corrections log</a> if it changes an existing page.',
+				'## How to read them',
+				'Each cell gives the text in brief with its reference, in <code>chapter:verse</code> form. A cell that says “None” means the gospel has no such passage. “No account” in the Thomas column means that Thomas, which contains sayings and almost no story, does not tell it.',
+				'The tables show where the gospels differ. They do not decide which account is right, and they do not say how a harmoniser would reconcile them; both of those are argued on the pages for each gospel. Any error found in a table is recorded on the <a href="/corrections/">corrections log</a>.',
+				'## Related',
+				'- <a href="/gospels/synoptic-problem/">The synoptic problem</a>: why Matthew, Mark and Luke share whole sentences.',
+				'- <a href="/gospels/thomas/">The Gospel of Thomas</a> and its <a href="/gospels/thomas/sayings/">full text</a>.',
+				'- <a href="/method/">The measure</a>: the rule this website applies to every claim.',
 			),
 		),
+		array( 'path' => 'gospels/discrepancies/genealogies', 'title' => 'The genealogies compared', 'template' => 'page-wide', 'pattern' => 'discrepancy-genealogies', 'excerpt' => 'The genealogies of Jesus in Matthew and Luke set side by side, with Mark, John and Thomas, which give none.' ),
+		array( 'path' => 'gospels/discrepancies/nativity', 'title' => 'The birth accounts compared', 'template' => 'page-wide', 'pattern' => 'discrepancy-nativity', 'excerpt' => 'The birth of Jesus in Matthew and Luke set side by side, with Mark, John and Thomas, which tell none.' ),
+		array( 'path' => 'gospels/discrepancies/last-supper', 'title' => 'The last supper compared', 'template' => 'page-wide', 'pattern' => 'discrepancy-last-supper', 'excerpt' => 'The last meal of Jesus in the four gospels set side by side, with the Gospel of Thomas.' ),
+		array( 'path' => 'gospels/discrepancies/crucifixion', 'title' => 'The crucifixion accounts compared', 'template' => 'page-wide', 'pattern' => 'discrepancy-crucifixion', 'excerpt' => 'The crucifixion in the four gospels set side by side, with the Gospel of Thomas.' ),
 		array( 'path' => 'gospels/discrepancies/resurrection', 'title' => 'The resurrection accounts compared', 'template' => 'page-wide', 'pattern' => 'discrepancy-resurrection', 'excerpt' => 'The four resurrection accounts set side by side, with references, and the Gospel of Thomas, which has none.' ),
 
 		// Paul of Tarsus.
@@ -482,7 +515,7 @@ function injil_help_starter_pages() {
 		array(
 			'path' => 'resources/sources', 'title' => 'Source library', 'excerpt' => 'Every work cited, with the pages that cite it.',
 			'body' => array(
-				'Works cited on this website. The list grows as articles are added.',
+				'Works cited on this website, grouped as primary and secondary sources.',
 				'## Primary sources',
 				'- The Qur’an.',
 				'- The New Testament, Greek text: Nestle-Aland, <em>Novum Testamentum Graece</em>.',
@@ -495,6 +528,10 @@ function injil_help_starter_pages() {
 				'## Secondary sources',
 				'- Raymond E. Brown, <em>An Introduction to the New Testament</em>.',
 				'- Thomas O. Lambdin (trans.), “The Gospel of Thomas”, in <em>The Nag Hammadi Library in English</em>, ed. James M. Robinson (Leiden: E. J. Brill, 1988).',
+				'- Mark M. Mattison (trans.), <em>The Gospel of Thomas</em>, <em>The Infancy Gospel of James</em>, <em>The Infancy Gospel of Thomas</em> and <em>Q</em>, public domain, gospels.net; with the manuscript information at gospels.net/manuscript.',
+				'- Stephen Patterson and Marvin Meyer (trans.), “The Gospel of Thomas”, in Robert J. Miller (ed.), <em>The Complete Gospels: Annotated Scholars Version</em> (Polebridge Press, 1992, 1994).',
+				'- Peter Kirby, <em>Early Christian Writings</em>, earlychristianwritings.com, especially the page on the Gospel of Thomas.',
+				'- Mohd Elfie Nieshaem Juferi, <em>The Gospel According to Islam</em> (Seri Kembangan: Langgam Fikir, 2028).',
 				'- Bruce M. Metzger, <em>A Textual Commentary on the Greek New Testament</em>.',
 				'- Bruce M. Metzger and Bart D. Ehrman, <em>The Text of the New Testament</em>.',
 				'- Mark Goodacre, <em>The Synoptic Problem: A Way Through the Maze</em>.',
@@ -504,6 +541,45 @@ function injil_help_starter_pages() {
 				'- The four articles answered on <a href="/resources/responses/">Responses to named articles</a>: Samuel Green (The Gospel Coalition Australia), John MacArthur (Grace to You), Entrusted to the Dirt (21 May 2025), Stand to Reason.',
 				'- Oasis Foundation and McGrath Institute for Church Life, “The Gospel(s) in Islam and Christianity”, <em>Reasons for Our Hope</em>, 16 February 2022 (cited as an objection on the objections page).',
 				'- Ahmad Shafaat, <em>The Gospel According to Islam</em> (Vantage Press, 1985).',
+			),
+		),
+		array( 'path' => 'resources/manuscripts', 'title' => 'Manuscripts of the extracanonical gospels', 'template' => 'page-wide', 'pattern' => 'manuscripts-table', 'excerpt' => 'The surviving manuscripts of the Gospel of Thomas, the infancy gospels and other gospels outside the New Testament, with language, form and date.' ),
+		array(
+			'path' => 'resources/borrowing', 'title' => 'Did the Qur’an borrow its stories?', 'excerpt' => 'The charge that the Qur’an copied its stories of Mary and Jesus from the infancy gospels and other sources, stated fairly and answered.',
+			'body' => array(
+				'@consensus',
+				'The Qur’an’s accounts of Mary and of Jesus have parallels in Christian books older than the Qur’an. Scholars agree on that. They differ on what the parallels mean.',
+				'## The charge',
+				'The charge says that the Qur’an took its stories from earlier books and from people who knew them. For Mary and Jesus it names the Infancy Gospel of James, for Mary’s dedication to the temple and her care there; the Infancy Gospel of Thomas, for the clay birds; the Arabic Infancy Gospel, for the infant who speaks from the cradle; and the Gospel of Pseudo-Matthew, for the palm tree. It is not a new charge. The Qur’an records it: “it is only a man who teaches him” (16:103), “old stories that he has had written down” (25:4-5), “you have studied” (6:105), “taught by others, a madman” (44:14).',
+				'## The parallels, and where they stop',
+				'- [agree] Mary’s mother vows her unborn child to God’s service (Qur’an 3:35; Infancy Gospel of James 4).',
+				'- [agree] Mary is brought up in the temple, and food is found with her (Qur’an 3:37; James 7-8).',
+				'- [agree] An angel announces the birth of Jesus (Qur’an 3:45; 19:19; James 11).',
+				'- [conflict] Her guardian is Zechariah in the Qur’an (3:37). In the book it is Joseph, chosen by a sign from staffs (James 9). The Qur’an never names Joseph.',
+				'- [conflict] The birth. In the Qur’an Mary withdraws to a remote place and labour takes her to the trunk of a palm (19:22-23). In the book Joseph finds a cave, a midwife is fetched, and Salome tests Mary (James 17-20).',
+				'- [conflict] The clay birds. In the Qur’an the sign belongs to the ministry and is done by God’s permission, as a sign to the Israelites (3:49; 5:110). In the Infancy Gospel of Thomas a five-year-old makes twelve sparrows on a Sabbath and claps, and God’s permission is not mentioned (Thomas 2).',
+				'- [conflict] The child. The Qur’an’s infant says God made him blessed, dutiful to his mother, and neither arrogant nor wretched (19:31-32). The child of the Infancy Gospel of Thomas curses a playmate so that he withers and another so that he dies (Thomas 3-4).',
+				'- [conflict] The speech from the cradle. The Qur’an’s infant says, “I am a servant of God” (19:30). The cradle speech in the Arabic Infancy Gospel calls him the Son of God. Its date is debated, and its surviving form may be later than the Qur’an. The Gospel of Pseudo-Matthew, which has the palm tree, is usually dated to the eighth or ninth century, after the Qur’an.',
+				'## What the parallels show',
+				'A resemblance of motif is not dependence. Dependence needs a shared and distinctive wording, or a shared order, or a shared mistake, and a route by which the material could have reached the author. Here the shared material is a handful of motifs: a vow, a temple, an angel, a bird of clay. Each is told differently, and the Qur’an and the books share no sentence and no sequence. Where they overlap, the Qur’an turns each story to its own point: the vow becomes a prayer heard (3:35-37), the birds become a sign given by God’s permission (3:49), the speech from the cradle becomes the infant’s confession of servanthood (19:30).',
+				'The books are themselves late and derived. Most scholars hold that the Infancy Gospel of James draws on Matthew and Luke. If dependence of one text on another made the later a borrower from the earlier, then Matthew and Luke borrowed from Mark and from Q, as <a href="/gospels/synoptic-problem/">the synoptic problem</a> shows, and the same test would turn on the gospels first.',
+				'## The route',
+				'No Arabic translation of the gospels or of the infancy gospels is known from before the Qur’an. The earliest Arabic gospel manuscripts that survive were copied after the rise of Islam, as Sidney Griffith shows in <em>The Bible in Arabic</em>. The claim that a man taught the Prophet rests on later biographies. The Qur’an answers it on its own ground: the tongue of the one they point to is foreign, and this is clear Arabic (16:103).',
+				'## What can be conceded',
+				'The Qur’an was addressed to people who already knew stories of Mary, of the prophets and of Jesus, from Jews and Christians around them. Gabriel Said Reynolds argues in <em>The Qur’ān and Its Biblical Subtext</em> that the Qur’an assumes this familiarity and answers it. This website does not deny that stories of Mary circulated before the Qur’an. The Qur’an does not claim to tell what no one had told. It claims to tell it truly: “this is the true narrative” (3:62), “that is Jesus, son of Mary, the word of truth, about which they dispute” (19:34), and it calls the accounts “news of the unseen” which the Prophet did not know (3:44; 11:49; 12:102).',
+				'@islamic',
+				'The Muslim position is that the Qur’an is a confirmation, a guardian over the earlier books (5:48), and a judge between those who differ (27:76). A guardian does not copy; it keeps what is true and corrects the rest. That is the measure this website applies in <a href="/gospel-according-to-islam/">The Gospel According to Islam</a>: where an infancy gospel agrees with the Qur’an, the item is used and marked; where it conflicts, it is set aside and the reason is given. See sections <a href="/gospel-according-to-islam/1/">1</a>, <a href="/gospel-according-to-islam/2/">2</a>, <a href="/gospel-according-to-islam/4/">4</a> and <a href="/gospel-according-to-islam/14/">14</a>.',
+				'## What would count as evidence',
+				'- A sentence in the Qur’an that matches the wording of an earlier book and is unusual enough that chance cannot explain it.',
+				'- A mistake in an earlier book that the Qur’an repeats.',
+				'- A known route: a text in a language the author could read, in a place the author could reach.',
+				'- A source that can be dated before the Qur’an.',
+				'None of the four has been shown for the stories of Mary and Jesus. The manuscripts and dates of the books concerned are set out on <a href="/resources/manuscripts/">the manuscripts of the extracanonical gospels</a>.',
+				'## Sources',
+				'- Mark M. Mattison (trans.), <em>The Infancy Gospel of James</em> and <em>The Infancy Gospel of Thomas</em>, public domain, gospels.net, with the manuscript information at gospels.net/manuscript.',
+				'- Gabriel Said Reynolds, <em>The Qur’ān and Its Biblical Subtext</em> (London: Routledge, 2010).',
+				'- Sidney H. Griffith, <em>The Bible in Arabic</em> (Princeton: Princeton University Press, 2013).',
+				'- The Qur’an: 3:35-49, 62; 5:48, 110; 6:105; 11:49; 12:102; 16:103; 19:16-34; 25:4-5; 27:76; 44:14.',
 			),
 		),
 		array(
@@ -638,9 +714,13 @@ function injil_help_starter_pages() {
 			'body' => array(
 				'## Texts',
 				'- <strong>The Gospel According to Islam</strong>, sections 1 to 27 and the Introduction: Dr. Ahmad Shafaat, <em>The Gospel According to Islam</em> (New York: Vantage Press, 1985). Spelling and scanning errors were corrected. The text and notes follow the arrangement of <em>The Narrative of Jesus, Son of Mary</em>, in which the Qur’anic passages are set among the sections and the notes are numbered through the whole.',
+				'- <strong>The Gospel According to Islam</strong>, printed edition: Mohd Elfie Nieshaem Juferi, <em>The Gospel According to Islam</em> (Seri Kembangan: Langgam Fikir, first edition, 2028). The text on this website was checked against the book.',
 				'- <strong>The Qur’anic passages on Jesus</strong>, with their headings and footnotes: Alham Ahmed, <em>The Gospel According to the Quran: Jesus and His Teachings</em> (Toronto: Noor Lal Foundation, 2021), in the translation <em>The Clear Quran</em> by Dr. Mustafa Khattab (Al-Furqaan Foundation, theclearquran.org), which the compiler acknowledges using with the foundation’s permission.',
 				'- <strong>An Epistle unto the Congregation of Paul of Tarsus</strong>: an English rendering of the Malay letter <em>Epistel Kepada Jemaat Paulus</em>, with footnotes added by this website.',
-				'- <strong>Gospel of Thomas</strong>: sayings are numbered as in the standard edition. The summaries are this website’s own, prepared from Thomas O. Lambdin’s translation in <em>The Nag Hammadi Library in English</em>, ed. James M. Robinson (Leiden: E. J. Brill, 1988), and checked against the translation by Stephen Patterson and Marvin Meyer in <em>The Complete Gospels</em>, ed. Robert J. Miller (Polebridge Press, 1992, 1994).',
+				'- <strong>Gospel of Thomas</strong>: sayings are numbered as in the standard edition. The summaries are this website’s own, prepared from Thomas O. Lambdin’s translation in <em>The Nag Hammadi Library in English</em>, ed. James M. Robinson (Leiden: E. J. Brill, 1988), and checked against the translations by Mark M. Mattison (public domain) and by Stephen Patterson and Marvin Meyer in <em>The Complete Gospels</em>, ed. Robert J. Miller (Polebridge Press, 1992, 1994, used with permission). Both are printed in full on the pages <a href="/gospels/thomas/sayings/">Mattison</a> and <a href="/gospels/thomas/sayings-patterson-meyer/">Patterson and Meyer</a>.',
+				'- <strong>The Gospel of Thomas, full text</strong>: Mark M. Mattison’s translation, based on Nag Hammadi Codex II, 2, which its translator has placed in the public domain (gospels.net, a Luminescence, L.L.C. website); and the translation by Stephen Patterson and Marvin Meyer, from <em>The Complete Gospels: Annotated Scholars Version</em>, ed. Robert J. Miller (Polebridge Press, 1992, 1994), reproduced with permission. Manuscript dates follow gospels.net.',
+				'- <strong>The Gospel of Thomas, introduction</strong>: the dating, the manuscripts and the debate over independence draw on Peter Kirby, <em>Early Christian Writings</em> (earlychristianwritings.com/thomas.html), who cites the work of Ron Cameron, Stephen Patterson and Stevan Davies.',
+				'- <strong>The infancy gospels, Q and the manuscript table</strong>: the summaries are this website’s own, prepared from Mark M. Mattison’s public-domain translations of the Infancy Gospel of James and the Infancy Gospel of Thomas, from his edition of Q (based on <em>The Critical Edition of Q</em>), and from the manuscript information, all at gospels.net.',
 				'- All other text, including the section titles, the colour-coded Gospel of Thomas sections and their notes, the answers and the replies: this website.',
 				'## Images',
 				'Manuscript images load from Wikimedia Commons. Each carries its credit and a link to its Commons page in its caption.',

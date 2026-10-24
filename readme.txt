@@ -74,6 +74,15 @@ The same nine colours can be set without code under Appearance > Theme Options >
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add a Changelog entry here, merge to main, and tag the commit with the same number (for example v2.5.1). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 3.3.0 =
+* Every placeholder is gone. The pillar page, the measure page and the corrections log carry real text; two editor patterns that held only drafting prompts and an unused cover image were removed.
+* Gospel of Thomas: full text on its own page in Mark M. Mattison's public-domain translation, and a second page in the Patterson and Meyer translation (used with permission). Dating, manuscripts and the independence debate are taken from Peter Kirby's Early Christian Writings and gospels.net; credited on the Thomas, Credits and Source library pages.
+* New pages: Did the Qur'an borrow its stories? (/resources/borrowing/) and Manuscripts of the extracanonical gospels (/resources/manuscripts/).
+* The Gospel According to Islam: sections 1, 2, 4 and 14 now carry marked items from the Infancy Gospel of James and the Infancy Gospel of Thomas, set against the Qur'an.
+* Discrepancy tables: genealogies, nativity, last supper and crucifixion added, each with a Thomas column; the index page lists and explains them.
+* The synoptic problem page now says what Q contains.
+* Fixed "Quirinus" and "Nephthalin" in the notes.
+
 = 3.2.2 =
 * Discrepancy tables: the Gospel of Thomas now has a column on the resurrection table (no account in any row) and a note, and the index page says so.
 * Credits and the Thomas page now also cite the Patterson and Meyer translation (The Complete Gospels) as a second text used for checking; no wording from it is reproduced.

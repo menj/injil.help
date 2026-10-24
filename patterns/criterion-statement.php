@@ -28,6 +28,15 @@
 <h3 class="wp-block-heading">Which claim of alteration this site makes</h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>[State precisely: alteration of meaning (<em>taḥrīf al-maʿnā</em>), alteration of text (<em>taḥrīf al-naṣṣ</em>), or both, and for which material. Do not present the two as a simple early/late sequence; cite Schaffner ch. 2 and Tarakci &amp; Sayar, <em>Islamic Quarterly</em> 49:3.]</p>
+<p>This site makes two claims, keeps them apart, and does not join them into one story of an early corruption.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><strong>Alteration of text (<em>taḥrīf al-naṣṣ</em>)</strong> is claimed only where the manuscripts show it. The longer ending of Mark (16:9-20) and the story of the woman caught in adultery (John 7:53-8:11) are absent from the oldest Greek Bibles. Where the manuscripts show no change, this site claims none.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><strong>Alteration of meaning (<em>taḥrīf al-maʿnā</em>)</strong> is the claim that words of Jesus and accounts about him were read in a sense the Qur'an denies, such as divine sonship and an atoning death, while the text itself stands. It is argued from the wording of the gospels and from the <a href="/gospels/discrepancies/">discrepancy tables</a>, not asserted.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>Each claim is made for named passages, each with its reason. Neither is made of the gospels as a whole, and the second does not depend on the first. Further reading: Schaffner, chapter 2; Tarakci and Sayar, <em>Islamic Quarterly</em> 49:3.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->

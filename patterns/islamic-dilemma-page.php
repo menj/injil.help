@@ -120,7 +120,7 @@
 <h4 class="wp-block-heading">Objection</h4>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>[The Qur&#039;an tells seventh-century Christians to judge by the Injīl they held. If it was not the four gospels, what did they hold?]</p>
+<p>The Qur&#039;an tells the people of the Injīl to judge by it (5:47). The Christians of the seventh century held the four gospels. If the Injīl was not those books, what did they hold, and how could the Qur&#039;an send them to it?</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:group {"layout":{"type":"default"}} -->
@@ -128,7 +128,7 @@
 <h4 class="wp-block-heading">Best Christian reply</h4>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>[State the strongest form of the reply fairly, with its source.]</p>
+<p>The strongest reply says that “the Injīl” can only mean the gospel scriptures the church possessed, since the Qur&#039;an addresses Christians as “the people of the Injīl” and tells them to judge by it. A command to follow a book presupposes that the book is sound. This is the argument Karl Pfander made against Muslim readers in <em>Mīzān al-Ḥaqq</em> (“The Balance of Truth”, published in the 1830s), and it is the form the Islamic Dilemma takes today in the online writing of Answering Islam and in videos by Acts 17 Apologetics.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:group {"layout":{"type":"default"}} -->
@@ -136,7 +136,7 @@
 <h4 class="wp-block-heading">Response</h4>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>[Answer it from the text of 5:47 and the classical exegetes, with sources.]</p>
+<p>The verse commands them to judge by “what God revealed in it”, and the revelation is the Injīl God gave to ʿĪsā (5:46), not every sentence in the books about him. The classical commentators read it that way. Al-Ṭabarī (d. 923) and Ibn Kathīr (d. 1373) take it as a command to act on what God sent down to ʿĪsā, which includes the news of the messenger to come (7:157; 61:6). The Qur&#039;an speaks as guardian over those books (5:48) and does not hand them its authority.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
@@ -145,12 +145,12 @@
 <!-- /wp:heading -->
 <!-- wp:details {"className":"is-style-faq"} -->
 <details class="wp-block-details is-style-faq"><summary>Who popularised the Islamic Dilemma?</summary><!-- wp:paragraph -->
-<p>[Name and date the modern popularisers, with citations, and note older Christian forms of the argument.]</p>
+<p>The argument is older than the name. Karl Pfander used its logic in <em>Mīzān al-Ḥaqq</em> in the 1830s: the Qur&#039;an honours the earlier scriptures, so Muslims must accept them as they stand. The phrase “the Islamic Dilemma” spread through online Christian apologetics from the 2010s, in the writing of Answering Islam, which has argued the same case since the 1990s, and in videos by Acts 17 Apologetics.</p>
 <!-- /wp:paragraph --></details>
 <!-- /wp:details -->
 <!-- wp:details {"className":"is-style-faq"} -->
 <details class="wp-block-details is-style-faq"><summary>Does Qur&#039;an 6:115 mean the Bible cannot be corrupted?</summary><!-- wp:paragraph -->
-<p>[Answer: the verse speaks of the words of God, not of every manuscript that carries them. 40-60 words, cited.]</p>
+<p>No. The verse says that none can change the words of your Lord (6:115). It speaks of God&#039;s decrees and promises, which no one can overturn, as 10:64 repeats, and not of every manuscript that carries a revelation. The Qur&#039;an itself says some wrote scripture with their own hands and altered it (2:75, 2:79, 4:46).</p>
 <!-- /wp:paragraph --></details>
 <!-- /wp:details -->
 <!-- wp:details {"className":"is-style-faq"} -->

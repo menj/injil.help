@@ -29,7 +29,7 @@ The theme header carries `GitHub Theme URI` and `Primary Branch: main`, so [Git 
 - `assets/css/`, `assets/js/`: Theme Options page styles and script, plus the ornament layer (`ornament.css`, `ornament.js`)
 - `assets/icons/`: line icons used as CSS masks
 - `assets/brandmark.svg`: brandmark (header, footer, fallback favicon)
-- `assets/images/`: placeholder cover art
+- `assets/images/`: the star pattern and divider used by the ornament layer
 
 ## Documentation
 

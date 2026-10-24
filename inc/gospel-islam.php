@@ -9,6 +9,7 @@
 defined( 'ABSPATH' ) || exit;
 
 require_once get_stylesheet_directory() . '/inc/gospel-islam-thomas.php';
+require_once get_stylesheet_directory() . '/inc/gospel-islam-infancy.php';
 require_once get_stylesheet_directory() . '/inc/quran-jesus.php';
 
 /**
@@ -165,6 +166,9 @@ function injil_help_gospel_islam_pages() {
 	$data  = injil_help_gospel_islam_data();
 	$base  = 'gospel-according-to-islam';
 	$thomas = injil_help_gospel_thomas_sections();
+	foreach ( injil_help_gospel_infancy_sections() as $k => $lines ) {
+		$thomas[ (string) $k ] = array_merge( isset( $thomas[ (string) $k ] ) ? $thomas[ (string) $k ] : array(), $lines );
+	}
 	$pages = array();
 
 	$front = array(
