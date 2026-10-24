@@ -38,9 +38,9 @@ The fixed facts about The Injil theme. When another document, a comment or a pat
 
 ## Data
 
-- All content is JSON under `inc/data/`: `pages/{pillar,gospels,paul,quran,gospel,bonus,resources,site}.json`, `narrative.json` (6 chapters, 27 sections, 235 notes), `gospel-islam.json`, `quran-jesus.json`, `thomas.json`, `infancy.json`, `substitution.json`, `thomas-mattison.json`, `thomas-patterson-meyer.json`, `tafsir/{work}.json`.
+- All content is JSON under `inc/data/`: `pages/{pillar,gospels,paul,quran,gospel,bonus,resources,site}.json`, `narrative.json` (6 chapters, 27 sections, 237 notes; `[v]` verse breaks and `[qS:A]` references in the lines), `gospel-islam.json`, `quran-jesus.json`, `thomas.json`, `infancy.json`, `substitution.json`, `thomas-mattison.json`, `thomas-patterson-meyer.json`, `tafsir/{work}.json`.
 - A page entry has `path`, `title`, `excerpt`, and `pattern` or `body`; optional `template`; optional `body_file`, a file in `inc/data/` whose lines are appended to `body` (the two full texts of Thomas).
-- Compact markup of a `body`: `## ` and `### ` headings; `- ` list items, optionally opening with `[agree]`, `[beyond]`, `[unclear]`, `[conflict]` or `[notneeded]`; `> ` quotation; `@consensus`, `@minority`, `@islamic` labels; `{{fn:…}}` inline footnote (numbered per page, listed under "Notes"); `[page-list]`; `? Question` followed by its answer paragraph (FAQ entry, collected into FAQPage); `[details] Title` … `[/details]` (fold block). Inline HTML inside lines is limited to what `wp_kses_post` allows; the commentaries use only `<strong>` and `<em>`.
+- Compact markup of a `body`: `## ` and `### ` headings; `- ` list items, optionally opening with `[agree]`, `[beyond]`, `[unclear]`, `[conflict]` or `[notneeded]`; `> ` quotation; `@consensus`, `@minority`, `@islamic` labels; `{{fn:…}}` inline footnote (numbered per page, listed under "Notes"); `[page-list]`; `? Question` followed by its answer paragraph (FAQ entry, collected into FAQPage); `[details] Title` … `[/details]` (fold block); `[v]` verse break and `[qS:A]` Qur'anic verse reference; `[bible]` … `[/bible]` (the gospel text block); `[notes]` (print the notes so far as the apparatus); `[p.classes] text` (paragraph with classes). Inline HTML inside lines is limited to what `wp_kses_post` allows; the commentaries use only `<strong>` and `<em>`.
 - Loaders: `injil_help_starter_pages()`, `injil_help_pages_file()`, `injil_help_data_file()`, `injil_help_narrative_data()`, `injil_help_gospel_islam_data()`, `injil_help_gospel_woven_sections()`, `injil_help_gospel_islam_pages()`, `injil_help_quran_data()`, `injil_help_quran_page()`, `injil_help_tafsir_data()`, `injil_help_tafsir_pages()`, `injil_help_tafsir_section_lines()`.
 - Parser: `injil_help_markup_to_blocks()` in `inc/starter-content.php`.
 
@@ -52,7 +52,7 @@ The fixed facts about The Injil theme. When another document, a comment or a pat
 
 ## Theme Options (`injil_help_options`)
 
-Tabs: Colours, Branding, Sharing, SEO, Content. Defaults: `colors` {}, `footer_mark` 1, `ornament` rich, `animate` 1, `parallax` strong, `favicon_force` 0, `favicon_url` '', `share` 1, `share_networks` x, facebook, whatsapp, telegram, reddit, linkedin, bluesky, threads, `share_types` post, page, `share_label` '', `schema` auto, `home_title` '', `home_description` '', `pillar_title` '', `og_image` '', `author_name` '', `author_url` '', `same_as` menj.org and apostleofdoom.org, `org_logo` ''.
+Tabs: Colours, Branding, Sharing, SEO, Content. Defaults: `colors` {}, `footer_mark` 1, `ornament` rich, `animate` 1, `parallax` strong, `gospel_layout` columns, `favicon_force` 0, `favicon_url` '', `share` 1, `share_networks` x, facebook, whatsapp, telegram, reddit, linkedin, bluesky, threads, `share_types` post, page, `share_label` '', `schema` auto, `home_title` '', `home_description` '', `pillar_title` '', `og_image` '', `author_name` '', `author_url` '', `same_as` menj.org and apostleofdoom.org, `org_logo` ''.
 
 ## Filters
 
@@ -85,6 +85,8 @@ Shafaat (1985) for the gospel text; Alham Ahmed and The Clear Quran for the pass
 
 ## Rules for contributors
 
+- Shafaat's 1985 text is the starting point of the gospel, not its rule. Where it or his notes depart from the Qur'an as the measure they are changed, and every departure is listed under "Where this gospel departs from Shafaat" on the composition page. The end of the story follows 4:157-158 and 3:55: not killed, not crucified, raised to God, another seen in his likeness and no name given for him.
+- The verse division of the gospel is the `[v]` markers in `narrative.json`, numbered at build time. Move, add or remove them with the text; never hard-code a verse number.
 - Content changes go in `inc/data/` or `patterns/`, never in PHP strings.
 - JS and CSS are separate files in `assets/js/` and `assets/css/`.
 - The options page stays tabbed; a new setting joins an existing tab or gets its own.

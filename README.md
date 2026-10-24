@@ -33,10 +33,10 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 |---|---|
 | Type | Block theme (theme.json v3), child of `twentytwentyfive` |
 | Folder, text domain, pattern prefix | `injil-help` |
-| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.4.0) |
+| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.5.0) |
 | PHP in `inc/` | options, starter-content, starter-content-pages, gospel-islam, quran-jesus, tafsir, seo, schema, share |
 | Data | `inc/data/` 2.6 MB of JSON: 175 starter pages, the gospel narrative, the Qur'anic passages, Thomas (woven sections and two full texts), the infancy gospels, the substitution witnesses, eight commentaries (315,000 words) |
-| Front-end assets | `style.css` 32 KB; `assets/css/ornament.css` 12 KB, `share.css` 3 KB; `assets/js/ornament.js` 3 KB, `share.js` 2 KB; all plain, no build step |
+| Front-end assets | `style.css` 32 KB; `assets/css/ornament.css` 12 KB, `share.css` 3 KB, `bible.css` 3 KB; `assets/js/ornament.js` 3 KB, `share.js` 2 KB; all plain, no build step |
 | Fonts | 16 MB in `assets/fonts/`, 18 `fontFace` entries in `theme.json` |
 | Admin | one tabbed page, Appearance › Theme Options, option `injil_help_options` |
 | Updates | Git Updater via the `GitHub Theme URI` and `Primary Branch: main` headers; tag `vX.Y.Z` |
@@ -89,7 +89,7 @@ Everything a visitor reads is either a block pattern in `patterns/` or JSON in `
 
 `functions.php` defines `INJIL_HELP_VERSION`, requires the five `inc/` files (options, starter-content, seo, schema, share; starter-content pulls in starter-content-pages, which pulls in gospel-islam, tafsir and quran-jesus), then registers:
 
-- `wp_enqueue_scripts`: `style.css`; `ornament.css` unless Ornament is Off; `ornament.js` (deferred, footer) when the reveal animation or parallax is on. `share.css` and `share.js` are enqueued by `share.php` only on pages that show the row.
+- `wp_enqueue_scripts`: `style.css`; `ornament.css` unless Ornament is Off; `ornament.js` (deferred, footer) when the reveal animation or parallax is on. `share.css` and `share.js` are enqueued by `share.php` only on pages that show the row. `bible.css` is enqueued on a singular post whose content contains the `ih-bible` block, which is every gospel section.
 - `after_setup_theme`: text domain from `languages/`; `style.css` as editor style.
 - `init`: pattern category `injil-help`; the block style variations listed under [Block styles](#block-styles-and-css).
 - `wp_head`: favicon link (custom URL, or the SVG brandmark when forced or when no Site Icon is set).
@@ -101,7 +101,7 @@ Everything a visitor reads is either a block pattern in `patterns/` or JSON in `
 | File | Holds | Shape |
 |---|---|---|
 | `pages/pillar.json`, `gospels.json`, `paul.json`, `quran.json`, `gospel.json`, `bonus.json`, `resources.json`, `site.json` | the starter pages, one file per part, in site order | array of `{path, title, excerpt, pattern? \| body?, body_file?, template?}`; `body_file` names a file in `inc/data/` whose list of lines is appended to `body` |
-| `narrative.json` | The Narrative of Jesus, Son of Mary | `{chapters: [{number, title, sections: [{number, lines[]}]}], notes: {n: text}}`; `[^n]` markers in lines |
+| `narrative.json` | The Narrative of Jesus, Son of Mary | `{chapters: [{number, title, sections: [{number, lines[]}]}], notes: {n: text}}`; `[^n]` note markers, `[v]` verse breaks and `[qS:A]` Qur'anic verse references in lines |
 | `gospel-islam.json` | section titles, Introduction | `{section_titles: {n: title}, front: {introduction: {title, paras[]}}}` |
 | `quran-jesus.json` | the Qur'anic passages | `{surahs: {n: name}, passages: [{surah, verses_range, heading, verses: {n: text}}]}` |
 | `thomas.json`, `infancy.json`, `substitution.json` | woven passages (Thomas, the infancy gospels, the substitution witnesses, merged in that order) | `{section: [markup lines]}` |
@@ -128,6 +128,14 @@ A `body` is a list of lines. `injil_help_markup_to_blocks()` turns them into blo
 | anything else | `core/paragraph` |
 
 Inline: `{{fn:note}}` is replaced by a numbered superscript link and the note is appended under a "Notes" heading as an ordered list with back-links; numbering is per page in order of appearance. Inline HTML passes through `wp_kses_post`. Lines are trimmed; blank lines are ignored.
+
+Five tokens serve the Bible layout of the gospel sections, emitted by `injil_help_gospel_section_head()` and `injil_help_gospel_islam_pages()` from the markers in `narrative.json`:
+
+- `[v]` opens a verse: `<span class="ih-v" id="vN">N</span>`, numbered from 1 per page. The markers are data, seeded from Shafaat's 1985 verse division; move, add or remove them and the numbering follows.
+- `[qS:A]` marks a Qur'anic verse: `<span class="ih-v ih-vq" id="qS-A">S:A</span>`.
+- `[bible]` … `[/bible]` wraps the text in `<div class="wp-block-group ih-bible">`, the block the layout styles.
+- `[notes]` prints the footnotes collected so far as `ol.ih-footnotes.ih-apparatus` at that point, numbered on; the notes of material after it (Thomas, the infancy gospels, the commentaries) go under the "Notes" heading at the end as before, with `start` set so the numbers continue.
+- `[p.classes] text` is a paragraph with those classes; the section head uses `ih-running-head`, `ih-argument` and `ih-chapter-num`.
 
 ## Starter content lifecycle
 
@@ -169,7 +177,7 @@ Appearance › Theme Options (`inc/options.php`), one option array `injil_help_o
 | Branding | `ornament` rich\|subtle\|off, `animate` 0\|1, `parallax` strong\|gentle\|off, `footer_mark`, `favicon_force`, `favicon_url` |
 | Sharing | `share`, `share_types` (post, page), `share_networks` (ordered subset of the network keys), `share_label` |
 | SEO | `schema` auto\|on\|off, `home_title`, `home_description`, `pillar_title`, `og_image`, `author_name`, `author_url`, `same_as` (one URL per line), `org_logo` |
-| Content | no keys; lists every starter page with status (missing, written, edited) and runs the two populate actions |
+| Content | no keys; lists every starter page with status (missing, written, edited) and runs the two populate actions, `gospel_layout` columns\|single\|plain |
 
 `injil_help_get_option( $key )` merges the stored array over `injil_help_option_defaults()`. `injil_help_color_css()` emits the overrides as `:root` custom properties on the front end and in the editor (`enqueue_block_assets`). The page's own CSS and JS are `assets/css/admin.css` and `assets/js/admin.js` (tabs with remembered selection, colour pickers); the admin CSS reads the palette tokens so it follows the Colours tab.
 
@@ -196,6 +204,10 @@ Registered in `functions.php`, styled in `style.css`:
 ## Fonts
 
 All faces are bundled in `assets/fonts/` and declared as `fontFace` in `theme.json`, so they appear in the editor's picker and are served from the theme with no third-party requests. Slugs and roles: `sabon` body, `garamond` headings, `kagnue` and `kagnue-outline` display (site title, cover title, section index and home section titles, large numerals), `evangelion` labels and navigation, `sbl-greek`, `sbl-hebrew`, `sbl-biblit` biblical languages, `hafs` Qur'anic text only (class `ih-quran`), `amiri` other Arabic (`ih-ar`, `:lang(ar)`), `naskh` hadith (`ih-hadith`), `estrangelo` Syriac (`:lang(syc)`), `cuneiform` (`:lang(akk)`), `special-elite` corrections log (`ih-record`), `dubidam`, `arslan`, `ferments`, `angel` available. Licences: Sabon Next LT and Kagnue are commercial faces licensed to the site owner; Angel keeps its README; the rest are OFL or free. Kagnue lacks the dotted transliteration letters, so it is kept off headings that may carry them.
+
+### The Bible layout
+
+`assets/css/bible.css` styles the gospel sections: `.ih-running-head` above the text; `.ih-bible` (the group block) with `.ih-argument` (italic, spanning both columns), `.ih-chapter-num` (the section numeral in the display face, floated at the start of the text), `h3` sub-headings in small capitals and `.ih-v` verse numbers (`.ih-vq` for the Qur'an's own); `.ih-apparatus` for the notes under a rule in small type. Two columns with a rule apply at 900px and above under `body.ih-gospel-columns`; `ih-gospel-single` keeps one column; `ih-gospel-plain` hides the running head, the numeral and the verse numbers. The body class comes from the `gospel_layout` option; the markup never changes, so switching the option is instant and reversible. Print always sets two columns.
 
 ## Ornament and parallax
 

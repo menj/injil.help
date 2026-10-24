@@ -98,10 +98,10 @@
 <p class="ih-k">Section · XXVI</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/26/">The trial and the road to Emmaus</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/26/">The trial and the raising of Jesus</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
-<p class="ih-d">Pilate, Barabbas, and the man who walks with two travellers.</p>
+<p class="ih-d">Pilate, Barabbas, and the one they led away: they did not kill him.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group --></section>

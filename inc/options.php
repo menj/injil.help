@@ -31,6 +31,7 @@ function injil_help_option_defaults() {
 		'ornament'         => 'rich',
 		'animate'          => 1,
 		'parallax'         => 'strong',
+		'gospel_layout'    => 'columns',
 		'favicon_force'    => 0,
 		'favicon_url'      => '',
 		'share'            => 1,
@@ -68,6 +69,7 @@ function injil_help_sanitize_options( $in ) {
 	$out['ornament']         = in_array( $in['ornament'] ?? 'rich', array( 'rich', 'subtle', 'off' ), true ) ? $in['ornament'] : 'rich';
 	$out['animate']          = empty( $in['animate'] ) ? 0 : 1;
 	$out['parallax']         = in_array( $in['parallax'] ?? 'strong', array( 'strong', 'gentle', 'off' ), true ) ? $in['parallax'] : 'strong';
+	$out['gospel_layout']    = in_array( $in['gospel_layout'] ?? 'columns', array( 'columns', 'single', 'plain' ), true ) ? $in['gospel_layout'] : 'columns';
 	$out['favicon_force']    = empty( $in['favicon_force'] ) ? 0 : 1;
 	$out['favicon_url']      = esc_url_raw( $in['favicon_url'] ?? '' );
 	$out['share']            = empty( $in['share'] ) ? 0 : 1;
@@ -288,6 +290,19 @@ function injil_help_render_options() {
 				}
 				$missing = 0;
 				?>
+				<table class="form-table" role="presentation">
+					<tr>
+						<th scope="row"><label for="ih-gospel-layout"><?php esc_html_e( 'Gospel text layout', 'injil-help' ); ?></label></th>
+						<td>
+							<select id="ih-gospel-layout" name="<?php echo esc_attr( $name ); ?>[gospel_layout]">
+								<option value="columns" <?php selected( $o['gospel_layout'], 'columns' ); ?>><?php esc_html_e( 'Bible: two columns, verse numbers, references at the foot', 'injil-help' ); ?></option>
+								<option value="single" <?php selected( $o['gospel_layout'], 'single' ); ?>><?php esc_html_e( 'Single column with verse numbers', 'injil-help' ); ?></option>
+								<option value="plain" <?php selected( $o['gospel_layout'], 'plain' ); ?>><?php esc_html_e( 'Plain paragraphs, no verse numbers', 'injil-help' ); ?></option>
+							</select>
+							<p class="description"><?php esc_html_e( 'How the 27 sections of The Gospel According to Islam are set. The verse numbers and the Qur’anic references are in the page markup whichever layout is chosen; the layout only shows or hides them. Below 900px the text is always one column.', 'injil-help' ); ?></p>
+						</td>
+					</tr>
+				</table>
 				<p class="description"><?php esc_html_e( 'The theme creates these pages when it is activated. Use the button to create any that are missing. When the theme is updated, every listed page is rewritten from the new text automatically, so edits made to those pages are replaced. The first button only creates missing pages; the second rewrites all of them now.', 'injil-help' ); ?></p>
 				<ul class="ih-pages">
 					<?php foreach ( injil_help_starter_pages() as $def ) : ?>
@@ -348,6 +363,7 @@ add_filter(
 		if ( ! injil_help_get_option( 'footer_mark' ) ) {
 			$classes[] = 'ih-no-footer-mark';
 		}
+		$classes[] = 'ih-gospel-' . injil_help_get_option( 'gospel_layout' );
 		$orn = injil_help_get_option( 'ornament' );
 		if ( 'off' !== $orn ) {
 			$classes[] = 'ih-orn';

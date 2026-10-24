@@ -30,7 +30,11 @@ function injil_help_pages_file( $name ) {
 	}
 	foreach ( $rows as &$row ) {
 		if ( ! empty( $row['body_file'] ) ) {
-			$row['body'] = array_merge( array_values( (array) ( $row['body'] ?? array() ) ), array_values( injil_help_data_file( (string) $row['body_file'] ) ) );
+			$lines = injil_help_data_file( (string) $row['body_file'] );
+			if ( ! $lines ) {
+				return array(); // a missing or malformed text file fails the whole page file, so nothing half-made is published
+			}
+			$row['body'] = array_merge( array_values( (array) ( $row['body'] ?? array() ) ), array_values( $lines ) );
 			unset( $row['body_file'] );
 		}
 	}

@@ -27,9 +27,9 @@
 <!-- /wp:paragraph -->
 <!-- wp:list -->
 <ul class="wp-block-list"><!-- wp:list-item -->
-<li><strong>Degree of correlation (R)</strong> shows how closely the two orders follow a straight-line relationship. A value near 1 means the orders are alike; a value near 0 means they are unrelated.</li>
+<li><strong>Degree of correlation (R)</strong> shows how closely the two orders follow a straight-line relationship. A value near 1 means the two orders run together; a value near 0 means that no linear relationship between them was found, which is the kind of agreement copying would leave.</li>
 <!-- /wp:list-item --><!-- wp:list-item -->
-<li><strong>Reliability (p)</strong> shows how likely it is that the figure arose by chance. The lower it is, the more likely the correlation is real. A value above .05 means the apparent correlation is not significant.</li>
+<li><strong>Reliability (p)</strong> is the probability of a correlation at least this large arising if the two orders were in fact unrelated. The lower it is, the harder the result is to explain by chance alone. A value above .05 is not statistically significant.</li>
 <!-- /wp:list-item --><!-- wp:list-item -->
 <li><strong>N</strong> is the number of pairs of sayings compared.</li>
 <!-- /wp:list-item --></ul>

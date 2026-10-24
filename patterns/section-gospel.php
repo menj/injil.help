@@ -38,7 +38,7 @@
 <h2 class="wp-block-heading">What this is</h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>A gospel is the story of Jesus told so as to bring out its meaning for faith and for history. This one is told in the light of the revelation given to Muḥammad. The words are Ahmad Shafaat’s, from <em>The Gospel According to Islam</em> (1985), a book about the size of Mark, built on the ninety-three Qur’anic verses and filled out from the New Testament, with the results of critical scholarship kept in view and extensive notes on every passage. The text here follows the arrangement of <em>The Narrative of Jesus, Son of Mary</em>: twenty-seven sections in six chapters, in paragraphs rather than numbered verses, opening with the Opening of the Qur’an and closing with the Qur’an’s own words on the oneness of God, with the Qur’anic passages on Jesus standing in the story under their own headings and the 235 notes running through the whole. Seventy sayings of the Gospel of Thomas, tested against the measure, are placed in the sections they belong to, each with a colour mark and a note.</p>
+<p>A gospel is the story of Jesus told so as to bring out its meaning for faith and for history. This one is told in the light of the revelation given to Muḥammad. The words are Ahmad Shafaat’s, from <em>The Gospel According to Islam</em> (1985), a book about the size of Mark, built on the ninety-three Qur’anic verses and filled out from the New Testament, with the results of critical scholarship kept in view and extensive notes on every passage. The text here follows the arrangement of <em>The Narrative of Jesus, Son of Mary</em>: twenty-seven sections in six chapters, in numbered verses set in two columns in the manner of a printed Bible, opening with the Opening of the Qur’an and closing with the Qur’an’s own words on the oneness of God, with the Qur’anic passages on Jesus standing in the story under their own headings and the 235 notes running through the whole. Seventy sayings of the Gospel of Thomas, tested against the measure, are placed in the sections they belong to, each with a colour mark and a note.</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading -->
 <h2 class="wp-block-heading">How to read it</h2>
@@ -345,7 +345,7 @@
 <p class="ih-k">Section · XXVI</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/26/">The trial, Barabbas and the road to Emmaus</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/26/">The trial, Barabbas and the raising of Jesus</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Section 26 of 27.</p>
@@ -356,7 +356,7 @@
 <p class="ih-k">Section · XXVII</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/27/">The empty tomb, the death of Jesus and the reports</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/27/">The empty tomb, the reports and the return</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Section 27 of 27.</p>
@@ -384,7 +384,7 @@
 <!-- /wp:details -->
 <!-- wp:details {"className":"is-style-faq"} -->
 <details class="wp-block-details is-style-faq"><summary>Who wrote The Gospel According to Islam?</summary><!-- wp:paragraph -->
-<p>Dr. Ahmad Shafaat, a Muslim scholar, published it with Vantage Press, New York, in 1985. His words are used unchanged apart from corrections of scanning errors. The arrangement, the Qur’anic passages from Alham Ahmed’s compilation, and the Gospel of Thomas sections are additions of this website, each credited on the <a href="/credits/">credits page</a>.</p>
+<p>Dr. Ahmad Shafaat, a Muslim scholar, published it with Vantage Press, New York, in 1985. His words are the base text. Where they or his notes departed from the Qur’an as the measure they were changed, chiefly at the end of the story, and every departure is listed on <a href="/gospel-according-to-islam/how-composed/">the composition page</a>. The arrangement, the Qur’anic passages from Alham Ahmed’s compilation, and the Gospel of Thomas sections are additions of this website, each credited on the <a href="/credits/">credits page</a>.</p>
 <!-- /wp:paragraph --></details>
 <!-- /wp:details -->
 <!-- wp:details {"className":"is-style-faq"} -->
@@ -399,7 +399,7 @@
 <!-- /wp:details -->
 <!-- wp:details {"className":"is-style-faq"} -->
 <details class="wp-block-details is-style-faq"><summary>Does the gospel include the crucifixion?</summary><!-- wp:paragraph -->
-<p>It tells the arrest, the trial, Barabbas and the empty tomb from the gospel sources, and where the gospels have the cross the Qur’an’s own words stand in the text: they did not kill him, nor crucify him, but it was made to appear so to them (4:157). See <a href="/gospel-according-to-islam/26/">section 26</a> and <a href="/gospel-according-to-islam/27/">section 27</a>.</p>
+<p>It tells the arrest, the trial and Barabbas from the gospel sources, and where the gospels have the cross the Qur’an’s own words stand in the text: they did not kill him, nor crucify him, but it was made to appear so to them, and God raised him to Himself (4:157-158). The empty tomb, the reports that went round and his return before the Hour follow. See <a href="/gospel-according-to-islam/26/">section 26</a> and <a href="/gospel-according-to-islam/27/">section 27</a>.</p>
 <!-- /wp:paragraph --></details>
 <!-- /wp:details -->
 <!-- wp:details {"className":"is-style-faq"} -->

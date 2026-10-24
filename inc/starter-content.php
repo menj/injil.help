@@ -16,7 +16,10 @@ require_once get_stylesheet_directory() . '/inc/starter-content-pages.php';
  *
  * "## " heading, "### " sub-heading, "- " list item, "> " quote, "@consensus|@minority|@islamic"
  * claim label, anything else a paragraph. Blank lines are ignored. Inline
- * "{{fn:text}}" becomes a numbered footnote; the notes are listed at the end.
+ * "{{fn:text}}" becomes a numbered footnote; the notes are listed at the end, or at a "[notes]"
+ * token as a reference apparatus. "[v]" opens a numbered verse and "[qS:A]" marks a Qur'anic
+ * verse; "[bible]" ... "[/bible]" wraps a gospel section for the Bible layout; "[p.classes] text"
+ * is a paragraph with those classes.
  * A list item may start with [agree], [beyond], [unclear], [conflict] or
  * [notneeded] to show a colour-coded status badge.
  */
@@ -37,16 +40,54 @@ function injil_help_markup_to_blocks( $lines ) {
 	$notes  = array();
 	$list   = array();
 	// Replace {{fn:...}} with a numbered superscript link and collect the note.
-	$footnote = function ( $text ) use ( &$notes ) {
+	$flushed  = 0; // notes already printed by an earlier [notes] token on this page
+	$verse    = 0; // "[v]" verse breaks, numbered per page
+	$footnote = function ( $text ) use ( &$notes, &$flushed, &$verse ) {
+		// "[v]" opens a numbered verse; "[qS:A]" marks a Qur'anic verse by chapter and verse.
+		$text = preg_replace_callback(
+			'/\[v\]/',
+			function () use ( &$verse ) {
+				$verse++;
+				return '<span class="ih-v" id="v' . $verse . '">' . $verse . '</span>';
+			},
+			$text
+		);
+		$text = preg_replace_callback(
+			'/\[q(\d+):(\d+)\]/',
+			function ( $m ) {
+				return '<span class="ih-v ih-vq" id="q' . $m[1] . '-' . $m[2] . '">' . $m[1] . ':' . $m[2] . '</span>';
+			},
+			$text
+		);
 		return preg_replace_callback(
 			'/\{\{fn:(.*?)\}\}/s',
-			function ( $m ) use ( &$notes ) {
+			function ( $m ) use ( &$notes, &$flushed ) {
 				$notes[] = trim( $m[1] );
-				$n       = count( $notes );
+				$n       = $flushed + count( $notes );
 				return sprintf( '<sup class="ih-fnref"><a href="#fn-%1$d" id="fnref-%1$d">%1$d</a></sup>', $n );
 			},
 			$text
 		);
+	};
+	// The collected notes as an ordered list: with the "Notes" heading at the end of a page, or, for the
+	// "[notes]" token, as a reference apparatus at the foot of the text, numbered on from the last list.
+	$print_notes = function ( $heading ) use ( &$out, &$notes, &$flushed ) {
+		if ( ! $notes ) {
+			return;
+		}
+		$start = $flushed + 1;
+		$class = $heading ? 'ih-footnotes' : 'ih-footnotes ih-apparatus';
+		if ( $heading ) {
+			$out .= "<!-- wp:heading -->\n<h2 class=\"wp-block-heading\" id=\"notes\">" . esc_html__( 'Notes', 'injil-help' ) . "</h2>\n<!-- /wp:heading -->\n";
+		}
+		$out .= '<!-- wp:list {"ordered":true' . ( $start > 1 ? ',"start":' . $start : '' ) . ',"className":"' . $class . '"} -->' . "\n" . '<ol' . ( $start > 1 ? ' start="' . $start . '"' : '' ) . ' class="wp-block-list ' . $class . '">';
+		foreach ( $notes as $i => $note ) {
+			$n    = $flushed + $i + 1;
+			$out .= sprintf( "<!-- wp:list-item -->\n<li id=\"fn-%1\$d\">%2\$s <a href=\"#fnref-%1\$d\" aria-label=\"%3\$s\">↩</a></li>\n<!-- /wp:list-item -->", $n, wp_kses_post( $note ), esc_attr__( 'Back to the text', 'injil-help' ) );
+		}
+		$out     .= "</ol>\n<!-- /wp:list -->\n";
+		$flushed += count( $notes );
+		$notes    = array();
 	};
 	$flush  = function () use ( &$out, &$list, &$notes, $status, &$footnote ) {
 		if ( ! $list ) {
@@ -102,6 +143,25 @@ function injil_help_markup_to_blocks( $lines ) {
 			$out .= "</details>\n<!-- /wp:details -->\n";
 			continue;
 		}
+		// "[bible]" ... "[/bible]" wraps the text of a gospel section in the block the Bible layout styles.
+		if ( '[bible]' === $line ) {
+			$out .= '<!-- wp:group {"className":"ih-bible","layout":{"type":"default"}} -->' . "\n" . '<div class="wp-block-group ih-bible">';
+			continue;
+		}
+		if ( '[/bible]' === $line ) {
+			$out .= "</div>\n<!-- /wp:group -->\n";
+			continue;
+		}
+		// "[notes]" prints the notes collected so far as a reference apparatus at this point.
+		if ( '[notes]' === $line ) {
+			$print_notes( false );
+			continue;
+		}
+		// "[p.class-names] text" is a paragraph with those classes.
+		if ( preg_match( '/^\[p\.([a-z0-9 -]+)\]\s*(.*)$/s', $line, $m ) ) {
+			$out .= '<!-- wp:paragraph {"className":"' . esc_attr( $m[1] ) . '"} -->' . "\n<p class=\"" . esc_attr( $m[1] ) . '">' . wp_kses_post( $footnote( $m[2] ) ) . "</p>\n<!-- /wp:paragraph -->\n";
+			continue;
+		}
 		if ( 0 === strpos( $line, '### ' ) ) {
 			$out .= "<!-- wp:heading {\"level\":3} -->\n<h3 class=\"wp-block-heading\">" . wp_kses_post( $footnote( substr( $line, 4 ) ) ) . "</h3>\n<!-- /wp:heading -->\n";
 		} elseif ( 0 === strpos( $line, '## ' ) ) {
@@ -117,16 +177,7 @@ function injil_help_markup_to_blocks( $lines ) {
 		}
 	}
 	$flush();
-
-	if ( $notes ) {
-		$out .= "<!-- wp:heading -->\n<h2 class=\"wp-block-heading\" id=\"notes\">" . esc_html__( 'Notes', 'injil-help' ) . "</h2>\n<!-- /wp:heading -->\n";
-		$out .= "<!-- wp:list {\"ordered\":true,\"className\":\"ih-footnotes\"} -->\n<ol class=\"wp-block-list ih-footnotes\">";
-		foreach ( $notes as $i => $note ) {
-			$n    = $i + 1;
-			$out .= sprintf( "<!-- wp:list-item -->\n<li id=\"fn-%1\$d\">%2\$s <a href=\"#fnref-%1\$d\" aria-label=\"%3\$s\">↩</a></li>\n<!-- /wp:list-item -->", $n, wp_kses_post( $note ), esc_attr__( 'Back to the text', 'injil-help' ) );
-		}
-		$out .= "</ol>\n<!-- /wp:list -->\n";
-	}
+	$print_notes( true );
 	return $out;
 }
 

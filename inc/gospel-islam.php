@@ -142,6 +142,35 @@ function injil_help_narrative_link_notes( $text, $current ) {
 }
 
 /** Page definitions for the front matter and the 27 sections. */
+/**
+ * The head of a section page in the Bible layout: the running head, the opening of the text block,
+ * the argument (title, verse count and the Qur'anic passages set in the section) and the numeral.
+ * Verses are counted from the "[v]" markers in the narrative data; the Qur'anic references from "[qS:A]".
+ */
+function injil_help_gospel_section_head( $n, $title, $sec, $nar ) {
+	$verses = 0;
+	$refs   = array();
+	foreach ( $sec['lines'] as $line ) {
+		$verses += substr_count( $line, '[v]' );
+		if ( preg_match_all( '/\[q(\d+):(\d+)\]/', $line, $m, PREG_SET_ORDER ) ) {
+			$first  = $m[0];
+			$last   = end( $m );
+			$refs[] = $first[1] . ':' . $first[2] . ( $last[2] !== $first[2] ? '-' . $last[2] : '' );
+		}
+	}
+	$chapter  = sprintf( 'Chapter %1$d, %2$s', $sec['chapter'], $nar['chapters'][ $sec['chapter'] ] );
+	$argument = sprintf( '%1$s. %2$d verses.', $title, $verses );
+	if ( $refs ) {
+		$argument .= ' With the Qur’an: ' . implode( '; ', $refs ) . '.';
+	}
+	return array(
+		'[p.ih-running-head] The Gospel According to Islam · ' . $chapter . ' · Section ' . $n,
+		'[bible]',
+		'[p.ih-argument] ' . $argument,
+		'[p.ih-chapter-num] ' . $n,
+	);
+}
+
 function injil_help_gospel_islam_pages() {
 	$data  = injil_help_gospel_islam_data();
 	$base  = 'gospel-according-to-islam';
@@ -168,7 +197,7 @@ function injil_help_gospel_islam_pages() {
 	$last = count( $nar['sections'] );
 	foreach ( $nar['sections'] as $n => $sec ) {
 		$title = isset( $data['chapters'][ $n ]['title'] ) ? $data['chapters'][ $n ]['title'] : '';
-		$body  = array( '<em>' . sprintf( 'Chapter %1$d. %2$s', $sec['chapter'], $nar['chapters'][ $sec['chapter'] ] ) . '</em>' );
+		$body  = injil_help_gospel_section_head( $n, $title, $sec, $nar );
 		foreach ( $sec['lines'] as $line ) {
 			$body[] = preg_replace_callback(
 				'/\[\^(\d+)\]/',
@@ -179,6 +208,8 @@ function injil_help_gospel_islam_pages() {
 				$line
 			);
 		}
+		$body[] = '[/bible]';
+		$body[] = '[notes]';
 		if ( ! empty( $thomas[ (string) $n ] ) ) {
 			$body = array_merge( $body, $thomas[ (string) $n ] );
 		}
