@@ -8,8 +8,8 @@
 ?>
 <!-- wp:group {"className":"ih-section-head","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-section-head"><!-- wp:group {"className":"ih-gloss-row","layout":{"type":"flex","flexWrap":"wrap","verticalAlignment":"bottom"}} -->
-<div class="wp-block-group ih-gloss-row"><!-- wp:paragraph {"className":"ih-gloss ih-ar"} -->
-<p class="ih-gloss ih-ar">ٱلۡإِنجِيلَ</p>
+<div class="wp-block-group ih-gloss-row"><!-- wp:paragraph {"className":"ih-gloss ih-ar ih-quran"} -->
+<p class="ih-gloss ih-ar ih-quran" dir="rtl" lang="ar">ٱلۡإِنجِيلَ</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"className":"ih-cite"} -->
 <p class="ih-cite">the Gospel · Q 5:46</p>
@@ -32,6 +32,26 @@
 <p class="ih-rf-link"><a href="/gospel-according-to-islam/how-composed/">How this gospel was composed</a></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"ih-overview","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-overview"><!-- wp:heading -->
+<h2 class="wp-block-heading">What this is</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>A gospel is the story of Jesus told so as to bring out its meaning for faith and for history. This one is told in the light of the revelation given to Muḥammad. The words are Ahmad Shafaat’s, from <em>The Gospel According to Islam</em> (1985), a book about the size of Mark, built on the ninety-three Qur’anic verses and filled out from the New Testament, with the results of critical scholarship kept in view and extensive notes on every passage. The text here follows the arrangement of <em>The Narrative of Jesus, Son of Mary</em>: twenty-seven sections in six chapters, in paragraphs rather than numbered verses, opening with the Opening of the Qur’an and closing with the Qur’an’s own words on the oneness of God, with the Qur’anic passages on Jesus standing in the story under their own headings and the 235 notes running through the whole. Seventy sayings of the Gospel of Thomas, tested against the measure, are placed in the sections they belong to, each with a colour mark and a note.</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2 class="wp-block-heading">How to read it</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>Start with <a href="/gospel-according-to-islam/how-composed/">How this gospel was composed</a>, which sets out every source and every rule, and with the author’s own <a href="/gospel-according-to-islam/introduction/">Introduction</a>, in which he explains why a new gospel is justified and asks the Christian reader to read it as a book from another church. Then read the sections in order; each carries the name of its chapter, the text, its notes at the foot, and links to the previous section, the next and the contents, so the whole can be read through from <a href="/gospel-according-to-islam/1/">section 1</a> to <a href="/gospel-according-to-islam/27/">section 27</a>. A green verse number marks the Qur’an speaking. A raised number leads to a note, and the notes are where the gospel shows its workings: the Qur’anic and New Testament passages behind each sentence, where and why the text departs from a gospel source, and the scholarship that bears on it. The colour marks on the sayings of Thomas are explained on <a href="/gospels/thomas/">the Gospel of Thomas</a>.</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The six chapters</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p><strong>Birth and Childhood</strong> (sections 1 to 4) runs from the family of ʿImrān to the boy in the Temple. <strong>John and the Beginning of the Ministry</strong> (5 to 8) is the Baptist, the baptism and temptation, Capernaum and the Beatitudes. <strong>The Ministry in Galilee</strong> (9 to 13) and <strong>Preaching, Signs and the Disciples</strong> (14 to 18) carry the teaching, the healings, the bird of clay and the table from heaven, the sending of the twelve and the vision. <strong>Jerusalem</strong> (19 to 24) is the entry, the cleansing of the Temple, the questions, the last supper and the promise of the Counsellor. <strong>Arrest, Trial and Aftermath</strong> (25 to 27) is Gethsemane, the trial, the empty tomb and the reports, with the Qur’anic text standing where the gospels have the cross.</p>
+<!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entries ih-entries-list ih-tint-gold","layout":{"type":"grid","minimumColumnWidth":"15rem"}} -->
 <div class="wp-block-group ih-entries ih-entries-list ih-tint-gold"><!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
@@ -353,4 +373,45 @@
 <p class="ih-d">A letter to the followers of Paul of Tarsus, in the manner of the Pauline epistles.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
+<!-- /wp:group -->
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Questions about The Gospel According to Islam</h2>
+<!-- /wp:heading -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>What is The Gospel According to Islam?</summary><!-- wp:paragraph -->
+<p>The life of ʿĪsā ibn Maryam told as a gospel in the light of the Qur’an: Ahmad Shafaat’s 1985 text, about the size of Mark, built on the ninety-three Qur’anic verses and filled out from the New Testament, arranged here in six chapters and twenty-seven sections with the Qur’anic passages set in the story and 235 notes. See <a href="/gospel-according-to-islam/how-composed/">how it was composed</a>.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Who wrote The Gospel According to Islam?</summary><!-- wp:paragraph -->
+<p>Dr. Ahmad Shafaat, a Muslim scholar, published it with Vantage Press, New York, in 1985. His words are used unchanged apart from corrections of scanning errors. The arrangement, the Qur’anic passages from Alham Ahmed’s compilation, and the Gospel of Thomas sections are additions of this website, each credited on the <a href="/credits/">credits page</a>.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Is a Muslim gospel allowed in Islam?</summary><!-- wp:paragraph -->
+<p>Muslim scholars have read, quoted and retold the gospels through the Qur’an since the ninth century; al-Qāsim b. Ibrāhīm reworked Matthew this way, and medieval authors cite all four gospels more than 1,270 times. A gospel is a telling of the story of Jesus, and the Qur’an is the measure of what in it is true. This book is not scripture and does not claim to be.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>How is this gospel different from the four gospels?</summary><!-- wp:paragraph -->
+<p>It keeps what in the gospels agrees with the Qur’an, sets aside what contradicts it and says so, and marks what the Qur’an leaves open. Jesus is a servant and messenger throughout, the law stands, there is no atoning death and no crucifixion, and the story opens and closes with the oneness of God. The rule is stated on <a href="/method/">the measure</a>.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Does the gospel include the crucifixion?</summary><!-- wp:paragraph -->
+<p>It tells the arrest, the trial, Barabbas and the empty tomb from the gospel sources, and where the gospels have the cross the Qur’an’s own words stand in the text: they did not kill him, nor crucify him, but it was made to appear so to them (4:157). See <a href="/gospel-according-to-islam/26/">section 26</a> and <a href="/gospel-according-to-islam/27/">section 27</a>.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Can I read the gospel straight through?</summary><!-- wp:paragraph -->
+<p>Yes. Start at <a href="/gospel-according-to-islam/1/">section 1</a>; every section carries links to the previous, the next and the contents, with its notes at the foot. The Introduction and the method page explain the sources first, and the colour marks on the Gospel of Thomas sayings are explained on <a href="/gospels/thomas/">the Gospel of Thomas</a>.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:group {"className":"ih-aside ih-next","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-aside ih-next"><!-- wp:paragraph {"className":"ih-k"} -->
+<p class="ih-k">Where this leads</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>Behind every page of the gospel is an apparatus: dates, terms, the works cited and the record of what has been corrected. The next part, <a href="/resources/">Resources</a>, holds it, together with the objections to this website’s case and the replies.</p>
+<!-- /wp:paragraph --></div>
 <!-- /wp:group -->

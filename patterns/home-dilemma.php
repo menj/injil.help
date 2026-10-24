@@ -8,9 +8,12 @@
 ?>
 <!-- wp:group {"tagName":"section","className":"ih-dilemma","layout":{"type":"default"}} -->
 <section class="wp-block-group ih-dilemma"><!-- wp:group {"className":"ih-section-head","layout":{"type":"default"}} -->
-<div class="wp-block-group ih-section-head"><!-- wp:group {"className":"ih-gloss-row","layout":{"type":"flex","flexWrap":"wrap","verticalAlignment":"bottom"}} -->
-<div class="wp-block-group ih-gloss-row"><!-- wp:paragraph {"className":"ih-gloss ih-ar"} -->
-<p class="ih-gloss ih-ar">وَلۡيَحۡكُمۡ أَهۡلُ ٱلۡإِنجِيلِ</p>
+<div class="wp-block-group ih-section-head"><!-- wp:paragraph {"className":"ih-eyebrow"} -->
+<p class="ih-eyebrow">Part I · The argument</p>
+<!-- /wp:paragraph -->
+<!-- wp:group {"className":"ih-gloss-row","layout":{"type":"flex","flexWrap":"wrap","verticalAlignment":"bottom"}} -->
+<div class="wp-block-group ih-gloss-row"><!-- wp:paragraph {"className":"ih-gloss ih-ar ih-quran"} -->
+<p class="ih-gloss ih-ar ih-quran" dir="rtl" lang="ar">وَلۡيَحۡكُمۡ أَهۡلُ ٱلۡإِنجِيلِ</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"className":"ih-cite"} -->
 <p class="ih-cite">let the people of the Injīl judge · Q 5:47</p>

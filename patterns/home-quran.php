@@ -8,9 +8,12 @@
 ?>
 <!-- wp:group {"tagName":"section","className":"ih-section","layout":{"type":"default"}} -->
 <section class="wp-block-group ih-section"><!-- wp:group {"className":"ih-section-head","layout":{"type":"default"}} -->
-<div class="wp-block-group ih-section-head"><!-- wp:group {"className":"ih-gloss-row","layout":{"type":"flex","flexWrap":"wrap","verticalAlignment":"bottom"}} -->
-<div class="wp-block-group ih-gloss-row"><!-- wp:paragraph {"className":"ih-gloss ih-ar"} -->
-<p class="ih-gloss ih-ar">عِيسَى ٱبۡنُ مَرۡيَمَ</p>
+<div class="wp-block-group ih-section-head"><!-- wp:paragraph {"className":"ih-eyebrow"} -->
+<p class="ih-eyebrow">Part IV · The measure</p>
+<!-- /wp:paragraph -->
+<!-- wp:group {"className":"ih-gloss-row","layout":{"type":"flex","flexWrap":"wrap","verticalAlignment":"bottom"}} -->
+<div class="wp-block-group ih-gloss-row"><!-- wp:paragraph {"className":"ih-gloss ih-ar ih-quran"} -->
+<p class="ih-gloss ih-ar ih-quran" dir="rtl" lang="ar">عِيسَى ٱبۡنُ مَرۡيَمَ</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"className":"ih-cite"} -->
 <p class="ih-cite">ʿĪsā son of Maryam · Q 3:45</p>

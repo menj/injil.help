@@ -1,17 +1,43 @@
-.ih-options{max-width:860px}
+/*
+ * Theme Options page. Colours come from the palette tokens so the page follows
+ * Theme Options > Colours; the fallbacks are the theme.json defaults.
+ */
+.ih-options{
+ --ih-a-primary:var(--wp--preset--color--accent-1,#1f5c4a);
+ --ih-a-gold:var(--wp--preset--color--accent-3,#c39a3f);
+ --ih-a-rule:var(--wp--preset--color--accent-6,#d8cbb2);
+ --ih-a-muted:var(--wp--preset--color--muted,#6b6158);
+ max-width:860px;
+}
 .ih-options h1{font-weight:500;letter-spacing:.02em}
-.ih-tabs{display:flex;gap:4px;border-bottom:1px solid #d8cbb2;margin:18px 0 0}
-.ih-tabs a{padding:10px 18px;text-decoration:none;color:#6b6158;border-bottom:2px solid transparent;margin-bottom:-1px;font-size:14px}
-.ih-tabs a:hover{color:#1f5c4a}
-.ih-tabs a[aria-selected="true"]{color:#1f5c4a;border-bottom-color:#1f5c4a;font-weight:600}
-.ih-tabs a:focus-visible{outline:2px solid #1f5c4a;outline-offset:2px}
-.ih-panel{background:#fff;border:1px solid #d8cbb2;border-top:0;border-radius:0 0 10px 10px;padding:8px 24px 16px}
+.ih-tabs{display:flex;flex-wrap:wrap;gap:4px;border-bottom:1px solid var(--ih-a-rule);margin:18px 0 0}
+.ih-tabs a{padding:10px 18px;text-decoration:none;color:var(--ih-a-muted);border-bottom:2px solid transparent;margin-bottom:-1px;font-size:14px}
+.ih-tabs a:hover{color:var(--ih-a-primary)}
+.ih-tabs a[aria-selected="true"]{color:var(--ih-a-primary);border-bottom-color:var(--ih-a-primary);font-weight:600}
+.ih-tabs a:focus-visible{outline:2px solid var(--ih-a-primary);outline-offset:2px}
+.ih-panel{background:#fff;border:1px solid var(--ih-a-rule);border-top:0;border-radius:0 0 10px 10px;padding:8px 24px 16px}
 .ih-js .ih-panel[hidden]{display:none}
 .ih-options .form-table th{width:240px;font-weight:500}
 .ih-options .wp-picker-container{display:inline-block}
 .ih-pages{margin:12px 0;columns:2;column-gap:32px}
 .ih-pages li{break-inside:avoid;display:flex;gap:8px;align-items:baseline;margin:0 0 6px;font-size:13px}
-.ih-pages code{color:#6b6158;background:none;padding:0;font-size:12px}
-.ih-dot{width:8px;height:8px;border-radius:50%;flex:none;background:#c39a3f}
-.is-ok .ih-dot{background:#1f5c4a}
+.ih-pages code{color:var(--ih-a-muted);background:none;padding:0;font-size:12px}
+.ih-dot{width:8px;height:8px;border-radius:50%;flex:none;background:var(--ih-a-gold)}
+.is-ok .ih-dot{background:var(--ih-a-primary)}
+
+/* Sharing tab: post-type choices on one line, network checklist with the icon beside each name */
+.ih-inline-choices{display:flex;flex-wrap:wrap;gap:6px 20px;margin:8px 0 0}
+.ih-networks{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px 16px;margin:8px 0 0}
+.ih-networks label{display:flex;align-items:center;gap:8px}
+.ih-networks .ih-net-icon{width:18px;height:18px;flex:none;background:currentColor;-webkit-mask:var(--ih-i) center/contain no-repeat;mask:var(--ih-i) center/contain no-repeat}
+.ih-share-x{--ih-i:url(../icons/social/x.svg)}
+.ih-share-facebook{--ih-i:url(../icons/social/facebook.svg)}
+.ih-share-whatsapp{--ih-i:url(../icons/social/whatsapp.svg)}
+.ih-share-telegram{--ih-i:url(../icons/social/telegram.svg)}
+.ih-share-reddit{--ih-i:url(../icons/social/reddit.svg)}
+.ih-share-linkedin{--ih-i:url(../icons/social/linkedin.svg)}
+.ih-share-bluesky{--ih-i:url(../icons/social/bluesky.svg)}
+.ih-share-threads{--ih-i:url(../icons/social/threads.svg)}
+.ih-share-pinterest{--ih-i:url(../icons/social/pinterest.svg)}
+.ih-share-line{--ih-i:url(../icons/social/line.svg)}
 @media (max-width:782px){.ih-pages{columns:1}}

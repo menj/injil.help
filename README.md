@@ -21,15 +21,21 @@ The theme header carries `GitHub Theme URI` and `Primary Branch: main`, so [Git 
 ## Structure
 
 - `style.css`, `theme.json`, `functions.php`: header, tokens, setup
-- `inc/options.php`: Appearance > Theme Options (tabbed: Colours, Branding, SEO)
-- `inc/starter-content.php`, `inc/starter-content-pages.php`: pages created on activation
-- `inc/seo.php`: titles, meta description, Open Graph, schema
+- `inc/options.php`: Appearance > Theme Options (tabbed: Colours, Branding, Sharing, SEO, Content)
+- `inc/share.php`: share row on posts and pages, Web Share button
+- `inc/starter-content.php`, `inc/starter-content-pages.php`: the page builder and the loader for the page data
+- `inc/data/`: all site content as JSON. `pages/*.json` are the starter pages by part of the site (pillar, gospels, paul, quran, gospel, bonus, resources, site); `narrative.json` is The Narrative of Jesus, Son of Mary (six chapters, 27 sections, 235 notes); `gospel-islam.json` holds the section titles and the Introduction; `quran-jesus.json` the 145 Qur'anic verses in 45 passages; `thomas.json` the Gospel of Thomas sections
+- `inc/data/tafsir/*.json`, `inc/tafsir.php`: the classical commentaries (al-Ṭabarī, al-Baghawī, al-Qurṭubī, Ibn Kathīr, Tanwīr al-Miqbās, al-Jalālayn, al-Durr al-Manthūr, al-Saʿdī) on the verses about Jesus, Mary, Zachariah and John, translated in full; builds `/quran/commentaries/` and the "From the commentaries" blocks folded into the gospel sections
+- `inc/gospel-islam.php`, `inc/quran-jesus.php`: build the gospel sections and the Qur'an page from that data
+- `inc/seo.php`: titles, meta description, Open Graph
+- `inc/schema.php`: the JSON-LD graph on every page (Organization, Person, WebSite, WebPage/CollectionPage/ProfilePage/ContactPage, BreadcrumbList, Article, FAQPage, ImageObject licence metadata, ItemList, Book)
 - `parts/`, `templates/`, `patterns/`: block markup
 - `assets/fonts/`: bundled fonts
-- `assets/css/`, `assets/js/`: Theme Options page styles and script, plus the ornament layer (`ornament.css`, `ornament.js`)
-- `assets/icons/`: line icons used as CSS masks
+- `assets/css/`, `assets/js/`: Theme Options page styles and script, the ornament layer (`ornament.css`, `ornament.js`) and the share row (`share.css`, `share.js`)
+- `assets/icons/`: line icons used as CSS masks; `assets/icons/social/`: share icons from the Minimalist Social Icons Pack (GPL; LinkedIn by Font Awesome, CC BY 4.0)
+- `languages/`: drop `injil-help-{locale}.mo` files here
 - `assets/brandmark.svg`: brandmark (header, footer, fallback favicon)
-- `assets/images/`: placeholder cover art
+- `assets/images/`: star pattern, divider and the default social image
 
 ## Documentation
 

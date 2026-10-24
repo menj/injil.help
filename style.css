@@ -5,7 +5,7 @@ Description: Child theme of Twenty Twenty-Five for injil.help, after Ahmad Shafa
 Author: Mohd Elfie Nieshaem Juferi
 Author URI: https://menj.org
 Template: twentytwentyfive
-Version: 3.2.1
+Version: 3.4.0
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -136,9 +136,22 @@ p.is-style-label-editorial{background:transparent;color:var(--ih-gold-ink);borde
 .wp-block-details.is-style-faq summary::-webkit-details-marker{display:none}
 .wp-block-details.is-style-faq summary::after{content:"+";font-family:var(--ih-sans);color:var(--wp--preset--color--accent-1)}
 .wp-block-details.is-style-faq[open] summary::after{content:"\2212"}
+/* Folded commentary blocks (the classical commentaries woven into the gospel sections) */
+.wp-block-details.is-style-fold{border-top:1px solid var(--wp--preset--color--accent-5);border-bottom:1px solid var(--wp--preset--color--accent-5);padding:var(--wp--preset--spacing--20) 0;margin:var(--wp--preset--spacing--20) 0}
+.wp-block-details.is-style-fold + .wp-block-details.is-style-fold{border-top:0;margin-top:0}
+.wp-block-details.is-style-fold summary{font-family:var(--ih-serif);font-weight:600;font-size:var(--wp--preset--font-size--medium);cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:1rem;align-items:baseline}
+.wp-block-details.is-style-fold summary::-webkit-details-marker{display:none}
+.wp-block-details.is-style-fold summary::after{content:"+";font-family:var(--ih-sans);color:var(--wp--preset--color--accent-2);flex:none}
+.wp-block-details.is-style-fold[open] summary::after{content:"\2212"}
+.wp-block-details.is-style-fold[open] summary{margin-bottom:var(--wp--preset--spacing--20)}
+.wp-block-details.is-style-fold h3{font-size:var(--wp--preset--font-size--medium);margin-top:var(--wp--preset--spacing--30)}
 
 /* ---------- v2.1: structure after apostleofdoom.org ---------- */
-.ih-ar{font-family:var(--ih-quran);direction:rtl;unicode-bidi:isolate;text-align:left;letter-spacing:0 !important}
+/* Arabic: .ih-ar is any Arabic (Amiri, RTL). KFGQPC Hafs is reserved for the Qur'an and applied only through .ih-quran. */
+.ih-ar{font-family:var(--wp--preset--font-family--amiri);direction:rtl;unicode-bidi:isolate;text-align:right;letter-spacing:0 !important}
+/* Glosses are single lines set beside Latin text, so they sit flush left with it. */
+.ih-gloss.ih-ar{text-align:left}
+.ih-quran,.ih-ar.ih-quran{font-family:var(--ih-quran)}
 .ih-gloss{display:block;font-family:var(--ih-greek);font-size:12px;font-weight:400;letter-spacing:.1em;color:var(--wp--preset--color--accent-2);line-height:1.3}
 .ih-gloss.ih-ar{font-size:14px}
 p.ih-gloss{margin:0;font-size:18px}
@@ -200,6 +213,13 @@ p.ih-cite{margin:0;font-size:13px;color:var(--wp--preset--color--muted)}
 .ih-entries-list .ih-entry h3{font-size:26px}
 @media (max-width:700px){.ih-entries-list .ih-entry{display:flex}}
 .ih-aside{border:1.5px solid var(--wp--preset--color--accent-3);border-radius:var(--ih-r-md);padding:18px 22px;max-width:760px;margin-top:var(--wp--preset--spacing--30) !important}
+.ih-aside > * + *{margin-top:8px}
+.ih-next .ih-k{color:var(--wp--preset--color--accent-1)}
+/* Section index: the overview between the head and the entries */
+.ih-overview{max-width:760px;margin-top:var(--wp--preset--spacing--30)}
+.ih-overview h2{font-size:var(--wp--preset--font-size--large);margin-top:var(--wp--preset--spacing--30)}
+.ih-overview h2:first-child{margin-top:0}
+.ih-overview p{margin-top:var(--wp--preset--spacing--10)}
 
 /* FAQs */
 .ih-answers-band{display:block;background:var(--wp--preset--color--accent-5);border-radius:var(--ih-r-lg);padding:clamp(24px,4vw,48px)}
@@ -230,11 +250,13 @@ p.ih-cite{margin:0;font-size:13px;color:var(--wp--preset--color--muted)}
 :lang(he),:lang(hbo){font-family:var(--wp--preset--font-family--sbl-hebrew)}
 :lang(syc),:lang(arc){font-family:var(--wp--preset--font-family--estrangelo)}
 :lang(akk),:lang(sux){font-family:var(--wp--preset--font-family--cuneiform)}
-.ih-quran,.ih-ar{font-family:var(--ih-quran)}
+.ih-quran{font-family:var(--ih-quran)}
 .ih-hadith{font-family:var(--wp--preset--font-family--naskh);direction:rtl}
 .ih-translit{font-family:var(--wp--preset--font-family--sbl-biblit)}
 .ih-record,.ih-record td,.ih-record th{font-family:var(--wp--preset--font-family--special-elite) !important}
 .wp-block-site-title{font-family:var(--ih-display)}
+/* Kagnue, the display face, also carries the large titles of the section index pages and the home sections, and the big numerals; it lacks the dotted transliteration letters, so it is not used for page titles that may carry them. */
+.ih-section-head h1,.ih-section-head h2,.ih-numeral{font-family:var(--ih-display);font-weight:400;letter-spacing:.01em}
 .ih-k,.ih-eyebrow,.ih-chapter-head,p[class*="is-style-label-"]{font-family:var(--ih-sans)}
 .ih-k,.ih-eyebrow{letter-spacing:.14em}
 .ih-cover-gloss{font-size:26px !important;color:var(--wp--preset--color--accent-3) !important;margin-bottom:var(--wp--preset--spacing--20) !important}
@@ -285,7 +307,7 @@ p.ih-cite{margin:0;font-size:13px;color:var(--wp--preset--color--muted)}
 
 /* Saying status marks: agree, beyond the measure, unclear, conflict, not needed */
 .ih-s{list-style:none;margin-inline-start:0;padding:.55em .9em;border-inline-start:4px solid var(--ih-mark,var(--wp--preset--color--accent-6));background:var(--ih-tint,transparent);border-radius:0 var(--ih-r-sm) var(--ih-r-sm) 0;margin-bottom:.5em}
-.ih-badge{display:inline-block;font-family:var(--ih-sans);font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.1em .6em;margin-inline-end:.5em;border-radius:var(--ih-r-pill);background:var(--ih-mark);color:#fff;vertical-align:.1em}
+.ih-badge{display:inline-block;font-family:var(--ih-sans);font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.1em .6em;margin-inline-end:.5em;border-radius:var(--ih-r-pill);background:var(--ih-mark);color:var(--wp--preset--color--base);vertical-align:.1em}
 .ih-s-agree{--ih-mark:var(--wp--preset--color--accent-1);--ih-tint:var(--wp--preset--color--green-tint)}
 .ih-s-beyond{--ih-mark:var(--wp--preset--color--accent-4);--ih-tint:var(--wp--preset--color--lapis-tint)}
 .ih-s-unclear{--ih-mark:var(--ih-gold-ink);--ih-tint:var(--wp--preset--color--gold-tint)}

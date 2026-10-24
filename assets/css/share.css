@@ -1,0 +1,55 @@
+/*
+ * Share row. Each icon is a CSS mask over currentColor, so the whole row follows
+ * the palette tokens and Theme Options > Colours.
+ */
+.ih-share{
+ display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;
+ margin-top:var(--wp--preset--spacing--40);padding-top:var(--wp--preset--spacing--20);
+ border-top:var(--ih-rule);
+}
+.ih-share-label{
+ font-family:var(--ih-sans);font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+ color:var(--wp--preset--color--accent-2);
+}
+.ih-share-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.ih-share-item{margin:0;text-align:start}
+.ih-share-link{
+ display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:6px 14px 6px 10px;
+ border:1.5px solid var(--wp--preset--color--accent-6);border-radius:var(--ih-r-pill);
+ background:var(--wp--preset--color--accent-5);color:var(--wp--preset--color--contrast);
+ font-family:var(--ih-sans);font-size:14px;font-weight:600;line-height:1;letter-spacing:.02em;
+ text-decoration:none;cursor:pointer;
+ transition:background .18s ease,border-color .18s ease,color .18s ease;
+}
+button.ih-share-link{font:inherit;font-family:var(--ih-sans);font-size:14px;font-weight:600}
+.ih-share-link:hover,.ih-share-link:focus-visible{
+ background:var(--wp--preset--color--green-tint);border-color:var(--wp--preset--color--accent-1);color:var(--wp--preset--color--accent-1);
+}
+.ih-share-icon{
+ flex:none;width:18px;height:18px;background:currentColor;
+ -webkit-mask:var(--ih-i) center/contain no-repeat;mask:var(--ih-i) center/contain no-repeat;
+}
+.ih-share-copy.is-failed .ih-share-link{border-color:var(--wp--preset--color--accent-2);color:var(--wp--preset--color--accent-2)}
+.ih-share-copy.is-done .ih-share-link{background:var(--wp--preset--color--accent-1);border-color:var(--wp--preset--color--accent-1);color:var(--wp--preset--color--base)}
+
+/* One mask per network; the files are assets/icons/social/{network}.svg */
+.ih-share-x .ih-share-icon{--ih-i:url(../icons/social/x.svg)}
+.ih-share-facebook .ih-share-icon{--ih-i:url(../icons/social/facebook.svg)}
+.ih-share-whatsapp .ih-share-icon{--ih-i:url(../icons/social/whatsapp.svg)}
+.ih-share-telegram .ih-share-icon{--ih-i:url(../icons/social/telegram.svg)}
+.ih-share-reddit .ih-share-icon{--ih-i:url(../icons/social/reddit.svg)}
+.ih-share-linkedin .ih-share-icon{--ih-i:url(../icons/social/linkedin.svg)}
+.ih-share-bluesky .ih-share-icon{--ih-i:url(../icons/social/bluesky.svg)}
+.ih-share-threads .ih-share-icon{--ih-i:url(../icons/social/threads.svg)}
+.ih-share-pinterest .ih-share-icon{--ih-i:url(../icons/social/pinterest.svg)}
+.ih-share-line .ih-share-icon{--ih-i:url(../icons/social/line.svg)}
+.ih-share-copy .ih-share-icon{--ih-i:url(../icons/link.svg)}
+.ih-share-native .ih-share-icon{--ih-i:url(../icons/share.svg)}
+
+/* Small screens: icons only, names read by assistive technology through aria-label */
+@media (max-width:599px){
+ .ih-share{gap:8px 12px}
+ .ih-share-link{padding:6px 10px;min-width:40px;justify-content:center}
+ .ih-share-item:not(.ih-share-copy):not(.ih-share-native) .ih-share-name{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+}
+@media (prefers-reduced-motion:reduce){.ih-share-link{transition:none}}

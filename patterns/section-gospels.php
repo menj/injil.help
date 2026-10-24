@@ -33,6 +33,23 @@
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
+<!-- wp:group {"className":"ih-overview","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-overview"><!-- wp:heading -->
+<h2 class="wp-block-heading">What this part shows</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>The Christian reading of Jesus rests on four books, and the Islamic Dilemma rests on the claim that the Qur’an must either accept them whole or reject them whole. This part asks what the four books are. The answer, drawn from the books themselves and from the scholarship that has studied them for two centuries, is that they are four anonymous Greek works written between forty and eighty years after the events, by men who say they were not there, in a chain of dependence in which each copied and corrected the one before, and that where they are independent of one another they disagree. None of this is a Muslim discovery. It is in every critical introduction to the New Testament, and the sources are given on each page.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>The order of the pages is the order in which the books were written. <a href="/gospels/mark/">Mark</a> comes first, anonymous and ending without a risen Jesus. <a href="/gospels/matthew/">Matthew</a> and <a href="/gospels/luke/">Luke</a> rewrite it, each adding a birth story and resurrection appearances that contradict the other’s, and each in its own way: Matthew for Jews who kept the law, Luke for gentiles who did not. <a href="/gospels/john/">John</a>, last and furthest from the rest, gives Jesus the speeches about himself that the other three never heard. <a href="/gospels/thomas/">Thomas</a>, outside the four, is the control: a gospel of sayings alone, which shows what the earliest tradition looked like before it was set into a story. <a href="/gospels/synoptic-problem/">The synoptic problem</a> is the chain of dependence shown in detail, and <a href="/gospels/discrepancies/">the discrepancy tables</a> are the disagreements set side by side with chapter and verse.</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2 class="wp-block-heading">How to read it</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>Begin with <a href="/method/">the measure</a>, which states in three lines the rule by which this website decides what in the gospels is the Injīl. Then read the five gospel pages in order. Each is labelled at the top with the position it takes (scholarly consensus, minority view, or the Islamic position), each gives its sources, and each ends with a short statement of why the page matters for the question of the Injīl. A reader who wants only the disagreements can go straight to the tables; a reader who wants to know why the disagreements exist should read the synoptic problem first.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
 <!-- wp:group {"className":"ih-entries ih-entries-list ih-tint-lapis","layout":{"type":"grid","minimumColumnWidth":"15rem"}} -->
 <div class="wp-block-group ih-entries ih-entries-list ih-tint-lapis"><!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
@@ -80,7 +97,7 @@
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Gospel · V</p>
+<p class="ih-k">Outside the four</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/gospels/thomas/">The Gospel of Thomas</a></h3>
@@ -91,7 +108,7 @@
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Gospel · VI</p>
+<p class="ih-k">Between the gospels</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/gospels/synoptic-problem/">The synoptic problem</a></h3>
@@ -102,7 +119,7 @@
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Gospel · VII</p>
+<p class="ih-k">Where they disagree</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/gospels/discrepancies/">The discrepancy tables</a></h3>
@@ -114,4 +131,45 @@
 <p class="ih-meta">In 5 parts</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
+<!-- /wp:group -->
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Questions about the four gospels</h2>
+<!-- /wp:heading -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Who wrote the four gospels?</summary><!-- wp:paragraph -->
+<p>Nobody knows. All four are anonymous; the names Matthew, Mark, Luke and John were attached in the second century, on traditions the gospels themselves do not support. Matthew and Luke copied most of Mark, which an eyewitness would not have needed to do. See <a href="/gospels/mark/">Mark</a> and <a href="/gospels/matthew/">Matthew</a>.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>When were the gospels written?</summary><!-- wp:paragraph -->
+<p>Mark around 65 to 75 CE, Matthew and Luke around 80 to 90, John around 90 to 110: forty to eighty years after the crucifixion, in Greek, outside Palestine. The letters of Paul of Tarsus, from about 50 CE, are older than any of them. The <a href="/resources/timeline/">timeline</a> sets every date in order.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Were the gospel writers eyewitnesses?</summary><!-- wp:paragraph -->
+<p>No. Luke says in his preface that he was not, and that he worked from earlier accounts handed down by those who were (Luke 1:1-4). Mark and Matthew explain Jewish customs and translate Aramaic for readers who knew neither. John ends by attributing its testimony to an unnamed disciple, in a chapter added after the gospel had already closed.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Do the four gospels contradict each other?</summary><!-- wp:paragraph -->
+<p>Yes, on the genealogies, the date and place of the birth, the day of the crucifixion, the last words, and almost every detail of the resurrection morning. The <a href="/gospels/discrepancies/">discrepancy tables</a> set the texts side by side with chapter and verse, so the reader can check rather than take it on trust.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>What is the synoptic problem?</summary><!-- wp:paragraph -->
+<p>The question of why Matthew, Mark and Luke share whole sentences in the same order. The answer held by most scholars is that Mark was written first and the other two copied him, adding a shared collection of sayings (Q) and material of their own. On any solution the three are not independent witnesses. See <a href="/gospels/synoptic-problem/">the synoptic problem</a>.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:details {"className":"is-style-faq"} -->
+<details class="wp-block-details is-style-faq"><summary>Is the Gospel of Thomas a real gospel?</summary><!-- wp:paragraph -->
+<p>It is a real early Christian text: 114 sayings of Jesus with no story, found at Nag Hammadi in 1945 and dated between the late first and mid second century. About half its sayings have parallels in the synoptics. It is not in the canon. This website tests each saying against the Qur’an; see <a href="/gospels/thomas/">the Gospel of Thomas</a>.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+<!-- wp:group {"className":"ih-aside ih-next","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-aside ih-next"><!-- wp:paragraph {"className":"ih-k"} -->
+<p class="ih-k">Where this leads</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>The gospels record a Jesus sent to Israel, who kept the law and told others to keep it. The Christ of the churches came from somewhere else. The next part, <a href="/paul/">Paul of Tarsus</a>, follows the man who never met him and whose letters are older than any gospel.</p>
+<!-- /wp:paragraph --></div>
 <!-- /wp:group -->

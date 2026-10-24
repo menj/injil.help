@@ -8,7 +8,10 @@
 ?>
 <!-- wp:group {"tagName":"section","className":"ih-section ih-answers-band","layout":{"type":"default"}} -->
 <section class="wp-block-group ih-section ih-answers-band"><!-- wp:group {"className":"ih-section-head","layout":{"type":"default"}} -->
-<div class="wp-block-group ih-section-head"><!-- wp:group {"className":"ih-gloss-row","layout":{"type":"flex","flexWrap":"wrap","verticalAlignment":"bottom"}} -->
+<div class="wp-block-group ih-section-head"><!-- wp:paragraph {"className":"ih-eyebrow"} -->
+<p class="ih-eyebrow">In brief</p>
+<!-- /wp:paragraph -->
+<!-- wp:group {"className":"ih-gloss-row","layout":{"type":"flex","flexWrap":"wrap","verticalAlignment":"bottom"}} -->
 <div class="wp-block-group ih-gloss-row"><!-- wp:paragraph {"className":"ih-gloss"} -->
 <p class="ih-gloss">ΑΠΟΛΟΓΙΑ</p>
 <!-- /wp:paragraph -->

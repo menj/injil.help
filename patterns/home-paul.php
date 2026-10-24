@@ -8,7 +8,10 @@
 ?>
 <!-- wp:group {"tagName":"section","className":"ih-section","layout":{"type":"default"}} -->
 <section class="wp-block-group ih-section"><!-- wp:group {"className":"ih-section-head","layout":{"type":"default"}} -->
-<div class="wp-block-group ih-section-head"><!-- wp:group {"className":"ih-gloss-row","layout":{"type":"flex","flexWrap":"wrap","verticalAlignment":"bottom"}} -->
+<div class="wp-block-group ih-section-head"><!-- wp:paragraph {"className":"ih-eyebrow"} -->
+<p class="ih-eyebrow">Part III · The man who changed the message</p>
+<!-- /wp:paragraph -->
+<!-- wp:group {"className":"ih-gloss-row","layout":{"type":"flex","flexWrap":"wrap","verticalAlignment":"bottom"}} -->
 <div class="wp-block-group ih-gloss-row"><!-- wp:paragraph {"className":"ih-gloss"} -->
 <p class="ih-gloss">ΠΑΥΛΟΣ</p>
 <!-- /wp:paragraph -->
@@ -32,6 +35,17 @@
 <p class="ih-k">Paul of Tarsus · I</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading"><a href="/paul/seven-letters/">The seven letters</a></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"ih-d"} -->
+<p class="ih-d">Which letters scholars accept as Paul of Tarsus’s own, and why the argument here rests on them alone.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
+<p class="ih-k">Paul of Tarsus · II</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/paul/acts-galatians/">Acts against Galatians</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
@@ -40,7 +54,7 @@
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Paul of Tarsus · II</p>
+<p class="ih-k">Paul of Tarsus · III</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/paul/paul-against-jesus/">Paul of Tarsus against Jesus</a></h3>
@@ -54,7 +68,7 @@
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Paul of Tarsus · III</p>
+<p class="ih-k">Paul of Tarsus · IV</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/paul/james/">James and the Jerusalem church</a></h3>
@@ -65,24 +79,13 @@
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Paul of Tarsus · IV</p>
+<p class="ih-k">Paul of Tarsus · V</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/paul/ebionites/">The Ebionites</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">The early Jewish followers of Jesus who kept the law and rejected Paul of Tarsus.</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group -->
-<!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
-<div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Paul of Tarsus · V</p>
-<!-- /wp:paragraph -->
-<!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/paul/seven-letters/">The seven letters</a></h3>
-<!-- /wp:heading -->
-<!-- wp:paragraph {"className":"ih-d"} -->
-<p class="ih-d">Which letters scholars accept as Paul of Tarsus’s own, and why the argument here rests on them alone.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
