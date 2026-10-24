@@ -151,6 +151,7 @@ p.ih-cite{margin:0;font-size:13px;color:var(--wp--preset--color--muted)}
 .ih-nav .wp-block-navigation-item__content{display:flex;flex-direction:column;align-items:flex-start;padding:6px 14px;border-radius:var(--ih-r-md);line-height:1.25;font-weight:600}
 .ih-nav .wp-block-navigation-item__content:hover,.ih-nav .current-menu-item > .wp-block-navigation-item__content{background:var(--wp--preset--color--accent-5)}
 .ih-nav .wp-block-navigation-item__label{display:flex;flex-direction:column}
+.ih-nav .wp-block-navigation-item__content,.ih-nav .wp-block-navigation-item__content:hover,.ih-nav .wp-block-navigation-item__content:focus{text-decoration:none}
 
 /* Hero: title page */
 .ih-cover-title{font-family:var(--ih-display) !important;font-weight:400 !important;letter-spacing:0 !important;font-size:clamp(46px,7vw,80px) !important;line-height:1 !important;margin:.15em 0 .1em !important}
