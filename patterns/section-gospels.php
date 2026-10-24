@@ -80,7 +80,7 @@
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Gospel · V</p>
+<p class="ih-k">Outside the four</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/gospels/thomas/">The Gospel of Thomas</a></h3>
@@ -91,7 +91,7 @@
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Gospel · VI</p>
+<p class="ih-k">Between the gospels</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/gospels/synoptic-problem/">The synoptic problem</a></h3>
@@ -102,7 +102,7 @@
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Gospel · VII</p>
+<p class="ih-k">Where they disagree</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/gospels/discrepancies/">The discrepancy tables</a></h3>

@@ -120,7 +120,7 @@
 <h4 class="wp-block-heading">Objection</h4>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>[The Qur&#039;an tells seventh-century Christians to judge by the Injīl they held. If it was not the four gospels, what did they hold?]</p>
+<p>The Qur&#039;an tells the Christians of the seventh century to judge by the Injīl (5:47) and says the Prophet is described in the Torah and the Injīl that are with them (7:157). If the Injīl was not the four gospels, what book did those Christians hold in their hands?</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:group {"layout":{"type":"default"}} -->
@@ -128,7 +128,7 @@
 <h4 class="wp-block-heading">Best Christian reply</h4>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>[State the strongest form of the reply fairly, with its source.]</p>
+<p>The Christians of Arabia and Syria had no gospel but the four, read in Greek and Syriac, or in Tatian&#039;s harmony of the four. When the Qur&#039;an says &quot;the Injīl&quot; and &quot;with them&quot;, it can only mean the book in their possession. A revelation that no one possessed could not be a standard for anyone to judge by. So the Qur&#039;an endorses the gospels Christians had, and the dilemma stands. This is the form of the argument in Gordon Nickel, <em>The Gentle Answer to the Muslim Accusation of Biblical Falsification</em> (2015), and in Samuel Green&#039;s articles, answered on <a href="/resources/responses/">Responses to named articles</a>.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:group {"layout":{"type":"default"}} -->
@@ -136,7 +136,7 @@
 <h4 class="wp-block-heading">Response</h4>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>[Answer it from the text of 5:47 and the classical exegetes, with sources.]</p>
+<p>The verse does not say &quot;judge by the book you hold&quot;. It says &quot;let the people of the Injīl judge by what God has revealed in it&quot; (<em>bimā anzala Allāhu fīhi</em>). The object of the command is the revelation, and the verse before it defines that revelation: the Injīl is what God gave to ʿĪsā, &quot;guidance and light&quot; (5:46). Al-Ṭabarī and Ibn Kathīr both gloss 5:47 as a command to judge by what God sent down in the Injīl, and neither reads it as a certificate for every line in Christian hands; the same Qur&#039;an says, of the same people, that some wrote scripture with their own hands (2:79) and moved words from their places (5:13-14). The books the Christians held carried the Injīl, which is why 7:157 can say the Prophet is found written in them, and carried other things too, which is why the Qur&#039;an corrects them. The reply also proves less than it claims: Christian writers do not agree whether the book in question was the four gospels or the Diatessaron (see <a href="/resources/responses/">the named articles</a>), and neither candidate is a book given to ʿĪsā. What the seventh-century Christians held is a question about manuscripts. What God revealed in the Injīl is a question the Qur&#039;an answers itself, as guardian over the earlier scripture (5:48), and this website follows that answer on <a href="/method/">the measure</a>.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
@@ -145,12 +145,12 @@
 <!-- /wp:heading -->
 <!-- wp:details {"className":"is-style-faq"} -->
 <details class="wp-block-details is-style-faq"><summary>Who popularised the Islamic Dilemma?</summary><!-- wp:paragraph -->
-<p>[Name and date the modern popularisers, with citations, and note older Christian forms of the argument.]</p>
+<p>The name and the two-horned form were spread online from the 2010s by David Wood of Acts 17 Apologetics, in videos and debates, and by Sam Shamoun of Answering Islam, who had used the argument in writing before that. The argument itself is older. Karl Gottlieb Pfander&#039;s <em>Mīzān al-Ḥaqq</em> (The Balance of Truth, 1830s) argued from the Qur&#039;an&#039;s affirmation of the earlier scriptures that they could not have been corrupted, and the ninth-century Christian apology written under the name of al-Kindī made the same move against its Muslim correspondent. Muslim scholars answered each of them in turn; this website answers the current form.</p>
 <!-- /wp:paragraph --></details>
 <!-- /wp:details -->
 <!-- wp:details {"className":"is-style-faq"} -->
 <details class="wp-block-details is-style-faq"><summary>Does Qur&#039;an 6:115 mean the Bible cannot be corrupted?</summary><!-- wp:paragraph -->
-<p>[Answer: the verse speaks of the words of God, not of every manuscript that carries them. 40-60 words, cited.]</p>
+<p>No. The verse says the word of your Lord is perfected in truth and justice and none can change His words (6:115; so also 18:27). The words are God&#039;s decree and revelation, not the ink of every copy made of them. The same book says people wrote scripture with their own hands (2:79) and moved words from their places (5:13). God&#039;s word stands whatever a scribe does to a page.</p>
 <!-- /wp:paragraph --></details>
 <!-- /wp:details -->
 <!-- wp:details {"className":"is-style-faq"} -->

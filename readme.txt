@@ -81,7 +81,9 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 * The default social image is now bundled (assets/images/og-default.jpg) instead of hotlinked from Wikimedia Commons.
 * Theme updates rewrite only the starter pages whose text changed, keep no revision for the rewrite, and flush rewrite rules only when permalinks had to be set. Page text is slashed before saving, so backslashes survive.
 * The Resources section is back on the front page.
-* No placeholder content: the corrections log opens with the real record instead of a sample row, the unused placeholder cover art is removed, and first activation bins WordPress's sample post, page and comment and replaces the default tagline.
+* No placeholder content: the corrections log opens with the real record instead of a sample row; the measure states the website's position on alteration; the pillar page's objection, reply, response and two open questions are written; the Objection-and-reply and Gospel-chapter patterns carry worked examples; the unused placeholder cover art is removed; first activation bins WordPress's sample post, page and comment and replaces the default tagline.
+* "How this gospel was composed" rewritten in full: the base text, the six-chapter arrangement, the Qur'anic passages set in the story, the notes, the Gospel of Thomas and the measure applied.
+* Pages read as one story. Front page: the argument, the books, the man who changed the message, the measure, the gospel restored, the apparatus, then the FAQs; each section carries a Part label. Paul of Tarsus opens with the seven letters, the evidence the rest depends on; the FAQs follow the same order as the site; the Gospels index names the role of the entries that are not one of the four.
 * Theme Options page colours follow the Colours tab; badge text and icons use the parchment token instead of white.
 * languages/ folder added for translation files; readme corrected on page rewriting.
 = 3.2.1 =

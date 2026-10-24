@@ -8,7 +8,10 @@
 ?>
 <!-- wp:group {"tagName":"section","className":"ih-section","layout":{"type":"default"}} -->
 <section class="wp-block-group ih-section"><!-- wp:group {"className":"ih-section-head","layout":{"type":"default"}} -->
-<div class="wp-block-group ih-section-head"><!-- wp:group {"className":"ih-gloss-row","layout":{"type":"flex","flexWrap":"wrap","verticalAlignment":"bottom"}} -->
+<div class="wp-block-group ih-section-head"><!-- wp:paragraph {"className":"ih-eyebrow"} -->
+<p class="ih-eyebrow">Part II · The books</p>
+<!-- /wp:paragraph -->
+<!-- wp:group {"className":"ih-gloss-row","layout":{"type":"flex","flexWrap":"wrap","verticalAlignment":"bottom"}} -->
 <div class="wp-block-group ih-gloss-row"><!-- wp:paragraph {"className":"ih-gloss"} -->
 <p class="ih-gloss">ΕΥΑΓΓΕΛΙΟΝ</p>
 <!-- /wp:paragraph -->
@@ -81,7 +84,7 @@
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Gospel · V</p>
+<p class="ih-k">Between the gospels</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/gospels/synoptic-problem/">The synoptic problem</a></h3>
@@ -92,7 +95,7 @@
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Gospel · VI</p>
+<p class="ih-k">Where they disagree</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/gospels/discrepancies/">The discrepancy tables</a></h3>
