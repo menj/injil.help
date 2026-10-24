@@ -11,7 +11,7 @@ The fixed facts about The Injil theme. When another document, a comment or a pat
 | Theme URI | https://github.com/menj/injil.help |
 | Folder and text domain | `injil-help` |
 | Parent theme | Twenty Twenty-Five (`twentytwentyfive`), must stay installed |
-| Site | https://injil.help |
+| Site | https://injil.help (The Rightly-Guided Injīl). The theme is custom-built for this one site and is not intended for use on any other. |
 | Repository | https://github.com/menj/injil.help, `Primary Branch: main` (Git Updater) |
 | Version | `Version:` in `style.css` and `INJIL_HELP_VERSION` in `functions.php`, always equal; the release tag is `v` + that number |
 | Requires | WordPress 6.6, PHP 7.4 |
@@ -25,20 +25,21 @@ The fixed facts about The Injil theme. When another document, a comment or a pat
 - No placeholder text anywhere. Every page is complete when created.
 - Laughter attributed to Jesus, docetism and mockery of the prophets in the Gnostic witnesses are set aside and the notes say so.
 - No classical commentator names Simon of Cyrene as the substitute; the identification comes from Basilides through modern apologetics. Do not reintroduce the claim.
-- No individual apologist is named on the secular-form page; the arguments are answered, not the people.
+- No individual apologist is named on the secular-form page; the arguments are answered, not the people. The pillar page names the argument's historical proponents (Shamoun, Wood, Pfander, Ward) as its origin only.
+- The Gospel of Thomas in the Patterson and Meyer translation is reproduced with permission; Mattison's translations are public domain. Keep both credits on the sayings pages and the credits page.
 
 ## Pages
 
-- 166 starter pages, created on activation from `inc/data/` and `patterns/`, listed and restorable under Appearance › Theme Options › Content.
-- Fixed slugs: `/the-islamic-dilemma/` (pillar), `/the-islamic-dilemma/secular-form/`, `/method/`, `/corrections/`, `/answers/`, `/gospels/`, `/paul/`, `/quran/`, `/quran/passages/`, `/quran/commentaries/`, `/gospel-according-to-islam/` (Introduction at `/introduction/`, sections `/1/` to `/27/`, `/how-composed/`), `/bonus/epistle/`, `/resources/` (`timeline`, `glossary`, `sources`, `objections`, `responses`), `/about-the-author/`, `/contact/`, `/credits/`, `/terms-of-use/`, `/privacy-policy/`, `/sitemap/`.
-- The gospel: Ahmad Shafaat's text (1985) in six chapters over 27 sections, with the Qur'anic passages, the Gospel of Thomas, the three witnesses to the substitution (section 26) and the classical commentaries woven in.
+- 175 starter pages, created on activation from `inc/data/` and `patterns/`, listed and restorable under Appearance › Theme Options › Content.
+- Fixed slugs: `/the-islamic-dilemma/` (pillar), `/the-islamic-dilemma/secular-form/`, `/method/`, `/corrections/`, `/answers/`, `/gospels/` (the part is named The Five Gospels: Mark, Matthew, Luke, John and Thomas; `/gospels/thomas/sayings/`, `/gospels/thomas/sayings-patterson-meyer/`, `/gospels/thomas/correlation/`, `/gospels/thomas/set-aside/`, `/gospels/discrepancies/{genealogies,nativity,last-supper,crucifixion,resurrection}/`), `/paul/`, `/quran/`, `/quran/passages/`, `/quran/commentaries/`, `/gospel-according-to-islam/` (Introduction at `/introduction/`, sections `/1/` to `/27/`, `/how-composed/`), `/bonus/epistle/`, `/resources/` (`timeline`, `glossary`, `sources`, `manuscripts`, `borrowing`, `objections`, `responses`), `/about-the-author/`, `/contact/`, `/credits/`, `/terms-of-use/`, `/privacy-policy/`, `/sitemap/`.
+- The gospel: Ahmad Shafaat's text (1985) in six chapters over 27 sections, with the Qur'anic passages, the Gospel of Thomas, the Infancy Gospel of James (sections 1, 2) and the Infancy Gospel of Thomas (sections 4, 14), the three witnesses to the substitution (section 26) and the classical commentaries woven in, in that order.
 - The Qur'anic passages: 13 surahs, 45 passages, 145 verses (`inc/data/quran-jesus.json`).
 - The commentaries: eight works on 3:33-64, 4:155-159, 5:110-120, 19:16-37, 21:91, 23:50, 43:57-65, 57:27, 61:6; keys `tabari`, `baghawi`, `qurtubi`, `ibn-katheer`, `tanwir`, `jalalayn`, `aldur-almanthoor`, `saadi`; 92 pages under `/quran/commentaries/`; folded into gospel sections 1, 2, 3, 7, 10, 13, 14, 16, 21, 22, 24, 25, 26, 27 (`injil_help_tafsir_section_map()`). Scope is the verses about Jesus, Mary, Zachariah and John only; a chunk that runs past them is cut at the commentator's heading in the build.
 
 ## Data
 
-- All content is JSON under `inc/data/`: `pages/{pillar,gospels,paul,quran,gospel,bonus,resources,site}.json`, `narrative.json` (6 chapters, 27 sections, 235 notes), `gospel-islam.json`, `quran-jesus.json`, `thomas.json`, `substitution.json`, `tafsir/{work}.json`.
-- A page entry has `path`, `title`, `excerpt`, and `pattern` or `body`; optional `template`.
+- All content is JSON under `inc/data/`: `pages/{pillar,gospels,paul,quran,gospel,bonus,resources,site}.json`, `narrative.json` (6 chapters, 27 sections, 235 notes), `gospel-islam.json`, `quran-jesus.json`, `thomas.json`, `infancy.json`, `substitution.json`, `thomas-mattison.json`, `thomas-patterson-meyer.json`, `tafsir/{work}.json`.
+- A page entry has `path`, `title`, `excerpt`, and `pattern` or `body`; optional `template`; optional `body_file`, a file in `inc/data/` whose lines are appended to `body` (the two full texts of Thomas).
 - Compact markup of a `body`: `## ` and `### ` headings; `- ` list items, optionally opening with `[agree]`, `[beyond]`, `[unclear]`, `[conflict]` or `[notneeded]`; `> ` quotation; `@consensus`, `@minority`, `@islamic` labels; `{{fn:…}}` inline footnote (numbered per page, listed under "Notes"); `[page-list]`; `? Question` followed by its answer paragraph (FAQ entry, collected into FAQPage); `[details] Title` … `[/details]` (fold block). Inline HTML inside lines is limited to what `wp_kses_post` allows; the commentaries use only `<strong>` and `<em>`.
 - Loaders: `injil_help_starter_pages()`, `injil_help_pages_file()`, `injil_help_data_file()`, `injil_help_narrative_data()`, `injil_help_gospel_islam_data()`, `injil_help_gospel_woven_sections()`, `injil_help_gospel_islam_pages()`, `injil_help_quran_data()`, `injil_help_quran_page()`, `injil_help_tafsir_data()`, `injil_help_tafsir_pages()`, `injil_help_tafsir_section_lines()`.
 - Parser: `injil_help_markup_to_blocks()` in `inc/starter-content.php`.

@@ -89,6 +89,28 @@
 <p class="ih-k">Reference</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading"><a href="/resources/borrowing/">Did the Qur’an borrow its stories?</a></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"ih-d"} -->
+<p class="ih-d">The charge that the Qur’an copied Mary and Jesus from the infancy gospels, stated fairly and answered.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
+<p class="ih-k">Reference</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading"><a href="/resources/manuscripts/">Manuscripts of the extracanonical gospels</a></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"ih-d"} -->
+<p class="ih-d">Thomas, the infancy gospels and others: what survives, in what language, and when it was copied.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
+<p class="ih-k">Reference</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/resources/objections/">Objections and replies</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->

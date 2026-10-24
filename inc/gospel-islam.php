@@ -27,10 +27,10 @@ function injil_help_gospel_thomas_sections() {
 	return injil_help_data_file( 'thomas' );
 }
 
-/** Everything woven into a section after Shafaat's text: Thomas, then the substitution witnesses. Keyed by section number. */
+/** Everything woven into a section after Shafaat's text: Thomas, the infancy gospels, then the substitution witnesses. Keyed by section number. */
 function injil_help_gospel_woven_sections() {
 	$out = array();
-	foreach ( array( injil_help_gospel_thomas_sections(), injil_help_data_file( 'substitution' ) ) as $set ) {
+	foreach ( array( injil_help_gospel_thomas_sections(), injil_help_data_file( 'infancy' ), injil_help_data_file( 'substitution' ) ) as $set ) {
 		foreach ( (array) $set as $n => $lines ) {
 			$out[ (string) $n ] = array_merge( $out[ (string) $n ] ?? array(), array_values( (array) $lines ) );
 		}

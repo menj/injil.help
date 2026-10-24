@@ -1,6 +1,6 @@
 # The Injil: technical reference
 
-A block child theme of Twenty Twenty-Five for [injil.help](https://injil.help). This file is for theme developers, web developers and hosts: how the theme is built, how it boots, where every piece of behaviour lives, what the server needs, and how to work on it. The general-audience manual is `readme.txt`; the fixed facts are in `SSOT.md`; the history is `CHANGELOG.md`; the roadmap is `UPGRADING.md`.
+A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided Injīl at [injil.help](https://injil.help), and not intended for any other: its pages, data, fonts and licences belong to that site. This file is for theme developers, web developers and hosts: how the theme is built, how it boots, where every piece of behaviour lives, what the server needs, and how to work on it. The general-audience manual is `readme.txt`; the fixed facts are in `SSOT.md`; the history is `CHANGELOG.md`; the roadmap is `UPGRADING.md`.
 
 ## Contents
 
@@ -35,7 +35,7 @@ A block child theme of Twenty Twenty-Five for [injil.help](https://injil.help). 
 | Folder, text domain, pattern prefix | `injil-help` |
 | Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.4.0) |
 | PHP in `inc/` | options, starter-content, starter-content-pages, gospel-islam, quran-jesus, tafsir, seo, schema, share |
-| Data | `inc/data/` 2.5 MB of JSON: 166 starter pages, the gospel narrative, the Qur'anic passages, Thomas, the substitution witnesses, eight commentaries (315,000 words) |
+| Data | `inc/data/` 2.6 MB of JSON: 175 starter pages, the gospel narrative, the Qur'anic passages, Thomas (woven sections and two full texts), the infancy gospels, the substitution witnesses, eight commentaries (315,000 words) |
 | Front-end assets | `style.css` 32 KB; `assets/css/ornament.css` 12 KB, `share.css` 3 KB; `assets/js/ornament.js` 3 KB, `share.js` 2 KB; all plain, no build step |
 | Fonts | 16 MB in `assets/fonts/`, 18 `fontFace` entries in `theme.json` |
 | Admin | one tabbed page, Appearance › Theme Options, option `injil_help_options` |
@@ -45,10 +45,10 @@ A block child theme of Twenty Twenty-Five for [injil.help](https://injil.help). 
 
 - WordPress 6.6 or later, PHP 7.4 or later (tested on 8.x). Twenty Twenty-Five installed; it may be inactive but must not be deleted.
 - Pretty permalinks. The theme sets `/%postname%/` on activation if the structure is empty.
-- Memory: the starter-content run that creates or rewrites 166 pages in one request works within WordPress's default 40 MB; on hosts with a lower `memory_limit` raise it to 128 MB for the first admin load after activation or an update.
+- Memory: the starter-content run that creates or rewrites 175 pages in one request works within WordPress's default 40 MB; on hosts with a lower `memory_limit` raise it to 128 MB for the first admin load after activation or an update.
 - `max_input_vars` and `post_max_size`: the largest starter pages (gospel sections 1, 2 and 27, 370 to 560 KB of block HTML) exceed PHP's default `post_max_size` of 8 MB only on hosts that set it lower; saving them in the block editor needs `max_input_vars` of at least 5000. Reading them needs nothing.
 - Page cache: strongly advised. The large pages are generated once and served from the database; a full-page cache (host-level, or any cache plugin) keeps them off PHP entirely. An object cache helps the options page but is not required.
-- Database: the 166 pages add about 6 MB to `wp_posts`; revisions are suppressed for theme-written pages.
+- Database: the 175 pages add about 6 MB to `wp_posts`; revisions are suppressed for theme-written pages.
 - Outbound requests: none at runtime. Manuscript images are loaded by the visitor's browser from `upload.wikimedia.org`; nothing is fetched server-side.
 - No build tools, Composer or npm. Upload the folder and activate.
 
@@ -100,11 +100,12 @@ Everything a visitor reads is either a block pattern in `patterns/` or JSON in `
 
 | File | Holds | Shape |
 |---|---|---|
-| `pages/pillar.json`, `gospels.json`, `paul.json`, `quran.json`, `gospel.json`, `bonus.json`, `resources.json`, `site.json` | the starter pages, one file per part, in site order | array of `{path, title, excerpt, pattern? \| body?, template?}` |
+| `pages/pillar.json`, `gospels.json`, `paul.json`, `quran.json`, `gospel.json`, `bonus.json`, `resources.json`, `site.json` | the starter pages, one file per part, in site order | array of `{path, title, excerpt, pattern? \| body?, body_file?, template?}`; `body_file` names a file in `inc/data/` whose list of lines is appended to `body` |
 | `narrative.json` | The Narrative of Jesus, Son of Mary | `{chapters: [{number, title, sections: [{number, lines[]}]}], notes: {n: text}}`; `[^n]` markers in lines |
 | `gospel-islam.json` | section titles, Introduction | `{section_titles: {n: title}, front: {introduction: {title, paras[]}}}` |
 | `quran-jesus.json` | the Qur'anic passages | `{surahs: {n: name}, passages: [{surah, verses_range, heading, verses: {n: text}}]}` |
-| `thomas.json`, `substitution.json` | woven passages | `{section: [markup lines]}` |
+| `thomas.json`, `infancy.json`, `substitution.json` | woven passages (Thomas, the infancy gospels, the substitution witnesses, merged in that order) | `{section: [markup lines]}` |
+| `thomas-mattison.json`, `thomas-patterson-meyer.json` | the full text of the Gospel of Thomas in two translations | `[markup lines]`, loaded through `body_file` |
 | `tafsir/{work}.json` | one commentary | `{work, entries: [{surah, from, to, arabic_words, english_words, paragraphs[]}]}` |
 
 `injil_help_starter_pages()` (static-cached per request) concatenates: pillar, gospels, paul, quran, the Qur'an page built by `injil_help_quran_page()`, the commentary pages from `injil_help_tafsir_pages()`, gospel, the 28 gospel pages from `injil_help_gospel_islam_pages()`, bonus, resources, site. Parents precede children in that order, which `populate()` relies on to resolve `post_parent`.
@@ -176,7 +177,7 @@ Appearance › Theme Options (`inc/options.php`), one option array `injil_help_o
 
 - `templates/`: `front-page.html`, `page.html`, `page-section.html` ("Section index"), `page-wide.html` ("Wide page (tables)"), `single.html`, `archive.html`, `home.html`, `index.html`, `search.html`, `404.html`. The two custom templates are declared in `theme.json` `customTemplates` for pages.
 - `parts/header.html`, `parts/footer.html`: navigation, brandmark, Qur'anic gloss (class `ih-gloss ih-ar ih-quran`, `dir="rtl" lang="ar"`).
-- `patterns/` (category `injil-help`): `hero`, `home-dilemma`, `home-gospels`, `home-paul`, `home-quran`, `home-gospel`, `home-resources`, `home-answers`, `parts-grid`, `islamic-dilemma-page`, `criterion-statement`, `section-gospels`, `section-paul`, `section-quran`, `section-gospel`, `section-resources`, `answers-page`, `how-composed`, `corrections-log`, `discrepancy-resurrection`, `quran-verse-index`, `answer-capsule`, `claim-labels`, `gospel-verse`, `objection-reply`, `faq`. A page definition names a pattern by slug (without the prefix) and `injil_help_page_content()` fetches its content from the registry.
+- `patterns/` (category `injil-help`): `hero`, `home-dilemma`, `home-gospels`, `home-paul`, `home-quran`, `home-gospel`, `home-resources`, `home-answers`, `parts-grid`, `islamic-dilemma-page`, `criterion-statement`, `section-gospels`, `section-paul`, `section-quran`, `section-gospel`, `section-resources`, `answers-page`, `how-composed`, `corrections-log`, `discrepancy-genealogies`, `discrepancy-nativity`, `discrepancy-last-supper`, `discrepancy-crucifixion`, `discrepancy-resurrection`, `thomas-correlation`, `manuscripts-table`, `quran-verse-index`, `answer-capsule`, `claim-labels`, `gospel-verse`, `objection-reply`, `faq`. A page definition names a pattern by slug (without the prefix) and `injil_help_page_content()` fetches its content from the registry.
 
 ## Block styles and CSS
 
