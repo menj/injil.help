@@ -1,9 +1,9 @@
 <?php
 /**
- * Title: Home section: The Four Gospels
+ * Title: Home section: The Five Gospels
  * Slug: injil-help/home-gospels
  * Categories: injil-help
- * Description: Front-page block for The Four Gospels: glossed heading, intro and numbered entries.
+ * Description: Front-page block for The Five Gospels: glossed heading, intro and numbered entries.
  */
 ?>
 <!-- wp:group {"tagName":"section","className":"ih-section","layout":{"type":"default"}} -->
@@ -17,10 +17,10 @@
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:heading -->
-<h2 class="wp-block-heading"><a href="/gospels/">The Four Gospels</a></h2>
+<h2 class="wp-block-heading"><a href="/gospels/">The Five Gospels</a></h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-intro"} -->
-<p class="ih-intro">Four anonymous books, who wrote them, when, from what sources and for whom, and where they disagree.</p>
+<p class="ih-intro">Five books, Mark, Matthew, Luke, John and Thomas: who wrote them, when, from what sources and for whom, and where they disagree.</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"sizeSlug":"large","linkDestination":"custom","className":"ih-plate"} -->
 <figure class="wp-block-image size-large ih-plate"><a href="https://commons.wikimedia.org/wiki/File:Manchester%2C_John_Rylands_Library_Ms_Greek_P_457_(Papyrus_52)_recto_John_18%2C_31-33.jpg"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Manchester%2C_John_Rylands_Library_Ms_Greek_P_457_(Papyrus_52)_recto_John_18%2C_31-33.jpg?width=900" alt="Papyrus 52 (P52, c. 125 CE): the oldest known fragment of a gospel, John 18:31-33 in Greek, John Rylands Library, Manchester" title="Papyrus 52 (P52)"/></a><figcaption class="wp-element-caption">Papyrus 52, John 18:31-33, the oldest known fragment of a gospel. John Rylands Library, Manchester. Public domain. <a href="https://commons.wikimedia.org/wiki/File:Manchester%2C_John_Rylands_Library_Ms_Greek_P_457_(Papyrus_52)_recto_John_18%2C_31-33.jpg">Wikimedia Commons</a></figcaption></figure>
@@ -84,6 +84,17 @@
 <p class="ih-k">Gospel · V</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading"><a href="/gospels/thomas/">The Gospel of Thomas</a></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"ih-d"} -->
+<p class="ih-d">A sayings collection with no narrative: what it is, when it was written, and where its sayings are used in this gospel.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
+<p class="ih-k">Gospel · VI</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/gospels/synoptic-problem/">The synoptic problem</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
@@ -92,7 +103,7 @@
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
-<p class="ih-k">Gospel · VI</p>
+<p class="ih-k">Gospel · VII</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/gospels/discrepancies/">The discrepancy tables</a></h3>

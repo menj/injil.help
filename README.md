@@ -1,6 +1,6 @@
 # The Rightly-Guided Injīl
 
-A child theme of Twenty Twenty-Five for [injil.help](https://injil.help): an answer to the Islamic Dilemma, with the four gospels and Paul of Tarsus examined and a gospel retold with the Qur'an as the measure.
+A child theme of Twenty Twenty-Five for [injil.help](https://injil.help): an answer to the Islamic Dilemma, with the five gospels (Mark, Matthew, Luke, John and Thomas) and Paul of Tarsus examined and a gospel retold with the Qur'an as the measure.
 
 ## Install
 

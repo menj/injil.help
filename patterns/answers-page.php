@@ -62,7 +62,7 @@
 <p class="ih-answer-text">All four gospels are anonymous. Church tradition attached the names in the second century; Irenaeus, around 180 CE, is the first writer to name all four. Most critical scholars date Mark to about 70 CE, Matthew and Luke to 80-90, and John to 90-110. None is held to be an eyewitness account.</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"className":"ih-full"} -->
-<p class="ih-full"><?php esc_html_e( 'Full evidence:', 'injil-help' ); ?> <a href="/gospels/">The Four Gospels</a></p>
+<p class="ih-full"><?php esc_html_e( 'Full evidence:', 'injil-help' ); ?> <a href="/gospels/">The Five Gospels</a></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:group {"className":"is-style-answer-item","layout":{"type":"default"}} -->

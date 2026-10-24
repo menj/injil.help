@@ -21,8 +21,8 @@ function injil_help_starter_pages() {
 		array( 'path' => 'corrections', 'title' => 'Corrections log', 'pattern' => 'corrections-log', 'excerpt' => 'Every error found, what the page said, and what it says now.' ),
 		array( 'path' => 'answers', 'title' => 'FAQs', 'template' => $section, 'pattern' => 'answers-page', 'excerpt' => 'The questions people search for most, answered and labelled.' ),
 
-		// The Four Gospels.
-		array( 'path' => 'gospels', 'title' => 'The Four Gospels', 'template' => $section, 'pattern' => 'section-gospels', 'excerpt' => 'Mark, Matthew, Luke and John examined: authorship, sources, dates and discrepancies.' ),
+		// The Five Gospels.
+		array( 'path' => 'gospels', 'title' => 'The Five Gospels', 'template' => $section, 'pattern' => 'section-gospels', 'excerpt' => 'Mark, Matthew, Luke, John and Thomas examined: authorship, sources, dates and discrepancies.' ),
 		array(
 			'path' => 'gospels/mark', 'title' => 'Mark, the first gospel', 'excerpt' => 'Anonymous, written around 70 CE, and used by both Matthew and Luke.',
 			'body' => array(

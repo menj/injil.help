@@ -11,7 +11,7 @@ Child theme of Twenty Twenty-Five for injil.help.
 1. Install and keep Twenty Twenty-Five (the parent). Do not delete it.
 2. Upload this folder to wp-content/themes/injil-help/ and activate "The Rightly-Guided Injīl". Set Settings > General > Site Title to "The Rightly-Guided Injīl" (the header and footer read it from there).
 3. (Automatic) On activation the theme creates all 73 pages listed under Theme Options > Content, sets pretty permalinks, and fills them with content. Steps 4 and 5 below are then done for you; follow them only to rebuild a page by hand.
-3a. Optional: create categories for the parts: The Four Gospels, Paul of Tarsus, Jesus in the Qur'an, The Gospel According to Islam, Resources.
+3a. Optional: create categories for the parts: The Five Gospels, Paul of Tarsus, Jesus in the Qur'an, The Gospel According to Islam, Resources.
 4. Create the section pages /gospels/, /paul/, /quran/, /gospel-according-to-islam/, /resources/ and /answers/. Give each the "Section index" template and insert its matching "Section index: ..." pattern (or "FAQs page").
 5. Create /method/ (insert "Criterion statement"), /corrections/ ("Corrections log"), and the article pages the section entries link to. Edit the entry links in each pattern as articles go live.
 
@@ -74,6 +74,9 @@ The same nine colours can be set without code under Appearance > Theme Options >
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add a Changelog entry here, merge to main, and tag the commit with the same number (for example v2.5.1). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 3.2.2 =
+* The gospels section is now The Five Gospels: Mark, Matthew, Luke, John and Thomas. Titles, intros, footer, hero, 404 and links updated; the front page now lists the Gospel of Thomas. Statements about the four canonical gospels (Irenaeus, Qur'an 5:47, the Diatessaron) are unchanged.
+
 = 3.2.1 =
 * Starter pages now update themselves: after a theme update, the first admin screen load rewrites every starter page from the new text (once per version). Edits made to those pages are replaced. Theme Options > Content also has an "Update all pages from the theme" button.
 * Main navigation links no longer underline on hover.
