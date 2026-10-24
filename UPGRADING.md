@@ -76,7 +76,7 @@ Whichever is chosen, document the server settings a site needs (`max_input_vars`
 
 **Timeline and glossary.** Make the timeline navigable by period and link each entry to its page; link every glossary term to the pages that use it.
 
-**Images.** The featured images are now sideloaded into the Media Library; serve the in-content plates from the same attachments instead of from Commons, keeping each caption's credit and licence; give the remaining article pages their images (John, the nativity and crucifixion tables, the Ebionites, the false apostles, the secular-form page, the measure, the Qur'an theme pages, the borrowing page); add the Birmingham and Sanaa folios at full resolution with zoom.
+**Images.** The featured images are now sideloaded into the Media Library; serve the in-content plates from the same attachments instead of from Commons, keeping each caption's credit and licence; give the remaining article pages their images (the nativity and crucifixion tables, the good news of Aḥmad, the borrowing page, the composition page); add the Birmingham and Sanaa folios at full resolution with zoom.
 
 ## Updating an existing site
 

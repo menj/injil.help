@@ -54,9 +54,9 @@
         "credit": "Public domain."
     },
     "gospels/discrepancies": {
-        "file": "Codex Vaticanus end or Luke.jpg",
-        "alt": "Codex Vaticanus, fourth century: the end of the Gospel of Luke and the beginning of John",
-        "caption": "Codex Vaticanus, fourth century: the end of Luke and the opening of John on one page. Vatican Library.",
+        "file": "Codex Bezae - Greek Luke 23-47 to 24-1 (The S.S. Teacher's Edition-The Holy Bible - Plate XXV).jpg",
+        "alt": "Codex Bezae, fifth century: Luke 23:47 to 24:1 in Greek",
+        "caption": "Codex Bezae, fifth century: Luke 23:47 to 24:1, the death and burial. Bezae differs from the other great codices at hundreds of points, which is why it stands beside the tables. Cambridge University Library.",
         "credit": "Public domain."
     },
     "gospels/discrepancies/genealogies": {
@@ -84,9 +84,9 @@
         "credit": "Public domain."
     },
     "paul/paul-against-jesus": {
-        "file": "Paul-epitre-galates-2-3es.jpg",
-        "alt": "Papyrus 46: the first page of the Epistle to the Galatians in Greek",
-        "caption": "Papyrus 46, about 200 CE: the opening of Galatians, the letter in which Paul of Tarsus sets his gospel against the men who knew Jesus.",
+        "file": "Rembrandt - Apostle Paul - WGA19120.jpg",
+        "alt": "Rembrandt, The Apostle Paul, about 1657, National Gallery of Art, Washington",
+        "caption": "Rembrandt, The Apostle Paul (about 1657), National Gallery of Art, Washington: Paul of Tarsus with the sword and the book.",
         "credit": "Public domain."
     },
     "paul/james": {
@@ -117,6 +117,54 @@
         "file": "Codex Sinaiticus Matthew 6,4-32.JPG",
         "alt": "Codex Sinaiticus, fourth century: a page of Matthew 6 with the Lord's Prayer",
         "caption": "Codex Sinaiticus, fourth century: Matthew 6:4 to 32, with the Lord's Prayer. British Library.",
+        "credit": "Public domain."
+    },
+    "gospels/john": {
+        "file": "Papyrus 66 (GA).jpg",
+        "alt": "Papyrus 66, Bodmer Papyrus II, about 200 CE: the opening of the Gospel of John",
+        "caption": "Papyrus 66 (Bodmer II), about 200 CE: John 1:1 to 14, the oldest nearly complete copy of the gospel. Bodmer Library, Cologny.",
+        "credit": "Public domain."
+    },
+    "paul/false-apostles": {
+        "file": "Paul-epitre-galates-2-3es.jpg",
+        "alt": "Papyrus 46: the first page of the Epistle to the Galatians in Greek",
+        "caption": "Papyrus 46, about 200 CE: the opening of Galatians, where Paul of Tarsus curses those who preach another gospel (1:6 to 9). The men he cursed are the subject of this page.",
+        "credit": "Public domain."
+    },
+    "paul/ebionites": {
+        "file": "Jerusalem Modell BW 2.JPG",
+        "alt": "Model of Jerusalem and the Temple of Herod in the first century, Israel Museum",
+        "caption": "The Temple of Herod in the model of first-century Jerusalem at the Israel Museum. The Ebionites kept the law of the Temple's city after its fall. Photograph by Berthold Werner.",
+        "credit": "Public domain."
+    },
+    "the-islamic-dilemma/secular-form": {
+        "file": "Birmingham Quran manuscript.jpg",
+        "alt": "The Birmingham Qur'an manuscript, two leaves in Hijazi script, radiocarbon-dated to the seventh century",
+        "caption": "The Birmingham Qur'an manuscript (Mingana 1572a), Hijazi script, radiocarbon-dated to between 568 and 645 CE. Cadbury Research Library, University of Birmingham.",
+        "credit": "Public domain."
+    },
+    "method": {
+        "file": "Kufic Quran, sura 7, verses 86-87.jpg",
+        "alt": "A Qur'an leaf in Kufic script, eighth or ninth century, with verses of Sūrat al-Aʿrāf",
+        "caption": "A Qur'an leaf in early Kufic script, eighth or ninth century: Sūrat al-Aʿrāf 86 to 87. The measure this website applies is the Qur'an's own.",
+        "credit": "Public domain."
+    },
+    "quran/birth": {
+        "file": "Virgin Mary and Jesus (old Persian miniature).jpg",
+        "alt": "Mary and the infant Jesus in an old Persian miniature",
+        "caption": "Mary and the infant Jesus in a Persian miniature. Muslim painters drew the story of Maryam from the Qur'an's nineteenth sūra.",
+        "credit": "Public domain."
+    },
+    "quran/servant": {
+        "file": "Christ Pantocrator Deesis mosaic Hagia Sophia.jpg",
+        "alt": "The Deesis mosaic of Christ in Hagia Sophia, Istanbul, thirteenth century",
+        "caption": "Christ in the Deesis mosaic of Hagia Sophia, Istanbul, thirteenth century: the image of the Jesus the Qur'an says he is not, a God; it calls him a servant and a messenger. Photograph by Myrabella.",
+        "credit": "Public domain."
+    },
+    "quran/signs": {
+        "file": "Giotto di Bondone - No. 25 Scenes from the Life of Christ - 9. Raising of Lazarus - WGA09204.jpg",
+        "alt": "Giotto, The Raising of Lazarus, Scrovegni Chapel, Padua, about 1305",
+        "caption": "Giotto, The Raising of Lazarus (about 1305), Scrovegni Chapel, Padua. The Qur'an: he brought the dead to life, by God's permission (3:49; 5:110).",
         "credit": "Public domain."
     }
 }
