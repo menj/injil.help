@@ -74,6 +74,9 @@ The same nine colours can be set without code under Appearance > Theme Options >
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add a Changelog entry here, merge to main, and tag the commit with the same number (for example v2.5.1). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 3.4.0 =
+* The Islamic Dilemma page is rewritten from the study Reconsidering the "Islamic Dilemma" (M. E. N. Juferi, 2026): where the argument came from (Answering Islam, Sam Shamoun; David Wood; Pfander), six answers, how the verses work, objection and reply, eight FAQs and a source list. Credited on Credits and the Source library.
+
 = 3.3.2 =
 * Fact-check of the Thomas correlation page and the Islamic Dilemma page: Goodacre's book title corrected (The Case for Thomas's Familiarity with the Synoptics); the note's limits stated on the page; Pfander's dates and the popularisers named only where checked.
 
