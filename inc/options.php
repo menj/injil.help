@@ -210,9 +210,13 @@ function injil_help_render_options() {
 				if ( isset( $_GET['ih_created'] ) ) {
 					printf( '<div class="notice notice-success inline"><p>%s</p></div>', esc_html( sprintf( /* translators: %d: number of pages */ _n( '%d page created.', '%d pages created.', (int) $_GET['ih_created'], 'injil-help' ), (int) $_GET['ih_created'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				}
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				if ( isset( $_GET['ih_updated'] ) ) {
+					printf( '<div class="notice notice-success inline"><p>%s</p></div>', esc_html( sprintf( /* translators: %d: number of pages */ _n( '%d page updated.', '%d pages updated.', (int) $_GET['ih_updated'], 'injil-help' ), (int) $_GET['ih_updated'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				}
 				$missing = 0;
 				?>
-				<p class="description"><?php esc_html_e( 'The theme creates these pages when it is activated. Use the button to create any that are missing. Existing pages are never changed or overwritten.', 'injil-help' ); ?></p>
+				<p class="description"><?php esc_html_e( 'The theme creates these pages when it is activated. Use the button to create any that are missing. When the theme is updated, every listed page is rewritten from the new text automatically, so edits made to those pages are replaced. The first button only creates missing pages; the second rewrites all of them now.', 'injil-help' ); ?></p>
 				<ul class="ih-pages">
 					<?php foreach ( injil_help_starter_pages() as $def ) : ?>
 						<?php
@@ -232,6 +236,7 @@ function injil_help_render_options() {
 				</ul>
 				<p>
 					<a class="button button-primary" href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=injil_help_populate' ), 'injil_help_populate' ) ); ?>"><?php echo esc_html( $missing ? sprintf( /* translators: %d: missing pages */ __( 'Create %d missing pages', 'injil-help' ), $missing ) : __( 'Check again', 'injil-help' ) ); ?></a>
+					<a class="button" data-confirm="<?php echo esc_attr__( 'Rewrite every listed page from the theme? Edits you made to those pages will be lost.', 'injil-help' ); ?>" href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=injil_help_populate&overwrite=1' ), 'injil_help_populate' ) ); ?>"><?php esc_html_e( 'Update all pages from the theme', 'injil-help' ); ?></a>
 				</p>
 			</section>
 
