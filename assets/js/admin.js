@@ -8,6 +8,8 @@
 	}
 	document.querySelector( '.ih-options' ).classList.add( 'ih-js' );
 
+	var referer = document.querySelector( 'input[name="_wp_http_referer"]' );
+
 	function show( id ) {
 		var found = false;
 		tabs.forEach( function ( t ) {
@@ -18,6 +20,10 @@
 		panels.forEach( function ( p ) {
 			p.hidden = p.id !== 'panel-' + id;
 		} );
+		// The fragment is not sent with the save request, so carry it in the referer WordPress redirects back to.
+		if ( found && referer ) {
+			referer.value = referer.value.replace( /#.*$/, '' ) + '#' + id;
+		}
 		return found;
 	}
 

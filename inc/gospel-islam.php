@@ -66,7 +66,101 @@ function injil_help_gospel_islam_data() {
 	return $data;
 }
 
-/** Page definitions for the front matter and the 27 chapters. */
+/**
+ * Load the Narrative of Jesus, Son of Mary (inc/data/narrative/).
+ *
+ * chN.txt hold "@chapter N Title", "@section N" and the paragraphs, "### " for the
+ * Qur'anic headings, with [^n] note markers. notes-N.txt hold "n|note" lines, the
+ * numbering running through the whole narrative.
+ */
+function injil_help_narrative_data() {
+	static $d = null;
+	if ( null !== $d ) {
+		return $d;
+	}
+	$d       = array(
+		'sections' => array(),
+		'chapters' => array(),
+		'notes'    => array(),
+	);
+	$dir     = get_stylesheet_directory() . '/inc/data/narrative/';
+	$chapter = 0;
+	$sec     = 0;
+	foreach ( array( 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6' ) as $f ) {
+		$lines = file( $dir . $f . '.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES );
+		if ( ! $lines ) {
+			continue;
+		}
+		foreach ( $lines as $line ) {
+			if ( preg_match( '/^@chapter (\d+) (.+)$/', $line, $m ) ) {
+				$chapter                   = (int) $m[1];
+				$d['chapters'][ $chapter ] = $m[2];
+			} elseif ( preg_match( '/^@section (\d+)$/', $line, $m ) ) {
+				$sec                   = (int) $m[1];
+				$d['sections'][ $sec ] = array(
+					'chapter' => $chapter,
+					'lines'   => array(),
+				);
+			} elseif ( $sec ) {
+				$d['sections'][ $sec ]['lines'][] = $line;
+			}
+		}
+	}
+	foreach ( array( 'notes-1', 'notes-2' ) as $f ) {
+		$lines = file( $dir . $f . '.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES );
+		foreach ( $lines ? $lines : array() as $line ) {
+			if ( preg_match( '/^(\d+)\|(.*)$/', $line, $m ) ) {
+				$d['notes'][ (int) $m[1] ] = $m[2];
+			}
+		}
+	}
+	return $d;
+}
+
+/** Where each numbered note lands: note => array( section, number on that page ). */
+function injil_help_narrative_refs() {
+	static $refs = null;
+	if ( null !== $refs ) {
+		return $refs;
+	}
+	$refs = array();
+	foreach ( injil_help_narrative_data()['sections'] as $n => $s ) {
+		$local = 0;
+		foreach ( $s['lines'] as $line ) {
+			if ( preg_match_all( '/\[\^(\d+)\]/', $line, $mm ) ) {
+				foreach ( $mm[1] as $k ) {
+					$refs[ (int) $k ] = array( $n, ++$local );
+				}
+			}
+		}
+	}
+	return $refs;
+}
+
+/** Turn "note 19" and "notes 49, 50" inside a note into links to those notes. */
+function injil_help_narrative_link_notes( $text, $current ) {
+	$refs = injil_help_narrative_refs();
+	return preg_replace_callback(
+		'/\b(notes?) (\d+(?:(?:, and |, | and )\d+)*)/',
+		function ( $m ) use ( $refs, $current ) {
+			$parts = preg_split( '/(, and |, | and )/', $m[2], -1, PREG_SPLIT_DELIM_CAPTURE );
+			$out   = '';
+			foreach ( $parts as $i => $p ) {
+				$k = (int) $p;
+				if ( $i % 2 || ! isset( $refs[ $k ] ) ) {
+					$out .= $p;
+					continue;
+				}
+				$href = ( $refs[ $k ][0] === $current ? '' : '/gospel-according-to-islam/' . $refs[ $k ][0] . '/' ) . '#fn-' . $refs[ $k ][1];
+				$out .= '<a href="' . $href . '">' . $k . '</a>';
+			}
+			return $m[1] . ' ' . $out;
+		},
+		$text
+	);
+}
+
+/** Page definitions for the front matter and the 27 sections. */
 function injil_help_gospel_islam_pages() {
 	$data  = injil_help_gospel_islam_data();
 	$base  = 'gospel-according-to-islam';
@@ -89,38 +183,37 @@ function injil_help_gospel_islam_pages() {
 		);
 	}
 
-	$last = count( $data['chapters'] );
-	foreach ( $data['chapters'] as $n => $ch ) {
-		$body = array();
-		foreach ( $ch['verses'] as $v => $text ) {
-			$text   = preg_replace_callback(
-				'/\[\[(\d+)\]\]/',
-				function ( $m ) use ( $ch ) {
+	$nar  = injil_help_narrative_data();
+	$last = count( $nar['sections'] );
+	foreach ( $nar['sections'] as $n => $sec ) {
+		$title = isset( $data['chapters'][ $n ]['title'] ) ? $data['chapters'][ $n ]['title'] : '';
+		$body  = array( '<em>' . sprintf( 'Chapter %1$d. %2$s', $sec['chapter'], $nar['chapters'][ $sec['chapter'] ] ) . '</em>' );
+		foreach ( $sec['lines'] as $line ) {
+			$body[] = preg_replace_callback(
+				'/\[\^(\d+)\]/',
+				function ( $m ) use ( $nar, $n ) {
 					$k = (int) $m[1];
-					return isset( $ch['notes'][ $k ] ) ? '{{fn:' . $ch['notes'][ $k ] . '}}' : '';
+					return isset( $nar['notes'][ $k ] ) ? '{{fn:' . injil_help_narrative_link_notes( $nar['notes'][ $k ], $n ) . '}}' : '';
 				},
-				$text
+				$line
 			);
-			$body[] = '<span class="ih-v">' . $v . '</span> ' . $text;
 		}
-		$body = array_merge( $body, injil_help_quran_chapter_lines( $n ) );
 		if ( ! empty( $thomas[ (string) $n ] ) ) {
 			$body = array_merge( $body, $thomas[ (string) $n ] );
 		}
 		$nav = array();
 		if ( $n > 1 ) {
-			$nav[] = '<a href="/' . $base . '/' . ( $n - 1 ) . '/">← Chapter ' . ( $n - 1 ) . '</a>';
+			$nav[] = '<a href="/' . $base . '/' . ( $n - 1 ) . '/">← Section ' . ( $n - 1 ) . '</a>';
 		}
-		$nav[]  = '<a href="/' . $base . '/">Contents</a>';
+		$nav[] = '<a href="/' . $base . '/">Contents</a>';
 		if ( $n < $last ) {
-			$nav[] = '<a href="/' . $base . '/' . ( $n + 1 ) . '/">Chapter ' . ( $n + 1 ) . ' →</a>';
+			$nav[] = '<a href="/' . $base . '/' . ( $n + 1 ) . '/">Section ' . ( $n + 1 ) . ' →</a>';
 		}
-		$body[] = implode( ' · ', $nav );
+		$body[]  = implode( ' · ', $nav );
 		$pages[] = array(
 			'path'    => $base . '/' . $n,
-			/* translators: 1: chapter number, 2: chapter title */
-			'title'   => sprintf( 'Chapter %1$d: %2$s', $n, $ch['title'] ),
-			'excerpt' => sprintf( 'Chapter %d of The Gospel According to Islam: %s.', $n, $ch['title'] ),
+			'title'   => sprintf( 'Section %1$d: %2$s', $n, $title ),
+			'excerpt' => sprintf( 'Section %d of The Narrative of Jesus, Son of Mary: %s.', $n, $title ),
 			'body'    => $body,
 		);
 	}

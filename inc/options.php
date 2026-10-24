@@ -94,10 +94,13 @@ add_action(
 			'injil_help_render_options'
 		);
 		add_action(
-			'admin_print_scripts-' . $hook,
-			function () {
+			'admin_enqueue_scripts',
+			function ( $screen_hook ) use ( $hook ) {
+				if ( $screen_hook !== $hook ) {
+					return;
+				}
 				wp_enqueue_style( 'wp-color-picker' );
-				wp_enqueue_style( 'injil-help-admin', get_stylesheet_directory_uri() . '/assets/css/admin.css', array(), INJIL_HELP_VERSION );
+				wp_enqueue_style( 'injil-help-admin', get_stylesheet_directory_uri() . '/assets/css/admin.css', array( 'wp-color-picker' ), INJIL_HELP_VERSION );
 				wp_enqueue_script( 'injil-help-admin', get_stylesheet_directory_uri() . '/assets/js/admin.js', array( 'wp-color-picker' ), INJIL_HELP_VERSION, true );
 			}
 		);
@@ -159,7 +162,7 @@ function injil_help_render_options() {
 						<th scope="row"><?php esc_html_e( 'Favicon', 'injil-help' ); ?></th>
 						<td>
 							<label><input type="checkbox" name="<?php echo esc_attr( $name ); ?>[favicon_force]" value="1" <?php checked( $o['favicon_force'] ); ?>> <?php esc_html_e( 'Always use the brandmark, even when a Site Icon is set', 'injil-help' ); ?></label>
-							<p class="description"><?php esc_html_e( 'By default the brandmark is used only when no Site Icon is set (Appearance > Customize > Site Identity).', 'injil-help' ); ?></p>
+							<p class="description"><?php esc_html_e( 'By default the brandmark is used only when no Site Icon is set (Settings > General > Site Icon).', 'injil-help' ); ?></p>
 						</td>
 					</tr>
 					<tr>
