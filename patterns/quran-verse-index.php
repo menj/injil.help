@@ -3,7 +3,7 @@
  * Title: Qur'an verse index
  * Slug: injil-help/quran-verse-index
  * Categories: injil-help
- * Description: Themes of Part III with the verses that treat them.
+ * Description: Themes of Part IV with the verses that treat them.
  */
 ?>
 <!-- wp:table {"hasFixedLayout":false,"className":"is-style-discrepancy"} -->

@@ -23,7 +23,7 @@
 <h2 class="wp-block-heading"><a href="/quran/">Jesus in the Qur’an</a></h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-intro"} -->
-<p class="ih-intro">All ninety-three verses on ʿĪsā ibn Maryam, grouped by theme and linked to the gospel passages they confirm or correct.</p>
+<p class="ih-intro">All 93 verses on ʿĪsā ibn Maryam, grouped by theme and linked to the gospel passages they confirm or correct.</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"sizeSlug":"large","linkDestination":"custom","className":"ih-plate"} -->
 <figure class="wp-block-image size-large ih-plate"><a href="https://commons.wikimedia.org/wiki/File:Sana'a1_Stanford_'07_recto.jpg"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Sana'a1_Stanford_'07_recto.jpg?width=900" alt="Ṣanʿāʾ palimpsest, Stanford '07 folio recto: an early Qur'an manuscript of the seventh to eighth century, held in Ṣanʿāʾ, Yemen, with an older text beneath" title="Ṣanʿāʾ palimpsest"/></a><figcaption class="wp-element-caption">The Ṣanʿāʾ palimpsest, Stanford &#039;07 folio, recto. Public domain. <a href="https://commons.wikimedia.org/wiki/File:Sana'a1_Stanford_'07_recto.jpg">Wikimedia Commons</a></figcaption></figure>

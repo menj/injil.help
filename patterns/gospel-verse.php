@@ -47,7 +47,7 @@
 <p class="is-style-label-editorial"><?php esc_html_e( 'Editorial', 'injil-help' ); ?></p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph -->
-<p>A bridge from the boyhood to the ministry, after Luke 2:51-52. No claim beyond the two verses it joins.</p>
+<p>A bridge from the boyhood to the ministry, after Luke 2:51-52. No claim beyond the 2 verses it joins.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
