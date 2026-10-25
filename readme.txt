@@ -83,7 +83,8 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 
 == Changelog ==
 = 3.6.3 =
-* Last pass against the Google SEO Starter Guide and the list of structured data Google supports: only documented features in the JSON-LD (FAQPage, sitelinks search, Book and ItemList dropped); a visible breadcrumb row on every page below the front page; meta descriptions trimmed to 160 characters; search results noindex; descriptive anchor text everywhere.
+* Last pass against the Google SEO Starter Guide: a visible breadcrumb row on every page below the front page; meta descriptions trimmed to 160 characters; search results noindex; descriptive anchor text everywhere.
+* Structured data widened to every schema.org type the content supports: ContactPoint, SearchAction, SiteNavigationElement, SpeakableSpecification, ScholarlyArticle with citations, Book and Chapter for the gospel, the Arabic Book and English translation of each commentary, DefinedTermSet for the glossary, Table, Dataset, Event for the timeline, Quotation, AboutPage, ItemList and FAQPage, beside the Organization, Person, WebSite, page, Breadcrumb, Article and ImageObject nodes.
 = 3.6.2 =
 * Links to apostleofdoom.org and bestofislam.org are within the running text only, thirty sentences naming the article and the site where a point is taken further; the declared row, the footer links and the sameAs entry of 3.6.1 are removed.
 = 3.6.1 =
