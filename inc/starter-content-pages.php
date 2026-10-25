@@ -57,11 +57,10 @@ function injil_help_pages_file( $name ) {
 function injil_help_pattern_file( $name ) {
 	static $cache = array();
 	$name = (string) $name;
-	if ( array_key_exists( $name, $cache ) ) {
+	if ( isset( $cache[ $name ] ) ) {
 		return $cache[ $name ];
 	}
-	$cache[ $name ] = null;
-	$file           = get_stylesheet_directory() . '/inc/data/patterns/' . $name . '.json';
+	$file = get_stylesheet_directory() . '/inc/data/patterns/' . $name . '.json';
 	if ( ! preg_match( '/^[a-z0-9-]+$/', $name ) || ! is_readable( $file ) ) {
 		return null;
 	}

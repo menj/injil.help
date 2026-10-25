@@ -438,8 +438,12 @@ function injil_help_populate_page( $order, $def, $overwrite = false, $force = fa
 	return 'failed';
 }
 
-/** What runs once after the last page is written: permalinks, rewrite rules, the version stamp. */
-function injil_help_populate_finish() {
+/**
+ * What runs once after the last page is written: permalinks, rewrite rules, the version stamp.
+ * The version is stamped only when every page was written ($complete), so a run in which a page
+ * failed (a missing or malformed data file) is retried on the next admin screen load.
+ */
+function injil_help_populate_finish( $complete = true ) {
 	// Pretty permalinks are required for the section URLs. Pages need no new rewrite rules, so flush only when the structure changed.
 	if ( ! get_option( 'permalink_structure' ) ) {
 		global $wp_rewrite;
@@ -451,7 +455,9 @@ function injil_help_populate_finish() {
 		flush_rewrite_rules();
 		update_option( 'injil_help_rules', INJIL_HELP_RULES, false );
 	}
-	update_option( 'injil_help_populated', INJIL_HELP_VERSION );
+	if ( $complete ) {
+		update_option( 'injil_help_populated', INJIL_HELP_VERSION );
+	}
 	delete_option( 'injil_help_featured' ); // the featured-image pass runs again on the next admin loads
 }
 
@@ -509,7 +515,7 @@ function injil_help_populate_step( $overwrite, $force, $offset, $seconds, $tally
 
 	$next = $i >= $total ? -1 : $i;
 	if ( -1 === $next ) {
-		injil_help_populate_finish();
+		injil_help_populate_finish( 0 === $tally['failed'] );
 	}
 	delete_option( 'injil_help_populating' );
 	return array( 'next' => $next, 'total' => $total, 'tally' => $tally, 'busy' => false );
@@ -555,6 +561,9 @@ function injil_help_populate_job_run( $seconds = 20 ) {
 	}
 	if ( -1 === $run['next'] ) {
 		delete_option( 'injil_help_populate_job' );
+		if ( ! $run['total'] ) {
+			return; // no page definitions could be read: nothing was done, so there is nothing to report, and the next load tries again
+		}
 		set_transient(
 			'injil_help_populate_report',
 			array(
@@ -636,8 +645,10 @@ add_action(
  * After a theme update, rewrite the starter pages from the new text: once per version, a few
  * seconds on each admin screen load by someone who can edit theme options until all are done.
  * Pages edited since the theme wrote them are kept; Theme Options > Content lists them and its
- * "Update all pages" button rewrites them too. Admin-ajax requests are left alone, so the
- * button's own batches are never slowed by the background job.
+ * "Update all pages" button rewrites them too. A run in which a page could not be written
+ * leaves the version unstamped and is retried, the first run after activation included.
+ * Admin-ajax requests are left alone, so the button's own batches are never slowed by the
+ * background job.
  */
 add_action(
 	'admin_init',
@@ -647,10 +658,11 @@ add_action(
 		}
 		if ( ! get_option( 'injil_help_populate_job' ) ) {
 			$done = get_option( 'injil_help_populated' );
-			if ( ! $done || ! version_compare( (string) $done, INJIL_HELP_VERSION, '<' ) ) {
+			if ( $done && ! version_compare( (string) $done, INJIL_HELP_VERSION, '<' ) ) {
 				return;
 			}
-			injil_help_populate_job_start( true );
+			// No version yet: the first run did not finish, so create what is missing. An older version: rewrite what changed.
+			injil_help_populate_job_start( (bool) $done );
 		}
 		injil_help_populate_job_run();
 	}

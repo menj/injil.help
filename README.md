@@ -121,7 +121,7 @@ Every URL is made of words, as the Google SEO Starter Guide asks: no page has a 
 
 Every article ends with a "Read next" row (`injil_help_related_blocks()`): the pages in its `related` list, which is the union of what its builder sets (a gospel section names the commentary groups it rests on; a commentary page names the gospel sections, the Qur'an page and the passages page the verses belong with, the group, the index and its other parts) and the curated map in `inc/data/related.json`. Section indexes that already end in their own "Where this leads" aside get no second row. The folds under a gospel section link to every group page the commentary belongs to, and a group page links every part of a work, so no page depends on the menus alone to be reached.
 
-A missing or malformed file yields an empty list from `injil_help_pages_file()` or `injil_help_data_file()`, and null from `injil_help_pattern_file()`, which makes that page "failed"; `populate()` then bails without stamping the version so the run is retried. Validate every file with `php -r` or `python -m json.tool` before committing (see [Development workflow](#development-workflow)).
+A missing or malformed file yields an empty list from `injil_help_pages_file()` or `injil_help_data_file()`, and null from `injil_help_pattern_file()`, which makes that page "failed". An empty list stops `populate()` before it writes anything; a failed page leaves the version unstamped. Either way the run is retried on the next admin screen load. Validate every file with `php -r` or `python -m json.tool` before committing (see [Development workflow](#development-workflow)).
 
 ## The compact markup
 
@@ -152,17 +152,17 @@ Five tokens serve the Bible layout of the gospel sections, emitted by `injil_hel
 
 `injil_help_populate( $overwrite = false, $force = false )` in `inc/starter-content.php`:
 
-1. Takes a lock with `add_option('injil_help_populating')` (atomic insert); a lock older than 60 seconds is treated as stale.
+1. Takes a lock with `add_option('injil_help_populating')` (atomic insert); a lock older than two minutes is treated as stale.
 2. Loads the page list; an empty list exits without writing or stamping.
 3. Suppresses revisions (`wp_revisions_to_keep` → 0) for the run.
 4. For each definition, in order: finds the page by path (`get_page_by_path`, trashed pages ignored); builds content (`injil_help_page_content()`: the pattern's content, or the parsed body); slashes it; inserts it if missing; if present and `$overwrite`, rewrites it only when the stored content differs and the page is not edited (or `$force`); sets `post_parent` from the path; stores `md5` of the written content in post meta `_injil_help_hash`.
 5. Sets pretty permalinks if the structure is empty and flushes rules only in that case.
-6. Stamps `injil_help_populated` with the version and releases the lock.
+6. Stamps `injil_help_populated` with the version, only when no page failed, and releases the lock.
 
 `injil_help_page_is_edited()` compares the stored hash with the current content; a mismatch means the owner edited the page. Entry points:
 
 - `after_switch_theme`: first activation only (no stamp yet): removes sample content, then `populate()`.
-- `admin_init`: when the stamp is older than `INJIL_HELP_VERSION` and the user can `edit_theme_options`: `populate(true)`.
+- `admin_init`, for a user who can `edit_theme_options`: when there is no stamp (the first run did not finish) the background job creates what is missing; when the stamp is older than `INJIL_HELP_VERSION` it rewrites what changed, keeping edited pages.
 - `admin_post_injil_help_populate` (capability and nonce checked): `populate($overwrite, $overwrite)` from the Content tab; "Create missing" passes nothing, "Update all" passes `overwrite=1`.
 
 

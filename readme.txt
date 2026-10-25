@@ -84,6 +84,8 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 == Changelog ==
 = 3.6.6 =
 * Content written to the database is kept only as JSON. The 17 patterns that supply whole pages (the pillar, the measure, the section indexes, the FAQs, the composition page, the corrections log and the tables) moved from PHP files in patterns/ to JSON in inc/data/patterns/. They are still in the editor under injil.help, and every page comes out exactly as before.
+* A run in which a page could not be written is retried on the next admin screen load instead of being marked done.
+* How this gospel was composed: the credits say which notes are Shafaat's (sections 1 to 24) and which are this website's (sections 25 to 27).
 = 3.6.5 =
 * Rank Math SEO: with the plugin active the theme works inside it. Rank Math owns the head and the single structured-data graph; the theme adds the nodes Rank Math does not make and enriches its Article, and prints Rank Math's breadcrumb trail in the theme's breadcrumb row.
 * Front page: eight FAQs in two full rows of four; every section's cards end on a full row at every width.
