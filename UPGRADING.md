@@ -4,7 +4,7 @@ Where the theme should go next: improvements to what exists, features and conten
 
 ## Priority 1: make it fool-proof
 
-**Bring the checks into the repository.** The checks run during development (PHP lint, JSON validity, the page and link check, the block-balance render of every page, the structured-data harness) live outside the repository. Put them under `tools/` with one command (`php tools/check.php`) and run them in a GitHub Actions workflow on every push and pull request, so a broken data file or a dangling link cannot be merged. Add a JSON Schema for each data file under `inc/data/schema/` and validate against it.
+**Bring the checks into the repository.** The checks run during development (PHP lint, JSON validity, the page and link check, the block-balance render of every page, the structured-data check) live outside the repository. Put them under `tools/` with one command (`php tools/check.php`) and run them in a GitHub Actions workflow on every push and pull request, so a broken data file or a dangling link cannot be merged. Add a JSON Schema for each data file under `inc/data/schema/` and validate against it.
 
 **Fail loudly on bad data.** `injil_help_pages_file()` and `injil_help_data_file()` return an empty array when a file is missing or malformed, which silently produces a site with pages missing. Keep the safe return, but record the failure and show an admin notice naming the file, and add a Site Health test ("The Rightly-Guided Injīl data files") that reports every file's status.
 

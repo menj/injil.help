@@ -85,7 +85,7 @@ injil-help/
 └─ languages/             .mo files
 ```
 
-Everything the theme writes to the database is JSON in `inc/data/`: the page definitions, the page bodies, the 17 page patterns, the texts they draw on, and the words the PHP builders add (`text.json`, `commentaries.json`). The PHP only arranges them; the interface labels it prints ("Notes", the claim labels, "Back to the text") go through WordPress translation. No `.html` or `.txt` file is read to populate the database, and none may be added for that purpose. The PHP patterns in `patterns/` are only the front-page sections, which the front-page template renders from the theme and never stores, and the small building blocks an editor inserts by hand. PHP never holds article text. The front end has no framework: two small scripts enhance pages that already work without them.
+Everything the theme writes to the database is JSON in `inc/data/`: the page definitions, the page bodies, the 17 page patterns, the texts they draw on, and the words the PHP builders add (`text.json`, `commentaries.json`). The PHP only arranges them; the interface labels it prints ("Notes", the claim labels, "Back to the text") go through WordPress translation. No `.html` or `.txt` file is read to populate the database, and none may be added for that purpose. The PHP patterns in `patterns/` are only the front-page sections, which the front-page template renders from the theme and never stores, and the small building blocks an editor inserts by hand. PHP never holds article text. The front end has no framework: two small scripts add to pages that already work without them.
 
 ## Boot sequence
 
