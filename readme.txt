@@ -87,6 +87,7 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 * Front page: eight FAQs in two full rows of four; every section's cards end on a full row at every width.
 * The Content tab's buttons now work in batches with a progress line and report at the top of the screen how many pages were created, updated, already up to date or kept because you edited them. They used to write every page in one request, which could time out silently. The automatic rewrite after a theme update also runs in steps and shows its progress and result.
 * The two-column flow of prose pages is removed; it split the navigation and share row.
+* New theme screenshot showing the front page's opening band and The Five Gospels in three full rows of cards.
 = 3.6.4 =
 * The development documents (README.md, SSOT.md, CHANGELOG.md, UPGRADING.md) are left out of the archive Git Updater installs; the theme carries no test files.
 = 3.6.3 =
