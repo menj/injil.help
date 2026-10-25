@@ -84,6 +84,8 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 == Changelog ==
 = 3.6.1 =
 * Content is full width by default: every page's text, tables and plates fill the page between the side gutters, and the header, footer and front page follow. Theme Options > Branding > Content width offers full (default), wide (1240px) and reading column (720px, the former default). At full and wide widths running prose is set in two columns on screens from 1280px, as the gospel sections are, so lines stay readable; headings, tables, plates, folds and asides span both columns.
+* The Gospel of Thomas page explains why Thomas is counted: a sayings gospel of the kind Q was, with the evidence, the contrary case labelled, the Qur'anic reason and three questions.
+* "Paul of Tarsus" throughout the site's own text.
 * Links to the writer's other websites, Apostle of Doom (the case against Paul of Tarsus) and Best of Islam (objections to Islam answered), where the subject meets: in the Read next row of 27 pages, the Paul of Tarsus index, the footer, four passages of prose and the default sameAs list.
 * The hero lede and the section intros are justified like the body text.
 * New theme screenshot.
