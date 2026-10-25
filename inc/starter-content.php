@@ -338,12 +338,32 @@ function injil_help_find_page( $path ) {
 	return $page && 'trash' !== $page->post_status ? $page : null;
 }
 
-const INJIL_HELP_HASH_META = '_injil_help_hash';
+const INJIL_HELP_HASH_META  = '_injil_help_hash'; // md5 of the content the theme wrote
+const INJIL_HELP_HEAD_META  = '_injil_help_head'; // md5 of the title and excerpt it wrote (from 3.6.1; absent on older pages)
 
-/** True when a starter page's stored content has been edited since the theme last wrote it. */
+/** The hash of a page's title and excerpt as the theme wrote them. */
+function injil_help_head_hash( $title, $excerpt ) {
+	return md5( (string) $title . "\n" . (string) $excerpt );
+}
+
+/** Record what the theme wrote, so a later edit to the content, the title or the excerpt is detected. */
+function injil_help_stamp_page( $id, $content, $title, $excerpt ) {
+	update_post_meta( $id, INJIL_HELP_HASH_META, md5( $content ) );
+	update_post_meta( $id, INJIL_HELP_HEAD_META, injil_help_head_hash( $title, $excerpt ) );
+}
+
+/**
+ * True when a starter page has been edited since the theme last wrote it: the content differs
+ * from the content hash, or the title or excerpt differs from the head hash. Pages written before
+ * 3.6.1 carry no head hash, so for them only the content counts until the theme rewrites them.
+ */
 function injil_help_page_is_edited( $post ) {
 	$hash = get_post_meta( $post->ID, INJIL_HELP_HASH_META, true );
-	return $hash && $hash !== md5( $post->post_content );
+	if ( $hash && $hash !== md5( $post->post_content ) ) {
+		return true;
+	}
+	$head = get_post_meta( $post->ID, INJIL_HELP_HEAD_META, true );
+	return $hash && $head && $head !== injil_help_head_hash( $post->post_title, $post->post_excerpt );
 }
 
 /**
@@ -404,7 +424,7 @@ function injil_help_populate( $overwrite = false, $force = false ) {
 				)
 			);
 			if ( $done && ! is_wp_error( $done ) ) {
-				update_post_meta( $existing->ID, INJIL_HELP_HASH_META, md5( $content ) );
+				injil_help_stamp_page( $existing->ID, $content, $def['title'], $excerpt );
 				++$created;
 			}
 			continue;
@@ -442,7 +462,7 @@ function injil_help_populate( $overwrite = false, $force = false ) {
 			if ( ! empty( $def['template'] ) ) {
 				update_post_meta( $id, '_wp_page_template', $def['template'] );
 			}
-			update_post_meta( $id, INJIL_HELP_HASH_META, md5( $content ) );
+			injil_help_stamp_page( $id, $content, $def['title'], $excerpt );
 			++$created;
 		}
 	}

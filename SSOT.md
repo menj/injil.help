@@ -49,7 +49,7 @@ The fixed facts about The Injil theme. When another document, a comment or a pat
 ## Starter content behaviour
 
 - `injil_help_populate( $overwrite = false, $force = false )`. On activation: create missing pages, set pretty permalinks, bin the untouched sample post, page and comment, replace the default tagline.
-- After an update (once per version, first admin load): rewrite pages whose text changed, skip pages the owner edited (post meta `_injil_help_hash` differs from the stored content), keep no revisions, slash data, flush rewrite rules only when permalinks were set. "Update all pages from the theme" rewrites everything, edited pages included.
+- After an update (once per version, first admin load): rewrite pages whose text changed, skip pages the owner edited (post meta `_injil_help_hash` differs from the stored content, or `_injil_help_head` from the title and excerpt), keep no revisions, slash data, flush rewrite rules only when permalinks were set. "Update all pages from the theme" rewrites everything, edited pages included.
 - Options written: `injil_help_populated` (version stamped only after a non-empty page list), `injil_help_populating` (lock, stale after a minute), `injil_help_options`.
 
 ## Theme Options (`injil_help_options`)
