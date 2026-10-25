@@ -84,6 +84,7 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 == Changelog ==
 = 3.6.1 =
 * Content is full width by default: every page's text, tables and plates fill the page between the side gutters, and the header, footer and front page follow. Theme Options > Branding > Content width offers full (default), wide (1240px) and reading column (720px, the former default). At full and wide widths running prose is set in two columns on screens from 1280px, as the gospel sections are, so lines stay readable; headings, tables, plates, folds and asides span both columns.
+* The hero lede and the section intros are justified like the body text.
 * New theme screenshot.
 = 3.6.0 =
 * Every URL is made of words (Google SEO Starter Guide): the 27 gospel sections move from /gospel-according-to-islam/1/ to /27/ to the words of their titles (/gospel-according-to-islam/john-the-baptist/ ...), the commentary groups lose their verse numbers (/quran/commentaries/family-of-imran/ ...) and a later part of a long commentary is a sibling page named for the work (/tabari-part-two/). Existing pages are renamed in place on the first admin load, keeping IDs, edits and featured images. The old URLs are not redirected.

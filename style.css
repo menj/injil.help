@@ -330,7 +330,8 @@ p.ih-cite{margin:0;font-size:13px;color:var(--wp--preset--color--muted)}
 .ih-no-footer-mark .ih-mark-foot{display:none}
 
 /* Justified body text; headings, captions, glosses, tables and Arabic stay as set */
-.wp-block-post-content :where(p,li):not([class*="has-text-align"],.ih-intro,.ih-d,.ih-gloss,.ih-eyebrow,.ih-cite,.ih-k,.ih-numeral,.ih-ar,.ih-quran,.wp-element-caption,.ih-legal *),
+.wp-block-post-content :where(p,li):not([class*="has-text-align"],.ih-d,.ih-gloss,.ih-eyebrow,.ih-cite,.ih-k,.ih-numeral,.ih-ar,.ih-quran,.wp-element-caption,.ih-legal *),
+.ih-cover-lede,.ih-intro,
 .ih-footer .wp-block-column > p:not(.ih-eyebrow,.ih-gloss){text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
 .wp-block-post-content :where(td,th,figcaption,summary) p{text-align:start}
 
