@@ -33,7 +33,7 @@ Modelled on apostleofdoom.org: a title-page hero; each part of the study as a bl
 * Block styles in the editor's Styles panel: ornament separator; claim labels (Scholarly consensus, Minority view, Islamic position); source labels (Qur'an, NT-attested, Editorial); answer capsule; gospel verse; objection and reply; criterion box; discrepancy table; FAQ item (which also feeds the page's FAQ rich result).
 * Page templates: "Section index" for index pages and "Wide page (tables)" for pages with wide comparison tables.
 * The Gospel According to Islam set like a printed Bible: a running head, the section numeral, an argument line, numbered verses, the Qur'an's own verse numbers in green, two columns on wide screens, and the notes at the foot of the text in small type. Choose two columns, one column or plain paragraphs under Theme Options > Content > Gospel text layout. The verse breaks are markers in the data and renumber themselves when the text is edited.
-* Structured data for search engines on every page, switched off automatically when Yoast, Rank Math or SEOPress is active.
+* Structured data for search engines on every page, switched off automatically when Yoast or SEOPress is active and added to Rank Math's own when Rank Math is active.
 * A share row under posts and pages: X, Facebook, WhatsApp, Telegram, Reddit, LinkedIn, Bluesky, Threads, Pinterest and LINE, with Copy link and, where the browser allows, a button that opens the device's share sheet. Choose the networks and the label under Theme Options > Sharing.
 == Fonts ==
 Bundled in assets/fonts and declared in theme.json, so every face is available in the editor's font picker. Roles:
@@ -82,6 +82,11 @@ This file is the user-facing manual that WordPress and Git Updater read. The rep
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add the entry to CHANGELOG.md and to the Changelog section here, note anything an existing site must know under "Updating an existing site" in UPGRADING.md, merge to main, and tag the commit with the same number (for example v3.4.0). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 3.6.5 =
+* Rank Math SEO: with the plugin active the theme works inside it. Rank Math owns the head and the single structured-data graph; the theme adds the nodes Rank Math does not make and enriches its Article, and prints Rank Math's breadcrumb trail in the theme's breadcrumb row.
+* Front page: eight FAQs in two full rows of four; every section's cards end on a full row at every width.
+* The Content tab's buttons now work in batches with a progress line and report at the top of the screen how many pages were created, updated, already up to date or kept because you edited them. They used to write every page in one request, which could time out silently. The automatic rewrite after a theme update also runs in steps and shows its progress and result.
+* The two-column flow of prose pages is removed; it split the navigation and share row.
 = 3.6.4 =
 * The development documents (README.md, SSOT.md, CHANGELOG.md, UPGRADING.md) are left out of the archive Git Updater installs; the theme carries no test files.
 = 3.6.3 =

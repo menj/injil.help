@@ -357,108 +357,89 @@ function injil_help_page_is_edited( $post ) {
 }
 
 /**
- * Create every missing page. Returns the number created or rewritten. With $overwrite,
- * pages that already exist are rewritten from the theme's text (title, content,
- * excerpt), except pages edited since the theme wrote them, which are kept unless
- * $force is set (the "Update all pages" button). A page whose stored text already
- * matches is left alone, and no revision is kept for the rewrite. Each page the
- * theme writes carries a hash of that content, which is how an edit is detected.
+ * Write one starter page. Returns what happened: "created", "updated", "unchanged" (the stored
+ * text already matches, or the page exists and $overwrite is off), "kept" (edited since the
+ * theme wrote it, and $force is off) or "failed". With $overwrite, an existing page is rewritten
+ * from the theme's text (title, content, excerpt) without a revision; each page the theme writes
+ * carries a hash of that content, which is how an edit is detected.
  */
-function injil_help_populate( $overwrite = false, $force = false ) {
-	// add_option() is an atomic insert, so only one request can take the lock; a lock older than a minute is stale.
-	if ( ! add_option( 'injil_help_populating', time(), '', false ) ) {
-		if ( time() - (int) get_option( 'injil_help_populating' ) < MINUTE_IN_SECONDS ) {
-			return 0;
-		}
-		update_option( 'injil_help_populating', time(), false );
+function injil_help_populate_page( $order, $def, $overwrite = false, $force = false ) {
+	$existing = injil_help_find_page( $def['path'] );
+	if ( ! $existing ) {
+		$existing = injil_help_adopt_former_page( $def );
 	}
-
-	// No page definitions (a missing or malformed data file): do nothing and do not record the version, so the run is retried.
-	$pages = injil_help_starter_pages();
-	if ( ! $pages ) {
-		delete_option( 'injil_help_populating' );
-		return 0;
+	if ( $existing && ! $overwrite ) {
+		return 'unchanged';
 	}
-
-	$created = 0;
-	add_filter( 'wp_revisions_to_keep', '__return_zero', 99 );
-
-	foreach ( $pages as $order => $def ) {
-		$existing = injil_help_find_page( $def['path'] );
-		if ( ! $existing ) {
-			$existing = injil_help_adopt_former_page( $def );
+	$content = injil_help_page_content( $def );
+	if ( '' === $content ) {
+		return 'failed';
+	}
+	$excerpt = $def['excerpt'] ?? '';
+	if ( $existing ) {
+		if ( $existing->post_title === $def['title'] && $existing->post_content === $content && $existing->post_excerpt === $excerpt ) {
+			return 'unchanged';
 		}
-		if ( $existing && ! $overwrite ) {
-			continue;
+		if ( ! $force && injil_help_page_is_edited( $existing ) ) {
+			return 'kept';
 		}
-		$content = injil_help_page_content( $def );
-		if ( '' === $content ) {
-			continue;
-		}
-		$excerpt = $def['excerpt'] ?? '';
-		if ( $existing ) {
-			if ( $existing->post_title === $def['title'] && $existing->post_content === $content && $existing->post_excerpt === $excerpt ) {
-				continue;
-			}
-			if ( ! $force && injil_help_page_is_edited( $existing ) ) {
-				continue;
-			}
-			$done = wp_update_post(
-				wp_slash(
-					array(
-						'ID'           => $existing->ID,
-						'post_title'   => $def['title'],
-						'post_content' => $content,
-						'post_excerpt' => $excerpt,
-					)
+		$done = wp_update_post(
+			wp_slash(
+				array(
+					'ID'           => $existing->ID,
+					'post_title'   => $def['title'],
+					'post_content' => $content,
+					'post_excerpt' => $excerpt,
 				)
-			);
-			if ( $done && ! is_wp_error( $done ) ) {
-				injil_help_stamp_page( $existing->ID, $content, $def['title'], $excerpt );
-				++$created;
-			}
-			continue;
+			)
+		);
+		if ( $done && ! is_wp_error( $done ) ) {
+			injil_help_stamp_page( $existing->ID, $content, $def['title'], $excerpt );
+			return 'updated';
 		}
-		$parts  = explode( '/', $def['path'] );
-		$slug   = array_pop( $parts );
-		$parent = $parts ? injil_help_find_page( implode( '/', $parts ) ) : null;
+		return 'failed';
+	}
+	$parts  = explode( '/', $def['path'] );
+	$slug   = array_pop( $parts );
+	$parent = $parts ? injil_help_find_page( implode( '/', $parts ) ) : null;
 
-		// The privacy page WordPress drafts for new sites is filled in rather than duplicated.
-		$id = 'privacy-policy' === $def['path'] ? (int) get_option( 'wp_page_for_privacy_policy' ) : 0;
-		if ( $id && 'draft' !== get_post_status( $id ) ) {
+	// The privacy page WordPress drafts for new sites is filled in rather than duplicated.
+	$id = 'privacy-policy' === $def['path'] ? (int) get_option( 'wp_page_for_privacy_policy' ) : 0;
+	if ( $id && 'draft' !== get_post_status( $id ) ) {
+		$id = 0;
+	}
+
+	$args = array(
+		'post_type'    => 'page',
+		'post_status'  => 'publish',
+		'post_title'   => $def['title'],
+		'post_name'    => $slug,
+		'post_parent'  => $parent ? $parent->ID : 0,
+		'post_content' => $content,
+		'post_excerpt' => $excerpt,
+		'menu_order'   => $order,
+	);
+	if ( $id ) {
+		$args['ID'] = $id;
+		$done       = wp_update_post( wp_slash( $args ) );
+		if ( ! $done || is_wp_error( $done ) ) {
 			$id = 0;
 		}
-
-		$args = array(
-			'post_type'    => 'page',
-			'post_status'  => 'publish',
-			'post_title'   => $def['title'],
-			'post_name'    => $slug,
-			'post_parent'  => $parent ? $parent->ID : 0,
-			'post_content' => $content,
-			'post_excerpt' => $excerpt,
-			'menu_order'   => $order,
-		);
-		if ( $id ) {
-			$args['ID'] = $id;
-			$done       = wp_update_post( wp_slash( $args ) );
-			if ( ! $done || is_wp_error( $done ) ) {
-				$id = 0;
-			}
-		} else {
-			$id = wp_insert_post( wp_slash( $args ) );
-		}
-		if ( $id && ! is_wp_error( $id ) ) {
-			if ( ! empty( $def['template'] ) ) {
-				update_post_meta( $id, '_wp_page_template', $def['template'] );
-			}
-			injil_help_stamp_page( $id, $content, $def['title'], $excerpt );
-			++$created;
-		}
+	} else {
+		$id = wp_insert_post( wp_slash( $args ) );
 	}
+	if ( $id && ! is_wp_error( $id ) ) {
+		if ( ! empty( $def['template'] ) ) {
+			update_post_meta( $id, '_wp_page_template', $def['template'] );
+		}
+		injil_help_stamp_page( $id, $content, $def['title'], $excerpt );
+		return 'created';
+	}
+	return 'failed';
+}
 
-	remove_filter( 'wp_revisions_to_keep', '__return_zero', 99 );
-
+/** What runs once after the last page is written: permalinks, rewrite rules, the version stamp. */
+function injil_help_populate_finish() {
 	// Pretty permalinks are required for the section URLs. Pages need no new rewrite rules, so flush only when the structure changed.
 	if ( ! get_option( 'permalink_structure' ) ) {
 		global $wp_rewrite;
@@ -470,11 +451,153 @@ function injil_help_populate( $overwrite = false, $force = false ) {
 		flush_rewrite_rules();
 		update_option( 'injil_help_rules', INJIL_HELP_RULES, false );
 	}
-
 	update_option( 'injil_help_populated', INJIL_HELP_VERSION );
 	delete_option( 'injil_help_featured' ); // the featured-image pass runs again on the next admin loads
+}
+
+/** An empty tally of what a run did. */
+function injil_help_populate_tally() {
+	return array(
+		'created'   => 0,
+		'updated'   => 0,
+		'unchanged' => 0,
+		'kept'      => 0,
+		'failed'    => 0,
+	);
+}
+
+/**
+ * Write the starter pages from $offset onward until they are all done or $seconds have passed
+ * (0 for no limit), so that no single request runs into PHP's time limit. Returns
+ * array( 'next' => the offset to carry on from, or -1 when finished; 'total' => pages; 'tally';
+ * 'busy' => true when another request holds the lock ). The last step runs injil_help_populate_finish().
+ */
+function injil_help_populate_step( $overwrite, $force, $offset, $seconds, $tally = null ) {
+	$tally = is_array( $tally ) ? array_merge( injil_help_populate_tally(), array_intersect_key( $tally, injil_help_populate_tally() ) ) : injil_help_populate_tally();
+
+	// add_option() is an atomic insert, so only one request can take the lock; a lock older than two minutes is stale.
+	if ( ! add_option( 'injil_help_populating', time(), '', false ) ) {
+		if ( time() - (int) get_option( 'injil_help_populating' ) < 2 * MINUTE_IN_SECONDS ) {
+			return array( 'next' => (int) $offset, 'total' => 0, 'tally' => $tally, 'busy' => true );
+		}
+		update_option( 'injil_help_populating', time(), false );
+	}
+
+	// No page definitions (a missing or malformed data file): do nothing and do not record the version, so the run is retried.
+	$pages = array_values( injil_help_starter_pages() );
+	$total = count( $pages );
+	if ( ! $total ) {
+		delete_option( 'injil_help_populating' );
+		return array( 'next' => -1, 'total' => 0, 'tally' => $tally, 'busy' => false );
+	}
+
+	if ( function_exists( 'set_time_limit' ) ) {
+		@set_time_limit( $seconds ? $seconds + 60 : 0 ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- not every host allows it
+	}
+	$start = microtime( true );
+	add_filter( 'wp_revisions_to_keep', '__return_zero', 99 );
+	$i = max( 0, (int) $offset );
+	while ( $i < $total ) {
+		$result = injil_help_populate_page( $i, $pages[ $i ], $overwrite, $force );
+		++$tally[ $result ];
+		++$i;
+		if ( $seconds && microtime( true ) - $start >= $seconds ) {
+			break;
+		}
+	}
+	remove_filter( 'wp_revisions_to_keep', '__return_zero', 99 );
+
+	$next = $i >= $total ? -1 : $i;
+	if ( -1 === $next ) {
+		injil_help_populate_finish();
+	}
 	delete_option( 'injil_help_populating' );
-	return $created;
+	return array( 'next' => $next, 'total' => $total, 'tally' => $tally, 'busy' => false );
+}
+
+/**
+ * Create every missing page, or with $overwrite rewrite every page (keeping edited ones unless
+ * $force), in one request with no time limit. Returns the number created or rewritten.
+ */
+function injil_help_populate( $overwrite = false, $force = false ) {
+	$run = injil_help_populate_step( $overwrite, $force, 0, 0 );
+	return $run['busy'] ? 0 : $run['tally']['created'] + $run['tally']['updated'];
+}
+
+/**
+ * The background job that writes the pages after activation and after a theme update, a few
+ * seconds per admin screen load until it is done. Option injil_help_populate_job:
+ * { overwrite, offset, total, tally, version }.
+ */
+function injil_help_populate_job_start( $overwrite ) {
+	update_option(
+		'injil_help_populate_job',
+		array(
+			'overwrite' => (bool) $overwrite,
+			'offset'    => 0,
+			'total'     => 0,
+			'tally'     => injil_help_populate_tally(),
+			'version'   => INJIL_HELP_VERSION,
+		),
+		false
+	);
+}
+
+/** Run the background job for up to $seconds. When it finishes, its report is kept for one notice. */
+function injil_help_populate_job_run( $seconds = 20 ) {
+	$job = get_option( 'injil_help_populate_job' );
+	if ( ! is_array( $job ) ) {
+		return;
+	}
+	$run = injil_help_populate_step( ! empty( $job['overwrite'] ), false, (int) $job['offset'], $seconds, $job['tally'] ?? null );
+	if ( ! empty( $run['busy'] ) ) {
+		return;
+	}
+	if ( -1 === $run['next'] ) {
+		delete_option( 'injil_help_populate_job' );
+		set_transient(
+			'injil_help_populate_report',
+			array(
+				'tally'   => $run['tally'],
+				'total'   => $run['total'],
+				'version' => $job['version'] ?? INJIL_HELP_VERSION,
+				'auto'    => ! empty( $job['overwrite'] ) ? 'update' : 'install',
+			),
+			DAY_IN_SECONDS
+		);
+		return;
+	}
+	$job['offset'] = $run['next'];
+	$job['tally']  = $run['tally'];
+	$job['total']  = $run['total'];
+	update_option( 'injil_help_populate_job', $job, false );
+}
+
+/** One sentence on what a run did: "3 pages created, 12 pages updated, 158 already up to date, 3 kept because you edited them." */
+function injil_help_populate_summary( $tally ) {
+	$tally = array_merge( injil_help_populate_tally(), (array) $tally );
+	$parts = array();
+	if ( $tally['created'] ) {
+		/* translators: %d: number of pages */
+		$parts[] = sprintf( _n( '%d page created', '%d pages created', $tally['created'], 'injil-help' ), $tally['created'] );
+	}
+	if ( $tally['updated'] ) {
+		/* translators: %d: number of pages */
+		$parts[] = sprintf( _n( '%d page updated', '%d pages updated', $tally['updated'], 'injil-help' ), $tally['updated'] );
+	}
+	if ( $tally['unchanged'] ) {
+		/* translators: %d: number of pages */
+		$parts[] = sprintf( _n( '%d already up to date', '%d already up to date', $tally['unchanged'], 'injil-help' ), $tally['unchanged'] );
+	}
+	if ( $tally['kept'] ) {
+		/* translators: %d: number of pages */
+		$parts[] = sprintf( _n( '%d kept because you edited it', '%d kept because you edited them', $tally['kept'], 'injil-help' ), $tally['kept'] );
+	}
+	if ( $tally['failed'] ) {
+		/* translators: %d: number of pages */
+		$parts[] = sprintf( _n( '%d could not be written', '%d could not be written', $tally['failed'], 'injil-help' ), $tally['failed'] );
+	}
+	return $parts ? ucfirst( implode( ', ', $parts ) ) . '.' : __( 'Nothing to do.', 'injil-help' );
 }
 
 /**
@@ -501,30 +624,98 @@ function injil_help_remove_sample_content() {
 add_action(
 	'after_switch_theme',
 	function () {
-		if ( ! get_option( 'injil_help_populated' ) ) {
+		if ( ! get_option( 'injil_help_populated' ) && ! get_option( 'injil_help_populate_job' ) ) {
 			injil_help_remove_sample_content();
-			injil_help_populate();
+			injil_help_populate_job_start( false );
+			injil_help_populate_job_run();
 		}
 	}
 );
 
 /**
- * After a theme update, rewrite the starter pages from the new text. Runs once per
- * version, on the first admin screen load by someone who can edit theme options.
- * Pages edited since the theme wrote them are kept; Theme Options > Content lists
- * them and its "Update all pages" button rewrites them too.
+ * After a theme update, rewrite the starter pages from the new text: once per version, a few
+ * seconds on each admin screen load by someone who can edit theme options until all are done.
+ * Pages edited since the theme wrote them are kept; Theme Options > Content lists them and its
+ * "Update all pages" button rewrites them too. Admin-ajax requests are left alone, so the
+ * button's own batches are never slowed by the background job.
  */
 add_action(
 	'admin_init',
 	function () {
-		$done = get_option( 'injil_help_populated' );
-		if ( $done && version_compare( (string) $done, INJIL_HELP_VERSION, '<' ) && current_user_can( 'edit_theme_options' ) ) {
-			injil_help_populate( true );
+		if ( wp_doing_ajax() || ! current_user_can( 'edit_theme_options' ) ) {
+			return;
 		}
+		if ( ! get_option( 'injil_help_populate_job' ) ) {
+			$done = get_option( 'injil_help_populated' );
+			if ( ! $done || ! version_compare( (string) $done, INJIL_HELP_VERSION, '<' ) ) {
+				return;
+			}
+			injil_help_populate_job_start( true );
+		}
+		injil_help_populate_job_run();
 	}
 );
 
-/** Run from the Theme Options > Content tab. The update button passes overwrite=1. */
+/** Tell the editor what the background job is doing, and what it did once it is done. */
+add_action(
+	'admin_notices',
+	function () {
+		if ( ! current_user_can( 'edit_theme_options' ) ) {
+			return;
+		}
+		$link = '<a href="' . esc_url( admin_url( 'themes.php?page=injil-help-options#content' ) ) . '">' . esc_html__( 'Theme Options › Content', 'injil-help' ) . '</a>';
+		$job  = get_option( 'injil_help_populate_job' );
+		if ( is_array( $job ) && ! empty( $job['total'] ) ) {
+			printf(
+				'<div class="notice notice-info"><p>%s</p></div>',
+				wp_kses_post(
+					sprintf(
+						/* translators: 1: pages done, 2: pages in all, 3: link to the Content tab */
+						__( 'The Injil is writing its pages: %1$d of %2$d done. It carries on as you move between admin screens; %3$s shows the list.', 'injil-help' ),
+						(int) $job['offset'],
+						(int) $job['total'],
+						$link
+					)
+				)
+			);
+			return;
+		}
+		$report = get_transient( 'injil_help_populate_report' );
+		if ( ! is_array( $report ) ) {
+			return;
+		}
+		delete_transient( 'injil_help_populate_report' );
+		$head = 'install' === $report['auto']
+			/* translators: %s: theme version */
+			? sprintf( __( 'The Injil %s has set up the site.', 'injil-help' ), $report['version'] )
+			/* translators: %s: theme version */
+			: sprintf( __( 'The Injil %s has brought the pages up to date.', 'injil-help' ), $report['version'] );
+		printf(
+			'<div class="notice notice-success is-dismissible"><p><strong>%1$s</strong> %2$s %3$s</p></div>',
+			esc_html( $head ),
+			esc_html( injil_help_populate_summary( $report['tally'] ) ),
+			wp_kses_post( $link )
+		);
+	}
+);
+
+/**
+ * The Content tab's buttons. With JavaScript they call injil_help_populate_batch over admin-ajax,
+ * a few seconds per request, and show the progress; without it the link runs the whole job in
+ * one request. Either way the screen comes back with the result at the top. "Update all pages"
+ * passes overwrite=1 and rewrites edited pages too.
+ */
+function injil_help_populate_redirect( $mode, $tally ) {
+	$args = array(
+		'page'    => 'injil-help-options',
+		'ih_done' => $mode,
+	);
+	foreach ( array_merge( injil_help_populate_tally(), (array) $tally ) as $k => $v ) {
+		$args[ 'ih_' . $k ] = (int) $v;
+	}
+	return add_query_arg( $args, admin_url( 'themes.php' ) ) . '#content';
+}
+
 add_action(
 	'admin_post_injil_help_populate',
 	function () {
@@ -533,8 +724,33 @@ add_action(
 		}
 		check_admin_referer( 'injil_help_populate' );
 		$overwrite = ! empty( $_GET['overwrite'] );
-		$n         = injil_help_populate( $overwrite, $overwrite );
-		wp_safe_redirect( add_query_arg( array( 'page' => 'injil-help-options', $overwrite ? 'ih_updated' : 'ih_created' => $n ), admin_url( 'themes.php' ) ) . '#content' );
+		$run       = injil_help_populate_step( $overwrite, $overwrite, 0, 0 );
+		if ( ! $run['busy'] ) {
+			delete_option( 'injil_help_populate_job' ); // a full run supersedes any background job
+		}
+		wp_safe_redirect( injil_help_populate_redirect( $run['busy'] ? 'busy' : ( $overwrite ? 'update' : 'create' ), $run['tally'] ) );
 		exit;
+	}
+);
+
+add_action(
+	'wp_ajax_injil_help_populate_batch',
+	function () {
+		if ( ! current_user_can( 'edit_theme_options' ) ) {
+			wp_send_json_error( array( 'message' => __( 'You do not have permission to do this.', 'injil-help' ) ), 403 );
+		}
+		check_ajax_referer( 'injil_help_populate', 'nonce' );
+		$overwrite = ! empty( $_POST['overwrite'] );
+		$offset    = isset( $_POST['offset'] ) ? absint( $_POST['offset'] ) : 0;
+		$tally     = array();
+		foreach ( array_keys( injil_help_populate_tally() ) as $k ) {
+			$tally[ $k ] = isset( $_POST['tally'][ $k ] ) ? absint( $_POST['tally'][ $k ] ) : 0;
+		}
+		$run = injil_help_populate_step( $overwrite, $overwrite, $offset, 12, $tally );
+		if ( -1 === $run['next'] && ! $run['busy'] ) {
+			delete_option( 'injil_help_populate_job' ); // a full run supersedes any background job
+		}
+		$run['redirect'] = -1 === $run['next'] ? injil_help_populate_redirect( $overwrite ? 'update' : 'create', $run['tally'] ) : '';
+		wp_send_json_success( $run );
 	}
 );

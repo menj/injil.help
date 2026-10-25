@@ -3,7 +3,7 @@
  * Title: Home section: FAQs
  * Slug: injil-help/home-answers
  * Categories: injil-help
- * Description: Six FAQs with labels and evidence links. Feeds FAQPage schema.
+ * Description: Eight FAQs with labels and evidence links, two rows of four on wide screens. Feeds FAQPage schema.
  */
 ?>
 <!-- wp:group {"tagName":"section","className":"ih-section ih-answers-band","layout":{"type":"default"}} -->
@@ -109,6 +109,34 @@
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"className":"ih-full"} -->
 <p class="ih-full"><?php esc_html_e( 'Full evidence:', 'injil-help' ); ?> <a href="/paul/paul-against-jesus/">Paul of Tarsus against Jesus</a></p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"is-style-answer-item","layout":{"type":"default"}} -->
+<div class="wp-block-group is-style-answer-item"><!-- wp:paragraph {"className":"is-style-label-islamic"} -->
+<p class="is-style-label-islamic"><?php esc_html_e( 'Islamic position', 'injil-help' ); ?></p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">What does the Qur&#039;an say about Jesus?</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"ih-answer-text"} -->
+<p class="ih-answer-text">The Qur’an names ʿĪsā twenty-five times and refers to him in ninety-three verses. It affirms his virgin birth, his signs and his title al-Masīḥ, the Messiah. It denies that he is God or the son of God (5:116-117; 19:35), and denies that he was killed or crucified (4:157).</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"className":"ih-full"} -->
+<p class="ih-full"><?php esc_html_e( 'Full evidence:', 'injil-help' ); ?> <a href="/quran/">Jesus in the Qur'an</a></p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"is-style-answer-item","layout":{"type":"default"}} -->
+<div class="wp-block-group is-style-answer-item"><!-- wp:paragraph {"className":"is-style-label-consensus"} -->
+<p class="is-style-label-consensus"><?php esc_html_e( 'Scholarly consensus', 'injil-help' ); ?></p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Is a Muslim gospel a new idea?</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"ih-answer-text"} -->
+<p class="ih-answer-text">No. Muslim scholars have read and retold the gospels through the Qur’an for more than a thousand years. In the ninth century al-Qāsim b. Ibrāhīm reworked the narrative of Matthew. One survey counts more than 1,270 gospel references in twenty medieval Muslim authors.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"className":"ih-full"} -->
+<p class="ih-full"><?php esc_html_e( 'Full evidence:', 'injil-help' ); ?> <a href="/gospel-according-to-islam/how-composed/">How this gospel was composed</a></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
