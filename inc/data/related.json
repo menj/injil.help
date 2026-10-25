@@ -1,0 +1,432 @@
+{
+    "gospel-according-to-islam/introduction": [
+        "gospel-according-to-islam/how-composed",
+        "method",
+        "gospels"
+    ],
+    "gospel-according-to-islam/how-composed": [
+        "gospel-according-to-islam/introduction",
+        "method",
+        "corrections",
+        "resources/sources",
+        "bonus"
+    ],
+    "gospel-according-to-islam/family-of-amran-zacharias-and-john": [
+        "quran/birth",
+        "gospels/luke"
+    ],
+    "gospel-according-to-islam/annunciation-and-birth-of-jesus": [
+        "quran/birth",
+        "gospels/discrepancies/nativity",
+        "resources/borrowing",
+        "gospels/matthew"
+    ],
+    "gospel-according-to-islam/promised-messenger-joseph-and-creation-of-jesus": [
+        "quran/birth",
+        "quran/ahmad",
+        "gospels/discrepancies/genealogies"
+    ],
+    "gospel-according-to-islam/presentation-boyhood-and-visit-to-jerusalem": [
+        "resources/borrowing",
+        "gospels/luke",
+        "resources/manuscripts"
+    ],
+    "gospel-according-to-islam/john-the-baptist": [
+        "quran/birth",
+        "gospels/mark"
+    ],
+    "gospel-according-to-islam/baptism-temptation-and-return-to-nazareth": [
+        "gospels/mark",
+        "gospels/synoptic-problem"
+    ],
+    "gospel-according-to-islam/capernaum-first-disciples-and-healings": [
+        "quran/signs",
+        "gospels/mark"
+    ],
+    "gospel-according-to-islam/leper-sabbath-and-beatitudes": [
+        "gospels/matthew",
+        "gospels/thomas"
+    ],
+    "gospel-according-to-islam/publicans-fasting-and-question-from-john": [
+        "gospels/thomas",
+        "gospels/luke"
+    ],
+    "gospel-according-to-islam/traditions-of-the-elders-and-syrophoenician-woman": [
+        "quran/servant",
+        "gospels/mark"
+    ],
+    "gospel-according-to-islam/blind-man-and-samaritan-woman": [
+        "gospels/john",
+        "gospels/thomas"
+    ],
+    "gospel-according-to-islam/jairus-daughter-and-death-of-john": [
+        "gospels/mark",
+        "gospels/thomas"
+    ],
+    "gospel-according-to-islam/the-twelve-and-their-mission": [
+        "quran/servant",
+        "paul/ebionites",
+        "gospels/thomas"
+    ],
+    "gospel-according-to-islam/bird-of-clay-beelzebub-and-unclean-spirit": [
+        "quran/signs",
+        "resources/borrowing"
+    ],
+    "gospel-according-to-islam/signs-rich-man-and-lazarus-and-woes": [
+        "quran/signs",
+        "gospels/luke"
+    ],
+    "gospel-according-to-islam/table-from-heaven-caesarea-philippi-and-vision": [
+        "quran/table",
+        "gospels/discrepancies/last-supper"
+    ],
+    "gospel-according-to-islam/meaning-of-the-vision-leaven-and-tares": [
+        "gospels/thomas",
+        "gospels/synoptic-problem"
+    ],
+    "gospel-according-to-islam/greatness-samaritans-and-children": [
+        "gospels/thomas",
+        "gospels/matthew"
+    ],
+    "gospel-according-to-islam/rich-man-and-request-of-james-and-john": [
+        "gospels/mark",
+        "gospels/thomas"
+    ],
+    "gospel-according-to-islam/entry-into-jerusalem-and-cleansing-of-the-temple": [
+        "gospels/john",
+        "gospels/discrepancies"
+    ],
+    "gospel-according-to-islam/questions-in-the-temple": [
+        "quran/servant",
+        "gospels/mark"
+    ],
+    "gospel-according-to-islam/end-of-public-ministry-and-vineyard": [
+        "quran/servant",
+        "gospels/thomas"
+    ],
+    "gospel-according-to-islam/last-supper-future-of-the-temple-and-man-of-perfection": [
+        "quran/table",
+        "gospels/discrepancies/last-supper"
+    ],
+    "gospel-according-to-islam/the-hour-and-promise-of-the-counsellor": [
+        "quran/ahmad",
+        "gospels/john"
+    ],
+    "gospel-according-to-islam/gethsemane-arrest-and-peters-denial": [
+        "quran/raised",
+        "gospels/discrepancies/crucifixion"
+    ],
+    "gospel-according-to-islam/trial-barabbas-and-raising-of-jesus": [
+        "quran/raised",
+        "gospels/discrepancies/crucifixion",
+        "the-islamic-dilemma"
+    ],
+    "gospel-according-to-islam/empty-tomb-reports-and-return": [
+        "quran/raised",
+        "gospels/discrepancies/resurrection"
+    ],
+    "the-islamic-dilemma": [
+        "the-islamic-dilemma/secular-form",
+        "the-islamic-dilemma/balance-of-truth",
+        "method",
+        "answers",
+        "resources/objections"
+    ],
+    "the-islamic-dilemma/secular-form": [
+        "the-islamic-dilemma",
+        "the-islamic-dilemma/balance-of-truth",
+        "method",
+        "quran/raised",
+        "resources/responses"
+    ],
+    "the-islamic-dilemma/balance-of-truth": [
+        "the-islamic-dilemma",
+        "the-islamic-dilemma/secular-form",
+        "method",
+        "resources/responses",
+        "quran/ahmad",
+        "resources/timeline"
+    ],
+    "method": [
+        "the-islamic-dilemma",
+        "about-the-author",
+        "corrections",
+        "gospel-according-to-islam/how-composed"
+    ],
+    "corrections": [
+        "method",
+        "contact",
+        "about-the-author"
+    ],
+    "answers": [
+        "the-islamic-dilemma",
+        "resources/objections",
+        "resources/responses",
+        "resources/glossary"
+    ],
+    "gospels/mark": [
+        "gospels/matthew",
+        "gospels/luke",
+        "gospels/synoptic-problem",
+        "gospels/discrepancies/resurrection"
+    ],
+    "gospels/matthew": [
+        "gospels/mark",
+        "gospels/luke",
+        "gospels/discrepancies/genealogies",
+        "gospels/discrepancies/nativity"
+    ],
+    "gospels/luke": [
+        "gospels/mark",
+        "gospels/matthew",
+        "gospels/discrepancies/nativity",
+        "paul/acts-galatians"
+    ],
+    "gospels/john": [
+        "paul/paul-against-jesus",
+        "quran/servant",
+        "quran/ahmad",
+        "gospels/discrepancies/resurrection"
+    ],
+    "gospels/thomas": [
+        "gospels/thomas/sayings",
+        "gospels/thomas/sayings-patterson-meyer",
+        "gospels/thomas/correlation",
+        "gospels/thomas/set-aside",
+        "resources/manuscripts"
+    ],
+    "gospels/thomas/sayings": [
+        "gospels/thomas",
+        "gospels/thomas/sayings-patterson-meyer",
+        "gospels/thomas/correlation",
+        "gospels/thomas/set-aside"
+    ],
+    "gospels/thomas/sayings-patterson-meyer": [
+        "gospels/thomas",
+        "gospels/thomas/sayings",
+        "gospels/thomas/correlation"
+    ],
+    "gospels/thomas/correlation": [
+        "gospels/thomas",
+        "gospels/synoptic-problem",
+        "gospels/thomas/sayings"
+    ],
+    "gospels/thomas/set-aside": [
+        "gospels/thomas",
+        "method",
+        "gospels/thomas/sayings"
+    ],
+    "gospels/synoptic-problem": [
+        "gospels/mark",
+        "gospels/matthew",
+        "gospels/luke",
+        "gospels/thomas/correlation"
+    ],
+    "gospels/discrepancies": [
+        "gospels/discrepancies/genealogies",
+        "gospels/discrepancies/nativity",
+        "gospels/discrepancies/last-supper",
+        "gospels/discrepancies/crucifixion",
+        "gospels/discrepancies/resurrection"
+    ],
+    "gospels/discrepancies/genealogies": [
+        "gospels/discrepancies/nativity",
+        "gospels/discrepancies/last-supper",
+        "gospels/discrepancies/crucifixion",
+        "gospels/discrepancies/resurrection",
+        "quran/birth",
+        "gospels/discrepancies"
+    ],
+    "gospels/discrepancies/nativity": [
+        "gospels/discrepancies/genealogies",
+        "gospels/discrepancies/last-supper",
+        "gospels/discrepancies/crucifixion",
+        "gospels/discrepancies/resurrection",
+        "quran/birth",
+        "gospels/discrepancies"
+    ],
+    "gospels/discrepancies/last-supper": [
+        "gospels/discrepancies/genealogies",
+        "gospels/discrepancies/nativity",
+        "gospels/discrepancies/crucifixion",
+        "gospels/discrepancies/resurrection",
+        "quran/table",
+        "gospels/discrepancies"
+    ],
+    "gospels/discrepancies/crucifixion": [
+        "gospels/discrepancies/genealogies",
+        "gospels/discrepancies/nativity",
+        "gospels/discrepancies/last-supper",
+        "gospels/discrepancies/resurrection",
+        "quran/raised",
+        "gospels/discrepancies"
+    ],
+    "gospels/discrepancies/resurrection": [
+        "gospels/discrepancies/genealogies",
+        "gospels/discrepancies/nativity",
+        "gospels/discrepancies/last-supper",
+        "gospels/discrepancies/crucifixion",
+        "quran/raised",
+        "gospels/discrepancies"
+    ],
+    "paul/acts-galatians": [
+        "paul/seven-letters",
+        "paul/james",
+        "paul/false-apostles",
+        "gospels/luke"
+    ],
+    "paul/paul-against-jesus": [
+        "gospels/john",
+        "paul/seven-letters",
+        "paul/james",
+        "bonus/epistle"
+    ],
+    "paul/james": [
+        "paul/ebionites",
+        "paul/acts-galatians",
+        "paul/paul-against-jesus"
+    ],
+    "paul/ebionites": [
+        "paul/james",
+        "resources/timeline",
+        "gospels/matthew"
+    ],
+    "paul/seven-letters": [
+        "paul/acts-galatians",
+        "paul/false-apostles",
+        "paul/paul-against-jesus"
+    ],
+    "paul/false-apostles": [
+        "paul/seven-letters",
+        "paul/james",
+        "bonus/epistle"
+    ],
+    "quran/passages": [
+        "quran/commentaries",
+        "quran/birth",
+        "quran/signs",
+        "quran/servant",
+        "quran/table",
+        "quran/raised",
+        "quran/ahmad"
+    ],
+    "quran/birth": [
+        "quran/commentaries/birth-of-jesus",
+        "quran/commentaries/family-of-imran",
+        "quran/commentaries/she-who-guarded-her-chastity",
+        "quran/commentaries/refuge-on-high-ground",
+        "gospels/discrepancies/nativity",
+        "gospel-according-to-islam/annunciation-and-birth-of-jesus"
+    ],
+    "quran/signs": [
+        "quran/commentaries/family-of-imran",
+        "quran/commentaries/the-table-and-the-questioning",
+        "gospel-according-to-islam/bird-of-clay-beelzebub-and-unclean-spirit",
+        "resources/borrowing"
+    ],
+    "quran/servant": [
+        "quran/commentaries/son-of-mary-as-an-example",
+        "quran/commentaries/compassion-mercy-and-monasticism",
+        "gospels/john",
+        "gospel-according-to-islam/questions-in-the-temple"
+    ],
+    "quran/table": [
+        "quran/commentaries/the-table-and-the-questioning",
+        "gospels/discrepancies/last-supper",
+        "gospel-according-to-islam/table-from-heaven-caesarea-philippi-and-vision"
+    ],
+    "quran/raised": [
+        "quran/commentaries/neither-killed-nor-crucified",
+        "gospels/discrepancies/crucifixion",
+        "gospel-according-to-islam/trial-barabbas-and-raising-of-jesus",
+        "gospel-according-to-islam/empty-tomb-reports-and-return",
+        "the-islamic-dilemma/secular-form"
+    ],
+    "quran/ahmad": [
+        "quran/commentaries/good-news-of-ahmad",
+        "gospel-according-to-islam/the-hour-and-promise-of-the-counsellor",
+        "the-islamic-dilemma/balance-of-truth",
+        "gospels/john"
+    ],
+    "quran/commentaries": [
+        "quran/passages",
+        "gospel-according-to-islam",
+        "gospel-according-to-islam/how-composed"
+    ],
+    "resources/timeline": [
+        "resources/glossary",
+        "resources/sources",
+        "resources/manuscripts",
+        "the-islamic-dilemma/balance-of-truth"
+    ],
+    "resources/glossary": [
+        "resources/timeline",
+        "resources/sources",
+        "method"
+    ],
+    "resources/sources": [
+        "resources/timeline",
+        "resources/manuscripts",
+        "credits",
+        "corrections"
+    ],
+    "resources/manuscripts": [
+        "gospels/thomas",
+        "resources/borrowing",
+        "resources/timeline"
+    ],
+    "resources/borrowing": [
+        "quran/birth",
+        "resources/manuscripts",
+        "gospel-according-to-islam/annunciation-and-birth-of-jesus",
+        "gospel-according-to-islam/bird-of-clay-beelzebub-and-unclean-spirit"
+    ],
+    "resources/objections": [
+        "resources/responses",
+        "the-islamic-dilemma/balance-of-truth",
+        "answers",
+        "the-islamic-dilemma"
+    ],
+    "resources/responses": [
+        "resources/objections",
+        "the-islamic-dilemma/balance-of-truth",
+        "the-islamic-dilemma/secular-form",
+        "the-islamic-dilemma"
+    ],
+    "bonus": [
+        "bonus/epistle",
+        "paul",
+        "gospel-according-to-islam/how-composed"
+    ],
+    "bonus/epistle": [
+        "bonus",
+        "paul/paul-against-jesus",
+        "paul/false-apostles"
+    ],
+    "about-the-author": [
+        "method",
+        "contact",
+        "credits",
+        "corrections"
+    ],
+    "terms-of-use": [
+        "privacy-policy",
+        "contact",
+        "credits"
+    ],
+    "privacy-policy": [
+        "terms-of-use",
+        "contact"
+    ],
+    "contact": [
+        "about-the-author",
+        "corrections",
+        "privacy-policy",
+        "sitemap"
+    ],
+    "credits": [
+        "resources/sources",
+        "about-the-author",
+        "terms-of-use"
+    ]
+}

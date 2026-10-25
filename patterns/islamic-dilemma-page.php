@@ -37,7 +37,7 @@
 <h2 class="wp-block-heading">Where the argument came from</h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>The argument is older than its name. A dilemma of the same shape was pressed against Christianity itself by the pagan critics Celsus and Julian, as Robert Wilken records, long before it was turned on Islam. The ninth-century Christian apology written under the name of al-Kindī reasoned from the Qur’an’s respect for the earlier scriptures against its Muslim correspondent. A letter of 1732 by the Christian writer Isṭifān Ward, known only in summary, argues that Qur’an 3:84, 5:46 and 2:87 attest the authenticity of the Torah and Gospel, which is the first horn of the dilemma. Karl Pfander’s <em>Mīzān al-Ḥaqq</em> (“The Balance of Truth”, drafted in German in 1829 and printed in Persian in the 1830s) made the same move the centrepiece of a missionary apologetic, and Muslim scholars answered it in its own day. Its modern home is Answering Islam, where Sam Shamoun’s articles on the Qur’an’s witness to the Bible and on <em>taḥrīf</em> (corruption) make the case; the circle around David Wood, Acts 17 Apologetics and the late Nabeel Qureshi gave it its name, its two-horned form and its reach on video from the 2010s.</p>
+<p>The argument is older than its name. A dilemma of the same shape was pressed against Christianity itself by the pagan critics Celsus and Julian, as Robert Wilken records, long before it was turned on Islam. The ninth-century Christian apology written under the name of al-Kindī reasoned from the Qur’an’s respect for the earlier scriptures against its Muslim correspondent. A letter of 1732 by the Christian writer Isṭifān Ward, known only in summary, argues that Qur’an 3:84, 5:46 and 2:87 attest the authenticity of the Torah and Gospel, which is the first horn of the dilemma. Karl Gottlieb Pfander’s <em>Mīzān al-Ḥaqq</em> (“The Balance of Truth”, written in German in 1829, printed in Persian in 1835 and in English in 1866) made the same move the centrepiece of a missionary apologetic, and Muslim scholars answered it in its own day; his argument is taken chapter by chapter on <a href="/the-islamic-dilemma/balance-of-truth/">Pfander’s Balance of Truth</a>. Its modern home is Answering Islam, where Sam Shamoun’s articles on the Qur’an’s witness to the Bible and on <em>taḥrīf</em> (corruption) make the case; the circle around David Wood, Acts 17 Apologetics and the late Nabeel Qureshi gave it its name, its two-horned form and its reach on video from the 2010s.</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading -->
 <h2 class="wp-block-heading">The argument, stated fairly</h2>
@@ -231,7 +231,7 @@
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 <!-- wp:paragraph {"className":"ih-next"} -->
-<p class="ih-next">The argument has also been restated as a secular case with two steps and four exits, and answered by a historical-critical reply that grants its first step. Both are taken point by point on <a href="/the-islamic-dilemma/secular-form/">The Islamic Dilemma without theology</a>.</p>
+<p class="ih-next">The argument has also been restated as a secular case with two steps and four exits, and answered by a historical-critical reply that grants its first step. Both are taken point by point on <a href="/the-islamic-dilemma/secular-form/">The Islamic Dilemma without theology</a>. Its source, Pfander’s <em>Balance of Truth</em> of 1829, is answered chapter by chapter on <a href="/the-islamic-dilemma/balance-of-truth/">Pfander’s Balance of Truth</a>.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->
@@ -239,7 +239,7 @@
 <!-- /wp:heading -->
 <!-- wp:details {"className":"is-style-faq"} -->
 <details class="wp-block-details is-style-faq"><summary>Who popularised the Islamic Dilemma?</summary><!-- wp:paragraph -->
-<p>In its present name and two-horned form, David Wood of Acts 17 Apologetics, in videos and debates from the 2010s, and Sam Shamoun of Answering Islam, who had used the argument in writing before that. The argument itself runs back through Pfander’s <em>Mīzān al-Ḥaqq</em> (1830s), Isṭifān Ward’s letter of 1732 and the ninth-century apology under the name of al-Kindī to a dilemma of the same shape that Celsus and Julian pressed against Christianity; the section “Where the argument came from” above gives the line. Muslim scholars answered each form in its day; this website answers the current one.</p>
+<p>In its present name and two-horned form, David Wood of Acts 17 Apologetics, in videos and debates from the 2010s, and Sam Shamoun of Answering Islam, who had used the argument in writing before that. The argument itself runs back through Pfander’s <em>Mīzān al-Ḥaqq</em> (1829; see <a href="/the-islamic-dilemma/balance-of-truth/">Pfander’s Balance of Truth</a>), Isṭifān Ward’s letter of 1732 and the ninth-century apology under the name of al-Kindī to a dilemma of the same shape that Celsus and Julian pressed against Christianity; the section “Where the argument came from” above gives the line. Muslim scholars answered each form in its day; this website answers the current one.</p>
 <!-- /wp:paragraph --></details>
 <!-- /wp:details -->
 <!-- wp:details {"className":"is-style-faq"} -->
@@ -297,7 +297,7 @@
 <!-- /wp:heading -->
 <!-- wp:list -->
 <ul class="wp-block-list"><!-- wp:list-item -->
-<li>Mohd Elfie Nieshaem Juferi, <em>Reconsidering the “Islamic Dilemma”</em> (Kuala Lumpur, first published 1 May 2026; version 1.1.0, 4 October 2026), which gives the full notes for the sections drawn from it.</li>
+<li>Mohd Elfie Nieshaem Juferi, <em>Reconsidering the “Islamic Dilemma”</em> (Kuala Lumpur, first published 1 May 2026; version 1.1.0, 4 October 2026), <a href="https://www.academia.edu/166160379/Reconsidering_The_Islamic_Dilemma">on Academia.edu</a>, which gives the full notes for the sections drawn from it.</li>
 <!-- /wp:list-item -->
 <!-- wp:list-item -->
 <li>Gordon Nickel, <em>The Gentle Answer to the Muslim Accusation of Biblical Falsification</em> (2015); Samuel Green’s articles, answered on <a href="/resources/responses/">Responses to named articles</a>.</li>
@@ -324,6 +324,6 @@
 <li>Walid Saleh, <em>In Defense of the Bible: A Critical Edition and an Introduction to al-Biqāʿī’s Bible Treatise</em> (Leiden: Brill, 2008); David Thomas and John Chesworth (eds.), <em>Christian-Muslim Relations: A Bibliographical History</em>, vol. 12 (Leiden: Brill, 2018); Robert Louis Wilken, <em>The Christians as the Romans Saw Them</em>, 2nd ed. (New Haven: Yale University Press, 2003).</li>
 <!-- /wp:list-item -->
 <!-- wp:list-item -->
-<li>Karl Pfander, <em>Mīzān al-Ḥaqq</em> (“The Balance of Truth”); the writing of Sam Shamoun on Answering Islam and the videos of David Wood (Acts 17 Apologetics), as the argument answered here.</li>
+<li>C. G. Pfander, <em>The Mizan ul Haqq; or, Balance of Truth</em>, trans. R. H. Weakley (London: Church Missionary House, 1866), answered on <a href="/the-islamic-dilemma/balance-of-truth/">Pfander’s Balance of Truth</a>; the writing of Sam Shamoun on Answering Islam and the videos of David Wood (Acts 17 Apologetics), as the argument answered here.</li>
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->

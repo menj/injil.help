@@ -39,8 +39,11 @@ function injil_help_gospel_woven_sections() {
 }
 
 /**
- * Section titles and front matter from gospel-islam.json:
- * { "section_titles": { "1": "...", ... }, "front": { "introduction": { "title", "paragraphs": [...] } } }.
+ * Section titles, section slugs and front matter from gospel-islam.json:
+ * { "section_titles": { "1": "..." }, "section_slugs": { "1": "family-of-amran-zacharias-and-john" },
+ *   "front": { "introduction": { "title", "paragraphs": [...] } } }.
+ * The slugs are the words of each section's URL (/gospel-according-to-islam/{slug}/); the
+ * section number is never a URL segment.
  */
 function injil_help_gospel_islam_data() {
 	static $data = null;
@@ -53,7 +56,10 @@ function injil_help_gospel_islam_data() {
 		'front'    => array(),
 	);
 	foreach ( (array) ( $json['section_titles'] ?? array() ) as $n => $title ) {
-		$data['chapters'][ (int) $n ] = array( 'title' => (string) $title );
+		$data['chapters'][ (int) $n ] = array(
+			'title' => (string) $title,
+			'slug'  => (string) ( $json['section_slugs'][ $n ] ?? sanitize_title( (string) $title ) ),
+		);
 	}
 	foreach ( (array) ( $json['front'] ?? array() ) as $key => $f ) {
 		$data['front'][ $key ] = array(
@@ -62,6 +68,27 @@ function injil_help_gospel_islam_data() {
 		);
 	}
 	return $data;
+}
+
+/** The URL slug of gospel section $n (the words of its title, from gospel-islam.json). */
+function injil_help_gospel_section_slug( $n ) {
+	$data = injil_help_gospel_islam_data();
+	return (string) ( $data['chapters'][ (int) $n ]['slug'] ?? (string) (int) $n );
+}
+
+/** The site path of gospel section $n, without slashes: gospel-according-to-islam/{slug}. */
+function injil_help_gospel_section_path( $n ) {
+	return 'gospel-according-to-islam/' . injil_help_gospel_section_slug( $n );
+}
+
+/** Section number by slug, or 0 when the slug is not a section. */
+function injil_help_gospel_section_number( $slug ) {
+	foreach ( injil_help_gospel_islam_data()['chapters'] as $n => $c ) {
+		if ( $c['slug'] === (string) $slug ) {
+			return (int) $n;
+		}
+	}
+	return 0;
 }
 
 /**
@@ -132,7 +159,7 @@ function injil_help_narrative_link_notes( $text, $current ) {
 					$out .= $p;
 					continue;
 				}
-				$href = ( $refs[ $k ][0] === $current ? '' : '/gospel-according-to-islam/' . $refs[ $k ][0] . '/' ) . '#fn-' . $refs[ $k ][1];
+				$href = ( $refs[ $k ][0] === $current ? '' : '/' . injil_help_gospel_section_path( $refs[ $k ][0] ) . '/' ) . '#fn-' . $refs[ $k ][1];
 				$out .= '<a href="' . $href . '">' . $k . '</a>';
 			}
 			return $m[1] . ' ' . $out;
@@ -218,15 +245,23 @@ function injil_help_gospel_islam_pages() {
 		}
 		$nav = array();
 		if ( $n > 1 ) {
-			$nav[] = '<a href="/' . $base . '/' . ( $n - 1 ) . '/">← Section ' . ( $n - 1 ) . '</a>';
+			$nav[] = '<a href="/' . injil_help_gospel_section_path( $n - 1 ) . '/">← Section ' . ( $n - 1 ) . ': ' . esc_html( $data['chapters'][ $n - 1 ]['title'] ?? '' ) . '</a>';
 		}
 		$nav[] = '<a href="/' . $base . '/">Contents</a>';
 		if ( $n < $last ) {
-			$nav[] = '<a href="/' . $base . '/' . ( $n + 1 ) . '/">Section ' . ( $n + 1 ) . ' →</a>';
+			$nav[] = '<a href="/' . injil_help_gospel_section_path( $n + 1 ) . '/">Section ' . ( $n + 1 ) . ': ' . esc_html( $data['chapters'][ $n + 1 ]['title'] ?? '' ) . ' →</a>';
 		}
 		$body[]  = implode( ' · ', $nav );
+		$related = array();
+		if ( function_exists( 'injil_help_tafsir_groups_for_section' ) ) {
+			foreach ( injil_help_tafsir_groups_for_section( (int) $n ) as $group ) {
+				$related[] = 'quran/commentaries/' . $group;
+			}
+		}
 		$pages[] = array(
-			'path'    => $base . '/' . $n,
+			'path'    => injil_help_gospel_section_path( $n ),
+			'related' => $related,
+			'former'  => array( $base . '/' . $n ), // the numeric URL of 3.5 and earlier; redirected and renamed in place
 			'title'   => sprintf( 'Section %1$d: %2$s', $n, $title ),
 			'excerpt' => sprintf( 'Section %d of The Narrative of Jesus, Son of Mary: %s.', $n, $title ),
 			'body'    => $body,
