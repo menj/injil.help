@@ -32,6 +32,7 @@ function injil_help_option_defaults() {
 		'animate'          => 1,
 		'parallax'         => 'strong',
 		'gospel_layout'    => 'columns',
+		'app_passwords'    => 0,
 		'favicon_force'    => 0,
 		'favicon_url'      => '',
 		'share'            => 1,
@@ -70,6 +71,7 @@ function injil_help_sanitize_options( $in ) {
 	$out['animate']          = empty( $in['animate'] ) ? 0 : 1;
 	$out['parallax']         = in_array( $in['parallax'] ?? 'strong', array( 'strong', 'gentle', 'off' ), true ) ? $in['parallax'] : 'strong';
 	$out['gospel_layout']    = in_array( $in['gospel_layout'] ?? 'columns', array( 'columns', 'single', 'plain' ), true ) ? $in['gospel_layout'] : 'columns';
+	$out['app_passwords']    = empty( $in['app_passwords'] ) ? 0 : 1;
 	$out['favicon_force']    = empty( $in['favicon_force'] ) ? 0 : 1;
 	$out['favicon_url']      = esc_url_raw( $in['favicon_url'] ?? '' );
 	$out['share']            = empty( $in['share'] ) ? 0 : 1;
@@ -137,6 +139,7 @@ function injil_help_render_options() {
 		'branding' => __( 'Branding', 'injil-help' ),
 		'sharing'  => __( 'Sharing', 'injil-help' ),
 		'seo'      => __( 'SEO', 'injil-help' ),
+		'security' => __( 'Security', 'injil-help' ),
 		'content'  => __( 'Content', 'injil-help' ),
 	);
 	?>
@@ -273,6 +276,18 @@ function injil_help_render_options() {
 							<p><label for="ih-author-url"><?php esc_html_e( 'Author URL', 'injil-help' ); ?></label><br><input type="url" class="regular-text" id="ih-author-url" name="<?php echo esc_attr( $name ); ?>[author_url]" value="<?php echo esc_attr( $o['author_url'] ); ?>" placeholder="https://"></p>
 							<p><label for="ih-same-as"><?php esc_html_e( 'Profile links (sameAs), one per line', 'injil-help' ); ?></label><br><textarea class="large-text code" rows="3" id="ih-same-as" name="<?php echo esc_attr( $name ); ?>[same_as]"><?php echo esc_textarea( $o['same_as'] ); ?></textarea></p>
 							<p><label for="ih-org-logo"><?php esc_html_e( 'Organization logo URL', 'injil-help' ); ?></label><br><input type="url" class="regular-text" id="ih-org-logo" name="<?php echo esc_attr( $name ); ?>[org_logo]" value="<?php echo esc_attr( $o['org_logo'] ); ?>" placeholder="https://"><br><span class="description"><?php esc_html_e( 'Empty uses the Site Icon, or the brandmark when none is set. Google asks for at least 112 × 112 pixels.', 'injil-help' ); ?></span></p>
+						</td>
+					</tr>
+				</table>
+			</section>
+
+			<section class="ih-panel" id="panel-security" role="tabpanel" aria-labelledby="tab-security">
+				<table class="form-table" role="presentation">
+					<tr>
+						<th scope="row"><?php esc_html_e( 'Application passwords', 'injil-help' ); ?></th>
+						<td>
+							<label><input type="checkbox" name="<?php echo esc_attr( $name ); ?>[app_passwords]" value="1" <?php checked( $o['app_passwords'] ); ?>> <?php esc_html_e( 'Allow application passwords', 'injil-help' ); ?></label>
+							<p class="description"><?php esc_html_e( 'Off by default. Application passwords let a client (a mobile app, a publishing tool, a script) log in through the REST API or XML-RPC with a password made for it alone. Nothing on this site needs that door, so the theme keeps it shut: the panel disappears from user profiles and such log-ins are refused. Tick the box only while a client you trust needs it.', 'injil-help' ); ?></p>
 						</td>
 					</tr>
 				</table>

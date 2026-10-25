@@ -17,10 +17,16 @@ require_once get_stylesheet_directory() . '/inc/share.php';
 
 /**
  * Hardening. Application passwords (REST API and XML-RPC log-ins with a per-application
- * password) are switched off for the whole site: nothing on injil.help is written through the
- * REST API from outside, so the feature is one more door than the site needs.
+ * password) are switched off for the whole site unless Theme Options › Security allows them:
+ * nothing on injil.help is written through the REST API from outside, so the feature is one
+ * more door than the site needs.
  */
-add_filter( 'wp_is_application_passwords_available', '__return_false' );
+add_filter(
+	'wp_is_application_passwords_available',
+	function ( $available ) {
+		return injil_help_get_option( 'app_passwords' ) ? $available : false;
+	}
+);
 
 /**
  * Styles: front end and editor.
