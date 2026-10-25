@@ -1,10 +1,10 @@
 {
-    "title": "Section index: Jesus in the Qur'an",
+    "title": "Section index: Jesus in the Qur’an",
     "slug": "injil-help/section-quran",
     "categories": [
         "injil-help"
     ],
-    "description": "Full index page for Jesus in the Qur'an. Insert on the /quran/ page with the Section index template.",
+    "description": "Full index page for Jesus in the Qur’an. Insert on the /quran/ page with the Section index template.",
     "content": [
         "<!-- wp:group {\"className\":\"ih-section-head\",\"layout\":{\"type\":\"default\"}} -->",
         "<div class=\"wp-block-group ih-section-head\"><!-- wp:group {\"className\":\"ih-gloss-row\",\"layout\":{\"type\":\"flex\",\"flexWrap\":\"wrap\",\"verticalAlignment\":\"bottom\"}} -->",
@@ -16,7 +16,7 @@
         "<!-- /wp:paragraph --></div>",
         "<!-- /wp:group -->",
         "<!-- wp:heading {\"level\":1} -->",
-        "<h1 class=\"wp-block-heading\">Jesus in the Qur'an</h1>",
+        "<h1 class=\"wp-block-heading\">Jesus in the Qur’an</h1>",
         "<!-- /wp:heading -->",
         "<!-- wp:paragraph {\"className\":\"ih-intro\"} -->",
         "<p class=\"ih-intro\">All ninety-three verses on ʿĪsā ibn Maryam, grouped by theme and linked to the gospel passages they confirm or correct.</p>",

@@ -122,7 +122,7 @@
 <p class="ih-answer-text">The Qur’an names ʿĪsā twenty-five times and refers to him in ninety-three verses. It affirms his virgin birth, his signs and his title al-Masīḥ, the Messiah. It denies that he is God or the son of God (5:116-117; 19:35), and denies that he was killed or crucified (4:157).</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"className":"ih-full"} -->
-<p class="ih-full"><?php esc_html_e( 'Full evidence:', 'injil-help' ); ?> <a href="/quran/">Jesus in the Qur'an</a></p>
+<p class="ih-full"><?php esc_html_e( 'Full evidence:', 'injil-help' ); ?> <a href="/quran/">Jesus in the Qur’an</a></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:group {"className":"is-style-answer-item","layout":{"type":"default"}} -->

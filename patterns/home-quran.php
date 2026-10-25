@@ -20,7 +20,7 @@
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:heading -->
-<h2 class="wp-block-heading"><a href="/quran/">Jesus in the Qur'an</a></h2>
+<h2 class="wp-block-heading"><a href="/quran/">Jesus in the Qur’an</a></h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-intro"} -->
 <p class="ih-intro">All ninety-three verses on ʿĪsā ibn Maryam, grouped by theme and linked to the gospel passages they confirm or correct.</p>

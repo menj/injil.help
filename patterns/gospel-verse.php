@@ -21,7 +21,7 @@
 <p class="is-style-label-quran"><?php esc_html_e( "Qur'an", 'injil-help' ); ?></p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph -->
-<p>Q 3:45; see also 19:16-21. Cf. Luke 1:26-33, where the angel is named Gabriel and the child is called Son of the Most High; the Qur'an calls him a Word from God and the Messiah.</p>
+<p>Q 3:45; see also 19:16-21. Cf. Luke 1:26-33, where the angel is named Gabriel and the child is called Son of the Most High; the Qur’an calls him a Word from God and the Messiah.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
@@ -34,7 +34,7 @@
 <p class="is-style-label-nt"><?php esc_html_e( 'NT-attested', 'injil-help' ); ?></p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph -->
-<p>Luke 2:41-47. Kept under rule 1 of the measure: it agrees with the Qur'an, which says God taught him the Book and wisdom (3:48) and that he spoke with wisdom from the cradle (5:110).</p>
+<p>Luke 2:41-47. Kept under rule 1 of the measure: it agrees with the Qur’an, which says God taught him the Book and wisdom (3:48) and that he spoke with wisdom from the cradle (5:110).</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->

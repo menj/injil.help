@@ -34,7 +34,7 @@
 <p class="ih-numeral">III</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/quran/">Jesus in the Qur'an</a></h3>
+<h3 class="wp-block-heading"><a href="/quran/">Jesus in the Qur’an</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"fontSize":"small"} -->
 <p class="has-small-font-size">All 93 verses, indexed by theme and linked to the gospel passages they confirm or correct.</p>
