@@ -1,20 +1,27 @@
 <?php
 /**
- * Structured data: one JSON-LD graph per page, built from the types Google Search
- * documents and that this site has content for.
+ * Structured data: one JSON-LD graph per page, built from every schema.org type the
+ * site's content supports (https://schema.org), whether or not a search engine shows it.
  *
- *   Organization (logo, sameAs)     every page
- *   Person (the author)             every page
- *   WebSite (+ sitelinks search)    every page (the SearchAction on the front page)
- *   WebPage / CollectionPage /      every page; ProfilePage on About the author,
- *     ContactPage / ProfilePage /    ContactPage on Contact, CollectionPage on
- *     SearchResultsPage              section indexes, archives and search
- *   BreadcrumbList                  every page below the front page
- *   Article / BlogPosting           every article page and post
- *   ImageObject (licence metadata)  every manuscript image, from its caption
- *   FAQPage                         every page with FAQ items
- *   ItemList                        section indexes (their entries)
- *   Book                            the gospel sections, as the work they belong to
+ *   Organization (logo, sameAs, ContactPoint)   every page
+ *   Person (the author)                          every page
+ *   WebSite (+ SearchAction, about)              every page
+ *   SiteNavigationElement (ItemList)             every page, from the header navigation
+ *   WebPage / CollectionPage (+ ItemList) /      every page; ProfilePage + AboutPage on About the
+ *     ProfilePage / AboutPage / ContactPage /    author, ContactPage on Contact, CollectionPage on
+ *     SearchResultsPage                          section indexes, the sitemap, archives and search
+ *   BreadcrumbList                               every page below the front page
+ *   Article / BlogPosting (+ speakable,          every article page and post
+ *     citation, about)
+ *   Book + Chapter                               The Gospel According to Islam and its 27 sections
+ *   Book (Arabic) + CreativeWork (translation)   each classical commentary page, with its author
+ *   DefinedTermSet + DefinedTerm                 the glossary
+ *   Table                                        every page with a comparison table
+ *   Dataset                                      the sayings-order test
+ *   Event                                        every dated entry of the timeline
+ *   Quotation                                    every quotation block on a page
+ *   FAQPage (Question, Answer)                   every page with FAQ items
+ *   ImageObject (licence metadata)               every manuscript image, from its caption
  *
  * Output is skipped when Yoast, Rank Math or SEOPress is active, unless Theme
  * Options > SEO forces it on. Filter injil_help_schema_graph to change the graph.
@@ -38,6 +45,9 @@ function injil_help_schema_ids() {
 		'author'  => $home . '#author',
 		'website' => $home . '#website',
 		'logo'    => $home . '#logo',
+		'nav'     => $home . '#navigation',
+		'jesus'   => $home . '#isa-ibn-maryam',
+		'quran'   => $home . '#quran',
 		'book'    => home_url( '/gospel-according-to-islam/' ) . '#book',
 	);
 }
@@ -65,25 +75,53 @@ function injil_help_schema_logo_url() {
 	return get_stylesheet_directory_uri() . '/assets/brandmark.svg';
 }
 
+/** The two subjects every page is about: ʿĪsā ibn Maryam and the Qur'an, with their Wikidata identifiers. */
+function injil_help_schema_subjects() {
+	$ids = injil_help_schema_ids();
+	return array(
+		array(
+			'@type'         => 'Person',
+			'@id'           => $ids['jesus'],
+			'name'          => 'ʿĪsā ibn Maryam',
+			'alternateName' => array( 'Jesus', 'Jesus of Nazareth', 'Jesus, son of Mary' ),
+			'sameAs'        => array( 'https://www.wikidata.org/wiki/Q302' ),
+		),
+		array(
+			'@type'      => 'Book',
+			'@id'        => $ids['quran'],
+			'name'       => 'The Qur’an',
+			'alternateName' => 'al-Qurʾān',
+			'inLanguage' => 'ar',
+			'sameAs'     => array( 'https://www.wikidata.org/wiki/Q428' ),
+		),
+	);
+}
+
 function injil_help_schema_site_nodes( $post = null ) {
 	$ids  = injil_help_schema_ids();
 	$home = home_url( '/' );
 	list( $name, $url, $same ) = injil_help_schema_author( $post );
 
 	$org = array(
-		'@type' => 'Organization',
-		'@id'   => $ids['org'],
-		'name'  => get_bloginfo( 'name' ),
-		'url'   => $home,
-		'logo'  => array(
+		'@type'        => 'Organization',
+		'@id'          => $ids['org'],
+		'name'         => get_bloginfo( 'name' ),
+		'url'          => $home,
+		'logo'         => array(
 			'@type'      => 'ImageObject',
 			'@id'        => $ids['logo'],
 			'url'        => injil_help_schema_logo_url(),
 			'contentUrl' => injil_help_schema_logo_url(),
 			'caption'    => get_bloginfo( 'name' ),
 		),
-		'image' => array( '@id' => $ids['logo'] ),
-		'founder' => array( '@id' => $ids['author'] ),
+		'image'        => array( '@id' => $ids['logo'] ),
+		'founder'      => array( '@id' => $ids['author'] ),
+		'contactPoint' => array(
+			'@type'       => 'ContactPoint',
+			'contactType' => 'editorial',
+			'url'         => home_url( '/contact/' ),
+			'availableLanguage' => array( 'en', 'ms' ),
+		),
 	);
 	if ( $same ) {
 		$org['sameAs'] = $same;
@@ -93,6 +131,7 @@ function injil_help_schema_site_nodes( $post = null ) {
 		'@id'      => $ids['author'],
 		'name'     => $name,
 		'worksFor' => array( '@id' => $ids['org'] ),
+		'jobTitle' => 'Apologist',
 	);
 	if ( $url ) {
 		$person['url'] = $url;
@@ -110,22 +149,52 @@ function injil_help_schema_site_nodes( $post = null ) {
 		'description'   => $d['home_description'],
 		'inLanguage'    => get_bloginfo( 'language' ),
 		'publisher'     => array( '@id' => $ids['org'] ),
+		'author'        => array( '@id' => $ids['author'] ),
+		'copyrightHolder' => array( '@id' => $ids['author'] ),
+		'isAccessibleForFree' => true,
 		'about'         => array(
-			'@type' => 'Thing',
-			'name'  => 'The Islamic Dilemma',
+			array( '@type' => 'Thing', 'name' => 'The Islamic Dilemma' ),
+			array( '@id' => $ids['jesus'] ),
+			array( '@id' => $ids['quran'] ),
 		),
-	);
-	if ( is_front_page() ) {
-		$website['potentialAction'] = array(
+		'potentialAction' => array(
 			'@type'       => 'SearchAction',
 			'target'      => array(
 				'@type'       => 'EntryPoint',
 				'urlTemplate' => $home . '?s={search_term_string}',
 			),
 			'query-input' => 'required name=search_term_string',
-		);
+		),
+	);
+	return array_merge( array( $org, $person, $website ), injil_help_schema_subjects(), array( injil_help_schema_navigation() ) );
+}
+
+/** The header navigation as an ItemList of SiteNavigationElement, read from parts/header.html. */
+function injil_help_schema_navigation() {
+	$ids   = injil_help_schema_ids();
+	$items = array();
+	$part  = get_stylesheet_directory() . '/parts/header.html';
+	if ( is_readable( $part ) && preg_match_all( '~<!-- wp:navigation-link \{"label":"(.*?)","title":"(.*?)","url":"(.*?)"~u', (string) file_get_contents( $part ), $m, PREG_SET_ORDER ) ) {
+		foreach ( $m as $i => $link ) {
+			$label   = html_entity_decode( wp_strip_all_tags( str_replace( '\\"', '"', $link[1] ) ), ENT_QUOTES );
+			$items[] = array(
+				'@type'    => 'ListItem',
+				'position' => $i + 1,
+				'item'     => array(
+					'@type'       => 'SiteNavigationElement',
+					'name'        => trim( preg_replace( '/\s*(ΕΥΑΓΓΕΛΙΟΝ|ΠΑΥΛΟΣ|ΑΠΟΛΟΓΙΑ|[\x{0600}-\x{06FF}\x{FB50}-\x{FDFF}\x{FE70}-\x{FEFF}\s]+)$/u', '', $label ) ),
+					'description' => html_entity_decode( str_replace( '\\"', '"', $link[2] ), ENT_QUOTES ),
+					'url'         => home_url( $link[3] ),
+				),
+			);
+		}
 	}
-	return array( $org, $person, $website );
+	return array(
+		'@type'           => 'ItemList',
+		'@id'             => $ids['nav'],
+		'name'            => 'Site navigation',
+		'itemListElement' => $items,
+	);
 }
 
 /* ---------- Content parsing ---------- */
@@ -154,36 +223,62 @@ function injil_help_collect_faq( $blocks, &$items ) {
 	foreach ( $blocks as $block ) {
 		$class = $block['attrs']['className'] ?? '';
 		if ( 'core/details' === $block['blockName'] && false !== strpos( $class, 'is-style-faq' ) ) {
-			preg_match( '#<summary[^>]*>(.*?)</summary>#s', $block['innerHTML'], $m );
-			$question = trim( wp_strip_all_tags( $m[1] ?? '' ) );
-			$answer   = '';
-			foreach ( $block['innerBlocks'] as $inner ) {
-				$answer .= render_block( $inner );
-			}
-			$answer = trim( wp_strip_all_tags( $answer ) );
-			if ( $question && $answer ) {
-				$items[] = array( html_entity_decode( $question, ENT_QUOTES ), html_entity_decode( $answer, ENT_QUOTES ) );
-			}
-		}
-		if ( 'core/group' === $block['blockName'] && false !== strpos( $class, 'is-style-answer-item' ) ) {
-			$question = '';
-			$answer   = '';
-			foreach ( $block['innerBlocks'] as $inner ) {
-				$inner_class = $inner['attrs']['className'] ?? '';
-				if ( 'core/heading' === $inner['blockName'] && '' === $question ) {
-					$question = trim( wp_strip_all_tags( render_block( $inner ) ) );
-				} elseif ( false !== strpos( $inner_class, 'ih-answer-text' ) ) {
+			if ( preg_match( '#<summary>(.*?)</summary>#s', $block['innerHTML'], $q ) ) {
+				$answer = '';
+				foreach ( $block['innerBlocks'] as $inner ) {
 					$answer .= ' ' . wp_strip_all_tags( render_block( $inner ) );
 				}
+				$items[] = array( html_entity_decode( wp_strip_all_tags( $q[1] ), ENT_QUOTES ), trim( preg_replace( '/\s+/', ' ', html_entity_decode( $answer, ENT_QUOTES ) ) ) );
 			}
-			$answer = trim( $answer );
-			if ( $question && $answer ) {
-				$items[] = array( html_entity_decode( $question, ENT_QUOTES ), html_entity_decode( $answer, ENT_QUOTES ) );
+			continue;
+		}
+		if ( 'core/group' === $block['blockName'] && false !== strpos( $class, 'is-style-answer-item' ) ) {
+			$q = '';
+			$a = '';
+			foreach ( $block['innerBlocks'] as $inner ) {
+				if ( 'core/heading' === $inner['blockName'] && ! $q ) {
+					$q = html_entity_decode( wp_strip_all_tags( $inner['innerHTML'] ), ENT_QUOTES );
+				} elseif ( false !== strpos( $inner['attrs']['className'] ?? '', 'ih-answer-text' ) ) {
+					$a = html_entity_decode( wp_strip_all_tags( render_block( $inner ) ), ENT_QUOTES );
+				}
+			}
+			if ( $q && $a ) {
+				$items[] = array( $q, trim( preg_replace( '/\s+/', ' ', $a ) ) );
 			}
 			continue;
 		}
 		if ( ! empty( $block['innerBlocks'] ) ) {
 			injil_help_collect_faq( $block['innerBlocks'], $items );
+		}
+	}
+}
+
+/** Quotation blocks (core/quote) on the page: the text and, where given, who is cited. */
+function injil_help_collect_quotes( $blocks, &$quotes ) {
+	foreach ( $blocks as $block ) {
+		if ( 'core/quote' === $block['blockName'] ) {
+			$text = '';
+			foreach ( $block['innerBlocks'] as $inner ) {
+				$text .= ' ' . wp_strip_all_tags( render_block( $inner ) );
+			}
+			$text = trim( preg_replace( '/\s+/', ' ', html_entity_decode( $text, ENT_QUOTES ) ) );
+			if ( $text ) {
+				$quote = array(
+					'@type' => 'Quotation',
+					'text'  => $text,
+				);
+				if ( preg_match( '#<cite>(.*?)</cite>#s', $block['innerHTML'], $c ) ) {
+					$quote['creator'] = array(
+						'@type' => 'Thing',
+						'name'  => html_entity_decode( wp_strip_all_tags( $c[1] ), ENT_QUOTES ),
+					);
+				}
+				$quotes[] = $quote;
+			}
+			continue;
+		}
+		if ( ! empty( $block['innerBlocks'] ) ) {
+			injil_help_collect_quotes( $block['innerBlocks'], $quotes );
 		}
 	}
 }
@@ -228,6 +323,9 @@ function injil_help_collect_images( $html ) {
 		} elseif ( false !== stripos( $caption, 'public domain' ) ) {
 			$node['license']         = 'https://creativecommons.org/publicdomain/mark/1.0/';
 			$node['copyrightNotice'] = 'Public domain';
+		} elseif ( false !== stripos( $caption, 'CC0' ) ) {
+			$node['license']         = 'https://creativecommons.org/publicdomain/zero/1.0/';
+			$node['copyrightNotice'] = 'CC0';
 		}
 		if ( preg_match( '#Photo: ([^.,]+)#', $caption, $ph ) ) {
 			$node['creator']         = array(
@@ -241,7 +339,7 @@ function injil_help_collect_images( $html ) {
 	return array_values( $images );
 }
 
-/** Section index entries (the cards), for an ItemList. */
+/** Section index entries (the cards) and the sitemap's page list, for an ItemList. */
 function injil_help_collect_entries( $html ) {
 	$list = array();
 	if ( preg_match_all( '#<div class="wp-block-group ih-entry[^"]*">.*?<h3[^>]*><a href="([^"]+)">(.*?)</a></h3>#s', $html, $m, PREG_SET_ORDER ) ) {
@@ -253,8 +351,137 @@ function injil_help_collect_entries( $html ) {
 				'name'     => html_entity_decode( wp_strip_all_tags( $e[2] ), ENT_QUOTES ),
 			);
 		}
+	} elseif ( preg_match( '#<ul[^>]*class="[^"]*wp-block-page-list[^"]*"[^>]*>(.*)</ul>#s', $html, $ul ) && preg_match_all( '#<a[^>]+href="([^"]+)"[^>]*>(.*?)</a>#s', $ul[1], $m, PREG_SET_ORDER ) ) {
+		foreach ( $m as $i => $e ) {
+			$list[] = array(
+				'@type'    => 'ListItem',
+				'position' => $i + 1,
+				'url'      => $e[1],
+				'name'     => html_entity_decode( wp_strip_all_tags( $e[2] ), ENT_QUOTES ),
+			);
+		}
 	}
 	return $list;
+}
+
+/** The works listed under a "Sources" heading, as CreativeWork citations: the italic title and the text before it as author. */
+function injil_help_collect_citations( $html ) {
+	$cites = array();
+	if ( ! preg_match( '#<h2[^>]*>\s*Sources\s*</h2>(.*?)(?:<h2|$)#s', $html, $sec ) ) {
+		return $cites;
+	}
+	if ( ! preg_match_all( '#<li>(.*?)</li>#s', $sec[1], $items ) ) {
+		return $cites;
+	}
+	foreach ( $items[1] as $li ) {
+		$plain = html_entity_decode( wp_strip_all_tags( $li ), ENT_QUOTES );
+		$cite  = array( '@type' => 'CreativeWork' );
+		// An article: “Title” and then the journal or volume in italics. Otherwise the first italic title is the work.
+		$quote_first = false !== mb_strpos( $li, '“' ) && ( false === strpos( $li, '<em>' ) || mb_strpos( $li, '“' ) < mb_strpos( $li, '<em>' ) );
+		if ( $quote_first && preg_match( '#^(.*?)“(.+?)”(.*)$#su', $plain, $art ) ) {
+			$cite['@type'] = 'ScholarlyArticle';
+			$cite['name']  = trim( $art[2] );
+			$author        = trim( $art[1], " ,;:\u{2019}" );
+			$after         = substr( $li, (int) mb_strpos( $li, '”' ) );
+			if ( preg_match( '#<em>(.*?)</em>#s', $after, $j ) ) {
+				$cite['isPartOf'] = array( '@type' => 'Periodical', 'name' => html_entity_decode( trim( wp_strip_all_tags( $j[1] ) ), ENT_QUOTES ) );
+			}
+		} elseif ( preg_match( '#^(.*?)<em>(.*?)</em>#s', $li, $m ) ) {
+			$cite['name'] = html_entity_decode( trim( wp_strip_all_tags( $m[2] ) ), ENT_QUOTES );
+			$author       = html_entity_decode( trim( wp_strip_all_tags( $m[1] ), " ,;:\u{2019}" ), ENT_QUOTES );
+		} else {
+			continue;
+		}
+		if ( ! $cite['name'] ) {
+			continue;
+		}
+		if ( $author && mb_strlen( $author ) < 120 ) {
+			$cite['author'] = array(
+				'@type' => 'Person',
+				'name'  => $author,
+			);
+		}
+		if ( preg_match( '#\((?:[^()]*?,\s*)?(\d{4})\)#', wp_strip_all_tags( $li ), $y ) ) {
+			$cite['datePublished'] = $y[1];
+		}
+		$cites[] = $cite;
+	}
+	return $cites;
+}
+
+/** Glossary entries: "<strong>Term</strong>: definition", several to a list item. */
+function injil_help_collect_terms( $html ) {
+	$terms = array();
+	if ( preg_match_all( '#<strong>([^<]+)</strong>\s*:\s*(.*?)(?=<strong>|</li>|</p>)#s', $html, $m, PREG_SET_ORDER ) ) {
+		foreach ( $m as $e ) {
+			$name = html_entity_decode( trim( $e[1] ), ENT_QUOTES );
+			$def  = trim( preg_replace( '/\s+/', ' ', html_entity_decode( wp_strip_all_tags( $e[2] ), ENT_QUOTES ) ) );
+			if ( $name && $def ) {
+				$terms[] = array(
+					'@type'       => 'DefinedTerm',
+					'name'        => $name,
+					'description' => $def,
+				);
+			}
+		}
+	}
+	return $terms;
+}
+
+/** Comparison tables (block style "discrepancy"): their caption or the heading before them. */
+function injil_help_collect_tables( $html, $page_title ) {
+	$tables = array();
+	if ( preg_match_all( '#(?:<h[23][^>]*>(.*?)</h[23]>\s*(?:<!--[^>]*-->\s*)*)?<figure[^>]*class="[^"]*is-style-discrepancy[^"]*"[^>]*>(.*?)</figure>#s', $html, $m, PREG_SET_ORDER ) ) {
+		foreach ( $m as $i => $t ) {
+			$heads = array();
+			if ( preg_match_all( '#<th[^>]*>(.*?)</th>#s', $t[2], $th ) ) {
+				$heads = array_map( fn( $h ) => html_entity_decode( wp_strip_all_tags( $h ), ENT_QUOTES ), $th[1] );
+			}
+			$name = $t[1] ? html_entity_decode( wp_strip_all_tags( $t[1] ), ENT_QUOTES ) : $page_title;
+			$tables[] = array(
+				'@type'       => 'Table',
+				'name'        => $name,
+				'description' => $heads ? 'Columns: ' . implode( ', ', $heads ) : $page_title,
+				'about'       => $page_title,
+			);
+		}
+	}
+	return $tables;
+}
+
+/** The timeline's dated entries as Events: "c. 6-4 BCE: text", "62 CE: text", "393 and 397 CE: text". */
+function injil_help_collect_events( $html ) {
+	$events = array();
+	if ( ! preg_match_all( '#<li>(.*?)</li>#s', $html, $items ) ) {
+		return $events;
+	}
+	foreach ( $items[1] as $li ) {
+		$text = trim( preg_replace( '/\s+/', ' ', html_entity_decode( wp_strip_all_tags( $li ), ENT_QUOTES ) ) );
+		if ( ! preg_match( '/^(c\. )?(\d{1,4})(?:[-–](\d{1,4}))?(?: and (\d{1,4}))? (BCE|CE):\s*(.+)$/u', $text, $m ) ) {
+			continue;
+		}
+		$year = function ( $y ) use ( $m ) {
+			$y = (int) $y;
+			return ( 'BCE' === $m[5] ? '-' : '' ) . str_pad( (string) $y, 4, '0', STR_PAD_LEFT );
+		};
+		$event = array(
+			'@type'       => 'Event',
+			'name'        => mb_substr( $m[6], 0, 110 ),
+			'description' => $m[6],
+			'startDate'   => $year( $m[2] ),
+			'eventStatus' => 'https://schema.org/EventScheduled',
+		);
+		if ( ! empty( $m[3] ) ) {
+			$event['endDate'] = $year( $m[3] );
+		} elseif ( ! empty( $m[4] ) ) {
+			$event['endDate'] = $year( $m[4] );
+		}
+		if ( $m[1] ) {
+			$event['description'] = 'Approximate date. ' . $m[6];
+		}
+		$events[] = $event;
+	}
+	return $events;
 }
 
 /* ---------- Page classification ---------- */
@@ -272,7 +499,7 @@ function injil_help_schema_page_type( $post, $entries = array() ) {
 	if ( $post instanceof WP_Post && 'page' === $post->post_type ) {
 		switch ( $post->post_name ) {
 			case 'about-the-author':
-				return 'ProfilePage';
+				return array( 'ProfilePage', 'AboutPage' );
 			case 'contact':
 				return 'ContactPage';
 			case 'sitemap':
@@ -300,6 +527,19 @@ function injil_help_schema_is_article( $post, $page_type = 'WebPage' ) {
 	return ! in_array( $post->post_name, $utility, true );
 }
 
+/** The page's place in the site: the path of its slugs, parent first. */
+function injil_help_schema_path( $post ) {
+	if ( ! $post instanceof WP_Post ) {
+		return array();
+	}
+	$slugs = array();
+	foreach ( array_reverse( get_post_ancestors( $post ) ) as $ancestor ) {
+		$slugs[] = get_post_field( 'post_name', $ancestor );
+	}
+	$slugs[] = $post->post_name;
+	return $slugs;
+}
+
 /* ---------- The graph ---------- */
 
 function injil_help_schema_graph() {
@@ -308,6 +548,7 @@ function injil_help_schema_graph() {
 	$ids   = injil_help_schema_ids();
 	$graph = injil_help_schema_site_nodes( $post );
 	$lang  = get_bloginfo( 'language' );
+	$path  = injil_help_schema_path( $post );
 
 	// The page's content: the front page template, or the post.
 	$content = $post ? $post->post_content : '';
@@ -343,15 +584,18 @@ function injil_help_schema_graph() {
 	$primary_image = $featured ?: ( $images ? $images[0]['contentUrl'] : injil_help_default_og_image() );
 
 	// WebPage.
-	$entries = $html ? injil_help_collect_entries( $html ) : array();
-	$webpage = array(
-		'@type'      => injil_help_schema_page_type( $post, $entries ),
+	$entries   = $html ? injil_help_collect_entries( $html ) : array();
+	$page_type = injil_help_schema_page_type( $post, $entries );
+	$webpage   = array(
+		'@type'      => $page_type,
 		'@id'        => $webpage_id,
 		'url'        => $url,
 		'name'       => $title,
 		'isPartOf'   => array( '@id' => $ids['website'] ),
 		'inLanguage' => $lang,
 		'primaryImageOfPage' => array( '@id' => $primary_image ),
+		'isAccessibleForFree' => true,
+		'publisher'  => array( '@id' => $ids['org'] ),
 	);
 	if ( $description ) {
 		$webpage['description'] = $description;
@@ -364,24 +608,24 @@ function injil_help_schema_graph() {
 		$webpage['breadcrumb'] = array( '@id' => $breadcrumb_id );
 	}
 	if ( is_front_page() || injil_help_is_pillar() ) {
-		$webpage['about'] = array(
-			'@type' => 'Thing',
-			'name'  => 'The Islamic Dilemma',
-		);
+		$webpage['about'] = array( '@type' => 'Thing', 'name' => 'The Islamic Dilemma' );
 	}
-	if ( 'ProfilePage' === $webpage['@type'] ) {
+	if ( in_array( 'ProfilePage', (array) $page_type, true ) ) {
 		$webpage['mainEntity'] = array( '@id' => $ids['author'] );
 	}
-	if ( 'CollectionPage' === $webpage['@type'] ) {
-		if ( $entries ) {
-			$webpage['mainEntity'] = array(
-				'@type'           => 'ItemList',
-				'name'            => $title,
-				'numberOfItems'   => count( $entries ),
-				'itemListElement' => $entries,
-			);
-		}
+	if ( 'CollectionPage' === $page_type && $entries ) {
+		$webpage['mainEntity'] = array(
+			'@type'           => 'ItemList',
+			'name'            => $title,
+			'numberOfItems'   => count( $entries ),
+			'itemListElement' => $entries,
+		);
 	}
+	$speakable = array(
+		'@type'       => 'SpeakableSpecification',
+		'cssSelector' => array( 'h1', '.entry-content > p' ),
+	);
+	$webpage['speakable'] = $speakable;
 	$graph[] = $webpage;
 
 	// Breadcrumb.
@@ -418,8 +662,9 @@ function injil_help_schema_graph() {
 		);
 	}
 
-	// Article.
-	if ( $post && is_singular() && injil_help_schema_is_article( $post, $webpage['@type'] ) ) {
+	// Article, with its citations, subjects and the works it belongs to.
+	$article_id = $url . '#article';
+	if ( $post && is_singular() && injil_help_schema_is_article( $post, $page_type ) ) {
 		$headline = $title;
 		if ( strlen( $headline ) > 110 ) {
 			$headline = rtrim( substr( $headline, 0, 109 ) ) . '…';
@@ -427,8 +672,8 @@ function injil_help_schema_graph() {
 		$image_list = array_values( array_unique( array_filter( array_merge( array( $featured ), wp_list_pluck( $images, 'contentUrl' ), array( injil_help_default_og_image() ) ) ) ) );
 		$parent     = $post->post_parent ? get_post( $post->post_parent ) : null;
 		$article    = array(
-			'@type'            => 'post' === $post->post_type ? 'BlogPosting' : 'Article',
-			'@id'              => $url . '#article',
+			'@type'            => 'post' === $post->post_type ? 'BlogPosting' : array( 'Article', 'ScholarlyArticle' ),
+			'@id'              => $article_id,
 			'headline'         => $headline,
 			'name'             => $title,
 			'url'              => $url,
@@ -437,11 +682,14 @@ function injil_help_schema_graph() {
 			'image'            => $image_list,
 			'author'           => array( '@id' => $ids['author'] ),
 			'publisher'        => array( '@id' => $ids['org'] ),
+			'copyrightHolder'  => array( '@id' => $ids['author'] ),
 			'datePublished'    => get_the_date( 'c', $post ),
 			'dateModified'     => get_the_modified_date( 'c', $post ),
 			'inLanguage'       => $lang,
 			'isAccessibleForFree' => true,
 			'wordCount'        => str_word_count( wp_strip_all_tags( $html ) ),
+			'about'            => array( array( '@id' => $ids['jesus'] ), array( '@id' => $ids['quran'] ) ),
+			'speakable'        => $speakable,
 		);
 		if ( $description ) {
 			$article['description'] = $description;
@@ -450,33 +698,134 @@ function injil_help_schema_graph() {
 			$article['articleSection'] = wp_strip_all_tags( get_the_title( $parent ) );
 		}
 		if ( injil_help_is_pillar() ) {
-			$article['about']    = array(
-				array( '@type' => 'Thing', 'name' => 'The Islamic Dilemma' ),
-				array( '@type' => 'Thing', 'name' => 'Injil' ),
-			);
+			$article['about'][] = array( '@type' => 'Thing', 'name' => 'The Islamic Dilemma' );
+			$article['about'][] = array( '@type' => 'Thing', 'name' => 'Injil' );
 			$article['keywords'] = 'the Islamic Dilemma, Quran 5:47, Injil, tahrif, the four gospels';
 		}
-		// The 27 sections and the Introduction belong to a book.
-		if ( $parent && 'gospel-according-to-islam' === $parent->post_name && ( 'introduction' === $post->post_name || ( function_exists( 'injil_help_gospel_section_number' ) && injil_help_gospel_section_number( $post->post_name ) ) ) ) {
-			$article['isPartOf'] = array( '@id' => $ids['book'] );
-			$graph[]             = array(
+		$citations = injil_help_collect_citations( $html );
+		if ( $citations ) {
+			$article['citation'] = $citations;
+		}
+
+		// The gospel: Book and Chapter.
+		$section = ( $parent && 'gospel-according-to-islam' === $parent->post_name && function_exists( 'injil_help_gospel_section_number' ) ) ? injil_help_gospel_section_number( $post->post_name ) : 0;
+		if ( $section || ( $parent && 'gospel-according-to-islam' === $parent->post_name && 'introduction' === $post->post_name ) ) {
+			$chapter_id              = $url . '#chapter';
+			$article['isPartOf']     = array( '@id' => $chapter_id );
+			$graph[]                 = array(
 				'@type'         => 'Book',
 				'@id'           => $ids['book'],
 				'name'          => 'The Gospel According to Islam',
 				'url'           => home_url( '/gospel-according-to-islam/' ),
-				'author'        => array(
-					'@type' => 'Person',
-					'name'  => 'Ahmad Shafaat',
-				),
-				'publisher'     => array(
-					'@type' => 'Organization',
-					'name'  => 'Vantage Press',
-				),
+				'author'        => array( '@type' => 'Person', 'name' => 'Ahmad Shafaat' ),
+				'editor'        => array( '@id' => $ids['author'] ),
+				'publisher'     => array( '@type' => 'Organization', 'name' => 'Vantage Press' ),
 				'datePublished' => '1985',
 				'inLanguage'    => 'en',
+				'numberOfPages' => 27,
+				'about'         => array( '@id' => $ids['jesus'] ),
 			);
+			$chapter = array(
+				'@type'    => 'Chapter',
+				'@id'      => $chapter_id,
+				'name'     => $title,
+				'url'      => $url,
+				'isPartOf' => array( '@id' => $ids['book'] ),
+				'author'   => array( '@type' => 'Person', 'name' => 'Ahmad Shafaat' ),
+			);
+			if ( $section ) {
+				$chapter['position'] = $section;
+			}
+			$graph[] = $chapter;
+		}
+
+		// A classical commentary: the Arabic work and its English rendering.
+		if ( isset( $path[1] ) && 'quran' === $path[0] && 'commentaries' === $path[1] && isset( $path[3] ) && function_exists( 'injil_help_tafsir_works' ) ) {
+			$key   = preg_replace( '/-part-[a-z]+$/', '', $path[3] );
+			$works = injil_help_tafsir_works();
+			if ( isset( $works[ $key ] ) ) {
+				$w       = $works[ $key ];
+				$work_id = home_url( '/quran/commentaries/' ) . '#' . $key;
+				$graph[] = array(
+					'@type'      => 'Book',
+					'@id'        => $work_id,
+					'name'       => $w['title'],
+					'alternateName' => $w['short'],
+					'inLanguage' => 'ar',
+					'author'     => array(
+						'@type'       => 'Person',
+						'name'        => $w['author'],
+						'description' => 'Died ' . $w['died'],
+					),
+					'about'      => array( '@id' => $ids['quran'] ),
+					'workTranslation' => array( '@id' => $work_id . '-en' ),
+				);
+				$graph[] = array(
+					'@type'             => 'CreativeWork',
+					'@id'               => $work_id . '-en',
+					'name'              => $w['short'] . ' in English',
+					'inLanguage'        => 'en',
+					'translationOfWork' => array( '@id' => $work_id ),
+					'translator'        => array( '@id' => $ids['org'] ),
+					'hasPart'           => array( '@id' => $article_id ),
+				);
+				$article['isPartOf'] = array( '@id' => $work_id . '-en' );
+			}
 		}
 		$graph[] = $article;
+	}
+
+	// The glossary as a DefinedTermSet.
+	if ( $post && 'glossary' === $post->post_name ) {
+		$terms = injil_help_collect_terms( $html );
+		if ( $terms ) {
+			$graph[] = array(
+				'@type'          => 'DefinedTermSet',
+				'@id'            => $url . '#terms',
+				'name'           => $title,
+				'url'            => $url,
+				'hasDefinedTerm' => $terms,
+			);
+		}
+	}
+
+	// Comparison tables.
+	foreach ( injil_help_collect_tables( $html, $title ) as $table ) {
+		$table['isPartOf'] = array( '@id' => $webpage_id );
+		$graph[]           = $table;
+	}
+
+	// The sayings-order test as a Dataset.
+	if ( $post && 'correlation' === $post->post_name ) {
+		$graph[] = array(
+			'@type'       => 'Dataset',
+			'@id'         => $url . '#dataset',
+			'name'        => 'Order of the parallel sayings in the Gospel of Thomas against Matthew, Mark, Luke and Q',
+			'description' => $description,
+			'url'         => $url,
+			'creator'     => array( '@id' => $ids['author'] ),
+			'isAccessibleForFree' => true,
+			'keywords'    => array( 'Gospel of Thomas', 'synoptic gospels', 'Q', 'correlation' ),
+			'variableMeasured' => array( 'Spearman rank correlation', 'p-value' ),
+		);
+	}
+
+	// The timeline as Events.
+	if ( $post && 'timeline' === $post->post_name ) {
+		foreach ( injil_help_collect_events( $html ) as $event ) {
+			$event['isPartOf'] = array( '@id' => $webpage_id );
+			$graph[]           = $event;
+		}
+	}
+
+	// Quotations.
+	$quotes = array();
+	if ( $blocks ) {
+		injil_help_collect_quotes( $blocks, $quotes );
+	}
+	foreach ( array_slice( $quotes, 0, 40 ) as $quote ) {
+		$quote['isPartOf'] = array( '@id' => $webpage_id );
+		$graph[]           = $quote;
 	}
 
 	// Images with licence metadata.

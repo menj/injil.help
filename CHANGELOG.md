@@ -2,6 +2,11 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.6.3
+
+- A last pass against the Google SEO Starter Guide: every page below the front page opens with a visible breadcrumb row (Home, the parent pages, the page), matching the BreadcrumbList; meta descriptions are trimmed to 160 characters at a sentence end; search result pages carry noindex; ten "its own page" anchors are rewritten as descriptive anchor text.
+- Structured data widened to every schema.org type the content supports, whatever a search engine chooses to show: Organization gains a ContactPoint; WebSite its SearchAction and the subjects it is about (ʿĪsā ibn Maryam and the Qur'an as Person and Book nodes with Wikidata identifiers); the header navigation is an ItemList of SiteNavigationElement; every page node carries a SpeakableSpecification; article pages are Article + ScholarlyArticle with their Sources list as `citation` (CreativeWork, or ScholarlyArticle in a Periodical); the gospel sections are Chapters of the Book; each commentary page names the Arabic Book, its author and the English CreativeWork that translates it; the glossary is a DefinedTermSet of 71 DefinedTerms; comparison tables are Table nodes; the sayings-order test is a Dataset; the 49 dated entries of the timeline are Events; quotation blocks are Quotation nodes; the About page is ProfilePage and AboutPage; the sitemap's page list and the section indexes are ItemLists; FAQPage stays.
+
 ## 3.6.2
 
 - Links to apostleofdoom.org and bestofislam.org are within the running text only: thirty sentences across the Paul of Tarsus pages, the Islamic Dilemma pages, the measure, John, the discrepancies index, the Qur'an pages, the resources pages and the bonus chapter name the article that takes the point further and the site it is on, the way any source is cited. The "On the writer's other websites" line of the Read next row, the footer links and the bestofislam.org sameAs entry added in 3.6.1 are removed; no site is presented as a companion or sister site.

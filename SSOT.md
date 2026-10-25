@@ -74,7 +74,8 @@ Tabs: Colours, Branding, Sharing, SEO, Security, Content. Defaults: `colors` {},
 
 ## Structured data and SEO
 
-- One JSON-LD `@graph` per page from `inc/schema.php` at `wp_head` priority 5: Organization, Person, WebSite (+ SearchAction on the front page), page node (WebPage, CollectionPage with ItemList when a page has three or more entries, ProfilePage, ContactPage, SearchResultsPage), BreadcrumbList, Article or BlogPosting, Book for the gospel sections, ImageObject with licence metadata, FAQPage from `is-style-faq` details.
+- One JSON-LD `@graph` per page from `inc/schema.php` at `wp_head` priority 5, carrying every schema.org type the content supports regardless of what any search engine displays: Organization (ContactPoint), Person, WebSite (SearchAction, about), Person and Book for ʿĪsā ibn Maryam and the Qur'an (Wikidata sameAs), SiteNavigationElement ItemList, page node (WebPage, CollectionPage + ItemList, ProfilePage + AboutPage, ContactPage, SearchResultsPage; SpeakableSpecification), BreadcrumbList, Article + ScholarlyArticle or BlogPosting with citation, Book + Chapter (the gospel), Book + CreativeWork translation (the commentaries), DefinedTermSet (glossary), Table, Dataset (correlation), Event (timeline), Quotation, FAQPage, ImageObject with licence metadata. Add a type whenever new content fits one.
+- Every page below the front page opens with a visible breadcrumb row (`injil_help_breadcrumb_html()`) that matches the BreadcrumbList; meta descriptions are trimmed to 160 characters at a sentence end; search result pages are `noindex`; anchor text is descriptive (never "its own page", "here" or a bare URL); every URL is words only.
 - Off automatically when Yoast, Rank Math or SEOPress is active.
 - Six FAQs on every main page, written as search queries.
 - Default social image: `assets/images/og-default.jpg`.

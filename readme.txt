@@ -82,6 +82,9 @@ This file is the user-facing manual that WordPress and Git Updater read. The rep
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add the entry to CHANGELOG.md and to the Changelog section here, note anything an existing site must know under "Updating an existing site" in UPGRADING.md, merge to main, and tag the commit with the same number (for example v3.4.0). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 3.6.3 =
+* Last pass against the Google SEO Starter Guide: a visible breadcrumb row on every page below the front page; meta descriptions trimmed to 160 characters; search results noindex; descriptive anchor text everywhere.
+* Structured data widened to every schema.org type the content supports: ContactPoint, SearchAction, SiteNavigationElement, SpeakableSpecification, ScholarlyArticle with citations, Book and Chapter for the gospel, the Arabic Book and English translation of each commentary, DefinedTermSet for the glossary, Table, Dataset, Event for the timeline, Quotation, AboutPage, ItemList and FAQPage, beside the Organization, Person, WebSite, page, Breadcrumb, Article and ImageObject nodes.
 = 3.6.2 =
 * Links to apostleofdoom.org and bestofislam.org are within the running text only, thirty sentences naming the article and the site where a point is taken further; the declared row, the footer links and the sameAs entry of 3.6.1 are removed.
 = 3.6.1 =

@@ -33,7 +33,7 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 |---|---|
 | Type | Block theme (theme.json v3), child of `twentytwentyfive` |
 | Folder, text domain, pattern prefix | `injil-help` |
-| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.6.2) |
+| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.6.3) |
 | PHP in `inc/` | options, starter-content, starter-content-pages, gospel-islam, quran-jesus, tafsir, seo, schema, share |
 | Data | `inc/data/` 2.6 MB of JSON: 176 starter pages, the gospel narrative, the Qur'anic passages, Thomas (woven sections and two full texts), the infancy gospels, the substitution witnesses, eight commentaries (315,000 words) |
 | Front-end assets | `style.css` 32 KB; `assets/css/ornament.css` 12 KB, `share.css` 3 KB, `bible.css` 3 KB; `assets/js/ornament.js` 3 KB, `share.js` 2 KB; all plain, no build step |
@@ -128,7 +128,7 @@ A `body` is a list of lines. `injil_help_markup_to_blocks()` turns them into blo
 | Line | Becomes |
 |---|---|
 | `- text` | list item; consecutive items form one `core/list`. A leading `[agree]`, `[beyond]`, `[unclear]`, `[conflict]` or `[notneeded]` adds class `ih-s ih-s-{key}` and a badge |
-| `? Question` + next line | `core/details` with `is-style-faq`, the next line as its paragraph; collected into FAQPage |
+| `? Question` + next line | `core/details` with `is-style-faq`, the next line as its paragraph |
 | `[details] Title` … `[/details]` | `core/details` with `is-style-fold` wrapping every block in between |
 | `### text`, `## text` | `core/heading` level 3 or 2 |
 | `> text` | `core/quote` with one paragraph |
@@ -204,10 +204,10 @@ Registered in `functions.php`, styled in `style.css`:
 | Block | Styles |
 |---|---|
 | `core/paragraph` | `label-consensus`, `label-minority`, `label-islamic`, `label-quran`, `label-nt`, `label-editorial` |
-| `core/group` | `answer-capsule`, `gospel-verse`, `objection-reply`, `criterion`, `answer-item` (FAQPage), `read-first` |
+| `core/group` | `answer-capsule`, `gospel-verse`, `objection-reply`, `criterion`, `answer-item`, `read-first` |
 | `core/table` | `discrepancy` |
 | `core/separator` | `ornament` |
-| `core/details` | `faq` (FAQPage); `fold` is applied by the parser and styled, not registered as a picker style |
+| `core/details` | `faq`; `fold` is applied by the parser and styled, not registered as a picker style |
 
 `style.css` opens with the tokens: radii `--ih-r-sm|md|lg`, font roles `--ih-serif`, `--ih-sans`, `--ih-display`, `--ih-greek`, `--ih-quran`. Colours are always `var(--wp--preset--color--{slug})`; nothing is hard-coded. Component classes are prefixed `ih-` (`ih-section-head`, `ih-entry`, `ih-k`, `ih-eyebrow`, `ih-numeral`, `ih-plate`, `ih-fnref`, `ih-footnotes`, `ih-s`, `ih-badge`, `ih-share*`). Language-scoped fonts come from `:lang()` selectors.
 
@@ -227,9 +227,9 @@ All faces are bundled in `assets/fonts/` and declared as `fontFace` in `theme.js
 
 ## SEO and structured data
 
-`inc/seo.php`: `injil_help_seo_defaults()` (filterable) supplies the home title, home description and pillar title; `document_title_parts` applies them; `wp_head` prints `meta description`, Open Graph and Twitter card tags with the page excerpt or the first paragraph, and the featured image or the default social image (`assets/images/og-default.jpg`, filter `injil_help_default_og_image`). `injil_help_is_pillar()` identifies `/the-islamic-dilemma/`.
+`inc/seo.php`: `injil_help_seo_defaults()` (filterable) supplies the home title, home description and pillar title; `document_title_parts` applies them; `wp_head` prints `meta description` (the excerpt or the first paragraph, trimmed to 160 characters at a sentence end by `injil_help_trim_description()`), Open Graph and Twitter card tags, and the featured image or the default social image (`assets/images/og-default.jpg`, filter `injil_help_default_og_image`). `injil_help_is_pillar()` identifies `/the-islamic-dilemma/`. `injil_help_breadcrumb_html()` prepends the visible breadcrumb row (Home, the parents, the page) to the content of every page and post below the front page at `the_content` priority 5; search result pages carry `noindex` through `wp_robots`.
 
-`inc/schema.php`: `injil_help_schema_enabled()` honours the SEO option and switches off when Yoast, Rank Math or SEOPress is active (filter `injil_help_output_schema`). `injil_help_schema_graph()` builds one `@graph` at `wp_head` priority 5: Organization (logo, sameAs), Person (author from the SEO tab or the post author), WebSite (+ SearchAction on the front page), the page node typed by `injil_help_schema_page_type()` (CollectionPage with an ItemList when the page has three or more entries, ProfilePage for the About page, ContactPage, SearchResultsPage, else WebPage), BreadcrumbList from ancestors, Article or BlogPosting when `injil_help_schema_is_article()` says so (word count, dates, section, images), Book for the gospel sections, ImageObject for every figure (licence read from the caption, creator from "Photo: Name", acquireLicensePage from the Commons link), FAQPage from `is-style-faq` details and `answer-item` groups. Patterns are expanded with `injil_help_expand_patterns()` so FAQ and image collection sees the real blocks. Filter the finished array with `injil_help_schema_graph`.
+`inc/schema.php`: `injil_help_schema_enabled()` honours the SEO option and switches off when Yoast, Rank Math or SEOPress is active (filter `injil_help_output_schema`). `injil_help_schema_graph()` builds one `@graph` at `wp_head` priority 5 from every schema.org type the content supports, whatever a search engine shows: Organization (logo, sameAs, ContactPoint), Person (author from the SEO tab or the post author), WebSite (SearchAction; about ʿĪsā ibn Maryam, the Qur'an and the Islamic Dilemma), Person and Book nodes for those two subjects with Wikidata identifiers, an ItemList of SiteNavigationElement from the header, the page node typed by `injil_help_schema_page_type()` (CollectionPage with an ItemList when the page has three or more entries or is the sitemap, ProfilePage + AboutPage for the About page, ContactPage, SearchResultsPage, else WebPage; every page carries a SpeakableSpecification), BreadcrumbList from ancestors, Article + ScholarlyArticle or BlogPosting when `injil_help_schema_is_article()` says so (word count, dates, section, images, `citation` parsed from the Sources list as CreativeWork or ScholarlyArticle-in-Periodical), Book + Chapter for the gospel sections, Book (Arabic, with its author) + CreativeWork (the English rendering, `translationOfWork`) for each commentary page, DefinedTermSet + DefinedTerm for the glossary, Table for every comparison table, Dataset for the sayings-order test, Event for every dated timeline entry, Quotation for every quote block (at most 40), FAQPage from `is-style-faq` details and `answer-item` groups, ImageObject for every figure (licence read from the caption, creator from "Photo: Name", acquireLicensePage from the Commons link). Patterns are expanded with `injil_help_expand_patterns()` so the collectors see the real blocks. Filter the finished array with `injil_help_schema_graph`.
 
 ## Share row
 
