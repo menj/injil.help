@@ -1,0 +1,25 @@
+{
+    "title": "Discrepancy table: the birth of Jesus",
+    "slug": "injil-help/discrepancy-nativity",
+    "categories": [
+        "injil-help"
+    ],
+    "description": "The birth narratives of Matthew and Luke, with Mark, John and Thomas.",
+    "keywords": [
+        "table",
+        "comparison",
+        "nativity",
+        "birth",
+        "Matthew 2",
+        "Luke 2"
+    ],
+    "content": [
+        "<!-- wp:table {\"hasFixedLayout\":false,\"align\":\"wide\",\"className\":\"is-style-discrepancy\"} -->",
+        "<figure class=\"wp-block-table alignwide is-style-discrepancy\"><table><thead><tr><th>Detail</th><th>Mark</th><th>Matthew</th><th>Luke</th><th>John</th><th>Thomas</th></tr></thead><tbody><tr><td>Birth story</td><td>None. The gospel begins with John the Baptist <code>1:1-4</code></td><td><code>1:18-2:23</code></td><td><code>1:5-2:40</code></td><td>None. The Word became flesh <code>1:14</code></td><td>No account</td></tr><tr><td>Announcement</td><td>None</td><td>An angel speaks to Joseph in a dream <code>1:20-21</code></td><td>The angel Gabriel speaks to Mary <code>1:26-38</code></td><td>None</td><td>No account</td></tr><tr><td>Home before the birth</td><td>None</td><td>Not stated; the family is in a house in Bethlehem <code>2:11</code></td><td>Nazareth <code>1:26</code>; <code>2:4</code></td><td>Jesus is said by some to come from Galilee, not Bethlehem <code>7:41-42</code></td><td>No account</td></tr><tr><td>Why Bethlehem</td><td>None</td><td>Not explained; Jesus is “born in Bethlehem of Judea” <code>2:1</code></td><td>A census under Quirinius <code>2:1-5</code></td><td>None</td><td>No account</td></tr><tr><td>Place of birth</td><td>None</td><td>Not described; the visit is to a house <code>2:11</code></td><td>A manger, because there was no room at the inn <code>2:7</code></td><td>None</td><td>No account</td></tr><tr><td>Star</td><td>None</td><td>A star in the east, then over the child <code>2:2,9</code></td><td>None; an angel and the glory of the Lord to shepherds <code>2:9</code></td><td>None</td><td>No account</td></tr><tr><td>Visitors</td><td>None</td><td>Magi from the east <code>2:1-12</code></td><td>Shepherds <code>2:8-20</code></td><td>None</td><td>No account</td></tr><tr><td>Herod</td><td>None</td><td>Seeks to kill the child; the infants of Bethlehem are killed <code>2:16</code></td><td>Named as king only in the time of John’s birth <code>1:5</code>; no massacre</td><td>None</td><td>No account</td></tr><tr><td>Egypt</td><td>None</td><td>The family flees to Egypt and returns <code>2:13-21</code></td><td>No flight; the child is presented at the temple <code>2:22-39</code></td><td>None</td><td>No account</td></tr><tr><td>Where they settle</td><td>None</td><td>Nazareth, after hearing of Archelaus <code>2:22-23</code></td><td>Nazareth, after the temple <code>2:39</code></td><td>Jesus is “of Nazareth” <code>1:45</code></td><td>No account</td></tr></tbody></table></figure>",
+        "<!-- /wp:table -->",
+        "<!-- wp:paragraph -->",
+        "<p>Matthew and Luke each tell a birth story, and neither mentions the main events of the other. Mark and John have none, and Thomas, a collection of sayings, has none either.</p>",
+        "<!-- /wp:paragraph -->",
+        ""
+    ]
+}

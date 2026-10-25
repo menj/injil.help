@@ -3,7 +3,7 @@
  * The Qur'anic passages on Jesus, with headings and footnotes, from
  * inc/data/quran-jesus.json, gathered on one page under /quran/. The narrative of
  * The Gospel According to Islam carries its own selection of passages in place.
- * Credits are on the separate Credits page.
+ * The page's own words, the credit to the compilation among them, are in inc/data/text.json.
  *
  * @package injil-help
  */
@@ -64,7 +64,7 @@ function injil_help_quran_block_lines( $key ) {
 /** The page that gathers every passage, in the order of the Qur’an. */
 function injil_help_quran_page() {
 	$data  = injil_help_quran_data();
-	$body  = array( 'Every passage of the Qur’an on Jesus and his teachings, with the headings and notes of the compilation. Each verse is numbered by chapter and verse. Many of them are set among the sections of <a href="/gospel-according-to-islam/">The Gospel According to Islam</a>.' );
+	$body  = (array) ( injil_help_text( 'quran_passages', 'intro' ) ?: array() );
 	$last  = 0;
 	// The compilation closes with 59:22-24 after 112; this page follows the order of the Qur'an.
 	$blocks = $data['blocks'];
@@ -82,14 +82,16 @@ function injil_help_quran_page() {
 	foreach ( $blocks as $key => $b ) {
 		if ( $b['surah'] !== $last ) {
 			$last   = $b['surah'];
-			$body[] = '## Chapter ' . $last . ': ' . $data['surahs'][ $last ];
+			$body[] = sprintf( injil_help_text( 'quran_passages', 'chapter' ), $last, $data['surahs'][ $last ] );
 		}
 		$body = array_merge( $body, injil_help_quran_block_lines( $key ) );
 	}
+	// Where the passages come from: the compiler, the publisher and the translation, on the page that reproduces them.
+	$body = array_merge( $body, (array) ( injil_help_text( 'quran_passages', 'source' ) ?: array() ) );
 	return array(
 		'path'    => 'quran/passages',
-		'title'   => 'The Qur’an on Jesus',
-		'excerpt' => 'Every passage of the Qur’an on Jesus and his teachings, with headings and notes.',
+		'title'   => injil_help_text( 'quran_passages', 'title' ),
+		'excerpt' => injil_help_text( 'quran_passages', 'excerpt' ),
 		'body'    => $body,
 	);
 }

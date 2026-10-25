@@ -21,7 +21,7 @@
 <!-- /wp:paragraph --></details>
 <!-- /wp:details -->
 <!-- wp:details {"className":"is-style-faq"} -->
-<details class="wp-block-details is-style-faq"><summary>What does the Qur&#039;an say about Jesus?</summary><!-- wp:paragraph -->
+<details class="wp-block-details is-style-faq"><summary>What does the Qur’an say about Jesus?</summary><!-- wp:paragraph -->
 <p>[40-60 word answer, linking to the verse index.]</p>
 <!-- /wp:paragraph --></details>
 <!-- /wp:details -->

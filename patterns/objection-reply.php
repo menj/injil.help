@@ -12,7 +12,7 @@
 <h4 class="wp-block-heading"><?php esc_html_e( 'Objection', 'injil-help' ); ?></h4>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>The Qur'an tells the People of the Injīl to judge by what God sent down in it (5:47). A book no one could read would be no standard to judge by, so the Injīl the Qur'an affirms must be the gospels Christians held.</p>
+<p>The Qur’an tells the People of the Injīl to judge by what God sent down in it (5:47). A book no one could read would be no standard to judge by, so the Injīl the Qur’an affirms must be the gospels Christians held.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:group {"layout":{"type":"default"}} -->
@@ -20,7 +20,7 @@
 <h4 class="wp-block-heading"><?php esc_html_e( 'Best Christian reply', 'injil-help' ); ?></h4>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>Seventh-century Christians possessed the four gospels, in Greek and Syriac, and nothing else under the name of gospel. The Qur'an speaks of the Injīl "with them" (7:157). Therefore it endorses the gospels in their hands (Gordon Nickel, <em>The Gentle Answer</em>, 2015; Samuel Green, "The Gospel in the Qur'an").</p>
+<p>Seventh-century Christians possessed the four gospels, in Greek and Syriac, and nothing else under the name of gospel. The Qur’an speaks of the Injīl “with them” (7:157). Therefore it endorses the gospels in their hands (Gordon Nickel, <em>The Gentle Answer</em>, 2015; Samuel Green, “The Gospel in the Qur’an”).</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:group {"layout":{"type":"default"}} -->
@@ -28,7 +28,7 @@
 <h4 class="wp-block-heading"><?php esc_html_e( 'Response', 'injil-help' ); ?></h4>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>The verse commands judgement by what God revealed in the Injīl, and the verse before it says the Injīl was given to ʿĪsā (5:46). The books Christians held carried that revelation and other matter besides, which is why the same Qur'an both appeals to them (7:157) and corrects them (2:79; 5:13-14). Possession of a book is not the identity of a revelation. See <a href="/the-islamic-dilemma/">The Islamic Dilemma, answered</a>.</p>
+<p>The verse commands judgement by what God revealed in the Injīl, and the verse before it says the Injīl was given to ʿĪsā (5:46). The books Christians held carried that revelation and other matter besides, which is why the same Qur’an both appeals to them (7:157) and corrects them (2:79; 5:13-14). Possession of a book is not the identity of a revelation. See <a href="/the-islamic-dilemma/">The Islamic Dilemma, answered</a>.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->

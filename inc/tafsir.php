@@ -5,7 +5,9 @@
  * Jalālayn, al-Durr al-Manthūr and Saʿdī on 3:33-64, 4:155-159, 5:110-120,
  * 19:16-37, 21:91, 23:50, 43:57-65, 57:27 and 61:6.
  *
- * The translations are data, one JSON file per work in inc/data/tafsir/, each
+ * The works, the verse groups and the words of the pages are in inc/data/commentaries.json
+ * and the "commentaries" group of inc/data/text.json. The translations are data, one JSON
+ * file per work in inc/data/tafsir/, each
  * holding "entries": the commentary on one verse range as a list of paragraphs in
  * the compact page markup. From them this file builds the pages under
  * /quran/commentaries/ (an index, one page per verse group, and one page or set
@@ -18,165 +20,30 @@
 
 defined( 'ABSPATH' ) || exit;
 
-/** The works in the order they are shown: by the death of the author or compiler. */
+/**
+ * The works in the order they are shown, by the death of the author or compiler, from
+ * inc/data/commentaries.json "works": { key: { short, title, author, died, about, source } }.
+ */
 function injil_help_tafsir_works() {
-	return array(
-		'tabari'           => array(
-			'short'  => 'al-Ṭabarī',
-			'title'  => 'Jāmiʿ al-bayān ʿan taʾwīl āy al-Qurʾān',
-			'author' => 'Abū Jaʿfar Muḥammad ibn Jarīr al-Ṭabarī',
-			'died'   => '310 AH / 923 CE',
-			'about'  => 'The earliest of the great commentaries to survive whole. Al-Ṭabarī sets out every opinion he knows on a verse with its chain of transmission, then rules between them. His reports on 4:157 are the oldest record of how the substitution at the cross was understood.',
-			'source' => 'tafsir.app, src=tabari',
-		),
-		'baghawi'          => array(
-			'short'  => 'al-Baghawī',
-			'title'  => 'Maʿālim al-tanzīl',
-			'author' => 'Abū Muḥammad al-Ḥusayn ibn Masʿūd al-Baghawī',
-			'died'   => '516 AH / 1122 CE',
-			'about'  => 'A commentary of the school of ḥadīth, valued for its restraint; it keeps the early reports and little else.',
-			'source' => 'tafsir.app, src=baghawi',
-		),
-		'qurtubi'          => array(
-			'short'  => 'al-Qurṭubī',
-			'title'  => 'al-Jāmiʿ li-aḥkām al-Qurʾān',
-			'author' => 'Abū ʿAbd Allāh Muḥammad ibn Aḥmad al-Qurṭubī',
-			'died'   => '671 AH / 1273 CE',
-			'about'  => 'The commentary of the Andalusian jurist, which takes each verse through its legal and grammatical questions as well as its narrative.',
-			'source' => 'tafsir.app, src=qurtubi',
-		),
-		'ibn-katheer'      => array(
-			'short'  => 'Ibn Kathīr',
-			'title'  => 'Tafsīr al-Qurʾān al-ʿAẓīm',
-			'author' => 'Abū al-Fidāʾ Ismāʿīl ibn ʿUmar ibn Kathīr',
-			'died'   => '774 AH / 1373 CE',
-			'about'  => 'The most read of the commentaries by ḥadīth, which explains the Qur’an by the Qur’an, then by the Prophet’s words, then by the Companions, and weighs the chains it cites.',
-			'source' => 'tafsir.app, src=ibn-katheer',
-		),
-		'tanwir'           => array(
-			'short'  => 'Tanwīr al-Miqbās',
-			'title'  => 'Tanwīr al-miqbās min tafsīr Ibn ʿAbbās',
-			'author' => 'attributed to ʿAbd Allāh ibn ʿAbbās; compiled by Majd al-Dīn al-Fīrūzābādī',
-			'died'   => 'compiler d. 817 AH / 1414 CE',
-			'about'  => 'A running gloss, phrase by phrase, transmitted under the name of the Prophet’s cousin Ibn ʿAbbās through a chain (al-Kalbī from Abū Ṣāliḥ) that Muslim scholars have long judged weak; it is read as a witness to early Kufan exegesis rather than as Ibn ʿAbbās’s own words.',
-			'source' => 'shamela.ws, book 12877',
-		),
-		'jalalayn'         => array(
-			'short'  => 'al-Jalālayn',
-			'title'  => 'Tafsīr al-Jalālayn',
-			'author' => 'Jalāl al-Dīn al-Maḥallī and Jalāl al-Dīn al-Suyūṭī',
-			'died'   => '864 AH / 1459 CE and 911 AH / 1505 CE',
-			'about'  => 'The two Jalāls’ gloss, a sentence or two to a verse, which became the handbook commentary of the Muslim world.',
-			'source' => 'tafsir.app, src=jalalayn',
-		),
-		'aldur-almanthoor' => array(
-			'short'  => 'al-Durr al-Manthūr',
-			'title'  => 'al-Durr al-manthūr fī al-tafsīr bi-l-maʾthūr',
-			'author' => 'Jalāl al-Dīn al-Suyūṭī',
-			'died'   => '911 AH / 1505 CE',
-			'about'  => 'Al-Suyūṭī’s collection of every transmitted report on each verse, drawn from the ḥadīth collections and the early commentaries, many of them otherwise lost.',
-			'source' => 'tafsir.app, src=aldur-almanthoor',
-		),
-		'saadi'            => array(
-			'short'  => 'al-Saʿdī',
-			'title'  => 'Taysīr al-Karīm al-Raḥmān fī tafsīr kalām al-Mannān',
-			'author' => 'ʿAbd al-Raḥmān ibn Nāṣir al-Saʿdī',
-			'died'   => '1376 AH / 1956 CE',
-			'about'  => 'A modern commentary in plain Arabic that states the sense of each verse and the lesson drawn from it, without chains or digressions.',
-			'source' => 'tafsir.app, src=saadi',
-		),
-	);
+	static $works = null;
+	if ( null === $works ) {
+		$works = (array) ( injil_help_data_file( 'commentaries' )['works'] ?? array() );
+	}
+	return $works;
 }
 
 /**
- * The verse groups, in Qur'anic order, with the gospel sections each feeds. The key is the
- * group's URL slug (words only; the verse numbers are in the title, never in the URL);
- * "former" is the slug of 3.5 and earlier; populate() renames the existing page in place.
+ * The verse groups, in Qur'anic order, from inc/data/commentaries.json "groups":
+ * { slug: { former, surah, from, to, name, title, intro } }. The key is the group's URL slug
+ * (words only; the verse numbers are in the title, never in the URL); "former" is the slug of
+ * 3.5 and earlier, and populate() renames the existing page in place.
  */
 function injil_help_tafsir_groups() {
-	return array(
-		'family-of-imran' => array(
-			'former' => 'al-imran-33-64',
-			'surah'  => 3,
-			'from'   => 33,
-			'to'     => 64,
-			'name'   => 'Āl ʿImrān',
-			'title'  => 'The family of ʿImrān (3:33-64)',
-			'intro'  => 'Mary’s mother and her vow, the birth of John to Zachariah, the annunciation to Mary, the signs Jesus was sent with, the disciples, the plot against him and his raising, the likeness of Jesus to Adam, the challenge to the delegation of Najrān, and the call to a common word.',
-		),
-		'neither-killed-nor-crucified' => array(
-			'former' => 'an-nisa-155-159',
-			'surah'  => 4,
-			'from'   => 155,
-			'to'     => 159,
-			'name'   => 'al-Nisāʾ',
-			'title'  => 'Neither killed nor crucified (4:155-159)',
-			'intro'  => 'The breaking of the covenant, the charge against Mary, the claim to have killed the Messiah, the denial of it, the raising of Jesus to God, and the faith of the People of the Book in him before his death.',
-		),
-		'the-table-and-the-questioning' => array(
-			'former' => 'al-maidah-110-120',
-			'surah'  => 5,
-			'from'   => 110,
-			'to'     => 120,
-			'name'   => 'al-Māʾidah',
-			'title'  => 'God’s favours, the table and the questioning (5:110-120)',
-			'intro'  => 'God recounts His favours to Jesus, the disciples ask for a table from heaven, and on the Day of Judgement God asks Jesus whether he told people to take him and his mother as gods.',
-		),
-		'birth-of-jesus' => array(
-			'former' => 'maryam-16-37',
-			'surah'  => 19,
-			'from'   => 16,
-			'to'     => 37,
-			'name'   => 'Maryam',
-			'title'  => 'The birth of Jesus (19:16-37)',
-			'intro'  => 'Mary withdraws, the Spirit appears to her as a man, she conceives and gives birth under the palm, brings the child to her people, and he speaks from the cradle; then the verdict on those who dispute about him.',
-		),
-		'she-who-guarded-her-chastity' => array(
-			'former' => 'al-anbiya-91',
-			'surah'  => 21,
-			'from'   => 91,
-			'to'     => 91,
-			'name'   => 'al-Anbiyāʾ',
-			'title'  => 'She who guarded her chastity (21:91)',
-			'intro'  => 'Mary and her son made a sign for all peoples.',
-		),
-		'refuge-on-high-ground' => array(
-			'former' => 'al-muminun-50',
-			'surah'  => 23,
-			'from'   => 50,
-			'to'     => 50,
-			'name'   => 'al-Muʾminūn',
-			'title'  => 'The refuge on high ground (23:50)',
-			'intro'  => 'The son of Mary and his mother given shelter on a height with a running spring.',
-		),
-		'son-of-mary-as-an-example' => array(
-			'former' => 'az-zukhruf-57-65',
-			'surah'  => 43,
-			'from'   => 57,
-			'to'     => 65,
-			'name'   => 'al-Zukhruf',
-			'title'  => 'The son of Mary as an example (43:57-65)',
-			'intro'  => 'The Meccans’ dispute over Jesus, his standing as a servant and a sign of the Hour, his call to the straight path, and the sects that differed about him.',
-		),
-		'compassion-mercy-and-monasticism' => array(
-			'former' => 'al-hadid-27',
-			'surah'  => 57,
-			'from'   => 27,
-			'to'     => 27,
-			'name'   => 'al-Ḥadīd',
-			'title'  => 'Compassion, mercy and monasticism (57:27)',
-			'intro'  => 'The followers of Jesus, the compassion God put in their hearts, and the monasticism they invented.',
-		),
-		'good-news-of-ahmad' => array(
-			'former' => 'as-saff-6',
-			'surah'  => 61,
-			'from'   => 6,
-			'to'     => 6,
-			'name'   => 'al-Ṣaff',
-			'title'  => 'The good news of Aḥmad (61:6)',
-			'intro'  => 'Jesus confirms the Torah and announces a messenger to come after him.',
-		),
-	);
+	static $groups = null;
+	if ( null === $groups ) {
+		$groups = (array) ( injil_help_data_file( 'commentaries' )['groups'] ?? array() );
+	}
+	return $groups;
 }
 
 /**
@@ -298,7 +165,7 @@ function injil_help_tafsir_words( $paragraphs ) {
 
 /** The markup lines of one entry: a heading for the verse range, then its paragraphs. */
 function injil_help_tafsir_entry_lines( $e, $level = '## ' ) {
-	$lines   = array( $level . 'On ' . injil_help_tafsir_ref( $e ) );
+	$lines   = array( $level . sprintf( injil_help_text( 'commentaries', 'entry_heading' ), injil_help_tafsir_ref( $e ) ) );
 	foreach ( (array) $e['paragraphs'] as $p ) {
 		$lines[] = $p;
 	}
@@ -319,7 +186,7 @@ function injil_help_tafsir_available() {
 function injil_help_tafsir_colophon( $work ) {
 	$w = injil_help_tafsir_works()[ $work ];
 	return sprintf(
-		'This is a complete English rendering of %1$s on these verses, prepared for this website from the public-domain Arabic text (%2$s). Nothing is abridged: every opinion, every report with its chain of transmission, every verse of poetry and every grammatical note is translated. Qur’anic quotations are in bold; the translator’s own notes are confined to the numbered footnotes and identify names, terms and variant readings only. A second translator has not checked the rendering, and the Arabic is linked so that any passage can be compared. The modern editors’ apparatus is not part of the classical text and is not translated.',
+		injil_help_text( 'commentaries', 'colophon' ),
 		esc_html( $w['title'] ),
 		esc_html( $w['source'] )
 	);
@@ -357,50 +224,30 @@ function injil_help_tafsir_pages() {
 		$totals[ $key ] = $n;
 	}
 
-	$index = array(
-		'The Qur’an speaks of Jesus, son of Mary, in some ninety verses, and for thirteen centuries Muslim scholars have written on each of them: what the words mean, what the Prophet and his Companions said about them, and what happened at the manger, in the temple, at the table and at the cross. Those commentaries are the Islamic record of the life of Jesus, and most of them have never been put into English. This part of the website gives them in full, verse by verse, for the passages that tell his story: his family and birth, his signs and his disciples, the plot against him, the cross and his raising, and the questioning on the Last Day.',
-		'Eight works are translated, from the tenth century to the twentieth. They are not digests. Every opinion a commentator records is here, with the chain of transmission he gives for it, every verse of poetry he cites for a word’s meaning, and every grammatical argument he makes, because the reader who wants to know what Islam has said of Jesus should have the whole of it and not a selection made for him. The same texts are woven, passage by passage, into <a href="/gospel-according-to-islam/">The Gospel According to Islam</a>, so that the gospel and its commentary are read together.',
-		'## The passages',
-	);
+	$index   = (array) injil_help_text( 'commentaries', 'index_intro' );
+	$index[] = injil_help_text( 'commentaries', 'index_passages_heading' );
 	foreach ( $groups as $slug => $g ) {
-		$index[] = sprintf( '- <strong><a href="/%1$s/%2$s/">%3$s</a>.</strong> %4$s', $base, $slug, $g['title'], $g['intro'] );
+		$index[] = sprintf( injil_help_text( 'commentaries', 'index_group_item' ), $base, $slug, $g['title'], $g['intro'] );
 	}
-	$index[] = '## The commentaries';
+	$index[] = injil_help_text( 'commentaries', 'index_works_heading' );
 	foreach ( $works as $key => $w ) {
 		if ( ! $totals[ $key ] ) {
 			continue;
 		}
-		$index[] = sprintf( '- <strong>%1$s</strong>, <em>%2$s</em>, %3$s (d. %4$s). %5$s About %6$s words in English on these passages.', $w['short'], $w['title'], $w['author'], $w['died'], $w['about'], number_format_i18n( round( $totals[ $key ], -2 ) ) );
+		$index[] = sprintf( injil_help_text( 'commentaries', 'index_work_item' ), $w['short'], $w['title'], $w['author'], $w['died'], $w['about'], number_format_i18n( round( $totals[ $key ], -2 ) ) );
 	}
-	$index[] = '## How to read them';
-	$index[] = 'Each commentary is given on its own page for each passage, in the order of the verses, under a heading for the verse or verses it treats. Qur’anic quotations within the commentary are in bold, with the reference where it can be identified. Where a commentator records several opinions, they are listed; where he cites a line of poetry for a word, it is set as a quotation; where he gives a chain of transmission, it is given in full, with “related to us” for <em>ḥaddathanā</em> and “from” for <em>ʿan</em>. The translator’s notes are numbered and identify names, places, terms and variant readings; they never summarise or replace the text. The classical commentators quote one another freely, so the reader will meet the same report more than once, sometimes with a different chain, and that is as it should be: it shows how the report travelled.';
-	$index[] = 'The reports in these commentaries are of two kinds, and the commentators themselves say so. Some go back to the Prophet and are weighed by the rules of ḥadīth. Many more are what the early Muslims heard from converts from Judaism and Christianity, Kaʿb al-Aḥbār and Wahb ibn Munabbih above all, and are called <em>isrāʾīliyyāt</em>; Ibn Kathīr in particular marks them and warns against building doctrine on them. They are kept here because they are part of the record, and because several of them preserve Christian traditions, about the Last Supper, the arrest and the substitution at the cross, that are older than any Muslim book.';
-	$index[] = '## On the sources and the translation';
-	$index[] = 'The Arabic texts are the standard printed editions as published without restriction at tafsir.app, and, for Tanwīr al-Miqbās, at the Shamela library (shamela.ws, book 12877); all eight works are in the public domain. The English renderings were prepared for this website and are released with it; they have not been checked by a second translator, and the Arabic source of every passage is named so that it can be compared. The editors’ modern apparatus, their footnotes on manuscripts and chains, is not part of the classical text and is not translated. Corrections are welcome through the <a href="/contact/">contact page</a> and are recorded in the <a href="/corrections/">corrections log</a>.';
-	$index[] = '## Questions about the commentaries';
-	$index[] = '? What is tafsīr?';
-	$index[] = 'Tafsīr is the Muslim discipline of explaining the Qur’an: the meaning of its words, the occasions on which its verses were revealed, the reports of the Prophet and his Companions about them, and the rulings and lessons drawn from them. The great commentaries run to many volumes; the pages here give what eight of them say on the verses about Jesus.';
-	$index[] = '? Why translate the whole commentary and not the parts about Jesus?';
-	$index[] = 'Because a selection is an argument, and this website wants the reader to see the record and not an argument about it. Every page carries all that the commentator wrote on the verse, including the grammar, the poetry and the chains of transmission, so that what he said about Jesus is read in the place and the company he gave it.';
-	$index[] = '? Do the commentators agree that Jesus was not crucified?';
-	$index[] = 'Yes. From al-Ṭabarī in the tenth century to al-Saʿdī in the twentieth, every commentary translated here reads 4:157 as the Qur’an states it: the Jews did not kill him and did not crucify him, but another was made to resemble him and God raised Jesus to Himself. They differ about who the other man was, whether a disciple who volunteered or the man sent to seize him, and about whether Jesus tasted death for some hours before he was raised. None of them says he died on the cross.';
-	$index[] = '? Are these the “Israelite tales” Muslims are warned about?';
-	$index[] = 'Some of the reports are. The commentators mark the stories that came through Kaʿb al-Aḥbār, Wahb ibn Munabbih and the People of the Book, and Ibn Kathīr in particular says they may be related but not relied on. They are translated here because they are part of what was said, and because the historian values them as early Christian traditions preserved in Arabic.';
-	$index[] = '? Which translation of the Qur’an do the commentaries quote?';
-	$index[] = 'None. The Qur’anic phrases within the commentaries are translated afresh with the commentary, since the commentator is often explaining the very word a translation would have to choose, and the reference is given so that the verse can be read in the site’s translation on <a href="/quran/passages/">the Qur’anic passages</a>.';
-	$index[] = '? Why are there no Shia commentaries?';
-	$index[] = 'The eight works here are the ones most read across the Sunni world and the ones the site owner asked for. The Shia commentaries, al-Ṭūsī’s <em>al-Tibyān</em> and al-Ṭabrisī’s <em>Majmaʿ al-bayān</em> above all, read these verses in the same way on the birth, the signs and the raising of Jesus, and may be added.';
+	$index   = array_merge( $index, (array) injil_help_text( 'commentaries', 'index_after' ) );
 	$pages[]  = array(
 		'path'    => $base,
-		'title'   => 'The classical commentaries on Jesus',
-		'excerpt' => 'Eight classical commentaries on the Qur’an, translated in full on the verses that tell the story of Jesus: his birth, his signs, the cross and his raising.',
+		'title'   => injil_help_text( 'commentaries', 'index_title' ),
+		'excerpt' => injil_help_text( 'commentaries', 'index_excerpt' ),
 		'body'    => $index,
 	);
 
 	foreach ( $groups as $slug => $g ) {
 		$body = array( $g['intro'] );
-		$body[] = sprintf( 'The verses are on <a href="/quran/passages/">the Qur’anic passages</a>. Each commentary below is complete for %s; choose a work to read it, or read them in order from the earliest.', $g['title'] );
-		$body[] = '## The commentaries on these verses';
+		$body[] = sprintf( injil_help_text( 'commentaries', 'group_verses' ), $g['title'] );
+		$body[] = injil_help_text( 'commentaries', 'group_works_heading' );
 		$links  = array();
 		foreach ( $works as $key => $w ) {
 			$entries = injil_help_tafsir_entries( $key, $g['surah'], $g['from'], $g['to'] );
@@ -427,9 +274,9 @@ function injil_help_tafsir_pages() {
 			$wpath       = $base . '/' . $slug . '/' . $key;
 			$part_links = array();
 			for ( $k = 2; $k <= $total_parts; $k++ ) {
-				$part_links[] = sprintf( '<a href="/%1$s/">part %2$d</a>', injil_help_tafsir_part_path( $base, $slug, $key, $k ), $k );
+				$part_links[] = sprintf( injil_help_text( 'commentaries', 'group_part_link' ), injil_help_tafsir_part_path( $base, $slug, $key, $k ), $k );
 			}
-			$links[] = sprintf( '- <strong><a href="/%1$s/">%2$s</a></strong> (d. %3$s), about %4$s words%5$s.', $wpath, $w['short'], $w['died'], number_format_i18n( round( $words, -1 ) ), $total_parts > 1 ? sprintf( ', in %1$d parts (%2$s)', $total_parts, implode( ', ', $part_links ) ) : '' );
+			$links[] = sprintf( injil_help_text( 'commentaries', 'group_work_item' ), $wpath, $w['short'], $w['died'], number_format_i18n( round( $words, -1 ) ), $total_parts > 1 ? sprintf( injil_help_text( 'commentaries', 'group_work_parts' ), $total_parts, implode( ', ', $part_links ) ) : '' );
 			foreach ( $parts as $i => $part ) {
 				$no    = $i + 1;
 				$path  = injil_help_tafsir_part_path( $base, $slug, $key, $no );
@@ -440,27 +287,27 @@ function injil_help_tafsir_pages() {
 				}
 				$first = injil_help_tafsir_ref( $part[0] );
 				$last  = injil_help_tafsir_ref( $part[ count( $part ) - 1 ] );
-				$range = $first === $last ? $first : $first . ' to ' . $last;
+				$range = $first === $last ? $first : sprintf( injil_help_text( 'commentaries', 'part_range' ), $first, $last );
 				$pb    = array(
-					sprintf( '<em>%1$s</em>, by %2$s (d. %3$s). %4$s', $w['title'], $w['author'], $w['died'], $w['about'] ),
+					sprintf( injil_help_text( 'commentaries', 'part_lede' ), $w['title'], $w['author'], $w['died'], $w['about'] ),
 					$total_parts > 1
-						? sprintf( 'Part %1$d of %2$d: the commentary on %3$s. The parts follow the order of the verses; this one covers %4$s.', $no, $total_parts, $g['title'], $range )
-						: sprintf( 'The complete commentary on %1$s, covering %2$s.', $g['title'], $range ),
+						? sprintf( injil_help_text( 'commentaries', 'part_of' ), $no, $total_parts, $g['title'], $range )
+						: sprintf( injil_help_text( 'commentaries', 'part_complete' ), $g['title'], $range ),
 				);
 				foreach ( $part as $e ) {
 					$pb = array_merge( $pb, injil_help_tafsir_entry_lines( $e ) );
 				}
-				$pb[] = '## About this text';
+				$pb[] = injil_help_text( 'commentaries', 'part_about_heading' );
 				$pb[] = injil_help_tafsir_colophon( $key );
 				$nav  = array();
 				if ( $no > 1 ) {
-					$nav[] = sprintf( '<a href="/%1$s/">← Part %2$d</a>', injil_help_tafsir_part_path( $base, $slug, $key, $no - 1 ), $no - 1 );
+					$nav[] = sprintf( injil_help_text( 'commentaries', 'part_prev' ), injil_help_tafsir_part_path( $base, $slug, $key, $no - 1 ), $no - 1 );
 				}
-				$nav[] = sprintf( '<a href="/%1$s/%2$s/">%3$s: all commentaries</a>', $base, $slug, $g['title'] );
+				$nav[] = sprintf( injil_help_text( 'commentaries', 'part_all' ), $base, $slug, $g['title'] );
 				if ( $no < $total_parts ) {
-					$nav[] = sprintf( '<a href="/%1$s/">Part %2$d →</a>', injil_help_tafsir_part_path( $base, $slug, $key, $no + 1 ), $no + 1 );
+					$nav[] = sprintf( injil_help_text( 'commentaries', 'part_next' ), injil_help_tafsir_part_path( $base, $slug, $key, $no + 1 ), $no + 1 );
 				}
-				$nav[]   = sprintf( '<a href="/%s/">The classical commentaries</a>', $base );
+				$nav[]   = sprintf( injil_help_text( 'commentaries', 'part_index' ), $base );
 				$pb[]    = implode( ' · ', $nav );
 				$siblings = array();
 				for ( $k = 1; $k <= $total_parts; $k++ ) {
@@ -472,24 +319,24 @@ function injil_help_tafsir_pages() {
 					'path'    => $path,
 					'former'  => $former,
 					'related' => array_merge( $siblings, array( $base . '/' . $slug ), injil_help_tafsir_group_related( $slug ), array( $base ) ),
-					'title'   => sprintf( '%1$s on %2$s%3$s', $w['short'], $g['title'], $total_parts > 1 ? sprintf( ', part %d', $no ) : '' ),
-					'excerpt' => sprintf( 'The complete commentary of %1$s (%2$s) on %3$s, translated into English%4$s.', $w['short'], $w['title'], $g['title'], $total_parts > 1 ? sprintf( ', part %d of %d', $no, $total_parts ) : '' ),
+					'title'   => sprintf( injil_help_text( 'commentaries', 'part_title' ), $w['short'], $g['title'], $total_parts > 1 ? sprintf( injil_help_text( 'commentaries', 'part_title_part' ), $no ) : '' ),
+					'excerpt' => sprintf( injil_help_text( 'commentaries', 'part_excerpt' ), $w['short'], $w['title'], $g['title'], $total_parts > 1 ? sprintf( injil_help_text( 'commentaries', 'part_excerpt_part' ), $no, $total_parts ) : '' ),
 					'body'    => $pb,
 				);
 			}
 		}
 		$body = array_merge( $body, $links );
-		$body[] = '## Where these verses stand in the gospel';
+		$body[] = injil_help_text( 'commentaries', 'group_sections_heading' );
 		$secs   = array();
 		foreach ( injil_help_tafsir_section_map() as $n => $ranges ) {
 			foreach ( $ranges as $r ) {
 				if ( $r[0] === $g['surah'] && $r[2] >= $g['from'] && $r[1] <= $g['to'] ) {
-					$secs[ $n ] = sprintf( '<a href="/%1$s/">Section %2$d</a> (%3$d:%4$d-%5$d)', injil_help_gospel_section_path( $n ), $n, $r[0], $r[1], $r[2] );
+					$secs[ $n ] = sprintf( injil_help_text( 'commentaries', 'group_section_link' ), injil_help_gospel_section_path( $n ), $n, $r[0], $r[1], $r[2] );
 				}
 			}
 		}
-		$body[] = $secs ? 'The same commentaries are woven into ' . implode( ', ', $secs ) . ' of The Gospel According to Islam, at the point in the story where the verses are told.' : 'These verses are drawn on throughout The Gospel According to Islam.';
-		$body[] = sprintf( '<a href="/%s/">← The classical commentaries</a>', $base );
+		$body[] = $secs ? sprintf( injil_help_text( 'commentaries', 'group_woven' ), implode( ', ', $secs ) ) : injil_help_text( 'commentaries', 'group_woven_none' );
+		$body[] = sprintf( injil_help_text( 'commentaries', 'group_back' ), $base );
 		array_splice(
 			$pages,
 			1 + count( array_filter( $pages, function ( $p ) use ( $base ) {
@@ -501,7 +348,7 @@ function injil_help_tafsir_pages() {
 				'former'  => array( $base . '/' . $g['former'] ),
 				'related' => array_merge( injil_help_tafsir_group_related( $slug ), array( $base ) ),
 				'title'   => $g['title'],
-				'excerpt' => sprintf( 'What the classical commentators say on %s, each in full.', $g['title'] ),
+				'excerpt' => sprintf( injil_help_text( 'commentaries', 'group_excerpt' ), $g['title'] ),
 				'body'    => $body,
 			) )
 		);
@@ -528,8 +375,8 @@ function injil_help_tafsir_section_lines( $n ) {
 	foreach ( $map[ $n ] as $r ) {
 		$refs[] = $r[1] === $r[2] ? $r[0] . ':' . $r[1] : $r[0] . ':' . $r[1] . '-' . $r[2];
 	}
-	$lines   = array( '## From the commentaries on ' . implode( ', ', $refs ) );
-	$lines[] = 'What the classical commentators wrote on the verses this section rests on, each given in full and folded away until opened. The same texts, with the other passages, are on <a href="/quran/commentaries/">the classical commentaries</a>.';
+	$lines   = array( sprintf( injil_help_text( 'commentaries', 'section_heading' ), implode( ', ', $refs ) ) );
+	$lines[] = injil_help_text( 'commentaries', 'section_intro' );
 	$any     = false;
 	foreach ( $works as $key => $w ) {
 		$entries = array();
@@ -548,16 +395,16 @@ function injil_help_tafsir_section_lines( $n ) {
 			$words += injil_help_tafsir_words( $e['paragraphs'] );
 			foreach ( $groups as $slug => $g ) {
 				if ( $g['surah'] === (int) $e['surah'] && $g['to'] >= (int) $e['from'] && $g['from'] <= (int) $e['to'] ) {
-					$own[ $slug ] = sprintf( '<a href="/quran/commentaries/%1$s/%2$s/">%3$s on %4$s</a>', $slug, $key, $w['short'], $g['title'] );
+					$own[ $slug ] = sprintf( injil_help_text( 'commentaries', 'section_own_link' ), $slug, $key, $w['short'], $g['title'] );
 				}
 			}
 		}
-		$lines[] = sprintf( '[details] %1$s, <em>%2$s</em> (d. %3$s), about %4$s words', $w['short'], $w['title'], $w['died'], number_format_i18n( round( $words, -1 ) ) );
+		$lines[] = sprintf( injil_help_text( 'commentaries', 'section_details' ), $w['short'], $w['title'], $w['died'], number_format_i18n( round( $words, -1 ) ) );
 		foreach ( $entries as $e ) {
 			$lines = array_merge( $lines, injil_help_tafsir_entry_lines( $e, '### ' ) );
 		}
 		if ( $own ) {
-			$lines[] = 'Read this commentary in full, with the other passages, on its own page: ' . implode( '; ', $own ) . '.';
+			$lines[] = sprintf( injil_help_text( 'commentaries', 'section_read_more' ), implode( '; ', $own ) );
 		}
 		$lines[] = '[/details]';
 	}

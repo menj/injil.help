@@ -22,6 +22,19 @@ function injil_help_data_file( $name ) {
 	return is_array( $data ) ? $data : array();
 }
 
+/**
+ * A piece of page text from inc/data/text.json, { group: { key: text } }: a string (format
+ * strings keep their sprintf placeholders) or a list of markup lines. The words the builders put
+ * into page content live there, never in PHP. Returns '' for a key that is not there.
+ */
+function injil_help_text( $group, $key ) {
+	static $text = null;
+	if ( null === $text ) {
+		$text = injil_help_data_file( 'text' );
+	}
+	return $text[ $group ][ $key ] ?? '';
+}
+
 /** Gospel of Thomas sections woven into the chapters, keyed by section number; each a list of page-markup lines. */
 function injil_help_gospel_thomas_sections() {
 	return injil_help_data_file( 'thomas' );
@@ -185,13 +198,13 @@ function injil_help_gospel_section_head( $n, $title, $sec, $nar ) {
 			$refs[] = $first[1] . ':' . $first[2] . ( $last[2] !== $first[2] ? '-' . $last[2] : '' );
 		}
 	}
-	$chapter  = sprintf( 'Chapter %1$d, %2$s', $sec['chapter'], $nar['chapters'][ $sec['chapter'] ] );
-	$argument = sprintf( '%1$s. %2$d verses.', $title, $verses );
+	$chapter  = sprintf( injil_help_text( 'gospel', 'chapter' ), $sec['chapter'], $nar['chapters'][ $sec['chapter'] ] );
+	$argument = sprintf( injil_help_text( 'gospel', 'argument' ), $title, $verses );
 	if ( $refs ) {
-		$argument .= ' With the Qur’an: ' . implode( '; ', $refs ) . '.';
+		$argument .= sprintf( injil_help_text( 'gospel', 'argument_quran' ), implode( '; ', $refs ) );
 	}
 	return array(
-		'[p.ih-running-head] The Gospel According to Islam · ' . $chapter . ' · Section ' . $n,
+		'[p.ih-running-head] ' . sprintf( injil_help_text( 'gospel', 'running_head_section' ), $chapter, $n ),
 		'[bible]',
 		'[p.ih-argument] ' . $argument,
 		'[p.ih-chapter-num] ' . $n,
@@ -205,7 +218,7 @@ function injil_help_gospel_islam_pages() {
 	$pages = array();
 
 	$front = array(
-		'introduction' => array( 'introduction', 'Introduction to The Gospel According to Islam.' ),
+		'introduction' => array( 'introduction', injil_help_text( 'gospel', 'introduction_excerpt' ) ),
 	);
 	foreach ( $front as $k => $f ) {
 		if ( empty( $data['front'][ $k ] ) ) {
@@ -213,7 +226,7 @@ function injil_help_gospel_islam_pages() {
 		}
 		// The Introduction is set like the sections: running head and the text in the Bible columns.
 		$body   = array_merge(
-			array( '[p.ih-running-head] The Gospel According to Islam · ' . $data['front'][ $k ]['title'], '[bible]' ),
+			array( '[p.ih-running-head] ' . sprintf( injil_help_text( 'gospel', 'running_head' ), $data['front'][ $k ]['title'] ), '[bible]' ),
 			$data['front'][ $k ]['paras'],
 			array( '[/bible]' )
 		);
@@ -250,11 +263,11 @@ function injil_help_gospel_islam_pages() {
 		}
 		$nav = array();
 		if ( $n > 1 ) {
-			$nav[] = '<a href="/' . injil_help_gospel_section_path( $n - 1 ) . '/">← Section ' . ( $n - 1 ) . ': ' . esc_html( $data['chapters'][ $n - 1 ]['title'] ?? '' ) . '</a>';
+			$nav[] = '<a href="/' . injil_help_gospel_section_path( $n - 1 ) . '/">' . sprintf( injil_help_text( 'gospel', 'prev' ), $n - 1, esc_html( $data['chapters'][ $n - 1 ]['title'] ?? '' ) ) . '</a>';
 		}
-		$nav[] = '<a href="/' . $base . '/">Contents</a>';
+		$nav[] = '<a href="/' . $base . '/">' . injil_help_text( 'gospel', 'contents' ) . '</a>';
 		if ( $n < $last ) {
-			$nav[] = '<a href="/' . injil_help_gospel_section_path( $n + 1 ) . '/">Section ' . ( $n + 1 ) . ': ' . esc_html( $data['chapters'][ $n + 1 ]['title'] ?? '' ) . ' →</a>';
+			$nav[] = '<a href="/' . injil_help_gospel_section_path( $n + 1 ) . '/">' . sprintf( injil_help_text( 'gospel', 'next' ), $n + 1, esc_html( $data['chapters'][ $n + 1 ]['title'] ?? '' ) ) . '</a>';
 		}
 		$body[]  = implode( ' · ', $nav );
 		$related = array();
@@ -267,8 +280,8 @@ function injil_help_gospel_islam_pages() {
 			'path'    => injil_help_gospel_section_path( $n ),
 			'related' => $related,
 			'former'  => array( $base . '/' . $n ), // the numeric URL of 3.5 and earlier; redirected and renamed in place
-			'title'   => sprintf( 'Section %1$d: %2$s', $n, $title ),
-			'excerpt' => sprintf( 'Section %d of The Narrative of Jesus, Son of Mary: %s.', $n, $title ),
+			'title'   => sprintf( injil_help_text( 'gospel', 'title' ), $n, $title ),
+			'excerpt' => sprintf( injil_help_text( 'gospel', 'excerpt' ), $n, $title ),
 			'body'    => $body,
 		);
 	}

@@ -13,7 +13,7 @@
     },
     "gospels/luke": {
         "file": "Dublin, Chester Beatty Ms Papyrus 45 BP I ff.13-14 Luke 11.50-12.12; 12.18-37; 12.42-13.1; 13.jpg",
-        "alt": "Papyrus 45, Chester Beatty Library, Dublin, about 200 to 250 CE: two leaves of the Gospel of Luke",
+        "alt": "Papyrus 45, Chester Beatty Library, Dublin, about 200 to 250 CE: 2 leaves of the Gospel of Luke",
         "caption": "Papyrus 45 (Chester Beatty I), about 200 to 250 CE: Luke 11 to 13, among the oldest copies of any gospel. Chester Beatty Library, Dublin.",
         "credit": "Public domain."
     },
@@ -61,8 +61,8 @@
     },
     "gospels/discrepancies/genealogies": {
         "file": "KellsFol029rIncipitMatthew.jpg",
-        "alt": "Book of Kells, folio 29r: Liber generationis, the opening of Matthew's genealogy of Jesus",
-        "caption": "Book of Kells, about 800 CE, folio 29r: Liber generationis, the first words of Matthew's genealogy. Trinity College Dublin.",
+        "alt": "Book of Kells, folio 29r: Liber generationis, the opening of Matthew’s genealogy of Jesus",
+        "caption": "Book of Kells, about 800 CE, folio 29r: Liber generationis, the first words of Matthew’s genealogy. Trinity College Dublin.",
         "credit": "Public domain."
     },
     "gospels/discrepancies/last-supper": {
@@ -74,13 +74,13 @@
     "paul/seven-letters": {
         "file": "Ann Arbor, University of Michigan P.Mich.inv. 6238 (Papyrus 46) fol. 158r Eph 6, 20–Gal 1, 8.jpg",
         "alt": "Papyrus 46, about 200 CE: the end of Ephesians and the beginning of Galatians, University of Michigan",
-        "caption": "Papyrus 46, about 200 CE, the oldest collection of Paul of Tarsus's letters: the end of Ephesians and the opening of Galatians. University of Michigan.",
+        "caption": "Papyrus 46, about 200 CE, the oldest collection of Paul of Tarsus’s letters: the end of Ephesians and the opening of Galatians. University of Michigan.",
         "credit": "Public domain."
     },
     "paul/acts-galatians": {
         "file": "Conversion on the Way to Damascus-Caravaggio (c.1600-1).jpg",
         "alt": "Caravaggio, Conversion on the Way to Damascus, about 1601, Santa Maria del Popolo, Rome",
-        "caption": "Caravaggio, Conversion on the Way to Damascus (about 1601), Santa Maria del Popolo, Rome: the scene Acts tells three times and Galatians once, differently.",
+        "caption": "Caravaggio, Conversion on the Way to Damascus (about 1601), Santa Maria del Popolo, Rome: the scene Acts tells 3 times and Galatians once, differently.",
         "credit": "Public domain."
     },
     "paul/paul-against-jesus": {
@@ -97,26 +97,26 @@
     },
     "the-islamic-dilemma": {
         "file": "Maghribi script sura 5.jpg",
-        "alt": "A Qur'an manuscript in Maghribi script showing Sūrat al-Māʾida, the fifth sūra",
-        "caption": "Sūrat al-Māʾida in a Qur'an written in Maghribi script. Verses 46 to 48 of this sūra, the Injīl given to ʿĪsā and the Qur'an as guardian over the earlier scripture, are the ground on which the dilemma is answered.",
+        "alt": "A Qur’an manuscript in Maghribi script showing Sūrat al-Māʾida, the fifth sūra",
+        "caption": "Sūrat al-Māʾida in a Qur’an written in Maghribi script. Verses 46 to 48 of this sūra, the Injīl given to ʿĪsā and the Qur’an as guardian over the earlier scripture, are the ground on which the dilemma is answered.",
         "credit": "Public domain."
     },
     "quran/table": {
         "file": "Juan de Juanes 002.jpg",
         "alt": "Juan de Juanes, The Last Supper, about 1562, Museo del Prado",
-        "caption": "Juan de Juanes, The Last Supper (about 1562), Museo del Prado, Madrid. The Qur'an's table from heaven (5:112 to 115) is the sign the disciples asked for.",
+        "caption": "Juan de Juanes, The Last Supper (about 1562), Museo del Prado, Madrid. The Qur’an’s table from heaven (5:112 to 115) is the sign the disciples asked for.",
         "credit": "Public domain."
     },
     "resources/sources": {
         "file": "Codex Vaticanus B, 2Thess. 3,11-18, Hebr. 1,1-2,2.jpg",
         "alt": "Codex Vaticanus, fourth century: the end of 2 Thessalonians and the beginning of Hebrews",
-        "caption": "Codex Vaticanus, fourth century, one of the two oldest complete Greek Bibles: the end of 2 Thessalonians and the opening of Hebrews. Vatican Library.",
+        "caption": "Codex Vaticanus, fourth century, one of the 2 oldest complete Greek Bibles: the end of 2 Thessalonians and the opening of Hebrews. Vatican Library.",
         "credit": "Public domain."
     },
     "resources/objections": {
         "file": "Codex Sinaiticus Matthew 6,4-32.JPG",
-        "alt": "Codex Sinaiticus, fourth century: a page of Matthew 6 with the Lord's Prayer",
-        "caption": "Codex Sinaiticus, fourth century: Matthew 6:4 to 32, with the Lord's Prayer. British Library.",
+        "alt": "Codex Sinaiticus, fourth century: a page of Matthew 6 with the Lord’s Prayer",
+        "caption": "Codex Sinaiticus, fourth century: Matthew 6:4 to 32, with the Lord’s Prayer. British Library.",
         "credit": "Public domain."
     },
     "gospels/john": {
@@ -134,37 +134,37 @@
     "paul/ebionites": {
         "file": "Jerusalem Modell BW 2.JPG",
         "alt": "Model of Jerusalem and the Temple of Herod in the first century, Israel Museum",
-        "caption": "The Temple of Herod in the model of first-century Jerusalem at the Israel Museum. The Ebionites kept the law of the Temple's city after its fall. Photograph by Berthold Werner.",
+        "caption": "The Temple of Herod in the model of first-century Jerusalem at the Israel Museum. The Ebionites kept the law of the Temple’s city after its fall. Photograph by Berthold Werner.",
         "credit": "Public domain."
     },
     "the-islamic-dilemma/secular-form": {
         "file": "Birmingham Quran manuscript.jpg",
-        "alt": "The Birmingham Qur'an manuscript, two leaves in Hijazi script, radiocarbon-dated to the seventh century",
-        "caption": "The Birmingham Qur'an manuscript (Mingana 1572a), Hijazi script, radiocarbon-dated to between 568 and 645 CE. Cadbury Research Library, University of Birmingham.",
+        "alt": "The Birmingham Qur’an manuscript, 2 leaves in Hijazi script, radiocarbon-dated to the seventh century",
+        "caption": "The Birmingham Qur’an manuscript (Mingana 1572a), Hijazi script, radiocarbon-dated to between 568 and 645 CE. Cadbury Research Library, University of Birmingham.",
         "credit": "Public domain."
     },
     "method": {
         "file": "Kufic Quran, sura 7, verses 86-87.jpg",
-        "alt": "A Qur'an leaf in Kufic script, eighth or ninth century, with verses of Sūrat al-Aʿrāf",
-        "caption": "A Qur'an leaf in early Kufic script, eighth or ninth century: Sūrat al-Aʿrāf 86 to 87. The measure this website applies is the Qur'an's own.",
+        "alt": "A Qur’an leaf in Kufic script, eighth or ninth century, with verses of Sūrat al-Aʿrāf",
+        "caption": "A Qur’an leaf in early Kufic script, eighth or ninth century: Sūrat al-Aʿrāf 86 to 87. The measure this website applies is the Qur’an’s own.",
         "credit": "Public domain."
     },
     "quran/birth": {
         "file": "Virgin Mary and Jesus (old Persian miniature).jpg",
         "alt": "Mary and the infant Jesus in an old Persian miniature",
-        "caption": "Mary and the infant Jesus in a Persian miniature. Muslim painters drew the story of Maryam from the Qur'an's nineteenth sūra.",
+        "caption": "Mary and the infant Jesus in a Persian miniature. Muslim painters drew the story of Maryam from the Qur’an’s nineteenth sūra.",
         "credit": "Public domain."
     },
     "quran/servant": {
         "file": "Christ Pantocrator Deesis mosaic Hagia Sophia.jpg",
         "alt": "The Deesis mosaic of Christ in Hagia Sophia, Istanbul, thirteenth century",
-        "caption": "Christ in the Deesis mosaic of Hagia Sophia, Istanbul, thirteenth century: the image of the Jesus the Qur'an says he is not, a God; it calls him a servant and a messenger. Photograph by Myrabella.",
+        "caption": "Christ in the Deesis mosaic of Hagia Sophia, Istanbul, thirteenth century: the image of Jesus as a God; the Qur’an calls him a servant and a messenger. Photograph by Myrabella.",
         "credit": "Public domain."
     },
     "quran/signs": {
         "file": "Giotto di Bondone - No. 25 Scenes from the Life of Christ - 9. Raising of Lazarus - WGA09204.jpg",
         "alt": "Giotto, The Raising of Lazarus, Scrovegni Chapel, Padua, about 1305",
-        "caption": "Giotto, The Raising of Lazarus (about 1305), Scrovegni Chapel, Padua. The Qur'an: he brought the dead to life, by God's permission (3:49; 5:110).",
+        "caption": "Giotto, The Raising of Lazarus (about 1305), Scrovegni Chapel, Padua. The Qur’an: he brought the dead to life, by God’s permission (3:49; 5:110).",
         "credit": "Public domain."
     },
     "gospels/discrepancies/nativity": {
@@ -176,7 +176,7 @@
     "gospels/discrepancies/crucifixion": {
         "file": "Giotto - Scrovegni - -35- - Crucifixion.jpg",
         "alt": "Giotto, The Crucifixion, Scrovegni Chapel, Padua, about 1305",
-        "caption": "Giotto, The Crucifixion (about 1305), Scrovegni Chapel, Padua. The four accounts of the day, the hour and the last words differ, and the Qur'an says it was made to appear so to them (4:157).",
+        "caption": "Giotto, The Crucifixion (about 1305), Scrovegni Chapel, Padua. The four accounts of the day, the hour and the last words differ, and the Qur’an says it was made to appear so to them (4:157).",
         "credit": "Public domain."
     }
 }
