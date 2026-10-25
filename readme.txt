@@ -85,6 +85,7 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 = 3.6.5 =
 * Rank Math SEO: with the plugin active the theme works inside it. Rank Math owns the head and the single structured-data graph; the theme adds the nodes Rank Math does not make and enriches its Article, and prints Rank Math's breadcrumb trail in the theme's breadcrumb row.
 * Front page: eight FAQs in two full rows of four; every section's cards end on a full row at every width.
+* The Content tab's buttons now work in batches with a progress line and report at the top of the screen how many pages were created, updated, already up to date or kept because you edited them. They used to write every page in one request, which could time out silently. The automatic rewrite after a theme update also runs in steps and shows its progress and result.
 * The two-column flow of prose pages is removed; it split the navigation and share row.
 = 3.6.4 =
 * The development documents (README.md, SSOT.md, CHANGELOG.md, UPGRADING.md) are left out of the archive Git Updater installs; the theme carries no test files.

@@ -134,6 +134,18 @@ add_action(
 				// The page's own colours follow the Colours tab.
 				wp_add_inline_style( 'injil-help-admin', injil_help_color_css() );
 				wp_enqueue_script( 'injil-help-admin', get_stylesheet_directory_uri() . '/assets/js/admin.js', array( 'wp-color-picker' ), INJIL_HELP_VERSION, true );
+				wp_localize_script(
+					'injil-help-admin',
+					'injilHelpPopulate',
+					array(
+						'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+						'nonce'   => wp_create_nonce( 'injil_help_populate' ),
+						/* translators: 1: pages done, 2: pages in all */
+						'working' => __( 'Writing the pages: %1$d of %2$d done. Keep this screen open.', 'injil-help' ),
+						'busy'    => __( 'Another update is running. Trying again in a few seconds…', 'injil-help' ),
+						'failed'  => __( 'The update stopped before it finished. Nothing is lost: press the button again and it carries on.', 'injil-help' ),
+					)
+				);
 			}
 		);
 	}
@@ -153,7 +165,26 @@ function injil_help_render_options() {
 	?>
 	<div class="wrap ih-options">
 		<h1><?php esc_html_e( 'Theme Options', 'injil-help' ); ?></h1>
-		<?php settings_errors(); ?>
+		<?php
+		settings_errors();
+		// The result of the Content tab's buttons, at the top of the screen whichever tab is open.
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended
+		if ( isset( $_GET['ih_done'] ) && function_exists( 'injil_help_populate_summary' ) ) {
+			$done  = sanitize_key( wp_unslash( $_GET['ih_done'] ) );
+			$tally = array();
+			foreach ( array( 'created', 'updated', 'unchanged', 'kept', 'failed' ) as $k ) {
+				$tally[ $k ] = isset( $_GET[ 'ih_' . $k ] ) ? absint( $_GET[ 'ih_' . $k ] ) : 0;
+			}
+			if ( 'busy' === $done ) {
+				printf( '<div class="notice notice-warning is-dismissible"><p>%s</p></div>', esc_html__( 'Another update was already running, so nothing was done. Wait a minute and press the button again.', 'injil-help' ) );
+			} else {
+				$head = 'update' === $done ? __( 'Update finished.', 'injil-help' ) : __( 'Check finished.', 'injil-help' );
+				printf( '<div class="notice %1$s is-dismissible"><p><strong>%2$s</strong> %3$s</p></div>', $tally['failed'] ? 'notice-warning' : 'notice-success', esc_html( $head ), esc_html( injil_help_populate_summary( $tally ) ) );
+			}
+		}
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
+		?>
+		<div id="ih-populate-status" class="notice notice-info inline" hidden aria-live="polite"><p></p></div>
 		<form method="post" action="options.php">
 			<?php settings_fields( 'injil_help' ); ?>
 			<nav class="ih-tabs" role="tablist" aria-label="<?php esc_attr_e( 'Settings sections', 'injil-help' ); ?>">
@@ -314,14 +345,6 @@ function injil_help_render_options() {
 
 			<section class="ih-panel" id="panel-content" role="tabpanel" aria-labelledby="tab-content">
 				<?php
-				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-				if ( isset( $_GET['ih_created'] ) ) {
-					printf( '<div class="notice notice-success inline"><p>%s</p></div>', esc_html( sprintf( /* translators: %d: number of pages */ _n( '%d page created.', '%d pages created.', (int) $_GET['ih_created'], 'injil-help' ), (int) $_GET['ih_created'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-				}
-				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-				if ( isset( $_GET['ih_updated'] ) ) {
-					printf( '<div class="notice notice-success inline"><p>%s</p></div>', esc_html( sprintf( /* translators: %d: number of pages */ _n( '%d page updated.', '%d pages updated.', (int) $_GET['ih_updated'], 'injil-help' ), (int) $_GET['ih_updated'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-				}
 				$missing = 0;
 				?>
 				<table class="form-table" role="presentation">
@@ -337,7 +360,7 @@ function injil_help_render_options() {
 						</td>
 					</tr>
 				</table>
-				<p class="description"><?php esc_html_e( 'The theme creates these pages when it is activated. Use the button to create any that are missing. When the theme is updated, every listed page is rewritten from the new text automatically, so edits made to those pages are replaced. The first button only creates missing pages; the second rewrites all of them now.', 'injil-help' ); ?></p>
+				<p class="description"><?php esc_html_e( 'The theme creates these pages when it is activated. When the theme is updated, the pages whose text changed are rewritten automatically, a few at a time as you move between admin screens, and pages you have edited are kept. The first button creates any page that is missing; the second rewrites every page now, edited ones included. Both work in small batches, show their progress here, and report what they did at the top of the screen.', 'injil-help' ); ?></p>
 				<ul class="ih-pages">
 					<?php foreach ( injil_help_starter_pages() as $def ) : ?>
 						<?php
@@ -356,8 +379,8 @@ function injil_help_render_options() {
 					<?php endforeach; ?>
 				</ul>
 				<p>
-					<a class="button button-primary" href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=injil_help_populate' ), 'injil_help_populate' ) ); ?>"><?php echo esc_html( $missing ? sprintf( /* translators: %d: missing pages */ __( 'Create %d missing pages', 'injil-help' ), $missing ) : __( 'Check again', 'injil-help' ) ); ?></a>
-					<a class="button" data-confirm="<?php echo esc_attr__( 'Rewrite every listed page from the theme? Edits you made to those pages will be lost.', 'injil-help' ); ?>" href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=injil_help_populate&overwrite=1' ), 'injil_help_populate' ) ); ?>"><?php esc_html_e( 'Update all pages from the theme', 'injil-help' ); ?></a>
+					<a class="button button-primary" data-ih-populate="create" href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=injil_help_populate' ), 'injil_help_populate' ) ); ?>"><?php echo esc_html( $missing ? sprintf( /* translators: %d: missing pages */ __( 'Create %d missing pages', 'injil-help' ), $missing ) : __( 'Check again', 'injil-help' ) ); ?></a>
+					<a class="button" data-ih-populate="update" data-confirm="<?php echo esc_attr__( 'Rewrite every listed page from the theme? Edits you made to those pages will be lost.', 'injil-help' ); ?>" href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=injil_help_populate&overwrite=1' ), 'injil_help_populate' ) ); ?>"><?php esc_html_e( 'Update all pages from the theme', 'injil-help' ); ?></a>
 				</p>
 			</section>
 
