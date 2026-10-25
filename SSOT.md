@@ -90,7 +90,7 @@ Shafaat (1985) for the gospel text; Alham Ahmed and The Clear Quran for the pass
 ## Rules for contributors
 
 - Shafaat's 1985 text is the starting point of the gospel, and the measure is its rule. Where it or his notes depart from the Qur'an as the measure they are changed, and every departure is listed under "Where this gospel departs from Shafaat" on the composition page. The end of the story follows 4:157-158 and 3:55: not killed, not crucified, raised to God, another seen in his likeness and no name given for him.
-- Numeric child slugs (the gospel sections, the commentary parts) work only through the slug filter and the two rewrite rules in `inc/starter-content.php`; WordPress otherwise renames them `N-2` and routes `/N/` to pagination. Keep them when adding parents with numbered children.
+- Never give a page a numeric slug: WordPress renames it `N-2` and routes `/N/` to pagination, and the site's URLs are words only (3.6.0 removed the filter and rewrite rules that once allowed numbers). A page that changes URL keeps its old path in `former`, and `injil_help_adopt_former_page()` moves the existing page.
 - The verse division of the gospel is the `[v]` markers in `narrative.json`, numbered at build time. Move, add or remove them with the text; never hard-code a verse number.
 - Content changes go in `inc/data/` or `patterns/`, never in PHP strings.
 - JS and CSS are separate files in `assets/js/` and `assets/css/`.

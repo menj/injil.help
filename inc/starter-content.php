@@ -295,22 +295,22 @@ function injil_help_repair_numeric_slug( $path ) {
 			'suppress_filters' => true,
 		)
 	);
-	$keep = 0;
+	// The copy to keep is the oldest edited one, or the oldest of all when none was edited; unedited duplicates are binned, edited ones left alone.
+	$copies = array();
 	foreach ( $ids as $id ) {
-		if ( ! preg_match( '/^' . preg_quote( $slug, '/' ) . '-\d+$/', (string) get_post_field( 'post_name', $id ) ) ) {
-			continue;
-		}
-		if ( ! $keep ) {
-			$keep = (int) $id;
-			continue;
-		}
-		$copy = get_post( $id );
-		if ( $copy && ! injil_help_page_is_edited( $copy ) ) {
-			wp_trash_post( $id );
+		if ( preg_match( '/^' . preg_quote( $slug, '/' ) . '-\d+$/', (string) get_post_field( 'post_name', $id ) ) ) {
+			$copies[ (int) $id ] = injil_help_page_is_edited( get_post( $id ) );
 		}
 	}
-	if ( ! $keep ) {
+	if ( ! $copies ) {
 		return null;
+	}
+	$edited = array_keys( array_filter( $copies ) );
+	$keep   = $edited ? (int) $edited[0] : (int) array_key_first( $copies );
+	foreach ( $copies as $id => $is_edited ) {
+		if ( $id !== $keep && ! $is_edited ) {
+			wp_trash_post( $id );
+		}
 	}
 	wp_update_post(
 		array(
