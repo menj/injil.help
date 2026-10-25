@@ -51,23 +51,86 @@ add_filter(
 	}
 );
 
+/**
+ * A meta description of at most $max characters: the whole text when it fits, else the
+ * sentences that fit (at least half the length), else the words that fit with an ellipsis.
+ * The Google SEO Starter Guide asks for a sentence or two; search results show about 160.
+ */
+function injil_help_trim_description( $text, $max = 160 ) {
+	$text = trim( preg_replace( '/\s+/', ' ', (string) $text ) );
+	if ( mb_strlen( $text ) <= $max ) {
+		return $text;
+	}
+	$cut = mb_substr( $text, 0, $max );
+	if ( preg_match( '/^(.{' . (int) ( $max / 2 ) . ',})[.!?](\s|$)/u', $cut, $m ) ) {
+		return trim( $m[1] ) . '.';
+	}
+	$cut = preg_replace( '/\s+\S*$/u', '', mb_substr( $text, 0, $max - 1 ) );
+	return rtrim( $cut, ' ,;:' ) . '…';
+}
+
 function injil_help_meta_description() {
 	$d = injil_help_seo_defaults();
 	if ( is_front_page() ) {
-		return $d['home_description'];
+		return injil_help_trim_description( $d['home_description'] );
 	}
 	if ( is_singular() ) {
 		$post = get_queried_object();
 		if ( has_excerpt( $post ) ) {
-			return wp_strip_all_tags( get_the_excerpt( $post ) );
+			return injil_help_trim_description( wp_strip_all_tags( get_the_excerpt( $post ) ) );
 		}
-		return wp_trim_words( wp_strip_all_tags( strip_shortcodes( $post->post_content ) ), 28, '…' );
+		return injil_help_trim_description( wp_strip_all_tags( strip_shortcodes( $post->post_content ) ) );
 	}
 	if ( is_category() || is_tag() ) {
-		return wp_strip_all_tags( term_description() );
+		return injil_help_trim_description( wp_strip_all_tags( term_description() ) );
 	}
-	return get_bloginfo( 'description' );
+	return injil_help_trim_description( get_bloginfo( 'description' ) );
 }
+
+/** Search result pages are not indexed; the guide asks that crawling be kept off them. */
+add_filter(
+	'wp_robots',
+	function ( $robots ) {
+		if ( is_search() ) {
+			$robots['noindex'] = true;
+			$robots['follow']  = true;
+		}
+		return $robots;
+	}
+);
+
+/**
+ * The visible breadcrumb row at the top of every page below the front page: Home, the parent
+ * pages, the page itself. It mirrors the BreadcrumbList in the structured data, as the guide
+ * asks ("a row of internal links at the top or bottom of the page").
+ */
+function injil_help_breadcrumb_html( $post ) {
+	$items = array( array( __( 'Home', 'injil-help' ), home_url( '/' ) ) );
+	foreach ( array_reverse( get_post_ancestors( $post ) ) as $ancestor ) {
+		$items[] = array( wp_strip_all_tags( get_the_title( $ancestor ) ), get_permalink( $ancestor ) );
+	}
+	$html = '<nav class="ih-breadcrumb" aria-label="' . esc_attr__( 'Breadcrumb', 'injil-help' ) . '"><ol>';
+	foreach ( $items as $item ) {
+		$html .= '<li><a href="' . esc_url( $item[1] ) . '">' . esc_html( $item[0] ) . '</a></li>';
+	}
+	$html .= '<li aria-current="page">' . esc_html( wp_strip_all_tags( get_the_title( $post ) ) ) . '</li></ol></nav>';
+	return $html;
+}
+
+add_filter(
+	'the_content',
+	function ( $content ) {
+		if ( ! is_singular( array( 'page', 'post' ) ) || is_front_page() || ! in_the_loop() || ! is_main_query() || doing_filter( 'get_the_excerpt' ) ) {
+			return $content;
+		}
+		$post = get_queried_object();
+		if ( ! $post || get_the_ID() !== $post->ID ) {
+			return $content;
+		}
+		return injil_help_breadcrumb_html( $post ) . $content;
+	},
+	5
+);
 
 /* Meta description, canonical, Open Graph, Twitter. */
 add_action(

@@ -268,7 +268,7 @@ function injil_help_render_options() {
 								<option value="on" <?php selected( $o['schema'], 'on' ); ?>><?php esc_html_e( 'Always on', 'injil-help' ); ?></option>
 								<option value="off" <?php selected( $o['schema'], 'off' ); ?>><?php esc_html_e( 'Always off', 'injil-help' ); ?></option>
 							</select>
-							<p class="description"><?php esc_html_e( 'Titles, meta description, Open Graph, and the JSON-LD graph: Organization, Person, WebSite with sitelinks search, WebPage, BreadcrumbList, Article, FAQPage, ImageObject licence metadata, ItemList and Book.', 'injil-help' ); ?></p>
+							<p class="description"><?php esc_html_e( 'Titles, meta description (trimmed to 160 characters), the breadcrumb row, Open Graph, and the JSON-LD graph limited to the features Google documents: Organization, Person, WebSite, WebPage, BreadcrumbList, Article and ImageObject licence metadata.', 'injil-help' ); ?></p>
 						</td>
 					</tr>
 					<tr>

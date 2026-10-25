@@ -2,6 +2,10 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.6.3
+
+- A last pass against the Google SEO Starter Guide and the list of structured data Google supports. Structured data is limited to the documented features: the FAQPage, sitelinks SearchAction, Book and ItemList nodes are no longer emitted (Google's list has none of them); Article, Breadcrumb, Image metadata, Organization and Profile page remain, with the WebSite, WebPage and Person nodes they reference. Every page below the front page opens with a visible breadcrumb row (Home, the parent pages, the page), matching the BreadcrumbList. Meta descriptions are trimmed to 160 characters at a sentence end. Search result pages carry noindex. Ten "its own page" anchors are rewritten as descriptive anchor text.
+
 ## 3.6.2
 
 - Links to apostleofdoom.org and bestofislam.org are within the running text only: thirty sentences across the Paul of Tarsus pages, the Islamic Dilemma pages, the measure, John, the discrepancies index, the Qur'an pages, the resources pages and the bonus chapter name the article that takes the point further and the site it is on, the way any source is cited. The "On the writer's other websites" line of the Read next row, the footer links and the bestofislam.org sameAs entry added in 3.6.1 are removed; no site is presented as a companion or sister site.

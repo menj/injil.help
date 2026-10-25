@@ -74,7 +74,8 @@ Tabs: Colours, Branding, Sharing, SEO, Security, Content. Defaults: `colors` {},
 
 ## Structured data and SEO
 
-- One JSON-LD `@graph` per page from `inc/schema.php` at `wp_head` priority 5: Organization, Person, WebSite (+ SearchAction on the front page), page node (WebPage, CollectionPage with ItemList when a page has three or more entries, ProfilePage, ContactPage, SearchResultsPage), BreadcrumbList, Article or BlogPosting, Book for the gospel sections, ImageObject with licence metadata, FAQPage from `is-style-faq` details.
+- One JSON-LD `@graph` per page from `inc/schema.php` at `wp_head` priority 5, limited to the features in Google's list of supported structured data: Organization, Person, WebSite, page node (WebPage, CollectionPage when a page has three or more entries, ProfilePage, ContactPage, SearchResultsPage), BreadcrumbList, Article or BlogPosting, ImageObject with licence metadata. No FAQPage, SearchAction, Book or ItemList (dropped in 3.6.3).
+- Every page below the front page opens with a visible breadcrumb row (`injil_help_breadcrumb_html()`) that matches the BreadcrumbList; meta descriptions are trimmed to 160 characters at a sentence end; search result pages are `noindex`; anchor text is descriptive (never "its own page", "here" or a bare URL); every URL is words only.
 - Off automatically when Yoast, Rank Math or SEOPress is active.
 - Six FAQs on every main page, written as search queries.
 - Default social image: `assets/images/og-default.jpg`.

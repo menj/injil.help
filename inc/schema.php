@@ -5,16 +5,19 @@
  *
  *   Organization (logo, sameAs)     every page
  *   Person (the author)             every page
- *   WebSite (+ sitelinks search)    every page (the SearchAction on the front page)
+ *   WebSite                         every page
  *   WebPage / CollectionPage /      every page; ProfilePage on About the author,
  *     ContactPage / ProfilePage /    ContactPage on Contact, CollectionPage on
  *     SearchResultsPage              section indexes, archives and search
  *   BreadcrumbList                  every page below the front page
  *   Article / BlogPosting           every article page and post
  *   ImageObject (licence metadata)  every manuscript image, from its caption
- *   FAQPage                         every page with FAQ items
- *   ItemList                        section indexes (their entries)
- *   Book                            the gospel sections, as the work they belong to
+ *
+ * Only the features in Google's list of supported structured data are emitted (Article,
+ * Breadcrumb, Image metadata, Organization, Profile page); the generic WebSite, WebPage and
+ * Person nodes carry the identifiers those features reference. The FAQ, sitelinks search,
+ * Book and ItemList nodes of earlier versions were dropped in 3.6.3, since Google no longer
+ * lists those features.
  *
  * Output is skipped when Yoast, Rank Math or SEOPress is active, unless Theme
  * Options > SEO forces it on. Filter injil_help_schema_graph to change the graph.
@@ -38,7 +41,6 @@ function injil_help_schema_ids() {
 		'author'  => $home . '#author',
 		'website' => $home . '#website',
 		'logo'    => $home . '#logo',
-		'book'    => home_url( '/gospel-according-to-islam/' ) . '#book',
 	);
 }
 
@@ -115,16 +117,6 @@ function injil_help_schema_site_nodes( $post = null ) {
 			'name'  => 'The Islamic Dilemma',
 		),
 	);
-	if ( is_front_page() ) {
-		$website['potentialAction'] = array(
-			'@type'       => 'SearchAction',
-			'target'      => array(
-				'@type'       => 'EntryPoint',
-				'urlTemplate' => $home . '?s={search_term_string}',
-			),
-			'query-input' => 'required name=search_term_string',
-		);
-	}
 	return array( $org, $person, $website );
 }
 
@@ -147,45 +139,6 @@ function injil_help_expand_patterns( $blocks ) {
 		$out[] = $block;
 	}
 	return $out;
-}
-
-/** FAQ items: core/details styled "FAQ item", and "Short answer" groups (heading + .ih-answer-text). */
-function injil_help_collect_faq( $blocks, &$items ) {
-	foreach ( $blocks as $block ) {
-		$class = $block['attrs']['className'] ?? '';
-		if ( 'core/details' === $block['blockName'] && false !== strpos( $class, 'is-style-faq' ) ) {
-			preg_match( '#<summary[^>]*>(.*?)</summary>#s', $block['innerHTML'], $m );
-			$question = trim( wp_strip_all_tags( $m[1] ?? '' ) );
-			$answer   = '';
-			foreach ( $block['innerBlocks'] as $inner ) {
-				$answer .= render_block( $inner );
-			}
-			$answer = trim( wp_strip_all_tags( $answer ) );
-			if ( $question && $answer ) {
-				$items[] = array( html_entity_decode( $question, ENT_QUOTES ), html_entity_decode( $answer, ENT_QUOTES ) );
-			}
-		}
-		if ( 'core/group' === $block['blockName'] && false !== strpos( $class, 'is-style-answer-item' ) ) {
-			$question = '';
-			$answer   = '';
-			foreach ( $block['innerBlocks'] as $inner ) {
-				$inner_class = $inner['attrs']['className'] ?? '';
-				if ( 'core/heading' === $inner['blockName'] && '' === $question ) {
-					$question = trim( wp_strip_all_tags( render_block( $inner ) ) );
-				} elseif ( false !== strpos( $inner_class, 'ih-answer-text' ) ) {
-					$answer .= ' ' . wp_strip_all_tags( render_block( $inner ) );
-				}
-			}
-			$answer = trim( $answer );
-			if ( $question && $answer ) {
-				$items[] = array( html_entity_decode( $question, ENT_QUOTES ), html_entity_decode( $answer, ENT_QUOTES ) );
-			}
-			continue;
-		}
-		if ( ! empty( $block['innerBlocks'] ) ) {
-			injil_help_collect_faq( $block['innerBlocks'], $items );
-		}
-	}
 }
 
 /**
@@ -241,7 +194,7 @@ function injil_help_collect_images( $html ) {
 	return array_values( $images );
 }
 
-/** Section index entries (the cards), for an ItemList. */
+/** Section index entries (the cards); three or more make the page a CollectionPage. */
 function injil_help_collect_entries( $html ) {
 	$list = array();
 	if ( preg_match_all( '#<div class="wp-block-group ih-entry[^"]*">.*?<h3[^>]*><a href="([^"]+)">(.*?)</a></h3>#s', $html, $m, PREG_SET_ORDER ) ) {
@@ -372,16 +325,6 @@ function injil_help_schema_graph() {
 	if ( 'ProfilePage' === $webpage['@type'] ) {
 		$webpage['mainEntity'] = array( '@id' => $ids['author'] );
 	}
-	if ( 'CollectionPage' === $webpage['@type'] ) {
-		if ( $entries ) {
-			$webpage['mainEntity'] = array(
-				'@type'           => 'ItemList',
-				'name'            => $title,
-				'numberOfItems'   => count( $entries ),
-				'itemListElement' => $entries,
-			);
-		}
-	}
 	$graph[] = $webpage;
 
 	// Breadcrumb.
@@ -456,26 +399,6 @@ function injil_help_schema_graph() {
 			);
 			$article['keywords'] = 'the Islamic Dilemma, Quran 5:47, Injil, tahrif, the four gospels';
 		}
-		// The 27 sections and the Introduction belong to a book.
-		if ( $parent && 'gospel-according-to-islam' === $parent->post_name && ( 'introduction' === $post->post_name || ( function_exists( 'injil_help_gospel_section_number' ) && injil_help_gospel_section_number( $post->post_name ) ) ) ) {
-			$article['isPartOf'] = array( '@id' => $ids['book'] );
-			$graph[]             = array(
-				'@type'         => 'Book',
-				'@id'           => $ids['book'],
-				'name'          => 'The Gospel According to Islam',
-				'url'           => home_url( '/gospel-according-to-islam/' ),
-				'author'        => array(
-					'@type' => 'Person',
-					'name'  => 'Ahmad Shafaat',
-				),
-				'publisher'     => array(
-					'@type' => 'Organization',
-					'name'  => 'Vantage Press',
-				),
-				'datePublished' => '1985',
-				'inLanguage'    => 'en',
-			);
-		}
 		$graph[] = $article;
 	}
 
@@ -498,33 +421,6 @@ function injil_help_schema_graph() {
 			'copyrightNotice'      => 'Public domain',
 			'acquireLicensePage'   => 'https://commons.wikimedia.org/wiki/File:Birmingham_Quran_manuscript.jpg',
 			'representativeOfPage' => true,
-		);
-	}
-
-	// FAQ.
-	$faq = array();
-	if ( $blocks ) {
-		injil_help_collect_faq( $blocks, $faq );
-	}
-	if ( $faq ) {
-		$main = array();
-		foreach ( $faq as $qa ) {
-			$main[] = array(
-				'@type'          => 'Question',
-				'name'           => $qa[0],
-				'acceptedAnswer' => array(
-					'@type' => 'Answer',
-					'text'  => $qa[1],
-				),
-			);
-		}
-		$graph[] = array(
-			'@type'      => 'FAQPage',
-			'@id'        => $url . '#faq',
-			'url'        => $url,
-			'isPartOf'   => array( '@id' => $webpage_id ),
-			'inLanguage' => $lang,
-			'mainEntity' => $main,
 		);
 	}
 
