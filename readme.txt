@@ -82,11 +82,13 @@ This file is the user-facing manual that WordPress and Git Updater read. The rep
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add the entry to CHANGELOG.md and to the Changelog section here, note anything an existing site must know under "Updating an existing site" in UPGRADING.md, merge to main, and tag the commit with the same number (for example v3.4.0). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 3.6.2 =
+* Links to apostleofdoom.org and bestofislam.org are within the running text only, thirty sentences naming the article and the site where a point is taken further; the declared row, the footer links and the sameAs entry of 3.6.1 are removed.
 = 3.6.1 =
 * Content is full width by default: every page's text, tables and plates fill the page between the side gutters, and the header, footer and front page follow. Theme Options > Branding > Content width offers full (default), wide (1240px) and reading column (720px, the former default). At full and wide widths running prose is set in two columns on screens from 1280px, as the gospel sections are, so lines stay readable; headings, tables, plates, folds and asides span both columns.
 * The Gospel of Thomas page explains why Thomas is counted: a sayings gospel of the kind Q was, with the evidence, the contrary case labelled, the Qur'anic reason and three questions.
 * "Paul of Tarsus" throughout the site's own text.
-* Links to the writer's other websites, Apostle of Doom (the case against Paul of Tarsus) and Best of Islam (objections to Islam answered), where the subject meets: in the Read next row of 27 pages, the Paul of Tarsus index, the footer, four passages of prose and the default sameAs list.
+* Links to apostleofdoom.org and bestofislam.org where the subject meets (reworked in 3.6.2).
 * The hero lede and the section intros are justified like the body text.
 * New theme screenshot.
 = 3.6.0 =
