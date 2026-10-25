@@ -2,6 +2,14 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.6.7
+
+- لعنة الله, "the curse of God", is set after the name of Paul of Tarsus as a calligraphic mark, like the honorific ligatures. It is used twice:
+  - on the Epistle's autograph line, where the writer leaves Paul of Tarsus's shadow;
+  - on The false apostles, in the sentence that gives the website's verdict, that Paul of Tarsus failed the first community's test.
+- The mark is `assets/images/lanat-allah.svg`: the outlines of Amiri Bold, the site's Arabic face, shaped by HarfBuzz and fully vowelled. `.ih-lanah` in `style.css` shows it as a mask in the palette's rubric red, so it follows the Colours tab and dark mode, and screen readers read it as "لعنة الله, the curse of God".
+- It is placed by hand and kept rare. It does not appear in titles, excerpts, menus or structured data.
+
 ## 3.6.6
 
 - Content intended for the database is stored only as JSON, as a security requirement. The 17 patterns that supply whole pages (`islamic-dilemma-page`, `criterion-statement`, the five `section-*` indexes, `answers-page`, `how-composed`, `corrections-log`, the five `discrepancy-*` tables, `manuscripts-table`, `thomas-correlation`) moved from PHP files in `patterns/` to `inc/data/patterns/{name}.json` (`title`, `slug`, `description`, `categories`, `keywords`, `content` as a list of lines of block markup). `injil_help_pattern_file()` reads them, refusing a name that is not a plain slug and a malformed file; `injil_help_page_content()` uses it instead of the pattern registry; `functions.php` registers the same files as block patterns, so the editor's injil.help category is unchanged. The four translated labels in them ("Full evidence:", "Islamic position", "Scholarly consensus", "The criterion") are now plain text, as the theme ships no translations. All 176 pages were built before and after and compared: titles, excerpts and content are byte for byte the same, so the update rewrites nothing. `patterns/` keeps only the front-page sections and the building blocks, which the theme never writes to the database. The theme reads no `.html` or `.txt` file to populate the database.
