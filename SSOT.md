@@ -54,11 +54,11 @@ The fixed facts about The Injil theme. When another document, a comment or a pat
 
 ## Theme Options (`injil_help_options`)
 
-Tabs: Colours, Branding, Sharing, SEO, Security, Content. Defaults: `colors` {}, `footer_mark` 1, `ornament` rich, `animate` 1, `parallax` strong, `gospel_layout` columns, `app_passwords` 0, `favicon_force` 0, `favicon_url` '', `share` 1, `share_networks` x, facebook, whatsapp, telegram, reddit, linkedin, bluesky, threads, `share_types` post, page, `share_label` '', `schema` auto, `home_title` '', `home_description` '', `pillar_title` '', `og_image` '', `author_name` '', `author_url` '', `same_as` menj.org and apostleofdoom.org, `org_logo` ''.
+Tabs: Colours, Branding, Sharing, SEO, Security, Content. Defaults: `colors` {}, `footer_mark` 1, `ornament` rich, `animate` 1, `parallax` strong, `gospel_layout` columns, `block_app_passwords` 1, `favicon_force` 0, `favicon_url` '', `share` 1, `share_networks` x, facebook, whatsapp, telegram, reddit, linkedin, bluesky, threads, `share_types` post, page, `share_label` '', `schema` auto, `home_title` '', `home_description` '', `pillar_title` '', `og_image` '', `author_name` '', `author_url` '', `same_as` menj.org and apostleofdoom.org, `org_logo` ''.
 
 ## Filters
 
-- Hardening set by the theme: `wp_is_application_passwords_available` returns false unless `app_passwords` is set (functions.php), so application passwords are off site-wide by default; Theme Options › Security switches them on.
+- Hardening set by the theme: `wp_is_application_passwords_available` returns false while `block_app_passwords` is set (functions.php), which it is by default, so application passwords are off site-wide until the block is unticked under Theme Options › Security.
 
 `injil_help_seo_defaults`, `injil_help_default_og_image`, `injil_help_output_schema`, `injil_help_schema_graph`, `injil_help_share_networks`.
 

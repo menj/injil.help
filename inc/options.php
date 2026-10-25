@@ -32,7 +32,7 @@ function injil_help_option_defaults() {
 		'animate'          => 1,
 		'parallax'         => 'strong',
 		'gospel_layout'    => 'columns',
-		'app_passwords'    => 0,
+		'block_app_passwords' => 1,
 		'favicon_force'    => 0,
 		'favicon_url'      => '',
 		'share'            => 1,
@@ -71,7 +71,7 @@ function injil_help_sanitize_options( $in ) {
 	$out['animate']          = empty( $in['animate'] ) ? 0 : 1;
 	$out['parallax']         = in_array( $in['parallax'] ?? 'strong', array( 'strong', 'gentle', 'off' ), true ) ? $in['parallax'] : 'strong';
 	$out['gospel_layout']    = in_array( $in['gospel_layout'] ?? 'columns', array( 'columns', 'single', 'plain' ), true ) ? $in['gospel_layout'] : 'columns';
-	$out['app_passwords']    = empty( $in['app_passwords'] ) ? 0 : 1;
+	$out['block_app_passwords'] = empty( $in['block_app_passwords'] ) ? 0 : 1;
 	$out['favicon_force']    = empty( $in['favicon_force'] ) ? 0 : 1;
 	$out['favicon_url']      = esc_url_raw( $in['favicon_url'] ?? '' );
 	$out['share']            = empty( $in['share'] ) ? 0 : 1;
@@ -286,8 +286,8 @@ function injil_help_render_options() {
 					<tr>
 						<th scope="row"><?php esc_html_e( 'Application passwords', 'injil-help' ); ?></th>
 						<td>
-							<label><input type="checkbox" name="<?php echo esc_attr( $name ); ?>[app_passwords]" value="1" <?php checked( $o['app_passwords'] ); ?>> <?php esc_html_e( 'Allow application passwords', 'injil-help' ); ?></label>
-							<p class="description"><?php esc_html_e( 'Off by default. Application passwords let a client (a mobile app, a publishing tool, a script) log in through the REST API or XML-RPC with a password made for it alone. Nothing on this site needs that door, so the theme keeps it shut: the panel disappears from user profiles and such log-ins are refused. Tick the box only while a client you trust needs it.', 'injil-help' ); ?></p>
+							<label><input type="checkbox" name="<?php echo esc_attr( $name ); ?>[block_app_passwords]" value="1" <?php checked( $o['block_app_passwords'] ); ?>> <?php esc_html_e( 'Block application passwords (on by default)', 'injil-help' ); ?></label>
+							<p class="description"><?php esc_html_e( 'Application passwords let a client (a mobile app, a publishing tool, a script) log in through the REST API or XML-RPC with a password made for it alone. Nothing on this site needs that door, so the theme keeps it shut: the panel disappears from user profiles and such log-ins are refused. Untick the box only while a client you trust needs it.', 'injil-help' ); ?></p>
 						</td>
 					</tr>
 				</table>
