@@ -374,21 +374,24 @@ function injil_help_collect_citations( $html ) {
 		return $cites;
 	}
 	foreach ( $items[1] as $li ) {
-		if ( ! preg_match( '#^(.*?)<em>(.*?)</em>#s', $li, $m ) ) {
+		$plain = html_entity_decode( wp_strip_all_tags( $li ), ENT_QUOTES );
+		$cite  = array( '@type' => 'CreativeWork' );
+		// An article: “Title” and then the journal or volume in italics. Otherwise the first italic title is the work.
+		if ( preg_match( '#^(.*?)“(.+?)”(.*)$#su', $plain, $art ) ) {
+			$cite['@type'] = 'ScholarlyArticle';
+			$cite['name']  = trim( $art[2] );
+			$author        = trim( $art[1], " ,;:\u{2019}" );
+			$after         = substr( $li, (int) mb_strpos( $li, '”' ) );
+			if ( preg_match( '#<em>(.*?)</em>#s', $after, $j ) ) {
+				$cite['isPartOf'] = array( '@type' => 'Periodical', 'name' => html_entity_decode( trim( wp_strip_all_tags( $j[1] ) ), ENT_QUOTES ) );
+			}
+		} elseif ( preg_match( '#^(.*?)<em>(.*?)</em>#s', $li, $m ) ) {
+			$cite['name'] = html_entity_decode( trim( wp_strip_all_tags( $m[2] ) ), ENT_QUOTES );
+			$author       = html_entity_decode( trim( wp_strip_all_tags( $m[1] ), " ,;:\u{2019}" ), ENT_QUOTES );
+		} else {
 			continue;
 		}
-		$title  = html_entity_decode( trim( wp_strip_all_tags( $m[2] ) ), ENT_QUOTES );
-		$author = html_entity_decode( trim( wp_strip_all_tags( $m[1] ), " ,;:\u{2019}" ), ENT_QUOTES );
-		$cite   = array( '@type' => 'CreativeWork' );
-		// An article: “Title”, then the journal in italics. Otherwise the italic title is the work.
-		if ( preg_match( '#^(.*?)“(.+?)”#su', wp_strip_all_tags( $m[1] ), $art ) ) {
-			$cite['@type']    = 'ScholarlyArticle';
-			$cite['name']     = html_entity_decode( trim( $art[2] ), ENT_QUOTES );
-			$cite['isPartOf'] = array( '@type' => 'Periodical', 'name' => $title );
-			$author           = html_entity_decode( trim( $art[1], " ,;:\u{2019}" ), ENT_QUOTES );
-		} elseif ( $title ) {
-			$cite['name'] = $title;
-		} else {
+		if ( ! $cite['name'] ) {
 			continue;
 		}
 		if ( $author && mb_strlen( $author ) < 120 ) {
