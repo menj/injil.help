@@ -43,7 +43,7 @@
 <p class="ih-k">Section · II</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/2/">The annunciation and the birth</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/annunciation-and-birth-of-jesus/">The annunciation and the birth</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Maryam, the angel, the palm tree, and the infant who speaks.</p>
@@ -54,7 +54,7 @@
 <p class="ih-k">Section · V</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/5/">John the Baptist</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/john-the-baptist/">John the Baptist</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">The prophet in the wilderness, and the call to repent.</p>
@@ -65,7 +65,7 @@
 <p class="ih-k">Section · VIII</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/8/">The Beatitudes</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/leper-sabbath-and-beatitudes/">The Beatitudes</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">The sabbath made for man, and the blessings of the poor in spirit.</p>
@@ -76,7 +76,7 @@
 <p class="ih-k">Section · XX</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/20/">Jerusalem</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/entry-into-jerusalem-and-cleansing-of-the-temple/">Jerusalem</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">The entry on a colt, and the cleansing of the temple.</p>
@@ -87,7 +87,7 @@
 <p class="ih-k">Section · XXIV</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/24/">The hour and the Counsellor</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/the-hour-and-promise-of-the-counsellor/">The hour and the Counsellor</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">The promise of the one who comes after.</p>
@@ -98,7 +98,7 @@
 <p class="ih-k">Section · XXVI</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/26/">The trial and the raising of Jesus</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/trial-barabbas-and-raising-of-jesus/">The trial and the raising of Jesus</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Pilate, Barabbas, and the one they led away: they did not kill him.</p>

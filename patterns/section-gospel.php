@@ -44,7 +44,7 @@
 <h2 class="wp-block-heading">How to read it</h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>Start with <a href="/gospel-according-to-islam/how-composed/">How this gospel was composed</a>, which sets out every source and every rule, and with the author’s own <a href="/gospel-according-to-islam/introduction/">Introduction</a>, in which he explains why a new gospel is justified and asks the Christian reader to read it as a book from another church. Then read the sections in order; each carries the name of its chapter, the text, its notes at the foot, and links to the previous section, the next and the contents, so the whole can be read through from <a href="/gospel-according-to-islam/1/">section 1</a> to <a href="/gospel-according-to-islam/27/">section 27</a>. A green verse number marks the Qur’an speaking. A raised number leads to a note, and the notes are where the gospel shows its workings: the Qur’anic and New Testament passages behind each sentence, where and why the text departs from a gospel source, and the scholarship that bears on it. The colour marks on the sayings of Thomas are explained on <a href="/gospels/thomas/">the Gospel of Thomas</a>.</p>
+<p>Start with <a href="/gospel-according-to-islam/how-composed/">How this gospel was composed</a>, which sets out every source and every rule, and with the author’s own <a href="/gospel-according-to-islam/introduction/">Introduction</a>, in which he explains why a new gospel is justified and asks the Christian reader to read it as a book from another church. Then read the sections in order; each carries the name of its chapter, the text, its notes at the foot, and links to the previous section, the next and the contents, so the whole can be read through from <a href="/gospel-according-to-islam/family-of-amran-zacharias-and-john/">section 1</a> to <a href="/gospel-according-to-islam/empty-tomb-reports-and-return/">section 27</a>. A green verse number marks the Qur’an speaking. A raised number leads to a note, and the notes are where the gospel shows its workings: the Qur’anic and New Testament passages behind each sentence, where and why the text departs from a gospel source, and the scholarship that bears on it. The colour marks on the sayings of Thomas are explained on <a href="/gospels/thomas/">the Gospel of Thomas</a>.</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading -->
 <h2 class="wp-block-heading">The six chapters</h2>
@@ -70,7 +70,7 @@
 <p class="ih-k">Section · I</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/1/">The family of Amran, Zacharias and John</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/family-of-amran-zacharias-and-john/">The family of Amran, Zacharias and John</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Section 1 of 27.</p>
@@ -81,7 +81,7 @@
 <p class="ih-k">Section · II</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/2/">The annunciation and the birth of Jesus</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/annunciation-and-birth-of-jesus/">The annunciation and the birth of Jesus</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Section 2 of 27.</p>
@@ -92,7 +92,7 @@
 <p class="ih-k">Section · III</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/3/">The promised messenger, Joseph and the creation of Jesus</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/promised-messenger-joseph-and-creation-of-jesus/">The promised messenger, Joseph and the creation of Jesus</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Section 3 of 27.</p>
@@ -103,7 +103,7 @@
 <p class="ih-k">Section · IV</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/4/">Presentation in the temple, boyhood and the visit to Jerusalem</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/presentation-boyhood-and-visit-to-jerusalem/">Presentation in the temple, boyhood and the visit to Jerusalem</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Section 4 of 27.</p>
@@ -114,7 +114,7 @@
 <p class="ih-k">Section · V</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/5/">John the Baptist</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/john-the-baptist/">John the Baptist</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Section 5 of 27.</p>
@@ -125,7 +125,7 @@
 <p class="ih-k">Section · VI</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/6/">The baptism, the temptation and the return to Nazareth</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/baptism-temptation-and-return-to-nazareth/">The baptism, the temptation and the return to Nazareth</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Section 6 of 27.</p>
@@ -136,7 +136,7 @@
 <p class="ih-k">Section · VII</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/7/">Capernaum: the first disciples and healings</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/capernaum-first-disciples-and-healings/">Capernaum: the first disciples and healings</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Section 7 of 27.</p>
@@ -147,7 +147,7 @@
 <p class="ih-k">Section · VIII</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/8/">The leper, the sabbath and the Beatitudes</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/leper-sabbath-and-beatitudes/">The leper, the sabbath and the Beatitudes</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Section 8 of 27.</p>
@@ -158,7 +158,7 @@
 <p class="ih-k">Section · IX</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/9/">Publicans, fasting and the question from John</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/publicans-fasting-and-question-from-john/">Publicans, fasting and the question from John</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Section 9 of 27.</p>
@@ -169,7 +169,7 @@
 <p class="ih-k">Section · X</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/10/">The traditions of the elders and the Syrophoenician woman</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/traditions-of-the-elders-and-syrophoenician-woman/">The traditions of the elders and the Syrophoenician woman</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Section 10 of 27.</p>
@@ -180,7 +180,7 @@
 <p class="ih-k">Section · XI</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/11/">The blind man and the Samaritan woman</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/blind-man-and-samaritan-woman/">The blind man and the Samaritan woman</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Section 11 of 27.</p>
@@ -191,7 +191,7 @@
 <p class="ih-k">Section · XII</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/12/">Jairus’s daughter and the death of John</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/jairus-daughter-and-death-of-john/">Jairus’s daughter and the death of John</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Section 12 of 27.</p>
@@ -202,7 +202,7 @@
 <p class="ih-k">Section · XIII</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/13/">The twelve and their mission</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/the-twelve-and-their-mission/">The twelve and their mission</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Section 13 of 27.</p>
@@ -213,7 +213,7 @@
 <p class="ih-k">Section · XIV</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/14/">The bird of clay, Beelzebub and the unclean spirit</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/bird-of-clay-beelzebub-and-unclean-spirit/">The bird of clay, Beelzebub and the unclean spirit</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Section 14 of 27.</p>
@@ -224,7 +224,7 @@
 <p class="ih-k">Section · XV</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/15/">Signs, the rich man and Lazarus, and the woes</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/signs-rich-man-and-lazarus-and-woes/">Signs, the rich man and Lazarus, and the woes</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Section 15 of 27.</p>
@@ -235,7 +235,7 @@
 <p class="ih-k">Section · XVI</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/16/">The table from heaven, Caesarea Philippi and the vision</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/table-from-heaven-caesarea-philippi-and-vision/">The table from heaven, Caesarea Philippi and the vision</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Section 16 of 27.</p>
@@ -246,7 +246,7 @@
 <p class="ih-k">Section · XVII</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/17/">The meaning of the vision, and parables of the leaven and the tares</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/meaning-of-the-vision-leaven-and-tares/">The meaning of the vision, and parables of the leaven and the tares</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Section 17 of 27.</p>
@@ -257,7 +257,7 @@
 <p class="ih-k">Section · XVIII</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/18/">Greatness, the Samaritans and the children</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/greatness-samaritans-and-children/">Greatness, the Samaritans and the children</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Section 18 of 27.</p>
@@ -268,7 +268,7 @@
 <p class="ih-k">Section · XIX</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/19/">The rich man, and the request of James and John</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/rich-man-and-request-of-james-and-john/">The rich man, and the request of James and John</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Section 19 of 27.</p>
@@ -279,7 +279,7 @@
 <p class="ih-k">Section · XX</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/20/">The entry into Jerusalem and the cleansing of the temple</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/entry-into-jerusalem-and-cleansing-of-the-temple/">The entry into Jerusalem and the cleansing of the temple</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Section 20 of 27.</p>
@@ -290,7 +290,7 @@
 <p class="ih-k">Section · XXI</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/21/">Questions in the temple: authority, tribute, resurrection and the first commandment</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/questions-in-the-temple/">Questions in the temple: authority, tribute, resurrection and the first commandment</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Section 21 of 27.</p>
@@ -301,7 +301,7 @@
 <p class="ih-k">Section · XXII</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/22/">The end of the public ministry, and the vineyard</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/end-of-public-ministry-and-vineyard/">The end of the public ministry, and the vineyard</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Section 22 of 27.</p>
@@ -312,7 +312,7 @@
 <p class="ih-k">Section · XXIII</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/23/">The last supper, the future of the temple and the Man of perfection</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/last-supper-future-of-the-temple-and-man-of-perfection/">The last supper, the future of the temple and the Man of perfection</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Section 23 of 27.</p>
@@ -323,7 +323,7 @@
 <p class="ih-k">Section · XXIV</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/24/">The hour, and the promise of the Counsellor</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/the-hour-and-promise-of-the-counsellor/">The hour, and the promise of the Counsellor</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Section 24 of 27.</p>
@@ -334,7 +334,7 @@
 <p class="ih-k">Section · XXV</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/25/">Gethsemane, the arrest and Peter’s denial</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/gethsemane-arrest-and-peters-denial/">Gethsemane, the arrest and Peter’s denial</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Section 25 of 27.</p>
@@ -345,7 +345,7 @@
 <p class="ih-k">Section · XXVI</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/26/">The trial, Barabbas and the raising of Jesus</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/trial-barabbas-and-raising-of-jesus/">The trial, Barabbas and the raising of Jesus</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Section 26 of 27.</p>
@@ -356,7 +356,7 @@
 <p class="ih-k">Section · XXVII</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/27/">The empty tomb, the reports and the return</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/empty-tomb-reports-and-return/">The empty tomb, the reports and the return</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Section 27 of 27.</p>
@@ -399,12 +399,12 @@
 <!-- /wp:details -->
 <!-- wp:details {"className":"is-style-faq"} -->
 <details class="wp-block-details is-style-faq"><summary>Does the gospel include the crucifixion?</summary><!-- wp:paragraph -->
-<p>It tells the arrest, the trial and Barabbas from the gospel sources, and where the gospels have the cross the Qur’an’s own words stand in the text: they did not kill him, nor crucify him, but it was made to appear so to them, and God raised him to Himself (4:157-158). The empty tomb, the reports that went round and his return before the Hour follow. See <a href="/gospel-according-to-islam/26/">section 26</a> and <a href="/gospel-according-to-islam/27/">section 27</a>.</p>
+<p>It tells the arrest, the trial and Barabbas from the gospel sources, and where the gospels have the cross the Qur’an’s own words stand in the text: they did not kill him, nor crucify him, but it was made to appear so to them, and God raised him to Himself (4:157-158). The empty tomb, the reports that went round and his return before the Hour follow. See <a href="/gospel-according-to-islam/trial-barabbas-and-raising-of-jesus/">section 26</a> and <a href="/gospel-according-to-islam/empty-tomb-reports-and-return/">section 27</a>.</p>
 <!-- /wp:paragraph --></details>
 <!-- /wp:details -->
 <!-- wp:details {"className":"is-style-faq"} -->
 <details class="wp-block-details is-style-faq"><summary>Can I read the gospel straight through?</summary><!-- wp:paragraph -->
-<p>Yes. Start at <a href="/gospel-according-to-islam/1/">section 1</a>; every section carries links to the previous, the next and the contents, with its notes at the foot. The Introduction and the method page explain the sources first, and the colour marks on the Gospel of Thomas sayings are explained on <a href="/gospels/thomas/">the Gospel of Thomas</a>.</p>
+<p>Yes. Start at <a href="/gospel-according-to-islam/family-of-amran-zacharias-and-john/">section 1</a>; every section carries links to the previous, the next and the contents, with its notes at the foot. The Introduction and the method page explain the sources first, and the colour marks on the Gospel of Thomas sayings are explained on <a href="/gospels/thomas/">the Gospel of Thomas</a>.</p>
 <!-- /wp:paragraph --></details>
 <!-- /wp:details -->
 <!-- wp:group {"className":"ih-aside ih-next","layout":{"type":"default"}} -->

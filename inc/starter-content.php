@@ -187,46 +187,91 @@ function injil_help_markup_to_blocks( $lines ) {
 function injil_help_page_content( $def ) {
 	if ( ! empty( $def['pattern'] ) ) {
 		$pattern = WP_Block_Patterns_Registry::get_instance()->get_registered( 'injil-help/' . $def['pattern'] );
-		return $pattern ? injil_help_add_page_image( $def['path'], $pattern['content'], true ) : '';
+		return $pattern ? injil_help_add_page_image( $def['path'], $pattern['content'] . injil_help_related_blocks( $def, $pattern['content'] ), true ) : '';
 	}
-	return injil_help_add_page_image( $def['path'], injil_help_markup_to_blocks( $def['body'] ?? array() ), false );
+	$content = injil_help_markup_to_blocks( $def['body'] ?? array() );
+	return injil_help_add_page_image( $def['path'], $content . injil_help_related_blocks( $def, $content ), false );
 }
 
 /**
- * WordPress refuses a purely numeric slug on a page: wp_unique_post_slug() renames "2" to "2-2",
- * and the page rewrite rules read /parent/2/ as page 2 of the parent. The gospel sections and
- * the commentary parts use numeric slugs, so the theme allows them under those parents, routes
- * them, and repairs pages an earlier version created under the renamed slugs.
+ * The "Read next" row under a page's content: the pages named in the definition's "related"
+ * list (the builders and inc/data/related.json), linked by their titles. Content that already
+ * ends in its own "ih-next" aside (the section indexes) gets no second row.
  */
-const INJIL_HELP_RULES = '2'; // bump when the rewrite rules change; populate() flushes when the stored value differs
-
-add_filter(
-	'wp_unique_post_slug_is_bad_hierarchical_slug',
-	function ( $bad, $slug, $post_type, $post_parent ) {
-		if ( 'page' === $post_type && $post_parent && preg_match( '/^\d+$/', $slug ) ) {
-			$uri = (string) get_page_uri( (int) $post_parent );
-			if ( 'gospel-according-to-islam' === $uri || 0 === strpos( $uri, 'quran/commentaries/' ) ) {
-				return false;
-			}
-		}
-		return $bad;
-	},
-	10,
-	4
-);
-
-add_action(
-	'init',
-	function () {
-		add_rewrite_rule( '^gospel-according-to-islam/([0-9]+)/?$', 'index.php?pagename=gospel-according-to-islam/$matches[1]', 'top' );
-		add_rewrite_rule( '^quran/commentaries/([a-z0-9-]+)/([a-z-]+)/([0-9]+)/?$', 'index.php?pagename=quran/commentaries/$matches[1]/$matches[2]/$matches[3]', 'top' );
+function injil_help_related_blocks( $def, $content = '' ) {
+	if ( empty( $def['related'] ) || false !== strpos( $content, 'ih-aside ih-next' ) ) {
+		return '';
 	}
-);
+	static $titles = null;
+	if ( null === $titles ) {
+		$titles = array();
+		foreach ( injil_help_starter_pages() as $p ) {
+			$titles[ $p['path'] ] = $p['title'];
+		}
+	}
+	$links = array();
+	foreach ( (array) $def['related'] as $path ) {
+		if ( $path !== $def['path'] && isset( $titles[ $path ] ) ) {
+			$links[] = '<a href="/' . esc_attr( $path ) . '/">' . esc_html( $titles[ $path ] ) . '</a>';
+		}
+	}
+	if ( ! $links ) {
+		return '';
+	}
+	return "\n<!-- wp:group {\"className\":\"ih-aside ih-next\",\"layout\":{\"type\":\"default\"}} -->\n<div class=\"wp-block-group ih-aside ih-next\"><!-- wp:paragraph {\"className\":\"ih-k\"} -->\n<p class=\"ih-k\">Read next</p>\n<!-- /wp:paragraph -->\n<!-- wp:paragraph -->\n<p>" . implode( ' · ', $links ) . "</p>\n<!-- /wp:paragraph --></div>\n<!-- /wp:group -->";
+}
 
 /**
- * A page that an earlier version created under a numeric slug WordPress renamed ("2-2", and
- * "2-3", "2-4" from later runs that could not find it): rename the oldest copy back to the
- * numeric slug and bin the duplicates that were never edited. Returns the repaired page or null.
+ * Every URL on the site is made of words (/gospel-according-to-islam/john-the-baptist/,
+ * /quran/commentaries/birth-of-jesus/tabari-part-two/), as the Google SEO Starter Guide asks.
+ * Versions up to 3.5 numbered the gospel sections and the commentary parts and put the verse
+ * numbers in the group slugs; populate() renames those existing pages in place (see
+ * injil_help_adopt_former_page()), so no page is duplicated. The old URLs are not redirected.
+ */
+const INJIL_HELP_RULES = '3'; // bump when the rewrite rules change; populate() flushes when the stored value differs
+
+/**
+ * A page that an earlier version published under one of the definition's "former" paths (a numeric
+ * slug, a group slug with verse numbers, or a copy WordPress renamed "2-2") is moved to its present
+ * path: the slug and the parent change, the ID, the edits and the featured image stay. Returns the
+ * moved page or null.
+ */
+function injil_help_adopt_former_page( $def ) {
+	foreach ( (array) ( $def['former'] ?? array() ) as $old ) {
+		$page = injil_help_find_page( $old );
+		if ( ! $page ) {
+			$page = injil_help_repair_numeric_slug( $old );
+		}
+		if ( ! $page ) {
+			continue;
+		}
+		$parts  = explode( '/', $def['path'] );
+		$slug   = array_pop( $parts );
+		$parent = $parts ? injil_help_find_page( implode( '/', $parts ) ) : null;
+		if ( $parts && ! $parent ) {
+			return null;
+		}
+		wp_update_post(
+			array(
+				'ID'          => $page->ID,
+				'post_name'   => $slug,
+				'post_parent' => $parent ? $parent->ID : 0,
+			)
+		);
+		clean_post_cache( $page->ID );
+		$moved = injil_help_find_page( $def['path'] );
+		if ( $moved ) {
+			return $moved;
+		}
+	}
+	return null;
+}
+
+/**
+ * Versions before 3.5.1 created the numbered pages under slugs WordPress renamed ("2-2", and
+ * "2-3", "2-4" from later runs that could not find them): rename the oldest copy back to the
+ * numeric slug, so that injil_help_adopt_former_page() can move it on, and bin the duplicates
+ * that were never edited. Returns the repaired page or null.
  */
 function injil_help_repair_numeric_slug( $path ) {
 	$parts = explode( '/', $path );
@@ -250,22 +295,22 @@ function injil_help_repair_numeric_slug( $path ) {
 			'suppress_filters' => true,
 		)
 	);
-	$keep = 0;
+	// The copy to keep is the oldest edited one, or the oldest of all when none was edited; unedited duplicates are binned, edited ones left alone.
+	$copies = array();
 	foreach ( $ids as $id ) {
-		if ( ! preg_match( '/^' . preg_quote( $slug, '/' ) . '-\d+$/', (string) get_post_field( 'post_name', $id ) ) ) {
-			continue;
-		}
-		if ( ! $keep ) {
-			$keep = (int) $id;
-			continue;
-		}
-		$copy = get_post( $id );
-		if ( $copy && ! injil_help_page_is_edited( $copy ) ) {
-			wp_trash_post( $id );
+		if ( preg_match( '/^' . preg_quote( $slug, '/' ) . '-\d+$/', (string) get_post_field( 'post_name', $id ) ) ) {
+			$copies[ (int) $id ] = injil_help_page_is_edited( get_post( $id ) );
 		}
 	}
-	if ( ! $keep ) {
+	if ( ! $copies ) {
 		return null;
+	}
+	$edited = array_keys( array_filter( $copies ) );
+	$keep   = $edited ? (int) $edited[0] : (int) array_key_first( $copies );
+	foreach ( $copies as $id => $is_edited ) {
+		if ( $id !== $keep && ! $is_edited ) {
+			wp_trash_post( $id );
+		}
 	}
 	wp_update_post(
 		array(
@@ -321,7 +366,7 @@ function injil_help_populate( $overwrite = false, $force = false ) {
 	foreach ( $pages as $order => $def ) {
 		$existing = injil_help_find_page( $def['path'] );
 		if ( ! $existing ) {
-			$existing = injil_help_repair_numeric_slug( $def['path'] );
+			$existing = injil_help_adopt_former_page( $def );
 		}
 		if ( $existing && ! $overwrite ) {
 			continue;
@@ -400,7 +445,7 @@ function injil_help_populate( $overwrite = false, $force = false ) {
 		$wp_rewrite->set_permalink_structure( '/%postname%/' );
 		flush_rewrite_rules();
 	}
-	// The rules for the numeric slugs are registered on init; flush once when they change.
+	// Flush once when the theme's rewrite rules change (3.6.0 removed the rules for the numeric slugs).
 	if ( get_option( 'injil_help_rules' ) !== INJIL_HELP_RULES ) {
 		flush_rewrite_rules();
 		update_option( 'injil_help_rules', INJIL_HELP_RULES, false );

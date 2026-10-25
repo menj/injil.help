@@ -457,7 +457,7 @@ function injil_help_schema_graph() {
 			$article['keywords'] = 'the Islamic Dilemma, Quran 5:47, Injil, tahrif, the four gospels';
 		}
 		// The 27 sections and the Introduction belong to a book.
-		if ( $parent && 'gospel-according-to-islam' === $parent->post_name && ( is_numeric( $post->post_name ) || 'introduction' === $post->post_name ) ) {
+		if ( $parent && 'gospel-according-to-islam' === $parent->post_name && ( 'introduction' === $post->post_name || ( function_exists( 'injil_help_gospel_section_number' ) && injil_help_gospel_section_number( $post->post_name ) ) ) ) {
 			$article['isPartOf'] = array( '@id' => $ids['book'] );
 			$graph[]             = array(
 				'@type'         => 'Book',

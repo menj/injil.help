@@ -88,10 +88,15 @@ function injil_help_tafsir_works() {
 	);
 }
 
-/** The verse groups, in Qur'anic order, with the gospel sections each feeds. */
+/**
+ * The verse groups, in Qur'anic order, with the gospel sections each feeds. The key is the
+ * group's URL slug (words only; the verse numbers are in the title, never in the URL);
+ * "former" is the slug of 3.5 and earlier; populate() renames the existing page in place.
+ */
 function injil_help_tafsir_groups() {
 	return array(
-		'al-imran-33-64'    => array(
+		'family-of-imran' => array(
+			'former' => 'al-imran-33-64',
 			'surah'  => 3,
 			'from'   => 33,
 			'to'     => 64,
@@ -99,7 +104,8 @@ function injil_help_tafsir_groups() {
 			'title'  => 'The family of ʿImrān (3:33-64)',
 			'intro'  => 'Mary’s mother and her vow, the birth of John to Zachariah, the annunciation to Mary, the signs Jesus was sent with, the disciples, the plot against him and his raising, the likeness of Jesus to Adam, the challenge to the delegation of Najrān, and the call to a common word.',
 		),
-		'an-nisa-155-159'   => array(
+		'neither-killed-nor-crucified' => array(
+			'former' => 'an-nisa-155-159',
 			'surah'  => 4,
 			'from'   => 155,
 			'to'     => 159,
@@ -107,7 +113,8 @@ function injil_help_tafsir_groups() {
 			'title'  => 'Neither killed nor crucified (4:155-159)',
 			'intro'  => 'The breaking of the covenant, the charge against Mary, the claim to have killed the Messiah, the denial of it, the raising of Jesus to God, and the faith of the People of the Book in him before his death.',
 		),
-		'al-maidah-110-120' => array(
+		'the-table-and-the-questioning' => array(
+			'former' => 'al-maidah-110-120',
 			'surah'  => 5,
 			'from'   => 110,
 			'to'     => 120,
@@ -115,7 +122,8 @@ function injil_help_tafsir_groups() {
 			'title'  => 'God’s favours, the table and the questioning (5:110-120)',
 			'intro'  => 'God recounts His favours to Jesus, the disciples ask for a table from heaven, and on the Day of Judgement God asks Jesus whether he told people to take him and his mother as gods.',
 		),
-		'maryam-16-37'      => array(
+		'birth-of-jesus' => array(
+			'former' => 'maryam-16-37',
 			'surah'  => 19,
 			'from'   => 16,
 			'to'     => 37,
@@ -123,7 +131,8 @@ function injil_help_tafsir_groups() {
 			'title'  => 'The birth of Jesus (19:16-37)',
 			'intro'  => 'Mary withdraws, the Spirit appears to her as a man, she conceives and gives birth under the palm, brings the child to her people, and he speaks from the cradle; then the verdict on those who dispute about him.',
 		),
-		'al-anbiya-91'      => array(
+		'she-who-guarded-her-chastity' => array(
+			'former' => 'al-anbiya-91',
 			'surah'  => 21,
 			'from'   => 91,
 			'to'     => 91,
@@ -131,7 +140,8 @@ function injil_help_tafsir_groups() {
 			'title'  => 'She who guarded her chastity (21:91)',
 			'intro'  => 'Mary and her son made a sign for all peoples.',
 		),
-		'al-muminun-50'     => array(
+		'refuge-on-high-ground' => array(
+			'former' => 'al-muminun-50',
 			'surah'  => 23,
 			'from'   => 50,
 			'to'     => 50,
@@ -139,7 +149,8 @@ function injil_help_tafsir_groups() {
 			'title'  => 'The refuge on high ground (23:50)',
 			'intro'  => 'The son of Mary and his mother given shelter on a height with a running spring.',
 		),
-		'az-zukhruf-57-65'  => array(
+		'son-of-mary-as-an-example' => array(
+			'former' => 'az-zukhruf-57-65',
 			'surah'  => 43,
 			'from'   => 57,
 			'to'     => 65,
@@ -147,7 +158,8 @@ function injil_help_tafsir_groups() {
 			'title'  => 'The son of Mary as an example (43:57-65)',
 			'intro'  => 'The Meccans’ dispute over Jesus, his standing as a servant and a sign of the Hour, his call to the straight path, and the sects that differed about him.',
 		),
-		'al-hadid-27'       => array(
+		'compassion-mercy-and-monasticism' => array(
+			'former' => 'al-hadid-27',
 			'surah'  => 57,
 			'from'   => 27,
 			'to'     => 27,
@@ -155,7 +167,8 @@ function injil_help_tafsir_groups() {
 			'title'  => 'Compassion, mercy and monasticism (57:27)',
 			'intro'  => 'The followers of Jesus, the compassion God put in their hearts, and the monasticism they invented.',
 		),
-		'as-saff-6'         => array(
+		'good-news-of-ahmad' => array(
+			'former' => 'as-saff-6',
 			'surah'  => 61,
 			'from'   => 6,
 			'to'     => 6,
@@ -189,6 +202,50 @@ function injil_help_tafsir_section_map() {
 		26 => array( array( 4, 157, 157 ) ),
 		27 => array( array( 3, 55, 58 ), array( 4, 158, 159 ), array( 5, 116, 120 ) ),
 	);
+}
+
+/** The slugs of the verse groups whose range touches gospel section $n, from the section map. */
+function injil_help_tafsir_groups_for_section( $n ) {
+	$map = injil_help_tafsir_section_map();
+	$out = array();
+	foreach ( (array) ( $map[ $n ] ?? array() ) as $r ) {
+		foreach ( injil_help_tafsir_groups() as $slug => $g ) {
+			if ( $g['surah'] === $r[0] && $g['to'] >= $r[1] && $g['from'] <= $r[2] ) {
+				$out[] = $slug;
+			}
+		}
+	}
+	return array_values( array_unique( $out ) );
+}
+
+/** The gospel sections (paths) whose verses fall in a group, and the page on Jesus in the Qur'an the group belongs with. */
+function injil_help_tafsir_group_related( $slug ) {
+	$groups  = injil_help_tafsir_groups();
+	$g       = $groups[ $slug ] ?? null;
+	$related = array();
+	if ( ! $g ) {
+		return $related;
+	}
+	foreach ( injil_help_tafsir_section_map() as $n => $ranges ) {
+		foreach ( $ranges as $r ) {
+			if ( $r[0] === $g['surah'] && $r[2] >= $g['from'] && $r[1] <= $g['to'] && function_exists( 'injil_help_gospel_section_path' ) ) {
+				$related[] = injil_help_gospel_section_path( $n );
+			}
+		}
+	}
+	$themes = array(
+		'family-of-imran'                  => array( 'quran/birth', 'quran/signs' ),
+		'neither-killed-nor-crucified'     => array( 'quran/raised' ),
+		'the-table-and-the-questioning'    => array( 'quran/table', 'quran/signs' ),
+		'birth-of-jesus'                   => array( 'quran/birth' ),
+		'she-who-guarded-her-chastity'     => array( 'quran/birth' ),
+		'refuge-on-high-ground'            => array( 'quran/birth' ),
+		'son-of-mary-as-an-example'        => array( 'quran/servant' ),
+		'compassion-mercy-and-monasticism' => array( 'quran/servant' ),
+		'good-news-of-ahmad'               => array( 'quran/ahmad' ),
+	);
+	$related = array_merge( $related, $themes[ $slug ] ?? array(), array( 'quran/passages' ) );
+	return array_values( array_unique( $related ) );
 }
 
 /** One work's data file: { "entries": [ { "surah", "from", "to", "arabic_words", "english_words", "paragraphs": [...] } ] }. */
@@ -269,6 +326,17 @@ function injil_help_tafsir_colophon( $work ) {
 }
 
 /** Pages: the index, a page per verse group, and a page (or a numbered set) per work and group. */
+/** A small number as a word, for URL slugs: 2 => "two". Numbers above twenty come back as digits. */
+function injil_help_number_word( $n ) {
+	$words = array( 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty' );
+	return isset( $words[ (int) $n ] ) ? $words[ (int) $n ] : (string) (int) $n;
+}
+
+/** The path of part $no of a work's commentary on a group: the first part is the work page, later parts are its siblings "{work}-part-two". */
+function injil_help_tafsir_part_path( $base, $group, $work, $no ) {
+	return $base . '/' . $group . '/' . $work . ( $no > 1 ? '-part-' . injil_help_number_word( $no ) : '' );
+}
+
 function injil_help_tafsir_pages() {
 	if ( ! injil_help_tafsir_available() ) {
 		return array();
@@ -357,10 +425,19 @@ function injil_help_tafsir_pages() {
 			}
 			$total_parts = count( $parts );
 			$wpath       = $base . '/' . $slug . '/' . $key;
-			$links[]     = sprintf( '- <strong><a href="/%1$s/">%2$s</a></strong> (d. %3$s), about %4$s words%5$s.', $wpath, $w['short'], $w['died'], number_format_i18n( round( $words, -1 ) ), $total_parts > 1 ? sprintf( ', in %d parts', $total_parts ) : '' );
+			$part_links = array();
+			for ( $k = 2; $k <= $total_parts; $k++ ) {
+				$part_links[] = sprintf( '<a href="/%1$s/">part %2$d</a>', injil_help_tafsir_part_path( $base, $slug, $key, $k ), $k );
+			}
+			$links[] = sprintf( '- <strong><a href="/%1$s/">%2$s</a></strong> (d. %3$s), about %4$s words%5$s.', $wpath, $w['short'], $w['died'], number_format_i18n( round( $words, -1 ) ), $total_parts > 1 ? sprintf( ', in %1$d parts (%2$s)', $total_parts, implode( ', ', $part_links ) ) : '' );
 			foreach ( $parts as $i => $part ) {
 				$no    = $i + 1;
-				$path  = 1 === $no ? $wpath : $wpath . '/' . $no;
+				$path  = injil_help_tafsir_part_path( $base, $slug, $key, $no );
+				// The URLs of 3.5 and earlier: the group slug carried the verse numbers and a later part was a numbered child of the work page.
+				$former = array( $base . '/' . $g['former'] . '/' . $key . ( $no > 1 ? '/' . $no : '' ) );
+				if ( $no > 1 ) {
+					$former[] = $wpath . '/' . $no;
+				}
 				$first = injil_help_tafsir_ref( $part[0] );
 				$last  = injil_help_tafsir_ref( $part[ count( $part ) - 1 ] );
 				$range = $first === $last ? $first : $first . ' to ' . $last;
@@ -377,20 +454,27 @@ function injil_help_tafsir_pages() {
 				$pb[] = injil_help_tafsir_colophon( $key );
 				$nav  = array();
 				if ( $no > 1 ) {
-					$nav[] = sprintf( '<a href="/%1$s/">← Part %2$d</a>', 1 === $no - 1 ? $wpath : $wpath . '/' . ( $no - 1 ), $no - 1 );
+					$nav[] = sprintf( '<a href="/%1$s/">← Part %2$d</a>', injil_help_tafsir_part_path( $base, $slug, $key, $no - 1 ), $no - 1 );
 				}
 				$nav[] = sprintf( '<a href="/%1$s/%2$s/">%3$s: all commentaries</a>', $base, $slug, $g['title'] );
 				if ( $no < $total_parts ) {
-					$nav[] = sprintf( '<a href="/%1$s/%2$d/">Part %2$d →</a>', $wpath, $no + 1 );
+					$nav[] = sprintf( '<a href="/%1$s/">Part %2$d →</a>', injil_help_tafsir_part_path( $base, $slug, $key, $no + 1 ), $no + 1 );
 				}
 				$nav[]   = sprintf( '<a href="/%s/">The classical commentaries</a>', $base );
 				$pb[]    = implode( ' · ', $nav );
+				$siblings = array();
+				for ( $k = 1; $k <= $total_parts; $k++ ) {
+					if ( $k !== $no ) {
+						$siblings[] = injil_help_tafsir_part_path( $base, $slug, $key, $k );
+					}
+				}
 				$pages[] = array(
 					'path'    => $path,
+					'former'  => $former,
+					'related' => array_merge( $siblings, array( $base . '/' . $slug ), injil_help_tafsir_group_related( $slug ), array( $base ) ),
 					'title'   => sprintf( '%1$s on %2$s%3$s', $w['short'], $g['title'], $total_parts > 1 ? sprintf( ', part %d', $no ) : '' ),
 					'excerpt' => sprintf( 'The complete commentary of %1$s (%2$s) on %3$s, translated into English%4$s.', $w['short'], $w['title'], $g['title'], $total_parts > 1 ? sprintf( ', part %d of %d', $no, $total_parts ) : '' ),
 					'body'    => $pb,
-					'parent'  => $base . '/' . $slug,
 				);
 			}
 		}
@@ -400,7 +484,7 @@ function injil_help_tafsir_pages() {
 		foreach ( injil_help_tafsir_section_map() as $n => $ranges ) {
 			foreach ( $ranges as $r ) {
 				if ( $r[0] === $g['surah'] && $r[2] >= $g['from'] && $r[1] <= $g['to'] ) {
-					$secs[ $n ] = sprintf( '<a href="/gospel-according-to-islam/%1$d/">Section %1$d</a> (%2$d:%3$d-%4$d)', $n, $r[0], $r[1], $r[2] );
+					$secs[ $n ] = sprintf( '<a href="/%1$s/">Section %2$d</a> (%3$d:%4$d-%5$d)', injil_help_gospel_section_path( $n ), $n, $r[0], $r[1], $r[2] );
 				}
 			}
 		}
@@ -414,6 +498,8 @@ function injil_help_tafsir_pages() {
 			0,
 			array( array(
 				'path'    => $base . '/' . $slug,
+				'former'  => array( $base . '/' . $g['former'] ),
+				'related' => array_merge( injil_help_tafsir_group_related( $slug ), array( $base ) ),
 				'title'   => $g['title'],
 				'excerpt' => sprintf( 'What the classical commentators say on %s, each in full.', $g['title'] ),
 				'body'    => $body,
@@ -457,22 +543,21 @@ function injil_help_tafsir_section_lines( $n ) {
 		}
 		$any    = true;
 		$words  = 0;
-		$group  = '';
+		$own    = array();
 		foreach ( $entries as $e ) {
 			$words += injil_help_tafsir_words( $e['paragraphs'] );
-		}
-		foreach ( $groups as $slug => $g ) {
-			if ( $g['surah'] === (int) reset( $entries )['surah'] ) {
-				$group = $slug;
-				break;
+			foreach ( $groups as $slug => $g ) {
+				if ( $g['surah'] === (int) $e['surah'] && $g['to'] >= (int) $e['from'] && $g['from'] <= (int) $e['to'] ) {
+					$own[ $slug ] = sprintf( '<a href="/quran/commentaries/%1$s/%2$s/">%3$s on %4$s</a>', $slug, $key, $w['short'], $g['title'] );
+				}
 			}
 		}
 		$lines[] = sprintf( '[details] %1$s, <em>%2$s</em> (d. %3$s), about %4$s words', $w['short'], $w['title'], $w['died'], number_format_i18n( round( $words, -1 ) ) );
 		foreach ( $entries as $e ) {
 			$lines = array_merge( $lines, injil_help_tafsir_entry_lines( $e, '### ' ) );
 		}
-		if ( $group ) {
-			$lines[] = sprintf( 'Read this commentary with the other passages on <a href="/quran/commentaries/%1$s/%2$s/">its own page</a>.', $group, $key );
+		if ( $own ) {
+			$lines[] = 'Read this commentary in full, with the other passages, on its own page: ' . implode( '; ', $own ) . '.';
 		}
 		$lines[] = '[/details]';
 	}

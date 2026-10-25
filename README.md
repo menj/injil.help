@@ -33,9 +33,9 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 |---|---|
 | Type | Block theme (theme.json v3), child of `twentytwentyfive` |
 | Folder, text domain, pattern prefix | `injil-help` |
-| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.5.2) |
+| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.6.0) |
 | PHP in `inc/` | options, starter-content, starter-content-pages, gospel-islam, quran-jesus, tafsir, seo, schema, share |
-| Data | `inc/data/` 2.6 MB of JSON: 175 starter pages, the gospel narrative, the Qur'anic passages, Thomas (woven sections and two full texts), the infancy gospels, the substitution witnesses, eight commentaries (315,000 words) |
+| Data | `inc/data/` 2.6 MB of JSON: 176 starter pages, the gospel narrative, the Qur'anic passages, Thomas (woven sections and two full texts), the infancy gospels, the substitution witnesses, eight commentaries (315,000 words) |
 | Front-end assets | `style.css` 32 KB; `assets/css/ornament.css` 12 KB, `share.css` 3 KB, `bible.css` 3 KB; `assets/js/ornament.js` 3 KB, `share.js` 2 KB; all plain, no build step |
 | Fonts | 16 MB in `assets/fonts/`, 18 `fontFace` entries in `theme.json` |
 | Admin | one tabbed page, Appearance › Theme Options, option `injil_help_options` |
@@ -45,10 +45,10 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 
 - WordPress 6.6 or later, PHP 7.4 or later (tested on 8.x). Twenty Twenty-Five installed; it may be inactive but must not be deleted.
 - Pretty permalinks. The theme sets `/%postname%/` on activation if the structure is empty.
-- Memory: the starter-content run that creates or rewrites 175 pages in one request works within WordPress's default 40 MB; on hosts with a lower `memory_limit` raise it to 128 MB for the first admin load after activation or an update.
+- Memory: the starter-content run that creates or rewrites 176 pages in one request works within WordPress's default 40 MB; on hosts with a lower `memory_limit` raise it to 128 MB for the first admin load after activation or an update.
 - `max_input_vars` and `post_max_size`: the largest starter pages (gospel sections 1, 2 and 27, 370 to 560 KB of block HTML) exceed PHP's default `post_max_size` of 8 MB only on hosts that set it lower; saving them in the block editor needs `max_input_vars` of at least 5000. Reading them needs nothing.
 - Page cache: strongly advised. The large pages are generated once and served from the database; a full-page cache (host-level, or any cache plugin) keeps them off PHP entirely. An object cache helps the options page but is not required.
-- Database: the 175 pages add about 6 MB to `wp_posts`; revisions are suppressed for theme-written pages.
+- Database: the 176 pages add about 6 MB to `wp_posts`; revisions are suppressed for theme-written pages.
 - Outbound requests: none at runtime. Manuscript images are loaded by the visitor's browser from `upload.wikimedia.org`; nothing is fetched server-side.
 - No build tools, Composer or npm. Upload the folder and activate.
 
@@ -101,9 +101,10 @@ Everything a visitor reads is either a block pattern in `patterns/` or JSON in `
 
 | File | Holds | Shape |
 |---|---|---|
-| `pages/pillar.json`, `gospels.json`, `paul.json`, `quran.json`, `gospel.json`, `bonus.json`, `resources.json`, `site.json` | the starter pages, one file per part, in site order | array of `{path, title, excerpt, pattern? \| body?, body_file?, template?}`; `body_file` names a file in `inc/data/` whose list of lines is appended to `body` |
+| `pages/pillar.json`, `gospels.json`, `paul.json`, `quran.json`, `gospel.json`, `bonus.json`, `resources.json`, `site.json` | the starter pages, one file per part, in site order | array of `{path, title, excerpt, pattern? \| body?, body_file?, template?, related?, former?}`; `body_file` names a file in `inc/data/` whose list of lines is appended to `body`; `related` lists the paths linked in the page's "Read next" row; `former` lists the paths the page had in earlier versions, which `populate()` renames in place |
 | `narrative.json` | The Narrative of Jesus, Son of Mary | `{chapters: [{number, title, sections: [{number, lines[]}]}], notes: {n: text}}`; `[^n]` note markers, `[v]` verse breaks and `[qS:A]` Qur'anic verse references in lines |
-| `gospel-islam.json` | section titles, Introduction | `{section_titles: {n: title}, front: {introduction: {title, paras[]}}}` |
+| `gospel-islam.json` | section titles, section URL slugs, Introduction | `{section_titles: {n: title}, section_slugs: {n: slug}, front: {introduction: {title, paras[]}}}`; the slug is the section's URL segment (`/gospel-according-to-islam/john-the-baptist/`), never its number |
+| `related.json` | the curated map of related pages behind the "Read next" row | `{path: [path, …]}`, merged with what the builders set (`injil_help_related_map()`) |
 | `quran-jesus.json` | the Qur'anic passages | `{surahs: {n: name}, passages: [{surah, verses_range, heading, verses: {n: text}}]}` |
 | `thomas.json`, `infancy.json`, `substitution.json` | woven passages (Thomas, the infancy gospels, the substitution witnesses, merged in that order) | `{section: [markup lines]}` |
 | `thomas-mattison.json`, `thomas-patterson-meyer.json` | the full text of the Gospel of Thomas in two translations | `[markup lines]`, loaded through `body_file` |
@@ -111,6 +112,12 @@ Everything a visitor reads is either a block pattern in `patterns/` or JSON in `
 | `tafsir/{work}.json` | one commentary | `{work, entries: [{surah, from, to, arabic_words, english_words, paragraphs[]}]}` |
 
 `injil_help_starter_pages()` (static-cached per request) concatenates: pillar, gospels, paul, quran, the Qur'an page built by `injil_help_quran_page()`, the commentary pages from `injil_help_tafsir_pages()`, gospel, the 28 gospel pages from `injil_help_gospel_islam_pages()`, bonus, resources, site. Parents precede children in that order, which `populate()` relies on to resolve `post_parent`.
+
+### URLs and internal links
+
+Every URL is made of words, as the Google SEO Starter Guide asks: no page has a number for a URL segment. The gospel sections take their slugs from `section_slugs` in `gospel-islam.json`, the commentary groups from the keys of `injil_help_tafsir_groups()`, and later parts of a long commentary are `{work}-part-two` siblings. A page that changes URL keeps its `former` paths in its definition; on the first admin load `injil_help_adopt_former_page()` finds the page under a former path (or under the `2-2` slug WordPress gave it before 3.5.1), renames it and re-parents it, keeping the ID, the edits and the featured image. The old URLs are not redirected.
+
+Every article ends with a "Read next" row (`injil_help_related_blocks()`): the pages in its `related` list, which is the union of what its builder sets (a gospel section names the commentary groups it rests on; a commentary page names the gospel sections, the Qur'an page and the passages page the verses belong with, the group, the index and its other parts) and the curated map in `inc/data/related.json`. Section indexes that already end in their own "Where this leads" aside get no second row. The folds under a gospel section link to every group page the commentary belongs to, and a group page links every part of a work, so no page depends on the menus alone to be reached.
 
 A missing or malformed file yields an empty list from `injil_help_pages_file()` or `injil_help_data_file()`; `populate()` then bails without stamping the version so the run is retried. Validate every file with `php -r` or `python -m json.tool` before committing (see [Development workflow](#development-workflow)).
 
@@ -161,8 +168,8 @@ Five tokens serve the Bible layout of the gospel sections, emitted by `injil_hel
 `inc/tafsir.php` holds three tables: `injil_help_tafsir_works()` (key, titles, author, death, note, source), `injil_help_tafsir_groups()` (nine verse groups with slug, surah, range, title, intro) and `injil_help_tafsir_section_map()` (which verse ranges each gospel section carries). From the data it builds:
 
 - the index `/quran/commentaries/` (works, passages, how to read, six FAQs);
-- one page per group `/quran/commentaries/{group}/` listing the works with word counts and the gospel sections the verses stand in;
-- one page per work and group `/quran/commentaries/{group}/{work}/`, split into numbered parts (`/2/`, `/3/` …) at about 14,000 English words, never splitting an entry; each with the work's colophon and prev/next navigation;
+- one page per group `/quran/commentaries/{group}/` (the group slug is words only: `family-of-imran`, `neither-killed-nor-crucified`, `birth-of-jesus` …; the verse numbers are in the title) listing the works with word counts, the parts of each, and the gospel sections the verses stand in;
+- one page per work and group `/quran/commentaries/{group}/{work}/`, split into parts at about 14,000 English words, never splitting an entry; a later part is a sibling page named `{work}-part-two`, `{work}-part-three` … (`injil_help_tafsir_part_path()`); each with the work's colophon, prev/next navigation and a "Read next" row naming the other parts, the group, the gospel sections and the Qur'an page the verses belong with;
 - `injil_help_tafsir_section_lines( $n )`: for a gospel section, a `## From the commentaries on …` heading and one `[details]` fold per work containing every entry whose range touches the section's ranges (an entry that straddles two sections appears in both), which `injil_help_gospel_islam_pages()` appends after the Thomas and substitution passages.
 
 Word counts come from `injil_help_tafsir_words()` (tags and footnotes stripped). Adding a work is one entry in `injil_help_tafsir_works()` plus its JSON file; the pages, the index and the folds follow. Entries are sorted by surah and first verse on load and cached per request.
@@ -179,6 +186,7 @@ Appearance › Theme Options (`inc/options.php`), one option array `injil_help_o
 | Branding | `ornament` rich\|subtle\|off, `animate` 0\|1, `parallax` strong\|gentle\|off, `footer_mark`, `favicon_force`, `favicon_url` |
 | Sharing | `share`, `share_types` (post, page), `share_networks` (ordered subset of the network keys), `share_label` |
 | SEO | `schema` auto\|on\|off, `home_title`, `home_description`, `pillar_title`, `og_image`, `author_name`, `author_url`, `same_as` (one URL per line), `org_logo` |
+| Security | `block_app_passwords` 0\|1 (default 1: application passwords, and with them REST API and XML-RPC log-ins with a per-application password, are refused site-wide until the block is unticked) |
 | Content | `gospel_layout` columns\|single\|plain (the Bible layout of the gospel sections); lists every starter page with status (missing, written, edited) and runs the two populate actions |
 
 `injil_help_get_option( $key )` merges the stored array over `injil_help_option_defaults()`. `injil_help_color_css()` emits the overrides as `:root` custom properties on the front end and in the editor (`enqueue_block_assets`). The page's own CSS and JS are `assets/css/admin.css` and `assets/js/admin.js` (tabs with remembered selection, colour pickers); the admin CSS reads the palette tokens so it follows the Colours tab.
@@ -252,6 +260,7 @@ Actions used: `after_switch_theme`, `admin_init`, `admin_post_injil_help_populat
 - All output is escaped at the point of printing; page content written by the theme passes through `wp_kses_post` in the parser; data files are static and shipped with the theme, never fetched.
 - No remote code, no eval, no inline scripts; the two scripts and three stylesheets are files, so a Content-Security-Policy with `script-src 'self'` works. `style-src` needs `'unsafe-inline'` only for the palette override block that WordPress prints as an inline style; put it in a file if your policy forbids that.
 - Share links open third-party sites with `rel="noopener noreferrer nofollow"`.
+- Application passwords are blocked by default: `wp_is_application_passwords_available` returns false while the `block_app_passwords` option is set (its default), so no client can log in through the REST API or XML-RPC with a per-application password. Untick the block under Theme Options › Security for a client that needs them.
 
 ## Development workflow
 
