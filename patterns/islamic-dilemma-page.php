@@ -142,10 +142,10 @@
 <p class="ih-k">Answer · V</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading">Paul stands outside, and the canon is not of one mind</h3>
+<h3 class="wp-block-heading">Paul of Tarsus stands outside, and the canon is not of one mind</h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>Fourteen of the New Testament’s twenty-seven documents are attributed to Paul of Tarsus or, in the case of Hebrews, were placed under his name, and Islam does not recognise Paul as a prophet. Islamic theology holds, on reports in al-Bukhārī and Muslim, that no prophet came between ʿĪsā and Muḥammad, and Paul claims a commission from the risen Christ. The Qur’anic <em>ḥawāriyyūn</em> (3:52; 5:111-112; 61:14) were the companions of Jesus in his lifetime, a category Paul by his own account does not fill. The command at 5:47 concerns the revelation given to Jesus, and Paul’s letters, written decades later, are a separate body of writing.</p>
+<p>Fourteen of the New Testament’s twenty-seven documents are attributed to Paul of Tarsus or, in the case of Hebrews, were placed under his name, and Islam does not recognise Paul of Tarsus as a prophet. Islamic theology holds, on reports in al-Bukhārī and Muslim, that no prophet came between ʿĪsā and Muḥammad, and Paul of Tarsus claims a commission from the risen Christ. The Qur’anic <em>ḥawāriyyūn</em> (3:52; 5:111-112; 61:14) were the companions of Jesus in his lifetime, a category Paul of Tarsus by his own account does not fill. The command at 5:47 concerns the revelation given to Jesus, and Paul of Tarsus’s letters, written decades later, are a separate body of writing.</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph -->
 <p>The canon is also divided on the doctrines the dilemma turns on. Hebrews says that without the shedding of blood there is no forgiveness (9:22). Psalm 51:16-17, Hosea 6:6 and Ezekiel 18 speak of forgiveness through a broken heart, mercy and repentance. And the Qur’an attributes to the scrolls of Abraham and Moses the principle that no bearer of burdens bears another’s burden (53:36-38). The argument grants the Bible a harmonising reading in advance and denies the Qur’an the same.</p>

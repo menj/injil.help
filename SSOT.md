@@ -96,5 +96,6 @@ Shafaat (1985) for the gospel text; Alham Ahmed and The Clear Quran for the pass
 - JS and CSS are separate files in `assets/js/` and `assets/css/`.
 - The options page stays tabbed; a new setting joins an existing tab or gets its own.
 - British spelling in site text; no contractions; no em dashes; Qur'anic quotations in bold inside the commentaries.
+- Paul is always "Paul of Tarsus" in the site's own text, including headings and link text; book titles, quotations and the glossary term "New perspective on Paul" keep their wording.
 - Release: bump both version strings, update `CHANGELOG.md` and the readme changelog, add an `UPGRADING.md` note if an existing site must act, merge to `main`, tag `vX.Y.Z`.
 - Run before pushing: `php -l` on every PHP file, JSON validity on every data file, the page link check and the block-balance render check (the scratch harnesses used in development live outside the repository; rebuild them from `inc/starter-content-pages.php` and `inc/schema.php` if needed).
