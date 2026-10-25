@@ -377,7 +377,8 @@ function injil_help_collect_citations( $html ) {
 		$plain = html_entity_decode( wp_strip_all_tags( $li ), ENT_QUOTES );
 		$cite  = array( '@type' => 'CreativeWork' );
 		// An article: “Title” and then the journal or volume in italics. Otherwise the first italic title is the work.
-		if ( preg_match( '#^(.*?)“(.+?)”(.*)$#su', $plain, $art ) ) {
+		$quote_first = false !== mb_strpos( $li, '“' ) && ( false === strpos( $li, '<em>' ) || mb_strpos( $li, '“' ) < mb_strpos( $li, '<em>' ) );
+		if ( $quote_first && preg_match( '#^(.*?)“(.+?)”(.*)$#su', $plain, $art ) ) {
 			$cite['@type'] = 'ScholarlyArticle';
 			$cite['name']  = trim( $art[2] );
 			$author        = trim( $art[1], " ,;:\u{2019}" );
