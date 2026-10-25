@@ -16,6 +16,13 @@ require_once get_stylesheet_directory() . '/inc/schema.php';
 require_once get_stylesheet_directory() . '/inc/share.php';
 
 /**
+ * Hardening. Application passwords (REST API and XML-RPC log-ins with a per-application
+ * password) are switched off for the whole site: nothing on injil.help is written through the
+ * REST API from outside, so the feature is one more door than the site needs.
+ */
+add_filter( 'wp_is_application_passwords_available', '__return_false' );
+
+/**
  * Styles: front end and editor.
  */
 add_action(

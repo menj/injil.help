@@ -87,6 +87,7 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 * Internal linking: every article ends in a "Read next" row of related pages (inc/data/related.json plus what the builders set); the folds under a gospel section link every group page the commentary belongs to; group pages link every part of a work. Every page now has at least one inbound link from another page's content.
 * New page: Pfander's Balance of Truth (/the-islamic-dilemma/balance-of-truth/), the source of the Christian polemic identified and answered where it meets this website; quoted in short phrases only. Linked from the pillar page, the objections, responses and timeline pages, the source library and the good news of Ahmad. 176 pages.
 * The source library and the pillar page link Reconsidering the "Islamic Dilemma" on Academia.edu.
+* Hardening: application passwords are switched off for the site (no REST API or XML-RPC log-in with a per-application password).
 = 3.5.2 =
 * Images for the nativity and crucifixion tables (Giotto's Scrovegni Chapel frescoes, public domain), confirmed on Commons. Thirty pages now carry one; the good news of Aḥmad, the borrowing page and the composition page still do not.
 = 3.5.1 =

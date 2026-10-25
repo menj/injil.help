@@ -58,6 +58,8 @@ Tabs: Colours, Branding, Sharing, SEO, Content. Defaults: `colors` {}, `footer_m
 
 ## Filters
 
+- Hardening set by the theme: `wp_is_application_passwords_available` is false (functions.php), so application passwords are off site-wide.
+
 `injil_help_seo_defaults`, `injil_help_default_og_image`, `injil_help_output_schema`, `injil_help_schema_graph`, `injil_help_share_networks`.
 
 ## Design tokens
