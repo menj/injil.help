@@ -2,6 +2,10 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.6.4
+
+- The development documents (SSOT.md, CHANGELOG.md, UPGRADING.md, with README.md and the dot-files already so marked) are `export-ignore`, so the archive Git Updater installs carries only what WordPress reads. The theme has no test files; the release checks live outside the repository.
+
 ## 3.6.3
 
 - A last pass against the Google SEO Starter Guide: every page below the front page opens with a visible breadcrumb row (Home, the parent pages, the page), matching the BreadcrumbList; meta descriptions are trimmed to 160 characters at a sentence end; search result pages carry noindex; ten "its own page" anchors are rewritten as descriptive anchor text.

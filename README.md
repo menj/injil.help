@@ -33,7 +33,7 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 |---|---|
 | Type | Block theme (theme.json v3), child of `twentytwentyfive` |
 | Folder, text domain, pattern prefix | `injil-help` |
-| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.6.3) |
+| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.6.4) |
 | PHP in `inc/` | options, starter-content, starter-content-pages, gospel-islam, quran-jesus, tafsir, seo, schema, share |
 | Data | `inc/data/` 2.6 MB of JSON: 176 starter pages, the gospel narrative, the Qur'anic passages, Thomas (woven sections and two full texts), the infancy gospels, the substitution witnesses, eight commentaries (315,000 words) |
 | Front-end assets | `style.css` 32 KB; `assets/css/ornament.css` 12 KB, `share.css` 3 KB, `bible.css` 3 KB; `assets/js/ornament.js` 3 KB, `share.js` 2 KB; all plain, no build step |
@@ -56,7 +56,7 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 
 1. Install Twenty Twenty-Five. Clone or unzip this repository to `wp-content/themes/injil-help` (the folder name must be `injil-help`).
 2. Activate "The Injil". `after_switch_theme` creates every page, sets permalinks, bins the untouched sample post, page and comment and replaces the default tagline.
-3. Updates: Git Updater reads the header and offers the release whose tag matches `Version:`. On the first admin screen load after the update, `admin_init` rewrites the starter pages whose text changed and leaves edited ones alone (see [Starter content lifecycle](#starter-content-lifecycle)). Take a database backup before updating.
+3. Updates: Git Updater reads the header and offers the release whose tag matches `Version:`. The archive GitHub builds for it leaves out the development files marked `export-ignore` in `.gitattributes` (README.md, SSOT.md, CHANGELOG.md, UPGRADING.md and the two dot-files), so a site updated that way carries only what WordPress reads: the code, the assets, the content, readme.txt and the screenshot. There are no test files in the theme; the checks run before each release live outside the repository. On the first admin screen load after the update, `admin_init` rewrites the starter pages whose text changed and leaves edited ones alone (see [Starter content lifecycle](#starter-content-lifecycle)). Take a database backup before updating.
 4. Release procedure: bump both version strings together, add the entry to `CHANGELOG.md` and to the Changelog section of `readme.txt`, note anything an existing site must do in `UPGRADING.md`, merge to `main`, tag `vX.Y.Z`.
 
 ## Architecture
