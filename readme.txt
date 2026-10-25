@@ -82,6 +82,8 @@ This file is the user-facing manual that WordPress and Git Updater read. The rep
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add the entry to CHANGELOG.md and to the Changelog section here, note anything an existing site must know under "Updating an existing site" in UPGRADING.md, merge to main, and tag the commit with the same number (for example v3.4.0). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 3.6.1 =
+* Content is full width by default: every page's text, tables and plates fill the page between the side gutters, and the header, footer and front page follow. Theme Options > Branding > Content width offers full (default), wide (1240px) and reading column (720px, the former default).
 = 3.6.0 =
 * Every URL is made of words (Google SEO Starter Guide): the 27 gospel sections move from /gospel-according-to-islam/1/ to /27/ to the words of their titles (/gospel-according-to-islam/john-the-baptist/ ...), the commentary groups lose their verse numbers (/quran/commentaries/family-of-imran/ ...) and a later part of a long commentary is a sibling page named for the work (/tabari-part-two/). Existing pages are renamed in place on the first admin load, keeping IDs, edits and featured images. The old URLs are not redirected.
 * Internal linking: every article ends in a "Read next" row of related pages (inc/data/related.json plus what the builders set); the folds under a gospel section link every group page the commentary belongs to; group pages link every part of a work. Every page now has at least one inbound link from another page's content.

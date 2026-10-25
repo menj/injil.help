@@ -2,6 +2,10 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.6.1
+
+- Content is full width by default: the text, tables and plates of every page fill the page between the side gutters, and the header, footer and front page follow. Theme Options › Branding › Content width offers full (default), wide (1240px, the width the header and footer had) and reading column (720px, the former default). The setting is the body class ih-width-full, -wide or -reading; the stylesheet overrides the constrained-layout widths WordPress prints.
+
 ## 3.6.0
 
 - Every URL is made of words, as the Google SEO Starter Guide asks. The 27 gospel sections move from /gospel-according-to-islam/1/ … /27/ to the words of their titles (/gospel-according-to-islam/john-the-baptist/, /trial-barabbas-and-raising-of-jesus/ …; the slugs are `section_slugs` in inc/data/gospel-islam.json). The commentary groups lose their verse numbers (/quran/commentaries/family-of-imran/, /neither-killed-nor-crucified/, /birth-of-jesus/ …), and a later part of a long commentary is a sibling page named for the work (/quran/commentaries/family-of-imran/tabari-part-two/) instead of a numbered child. On the first admin load the existing pages are renamed in place, keeping their IDs, edits and featured images (`former` paths on the page definitions; `injil_help_adopt_former_page()`); the filter that allowed numeric slugs and the rewrite rules for them are removed. The old URLs are not redirected.

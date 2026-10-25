@@ -33,7 +33,7 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 |---|---|
 | Type | Block theme (theme.json v3), child of `twentytwentyfive` |
 | Folder, text domain, pattern prefix | `injil-help` |
-| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.6.0) |
+| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.6.1) |
 | PHP in `inc/` | options, starter-content, starter-content-pages, gospel-islam, quran-jesus, tafsir, seo, schema, share |
 | Data | `inc/data/` 2.6 MB of JSON: 176 starter pages, the gospel narrative, the Qur'anic passages, Thomas (woven sections and two full texts), the infancy gospels, the substitution witnesses, eight commentaries (315,000 words) |
 | Front-end assets | `style.css` 32 KB; `assets/css/ornament.css` 12 KB, `share.css` 3 KB, `bible.css` 3 KB; `assets/js/ornament.js` 3 KB, `share.js` 2 KB; all plain, no build step |
@@ -183,7 +183,7 @@ Appearance › Theme Options (`inc/options.php`), one option array `injil_help_o
 | Tab | Keys |
 |---|---|
 | Colours | `colors` (nine palette slugs → hex; empty keeps theme.json) |
-| Branding | `ornament` rich\|subtle\|off, `animate` 0\|1, `parallax` strong\|gentle\|off, `footer_mark`, `favicon_force`, `favicon_url` |
+| Branding | `content_width` full\|wide\|reading (default full: the content fills the page between the gutters; wide is the 1240px of the header and footer; reading is the 720px column of theme.json; body class `ih-width-{value}`), `ornament` rich\|subtle\|off, `animate` 0\|1, `parallax` strong\|gentle\|off, `footer_mark`, `favicon_force`, `favicon_url` |
 | Sharing | `share`, `share_types` (post, page), `share_networks` (ordered subset of the network keys), `share_label` |
 | SEO | `schema` auto\|on\|off, `home_title`, `home_description`, `pillar_title`, `og_image`, `author_name`, `author_url`, `same_as` (one URL per line), `org_logo` |
 | Security | `block_app_passwords` 0\|1 (default 1: application passwords, and with them REST API and XML-RPC log-ins with a per-application password, are refused site-wide until the block is unticked) |
