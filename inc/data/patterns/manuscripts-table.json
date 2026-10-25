@@ -1,0 +1,27 @@
+{
+    "title": "Table: manuscripts of the extracanonical gospels",
+    "slug": "injil-help/manuscripts-table",
+    "categories": [
+        "injil-help"
+    ],
+    "description": "The surviving manuscripts of the Gospel of Thomas and other gospels outside the New Testament.",
+    "keywords": [
+        "table",
+        "manuscripts",
+        "papyri",
+        "Nag Hammadi",
+        "Oxyrhynchus"
+    ],
+    "content": [
+        "<!-- wp:paragraph -->",
+        "<p>Gospels outside the New Testament survive in few manuscripts, many of them copied centuries after the works were composed. The table lists each one with its language, form and approximate date, so that a reader can see how much of each text exists and how early.</p>",
+        "<!-- /wp:paragraph -->",
+        "<!-- wp:table {\"hasFixedLayout\":false,\"align\":\"wide\",\"className\":\"is-style-discrepancy\"} -->",
+        "<figure class=\"wp-block-table alignwide is-style-discrepancy\"><table><thead><tr><th>Work</th><th>Manuscript</th><th>Language and form</th><th>Date</th><th>What survives</th></tr></thead><tbody><tr><td>Gospel of Thomas</td><td>Nag Hammadi Codex II, tractate 2</td><td>Coptic, papyrus codex</td><td>4th or 5th century</td><td>Essentially complete</td></tr><tr><td>Gospel of Thomas</td><td>P.Oxy. 1</td><td>Greek, papyrus codex</td><td>Late 2nd or early 3rd century</td><td>Most of sayings 26-30 and 77, and sayings 31-33</td></tr><tr><td>Gospel of Thomas</td><td>P.Oxy. 654</td><td>Greek, papyrus roll</td><td>Middle or late 3rd century</td><td>The prologue and sayings 1-7</td></tr><tr><td>Gospel of Thomas</td><td>P.Oxy. 655</td><td>Greek, papyrus roll</td><td>3rd century</td><td>Parts of sayings 24 and 36-39</td></tr><tr><td>Sayings of Jesus</td><td>P.Oxy. 5575</td><td>Greek, papyrus roll</td><td>2nd century</td><td>Sayings close to Matthew 6, Luke 12 and Thomas 27, 36 and 63</td></tr><tr><td>Gospel of Mary</td><td>Berlin Codex 8502, tractate 1</td><td>Coptic, papyrus codex</td><td>5th century</td><td>About half the text</td></tr><tr><td>Gospel of Mary</td><td>P.Oxy. 3525</td><td>Greek, papyrus roll</td><td>3rd century</td><td>A parallel to part of the Coptic text</td></tr><tr><td>Gospel of Mary</td><td>P.Ryl. 463</td><td>Greek, papyrus codex</td><td>Early 3rd century</td><td>A parallel to part of the Coptic text</td></tr><tr><td>Gospel of Judas</td><td>Codex Tchacos, tractate 3</td><td>Coptic, papyrus codex</td><td>Late 4th or early 5th century</td><td>More than 90% of the text</td></tr><tr><td>Gospel of Philip</td><td>Nag Hammadi Codex II, tractate 3</td><td>Coptic, papyrus codex</td><td>4th or 5th century</td><td>Essentially complete</td></tr><tr><td>Gospel of Truth</td><td>Nag Hammadi Codex I, tractate 3</td><td>Coptic, papyrus codex</td><td>4th or 5th century</td><td>Essentially complete</td></tr><tr><td>Gospel of Truth</td><td>Nag Hammadi Codex XII, tractate 2</td><td>Coptic, papyrus codex</td><td>4th or 5th century</td><td>Fragments of a second version</td></tr><tr><td>Gospel of Peter</td><td>Akhmim fragment (P.Cair. 10759)</td><td>Greek, parchment codex</td><td>Late 6th century</td><td>Verses 1-60</td></tr><tr><td>Gospel of Peter</td><td>P.Oxy. 2949</td><td>Greek, papyrus roll</td><td>Late 2nd or early 3rd century</td><td>Possibly another version of verses 3-5</td></tr><tr><td>Gospel of Peter</td><td>P.Oxy. 4009</td><td>Greek, papyrus codex</td><td>2nd century</td><td>Possibly from a lost part of the gospel</td></tr><tr><td>Egerton Gospel</td><td>P.Egerton 2 (with P.Köln 255)</td><td>Greek, papyrus codex and roll</td><td>Late 2nd or early 3rd century</td><td>Part of an unidentified gospel</td></tr><tr><td>Secret Book of James</td><td>Nag Hammadi Codex I, tractate 2</td><td>Coptic, papyrus codex</td><td>4th or 5th century</td><td>Essentially complete</td></tr><tr><td>Infancy Gospel of James</td><td>Papyrus Bodmer V</td><td>Greek, papyrus codex</td><td>Late 3rd or early 4th century</td><td>The earliest of over 140 Greek manuscripts, with a shorter form of chapters 18-21</td></tr><tr><td>Infancy Gospel of Thomas</td><td>Hagios Saba 259</td><td>Greek, codex</td><td>11th century</td><td>The earliest Greek manuscript; versions in other ancient languages are earlier and nearer the first Greek text</td></tr><tr><td>The Stranger’s Book</td><td>Codex Tchacos, tractate 4</td><td>Coptic, papyrus codex</td><td>Late 4th or early 5th century</td><td>An unknown part of the text</td></tr></tbody></table></figure>",
+        "<!-- /wp:table -->",
+        "<!-- wp:paragraph -->",
+        "<p>Dates are approximate and follow the manuscript information published by Mark M. Mattison at gospels.net. A manuscript date is the date of the copy, not of the work. Two of these books matter most for this website: the <a href=\"/gospels/thomas/\">Gospel of Thomas</a>, and the two infancy gospels, which are set beside the Qur&#039;an in <a href=\"/resources/borrowing/\">Did the Qur&#039;an borrow its stories?</a></p>",
+        "<!-- /wp:paragraph -->",
+        ""
+    ]
+}

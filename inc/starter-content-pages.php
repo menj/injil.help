@@ -4,7 +4,8 @@
  *
  * The pages are data, kept as JSON in inc/data/pages/, one file per part of the
  * site. Each entry has "path", "title" and "excerpt", and either "pattern" (the
- * block pattern of that slug supplies the content) or "body" (lines of the compact
+ * JSON pattern of that name in inc/data/patterns/ supplies the content, see
+ * injil_help_pattern_file()) or "body" (lines of the compact
  * markup described in injil_help_markup_to_blocks()); "body_file" names a JSON
  * file in inc/data/ whose list of lines is appended to "body" (the full texts of
  * the Gospel of Thomas are kept that way); "template" names a page template;
@@ -43,6 +44,39 @@ function injil_help_pages_file( $name ) {
 	}
 	unset( $row );
 	return $rows;
+}
+
+/**
+ * A block pattern kept as JSON in inc/data/patterns/{name}.json: "title", "slug", "description",
+ * "categories", "keywords" and "content", the block markup as a list of lines. The pages whose
+ * definition names a "pattern" take their content from here, and functions.php registers the
+ * same files as block patterns for the editor. Content meant for the database is kept only as
+ * JSON. Returns the pattern with its content joined, or null if the name is not a plain slug or
+ * the file is missing or malformed.
+ */
+function injil_help_pattern_file( $name ) {
+	static $cache = array();
+	$name = (string) $name;
+	if ( array_key_exists( $name, $cache ) ) {
+		return $cache[ $name ];
+	}
+	$cache[ $name ] = null;
+	$file           = get_stylesheet_directory() . '/inc/data/patterns/' . $name . '.json';
+	if ( ! preg_match( '/^[a-z0-9-]+$/', $name ) || ! is_readable( $file ) ) {
+		return null;
+	}
+	$data = json_decode( (string) file_get_contents( $file ), true );
+	if ( ! is_array( $data ) || empty( $data['title'] ) || empty( $data['slug'] ) || ! isset( $data['content'] ) || ! is_array( $data['content'] ) ) {
+		return null;
+	}
+	foreach ( $data['content'] as $line ) {
+		if ( ! is_string( $line ) ) {
+			return null;
+		}
+	}
+	$data['content'] = implode( "\n", $data['content'] );
+	$cache[ $name ]  = $data;
+	return $data;
 }
 
 /**

@@ -186,7 +186,7 @@ function injil_help_markup_to_blocks( $lines ) {
 /** Block content for one page definition, or '' when its pattern is missing. */
 function injil_help_page_content( $def ) {
 	if ( ! empty( $def['pattern'] ) ) {
-		$pattern = WP_Block_Patterns_Registry::get_instance()->get_registered( 'injil-help/' . $def['pattern'] );
+		$pattern = injil_help_pattern_file( $def['pattern'] );
 		return $pattern ? injil_help_add_page_image( $def['path'], $pattern['content'] . injil_help_related_blocks( $def, $pattern['content'] ), true ) : '';
 	}
 	$content = injil_help_markup_to_blocks( $def['body'] ?? array() );

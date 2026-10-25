@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'INJIL_HELP_VERSION', '3.6.5' );
+define( 'INJIL_HELP_VERSION', '3.6.6' );
 
 require_once get_stylesheet_directory() . '/inc/options.php';
 require_once get_stylesheet_directory() . '/inc/starter-content.php';
@@ -70,6 +70,15 @@ add_action(
 				'description' => __( 'Tables, capsules, labels and verse layouts for injil.help.', 'injil-help' ),
 			)
 		);
+
+		// The patterns that supply whole pages are kept as JSON in inc/data/patterns/ and registered from there.
+		$keys = array_flip( array( 'title', 'description', 'content', 'categories', 'keywords', 'blockTypes', 'postTypes', 'templateTypes', 'viewportWidth', 'inserter' ) );
+		foreach ( (array) glob( get_stylesheet_directory() . '/inc/data/patterns/*.json' ) as $file ) {
+			$pattern = injil_help_pattern_file( basename( (string) $file, '.json' ) );
+			if ( $pattern && ! WP_Block_Patterns_Registry::get_instance()->is_registered( $pattern['slug'] ) ) {
+				register_block_pattern( $pattern['slug'], array_intersect_key( $pattern, $keys ) );
+			}
+		}
 	}
 );
 
