@@ -231,7 +231,7 @@
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 <!-- wp:paragraph {"className":"ih-next"} -->
-<p class="ih-next">The argument has also been restated as a secular case with two steps and four exits, and answered by a historical-critical reply that grants its first step. Both are taken point by point on <a href="/the-islamic-dilemma/secular-form/">The Islamic Dilemma without theology</a>. Its source, Pfander’s <em>Balance of Truth</em> of 1829, is answered chapter by chapter on <a href="/the-islamic-dilemma/balance-of-truth/">Pfander’s Balance of Truth</a>.</p>
+<p class="ih-next">The argument has also been restated as a secular case with two steps and four exits, and answered by a historical-critical reply that grants its first step. Both are taken point by point on <a href="/the-islamic-dilemma/secular-form/">The Islamic Dilemma without theology</a>. Its source, Pfander’s <em>Balance of Truth</em> of 1829, is answered chapter by chapter on <a href="/the-islamic-dilemma/balance-of-truth/">Pfander’s Balance of Truth</a>. The writer’s other website, Best of Islam, gives <a href="https://bestofislam.org/islamic-dilemma/">the five assumptions the argument needs</a> in short form.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->
@@ -289,7 +289,7 @@
 <!-- /wp:details -->
 <!-- wp:details {"className":"is-style-faq"} -->
 <details class="wp-block-details is-style-faq"><summary>Where is the Injīl, if it is not the four gospels?</summary><!-- wp:paragraph -->
-<p>It was never a book that Muslims say survives on a shelf. It is the revelation given to ʿĪsā, which the canonical gospels, Tatian’s harmony, the Jewish-Christian gospels and the oral tradition behind them each preserve in part. The Jewish-Christian gospels, known from Jerome, Epiphanius and Origen, are fragmentary and are not to be identified directly with the Injīl, though they show that early devotion to Jesus was more varied than the later canon suggests.</p>
+<p>It was never a book that Muslims say survives on a shelf. It is the revelation given to ʿĪsā, which the canonical gospels, Tatian’s harmony, the Jewish-Christian gospels and the oral tradition behind them each preserve in part. The Jewish-Christian gospels, known from Jerome, Epiphanius and Origen, are fragmentary and are not to be identified directly with the Injīl, though they show that early devotion to Jesus was more varied than the later canon suggests. The same question is answered in five points on <a href="https://bestofislam.org/where-is-the-injil/">Best of Islam</a>.</p>
 <!-- /wp:paragraph --></details>
 <!-- /wp:details -->
 <!-- wp:heading -->

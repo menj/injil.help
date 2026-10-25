@@ -210,15 +210,25 @@ function injil_help_related_blocks( $def, $content = '' ) {
 		}
 	}
 	$links = array();
-	foreach ( (array) $def['related'] as $path ) {
-		if ( $path !== $def['path'] && isset( $titles[ $path ] ) ) {
-			$links[] = '<a href="/' . esc_attr( $path ) . '/">' . esc_html( $titles[ $path ] ) . '</a>';
+	$sites = array();
+	foreach ( (array) $def['related'] as $item ) {
+		if ( is_array( $item ) && ! empty( $item['url'] ) && ! empty( $item['title'] ) ) {
+			$sites[] = '<a href="' . esc_url( $item['url'] ) . '">' . esc_html( $item['title'] ) . '</a>' . ( empty( $item['site'] ) ? '' : ' <span class="ih-site">(' . esc_html( $item['site'] ) . ')</span>' );
+		} elseif ( is_string( $item ) && $item !== $def['path'] && isset( $titles[ $item ] ) ) {
+			$links[] = '<a href="/' . esc_attr( $item ) . '/">' . esc_html( $titles[ $item ] ) . '</a>';
 		}
 	}
-	if ( ! $links ) {
+	if ( ! $links && ! $sites ) {
 		return '';
 	}
-	return "\n<!-- wp:group {\"className\":\"ih-aside ih-next\",\"layout\":{\"type\":\"default\"}} -->\n<div class=\"wp-block-group ih-aside ih-next\"><!-- wp:paragraph {\"className\":\"ih-k\"} -->\n<p class=\"ih-k\">Read next</p>\n<!-- /wp:paragraph -->\n<!-- wp:paragraph -->\n<p>" . implode( ' · ', $links ) . "</p>\n<!-- /wp:paragraph --></div>\n<!-- /wp:group -->";
+	$out = "\n<!-- wp:group {\"className\":\"ih-aside ih-next\",\"layout\":{\"type\":\"default\"}} -->\n<div class=\"wp-block-group ih-aside ih-next\"><!-- wp:paragraph {\"className\":\"ih-k\"} -->\n<p class=\"ih-k\">Read next</p>\n<!-- /wp:paragraph -->";
+	if ( $links ) {
+		$out .= "\n<!-- wp:paragraph -->\n<p>" . implode( ' · ', $links ) . "</p>\n<!-- /wp:paragraph -->";
+	}
+	if ( $sites ) {
+		$out .= "\n<!-- wp:paragraph {\"className\":\"ih-sites\"} -->\n<p class=\"ih-sites\">On the writer’s other websites: " . implode( ' · ', $sites ) . "</p>\n<!-- /wp:paragraph -->";
+	}
+	return $out . "</div>\n<!-- /wp:group -->";
 }
 
 /**

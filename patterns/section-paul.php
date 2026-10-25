@@ -115,7 +115,7 @@
 <!-- /wp:group -->
 <!-- wp:group {"className":"ih-aside","layout":{"type":"default"}} -->
 <div class="wp-block-group ih-aside"><!-- wp:paragraph -->
-<p>The full case against Paul of Tarsus is set out at <a href="https://apostleofdoom.org">apostleofdoom.org</a>.</p>
+<p>The full case against Paul of Tarsus is set out at <a href="https://apostleofdoom.org">Apostle of Doom</a>, the writer’s other website: <a href="https://apostleofdoom.org/the-man/">the man</a>, <a href="https://apostleofdoom.org/the-charges/">the charges</a>, <a href="https://apostleofdoom.org/the-witnesses/">the witnesses</a>, <a href="https://apostleofdoom.org/the-verdict/">the verdict</a> and <a href="https://apostleofdoom.org/answers/">answers to missionary claims</a>. These pages give the part of it that bears on the Injīl.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:heading -->
