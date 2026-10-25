@@ -93,7 +93,6 @@ add_filter(
 	function ( $robots ) {
 		if ( is_search() ) {
 			$robots['noindex'] = true;
-			$robots['follow']  = true;
 		}
 		return $robots;
 	}
@@ -120,11 +119,12 @@ function injil_help_breadcrumb_html( $post ) {
 add_filter(
 	'the_content',
 	function ( $content ) {
-		if ( ! is_singular( array( 'page', 'post' ) ) || is_front_page() || ! in_the_loop() || ! is_main_query() || doing_filter( 'get_the_excerpt' ) ) {
+		// Block templates render the Post Content block outside a classic loop, so in_the_loop() is not checked (as in inc/share.php); the queried object is matched instead.
+		if ( ! is_singular( array( 'page', 'post' ) ) || is_front_page() || ! is_main_query() || doing_filter( 'get_the_excerpt' ) ) {
 			return $content;
 		}
 		$post = get_queried_object();
-		if ( ! $post || get_the_ID() !== $post->ID ) {
+		if ( ! $post || get_the_ID() !== $post->ID || false !== strpos( $content, 'class="ih-breadcrumb"' ) ) {
 			return $content;
 		}
 		return injil_help_breadcrumb_html( $post ) . $content;
