@@ -1,0 +1,151 @@
+{
+    "works": {
+        "tabari": {
+            "short": "al-Ṭabarī",
+            "title": "Jāmiʿ al-bayān ʿan taʾwīl āy al-Qurʾān",
+            "author": "Abū Jaʿfar Muḥammad ibn Jarīr al-Ṭabarī",
+            "died": "310 AH / 923 CE",
+            "about": "The earliest of the great commentaries to survive whole. Al-Ṭabarī sets out every opinion he knows on a verse with its chain of transmission, then rules between them. His reports on 4:157 are the oldest record of how the substitution at the cross was understood.",
+            "source": "tafsir.app, src=tabari"
+        },
+        "baghawi": {
+            "short": "al-Baghawī",
+            "title": "Maʿālim al-tanzīl",
+            "author": "Abū Muḥammad al-Ḥusayn ibn Masʿūd al-Baghawī",
+            "died": "516 AH / 1122 CE",
+            "about": "A commentary of the school of ḥadīth, valued for its restraint; it keeps the early reports and little else.",
+            "source": "tafsir.app, src=baghawi"
+        },
+        "qurtubi": {
+            "short": "al-Qurṭubī",
+            "title": "al-Jāmiʿ li-aḥkām al-Qurʾān",
+            "author": "Abū ʿAbd Allāh Muḥammad ibn Aḥmad al-Qurṭubī",
+            "died": "671 AH / 1273 CE",
+            "about": "The commentary of the Andalusian jurist, which takes each verse through its legal and grammatical questions as well as its narrative.",
+            "source": "tafsir.app, src=qurtubi"
+        },
+        "ibn-katheer": {
+            "short": "Ibn Kathīr",
+            "title": "Tafsīr al-Qurʾān al-ʿAẓīm",
+            "author": "Abū al-Fidāʾ Ismāʿīl ibn ʿUmar ibn Kathīr",
+            "died": "774 AH / 1373 CE",
+            "about": "The most read of the commentaries by ḥadīth, which explains the Qur’an by the Qur’an, then by the Prophet’s words, then by the Companions, and weighs the chains it cites.",
+            "source": "tafsir.app, src=ibn-katheer"
+        },
+        "tanwir": {
+            "short": "Tanwīr al-Miqbās",
+            "title": "Tanwīr al-miqbās min tafsīr Ibn ʿAbbās",
+            "author": "attributed to ʿAbd Allāh ibn ʿAbbās; compiled by Majd al-Dīn al-Fīrūzābādī",
+            "died": "compiler d. 817 AH / 1414 CE",
+            "about": "A running gloss, phrase by phrase, transmitted under the name of the Prophet’s cousin Ibn ʿAbbās through a chain (al-Kalbī from Abū Ṣāliḥ) that Muslim scholars have long judged weak; it is read as a witness to early Kufan exegesis rather than as Ibn ʿAbbās’s own words.",
+            "source": "shamela.ws, book 12877"
+        },
+        "jalalayn": {
+            "short": "al-Jalālayn",
+            "title": "Tafsīr al-Jalālayn",
+            "author": "Jalāl al-Dīn al-Maḥallī and Jalāl al-Dīn al-Suyūṭī",
+            "died": "864 AH / 1459 CE and 911 AH / 1505 CE",
+            "about": "The two Jalāls’ gloss, a sentence or two to a verse, which became the handbook commentary of the Muslim world.",
+            "source": "tafsir.app, src=jalalayn"
+        },
+        "aldur-almanthoor": {
+            "short": "al-Durr al-Manthūr",
+            "title": "al-Durr al-manthūr fī al-tafsīr bi-l-maʾthūr",
+            "author": "Jalāl al-Dīn al-Suyūṭī",
+            "died": "911 AH / 1505 CE",
+            "about": "Al-Suyūṭī’s collection of every transmitted report on each verse, drawn from the ḥadīth collections and the early commentaries, many of them otherwise lost.",
+            "source": "tafsir.app, src=aldur-almanthoor"
+        },
+        "saadi": {
+            "short": "al-Saʿdī",
+            "title": "Taysīr al-Karīm al-Raḥmān fī tafsīr kalām al-Mannān",
+            "author": "ʿAbd al-Raḥmān ibn Nāṣir al-Saʿdī",
+            "died": "1376 AH / 1956 CE",
+            "about": "A modern commentary in plain Arabic that states the sense of each verse and the lesson drawn from it, without chains or digressions.",
+            "source": "tafsir.app, src=saadi"
+        }
+    },
+    "groups": {
+        "family-of-imran": {
+            "former": "al-imran-33-64",
+            "surah": 3,
+            "from": 33,
+            "to": 64,
+            "name": "Āl ʿImrān",
+            "title": "The family of ʿImrān (3:33-64)",
+            "intro": "Mary’s mother and her vow, the birth of John to Zachariah, the annunciation to Mary, the signs Jesus was sent with, the disciples, the plot against him and his raising, the likeness of Jesus to Adam, the challenge to the delegation of Najrān, and the call to a common word."
+        },
+        "neither-killed-nor-crucified": {
+            "former": "an-nisa-155-159",
+            "surah": 4,
+            "from": 155,
+            "to": 159,
+            "name": "al-Nisāʾ",
+            "title": "Neither killed nor crucified (4:155-159)",
+            "intro": "The breaking of the covenant, the charge against Mary, the claim to have killed the Messiah, the denial of it, the raising of Jesus to God, and the faith of the People of the Book in him before his death."
+        },
+        "the-table-and-the-questioning": {
+            "former": "al-maidah-110-120",
+            "surah": 5,
+            "from": 110,
+            "to": 120,
+            "name": "al-Māʾidah",
+            "title": "God’s favours, the table and the questioning (5:110-120)",
+            "intro": "God recounts His favours to Jesus, the disciples ask for a table from heaven, and on the Day of Judgement God asks Jesus whether he told people to take him and his mother as gods."
+        },
+        "birth-of-jesus": {
+            "former": "maryam-16-37",
+            "surah": 19,
+            "from": 16,
+            "to": 37,
+            "name": "Maryam",
+            "title": "The birth of Jesus (19:16-37)",
+            "intro": "Mary withdraws, the Spirit appears to her as a man, she conceives and gives birth under the palm, brings the child to her people, and he speaks from the cradle; then the verdict on those who dispute about him."
+        },
+        "she-who-guarded-her-chastity": {
+            "former": "al-anbiya-91",
+            "surah": 21,
+            "from": 91,
+            "to": 91,
+            "name": "al-Anbiyāʾ",
+            "title": "She who guarded her chastity (21:91)",
+            "intro": "Mary and her son made a sign for all peoples."
+        },
+        "refuge-on-high-ground": {
+            "former": "al-muminun-50",
+            "surah": 23,
+            "from": 50,
+            "to": 50,
+            "name": "al-Muʾminūn",
+            "title": "The refuge on high ground (23:50)",
+            "intro": "The son of Mary and his mother given shelter on a height with a running spring."
+        },
+        "son-of-mary-as-an-example": {
+            "former": "az-zukhruf-57-65",
+            "surah": 43,
+            "from": 57,
+            "to": 65,
+            "name": "al-Zukhruf",
+            "title": "The son of Mary as an example (43:57-65)",
+            "intro": "The Meccans’ dispute over Jesus, his standing as a servant and a sign of the Hour, his call to the straight path, and the sects that differed about him."
+        },
+        "compassion-mercy-and-monasticism": {
+            "former": "al-hadid-27",
+            "surah": 57,
+            "from": 27,
+            "to": 27,
+            "name": "al-Ḥadīd",
+            "title": "Compassion, mercy and monasticism (57:27)",
+            "intro": "The followers of Jesus, the compassion God put in their hearts, and the monasticism they invented."
+        },
+        "good-news-of-ahmad": {
+            "former": "as-saff-6",
+            "surah": 61,
+            "from": 6,
+            "to": 6,
+            "name": "al-Ṣaff",
+            "title": "The good news of Aḥmad (61:6)",
+            "intro": "Jesus confirms the Torah and announces a messenger to come after him."
+        }
+    }
+}

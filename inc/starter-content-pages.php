@@ -112,6 +112,10 @@ function injil_help_starter_pages() {
 }
 
 function injil_help_starter_pages_list() {
+	// The words the builders put on pages: without them no page is made, so nothing is published with gaps.
+	if ( ! injil_help_data_file( 'text' ) || ! injil_help_data_file( 'commentaries' ) ) {
+		return array();
+	}
 	$pages = array_merge(
 		injil_help_pages_file( 'pillar' ),
 		injil_help_pages_file( 'gospels' ),

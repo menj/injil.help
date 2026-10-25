@@ -218,7 +218,7 @@ function injil_help_related_blocks( $def, $content = '' ) {
 	if ( ! $links ) {
 		return '';
 	}
-	return "\n<!-- wp:group {\"className\":\"ih-aside ih-next\",\"layout\":{\"type\":\"default\"}} -->\n<div class=\"wp-block-group ih-aside ih-next\"><!-- wp:paragraph {\"className\":\"ih-k\"} -->\n<p class=\"ih-k\">Read next</p>\n<!-- /wp:paragraph -->\n<!-- wp:paragraph -->\n<p>" . implode( ' · ', $links ) . "</p>\n<!-- /wp:paragraph --></div>\n<!-- /wp:group -->";
+	return "\n<!-- wp:group {\"className\":\"ih-aside ih-next\",\"layout\":{\"type\":\"default\"}} -->\n<div class=\"wp-block-group ih-aside ih-next\"><!-- wp:paragraph {\"className\":\"ih-k\"} -->\n<p class=\"ih-k\">" . esc_html( injil_help_text( 'related', 'label' ) ) . "</p>\n<!-- /wp:paragraph -->\n<!-- wp:paragraph -->\n<p>" . implode( ' · ', $links ) . "</p>\n<!-- /wp:paragraph --></div>\n<!-- /wp:group -->";
 }
 
 /**
