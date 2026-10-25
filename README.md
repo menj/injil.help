@@ -79,7 +79,7 @@ injil-help/
 │  ├─ share.php           share row
 │  └─ data/               all content (JSON)
 ├─ templates/, parts/     block templates and the header and footer parts
-├─ patterns/              26 PHP block patterns (front page, indexes, pillar, building blocks)
+├─ patterns/              32 PHP block patterns (front page, indexes, pillar, tables, building blocks)
 ├─ assets/css|js|fonts|icons|images
 └─ languages/             .mo files
 ```
@@ -183,7 +183,7 @@ Appearance › Theme Options (`inc/options.php`), one option array `injil_help_o
 | Tab | Keys |
 |---|---|
 | Colours | `colors` (nine palette slugs → hex; empty keeps theme.json) |
-| Branding | `content_width` full\|wide\|reading (default full: the content fills the page between the gutters; wide is the 1240px of the header and footer; reading is the 720px column of theme.json; body class `ih-width-{value}`), `ornament` rich\|subtle\|off, `animate` 0\|1, `parallax` strong\|gentle\|off, `footer_mark`, `favicon_force`, `favicon_url` |
+| Branding | `content_width` full\|wide\|reading (default full: the content fills the page between the gutters; wide is the 1240px of the header and footer; reading is the 720px column of theme.json; body class `ih-width-{value}`; at full and wide, prose pages flow in two columns from 1280px with headings, tables, plates, folds and asides spanning both, while pages carrying `.ih-bible` keep the gospel's own columns), `ornament` rich\|subtle\|off, `animate` 0\|1, `parallax` strong\|gentle\|off, `footer_mark`, `favicon_force`, `favicon_url` |
 | Sharing | `share`, `share_types` (post, page), `share_networks` (ordered subset of the network keys), `share_label` |
 | SEO | `schema` auto\|on\|off, `home_title`, `home_description`, `pillar_title`, `og_image`, `author_name`, `author_url`, `same_as` (one URL per line), `org_logo` |
 | Security | `block_app_passwords` 0\|1 (default 1: application passwords, and with them REST API and XML-RPC log-ins with a per-application password, are refused site-wide until the block is unticked) |

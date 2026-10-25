@@ -217,6 +217,15 @@ p.ih-cite{margin:0;font-size:13px;color:var(--wp--preset--color--muted)}
 .ih-width-full{--wp--style--global--content-size:none;--wp--style--global--wide-size:none}
 .ih-width-full .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)),.ih-width-full .is-layout-constrained > .alignwide{max-width:none}
 .ih-width-full .ih-aside,.ih-width-full .ih-overview{max-width:none}
+/* At full and wide widths a page of running prose is set in two columns on screens from 1280px, as the gospel sections are, so a line never runs past about eighty characters. Headings, tables, plates, folds, asides, cards and the Read next row span both columns; the gospel sections keep their own column setting. */
+@supports selector(:has(a)) {
+ @media (min-width:1280px){
+  :is(.ih-width-full,.ih-width-wide) .entry-content:not(:has(.ih-bible)){column-count:2;column-gap:3rem;column-rule:1px solid var(--wp--preset--color--accent-6)}
+  :is(.ih-width-full,.ih-width-wide) .entry-content:not(:has(.ih-bible)) > :is(h2,h3,h4,figure,table,.wp-block-table,details,blockquote,.wp-block-group,.wp-block-columns,.wp-block-buttons,.wp-block-separator,.ih-footnotes){column-span:all}
+  :is(.ih-width-full,.ih-width-wide) .entry-content:not(:has(.ih-bible)) > :is(h2,h3,h4){break-after:avoid}
+  :is(.ih-width-full,.ih-width-wide) .entry-content:not(:has(.ih-bible)) > p,:is(.ih-width-full,.ih-width-wide) .entry-content:not(:has(.ih-bible)) li{break-inside:avoid}
+ }
+}
 .ih-aside{border:1.5px solid var(--wp--preset--color--accent-3);border-radius:var(--ih-r-md);padding:18px 22px;max-width:760px;margin-top:var(--wp--preset--spacing--30) !important}
 .ih-aside > * + *{margin-top:8px}
 .ih-next .ih-k{color:var(--wp--preset--color--accent-1)}

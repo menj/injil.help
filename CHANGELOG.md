@@ -4,7 +4,8 @@ All notable changes to The Injil theme. The `Changelog` section of `readme.txt` 
 
 ## 3.6.1
 
-- Content is full width by default: the text, tables and plates of every page fill the page between the side gutters, and the header, footer and front page follow. Theme Options › Branding › Content width offers full (default), wide (1240px, the width the header and footer had) and reading column (720px, the former default). The setting is the body class ih-width-full, -wide or -reading; the stylesheet overrides the constrained-layout widths WordPress prints.
+- Content is full width by default: the text, tables and plates of every page fill the page between the side gutters, and the header, footer and front page follow. Theme Options › Branding › Content width offers full (default), wide (1240px, the width the header and footer had) and reading column (720px, the former default). The setting is the body class ih-width-full, -wide or -reading; the stylesheet overrides the constrained-layout widths WordPress prints. At full and wide widths a page of running prose is set in two columns on screens from 1280px, as the gospel sections are, so a line never runs past about eighty characters; headings, tables, plates, folds, asides, cards and the Read next row span both columns, and the gospel sections keep their own column setting.
+- New theme screenshot of the front page as it now stands.
 
 ## 3.6.0
 
