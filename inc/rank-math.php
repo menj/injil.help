@@ -133,7 +133,8 @@ function injil_help_rank_math_json_ld( $data, $jsonld = null ) {
 		// The theme's own copies of what Rank Math makes are left out.
 		$own_page = '';
 		$own_art  = '';
-		$skip     = array( $ids['org'] => true, $ids['author'] => true, $ids['website'] => true );
+		// The theme's author stays: it is a Person, and Rank Math's publisher may be an Organization.
+		$skip     = array( $ids['org'] => true, $ids['website'] => true );
 		foreach ( $graph as $node ) {
 			$types = (array) ( $node['@type'] ?? array() );
 			$id    = $node['@id'] ?? '';
@@ -166,7 +167,6 @@ function injil_help_rank_math_json_ld( $data, $jsonld = null ) {
 
 		$map = array(
 			$ids['org']    => $publisher,
-			$ids['author'] => $publisher,
 		);
 		if ( $own_page ) {
 			$map[ $own_page ] = $webpage;
