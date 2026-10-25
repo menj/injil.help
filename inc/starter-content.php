@@ -210,15 +210,25 @@ function injil_help_related_blocks( $def, $content = '' ) {
 		}
 	}
 	$links = array();
-	foreach ( (array) $def['related'] as $path ) {
-		if ( $path !== $def['path'] && isset( $titles[ $path ] ) ) {
-			$links[] = '<a href="/' . esc_attr( $path ) . '/">' . esc_html( $titles[ $path ] ) . '</a>';
+	$sites = array();
+	foreach ( (array) $def['related'] as $item ) {
+		if ( is_array( $item ) && ! empty( $item['url'] ) && ! empty( $item['title'] ) ) {
+			$sites[] = '<a href="' . esc_url( $item['url'] ) . '">' . esc_html( $item['title'] ) . '</a>' . ( empty( $item['site'] ) ? '' : ' <span class="ih-site">(' . esc_html( $item['site'] ) . ')</span>' );
+		} elseif ( is_string( $item ) && $item !== $def['path'] && isset( $titles[ $item ] ) ) {
+			$links[] = '<a href="/' . esc_attr( $item ) . '/">' . esc_html( $titles[ $item ] ) . '</a>';
 		}
 	}
-	if ( ! $links ) {
+	if ( ! $links && ! $sites ) {
 		return '';
 	}
-	return "\n<!-- wp:group {\"className\":\"ih-aside ih-next\",\"layout\":{\"type\":\"default\"}} -->\n<div class=\"wp-block-group ih-aside ih-next\"><!-- wp:paragraph {\"className\":\"ih-k\"} -->\n<p class=\"ih-k\">Read next</p>\n<!-- /wp:paragraph -->\n<!-- wp:paragraph -->\n<p>" . implode( ' · ', $links ) . "</p>\n<!-- /wp:paragraph --></div>\n<!-- /wp:group -->";
+	$out = "\n<!-- wp:group {\"className\":\"ih-aside ih-next\",\"layout\":{\"type\":\"default\"}} -->\n<div class=\"wp-block-group ih-aside ih-next\"><!-- wp:paragraph {\"className\":\"ih-k\"} -->\n<p class=\"ih-k\">Read next</p>\n<!-- /wp:paragraph -->";
+	if ( $links ) {
+		$out .= "\n<!-- wp:paragraph -->\n<p>" . implode( ' · ', $links ) . "</p>\n<!-- /wp:paragraph -->";
+	}
+	if ( $sites ) {
+		$out .= "\n<!-- wp:paragraph {\"className\":\"ih-sites\"} -->\n<p class=\"ih-sites\">On the writer’s other websites: " . implode( ' · ', $sites ) . "</p>\n<!-- /wp:paragraph -->";
+	}
+	return $out . "</div>\n<!-- /wp:group -->";
 }
 
 /**
@@ -328,12 +338,32 @@ function injil_help_find_page( $path ) {
 	return $page && 'trash' !== $page->post_status ? $page : null;
 }
 
-const INJIL_HELP_HASH_META = '_injil_help_hash';
+const INJIL_HELP_HASH_META  = '_injil_help_hash'; // md5 of the content the theme wrote
+const INJIL_HELP_HEAD_META  = '_injil_help_head'; // md5 of the title and excerpt it wrote (from 3.6.1; absent on older pages)
 
-/** True when a starter page's stored content has been edited since the theme last wrote it. */
+/** The hash of a page's title and excerpt as the theme wrote them. */
+function injil_help_head_hash( $title, $excerpt ) {
+	return md5( (string) $title . "\n" . (string) $excerpt );
+}
+
+/** Record what the theme wrote, so a later edit to the content, the title or the excerpt is detected. */
+function injil_help_stamp_page( $id, $content, $title, $excerpt ) {
+	update_post_meta( $id, INJIL_HELP_HASH_META, md5( $content ) );
+	update_post_meta( $id, INJIL_HELP_HEAD_META, injil_help_head_hash( $title, $excerpt ) );
+}
+
+/**
+ * True when a starter page has been edited since the theme last wrote it: the content differs
+ * from the content hash, or the title or excerpt differs from the head hash. Pages written before
+ * 3.6.1 carry no head hash, so for them only the content counts until the theme rewrites them.
+ */
 function injil_help_page_is_edited( $post ) {
 	$hash = get_post_meta( $post->ID, INJIL_HELP_HASH_META, true );
-	return $hash && $hash !== md5( $post->post_content );
+	if ( $hash && $hash !== md5( $post->post_content ) ) {
+		return true;
+	}
+	$head = get_post_meta( $post->ID, INJIL_HELP_HEAD_META, true );
+	return $hash && $head && $head !== injil_help_head_hash( $post->post_title, $post->post_excerpt );
 }
 
 /**
@@ -394,7 +424,7 @@ function injil_help_populate( $overwrite = false, $force = false ) {
 				)
 			);
 			if ( $done && ! is_wp_error( $done ) ) {
-				update_post_meta( $existing->ID, INJIL_HELP_HASH_META, md5( $content ) );
+				injil_help_stamp_page( $existing->ID, $content, $def['title'], $excerpt );
 				++$created;
 			}
 			continue;
@@ -432,7 +462,7 @@ function injil_help_populate( $overwrite = false, $force = false ) {
 			if ( ! empty( $def['template'] ) ) {
 				update_post_meta( $id, '_wp_page_template', $def['template'] );
 			}
-			update_post_meta( $id, INJIL_HELP_HASH_META, md5( $content ) );
+			injil_help_stamp_page( $id, $content, $def['title'], $excerpt );
 			++$created;
 		}
 	}

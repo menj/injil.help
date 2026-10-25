@@ -49,12 +49,12 @@ The fixed facts about The Injil theme. When another document, a comment or a pat
 ## Starter content behaviour
 
 - `injil_help_populate( $overwrite = false, $force = false )`. On activation: create missing pages, set pretty permalinks, bin the untouched sample post, page and comment, replace the default tagline.
-- After an update (once per version, first admin load): rewrite pages whose text changed, skip pages the owner edited (post meta `_injil_help_hash` differs from the stored content), keep no revisions, slash data, flush rewrite rules only when permalinks were set. "Update all pages from the theme" rewrites everything, edited pages included.
+- After an update (once per version, first admin load): rewrite pages whose text changed, skip pages the owner edited (post meta `_injil_help_hash` differs from the stored content, or `_injil_help_head` from the title and excerpt), keep no revisions, slash data, flush rewrite rules only when permalinks were set. "Update all pages from the theme" rewrites everything, edited pages included.
 - Options written: `injil_help_populated` (version stamped only after a non-empty page list), `injil_help_populating` (lock, stale after a minute), `injil_help_options`.
 
 ## Theme Options (`injil_help_options`)
 
-Tabs: Colours, Branding, Sharing, SEO, Security, Content. Defaults: `colors` {}, `footer_mark` 1, `ornament` rich, `animate` 1, `parallax` strong, `gospel_layout` columns, `block_app_passwords` 1, `favicon_force` 0, `favicon_url` '', `share` 1, `share_networks` x, facebook, whatsapp, telegram, reddit, linkedin, bluesky, threads, `share_types` post, page, `share_label` '', `schema` auto, `home_title` '', `home_description` '', `pillar_title` '', `og_image` '', `author_name` '', `author_url` '', `same_as` menj.org and apostleofdoom.org, `org_logo` ''.
+Tabs: Colours, Branding, Sharing, SEO, Security, Content. Defaults: `colors` {}, `footer_mark` 1, `ornament` rich, `animate` 1, `parallax` strong, `gospel_layout` columns, `content_width` full (full and wide set prose pages in two columns from 1280px; pages with `.ih-bible` are excluded through `:has()`), `block_app_passwords` 1, `favicon_force` 0, `favicon_url` '', `share` 1, `share_networks` x, facebook, whatsapp, telegram, reddit, linkedin, bluesky, threads, `share_types` post, page, `share_label` '', `schema` auto, `home_title` '', `home_description` '', `pillar_title` '', `og_image` '', `author_name` '', `author_url` '', `same_as` menj.org, apostleofdoom.org and bestofislam.org, `org_logo` ''.
 
 ## Filters
 
@@ -96,5 +96,7 @@ Shafaat (1985) for the gospel text; Alham Ahmed and The Clear Quran for the pass
 - JS and CSS are separate files in `assets/js/` and `assets/css/`.
 - The options page stays tabbed; a new setting joins an existing tab or gets its own.
 - British spelling in site text; no contractions; no em dashes; Qur'anic quotations in bold inside the commentaries.
+- The writer's other websites are Apostle of Doom (https://apostleofdoom.org, the case against Paul of Tarsus) and Best of Islam (https://bestofislam.org, objections to Islam answered). Link to them where the subject meets, by article, through `related.json` entries `{url, title, site}` and in prose; name them by their names, not their domains; never nofollow them.
+- Paul is always "Paul of Tarsus" in the site's own text, including headings and link text; book titles, quotations and the glossary term "New perspective on Paul" keep their wording.
 - Release: bump both version strings, update `CHANGELOG.md` and the readme changelog, add an `UPGRADING.md` note if an existing site must act, merge to `main`, tag `vX.Y.Z`.
 - Run before pushing: `php -l` on every PHP file, JSON validity on every data file, the page link check and the block-balance render check (the scratch harnesses used in development live outside the repository; rebuild them from `inc/starter-content-pages.php` and `inc/schema.php` if needed).

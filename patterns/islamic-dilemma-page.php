@@ -142,10 +142,10 @@
 <p class="ih-k">Answer · V</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading">Paul stands outside, and the canon is not of one mind</h3>
+<h3 class="wp-block-heading">Paul of Tarsus stands outside, and the canon is not of one mind</h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>Fourteen of the New Testament’s twenty-seven documents are attributed to Paul of Tarsus or, in the case of Hebrews, were placed under his name, and Islam does not recognise Paul as a prophet. Islamic theology holds, on reports in al-Bukhārī and Muslim, that no prophet came between ʿĪsā and Muḥammad, and Paul claims a commission from the risen Christ. The Qur’anic <em>ḥawāriyyūn</em> (3:52; 5:111-112; 61:14) were the companions of Jesus in his lifetime, a category Paul by his own account does not fill. The command at 5:47 concerns the revelation given to Jesus, and Paul’s letters, written decades later, are a separate body of writing.</p>
+<p>Fourteen of the New Testament’s twenty-seven documents are attributed to Paul of Tarsus or, in the case of Hebrews, were placed under his name, and Islam does not recognise Paul of Tarsus as a prophet. Islamic theology holds, on reports in al-Bukhārī and Muslim, that no prophet came between ʿĪsā and Muḥammad, and Paul of Tarsus claims a commission from the risen Christ. The Qur’anic <em>ḥawāriyyūn</em> (3:52; 5:111-112; 61:14) were the companions of Jesus in his lifetime, a category Paul of Tarsus by his own account does not fill. The command at 5:47 concerns the revelation given to Jesus, and Paul of Tarsus’s letters, written decades later, are a separate body of writing.</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph -->
 <p>The canon is also divided on the doctrines the dilemma turns on. Hebrews says that without the shedding of blood there is no forgiveness (9:22). Psalm 51:16-17, Hosea 6:6 and Ezekiel 18 speak of forgiveness through a broken heart, mercy and repentance. And the Qur’an attributes to the scrolls of Abraham and Moses the principle that no bearer of burdens bears another’s burden (53:36-38). The argument grants the Bible a harmonising reading in advance and denies the Qur’an the same.</p>
@@ -231,7 +231,7 @@
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 <!-- wp:paragraph {"className":"ih-next"} -->
-<p class="ih-next">The argument has also been restated as a secular case with two steps and four exits, and answered by a historical-critical reply that grants its first step. Both are taken point by point on <a href="/the-islamic-dilemma/secular-form/">The Islamic Dilemma without theology</a>. Its source, Pfander’s <em>Balance of Truth</em> of 1829, is answered chapter by chapter on <a href="/the-islamic-dilemma/balance-of-truth/">Pfander’s Balance of Truth</a>.</p>
+<p class="ih-next">The argument has also been restated as a secular case with two steps and four exits, and answered by a historical-critical reply that grants its first step. Both are taken point by point on <a href="/the-islamic-dilemma/secular-form/">The Islamic Dilemma without theology</a>. Its source, Pfander’s <em>Balance of Truth</em> of 1829, is answered chapter by chapter on <a href="/the-islamic-dilemma/balance-of-truth/">Pfander’s Balance of Truth</a>. The writer’s other website, Best of Islam, gives <a href="https://bestofislam.org/islamic-dilemma/">the five assumptions the argument needs</a> in short form.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->
@@ -289,7 +289,7 @@
 <!-- /wp:details -->
 <!-- wp:details {"className":"is-style-faq"} -->
 <details class="wp-block-details is-style-faq"><summary>Where is the Injīl, if it is not the four gospels?</summary><!-- wp:paragraph -->
-<p>It was never a book that Muslims say survives on a shelf. It is the revelation given to ʿĪsā, which the canonical gospels, Tatian’s harmony, the Jewish-Christian gospels and the oral tradition behind them each preserve in part. The Jewish-Christian gospels, known from Jerome, Epiphanius and Origen, are fragmentary and are not to be identified directly with the Injīl, though they show that early devotion to Jesus was more varied than the later canon suggests.</p>
+<p>It was never a book that Muslims say survives on a shelf. It is the revelation given to ʿĪsā, which the canonical gospels, Tatian’s harmony, the Jewish-Christian gospels and the oral tradition behind them each preserve in part. The Jewish-Christian gospels, known from Jerome, Epiphanius and Origen, are fragmentary and are not to be identified directly with the Injīl, though they show that early devotion to Jesus was more varied than the later canon suggests. The same question is answered in five points on <a href="https://bestofislam.org/where-is-the-injil/">Best of Islam</a>.</p>
 <!-- /wp:paragraph --></details>
 <!-- /wp:details -->
 <!-- wp:heading -->

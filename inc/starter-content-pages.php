@@ -8,8 +8,9 @@
  * markup described in injil_help_markup_to_blocks()); "body_file" names a JSON
  * file in inc/data/ whose list of lines is appended to "body" (the full texts of
  * the Gospel of Thomas are kept that way); "template" names a page template;
- * "related" lists the paths of the pages linked in the "Read next" row under the
- * content (merged with inc/data/related.json, the curated map of related pages);
+ * "related" lists the pages linked in the "Read next" row under the content: site
+ * paths, and {url, title, site} entries for the writer's sister sites, Apostle of Doom
+ * (apostleofdoom.org) and Best of Islam (bestofislam.org) (merged with inc/data/related.json);
  * "former" lists paths the page had in earlier versions, so populate() can rename it. The 27 sections of The Gospel According to Islam and the page of
  * Qur'anic passages are built from their own data files and spliced in here.
  *
@@ -66,8 +67,17 @@ function injil_help_starter_pages() {
 	$pages = injil_help_starter_pages_list();
 	$map   = injil_help_related_map();
 	foreach ( $pages as &$def ) {
-		$related = array_merge( (array) ( $def['related'] ?? array() ), (array) ( $map[ $def['path'] ] ?? array() ) );
-		$def['related'] = array_values( array_unique( array_diff( $related, array( $def['path'] ) ) ) );
+		// Internal paths (strings, deduplicated) first, then the sister-site entries ({url, title, site}).
+		$paths = array();
+		$sites = array();
+		foreach ( array_merge( (array) ( $def['related'] ?? array() ), (array) ( $map[ $def['path'] ] ?? array() ) ) as $item ) {
+			if ( is_array( $item ) ) {
+				$sites[] = $item;
+			} elseif ( $item !== $def['path'] && ! in_array( $item, $paths, true ) ) {
+				$paths[] = $item;
+			}
+		}
+		$def['related'] = array_merge( $paths, $sites );
 	}
 	unset( $def );
 	return $pages;

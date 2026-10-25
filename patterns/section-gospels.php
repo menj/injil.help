@@ -162,7 +162,7 @@
 <!-- /wp:details -->
 <!-- wp:details {"className":"is-style-faq"} -->
 <details class="wp-block-details is-style-faq"><summary>Is the Gospel of Thomas a real gospel?</summary><!-- wp:paragraph -->
-<p>It is a real early Christian text: 114 sayings of Jesus with no story, found at Nag Hammadi in 1945 and dated between the late first and mid second century. About half its sayings have parallels in the synoptics. It is not in the canon. This website tests each saying against the Qur’an; see <a href="/gospels/thomas/">the Gospel of Thomas</a>.</p>
+<p>It is a real early Christian text: 114 sayings of Jesus with no story, found at Nag Hammadi in 1945 and dated between the late first and mid second century. About half its sayings have parallels in the synoptics, and some 37 units are shared with Q, the sayings source most scholars hold Matthew and Luke used. Thomas is the one sayings gospel of that kind to survive whole, which is why the Jesus Seminar printed it as the fifth gospel in 1993 and why it is counted here. It is not in the canon. This website tests each saying against the Qur’an; see <a href="/gospels/thomas/">the Gospel of Thomas</a>.</p>
 <!-- /wp:paragraph --></details>
 <!-- /wp:details -->
 <!-- wp:group {"className":"ih-aside ih-next","layout":{"type":"default"}} -->

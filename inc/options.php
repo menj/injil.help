@@ -32,6 +32,7 @@ function injil_help_option_defaults() {
 		'animate'          => 1,
 		'parallax'         => 'strong',
 		'gospel_layout'    => 'columns',
+		'content_width'    => 'full',
 		'block_app_passwords' => 1,
 		'favicon_force'    => 0,
 		'favicon_url'      => '',
@@ -46,7 +47,7 @@ function injil_help_option_defaults() {
 		'og_image'         => '',
 		'author_name'      => '',
 		'author_url'       => '',
-		'same_as'          => "https://menj.org\nhttps://apostleofdoom.org",
+		'same_as'          => "https://menj.org\nhttps://apostleofdoom.org\nhttps://bestofislam.org",
 		'org_logo'         => '',
 	);
 }
@@ -54,6 +55,12 @@ function injil_help_option_defaults() {
 function injil_help_get_option( $key = null ) {
 	$opts = wp_parse_args( (array) get_option( INJIL_HELP_OPTION, array() ), injil_help_option_defaults() );
 	return null === $key ? $opts : ( $opts[ $key ] ?? null );
+}
+
+/** The submitted value of a select when it is one of the allowed values, else the default; never null. */
+function injil_help_pick( $in, $key, $allowed, $default ) {
+	$value = $in[ $key ] ?? $default;
+	return in_array( $value, $allowed, true ) ? $value : $default;
 }
 
 function injil_help_sanitize_options( $in ) {
@@ -67,10 +74,11 @@ function injil_help_sanitize_options( $in ) {
 		}
 	}
 	$out['footer_mark']      = empty( $in['footer_mark'] ) ? 0 : 1;
-	$out['ornament']         = in_array( $in['ornament'] ?? 'rich', array( 'rich', 'subtle', 'off' ), true ) ? $in['ornament'] : 'rich';
+	$out['ornament']         = injil_help_pick( $in, 'ornament', array( 'rich', 'subtle', 'off' ), 'rich' );
 	$out['animate']          = empty( $in['animate'] ) ? 0 : 1;
-	$out['parallax']         = in_array( $in['parallax'] ?? 'strong', array( 'strong', 'gentle', 'off' ), true ) ? $in['parallax'] : 'strong';
-	$out['gospel_layout']    = in_array( $in['gospel_layout'] ?? 'columns', array( 'columns', 'single', 'plain' ), true ) ? $in['gospel_layout'] : 'columns';
+	$out['parallax']         = injil_help_pick( $in, 'parallax', array( 'strong', 'gentle', 'off' ), 'strong' );
+	$out['gospel_layout']    = injil_help_pick( $in, 'gospel_layout', array( 'columns', 'single', 'plain' ), 'columns' );
+	$out['content_width']    = injil_help_pick( $in, 'content_width', array( 'full', 'wide', 'reading' ), 'full' );
 	$out['block_app_passwords'] = empty( $in['block_app_passwords'] ) ? 0 : 1;
 	$out['favicon_force']    = empty( $in['favicon_force'] ) ? 0 : 1;
 	$out['favicon_url']      = esc_url_raw( $in['favicon_url'] ?? '' );
@@ -78,7 +86,7 @@ function injil_help_sanitize_options( $in ) {
 	$out['share_networks']   = array_values( array_intersect( array_keys( injil_help_share_networks() ), array_map( 'sanitize_key', (array) ( $in['share_networks'] ?? array() ) ) ) );
 	$out['share_types']      = array_values( array_intersect( array( 'post', 'page' ), array_map( 'sanitize_key', (array) ( $in['share_types'] ?? array() ) ) ) );
 	$out['share_label']      = sanitize_text_field( $in['share_label'] ?? '' );
-	$out['schema']           = in_array( $in['schema'] ?? 'auto', array( 'auto', 'on', 'off' ), true ) ? $in['schema'] : 'auto';
+	$out['schema']           = injil_help_pick( $in, 'schema', array( 'auto', 'on', 'off' ), 'auto' );
 	$out['home_title']       = sanitize_text_field( $in['home_title'] ?? '' );
 	$out['home_description'] = sanitize_textarea_field( $in['home_description'] ?? '' );
 	$out['pillar_title']     = sanitize_text_field( $in['pillar_title'] ?? '' );
@@ -168,6 +176,17 @@ function injil_help_render_options() {
 
 			<section class="ih-panel" id="panel-branding" role="tabpanel" aria-labelledby="tab-branding">
 				<table class="form-table" role="presentation">
+					<tr>
+						<th scope="row"><label for="ih-content-width"><?php esc_html_e( 'Content width', 'injil-help' ); ?></label></th>
+						<td>
+							<select id="ih-content-width" name="<?php echo esc_attr( $name ); ?>[content_width]">
+								<option value="full" <?php selected( $o['content_width'], 'full' ); ?>><?php esc_html_e( 'Full width: the content fills the page between the side gutters', 'injil-help' ); ?></option>
+								<option value="wide" <?php selected( $o['content_width'], 'wide' ); ?>><?php esc_html_e( 'Wide: 1240px, the width of the header and footer', 'injil-help' ); ?></option>
+								<option value="reading" <?php selected( $o['content_width'], 'reading' ); ?>><?php esc_html_e( 'Reading column: 720px', 'injil-help' ); ?></option>
+							</select>
+							<p class="description"><?php esc_html_e( 'How wide the text and tables of every page may run. Full width is the default, and the header, footer and front page widen with it. Wide is the 1240px of the header and footer. Reading column restores the former layout: a 720px column of text under the 1240px header, footer and front page. Tables and plates marked wide fill the width in every case.', 'injil-help' ); ?></p>
+						</td>
+					</tr>
 					<tr>
 						<th scope="row"><label for="ih-ornament"><?php esc_html_e( 'Ornament', 'injil-help' ); ?></label></th>
 						<td>
@@ -379,6 +398,7 @@ add_filter(
 			$classes[] = 'ih-no-footer-mark';
 		}
 		$classes[] = 'ih-gospel-' . injil_help_get_option( 'gospel_layout' );
+		$classes[] = 'ih-width-' . injil_help_get_option( 'content_width' );
 		$orn = injil_help_get_option( 'ornament' );
 		if ( 'off' !== $orn ) {
 			$classes[] = 'ih-orn';
