@@ -33,7 +33,7 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 |---|---|
 | Type | Block theme (theme.json v3), child of `twentytwentyfive` |
 | Folder, text domain, pattern prefix | `injil-help` |
-| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.6.1) |
+| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.6.2) |
 | PHP in `inc/` | options, starter-content, starter-content-pages, gospel-islam, quran-jesus, tafsir, seo, schema, share |
 | Data | `inc/data/` 2.6 MB of JSON: 176 starter pages, the gospel narrative, the Qur'anic passages, Thomas (woven sections and two full texts), the infancy gospels, the substitution witnesses, eight commentaries (315,000 words) |
 | Front-end assets | `style.css` 32 KB; `assets/css/ornament.css` 12 KB, `share.css` 3 KB, `bible.css` 3 KB; `assets/js/ornament.js` 3 KB, `share.js` 2 KB; all plain, no build step |
@@ -104,7 +104,7 @@ Everything a visitor reads is either a block pattern in `patterns/` or JSON in `
 | `pages/pillar.json`, `gospels.json`, `paul.json`, `quran.json`, `gospel.json`, `bonus.json`, `resources.json`, `site.json` | the starter pages, one file per part, in site order | array of `{path, title, excerpt, pattern? \| body?, body_file?, template?, related?, former?}`; `body_file` names a file in `inc/data/` whose list of lines is appended to `body`; `related` lists the paths linked in the page's "Read next" row; `former` lists the paths the page had in earlier versions, which `populate()` renames in place |
 | `narrative.json` | The Narrative of Jesus, Son of Mary | `{chapters: [{number, title, sections: [{number, lines[]}]}], notes: {n: text}}`; `[^n]` note markers, `[v]` verse breaks and `[qS:A]` Qur'anic verse references in lines |
 | `gospel-islam.json` | section titles, section URL slugs, Introduction | `{section_titles: {n: title}, section_slugs: {n: slug}, front: {introduction: {title, paras[]}}}`; the slug is the section's URL segment (`/gospel-according-to-islam/john-the-baptist/`), never its number |
-| `related.json` | the curated map of related pages behind the "Read next" row | `{path: [path | {url, title, site}, …]}`: site paths, and entries for the writer's other websites (Apostle of Doom, Best of Islam) rendered as a second line of the row; merged with what the builders set (`injil_help_related_map()`) |
+| `related.json` | the curated map of related pages behind the "Read next" row | `{path: [path, …]}`, merged with what the builders set (`injil_help_related_map()`) |
 | `quran-jesus.json` | the Qur'anic passages | `{surahs: {n: name}, passages: [{surah, verses_range, heading, verses: {n: text}}]}` |
 | `thomas.json`, `infancy.json`, `substitution.json` | woven passages (Thomas, the infancy gospels, the substitution witnesses, merged in that order) | `{section: [markup lines]}` |
 | `thomas-mattison.json`, `thomas-patterson-meyer.json` | the full text of the Gospel of Thomas in two translations | `[markup lines]`, loaded through `body_file` |

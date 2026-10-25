@@ -130,29 +130,14 @@
         "the-islamic-dilemma/balance-of-truth",
         "method",
         "answers",
-        "resources/objections",
-        {
-            "url": "https://bestofislam.org/islamic-dilemma/",
-            "title": "The Islamic Dilemma: five assumptions the argument needs",
-            "site": "Best of Islam"
-        },
-        {
-            "url": "https://bestofislam.org/where-is-the-injil/",
-            "title": "Where is the Injīl? Five answers",
-            "site": "Best of Islam"
-        }
+        "resources/objections"
     ],
     "the-islamic-dilemma/secular-form": [
         "the-islamic-dilemma",
         "the-islamic-dilemma/balance-of-truth",
         "method",
         "quran/raised",
-        "resources/responses",
-        {
-            "url": "https://bestofislam.org/islamic-dilemma/",
-            "title": "The Islamic Dilemma: five assumptions the argument needs",
-            "site": "Best of Islam"
-        }
+        "resources/responses"
     ],
     "the-islamic-dilemma/balance-of-truth": [
         "the-islamic-dilemma",
@@ -160,28 +145,13 @@
         "method",
         "resources/responses",
         "quran/ahmad",
-        "resources/timeline",
-        {
-            "url": "https://bestofislam.org/manuscript-transmission/",
-            "title": "Manuscript transmission: the Qur’an and the New Testament",
-            "site": "Best of Islam"
-        },
-        {
-            "url": "https://bestofislam.org/uthman-copies/",
-            "title": "ʿUthmān’s copies: the Qur’an’s earliest manuscripts",
-            "site": "Best of Islam"
-        }
+        "resources/timeline"
     ],
     "method": [
         "the-islamic-dilemma",
         "about-the-author",
         "corrections",
-        "gospel-according-to-islam/how-composed",
-        {
-            "url": "https://apostleofdoom.org/the-measure/",
-            "title": "The measure, as Apostle of Doom applies it",
-            "site": "Apostle of Doom"
-        }
+        "gospel-according-to-islam/how-composed"
     ],
     "corrections": [
         "method",
@@ -192,17 +162,7 @@
         "the-islamic-dilemma",
         "resources/objections",
         "resources/responses",
-        "resources/glossary",
-        {
-            "url": "https://bestofislam.org/islamic-dilemma/",
-            "title": "The Islamic Dilemma: five assumptions the argument needs",
-            "site": "Best of Islam"
-        },
-        {
-            "url": "https://apostleofdoom.org/questions/",
-            "title": "Questions about Paul of Tarsus",
-            "site": "Apostle of Doom"
-        }
+        "resources/glossary"
     ],
     "gospels/mark": [
         "gospels/matthew",
@@ -226,12 +186,7 @@
         "paul/paul-against-jesus",
         "quran/servant",
         "quran/ahmad",
-        "gospels/discrepancies/resurrection",
-        {
-            "url": "https://bestofislam.org/jesus-not-god/",
-            "title": "Five reasons Muslims believe Jesus is not God",
-            "site": "Best of Islam"
-        }
+        "gospels/discrepancies/resurrection"
     ],
     "gospels/thomas": [
         "gospels/thomas/sayings",
@@ -304,12 +259,7 @@
         "gospels/discrepancies/last-supper",
         "gospels/discrepancies/resurrection",
         "quran/raised",
-        "gospels/discrepancies",
-        {
-            "url": "https://bestofislam.org/crucifixion-quran/",
-            "title": "The crucifixion and the Qur’an: six facts about 4:157",
-            "site": "Best of Islam"
-        }
+        "gospels/discrepancies"
     ],
     "gospels/discrepancies/resurrection": [
         "gospels/discrepancies/genealogies",
@@ -317,124 +267,39 @@
         "gospels/discrepancies/last-supper",
         "gospels/discrepancies/crucifixion",
         "quran/raised",
-        "gospels/discrepancies",
-        {
-            "url": "https://bestofislam.org/crucifixion-quran/",
-            "title": "The crucifixion and the Qur’an: six facts about 4:157",
-            "site": "Best of Islam"
-        }
+        "gospels/discrepancies"
     ],
     "paul/acts-galatians": [
         "paul/seven-letters",
         "paul/james",
         "paul/false-apostles",
-        "gospels/luke",
-        {
-            "url": "https://apostleofdoom.org/the-damascus-road/",
-            "title": "The Damascus road: one vision, three stories",
-            "site": "Apostle of Doom"
-        },
-        {
-            "url": "https://apostleofdoom.org/paul-against-the-disciples/",
-            "title": "Paul of Tarsus against the disciples: the Jerusalem Council",
-            "site": "Apostle of Doom"
-        },
-        {
-            "url": "https://apostleofdoom.org/appendices/why-luke-does-not-know-pauls-letters/",
-            "title": "Why Acts ignores the letters",
-            "site": "Apostle of Doom"
-        }
+        "gospels/luke"
     ],
     "paul/paul-against-jesus": [
         "gospels/john",
         "paul/seven-letters",
         "paul/james",
-        "bonus/epistle",
-        {
-            "url": "https://apostleofdoom.org/at-the-crossroads-of-the-message/",
-            "title": "Two portraits of ʿĪsā ibn Maryam",
-            "site": "Apostle of Doom"
-        },
-        {
-            "url": "https://apostleofdoom.org/the-foundations-of-pauline-doctrine/",
-            "title": "The message remade",
-            "site": "Apostle of Doom"
-        },
-        {
-            "url": "https://bestofislam.org/paul-and-the-law/",
-            "title": "Paul of Tarsus and the Law: six verses against Matthew 5:17",
-            "site": "Best of Islam"
-        }
+        "bonus/epistle"
     ],
     "paul/james": [
         "paul/ebionites",
         "paul/acts-galatians",
-        "paul/paul-against-jesus",
-        {
-            "url": "https://apostleofdoom.org/james-the-brother/",
-            "title": "James, the brother of ʿĪsā ibn Maryam",
-            "site": "Apostle of Doom"
-        },
-        {
-            "url": "https://apostleofdoom.org/the-first-witnesses/",
-            "title": "The first witnesses against Paul of Tarsus",
-            "site": "Apostle of Doom"
-        }
+        "paul/paul-against-jesus"
     ],
     "paul/ebionites": [
         "paul/james",
         "resources/timeline",
-        "gospels/matthew",
-        {
-            "url": "https://apostleofdoom.org/the-hostile-witnesses/",
-            "title": "The hostile witnesses",
-            "site": "Apostle of Doom"
-        },
-        {
-            "url": "https://apostleofdoom.org/paul-in-the-islamic-tradition/",
-            "title": "Paul of Tarsus in the Islamic tradition",
-            "site": "Apostle of Doom"
-        },
-        {
-            "url": "https://apostleofdoom.org/the-early-islamic-record/",
-            "title": "The early Islamic record",
-            "site": "Apostle of Doom"
-        }
+        "gospels/matthew"
     ],
     "paul/seven-letters": [
         "paul/acts-galatians",
         "paul/false-apostles",
-        "paul/paul-against-jesus",
-        {
-            "url": "https://apostleofdoom.org/the-letters-of-a-man/",
-            "title": "Revelation or borrowing? The letters of a man",
-            "site": "Apostle of Doom"
-        },
-        {
-            "url": "https://apostleofdoom.org/paul-and-the-new-testament/",
-            "title": "How Paul of Tarsus came to own the New Testament",
-            "site": "Apostle of Doom"
-        },
-        {
-            "url": "https://bestofislam.org/second-peter/",
-            "title": "Written in Peter’s name: what a Catholic Bible says about 2 Peter",
-            "site": "Best of Islam"
-        }
+        "paul/paul-against-jesus"
     ],
     "paul/false-apostles": [
         "paul/seven-letters",
         "paul/james",
-        "bonus/epistle",
-        {
-            "url": "https://apostleofdoom.org/the-first-witnesses/",
-            "title": "The first witnesses against Paul of Tarsus",
-            "site": "Apostle of Doom"
-        },
-        {
-            "url": "https://apostleofdoom.org/revelation-or-borrowing/",
-            "title": "Five hundred witnesses and an angel of light",
-            "site": "Apostle of Doom"
-        }
+        "bonus/epistle"
     ],
     "quran/passages": [
         "quran/commentaries",
@@ -451,12 +316,7 @@
         "quran/commentaries/she-who-guarded-her-chastity",
         "quran/commentaries/refuge-on-high-ground",
         "gospels/discrepancies/nativity",
-        "gospel-according-to-islam/annunciation-and-birth-of-jesus",
-        {
-            "url": "https://bestofislam.org/ezra-and-mary/",
-            "title": "Ezra and Mary in the Qur’an: two contested verses",
-            "site": "Best of Islam"
-        }
+        "gospel-according-to-islam/annunciation-and-birth-of-jesus"
     ],
     "quran/signs": [
         "quran/commentaries/family-of-imran",
@@ -468,17 +328,7 @@
         "quran/commentaries/son-of-mary-as-an-example",
         "quran/commentaries/compassion-mercy-and-monasticism",
         "gospels/john",
-        "gospel-according-to-islam/questions-in-the-temple",
-        {
-            "url": "https://bestofislam.org/jesus-not-god/",
-            "title": "Five reasons Muslims believe Jesus is not God",
-            "site": "Best of Islam"
-        },
-        {
-            "url": "https://apostleofdoom.org/the-quran-as-witness/",
-            "title": "The Qur’an as witness",
-            "site": "Apostle of Doom"
-        }
+        "gospel-according-to-islam/questions-in-the-temple"
     ],
     "quran/table": [
         "quran/commentaries/the-table-and-the-questioning",
@@ -490,23 +340,13 @@
         "gospels/discrepancies/crucifixion",
         "gospel-according-to-islam/trial-barabbas-and-raising-of-jesus",
         "gospel-according-to-islam/empty-tomb-reports-and-return",
-        "the-islamic-dilemma/secular-form",
-        {
-            "url": "https://bestofislam.org/crucifixion-quran/",
-            "title": "The crucifixion and the Qur’an: six facts about 4:157",
-            "site": "Best of Islam"
-        }
+        "the-islamic-dilemma/secular-form"
     ],
     "quran/ahmad": [
         "quran/commentaries/good-news-of-ahmad",
         "gospel-according-to-islam/the-hour-and-promise-of-the-counsellor",
         "the-islamic-dilemma/balance-of-truth",
-        "gospels/john",
-        {
-            "url": "https://bestofislam.org/was-muhammad-illiterate-ummi/",
-            "title": "Was Muḥammad illiterate? Five answers on ummī",
-            "site": "Best of Islam"
-        }
+        "gospels/john"
     ],
     "quran/commentaries": [
         "quran/passages",
@@ -517,38 +357,18 @@
         "resources/glossary",
         "resources/sources",
         "resources/manuscripts",
-        "the-islamic-dilemma/balance-of-truth",
-        {
-            "url": "https://apostleofdoom.org/reference/chronology/",
-            "title": "Timeline of Paul of Tarsus",
-            "site": "Apostle of Doom"
-        }
+        "the-islamic-dilemma/balance-of-truth"
     ],
     "resources/glossary": [
         "resources/timeline",
         "resources/sources",
-        "method",
-        {
-            "url": "https://apostleofdoom.org/reference/glossary/",
-            "title": "Glossary of the case against Paul of Tarsus",
-            "site": "Apostle of Doom"
-        }
+        "method"
     ],
     "resources/sources": [
         "resources/timeline",
         "resources/manuscripts",
         "credits",
-        "corrections",
-        {
-            "url": "https://apostleofdoom.org/reference/sources/",
-            "title": "Sources used at Apostle of Doom",
-            "site": "Apostle of Doom"
-        },
-        {
-            "url": "https://bestofislam.org/sources-and-standards/",
-            "title": "Sources and standards at Best of Islam",
-            "site": "Best of Islam"
-        }
+        "corrections"
     ],
     "resources/manuscripts": [
         "gospels/thomas",
@@ -565,69 +385,29 @@
         "resources/responses",
         "the-islamic-dilemma/balance-of-truth",
         "answers",
-        "the-islamic-dilemma",
-        {
-            "url": "https://bestofislam.org/islamic-dilemma/",
-            "title": "The Islamic Dilemma: five assumptions the argument needs",
-            "site": "Best of Islam"
-        },
-        {
-            "url": "https://bestofislam.org/where-is-the-injil/",
-            "title": "Where is the Injīl? Five answers",
-            "site": "Best of Islam"
-        }
+        "the-islamic-dilemma"
     ],
     "resources/responses": [
         "resources/objections",
         "the-islamic-dilemma/balance-of-truth",
         "the-islamic-dilemma/secular-form",
-        "the-islamic-dilemma",
-        {
-            "url": "https://bestofislam.org/islamic-dilemma/",
-            "title": "The Islamic Dilemma: five assumptions the argument needs",
-            "site": "Best of Islam"
-        },
-        {
-            "url": "https://bestofislam.org/same-god/",
-            "title": "Six reasons the God of the Qur’an is the God of the Bible",
-            "site": "Best of Islam"
-        }
+        "the-islamic-dilemma"
     ],
     "bonus": [
         "bonus/epistle",
         "paul",
-        "gospel-according-to-islam/how-composed",
-        {
-            "url": "https://apostleofdoom.org/an-epistle-to-the-churches-of-paul/",
-            "title": "An epistle to the churches of Paul of Tarsus",
-            "site": "Apostle of Doom"
-        }
+        "gospel-according-to-islam/how-composed"
     ],
     "bonus/epistle": [
         "bonus",
         "paul/paul-against-jesus",
-        "paul/false-apostles",
-        {
-            "url": "https://apostleofdoom.org/an-epistle-to-the-churches-of-paul/",
-            "title": "An epistle to the churches of Paul of Tarsus",
-            "site": "Apostle of Doom"
-        }
+        "paul/false-apostles"
     ],
     "about-the-author": [
         "method",
         "contact",
         "credits",
-        "corrections",
-        {
-            "url": "https://apostleofdoom.org/about-the-author/",
-            "title": "About the author at Apostle of Doom",
-            "site": "Apostle of Doom"
-        },
-        {
-            "url": "https://bestofislam.org/about/",
-            "title": "About Best of Islam",
-            "site": "Best of Islam"
-        }
+        "corrections"
     ],
     "terms-of-use": [
         "privacy-policy",
@@ -648,32 +428,5 @@
         "resources/sources",
         "about-the-author",
         "terms-of-use"
-    ],
-    "paul": [
-        {
-            "url": "https://apostleofdoom.org/the-man/",
-            "title": "The man",
-            "site": "Apostle of Doom"
-        },
-        {
-            "url": "https://apostleofdoom.org/the-charges/",
-            "title": "The charges",
-            "site": "Apostle of Doom"
-        },
-        {
-            "url": "https://apostleofdoom.org/the-witnesses/",
-            "title": "The witnesses",
-            "site": "Apostle of Doom"
-        },
-        {
-            "url": "https://apostleofdoom.org/the-verdict/",
-            "title": "The verdict",
-            "site": "Apostle of Doom"
-        },
-        {
-            "url": "https://apostleofdoom.org/answers/",
-            "title": "Answers to missionary claims",
-            "site": "Apostle of Doom"
-        }
     ]
 }
