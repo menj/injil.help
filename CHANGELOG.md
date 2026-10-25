@@ -7,7 +7,7 @@ All notable changes to The Injil theme. The `Changelog` section of `readme.txt` 
 - لعنة الله, "the curse of God", is set after the name of Paul of Tarsus as a calligraphic mark, like the honorific ligatures. It is used twice:
   - on the Epistle's autograph line, where the writer leaves Paul of Tarsus's shadow;
   - on The false apostles, in the sentence that gives the website's verdict, that Paul of Tarsus failed the first community's test.
-- The mark is `assets/images/lanat-allah.svg`: the outlines of Amiri Bold, the site's Arabic face, shaped by HarfBuzz and fully vowelled. `.ih-lanah` in `style.css` shows it as a mask in the palette's rubric red, so it follows the Colours tab and dark mode, and screen readers read it as "لعنة الله, the curse of God".
+- The mark is `assets/images/lanat-allah.svg`: the outlines of Amiri Bold, the site's Arabic face, shaped by HarfBuzz, vowelled as لعنةُ الله. `.ih-lanah` in `style.css` shows it as a mask in the palette's rubric red, so it follows the Colours tab and dark mode, and screen readers read it as "لعنة الله, the curse of God".
 - It is placed by hand and kept rare. It does not appear in titles, excerpts, menus or structured data.
 
 ## 3.6.6

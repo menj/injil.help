@@ -151,7 +151,7 @@ p.is-style-label-editorial{background:transparent;color:var(--ih-gold-ink);borde
 .ih-ar{font-family:var(--wp--preset--font-family--amiri);direction:rtl;unicode-bidi:isolate;text-align:right;letter-spacing:0 !important}
 /* لعنة الله after the name of Paul of Tarsus, set as a calligraphic mark like the honorific ligatures: Amiri Bold outlines
    (assets/images/lanat-allah.svg) used as a mask, so the mark takes the rubric red of the palette. Used sparingly, by hand. */
-.ih-lanah{display:inline-block;height:1.35em;aspect-ratio:2397/1539;margin-inline:.2em;vertical-align:-.38em;background-color:var(--wp--preset--color--accent-2);-webkit-mask:url(assets/images/lanat-allah.svg) center/contain no-repeat;mask:url(assets/images/lanat-allah.svg) center/contain no-repeat}
+.ih-lanah{display:inline-block;height:1.35em;aspect-ratio:2366/1230;margin-inline:.2em;vertical-align:-.3em;background-color:var(--wp--preset--color--accent-2);-webkit-mask:url(assets/images/lanat-allah.svg) center/contain no-repeat;mask:url(assets/images/lanat-allah.svg) center/contain no-repeat}
 @media (forced-colors:active){.ih-lanah{background-color:CanvasText}}
 /* Glosses are single lines set beside Latin text, so they sit flush left with it. */
 .ih-gloss.ih-ar{text-align:left}
