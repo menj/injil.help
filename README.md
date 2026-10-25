@@ -33,7 +33,7 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 |---|---|
 | Type | Block theme (theme.json v3), child of `twentytwentyfive` |
 | Folder, text domain, pattern prefix | `injil-help` |
-| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.6.6) |
+| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.6.7) |
 | PHP in `inc/` | options, starter-content, starter-content-pages, gospel-islam, quran-jesus, tafsir, seo, schema, share |
 | Data | `inc/data/` 2.6 MB of JSON: 176 starter pages, the gospel narrative, the Qur'anic passages, Thomas (woven sections and two full texts), the infancy gospels, the substitution witnesses, eight commentaries (315,000 words) |
 | Front-end assets | `style.css` 32 KB; `assets/css/ornament.css` 12 KB, `share.css` 3 KB, `bible.css` 3 KB; `assets/js/ornament.js` 3 KB, `share.js` 2 KB; all plain, no build step |
@@ -217,6 +217,8 @@ Registered in `functions.php`, styled in `style.css`:
 | `core/details` | `faq`; `fold` is applied by the parser and styled, not registered as a picker style |
 
 `style.css` opens with the tokens: radii `--ih-r-sm|md|lg`, font roles `--ih-serif`, `--ih-sans`, `--ih-display`, `--ih-greek`, `--ih-quran`. Colours are always `var(--wp--preset--color--{slug})`; nothing is hard-coded. Component classes are prefixed `ih-` (`ih-section-head`, `ih-entry`, `ih-k`, `ih-eyebrow`, `ih-numeral`, `ih-plate`, `ih-fnref`, `ih-footnotes`, `ih-s`, `ih-badge`, `ih-share*`). Language-scoped fonts come from `:lang()` selectors.
+
+`.ih-lanah` is the calligraphic لعنة الله set after the name of Paul of Tarsus: an empty span with `role="img"` and an `aria-label`, drawn from `assets/images/lanat-allah.svg` (Dubidam Arabic Regular outlines) as a CSS mask in the rubric red. It is placed by hand and kept to the Epistle's autograph line and the verdict on The false apostles.
 
 ## Fonts
 

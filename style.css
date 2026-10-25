@@ -5,7 +5,7 @@ Description: Custom child theme of Twenty Twenty-Five built for one site, The Ri
 Author: MENJ
 Author URI: https://menj.blog
 Template: twentytwentyfive
-Version: 3.6.6
+Version: 3.6.7
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -149,6 +149,10 @@ p.is-style-label-editorial{background:transparent;color:var(--ih-gold-ink);borde
 /* ---------- v2.1: structure after apostleofdoom.org ---------- */
 /* Arabic: .ih-ar is any Arabic (Amiri, RTL). KFGQPC Hafs is reserved for the Qur'an and applied only through .ih-quran. */
 .ih-ar{font-family:var(--wp--preset--font-family--amiri);direction:rtl;unicode-bidi:isolate;text-align:right;letter-spacing:0 !important}
+/* لعنة الله after the name of Paul of Tarsus, set as a calligraphic mark like the honorific ligatures: Dubidam Arabic Regular outlines
+   (assets/images/lanat-allah.svg) used as a mask, so the mark takes the rubric red of the palette. Used sparingly, by hand. */
+.ih-lanah{display:inline-block;height:1.05em;aspect-ratio:3672/1075;margin-inline:.1em .05em;vertical-align:-.16em;background-color:var(--wp--preset--color--accent-2);-webkit-mask:url(assets/images/lanat-allah.svg) center/contain no-repeat;mask:url(assets/images/lanat-allah.svg) center/contain no-repeat}
+@media (forced-colors:active){.ih-lanah{background-color:CanvasText}}
 /* Glosses are single lines set beside Latin text, so they sit flush left with it. */
 .ih-gloss.ih-ar{text-align:left}
 .ih-quran,.ih-ar.ih-quran{font-family:var(--ih-quran)}

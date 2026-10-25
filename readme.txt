@@ -82,6 +82,8 @@ This file is the user-facing manual that WordPress and Git Updater read. The rep
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add the entry to CHANGELOG.md and to the Changelog section here, note anything an existing site must know under "Updating an existing site" in UPGRADING.md, merge to main, and tag the commit with the same number (for example v3.4.0). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 3.6.7 =
+* لعنة الله (the curse of God) after the name of Paul of Tarsus, as a calligraphic mark in rubric red, used twice: on the Epistle's autograph line and on the verdict of The false apostles.
 = 3.6.6 =
 * Content written to the database is kept only as JSON. The 17 patterns that supply whole pages (the pillar, the measure, the section indexes, the FAQs, the composition page, the corrections log and the tables) moved from PHP files in patterns/ to JSON in inc/data/patterns/. They are still in the editor under injil.help, and every page comes out exactly as before.
 * A run in which a page could not be written is retried on the next admin screen load instead of being marked done.
