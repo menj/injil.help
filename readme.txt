@@ -82,6 +82,10 @@ This file is the user-facing manual that WordPress and Git Updater read. The rep
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add the entry to CHANGELOG.md and to the Changelog section here, note anything an existing site must know under "Updating an existing site" in UPGRADING.md, merge to main, and tag the commit with the same number (for example v3.4.0). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 3.6.5 =
+* Rank Math SEO: with the plugin active the theme works inside it. Rank Math owns the head and the single structured-data graph; the theme adds the nodes Rank Math does not make and enriches its Article, and prints Rank Math's breadcrumb trail in the theme's breadcrumb row.
+* Front page: eight FAQs in two full rows of four; every section's cards end on a full row at every width.
+* The two-column flow of prose pages is removed; it split the navigation and share row.
 = 3.6.4 =
 * The development documents (README.md, SSOT.md, CHANGELOG.md, UPGRADING.md) are left out of the archive Git Updater installs; the theme carries no test files.
 = 3.6.3 =

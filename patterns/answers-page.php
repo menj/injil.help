@@ -164,7 +164,10 @@
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:group {"className":"is-style-answer-item","layout":{"type":"default"}} -->
-<div class="wp-block-group is-style-answer-item"><!-- wp:heading -->
+<div class="wp-block-group is-style-answer-item"><!-- wp:paragraph {"className":"is-style-label-consensus"} -->
+<p class="is-style-label-consensus"><?php esc_html_e( 'Scholarly consensus', 'injil-help' ); ?></p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
 <h2 class="wp-block-heading">Is a Muslim gospel a new idea?</h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-answer-text"} -->

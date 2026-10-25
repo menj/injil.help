@@ -264,7 +264,7 @@ function injil_help_render_options() {
 						<th scope="row"><label for="ih-schema"><?php esc_html_e( 'Theme SEO output', 'injil-help' ); ?></label></th>
 						<td>
 							<select id="ih-schema" name="<?php echo esc_attr( $name ); ?>[schema]">
-								<option value="auto" <?php selected( $o['schema'], 'auto' ); ?>><?php esc_html_e( 'Automatic (off when Yoast, Rank Math or SEOPress is active)', 'injil-help' ); ?></option>
+								<option value="auto" <?php selected( $o['schema'], 'auto' ); ?>><?php esc_html_e( 'Automatic (with Rank Math, the theme works inside it; off with Yoast or SEOPress)', 'injil-help' ); ?></option>
 								<option value="on" <?php selected( $o['schema'], 'on' ); ?>><?php esc_html_e( 'Always on', 'injil-help' ); ?></option>
 								<option value="off" <?php selected( $o['schema'], 'off' ); ?>><?php esc_html_e( 'Always off', 'injil-help' ); ?></option>
 							</select>

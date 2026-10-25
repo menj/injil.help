@@ -5,7 +5,7 @@ Description: Custom child theme of Twenty Twenty-Five built for one site, The Ri
 Author: MENJ
 Author URI: https://menj.blog
 Template: twentytwentyfive
-Version: 3.6.4
+Version: 3.6.5
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -178,7 +178,12 @@ p.ih-cite{margin:0;font-size:13px;color:var(--wp--preset--color--muted)}
 /* Home and section blocks */
 .ih-section{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);margin-block-start:var(--wp--preset--spacing--50) !important}
 .ih-section > *{margin:0 !important}
-@media (max-width:900px){.ih-section{grid-template-columns:1fr}}
+@media (max-width:1199px){.ih-section{grid-template-columns:1fr}}
+/* Card grids always end on a full row: the front-page sections set nine or six cards in three columns, the FAQ band eight in four (two below 1200px); one column on phones. The column count is fixed, not auto-fill, so a row is never left half empty. */
+.ih-section > .ih-entries:not(.ih-entries-list){display:grid !important;grid-template-columns:repeat(3,minmax(0,1fr)) !important}
+.ih-answers:not(.ih-answers-list){display:grid !important;grid-template-columns:repeat(4,minmax(0,1fr)) !important}
+@media (max-width:1199px){.ih-answers:not(.ih-answers-list){grid-template-columns:repeat(2,minmax(0,1fr)) !important}}
+@media (max-width:640px){.ih-section > .ih-entries:not(.ih-entries-list),.ih-answers:not(.ih-answers-list){grid-template-columns:1fr !important}}
 .ih-section-head > * + *{margin-block-start:var(--wp--preset--spacing--10)}
 .ih-section-head h1,.ih-section-head h2{margin-top:6px}
 .ih-section-head h2{font-size:40px;line-height:1.05}
@@ -217,15 +222,6 @@ p.ih-cite{margin:0;font-size:13px;color:var(--wp--preset--color--muted)}
 .ih-width-full{--wp--style--global--content-size:none;--wp--style--global--wide-size:none}
 .ih-width-full .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)),.ih-width-full .is-layout-constrained > .alignwide{max-width:none}
 .ih-width-full .ih-aside,.ih-width-full .ih-overview{max-width:none}
-/* At full and wide widths a page of running prose is set in two columns on screens from 1280px, as the gospel sections are, so a line never runs past about eighty characters. Headings, tables, plates, folds, asides, cards and the Read next row span both columns; the gospel sections keep their own column setting. */
-@supports selector(:has(a)) {
- @media (min-width:1280px){
-  :is(.ih-width-full,.ih-width-wide) .entry-content:not(:has(.ih-bible)){column-count:2;column-gap:3rem;column-rule:1px solid var(--wp--preset--color--accent-6)}
-  :is(.ih-width-full,.ih-width-wide) .entry-content:not(:has(.ih-bible)) > :is(h2,h3,h4,figure,table,.wp-block-table,details,blockquote,.wp-block-group,.wp-block-columns,.wp-block-buttons,.wp-block-separator,.ih-footnotes){column-span:all}
-  :is(.ih-width-full,.ih-width-wide) .entry-content:not(:has(.ih-bible)) > :is(h2,h3,h4){break-after:avoid}
-  :is(.ih-width-full,.ih-width-wide) .entry-content:not(:has(.ih-bible)) > p,:is(.ih-width-full,.ih-width-wide) .entry-content:not(:has(.ih-bible)) li{break-inside:avoid}
- }
-}
 .ih-aside{border:1.5px solid var(--wp--preset--color--accent-3);border-radius:var(--ih-r-md);padding:18px 22px;max-width:760px;margin-top:var(--wp--preset--spacing--30) !important}
 .ih-aside > * + *{margin-top:8px}
 .ih-next .ih-k{color:var(--wp--preset--color--accent-1)}
@@ -235,7 +231,9 @@ p.ih-cite{margin:0;font-size:13px;color:var(--wp--preset--color--muted)}
 .ih-breadcrumb li+li::before{content:"›";padding:0 8px;color:var(--wp--preset--color--accent-3)}
 .ih-breadcrumb a{color:var(--wp--preset--color--accent-4);text-decoration:none}
 .ih-breadcrumb a:hover{color:var(--wp--preset--color--accent-2);text-decoration:underline}
-.ih-breadcrumb [aria-current]{color:var(--wp--preset--color--contrast)}
+.ih-breadcrumb [aria-current],.ih-breadcrumb .last{color:var(--wp--preset--color--contrast)}
+.ih-breadcrumb p{margin:0}
+.ih-breadcrumb .separator{color:var(--wp--preset--color--accent-3);padding:0 2px}
 /* Section index: the overview between the head and the entries */
 .ih-overview{max-width:760px;margin-top:var(--wp--preset--spacing--30)}
 .ih-overview h2{font-size:var(--wp--preset--font-size--large);margin-top:var(--wp--preset--spacing--30)}

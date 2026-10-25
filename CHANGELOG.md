@@ -2,6 +2,12 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.6.5
+
+- Rank Math SEO: the theme works inside it instead of stepping aside. With the plugin active and Theme Options › SEO on Automatic, Rank Math owns the head (title, description, canonical, robots, Open Graph, sitemap) and there is one structured-data graph, Rank Math's: the theme adds through `rank_math/json_ld` every node Rank Math does not make (Book and Chapter for the gospel, the commentaries and their translations, DefinedTermSet, Table, Dataset, Event, Quotation, FAQPage, the two subjects, the site navigation, the manuscript images with their licence) and gives Rank Math's Article its citations, subjects and the chapter or translation it belongs to; every reference to the theme's own organisation, author, page and article is pointed at Rank Math's, so nothing dangles and no node is printed twice. The theme declares `rank-math-breadcrumbs` support and prints Rank Math's trail in its breadcrumb row, so the visible trail and Rank Math's BreadcrumbList are one list. When Rank Math's homepage description is empty, the theme's is used. "Always on" still prints the theme's own head and graph as well; "Always off" leaves everything to the plugin. New file `inc/rank-math.php`.
+- The front-page FAQ band has eight questions, two full rows of four (two columns below 1200px, one on phones); the two added, on what the Qur'an says about Jesus and whether a Muslim gospel is a new idea, come from the FAQs page, where the second now carries its label. The Five Gospels section on the front page has nine cards (the full text of Thomas and the sayings-order test added) and the other sections six, in three fixed columns, so every card grid ends on a full row at every width. The section head sits above its cards below 1200px.
+- The two-column flow of prose pages added in 3.6.1 is removed: it split the section navigation and the share row across the columns. Content stays full width; only the gospel text keeps its Bible columns.
+
 ## 3.6.4
 
 - The development documents (SSOT.md, CHANGELOG.md, UPGRADING.md, with README.md and the dot-files already so marked) are `export-ignore`, so the archive Git Updater installs carries only what WordPress reads. The theme has no test files; the release checks live outside the repository.

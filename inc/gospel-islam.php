@@ -211,7 +211,12 @@ function injil_help_gospel_islam_pages() {
 		if ( empty( $data['front'][ $k ] ) ) {
 			continue;
 		}
-		$body   = $data['front'][ $k ]['paras'];
+		// The Introduction is set like the sections: running head and the text in the Bible columns.
+		$body   = array_merge(
+			array( '[p.ih-running-head] The Gospel According to Islam · ' . $data['front'][ $k ]['title'], '[bible]' ),
+			$data['front'][ $k ]['paras'],
+			array( '[/bible]' )
+		);
 		$pages[] = array(
 			'path'    => $base . '/' . $f[0],
 			'title'   => $data['front'][ $k ]['title'],

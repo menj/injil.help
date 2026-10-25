@@ -33,7 +33,7 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 |---|---|
 | Type | Block theme (theme.json v3), child of `twentytwentyfive` |
 | Folder, text domain, pattern prefix | `injil-help` |
-| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.6.4) |
+| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.6.5) |
 | PHP in `inc/` | options, starter-content, starter-content-pages, gospel-islam, quran-jesus, tafsir, seo, schema, share |
 | Data | `inc/data/` 2.6 MB of JSON: 176 starter pages, the gospel narrative, the Qur'anic passages, Thomas (woven sections and two full texts), the infancy gospels, the substitution witnesses, eight commentaries (315,000 words) |
 | Front-end assets | `style.css` 32 KB; `assets/css/ornament.css` 12 KB, `share.css` 3 KB, `bible.css` 3 KB; `assets/js/ornament.js` 3 KB, `share.js` 2 KB; all plain, no build step |
@@ -76,6 +76,7 @@ injil-help/
 │  ├─ tafsir.php          the commentaries: works, verse groups, section map, pages, fold blocks
 │  ├─ seo.php             document title, meta description, Open Graph
 │  ├─ schema.php          the JSON-LD graph
+│  ├─ rank-math.php       Rank Math: graph merge, breadcrumbs, home description
 │  ├─ share.php           share row
 │  └─ data/               all content (JSON)
 ├─ templates/, parts/     block templates and the header and footer parts
@@ -230,6 +231,10 @@ All faces are bundled in `assets/fonts/` and declared as `fontFace` in `theme.js
 `inc/seo.php`: `injil_help_seo_defaults()` (filterable) supplies the home title, home description and pillar title; `document_title_parts` applies them; `wp_head` prints `meta description` (the excerpt or the first paragraph, trimmed to 160 characters at a sentence end by `injil_help_trim_description()`), Open Graph and Twitter card tags, and the featured image or the default social image (`assets/images/og-default.jpg`, filter `injil_help_default_og_image`). `injil_help_is_pillar()` identifies `/the-islamic-dilemma/`. `injil_help_breadcrumb_html()` prepends the visible breadcrumb row (Home, the parents, the page) to the content of every page and post below the front page at `the_content` priority 5; search result pages carry `noindex` through `wp_robots`.
 
 `inc/schema.php`: `injil_help_schema_enabled()` honours the SEO option and switches off when Yoast, Rank Math or SEOPress is active (filter `injil_help_output_schema`). `injil_help_schema_graph()` builds one `@graph` at `wp_head` priority 5 from every schema.org type the content supports, whatever a search engine shows: Organization (logo, sameAs, ContactPoint), Person (author from the SEO tab or the post author), WebSite (SearchAction; about ʿĪsā ibn Maryam, the Qur'an and the Islamic Dilemma), Person and Book nodes for those two subjects with Wikidata identifiers, an ItemList of SiteNavigationElement from the header, the page node typed by `injil_help_schema_page_type()` (CollectionPage with an ItemList when the page has three or more entries or is the sitemap, ProfilePage + AboutPage for the About page, ContactPage, SearchResultsPage, else WebPage; every page carries a SpeakableSpecification), BreadcrumbList from ancestors, Article + ScholarlyArticle or BlogPosting when `injil_help_schema_is_article()` says so (word count, dates, section, images, `citation` parsed from the Sources list as CreativeWork or ScholarlyArticle-in-Periodical), Book + Chapter for the gospel sections, Book (Arabic, with its author) + CreativeWork (the English rendering, `translationOfWork`) for each commentary page, DefinedTermSet + DefinedTerm for the glossary, Table for every comparison table, Dataset for the sayings-order test, Event for every dated timeline entry, Quotation for every quote block (at most 40), FAQPage from `is-style-faq` details and `answer-item` groups, ImageObject for every figure (licence read from the caption, creator from "Photo: Name", acquireLicensePage from the Commons link). Patterns are expanded with `injil_help_expand_patterns()` so the collectors see the real blocks. Filter the finished array with `injil_help_schema_graph`.
+
+## Rank Math
+
+`inc/rank-math.php`. With Rank Math active and the SEO option on Automatic (`injil_help_rank_math_mode()`), the theme's own head output and graph are off and the theme works inside the plugin: `injil_help_rank_math_json_ld()` on `rank_math/json_ld` (priority 50) merges into Rank Math's data every node of `injil_help_schema_graph()` that Rank Math does not make, skips the theme's Organization, Person, WebSite, page node, BreadcrumbList and Article, copies the Article's `citation`, `about`, `speakable` and extra `isPartOf` onto Rank Math's Article, and repoints every reference (`injil_help_rank_math_repoint()`) to Rank Math's publisher, WebPage and Article. A FAQPage is added only when Rank Math has none. `add_theme_support( 'rank-math-breadcrumbs' )` is declared; while Rank Math's breadcrumbs are on, the `injil_help_breadcrumb_html` filter replaces the theme's trail with `rank_math_get_breadcrumbs()` wrapped in the theme's `.ih-breadcrumb` nav. `rank_math/frontend/description` supplies the theme's home description when Rank Math's is empty. "Always on" prints the theme's head and graph beside the plugin's; "Always off" prints nothing.
 
 ## Share row
 

@@ -113,7 +113,7 @@ function injil_help_breadcrumb_html( $post ) {
 		$html .= '<li><a href="' . esc_url( $item[1] ) . '">' . esc_html( $item[0] ) . '</a></li>';
 	}
 	$html .= '<li aria-current="page">' . esc_html( wp_strip_all_tags( get_the_title( $post ) ) ) . '</li></ol></nav>';
-	return $html;
+	return apply_filters( 'injil_help_breadcrumb_html', $html, $post ); // inc/rank-math.php swaps in Rank Math's trail
 }
 
 add_filter(
