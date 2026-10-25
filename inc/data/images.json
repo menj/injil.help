@@ -13,7 +13,7 @@
     },
     "gospels/luke": {
         "file": "Dublin, Chester Beatty Ms Papyrus 45 BP I ff.13-14 Luke 11.50-12.12; 12.18-37; 12.42-13.1; 13.jpg",
-        "alt": "Papyrus 45, Chester Beatty Library, Dublin, about 200 to 250 CE: two leaves of the Gospel of Luke",
+        "alt": "Papyrus 45, Chester Beatty Library, Dublin, about 200 to 250 CE: 2 leaves of the Gospel of Luke",
         "caption": "Papyrus 45 (Chester Beatty I), about 200 to 250 CE: Luke 11 to 13, among the oldest copies of any gospel. Chester Beatty Library, Dublin.",
         "credit": "Public domain."
     },
@@ -80,7 +80,7 @@
     "paul/acts-galatians": {
         "file": "Conversion on the Way to Damascus-Caravaggio (c.1600-1).jpg",
         "alt": "Caravaggio, Conversion on the Way to Damascus, about 1601, Santa Maria del Popolo, Rome",
-        "caption": "Caravaggio, Conversion on the Way to Damascus (about 1601), Santa Maria del Popolo, Rome: the scene Acts tells three times and Galatians once, differently.",
+        "caption": "Caravaggio, Conversion on the Way to Damascus (about 1601), Santa Maria del Popolo, Rome: the scene Acts tells 3 times and Galatians once, differently.",
         "credit": "Public domain."
     },
     "paul/paul-against-jesus": {
@@ -110,7 +110,7 @@
     "resources/sources": {
         "file": "Codex Vaticanus B, 2Thess. 3,11-18, Hebr. 1,1-2,2.jpg",
         "alt": "Codex Vaticanus, fourth century: the end of 2 Thessalonians and the beginning of Hebrews",
-        "caption": "Codex Vaticanus, fourth century, one of the two oldest complete Greek Bibles: the end of 2 Thessalonians and the opening of Hebrews. Vatican Library.",
+        "caption": "Codex Vaticanus, fourth century, one of the 2 oldest complete Greek Bibles: the end of 2 Thessalonians and the opening of Hebrews. Vatican Library.",
         "credit": "Public domain."
     },
     "resources/objections": {
@@ -139,7 +139,7 @@
     },
     "the-islamic-dilemma/secular-form": {
         "file": "Birmingham Quran manuscript.jpg",
-        "alt": "The Birmingham Qur’an manuscript, two leaves in Hijazi script, radiocarbon-dated to the seventh century",
+        "alt": "The Birmingham Qur’an manuscript, 2 leaves in Hijazi script, radiocarbon-dated to the seventh century",
         "caption": "The Birmingham Qur’an manuscript (Mingana 1572a), Hijazi script, radiocarbon-dated to between 568 and 645 CE. Cadbury Research Library, University of Birmingham.",
         "credit": "Public domain."
     },
@@ -158,7 +158,7 @@
     "quran/servant": {
         "file": "Christ Pantocrator Deesis mosaic Hagia Sophia.jpg",
         "alt": "The Deesis mosaic of Christ in Hagia Sophia, Istanbul, thirteenth century",
-        "caption": "Christ in the Deesis mosaic of Hagia Sophia, Istanbul, thirteenth century: the image of the Jesus the Qur’an says he is not, a God; it calls him a servant and a messenger. Photograph by Myrabella.",
+        "caption": "Christ in the Deesis mosaic of Hagia Sophia, Istanbul, thirteenth century: the image of Jesus as a God; the Qur’an calls him a servant and a messenger. Photograph by Myrabella.",
         "credit": "Public domain."
     },
     "quran/signs": {

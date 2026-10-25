@@ -1,6 +1,6 @@
 <?php
 /**
- * Title: Home section: Paul of Tarsus, the False Apostle
+ * Title: Home section: Paul of Tarsus, the false apostle
  * Slug: injil-help/home-paul
  * Categories: injil-help
  * Description: Front-page block for Paul of Tarsus: glossed heading, intro and numbered entries.
@@ -20,7 +20,7 @@
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:heading -->
-<h2 class="wp-block-heading"><a href="/paul/">Paul of Tarsus, the False Apostle</a></h2>
+<h2 class="wp-block-heading"><a href="/paul/">Paul of Tarsus, the false apostle</a></h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-intro"} -->
 <p class="ih-intro">Paul of Tarsus against the men who knew ʿĪsā ibn Maryam: his own letters, the account in Acts, and the Jerusalem church under James.</p>

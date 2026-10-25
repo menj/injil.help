@@ -16,13 +16,13 @@
 <h1 class="wp-block-heading ih-cover-title">The Rightly-Guided Injīl</h1>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-cover-sub"} -->
-<p class="ih-cover-sub">The five gospels, Paul of Tarsus, and the Jesus of the Qur&#039;an</p>
+<p class="ih-cover-sub">The five gospels, Paul of Tarsus, and the Jesus of the Qur’an</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"className":"ih-gloss ih-ar ih-quran ih-cover-gloss"} -->
 <p class="ih-gloss ih-ar ih-quran ih-cover-gloss" dir="rtl" lang="ar">فِيهِ هُدٗى وَنُورٞ</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"className":"ih-cover-lede"} -->
-<p class="ih-cover-lede">The Islamic Dilemma says the Qur&#039;an cannot confirm the gospels and contradict them at once. This website answers it from the gospels themselves: five books that disagree with each other, a Paul of Tarsus at odds with the men who knew ʿĪsā ibn Maryam, and the Qur&#039;an as the measure over both.</p>
+<p class="ih-cover-lede">The Islamic Dilemma says the Qur’an cannot confirm the gospels and contradict them at once. This website answers it from the gospels themselves: 5 books that disagree with each other, a Paul of Tarsus at odds with the men who knew ʿĪsā ibn Maryam, and the Qur’an as the measure over both.</p>
 <!-- /wp:paragraph -->
 <!-- wp:buttons -->
 <div class="wp-block-buttons"><!-- wp:button {"className":"ih-btn-gloss"} -->
@@ -35,7 +35,7 @@
 <!-- /wp:column -->
 <!-- wp:column {"verticalAlignment":"center","width":"38%"} -->
 <div class="wp-block-column is-vertically-aligned-center" style="flex-basis:38%"><!-- wp:image {"sizeSlug":"large","linkDestination":"custom","className":"ih-plate ih-cover-image"} -->
-<figure class="wp-block-image size-large ih-plate ih-cover-image"><a href="https://commons.wikimedia.org/wiki/File:Birmingham_Quran_manuscript.jpg"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Birmingham_Quran_manuscript.jpg?width=1400" alt="Birmingham Qur'an manuscript: two parchment folios in Hijazi script carrying Sūrat Maryam, radiocarbon dated 568–645 CE, University of Birmingham" title="Birmingham Qur'an manuscript"/></a><figcaption class="wp-element-caption">Birmingham Qur&#039;an manuscript, folios 1v and 2r, with the close of Sūrat Maryam. University of Birmingham. Public domain. <a href="https://commons.wikimedia.org/wiki/File:Birmingham_Quran_manuscript.jpg">Wikimedia Commons</a></figcaption></figure>
+<figure class="wp-block-image size-large ih-plate ih-cover-image"><a href="https://commons.wikimedia.org/wiki/File:Birmingham_Quran_manuscript.jpg"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Birmingham_Quran_manuscript.jpg?width=1400" alt="Birmingham Qur'an manuscript: two parchment folios in Hijazi script carrying Sūrat Maryam, radiocarbon dated 568–645 CE, University of Birmingham" title="Birmingham Qur'an manuscript"/></a><figcaption class="wp-element-caption">Birmingham Qur’an manuscript, folios 1v and 2r, with the close of Sūrat Maryam. University of Birmingham. Public domain. <a href="https://commons.wikimedia.org/wiki/File:Birmingham_Quran_manuscript.jpg">Wikimedia Commons</a></figcaption></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div>

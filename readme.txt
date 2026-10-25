@@ -47,7 +47,7 @@ Licensing: Sabon Next LT (Linotype) and Kagnue (Youthlabs Studio) are commercial
 
 == SEO: "the Islamic Dilemma" ==
 * The pillar page is /the-islamic-dilemma/, created for you. Its excerpt is its meta description: keyword first, under 160 characters.
-* The theme sets the home title to "The Islamic Dilemma, Answered | <site name>" and the pillar title to "The Islamic Dilemma, Answered: Qur'an 5:47 and the Injīl", and writes the meta description and social-preview tags for every page. Change the titles and description under Theme Options > SEO. If Yoast, Rank Math or SEOPress is active, the theme steps back and you set the same values in the plugin.
+* The theme sets the home title to "The Islamic Dilemma, answered | <site name>" and the pillar title to "The Islamic Dilemma, answered: Qur’an 5:47 and the Injīl", and writes the meta description and social-preview tags for every page. Change the titles and description under Theme Options > SEO. If Yoast, Rank Math or SEOPress is active, the theme steps back and you set the same values in the plugin.
 * Structured data: every page carries the markup Google documents for sites like this (the organisation and author, the site search, the page type, breadcrumbs, article details, the gospel as a book, the licence of every manuscript image, and the FAQs). Fill in the author name, profile links and logo under Theme Options > SEO.
 * FAQs: every main page carries six questions and answers written the way people search; the front page carries six and the FAQs page twelve. Each feeds that page's FAQ rich result.
 * The keyword appears in the home kicker and lede, the home dilemma section, the first nav item, the first two FAQs and the footer. Link to /the-islamic-dilemma/ from every new article that touches Qur'an 5:47, taḥrīf or the identity of the Injīl, with varied anchor text.
@@ -88,6 +88,7 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 * The words the page builders add (the commentary pages, the gospel section heads and navigation, The Qur'an on Jesus) are JSON too, in inc/data/text.json and inc/data/commentaries.json.
 * The Qur'an on Jesus credits Alham Ahmed's compilation, its publisher and The Clear Quran translation on the page itself.
 * How this gospel was composed: the credits say who wrote the notes: the Clear Quran's footnotes to the passages, Shafaat's notes, and the website's notes on the Qur'anic ending.
+* Writing style v2 across the site's own text: reframes stated positively, sources named, counts as digits, padding cut, long paragraphs split, curly quotes, sentence-case headings. The commentary translations lose their em dashes. Reproduced texts keep their authors' wording.
 = 3.6.5 =
 * Rank Math SEO: with the plugin active the theme works inside it. Rank Math owns the head and the single structured-data graph; the theme adds the nodes Rank Math does not make and adds to its Article, and prints Rank Math's breadcrumb trail in the theme's breadcrumb row.
 * Front page: eight FAQs in two full rows of four; every section's cards end on a full row at every width.
