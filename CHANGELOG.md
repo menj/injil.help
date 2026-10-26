@@ -12,6 +12,7 @@ All notable changes to The Injil theme. The `Changelog` section of `readme.txt` 
 - The phrase patterns are scanned as one pattern would be: from the end of the last match, the earliest match of any pattern, the longest at one place. Collecting each pattern's matches apart missed a phrase that a passed-over match in another pattern overlapped ("King Saul and Paul of Tarsus" linked nothing when King Saul was already linked); 178 of 1,720 overlapping chains of real phrases were wrong, now none.
 - The breadcrumb's links no longer count as links the text already makes, so the prose of a sub-page links its parent page again.
 - A list item holding two paragraphs gets one new link, not one in each paragraph.
+- A nested list item gets a link of its own: the outer item's link no longer uses up the items in a list inside it, and a link in a nested item no longer uses up the outer item's.
 - An element left unclosed inside a region where no link may go closes with that region, so it no longer switches links off for the rest of the page.
 - Addresses and slugs on the Contextual links tab keep their percent-encoded characters: `sanitize_text_field()` deleted every `%XX`, so `/gospels/%D8%A7/` was saved as `/gospels//`. The phrase is sanitised as text and the address with `esc_url_raw()`; a line without a valid address is dropped (`injil_help_sanitize_ctx_line()`, `injil_help_sanitize_ctx_slug()`).
 

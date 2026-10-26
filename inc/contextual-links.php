@@ -209,7 +209,7 @@ function injil_help_ctx_apply( $content, $here ) {
 	}
 	$made   = array( 0 => 0, 1 => 0 );
 	$stack  = array(); // Open elements that forbid links.
-	$blocks = array(); // Open <p> and <li>, true once it or an enclosing one has a link.
+	$blocks = array(); // Open <p> and <li>: array( tag, linked ).
 	$void   = array( 'br', 'img', 'hr', 'wbr', 'input', 'source', 'meta', 'link', 'col', 'area', 'embed', 'track' );
 	$out    = '';
 
@@ -237,16 +237,19 @@ function injil_help_ctx_apply( $content, $here ) {
 					if ( $stack || injil_help_ctx_forbids( $tag, $piece ) ) {
 						$stack[] = $tag;
 					}
-					if ( 'p' === $tag || 'li' === $tag ) {
+					if ( 'li' === $tag ) {
+						// A list item, nested or not, has a link of its own to make.
+						$blocks[] = array( 'li', false );
+					} elseif ( 'p' === $tag ) {
 						// A paragraph inside a list item that already has its link inherits that.
-						$blocks[] = $blocks ? end( $blocks ) : false;
+						$blocks[] = array( 'p', $blocks ? end( $blocks )[1] : false );
 					}
 				}
 			}
 			$out .= $piece;
 			continue;
 		}
-		if ( $stack || ( $blocks && end( $blocks ) ) || '' === trim( $piece ) || ( $made[0] >= $caps[0] && $made[1] >= $caps[1] ) ) {
+		if ( $stack || ( $blocks && end( $blocks )[1] ) || '' === trim( $piece ) || ( $made[0] >= $caps[0] && $made[1] >= $caps[1] ) ) {
 			$out .= $piece;
 			continue;
 		}
@@ -286,9 +289,13 @@ function injil_help_ctx_apply( $content, $here ) {
 				: '<a class="ih-ctx-link ih-ctx-link--sister" href="' . esc_url( $url ) . '" rel="noopener">' . $match . '</a>' ) . substr( $piece, $pos );
 			break; // One new link in a piece of text, so at most one in a paragraph.
 		}
-		if ( $linked && $blocks ) {
-			// The paragraph and every list item around it now have their link.
-			$blocks = array_fill( 0, count( $blocks ), true );
+		// The paragraph, and the list item that holds it, now have their link; an outer list
+		// item around a nested list keeps its own.
+		for ( $i = count( $blocks ) - 1; $linked && $i >= 0; $i-- ) {
+			$blocks[ $i ][1] = true;
+			if ( 'li' === $blocks[ $i ][0] ) {
+				break;
+			}
 		}
 		$out .= $piece;
 	}
