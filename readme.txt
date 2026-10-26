@@ -84,6 +84,8 @@ This file is the user-facing manual that WordPress and Git Updater read. The rep
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add the entry to CHANGELOG.md and to the Changelog section here, note anything an existing site must know under "Updating an existing site" in UPGRADING.md, merge to main, and tag the commit with the same number (for example v3.4.0). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 3.7.4 =
+* The Islamic Dilemma pillar page carries "The Islamic Dilemma across the network", a box linking the six sister pieces on compelling-evidence.com, abrahamic-religions.com, bestofislam.org, apostleofdoom.org, murtadd.org and lailatulqadar.guide.
 = 3.7.3 =
 * Content corrections: Ibn Isḥāq's report of the Christians' 7 hours; the "taught to write" reading of 3:48 and 5:110 conceded to the commentators; 46:30 quoted correctly; al-Saʿdī on 3:55 retranslated from his Arabic; the Codex Sinaiticus alt text.
 = 3.7.2 =

@@ -2,6 +2,11 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.7.4
+
+- The Islamic Dilemma pillar page (/the-islamic-dilemma/, `inc/data/patterns/islamic-dilemma-page.json`, included by `inc/data/pages/pillar.json`) carries "The Islamic Dilemma across the network" before its Sources: an `is-style-criterion` box with one line per sister piece and its angle, linking compelling-evidence.com/articles/islamic-dilemma-quran-and-bible/, abrahamic-religions.com/islamic-dilemma/, bestofislam.org/islamic-dilemma/, apostleofdoom.org/islamic-dilemma/, murtadd.org/guides/islamic-dilemma/ and lailatulqadar.guide/islamic-dilemma/ (`rel="noopener"`, same tab, as the contextual links do).
+- On-page SEO checked, nothing else changed: the keyword "the Islamic Dilemma" is already in the title tag ("The Islamic Dilemma, answered: Qur’an 5:47 and the Injīl"), the H1, the meta description (the page excerpt) and the first 100 words. No new article.
+
 ## 3.7.3
 
 - Five content errors from the content review are corrected.
