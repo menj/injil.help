@@ -185,7 +185,9 @@ function injil_help_ctx_apply( $content, $here ) {
 						array_pop( $blocks );
 					}
 				} elseif ( ! in_array( $tag, $void, true ) && '/' !== substr( $piece, -2, 1 ) ) {
-					if ( injil_help_ctx_forbids( $tag, $piece ) ) {
+					// Inside a skip region every element is tracked, so a nested
+					// element of the same name cannot close the region early.
+					if ( $stack || injil_help_ctx_forbids( $tag, $piece ) ) {
 						$stack[] = $tag;
 					}
 					if ( 'p' === $tag || 'li' === $tag ) {
