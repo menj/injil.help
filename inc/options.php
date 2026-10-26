@@ -105,8 +105,9 @@ function injil_help_sanitize_options( $in ) {
 	$out['ctx_sister']       = empty( $in['ctx_sister'] ) ? 0 : 1;
 	$out['ctx_own_max']      = max( 0, min( 15, (int) ( $in['ctx_own_max'] ?? 4 ) ) );
 	$out['ctx_sister_max']   = max( 0, min( 10, (int) ( $in['ctx_sister_max'] ?? 3 ) ) );
-	$out['ctx_extra']        = implode( "\n", array_filter( array_map( 'sanitize_text_field', preg_split( '/\R/u', (string) ( $in['ctx_extra'] ?? '' ) ) ) ) );
-	$out['ctx_exclude']      = implode( "\n", array_filter( array_map( 'sanitize_text_field', preg_split( '/\R/u', (string) ( $in['ctx_exclude'] ?? '' ) ) ) ) );
+	// Split without the u flag, which fails (returns false) on invalid UTF-8; sanitize_text_field() drops the invalid bytes.
+	$out['ctx_extra']        = implode( "\n", array_filter( array_map( 'sanitize_text_field', preg_split( '/\r\n|\r|\n/', (string) ( $in['ctx_extra'] ?? '' ) ) ) ) );
+	$out['ctx_exclude']      = implode( "\n", array_filter( array_map( 'sanitize_text_field', preg_split( '/\r\n|\r|\n/', (string) ( $in['ctx_exclude'] ?? '' ) ) ) ) );
 	return $out;
 }
 

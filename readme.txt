@@ -86,6 +86,7 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 == Changelog ==
 = 3.7.2 =
 * The Qur'anic face is served as a WOFF2 conversion (107 KB, from 298 KB) in place of the original TTF, by the owner's decision, accepting that the font's licence forbids modifying it.
+* Contextual links: posts and pages only (not attachments); saving the tab survives invalid UTF-8; an over-long phrase no longer disables its neighbours; non-ASCII capitals match without mbstring.
 = 3.7.1 =
 * KFGQPC HAFS Uthmanic Script ships with its licence (assets/fonts/KFGQPC-Hafs-Uthmanic-LICENSE.txt) and is credited on the credits page; the font file is unchanged and still used for Qur'anic Arabic only (class ih-quran). A verse set as its own block gets a line height of 2.1 for the marks.
 = 3.7.0 =

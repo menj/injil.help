@@ -21,6 +21,61 @@ function injil_help_ctx_key( $text ) {
 	return function_exists( 'mb_strtolower' ) ? mb_strtolower( trim( $text ), 'UTF-8' ) : strtolower( trim( $text ) );
 }
 
+/**
+ * The target for matched text. Without mbstring the keys keep their non-ASCII capitals
+ * (strtolower() lowers ASCII only), so a miss is retried phrase by phrase, case-insensitively.
+ *
+ * @param array<string,array{0:string,1:bool}> $phrases Normalised phrase => target.
+ * @param string                               $match   Matched text.
+ * @return array{0:string,1:bool}|null
+ */
+function injil_help_ctx_lookup( $phrases, $match ) {
+	$key = injil_help_ctx_key( $match );
+	if ( isset( $phrases[ $key ] ) ) {
+		return $phrases[ $key ];
+	}
+	foreach ( $phrases as $phrase => $hit ) {
+		if ( preg_match( '/^' . preg_quote( (string) $phrase, '/' ) . '$/iu', $key ) ) {
+			return $hit;
+		}
+	}
+	return null;
+}
+
+/**
+ * Patterns for the phrases, at most 150 to a pattern: one pattern of the whole map is more
+ * than PCRE compiles. A chunk that still fails (an over-long phrase added on the tab) is split
+ * in two until it compiles; a single phrase that cannot compile is left out, so it never costs
+ * the phrases beside it.
+ *
+ * @param string[] $keys Normalised phrases, longest first.
+ * @return string[]
+ */
+function injil_help_ctx_patterns( $keys ) {
+	$patterns = array();
+	foreach ( array_chunk( $keys, 150 ) as $chunk ) {
+		$queue = array( $chunk );
+		while ( $queue ) {
+			$part = array_shift( $queue );
+			$alts = array();
+			foreach ( $part as $key ) {
+				$alt    = preg_quote( $key, '/' );
+				$alt    = str_replace( "'", "(?:'|’|ʼ|&\\#8217;|&\\#0?39;|&rsquo;)", $alt );
+				$alts[] = str_replace( ' ', '(?:\s|&nbsp;|&\\#160;|\x{00A0})+', $alt );
+			}
+			// A whole phrase: no letter or digit on either side, and never part of an entity.
+			$pattern = '/(?<![\p{L}\p{N}&#])(?:' . implode( '|', $alts ) . ')(?![\p{L}\p{N}])/iu';
+			if ( false !== @preg_match( $pattern, '' ) ) { // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- the failure is handled here.
+				$patterns[] = $pattern;
+			} elseif ( count( $part ) > 1 ) {
+				$half = (int) ceil( count( $part ) / 2 );
+				array_push( $queue, array_slice( $part, 0, $half ), array_slice( $part, $half ) );
+			}
+		}
+	}
+	return $patterns;
+}
+
 /** A URL reduced to host and path, for comparing targets and the current page. */
 function injil_help_ctx_norm_url( $url ) {
 	$parts = wp_parse_url( html_entity_decode( (string) $url ) );
@@ -89,28 +144,16 @@ function injil_help_ctx_compiled() {
 		}
 	}
 
-	// Several patterns of 150 phrases each: one pattern of the whole map is more than PCRE compiles.
-	$patterns = array();
-	$keys     = array_keys( $phrases );
+	$keys = array_keys( $phrases );
 	usort(
 		$keys,
 		static function ( $a, $b ) {
 			return strlen( $b ) <=> strlen( $a );
 		}
 	);
-	foreach ( array_chunk( $keys, 150 ) as $chunk ) {
-		$alts = array();
-		foreach ( $chunk as $key ) {
-			$alt    = preg_quote( $key, '/' );
-			$alt    = str_replace( "'", "(?:'|’|ʼ|&\\#8217;|&\\#0?39;|&rsquo;)", $alt );
-			$alts[] = str_replace( ' ', '(?:\s|&nbsp;|&\\#160;|\x{00A0})+', $alt );
-		}
-		// A whole phrase: no letter or digit on either side, and never part of an entity.
-		$patterns[] = '/(?<![\p{L}\p{N}&#])(?:' . implode( '|', $alts ) . ')(?![\p{L}\p{N}])/iu';
-	}
 	return $cache = array(
 		'phrases'  => $phrases,
-		'patterns' => $patterns,
+		'patterns' => injil_help_ctx_patterns( array_map( 'strval', $keys ) ),
 	);
 }
 
@@ -225,7 +268,7 @@ function injil_help_ctx_apply( $content, $here ) {
 			if ( $at < $pos ) {
 				continue;
 			}
-			$hit = $map['phrases'][ injil_help_ctx_key( $match ) ] ?? null;
+			$hit = injil_help_ctx_lookup( $map['phrases'], $match );
 			if ( ! $hit ) {
 				continue;
 			}
@@ -273,7 +316,7 @@ function injil_help_ctx_wanted( $post ) {
 add_filter(
 	'the_content',
 	function ( $content ) {
-		if ( is_admin() || is_feed() || ! is_singular() || is_front_page() || ! is_main_query() || doing_filter( 'get_the_excerpt' ) ) {
+		if ( is_admin() || is_feed() || ! is_singular( array( 'post', 'page' ) ) || is_front_page() || ! is_main_query() || doing_filter( 'get_the_excerpt' ) ) {
 			return $content;
 		}
 		$post = get_queried_object();

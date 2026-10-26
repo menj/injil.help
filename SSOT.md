@@ -89,7 +89,7 @@ Tabs: Colours, Branding, Sharing, Contextual links, SEO, Security, Content. Defa
 
 ## Contextual links
 
-`inc/contextual-links.php` links the first mention of a known phrase in the running text of a singular post or page (not the front page) to the inner page that treats it, via `the_content` at priority 15: after `do_blocks`, `wpautop`, `wptexturize` and shortcodes, before the share row (20). The guard matches the queried post rather than `in_the_loop()`, as the breadcrumb and share row do. This site's key is `injil` (`INJIL_HELP_SITE_KEY`).
+`inc/contextual-links.php` links the first mention of a known phrase in the running text of a single post or page (`is_singular( array( 'post', 'page' ) )`, so never an attachment; not the front page) to the inner page that treats it, via `the_content` at priority 15: after `do_blocks`, `wpautop`, `wptexturize` and shortcodes, before the share row (20). The guard matches the queried post rather than `in_the_loop()`, as the breadcrumb and share row do. This site's key is `injil` (`INJIL_HELP_SITE_KEY`).
 
 - The map is `inc/data/network-links.json`: `sites` (key to base URL) and `links` (`site`, `path`, `phrases`). It is shared: the same file, byte for byte, ships in all seven themes (abrahamic, bestofislam, injil.help, paulus, compelling-evidence, murtadd, lailatulqadar). Change it in all seven or in none. Each phrase belongs to one page across the network, and each path must exist on the site that serves it.
 - Entries for this site link with `home_url( path )`, so staging links to staging; entries for a sister site link to its base URL. Lines in `ctx_extra` come first and win; a full address there must be on a host in `sites`.
