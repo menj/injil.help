@@ -2,6 +2,11 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.7.1
+
+- KFGQPC HAFS Uthmanic Script, the Qur'anic face, now ships with its licence: `assets/fonts/KFGQPC-Hafs-Uthmanic-LICENSE.txt`. The licence allows use, copying and distribution free of charge and forbids any modification, so the TTF stays exactly as issued (not converted to WOFF or WOFF2, not subset). The credits page names it. It remains the face for Qur'anic Arabic only, through the class `ih-quran`; hadith keep Noto Naskh Arabic and all other Arabic keeps Amiri. The same face is now the Qur'anic font of all seven themes of the network.
+- A Qur'anic verse set as its own block (an `ih-quran` paragraph that is not a one-line gloss) gets a line height of 2.1 and right-to-left isolation, so the small high marks and the ayah-end sign have room. Letter spacing on `ih-quran` is held at zero.
+
 ## 3.7.0
 
 - Contextual links. In the running text of a page, the first mention of a phrase the network map knows becomes a link to the inner page that treats it: a page on this site (the Gospel of Thomas, the Last Supper, the annunciation) or a page on one of the six sister sites (Paul of Tarsus on apostleofdoom.org, the Talmud and the crucifixion on bestofislam.org, Galilee and Ibrāhīm on abrahamic-religions.com, taḥrīf on compelling-evidence.com, and so on). There is no section or list of links: the links are in the sentences.
