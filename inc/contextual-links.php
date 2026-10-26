@@ -114,7 +114,7 @@ function injil_help_ctx_compiled() {
 		}
 	};
 
-	foreach ( preg_split( '/\R/u', (string) injil_help_get_option( 'ctx_extra' ) ) as $line ) {
+	foreach ( preg_split( '/\r\n|\r|\n/', (string) injil_help_get_option( 'ctx_extra' ) ) as $line ) {
 		$parts = array_map( 'trim', explode( '|', $line, 2 ) );
 		if ( count( $parts ) < 2 || '' === $parts[0] ) {
 			continue;
@@ -197,16 +197,19 @@ function injil_help_ctx_apply( $content, $here ) {
 		return $content;
 	}
 
-	// Targets the text already links to count as done, as does the page itself.
-	$done = array( injil_help_ctx_norm_url( $here ) => true );
-	if ( preg_match_all( '/\bhref\s*=\s*["\']([^"\']+)["\']/i', $content, $hrefs ) ) {
+	// Targets the text already links to count as done, as does the page itself. Navigation
+	// (the breadcrumb, at 5) is not the text: its links to the parent pages must not stop the
+	// prose from linking them.
+	$done  = array( injil_help_ctx_norm_url( $here ) => true );
+	$prose = preg_replace( '#<nav\b.*?</nav>#is', '', $content );
+	if ( preg_match_all( '/\bhref\s*=\s*["\']([^"\']+)["\']/i', null === $prose ? $content : $prose, $hrefs ) ) {
 		foreach ( $hrefs[1] as $href ) {
 			$done[ injil_help_ctx_norm_url( $href ) ] = true;
 		}
 	}
 	$made   = array( 0 => 0, 1 => 0 );
 	$stack  = array(); // Open elements that forbid links.
-	$blocks = array(); // Open <p> and <li>, true once one has a link.
+	$blocks = array(); // Open <p> and <li>, true once it or an enclosing one has a link.
 	$void   = array( 'br', 'img', 'hr', 'wbr', 'input', 'source', 'meta', 'link', 'col', 'area', 'embed', 'track' );
 	$out    = '';
 
@@ -220,7 +223,8 @@ function injil_help_ctx_apply( $content, $here ) {
 				if ( '/' === $m[1] ) {
 					for ( $i = count( $stack ) - 1; $i >= 0; $i-- ) {
 						if ( $stack[ $i ] === $tag ) {
-							array_splice( $stack, $i, 1 );
+							// Anything left open inside the element closes with it.
+							array_splice( $stack, $i );
 							break;
 						}
 					}
@@ -234,7 +238,8 @@ function injil_help_ctx_apply( $content, $here ) {
 						$stack[] = $tag;
 					}
 					if ( 'p' === $tag || 'li' === $tag ) {
-						$blocks[] = false;
+						// A paragraph inside a list item that already has its link inherits that.
+						$blocks[] = $blocks ? end( $blocks ) : false;
 					}
 				}
 			}
@@ -245,29 +250,24 @@ function injil_help_ctx_apply( $content, $here ) {
 			$out .= $piece;
 			continue;
 		}
-		// Every pattern's matches, in the order of the text; at one place the longest wins, and
-		// a phrase inside one already passed over is not tried, as with a single pattern.
-		$hits = array();
-		foreach ( $map['patterns'] as $pattern ) {
-			if ( preg_match_all( $pattern, $piece, $found, PREG_OFFSET_CAPTURE ) ) {
-				foreach ( $found[0] as $f ) {
-					$hits[] = $f;
-				}
-			}
-		}
-		usort(
-			$hits,
-			static function ( $a, $b ) {
-				return $a[1] <=> $b[1] ?: strlen( $b[0] ) <=> strlen( $a[0] );
-			}
-		);
+		// Scan the text as one pattern would: from the end of the last match, the earliest
+		// match of any chunk, the longest at one place. Collecting each chunk's matches apart
+		// would miss a phrase that a passed-over match in another chunk overlapped. On invalid
+		// UTF-8 every preg_match() fails and the text is left as it is.
 		$linked = false;
 		$pos    = 0;
-		foreach ( $hits as $h ) {
-			list( $match, $at ) = $h;
-			if ( $at < $pos ) {
-				continue;
+		while ( true ) {
+			$best = null;
+			foreach ( $map['patterns'] as $pattern ) {
+				if ( preg_match( $pattern, $piece, $f, PREG_OFFSET_CAPTURE, $pos ) && ( ! $best || $f[0][1] < $best[1] || ( $f[0][1] === $best[1] && strlen( $f[0][0] ) > strlen( $best[0] ) ) ) ) {
+					$best = $f[0];
+				}
 			}
+			if ( ! $best ) {
+				break;
+			}
+			list( $match, $at ) = $best;
+			$pos = $at + strlen( $match );
 			$hit = injil_help_ctx_lookup( $map['phrases'], $match );
 			if ( ! $hit ) {
 				continue;
@@ -275,7 +275,6 @@ function injil_help_ctx_apply( $content, $here ) {
 			list( $url, $own ) = $hit;
 			$kind = $own ? 1 : 0;
 			$norm = injil_help_ctx_norm_url( $url );
-			$pos  = $at + strlen( $match );
 			if ( $made[ $kind ] >= $caps[ $kind ] || isset( $done[ $norm ] ) ) {
 				continue;
 			}
@@ -288,7 +287,8 @@ function injil_help_ctx_apply( $content, $here ) {
 			break; // One new link in a piece of text, so at most one in a paragraph.
 		}
 		if ( $linked && $blocks ) {
-			$blocks[ count( $blocks ) - 1 ] = true;
+			// The paragraph and every list item around it now have their link.
+			$blocks = array_fill( 0, count( $blocks ), true );
 		}
 		$out .= $piece;
 	}
@@ -300,7 +300,7 @@ function injil_help_ctx_wanted( $post ) {
 	if ( ! $post instanceof WP_Post ) {
 		return false;
 	}
-	$excluded = array_filter( array_map( 'trim', preg_split( '/\R/u', (string) injil_help_get_option( 'ctx_exclude' ) ) ) );
+	$excluded = array_filter( array_map( 'trim', preg_split( '/\r\n|\r|\n/', (string) injil_help_get_option( 'ctx_exclude' ) ) ) );
 	$excluded = array_map( static function ( $s ) { return trim( strtolower( $s ), '/' ); }, $excluded );
 	$wanted   = ! in_array( strtolower( $post->post_name ), $excluded, true ) && ! in_array( strtolower( trim( (string) get_page_uri( $post ), '/' ) ), $excluded, true );
 	return (bool) apply_filters( 'injil_help_contextual_links_enabled', $wanted, $post );

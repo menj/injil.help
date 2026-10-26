@@ -105,10 +105,40 @@ function injil_help_sanitize_options( $in ) {
 	$out['ctx_sister']       = empty( $in['ctx_sister'] ) ? 0 : 1;
 	$out['ctx_own_max']      = max( 0, min( 15, (int) ( $in['ctx_own_max'] ?? 4 ) ) );
 	$out['ctx_sister_max']   = max( 0, min( 10, (int) ( $in['ctx_sister_max'] ?? 3 ) ) );
-	// Split without the u flag, which fails (returns false) on invalid UTF-8; sanitize_text_field() drops the invalid bytes.
-	$out['ctx_extra']        = implode( "\n", array_filter( array_map( 'sanitize_text_field', preg_split( '/\r\n|\r|\n/', (string) ( $in['ctx_extra'] ?? '' ) ) ) ) );
-	$out['ctx_exclude']      = implode( "\n", array_filter( array_map( 'sanitize_text_field', preg_split( '/\r\n|\r|\n/', (string) ( $in['ctx_exclude'] ?? '' ) ) ) ) );
+	// Split without the u flag, which fails (returns false) on invalid UTF-8. Addresses and
+	// slugs keep their %XX octets: sanitize_text_field() deletes them, which turns an Arabic
+	// slug such as /%d8%a7/ into //.
+	$out['ctx_extra']        = implode( "\n", array_filter( array_map( 'injil_help_sanitize_ctx_line', preg_split( '/\r\n|\r|\n/', (string) ( $in['ctx_extra'] ?? '' ) ) ) ) );
+	$out['ctx_exclude']      = implode( "\n", array_filter( array_map( 'injil_help_sanitize_ctx_slug', preg_split( '/\r\n|\r|\n/', (string) ( $in['ctx_exclude'] ?? '' ) ) ) ) );
 	return $out;
+}
+
+/**
+ * One "phrase | address" line: the phrase as plain text, the address as a URL, so its %XX
+ * octets survive. A line without an address, or whose address is refused, is dropped.
+ *
+ * @param string $line Raw line.
+ * @return string
+ */
+function injil_help_sanitize_ctx_line( $line ) {
+	$parts = array_map( 'trim', explode( '|', (string) $line, 2 ) );
+	if ( count( $parts ) < 2 ) {
+		return '';
+	}
+	$phrase  = sanitize_text_field( $parts[0] );
+	$address = esc_url_raw( $parts[1] );
+	return ( '' === $phrase || '' === $address ) ? '' : $phrase . ' | ' . $address;
+}
+
+/**
+ * One excluded slug or path: tags and invalid bytes removed, %XX octets kept, since
+ * WordPress stores a non-ASCII slug percent-encoded.
+ *
+ * @param string $line Raw line.
+ * @return string
+ */
+function injil_help_sanitize_ctx_slug( $line ) {
+	return trim( preg_replace( '/\s+/', ' ', wp_strip_all_tags( wp_check_invalid_utf8( (string) $line ) ) ) );
 }
 
 add_action(

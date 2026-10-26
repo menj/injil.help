@@ -9,6 +9,11 @@ All notable changes to The Injil theme. The `Changelog` section of `readme.txt` 
 - Saving Theme Options no longer fails when a Contextual links textarea holds invalid UTF-8: the lines are split without the `u` flag, which returned `false` and made `array_map()` throw; `sanitize_text_field()` then drops the invalid bytes.
 - A phrase too long for PCRE, added on the Contextual links tab, no longer costs the other phrases in its pattern: a pattern that fails to compile is split in two until it compiles, and only the phrase that cannot compile is left out (`injil_help_ctx_patterns()`).
 - Without mbstring, a phrase with a non-ASCII capital (Ṣābiʾūn) still matches its lower-case form in the text: a missed lookup is retried phrase by phrase, case-insensitively (`injil_help_ctx_lookup()`).
+- The phrase patterns are scanned as one pattern would be: from the end of the last match, the earliest match of any pattern, the longest at one place. Collecting each pattern's matches apart missed a phrase that a passed-over match in another pattern overlapped ("King Saul and Paul of Tarsus" linked nothing when King Saul was already linked); 178 of 1,720 overlapping chains of real phrases were wrong, now none.
+- The breadcrumb's links no longer count as links the text already makes, so the prose of a sub-page links its parent page again.
+- A list item holding two paragraphs gets one new link, not one in each paragraph.
+- An element left unclosed inside a region where no link may go closes with that region, so it no longer switches links off for the rest of the page.
+- Addresses and slugs on the Contextual links tab keep their percent-encoded characters: `sanitize_text_field()` deleted every `%XX`, so `/gospels/%D8%A7/` was saved as `/gospels//`. The phrase is sanitised as text and the address with `esc_url_raw()`; a line without a valid address is dropped (`injil_help_sanitize_ctx_line()`, `injil_help_sanitize_ctx_slug()`).
 
 ## 3.7.1
 
