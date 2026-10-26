@@ -2,6 +2,13 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.7.0
+
+- Contextual links. In the running text of a page, the first mention of a phrase the network map knows becomes a link to the inner page that treats it: a page on this site (the Gospel of Thomas, the Last Supper, the annunciation) or a page on one of the six sister sites (Paul of Tarsus on apostleofdoom.org, the Talmud and the crucifixion on bestofislam.org, Galilee and Ibrāhīm on abrahamic-religions.com, taḥrīf on compelling-evidence.com, and so on). There is no section or list of links: the links are in the sentences.
+- The map is `inc/data/network-links.json`: 404 inner pages and 913 phrases across the seven sites, each phrase owned by one page, every path checked against the theme that serves it. The same file ships, byte for byte, in all seven themes.
+- Links are made as the page renders (`inc/contextual-links.php`, `the_content` at 15); the stored text is untouched. Never in a heading, a quotation, a verse, the gospel text (`.ih-bible`), Arabic, a note, a table, the breadcrumb or an existing link. At most one new link in a paragraph or list item; each page linked once, and never the page itself; a page the text already links to is not linked again.
+- New tab, Theme Options › Contextual links: links to this site and to the sister sites switched on or off separately, at most 4 and 3 on a page by default, more phrases of your own (`phrase | /path/` or a sister-site address), and pages that get none.
+
 ## 3.6.7
 
 - لعنة الله, "the curse of God", is set after the name of Paul of Tarsus as a calligraphic mark, like the honorific ligatures. It is used twice:

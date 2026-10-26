@@ -34,6 +34,7 @@ Modelled on apostleofdoom.org: a title-page hero; each part of the study as a bl
 * Page templates: "Section index" for index pages and "Wide page (tables)" for pages with wide comparison tables.
 * The Gospel According to Islam set like a printed Bible: a running head, the section numeral, an argument line, numbered verses, the Qur'an's own verse numbers in green, two columns on wide screens, and the notes at the foot of the text in small type. Choose two columns, one column or plain paragraphs under Theme Options > Content > Gospel text layout. The verse breaks are markers in the data and renumber themselves when the text is edited.
 * Structured data for search engines on every page, switched off automatically when Yoast or SEOPress is active and added to Rank Math's own when Rank Math is active.
+* Contextual links in the text: the first mention of a phrase the network map knows (inc/data/network-links.json, the same file in all seven of the author's themes) links to the inner page that treats it, on this site or a sister site. Set under Theme Options > Contextual links.
 * A share row under posts and pages: X, Facebook, WhatsApp, Telegram, Reddit, LinkedIn, Bluesky, Threads, Pinterest and LINE, with Copy link and, where the browser allows, a button that opens the device's share sheet. Choose the networks and the label under Theme Options > Sharing.
 == Fonts ==
 Bundled in assets/fonts and declared in theme.json, so every face is available in the editor's font picker. Roles:
@@ -64,6 +65,7 @@ Appearance > Theme Options is a tabbed page:
 * Colours: nine palette overrides with colour pickers; empty keeps the default.
 * Branding: ornament layer (Rich, Subtle, Off) and the reveal animation; show or hide the footer brandmark; always use the brandmark as favicon even with a Site Icon; custom favicon URL.
 * Sharing: show or hide the share row, on posts and/or pages; which networks, in order; the row's label.
+* Contextual links: link the first mention of a known phrase to its page on this site and/or on the sister sites; the most of each kind on one page (4 and 3 by default); more phrases, one per line as phrase | address; pages that get no links.
 * Content: lists every starter page with its status, creates missing ones, and rewrites all of them from the theme on demand.
 * SEO: theme SEO output automatic, always on or always off; home title and description; pillar page title; default social image URL; structured data: author name and URL, profile links (sameAs), organization logo URL.
 The page's own colours follow the Colours tab.
@@ -82,6 +84,8 @@ This file is the user-facing manual that WordPress and Git Updater read. The rep
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add the entry to CHANGELOG.md and to the Changelog section here, note anything an existing site must know under "Updating an existing site" in UPGRADING.md, merge to main, and tag the commit with the same number (for example v3.4.0). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 3.7.0 =
+* Contextual links: the first mention of a known phrase in the text of a page links to the inner page that treats it, here or on one of the six sister sites. The shared map is inc/data/network-links.json; Theme Options > Contextual links sets the caps and adds phrases.
 = 3.6.7 =
 * لعنة الله (the curse of God) after the name of Paul of Tarsus, as a calligraphic mark in rubric red, used twice: on the Epistle's autograph line and on the verdict of The false apostles.
 = 3.6.6 =

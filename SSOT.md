@@ -54,13 +54,13 @@ The fixed facts about The Injil theme. When another document, a comment or a pat
 
 ## Theme Options (`injil_help_options`)
 
-Tabs: Colours, Branding, Sharing, SEO, Security, Content. Defaults: `colors` {}, `footer_mark` 1, `ornament` rich, `animate` 1, `parallax` strong, `gospel_layout` columns, `content_width` full (full and wide set prose pages in two columns from 1280px; pages with `.ih-bible` are excluded through `:has()`), `block_app_passwords` 1, `favicon_force` 0, `favicon_url` '', `share` 1, `share_networks` x, facebook, whatsapp, telegram, reddit, linkedin, bluesky, threads, `share_types` post, page, `share_label` '', `schema` auto, `home_title` '', `home_description` '', `pillar_title` '', `og_image` '', `author_name` '', `author_url` '', `same_as` menj.org and apostleofdoom.org, `org_logo` ''.
+Tabs: Colours, Branding, Sharing, Contextual links, SEO, Security, Content. Defaults: `colors` {}, `footer_mark` 1, `ornament` rich, `animate` 1, `parallax` strong, `gospel_layout` columns, `content_width` full (full and wide set prose pages in two columns from 1280px; pages with `.ih-bible` are excluded through `:has()`), `block_app_passwords` 1, `favicon_force` 0, `favicon_url` '', `share` 1, `share_networks` x, facebook, whatsapp, telegram, reddit, linkedin, bluesky, threads, `share_types` post, page, `share_label` '', `schema` auto, `home_title` '', `home_description` '', `pillar_title` '', `og_image` '', `author_name` '', `author_url` '', `same_as` menj.org and apostleofdoom.org, `org_logo` '', `ctx_own` 1, `ctx_sister` 1, `ctx_own_max` 4 (0-15), `ctx_sister_max` 3 (0-10), `ctx_extra` '', `ctx_exclude` ''.
 
 ## Filters
 
 - Hardening set by the theme: `wp_is_application_passwords_available` returns false while `block_app_passwords` is set (functions.php), which it is by default, so application passwords are off site-wide until the block is unticked under Theme Options › Security.
 
-`injil_help_seo_defaults`, `injil_help_default_og_image`, `injil_help_output_schema`, `injil_help_schema_graph`, `injil_help_share_networks`.
+`injil_help_seo_defaults`, `injil_help_default_og_image`, `injil_help_output_schema`, `injil_help_schema_graph`, `injil_help_share_networks`, `injil_help_contextual_links_map` (the decoded map), `injil_help_contextual_links_enabled` (bool, `$post`).
 
 ## Design tokens
 
@@ -86,6 +86,16 @@ Tabs: Colours, Branding, Sharing, SEO, Security, Content. Defaults: `colors` {},
 ## Sharing
 
 `inc/share.php` adds the row after the content on singular posts and pages (not the front page) via `the_content` at priority 20, guarded against excerpts; networks x, facebook, whatsapp, telegram, reddit, linkedin, bluesky, threads, pinterest, line; Copy link and Web Share buttons appear only with JavaScript. Icons are CSS masks in `assets/icons/social/`.
+
+## Contextual links
+
+`inc/contextual-links.php` links the first mention of a known phrase in the running text of a singular post or page (not the front page) to the inner page that treats it, via `the_content` at priority 15: after `do_blocks`, `wpautop`, `wptexturize` and shortcodes, before the share row (20). The guard matches the queried post rather than `in_the_loop()`, as the breadcrumb and share row do. This site's key is `injil` (`INJIL_HELP_SITE_KEY`).
+
+- The map is `inc/data/network-links.json`: `sites` (key to base URL) and `links` (`site`, `path`, `phrases`). It is shared: the same file, byte for byte, ships in all seven themes (abrahamic, bestofislam, injil.help, paulus, compelling-evidence, murtadd, lailatulqadar). Change it in all seven or in none. Each phrase belongs to one page across the network, and each path must exist on the site that serves it.
+- Entries for this site link with `home_url( path )`, so staging links to staging; entries for a sister site link to its base URL. Lines in `ctx_extra` come first and win; a full address there must be on a host in `sites`.
+- Matching is whole phrase, capitals aside, curly apostrophes and non-breaking spaces allowed. The phrases are split into patterns of 150, because one pattern of the whole map is more than PCRE compiles; matches are merged in text order, the longest first at one place.
+- Never inside `a`, headings, `blockquote`, `q`, `figure`, `figcaption`, `cite`, `code`, `pre`, `sup`, `sub`, `nav`, `table`, form controls, `summary`, `aside`, `header`, `footer`, `lang` ar, he, el or syr, `dir="rtl"`, or the classes `ih-ar`, `ih-quran`, `ih-hadith`, `ih-verse`, `ih-v`, `ih-vq`, `ih-bible`, `ih-translit`, `ih-fnref`, `ih-footnotes`, `ih-foot-list`, `ih-apparatus`, `ih-lanah`, `ih-cite`, `ih-running-head`, `ih-chapter-head`, `ih-chapter-num`, `ih-eyebrow`, `ih-meta`, `ih-numeral`, `ih-mark`, `ih-breadcrumb`, `ih-share`, `ih-next`, `ih-entries-list`, `ih-answers-list`, `is-style-gospel-verse`.
+- At most one new link in a `p` or `li`; each target once a page; never the page itself; a target the text already links to is skipped. Markup: `<a class="ih-ctx-link">` for this site, `<a class="ih-ctx-link ih-ctx-link--sister" rel="noopener">` for a sister site, same tab. The links take the theme's own link style; no CSS is added.
 
 ## Credits that must stay
 
