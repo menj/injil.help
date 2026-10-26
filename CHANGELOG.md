@@ -2,6 +2,15 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.7.3
+
+- Five content errors from the content review are corrected.
+  - Ibn Isḥāq's 7 hours of death is the Christians' claim, which he reports (al-Ṭabarī on 3:55); the Islamic Dilemma page gave it as his own view. The sentence now says so.
+  - "Taught to write" (3:48; 5:110): the page called the reading a slip and a misreading, but al-Ṭabarī, al-Jalālayn, al-Baghawī, al-Qurṭubī (from Ibn Jurayj) and Ibn Kathīr, in the site's own translations, all gloss <em>al-kitāb</em> there as writing. The page now concedes the reading and answers what the argument builds on it.
+  - 46:30 was quoted as confirming "what came after Moses"; the verse calls the Qur'an "a Book sent down after Moses, confirming what was before it".
+  - The al-Saʿdī commentary on 3:55 is retranslated from his Arabic (quran.com tafsir 91). The passage on the descent of Jesus and the quotation of 24:55 are not in his text and are removed; his remarks on God's exaltation, the restraint of the Children of Israel (5:110) and the Christians and then the Muslims prevailing are added.
+  - The alt text of the Codex Sinaiticus image on the Mark page no longer says the codex has the shorter ending; it ends Mark at 16:8.
+
 ## 3.7.2
 
 - The Qur'anic face is served as `assets/fonts/KFGQPC-Hafs-Uthmanic.woff2` (107 KB) in place of the original TTF (298 KB, removed). The owner chose on 2026-10-26 to serve a WOFF2 conversion of the KFGQPC HAFS Uthmanic Script (107 KB, from 298 KB), accepting that the KFGQPC licence forbids modifying the font. The conversion is lossless for glyphs, cmap and OpenType layout; the digital signature (DSIG) is dropped. Recorded in SSOT.md; the credits page says so.
