@@ -98,6 +98,87 @@
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Paul of Tarsus’s own charge against his rivals (2 Corinthians 11:13), and who stood on the other side of it.</p>
 <!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
+<p class="ih-k">Bonus chapter</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading"><a href="/bonus/epistle/">An epistle to his congregation</a></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"ih-d"} -->
+<p class="ih-d">A letter to the followers of Paul of Tarsus, in the manner of the Pauline epistles.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"ih-entry ih-entry--sister","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-entry ih-entry--sister"><!-- wp:paragraph {"className":"ih-k"} -->
+<p class="ih-k">Apostle of Doom</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading"><a href="https://apostleofdoom.org/the-damascus-road/" rel="noopener">The Damascus road</a></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"ih-d"} -->
+<p class="ih-d">Luke tells the vision near Damascus three times. All three accounts in full, before they are compared.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"className":"ih-meta"} -->
+<p class="ih-meta">apostleofdoom.org</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"ih-entry ih-entry--sister","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-entry ih-entry--sister"><!-- wp:paragraph {"className":"ih-k"} -->
+<p class="ih-k">Apostle of Doom</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading"><a href="https://apostleofdoom.org/paul-against-the-disciples/" rel="noopener">The Jerusalem Council</a></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"ih-d"} -->
+<p class="ih-d">James and Peter kept the law of Mūsā. Paul of Tarsus set it aside, then kept it in the Temple.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"className":"ih-meta"} -->
+<p class="ih-meta">apostleofdoom.org</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"ih-entry ih-entry--sister","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-entry ih-entry--sister"><!-- wp:paragraph {"className":"ih-k"} -->
+<p class="ih-k">Apostle of Doom</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading"><a href="https://apostleofdoom.org/justification-by-faith/" rel="noopener">Justification and the Logos</a></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"ih-d"} -->
+<p class="ih-d">Faith alone and the Logos made flesh: two doctrines that owe more to Paul of Tarsus and Philo than to Jesus.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"className":"ih-meta"} -->
+<p class="ih-meta">apostleofdoom.org</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"ih-entry ih-entry--sister","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-entry ih-entry--sister"><!-- wp:paragraph {"className":"ih-k"} -->
+<p class="ih-k">Apostle of Doom</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading"><a href="https://apostleofdoom.org/the-quran-as-witness/" rel="noopener">The Qur’an as witness</a></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"ih-d"} -->
+<p class="ih-d">It never names Paul of Tarsus, yet names the crucifixion, the divinity, lords besides God and altered scripture.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"className":"ih-meta"} -->
+<p class="ih-meta">apostleofdoom.org</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"ih-entry ih-entry--sister","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-entry ih-entry--sister"><!-- wp:paragraph {"className":"ih-k"} -->
+<p class="ih-k">Apostle of Doom</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading"><a href="https://apostleofdoom.org/paul-the-father-of-a-new-religion/" rel="noopener">The church that followed Paul of Tarsus</a></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"ih-d"} -->
+<p class="ih-d">The despair of Peter and the rise of Marcion: how that church began.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"className":"ih-meta"} -->
+<p class="ih-meta">apostleofdoom.org</p>
+<!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group --></section>
 <!-- /wp:group -->

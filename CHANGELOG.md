@@ -2,6 +2,34 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.7.2
+
+- The Qur'anic face is served as `assets/fonts/KFGQPC-Hafs-Uthmanic.woff2` (107 KB) in place of the original TTF (298 KB, removed). The owner chose on 2026-10-26 to serve a WOFF2 conversion of the KFGQPC HAFS Uthmanic Script (107 KB, from 298 KB), accepting that the KFGQPC licence forbids modifying the font. The conversion is lossless for glyphs, cmap and OpenType layout; the digital signature (DSIG) is dropped. Recorded in SSOT.md; the credits page says so.
+- Contextual links run on posts and pages only (`is_singular( array( 'post', 'page' ) )`). Attachment pages and any other singular type are no longer linked.
+- Saving Theme Options no longer fails when a Contextual links textarea holds invalid UTF-8: the lines are split without the `u` flag, which returned `false` and made `array_map()` throw; `sanitize_text_field()` then drops the invalid bytes.
+- A phrase too long for PCRE, added on the Contextual links tab, no longer costs the other phrases in its pattern: a pattern that fails to compile is split in two until it compiles, and only the phrase that cannot compile is left out (`injil_help_ctx_patterns()`).
+- Without mbstring, a phrase with a non-ASCII capital (Ṣābiʾūn) still matches its lower-case form in the text: a missed lookup is retried phrase by phrase, case-insensitively (`injil_help_ctx_lookup()`).
+- The phrase patterns are scanned as one pattern would be: from the end of the last match, the earliest match of any pattern, the longest at one place. Collecting each pattern's matches apart missed a phrase that a passed-over match in another pattern overlapped ("King Saul and Paul of Tarsus" linked nothing when King Saul was already linked); 178 of 1,720 overlapping chains of real phrases were wrong, now none.
+- The breadcrumb's links no longer count as links the text already makes, so the prose of a sub-page links its parent page again.
+- A list item holding two paragraphs gets one new link, not one in each paragraph.
+- A nested list item gets a link of its own: the outer item's link no longer uses up the items in a list inside it, and a link in a nested item no longer uses up the outer item's.
+- An element left unclosed inside a region where no link may go closes with that region, so it no longer switches links off for the rest of the page.
+- Addresses and slugs on the Contextual links tab keep their percent-encoded characters: `sanitize_text_field()` deleted every `%XX`, so `/gospels/%D8%A7/` was saved as `/gospels//`. The phrase is sanitised as text and the address with `esc_url_raw()`; a line without a valid address is dropped (`injil_help_sanitize_ctx_line()`, `injil_help_sanitize_ctx_slug()`).
+- The four card sections on the front page are filled so the cards reach the foot of the heading and plate beside them, with no empty space under the grid at desktop widths: The Gospel According to Islam has 15 sections (adds I, VI, XI, XIV, XVI, XXI, XXIII, XXV, XXVII); Jesus in the Qur'an adds the full passages page, the borrowing objection and four bestofislam.org articles; Paul of Tarsus adds the bonus epistle and five apostleofdoom.org chapters; the five gospels add four of the discrepancy tables, the extracanonical manuscripts and the sayings of Thomas set aside. A card for a sister site carries the class `ih-entry--sister`, a full address with `rel="noopener"`, and the site's name with a small arrow in its `ih-meta` line (`style.css`). The patterns are included by `templates/front-page.html`, so the front page takes the cards with no step, unless the template was edited in the Site Editor (see UPGRADING.md).
+
+## 3.7.1
+
+- KFGQPC HAFS Uthmanic Script, the Qur'anic face, now ships with its licence: `assets/fonts/KFGQPC-Hafs-Uthmanic-LICENSE.txt`. The licence allows use, copying and distribution free of charge and forbids any modification, so the TTF stays exactly as issued (not converted to WOFF or WOFF2, not subset). The credits page names it. It remains the face for Qur'anic Arabic only, through the class `ih-quran`; hadith keep Noto Naskh Arabic and all other Arabic keeps Amiri. The same face is now the Qur'anic font of all seven themes of the network.
+- A Qur'anic verse set as its own block (an `ih-quran` paragraph that is not a one-line gloss) gets a line height of 2.1 and right-to-left isolation, so the small high marks and the ayah-end sign have room. Letter spacing on `ih-quran` is held at zero.
+
+## 3.7.0
+
+- Contextual links. In the running text of a page, the first mention of a phrase the network map knows becomes a link to the inner page that treats it: a page on this site (the Gospel of Thomas, the Last Supper, the annunciation) or a page on one of the six sister sites (Paul of Tarsus on apostleofdoom.org, the Talmud and the crucifixion on bestofislam.org, Galilee and Ibrāhīm on abrahamic-religions.com, taḥrīf on compelling-evidence.com, and so on). There is no section or list of links: the links are in the sentences.
+- The map is `inc/data/network-links.json`: 404 inner pages and 913 phrases across the seven sites, each phrase owned by one page, every path checked against the theme that serves it. The same file ships, byte for byte, in all seven themes.
+- Links are made as the page renders (`inc/contextual-links.php`, `the_content` at 15); the stored text is untouched. Never in a heading, a quotation, a verse, the gospel text (`.ih-bible`), Arabic, a note, a table, the breadcrumb or an existing link. At most one new link in a paragraph or list item; each page linked once, and never the page itself; a page the text already links to is not linked again.
+- A region where no link may go ends only at its own closing tag: every element inside it is tracked, so a nested `div` inside an Arabic or verse `div` cannot end the region early.
+- New tab, Theme Options › Contextual links: links to this site and to the sister sites switched on or off separately, at most 4 and 3 on a page by default, more phrases of your own (`phrase | /path/` or a sister-site address), and pages that get none.
+
 ## 3.6.7
 
 - لعنة الله, "the curse of God", is set after the name of Paul of Tarsus as a calligraphic mark, like the honorific ligatures. It is used twice:

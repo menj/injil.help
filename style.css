@@ -5,7 +5,7 @@ Description: Custom child theme of Twenty Twenty-Five built for one site, The Ri
 Author: MENJ
 Author URI: https://menj.blog
 Template: twentytwentyfive
-Version: 3.6.7
+Version: 3.7.2
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -155,7 +155,9 @@ p.is-style-label-editorial{background:transparent;color:var(--ih-gold-ink);borde
 @media (forced-colors:active){.ih-lanah{background-color:CanvasText}}
 /* Glosses are single lines set beside Latin text, so they sit flush left with it. */
 .ih-gloss.ih-ar{text-align:left}
-.ih-quran,.ih-ar.ih-quran{font-family:var(--ih-quran)}
+.ih-quran,.ih-ar.ih-quran{font-family:var(--ih-quran);letter-spacing:0;font-feature-settings:normal}
+/* A verse set as its own block (not a one-line gloss) needs room above and below for the Hafs marks. */
+.ih-quran:not(.ih-gloss):not(span){direction:rtl;unicode-bidi:isolate;line-height:2.1}
 .ih-gloss{display:block;font-family:var(--ih-greek);font-size:12px;font-weight:400;letter-spacing:.1em;color:var(--wp--preset--color--accent-2);line-height:1.3}
 .ih-gloss.ih-ar{font-size:14px}
 p.ih-gloss{margin:0;font-size:18px}
@@ -211,6 +213,8 @@ p.ih-cite{margin:0;font-size:13px;color:var(--wp--preset--color--muted)}
 .ih-k{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--wp--preset--color--accent-2)}
 .ih-d{font-size:15px;color:var(--wp--preset--color--muted)}
 .ih-meta{margin-top:auto !important;padding-top:6px;font-size:13px;font-weight:600;color:var(--wp--preset--color--accent-1)}
+.ih-entry--sister .ih-meta{display:flex;align-items:center;gap:4px;font-weight:500;letter-spacing:.02em}
+.ih-entry--sister .ih-meta::after{content:"\2197";content:"\2197" / "";font-size:12px;line-height:1}
 .ih-tint-lapis .ih-entry{background:var(--wp--preset--color--lapis-tint)}
 .ih-tint-red .ih-entry{background:var(--wp--preset--color--red-tint)}
 .ih-tint-green .ih-entry{background:var(--wp--preset--color--green-tint)}

@@ -34,12 +34,13 @@ Modelled on apostleofdoom.org: a title-page hero; each part of the study as a bl
 * Page templates: "Section index" for index pages and "Wide page (tables)" for pages with wide comparison tables.
 * The Gospel According to Islam set like a printed Bible: a running head, the section numeral, an argument line, numbered verses, the Qur'an's own verse numbers in green, two columns on wide screens, and the notes at the foot of the text in small type. Choose two columns, one column or plain paragraphs under Theme Options > Content > Gospel text layout. The verse breaks are markers in the data and renumber themselves when the text is edited.
 * Structured data for search engines on every page, switched off automatically when Yoast or SEOPress is active and added to Rank Math's own when Rank Math is active.
+* Contextual links in the text: the first mention of a phrase the network map knows (inc/data/network-links.json, the same file in all seven of the author's themes) links to the inner page that treats it, on this site or a sister site. Set under Theme Options > Contextual links.
 * A share row under posts and pages: X, Facebook, WhatsApp, Telegram, Reddit, LinkedIn, Bluesky, Threads, Pinterest and LINE, with Copy link and, where the browser allows, a button that opens the device's share sheet. Choose the networks and the label under Theme Options > Sharing.
 == Fonts ==
 Bundled in assets/fonts and declared in theme.json, so every face is available in the editor's font picker. Roles:
 * Sabon Next LT: body text. EB Garamond: headings. Kagnue: site title, the titles of the section index pages and home sections, the large numerals and the cover title. Evangelion CPA: labels, kickers, navigation.
 * SBL Greek, SBL Hebrew, SBL BibLit: biblical languages and transliteration (also applied by lang="grc", lang="he").
-* KFGQPC Hafs Uthmanic (the King Fahd Complex face): reserved strictly for Qur'anic text; every Qur'anic gloss in the header, footer and section heads uses it. Do not use it for anything that is not the Qur'an. Noto Naskh Arabic: hadith. Amiri: all other Arabic. Dubidam Arabic, Arslan Wessam: Arabic display.
+* KFGQPC Hafs Uthmanic (the King Fahd Complex face): reserved strictly for Qur'anic text; every Qur'anic gloss in the header, footer and section heads uses it. Its licence allows use, copying and distribution free of charge and forbids any modification; the owner chose on 2026-10-26 to serve a WOFF2 conversion of it nonetheless (lossless for glyphs and OpenType layout, digital signature dropped). Never subset it. The licence is beside it in assets/fonts. Do not use it for anything that is not the Qur'an. Noto Naskh Arabic: hadith. Amiri: all other Arabic. Dubidam Arabic, Arslan Wessam: Arabic display.
 * Estrangelo Edessa: Syriac. Noto Sans Cuneiform: cuneiform. Special Elite: the corrections log. Ferments, Angel: available, unused by default.
 The class names and language codes that select each face are listed in README.md.
 
@@ -64,6 +65,7 @@ Appearance > Theme Options is a tabbed page:
 * Colours: nine palette overrides with colour pickers; empty keeps the default.
 * Branding: ornament layer (Rich, Subtle, Off) and the reveal animation; show or hide the footer brandmark; always use the brandmark as favicon even with a Site Icon; custom favicon URL.
 * Sharing: show or hide the share row, on posts and/or pages; which networks, in order; the row's label.
+* Contextual links: link the first mention of a known phrase to its page on this site and/or on the sister sites; the most of each kind on one page (4 and 3 by default); more phrases, one per line as phrase | address; pages that get no links.
 * Content: lists every starter page with its status, creates missing ones, and rewrites all of them from the theme on demand.
 * SEO: theme SEO output automatic, always on or always off; home title and description; pillar page title; default social image URL; structured data: author name and URL, profile links (sameAs), organization logo URL.
 The page's own colours follow the Colours tab.
@@ -82,6 +84,15 @@ This file is the user-facing manual that WordPress and Git Updater read. The rep
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add the entry to CHANGELOG.md and to the Changelog section here, note anything an existing site must know under "Updating an existing site" in UPGRADING.md, merge to main, and tag the commit with the same number (for example v3.4.0). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 3.7.2 =
+* The Qur'anic face is served as a WOFF2 conversion (107 KB, from 298 KB) in place of the original TTF, by the owner's decision, accepting that the font's licence forbids modifying it.
+* Contextual links: posts and pages only (not attachments); saving the tab survives invalid UTF-8; an over-long phrase no longer disables its neighbours; non-ASCII capitals match without mbstring.
+* Contextual links: overlapping phrases across patterns no longer hide a link; the breadcrumb no longer stops the text linking its parent page; one link per list item; an unclosed element in a no-link region no longer stops later links; addresses and slugs keep their %XX characters on save.
+* Front page: the four card sections are filled to the height of their heading and plate (15, 12, 12 and 15 cards); cards for bestofislam.org and apostleofdoom.org are marked with the site's name and an arrow.
+= 3.7.1 =
+* KFGQPC HAFS Uthmanic Script ships with its licence (assets/fonts/KFGQPC-Hafs-Uthmanic-LICENSE.txt) and is credited on the credits page; the font file is unchanged and still used for Qur'anic Arabic only (class ih-quran). A verse set as its own block gets a line height of 2.1 for the marks.
+= 3.7.0 =
+* Contextual links: the first mention of a known phrase in the text of a page links to the inner page that treats it, here or on one of the six sister sites. The shared map is inc/data/network-links.json; Theme Options > Contextual links sets the caps and adds phrases.
 = 3.6.7 =
 * لعنة الله (the curse of God) after the name of Paul of Tarsus, as a calligraphic mark in rubric red, used twice: on the Epistle's autograph line and on the verdict of The false apostles.
 = 3.6.6 =

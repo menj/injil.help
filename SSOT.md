@@ -54,19 +54,19 @@ The fixed facts about The Injil theme. When another document, a comment or a pat
 
 ## Theme Options (`injil_help_options`)
 
-Tabs: Colours, Branding, Sharing, SEO, Security, Content. Defaults: `colors` {}, `footer_mark` 1, `ornament` rich, `animate` 1, `parallax` strong, `gospel_layout` columns, `content_width` full (full and wide set prose pages in two columns from 1280px; pages with `.ih-bible` are excluded through `:has()`), `block_app_passwords` 1, `favicon_force` 0, `favicon_url` '', `share` 1, `share_networks` x, facebook, whatsapp, telegram, reddit, linkedin, bluesky, threads, `share_types` post, page, `share_label` '', `schema` auto, `home_title` '', `home_description` '', `pillar_title` '', `og_image` '', `author_name` '', `author_url` '', `same_as` menj.org and apostleofdoom.org, `org_logo` ''.
+Tabs: Colours, Branding, Sharing, Contextual links, SEO, Security, Content. Defaults: `colors` {}, `footer_mark` 1, `ornament` rich, `animate` 1, `parallax` strong, `gospel_layout` columns, `content_width` full (full and wide set prose pages in two columns from 1280px; pages with `.ih-bible` are excluded through `:has()`), `block_app_passwords` 1, `favicon_force` 0, `favicon_url` '', `share` 1, `share_networks` x, facebook, whatsapp, telegram, reddit, linkedin, bluesky, threads, `share_types` post, page, `share_label` '', `schema` auto, `home_title` '', `home_description` '', `pillar_title` '', `og_image` '', `author_name` '', `author_url` '', `same_as` menj.org and apostleofdoom.org, `org_logo` '', `ctx_own` 1, `ctx_sister` 1, `ctx_own_max` 4 (0-15), `ctx_sister_max` 3 (0-10), `ctx_extra` '', `ctx_exclude` ''.
 
 ## Filters
 
 - Hardening set by the theme: `wp_is_application_passwords_available` returns false while `block_app_passwords` is set (functions.php), which it is by default, so application passwords are off site-wide until the block is unticked under Theme Options › Security.
 
-`injil_help_seo_defaults`, `injil_help_default_og_image`, `injil_help_output_schema`, `injil_help_schema_graph`, `injil_help_share_networks`.
+`injil_help_seo_defaults`, `injil_help_default_og_image`, `injil_help_output_schema`, `injil_help_schema_graph`, `injil_help_share_networks`, `injil_help_contextual_links_map` (the decoded map), `injil_help_contextual_links_enabled` (bool, `$post`).
 
 ## Design tokens
 
 - Palette slugs (theme.json): `base` #f6f1e6, `contrast` #2a2420, `accent-1` #1f5c4a, `accent-2` #9b2c2c, `accent-3` #c39a3f, `accent-4` #2d4a7a, `accent-5` #ece3d1, `accent-6` #d8cbb2, `muted` #6b6158; tints `green-deep`, `green-tint`, `red-tint`, `lapis-tint`, `gold-tint`. Never hard-code a colour in CSS; read the token.
 - Font slugs: `sabon` (body), `garamond` (headings), `kagnue` and `kagnue-outline` (display: site title, cover title, section index and home section titles, large numerals), `evangelion` (labels, kickers, navigation), `sbl-greek`, `sbl-hebrew`, `sbl-biblit`, `hafs` (Qur'anic text only, class `ih-quran`), `amiri` (other Arabic, class `ih-ar` or `lang="ar"`), `naskh` (hadith, `ih-hadith`), `dubidam`, `arslan`, `estrangelo` (Syriac), `cuneiform`, `special-elite` (corrections log, `ih-record`), `ferments`, `angel`.
-- Rule: KFGQPC Hafs is never set on anything that is not the Qur'an. Kagnue is not used for titles that may carry dotted transliteration letters.
+- Rule: KFGQPC Hafs is never set on anything that is not the Qur'an, and the same face is the Qur'anic font of all seven themes of the network. Its licence forbids modification. The owner chose on 2026-10-26 to serve a WOFF2 conversion of the KFGQPC HAFS Uthmanic Script (107 KB, from 298 KB), accepting that the KFGQPC licence forbids modifying the font. The conversion is lossless for glyphs, cmap and OpenType layout; the digital signature (DSIG) is dropped. The file is `assets/fonts/KFGQPC-Hafs-Uthmanic.woff2`, never subset, beside `assets/fonts/KFGQPC-Hafs-Uthmanic-LICENSE.txt`. In this face a verse number is written as bare Arabic-Indic digits (٤٥), which the font sets inside the ayah ornament itself; do not add U+06DD (۝), which draws a second, empty ornament. Kagnue is not used for titles that may carry dotted transliteration letters.
 - Font roles are variables at the top of `style.css`: `--ih-serif`, `--ih-sans`, `--ih-display`, `--ih-greek`, `--ih-quran`; radii `--ih-r-sm`, `--ih-r-md`, `--ih-r-lg`.
 - Block styles: `is-style-faq`, `is-style-fold`, `is-style-label-consensus|minority|islamic`, answer capsule, gospel verse, objection and reply, criterion box, discrepancy table, ornament separator.
 - Ornament: `assets/css/ornament.css`, `assets/js/ornament.js`; body classes `ih-orn`, `ih-px-strong|gentle|off`; CSS variables `--ih-sy` (scroll) and `--ih-p` (element progress); everything a transform; reduced motion respected.
@@ -86,6 +86,16 @@ Tabs: Colours, Branding, Sharing, SEO, Security, Content. Defaults: `colors` {},
 ## Sharing
 
 `inc/share.php` adds the row after the content on singular posts and pages (not the front page) via `the_content` at priority 20, guarded against excerpts; networks x, facebook, whatsapp, telegram, reddit, linkedin, bluesky, threads, pinterest, line; Copy link and Web Share buttons appear only with JavaScript. Icons are CSS masks in `assets/icons/social/`.
+
+## Contextual links
+
+`inc/contextual-links.php` links the first mention of a known phrase in the running text of a single post or page (`is_singular( array( 'post', 'page' ) )`, so never an attachment; not the front page) to the inner page that treats it, via `the_content` at priority 15: after `do_blocks`, `wpautop`, `wptexturize` and shortcodes, before the share row (20). The guard matches the queried post rather than `in_the_loop()`, as the breadcrumb and share row do. This site's key is `injil` (`INJIL_HELP_SITE_KEY`).
+
+- The map is `inc/data/network-links.json`: `sites` (key to base URL) and `links` (`site`, `path`, `phrases`). It is shared: the same file, byte for byte, ships in all seven themes (abrahamic, bestofislam, injil.help, paulus, compelling-evidence, murtadd, lailatulqadar). Change it in all seven or in none. Each phrase belongs to one page across the network, and each path must exist on the site that serves it.
+- Entries for this site link with `home_url( path )`, so staging links to staging; entries for a sister site link to its base URL. Lines in `ctx_extra` come first and win; a full address there must be on a host in `sites`.
+- Matching is whole phrase, capitals aside, curly apostrophes and non-breaking spaces allowed. The phrases are split into patterns of 150, because one pattern of the whole map is more than PCRE compiles; the text is scanned as one pattern would scan it: from the end of the last match, the earliest match of any pattern, the longest at one place. Links in navigation (the breadcrumb) do not count as links the text already makes.
+- Never inside `a`, headings, `blockquote`, `q`, `figure`, `figcaption`, `cite`, `code`, `pre`, `sup`, `sub`, `nav`, `table`, form controls, `summary`, `aside`, `header`, `footer`, `lang` ar, he, el or syr, `dir="rtl"`, or the classes `ih-ar`, `ih-quran`, `ih-hadith`, `ih-verse`, `ih-v`, `ih-vq`, `ih-bible`, `ih-translit`, `ih-fnref`, `ih-footnotes`, `ih-foot-list`, `ih-apparatus`, `ih-lanah`, `ih-cite`, `ih-running-head`, `ih-chapter-head`, `ih-chapter-num`, `ih-eyebrow`, `ih-meta`, `ih-numeral`, `ih-mark`, `ih-breadcrumb`, `ih-share`, `ih-next`, `ih-entries-list`, `ih-answers-list`, `is-style-gospel-verse`.
+- At most one new link in a `p` or `li`; each target once a page; never the page itself; a target the text already links to is skipped. Markup: `<a class="ih-ctx-link">` for this site, `<a class="ih-ctx-link ih-ctx-link--sister" rel="noopener">` for a sister site, same tab. The links take the theme's own link style; no CSS is added.
 
 ## Credits that must stay
 

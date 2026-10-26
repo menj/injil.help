@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'INJIL_HELP_VERSION', '3.6.7' );
+define( 'INJIL_HELP_VERSION', '3.7.2' );
 
 require_once get_stylesheet_directory() . '/inc/options.php';
 require_once get_stylesheet_directory() . '/inc/starter-content.php';
@@ -15,6 +15,7 @@ require_once get_stylesheet_directory() . '/inc/seo.php';
 require_once get_stylesheet_directory() . '/inc/schema.php';
 require_once get_stylesheet_directory() . '/inc/rank-math.php';
 require_once get_stylesheet_directory() . '/inc/share.php';
+require_once get_stylesheet_directory() . '/inc/contextual-links.php';
 
 /**
  * Hardening. Application passwords (REST API and XML-RPC log-ins with a per-application

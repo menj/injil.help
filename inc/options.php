@@ -49,6 +49,12 @@ function injil_help_option_defaults() {
 		'author_url'       => '',
 		'same_as'          => "https://menj.org\nhttps://apostleofdoom.org",
 		'org_logo'         => '',
+		'ctx_own'          => 1,
+		'ctx_sister'       => 1,
+		'ctx_own_max'      => 4,
+		'ctx_sister_max'   => 3,
+		'ctx_extra'        => '',
+		'ctx_exclude'      => '',
 	);
 }
 
@@ -95,7 +101,44 @@ function injil_help_sanitize_options( $in ) {
 	$out['author_url']       = esc_url_raw( $in['author_url'] ?? '' );
 	$out['same_as']          = implode( "\n", array_filter( array_map( 'esc_url_raw', array_map( 'trim', explode( "\n", (string) ( $in['same_as'] ?? '' ) ) ) ) ) );
 	$out['org_logo']         = esc_url_raw( $in['org_logo'] ?? '' );
+	$out['ctx_own']          = empty( $in['ctx_own'] ) ? 0 : 1;
+	$out['ctx_sister']       = empty( $in['ctx_sister'] ) ? 0 : 1;
+	$out['ctx_own_max']      = max( 0, min( 15, (int) ( $in['ctx_own_max'] ?? 4 ) ) );
+	$out['ctx_sister_max']   = max( 0, min( 10, (int) ( $in['ctx_sister_max'] ?? 3 ) ) );
+	// Split without the u flag, which fails (returns false) on invalid UTF-8. Addresses and
+	// slugs keep their %XX octets: sanitize_text_field() deletes them, which turns an Arabic
+	// slug such as /%d8%a7/ into //.
+	$out['ctx_extra']        = implode( "\n", array_filter( array_map( 'injil_help_sanitize_ctx_line', preg_split( '/\r\n|\r|\n/', (string) ( $in['ctx_extra'] ?? '' ) ) ) ) );
+	$out['ctx_exclude']      = implode( "\n", array_filter( array_map( 'injil_help_sanitize_ctx_slug', preg_split( '/\r\n|\r|\n/', (string) ( $in['ctx_exclude'] ?? '' ) ) ) ) );
 	return $out;
+}
+
+/**
+ * One "phrase | address" line: the phrase as plain text, the address as a URL, so its %XX
+ * octets survive. A line without an address, or whose address is refused, is dropped.
+ *
+ * @param string $line Raw line.
+ * @return string
+ */
+function injil_help_sanitize_ctx_line( $line ) {
+	$parts = array_map( 'trim', explode( '|', (string) $line, 2 ) );
+	if ( count( $parts ) < 2 ) {
+		return '';
+	}
+	$phrase  = sanitize_text_field( $parts[0] );
+	$address = esc_url_raw( $parts[1] );
+	return ( '' === $phrase || '' === $address ) ? '' : $phrase . ' | ' . $address;
+}
+
+/**
+ * One excluded slug or path: tags and invalid bytes removed, %XX octets kept, since
+ * WordPress stores a non-ASCII slug percent-encoded.
+ *
+ * @param string $line Raw line.
+ * @return string
+ */
+function injil_help_sanitize_ctx_slug( $line ) {
+	return trim( preg_replace( '/\s+/', ' ', wp_strip_all_tags( wp_check_invalid_utf8( (string) $line ) ) ) );
 }
 
 add_action(
@@ -158,6 +201,7 @@ function injil_help_render_options() {
 		'colours'  => __( 'Colours', 'injil-help' ),
 		'branding' => __( 'Branding', 'injil-help' ),
 		'sharing'  => __( 'Sharing', 'injil-help' ),
+		'links'    => __( 'Contextual links', 'injil-help' ),
 		'seo'      => __( 'SEO', 'injil-help' ),
 		'security' => __( 'Security', 'injil-help' ),
 		'content'  => __( 'Content', 'injil-help' ),
@@ -285,6 +329,34 @@ function injil_help_render_options() {
 					<tr>
 						<th scope="row"><label for="ih-share-label"><?php esc_html_e( 'Label', 'injil-help' ); ?></label></th>
 						<td><input type="text" class="regular-text" id="ih-share-label" name="<?php echo esc_attr( $name ); ?>[share_label]" value="<?php echo esc_attr( $o['share_label'] ); ?>" placeholder="<?php esc_attr_e( 'Share', 'injil-help' ); ?>"></td>
+					</tr>
+				</table>
+			</section>
+
+			<section class="ih-panel" id="panel-links" role="tabpanel" aria-labelledby="tab-links">
+				<p class="description"><?php esc_html_e( 'In the running text of a page, the first mention of a phrase the network map knows becomes a link to the inner page that treats it: a page on this site, or a page on one of the six sister sites (bestofislam.org, apostleofdoom.org, abrahamic-religions.com, compelling-evidence.com, murtadd.org, lailatulqadar.guide). Links are made as the page is shown; the stored text is never changed. Never in a heading, a quotation, a verse, the gospel text, Arabic, a note, a table or an existing link; at most one new link in a paragraph, and each page linked once.', 'injil-help' ); ?></p>
+				<table class="form-table" role="presentation">
+					<tr>
+						<th scope="row"><?php esc_html_e( 'Pages on this site', 'injil-help' ); ?></th>
+						<td>
+							<label><input type="checkbox" name="<?php echo esc_attr( $name ); ?>[ctx_own]" value="1" <?php checked( $o['ctx_own'] ); ?>> <?php esc_html_e( 'Link to pages on injil.help', 'injil-help' ); ?></label>
+							<p class="ih-inline-choices"><label for="ih-ctx-own-max"><?php esc_html_e( 'At most, on one page', 'injil-help' ); ?></label> <input type="number" class="small-text" min="0" max="15" id="ih-ctx-own-max" name="<?php echo esc_attr( $name ); ?>[ctx_own_max]" value="<?php echo esc_attr( $o['ctx_own_max'] ); ?>"></p>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row"><?php esc_html_e( 'Pages on the sister sites', 'injil-help' ); ?></th>
+						<td>
+							<label><input type="checkbox" name="<?php echo esc_attr( $name ); ?>[ctx_sister]" value="1" <?php checked( $o['ctx_sister'] ); ?>> <?php esc_html_e( 'Link to pages on the six sister sites', 'injil-help' ); ?></label>
+							<p class="ih-inline-choices"><label for="ih-ctx-sister-max"><?php esc_html_e( 'At most, on one page', 'injil-help' ); ?></label> <input type="number" class="small-text" min="0" max="10" id="ih-ctx-sister-max" name="<?php echo esc_attr( $name ); ?>[ctx_sister_max]" value="<?php echo esc_attr( $o['ctx_sister_max'] ); ?>"></p>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row"><label for="ih-ctx-extra"><?php esc_html_e( 'More phrases', 'injil-help' ); ?></label></th>
+						<td><textarea class="large-text code" rows="6" id="ih-ctx-extra" name="<?php echo esc_attr( $name ); ?>[ctx_extra]" placeholder="Gospel of Peter | /gospels/peter/"><?php echo esc_textarea( $o['ctx_extra'] ); ?></textarea><p class="description"><?php esc_html_e( 'One per line: phrase | address. A path such as /paul/james/ is a page on this site; a full address must be on one of the sister sites. These come before the shared map, so a phrase here wins.', 'injil-help' ); ?></p></td>
+					</tr>
+					<tr>
+						<th scope="row"><label for="ih-ctx-exclude"><?php esc_html_e( 'Pages without links', 'injil-help' ); ?></label></th>
+						<td><textarea class="large-text code" rows="3" id="ih-ctx-exclude" name="<?php echo esc_attr( $name ); ?>[ctx_exclude]" placeholder="terms"><?php echo esc_textarea( $o['ctx_exclude'] ); ?></textarea><p class="description"><?php esc_html_e( 'One per line: a page slug (terms) or its path (paul/james).', 'injil-help' ); ?></p></td>
 					</tr>
 				</table>
 			</section>
