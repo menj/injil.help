@@ -40,7 +40,7 @@ Modelled on apostleofdoom.org: a title-page hero; each part of the study as a bl
 Bundled in assets/fonts and declared in theme.json, so every face is available in the editor's font picker. Roles:
 * Sabon Next LT: body text. EB Garamond: headings. Kagnue: site title, the titles of the section index pages and home sections, the large numerals and the cover title. Evangelion CPA: labels, kickers, navigation.
 * SBL Greek, SBL Hebrew, SBL BibLit: biblical languages and transliteration (also applied by lang="grc", lang="he").
-* KFGQPC Hafs Uthmanic (the King Fahd Complex face): reserved strictly for Qur'anic text; every Qur'anic gloss in the header, footer and section heads uses it. Its licence allows use, copying and distribution free of charge and forbids any modification, so the TTF is shipped exactly as issued: never convert it to WOFF or WOFF2, subset it or re-save it. The licence is beside it in assets/fonts. Do not use it for anything that is not the Qur'an. Noto Naskh Arabic: hadith. Amiri: all other Arabic. Dubidam Arabic, Arslan Wessam: Arabic display.
+* KFGQPC Hafs Uthmanic (the King Fahd Complex face): reserved strictly for Qur'anic text; every Qur'anic gloss in the header, footer and section heads uses it. Its licence allows use, copying and distribution free of charge and forbids any modification; the owner chose on 2026-10-26 to serve a WOFF2 conversion of it nonetheless (lossless for glyphs and OpenType layout, digital signature dropped). Never subset it. The licence is beside it in assets/fonts. Do not use it for anything that is not the Qur'an. Noto Naskh Arabic: hadith. Amiri: all other Arabic. Dubidam Arabic, Arslan Wessam: Arabic display.
 * Estrangelo Edessa: Syriac. Noto Sans Cuneiform: cuneiform. Special Elite: the corrections log. Ferments, Angel: available, unused by default.
 The class names and language codes that select each face are listed in README.md.
 
@@ -84,6 +84,8 @@ This file is the user-facing manual that WordPress and Git Updater read. The rep
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add the entry to CHANGELOG.md and to the Changelog section here, note anything an existing site must know under "Updating an existing site" in UPGRADING.md, merge to main, and tag the commit with the same number (for example v3.4.0). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 3.7.2 =
+* The Qur'anic face is served as a WOFF2 conversion (107 KB, from 298 KB) in place of the original TTF, by the owner's decision, accepting that the font's licence forbids modifying it.
 = 3.7.1 =
 * KFGQPC HAFS Uthmanic Script ships with its licence (assets/fonts/KFGQPC-Hafs-Uthmanic-LICENSE.txt) and is credited on the credits page; the font file is unchanged and still used for Qur'anic Arabic only (class ih-quran). A verse set as its own block gets a line height of 2.1 for the marks.
 = 3.7.0 =

@@ -286,7 +286,7 @@
        "fontStyle": "normal",
        "fontWeight": "400",
        "src": [
-        "file:./assets/fonts/KFGQPC-Hafs-Uthmanic.ttf"
+        "file:./assets/fonts/KFGQPC-Hafs-Uthmanic.woff2"
        ]
       }
      ]
