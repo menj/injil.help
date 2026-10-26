@@ -113,6 +113,84 @@
 <!-- wp:paragraph {"className":"ih-meta"} -->
 <p class="ih-meta">61:6</p>
 <!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
+<p class="ih-k">All passages</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading"><a href="/quran/passages/">The Qur’an on Jesus</a></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"ih-d"} -->
+<p class="ih-d">Every passage of the Qur’an on Jesus and his teachings, with headings and notes.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"ih-entry","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-entry"><!-- wp:paragraph {"className":"ih-k"} -->
+<p class="ih-k">Objection</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading"><a href="/resources/borrowing/">Did the Qur’an borrow its stories?</a></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"ih-d"} -->
+<p class="ih-d">The charge that the stories of Maryam and Jesus were copied from the infancy gospels, stated fairly and answered.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"ih-entry ih-entry--sister","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-entry ih-entry--sister"><!-- wp:paragraph {"className":"ih-k"} -->
+<p class="ih-k">Best of Islam</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading"><a href="https://bestofislam.org/crucifixion-quran/" rel="noopener">The crucifixion and Qur’an 4:157</a></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"ih-d"} -->
+<p class="ih-d">What historians hold, what 4:157 says, and why Islam rejects atonement by proxy.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"className":"ih-meta"} -->
+<p class="ih-meta">bestofislam.org</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"ih-entry ih-entry--sister","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-entry ih-entry--sister"><!-- wp:paragraph {"className":"ih-k"} -->
+<p class="ih-k">Best of Islam</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading"><a href="https://bestofislam.org/jesus-not-god/" rel="noopener">Why Jesus is not God</a></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"ih-d"} -->
+<p class="ih-d">Five reasons Muslims hold that Jesus was a prophet and not God, argued from the gospels as much as from the Qur’an.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"className":"ih-meta"} -->
+<p class="ih-meta">bestofislam.org</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"ih-entry ih-entry--sister","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-entry ih-entry--sister"><!-- wp:paragraph {"className":"ih-k"} -->
+<p class="ih-k">Best of Islam</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading"><a href="https://bestofislam.org/where-is-the-injil/" rel="noopener">Where is the Injil?</a></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"ih-d"} -->
+<p class="ih-d">Show us the Injil, critics say, or admit it never existed. Five answers to what the question assumes.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"className":"ih-meta"} -->
+<p class="ih-meta">bestofislam.org</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"ih-entry ih-entry--sister","layout":{"type":"default"}} -->
+<div class="wp-block-group ih-entry ih-entry--sister"><!-- wp:paragraph {"className":"ih-k"} -->
+<p class="ih-k">Best of Islam</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading"><a href="https://bestofislam.org/deuteronomy-18-and-the-paraclete/" rel="noopener">Deuteronomy 18 and the Paraclete</a></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"ih-d"} -->
+<p class="ih-d">The prophet like Moses and the Comforter in John: the Muslim case and the Christian reply.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"className":"ih-meta"} -->
+<p class="ih-meta">bestofislam.org</p>
+<!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group --></section>
 <!-- /wp:group -->

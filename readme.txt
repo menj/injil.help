@@ -88,6 +88,7 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 * The Qur'anic face is served as a WOFF2 conversion (107 KB, from 298 KB) in place of the original TTF, by the owner's decision, accepting that the font's licence forbids modifying it.
 * Contextual links: posts and pages only (not attachments); saving the tab survives invalid UTF-8; an over-long phrase no longer disables its neighbours; non-ASCII capitals match without mbstring.
 * Contextual links: overlapping phrases across patterns no longer hide a link; the breadcrumb no longer stops the text linking its parent page; one link per list item; an unclosed element in a no-link region no longer stops later links; addresses and slugs keep their %XX characters on save.
+* Front page: the four card sections are filled to the height of their heading and plate (15, 12, 12 and 15 cards); cards for bestofislam.org and apostleofdoom.org are marked with the site's name and an arrow.
 = 3.7.1 =
 * KFGQPC HAFS Uthmanic Script ships with its licence (assets/fonts/KFGQPC-Hafs-Uthmanic-LICENSE.txt) and is credited on the credits page; the font file is unchanged and still used for Qur'anic Arabic only (class ih-quran). A verse set as its own block gets a line height of 2.1 for the marks.
 = 3.7.0 =

@@ -213,6 +213,8 @@ p.ih-cite{margin:0;font-size:13px;color:var(--wp--preset--color--muted)}
 .ih-k{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--wp--preset--color--accent-2)}
 .ih-d{font-size:15px;color:var(--wp--preset--color--muted)}
 .ih-meta{margin-top:auto !important;padding-top:6px;font-size:13px;font-weight:600;color:var(--wp--preset--color--accent-1)}
+.ih-entry--sister .ih-meta{display:flex;align-items:center;gap:4px;font-weight:500;letter-spacing:.02em}
+.ih-entry--sister .ih-meta::after{content:"\2197";content:"\2197" / "";font-size:12px;line-height:1}
 .ih-tint-lapis .ih-entry{background:var(--wp--preset--color--lapis-tint)}
 .ih-tint-red .ih-entry{background:var(--wp--preset--color--red-tint)}
 .ih-tint-green .ih-entry{background:var(--wp--preset--color--green-tint)}
