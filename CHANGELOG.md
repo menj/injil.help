@@ -6,7 +6,6 @@ All notable changes to The Injil theme. The `Changelog` section of `readme.txt` 
 
 - "About the author" is now "About", at /about/: the page describes the website and names no person. The old page is moved to the new address in place (its ID and any edits stay), and /about-the-author/ redirects to /about/ with a 301. The footer link, the related-pages map and the structured data (AboutPage) follow.
 - The owner's name is removed from the site: the About page, the credits, the source library and the Islamic Dilemma page now cite the owner's works by title only. The structured data no longer falls back to the WordPress author's display name for the author node; it uses the name set in Theme Options, or the site name.
-- The default profile links (sameAs) in Theme Options > SEO are now empty, so the structured data on the front end links no personal site. A site that saved the old default keeps it until the field is cleared.
 - The Contact page links menj.bio in place of menj.org.
 - The About page no longer links Apostle of Doom, which SSOT.md forbids presenting as a sister site.
 
