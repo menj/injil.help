@@ -2,6 +2,13 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.8.3
+
+- Every URL the site had before stays alive: a former path redirects to the present word-based URL with a 301. The map comes from the `former` lists the pages already carry, so it covers the 27 numbered gospel sections, the nine commentary groups with verse numbers in their slugs, every numbered commentary part and /about-the-author/. WordPress copies of these (/gospel-according-to-islam/1-2/, /quran/commentaries/al-imran-33-64/tabari/2-3/) and of a present path (/about-2/) redirect too, and so does any address below a former path.
+- The update now clears copies in every case. Before, a `-2` copy survived when the page itself had already moved. Now unedited copies go to the bin and edited ones become drafts.
+- The redirect for /about-the-author/ is folded into the general one.
+- Scan of all 176 page paths: none carries a verse number, a numeric prefix or a `-N` suffix.
+
 ## 3.8.2
 
 - "About the author" is now "About", at /about/: the page describes the website and names no person. The old page is moved to the new address in place (its ID and any edits stay), and /about-the-author/ redirects to /about/ with a 301. The footer link, the related-pages map and the structured data (AboutPage) follow.

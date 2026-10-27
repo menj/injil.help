@@ -279,7 +279,7 @@ function injil_help_gospel_islam_pages() {
 		$pages[] = array(
 			'path'    => injil_help_gospel_section_path( $n ),
 			'related' => $related,
-			'former'  => array( $base . '/' . $n ), // the numeric URL of 3.5 and earlier; redirected and renamed in place
+			'former'  => array( $base . '/' . $n ), // the numeric URL of 3.5 and earlier; renamed in place and redirected by injil_help_redirect_former()
 			'title'   => sprintf( injil_help_text( 'gospel', 'title' ), $n, $title ),
 			'excerpt' => sprintf( injil_help_text( 'gospel', 'excerpt' ), $n, $title ),
 			'body'    => $body,

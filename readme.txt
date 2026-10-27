@@ -84,6 +84,8 @@ This file is the user-facing manual that WordPress and Git Updater read. The rep
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add the entry to CHANGELOG.md and to the Changelog section here, note anything an existing site must know under "Updating an existing site" in UPGRADING.md, merge to main, and tag the commit with the same number (for example v3.4.0). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 3.8.3 =
+* Every old URL (numbered gospel sections, commentary groups with verse numbers, numbered commentary parts, their -2/-3 copies, /about-the-author/) redirects to the present URL with a 301. Leftover -2 copies are binned, or made drafts when edited.
 = 3.8.2 =
 * "About the author" becomes "About" at /about/, about the website only; /about-the-author/ redirects there. The owner is named nowhere on the site, and the structured data no longer uses the WordPress author's name. The Contact page links menj.bio.
 = 3.8.1 =
