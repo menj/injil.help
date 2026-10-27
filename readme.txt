@@ -84,6 +84,8 @@ This file is the user-facing manual that WordPress and Git Updater read. The rep
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add the entry to CHANGELOG.md and to the Changelog section here, note anything an existing site must know under "Updating an existing site" in UPGRADING.md, merge to main, and tag the commit with the same number (for example v3.4.0). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 3.8.1 =
+* /quran/raised/ gains one sentence tying its title, the end of his earthly mission, to the raising to God and the return read in 4:159.
 = 3.8.0 =
 * One owner page per keyword: the pillar gains "What is the Islamic Dilemma?" and "Is the Islamic Dilemma valid?" FAQs and a new title tag; /quran/servant/ becomes "The Messiah in Islam" with sections on al-Masīḥ and six FAQs (Do Muslims believe in Jesus? Is Jesus the son of God in Islam?); the /paul/ hub owns "the gospel of Paul of Tarsus"; Paul of Tarsus vs Jesus, the false apostles and Acts against Galatians (Paul of Tarsus in Arabia) get new titles or excerpts and FAQs.
 = 3.7.4 =

@@ -2,6 +2,11 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.8.1
+
+- Coverage check of the 55 starter page entries (TF-IDF over titles, headings and text): no two pages overlap strongly; the one subject gap is closed. /quran/raised/ ("The end of his earthly mission") never used the words of its title in its text; one sentence under "How Muslims have read it" now says that, on the majority reading, the raising to God ends his earthly mission and his return (4:159) is still to come. No other text changed.
+- The version bump makes the update rewrite that page on existing sites unless the owner edited it.
+
 ## 3.8.0
 
 - The Islamic Dilemma pillar page carries no "across the network" box: SSOT.md forbids presenting bestofislam.org and apostleofdoom.org as sister sites, so the box planned for 3.7.4 is removed before release.
