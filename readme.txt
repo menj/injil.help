@@ -85,7 +85,7 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 
 == Changelog ==
 = 3.8.2 =
-* "About the author" becomes "About" at /about/, about the website only; /about-the-author/ redirects there. The owner is named nowhere on the site, and the structured data no longer uses the WordPress author's name.
+* "About the author" becomes "About" at /about/, about the website only; /about-the-author/ redirects there. The owner is named nowhere on the site, and the structured data no longer uses the WordPress author's name. The Contact page links menj.bio, and the default profile links are empty.
 = 3.8.1 =
 * /quran/raised/ gains one sentence tying its title, the end of his earthly mission, to the raising to God and the return read in 4:159.
 = 3.8.0 =
