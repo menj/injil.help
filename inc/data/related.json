@@ -149,14 +149,14 @@
     ],
     "method": [
         "the-islamic-dilemma",
-        "about-the-author",
+        "about",
         "corrections",
         "gospel-according-to-islam/how-composed"
     ],
     "corrections": [
         "method",
         "contact",
-        "about-the-author"
+        "about"
     ],
     "answers": [
         "the-islamic-dilemma",
@@ -403,7 +403,7 @@
         "paul/paul-against-jesus",
         "paul/false-apostles"
     ],
-    "about-the-author": [
+    "about": [
         "method",
         "contact",
         "credits",
@@ -419,14 +419,14 @@
         "contact"
     ],
     "contact": [
-        "about-the-author",
+        "about",
         "corrections",
         "privacy-policy",
         "sitemap"
     ],
     "credits": [
         "resources/sources",
-        "about-the-author",
+        "about",
         "terms-of-use"
     ]
 }

@@ -2,6 +2,18 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.8.2
+
+- "About the author" is now "About", at /about/: the page describes the website and names no person. The old page is moved to the new address in place (its ID and any edits stay), and /about-the-author/ redirects to /about/ with a 301. The footer link, the related-pages map and the structured data (AboutPage) follow.
+- The owner's name is removed from the site: the About page, the credits, the source library and the Islamic Dilemma page now cite the owner's works by title only. The structured data no longer falls back to the WordPress author's display name for the author node; it uses the name set in Theme Options, or the site name.
+- The Contact page and the default profile links (sameAs) use menj.bio in place of menj.org.
+- The About page no longer links Apostle of Doom, which SSOT.md forbids presenting as a sister site.
+
+## 3.8.1
+
+- Coverage check of the 55 starter page entries (TF-IDF over titles, headings and text): no two pages overlap strongly; the one subject gap is closed. /quran/raised/ ("The end of his earthly mission") never used the words of its title in its text; one sentence under "How Muslims have read it" now says that, on the majority reading, the raising to God ends his earthly mission and his return (4:159) is still to come. No other text changed.
+- The version bump makes the update rewrite that page on existing sites unless the owner edited it.
+
 ## 3.8.0
 
 - The Islamic Dilemma pillar page carries no "across the network" box: SSOT.md forbids presenting bestofislam.org and apostleofdoom.org as sister sites, so the box planned for 3.7.4 is removed before release.

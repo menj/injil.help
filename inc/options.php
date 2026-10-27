@@ -47,7 +47,7 @@ function injil_help_option_defaults() {
 		'og_image'         => '',
 		'author_name'      => '',
 		'author_url'       => '',
-		'same_as'          => "https://menj.org\nhttps://apostleofdoom.org",
+		'same_as'          => "https://menj.bio\nhttps://apostleofdoom.org",
 		'org_logo'         => '',
 		'ctx_own'          => 1,
 		'ctx_sister'       => 1,

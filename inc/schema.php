@@ -52,14 +52,10 @@ function injil_help_schema_ids() {
 	);
 }
 
-/** Author details: Theme Options > SEO, falling back to the post author. */
+/** Author details: Theme Options > SEO, falling back to the site name. The post author's name is never used. */
 function injil_help_schema_author( $post = null ) {
 	$name = injil_help_get_option( 'author_name' );
 	$url  = injil_help_get_option( 'author_url' );
-	if ( ! $name && $post instanceof WP_Post ) {
-		$name = get_the_author_meta( 'display_name', $post->post_author );
-		$url  = $url ?: get_the_author_meta( 'user_url', $post->post_author );
-	}
 	$same = array_values( array_filter( array_map( 'trim', explode( "\n", (string) injil_help_get_option( 'same_as' ) ) ) ) );
 	return array( $name ?: get_bloginfo( 'name' ), $url, $same );
 }
@@ -498,8 +494,8 @@ function injil_help_schema_page_type( $post, $entries = array() ) {
 	}
 	if ( $post instanceof WP_Post && 'page' === $post->post_type ) {
 		switch ( $post->post_name ) {
-			case 'about-the-author':
-				return array( 'ProfilePage', 'AboutPage' );
+			case 'about':
+				return 'AboutPage';
 			case 'contact':
 				return 'ContactPage';
 			case 'sitemap':
@@ -523,7 +519,7 @@ function injil_help_schema_is_article( $post, $page_type = 'WebPage' ) {
 	if ( 'page' !== $post->post_type ) {
 		return false;
 	}
-	$utility = array( 'contact', 'sitemap', 'privacy-policy', 'terms-of-use', 'credits', 'about-the-author', 'answers', 'corrections' );
+	$utility = array( 'contact', 'sitemap', 'privacy-policy', 'terms-of-use', 'credits', 'about', 'answers', 'corrections' );
 	return ! in_array( $post->post_name, $utility, true );
 }
 
