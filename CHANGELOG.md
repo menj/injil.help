@@ -12,6 +12,7 @@ Keyword ownership from the October 2026 keyword map: each primary keyword has on
 - /paul/paul-against-jesus/ ("paul vs jesus"): excerpt opens "Paul of Tarsus vs Jesus"; three FAQs. Title and H1 unchanged.
 - /paul/false-apostles/ ("was paul a false apostle"): title "The false apostles: was Paul of Tarsus one?", a new excerpt, three FAQs. The laʿnat Allāh mark stays where it was; none is added.
 - /paul/acts-galatians/ ("how long was paul in arabia"): title "Acts against Galatians: Paul of Tarsus in Arabia and Jerusalem", a new excerpt, an H2 "Paul of Tarsus in Arabia" and three FAQs.
+- Prose revised to the house style.
 - The version bump makes the update rewrite these pages on existing sites unless the owner edited them.
 
 ## 3.7.4
