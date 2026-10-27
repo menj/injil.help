@@ -2,6 +2,18 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.8.0
+
+Keyword ownership from the October 2026 keyword map: each primary keyword has one owner page on this site.
+
+- The Islamic Dilemma pillar (/the-islamic-dilemma/) keeps "Islamic dilemma" as its focus keyword. Title tag (`pillar_title` default in `inc/seo.php`): "The Islamic Dilemma: What It Is and Why It Fails". Meta (excerpt) opens on "What is the Islamic Dilemma?". Its FAQ block gains "What is the Islamic Dilemma?" and "Is there a book on the Islamic Dilemma?", and "Is the Islamic Dilemma a good argument?" becomes "Is the Islamic Dilemma valid?".
+- /quran/servant/ owns "messiah in islam" and "who is the messiah in islam": title "The Messiah in Islam: a servant and a messenger", a new excerpt, new H2s "Who is the Messiah in Islam?", "What “Messiah” means in the Qur’an" (al-Ṭabarī on 3:45, reports 7063-7066, checked on shamela.ws) and "Are Muslims waiting for the Messiah?" (al-Bukhārī 3448 and 3439, checked on shamela.ws), and six FAQs, among them "Do Muslims believe in Jesus?" and "Is Jesus the son of God in Islam?". The count of al-Masīḥ is corrected to 11 times in 9 verses (checked on api.quran.com). The son-of-God FAQ moves there from the /quran/ hub, which takes "Did Jesus have disciples in the Qur’an?" in its place. No new /quran/messiah/ page: the servant page was the close match.
+- /paul/ hub owns "gospel of paul": title "Paul of Tarsus and his gospel", H1 the same (it was "Paul of Tarsus, the false apostle", which competed with /paul/false-apostles/), a new excerpt, an H2 "The gospel of Paul of Tarsus and the Injīl", and the FAQ "What is the gospel of Paul of Tarsus?" in place of "Did Paul of Tarsus and Jesus teach the same thing?", which moves to /paul/paul-against-jesus/.
+- /paul/paul-against-jesus/ ("paul vs jesus"): excerpt opens "Paul of Tarsus vs Jesus"; three FAQs. Title and H1 unchanged.
+- /paul/false-apostles/ ("was paul a false apostle"): title "The false apostles: was Paul of Tarsus one?", a new excerpt, three FAQs. The laʿnat Allāh mark stays where it was; none is added.
+- /paul/acts-galatians/ ("how long was paul in arabia"): title "Acts against Galatians: Paul of Tarsus in Arabia and Jerusalem", a new excerpt, an H2 "Paul of Tarsus in Arabia" and three FAQs.
+- The version bump makes the update rewrite these pages on existing sites unless the owner edited them.
+
 ## 3.7.4
 
 - The Islamic Dilemma pillar page (/the-islamic-dilemma/, `inc/data/patterns/islamic-dilemma-page.json`, included by `inc/data/pages/pillar.json`) carries "The Islamic Dilemma across the network" before its Sources: an `is-style-criterion` box with one line per sister piece and its angle, linking compelling-evidence.com/articles/islamic-dilemma-quran-and-bible/, abrahamic-religions.com/islamic-dilemma/, bestofislam.org/islamic-dilemma/, apostleofdoom.org/islamic-dilemma/, murtadd.org/guides/islamic-dilemma/ and lailatulqadar.guide/islamic-dilemma/ (`rel="noopener"`, same tab, as the contextual links do).

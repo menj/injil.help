@@ -18,7 +18,7 @@ function injil_help_seo_defaults() {
 		array(
 			'home_title'       => __( 'The Islamic Dilemma, answered', 'injil-help' ),
 			'home_description' => __( "The Islamic Dilemma says the Qur'an affirms the gospels it contradicts. A sourced answer: what the Injīl is, what the four gospels are, and the Qur'an as their measure.", 'injil-help' ),
-			'pillar_title'     => __( 'The Islamic Dilemma, answered: Qur’an 5:47 and the Injīl', 'injil-help' ),
+			'pillar_title'     => __( 'The Islamic Dilemma: What It Is and Why It Fails', 'injil-help' ),
 		)
 	);
 }
