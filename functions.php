@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'INJIL_HELP_VERSION', '3.8.3' );
+define( 'INJIL_HELP_VERSION', '3.9.0' );
 
 require_once get_stylesheet_directory() . '/inc/options.php';
 require_once get_stylesheet_directory() . '/inc/starter-content.php';
@@ -16,20 +16,14 @@ require_once get_stylesheet_directory() . '/inc/schema.php';
 require_once get_stylesheet_directory() . '/inc/rank-math.php';
 require_once get_stylesheet_directory() . '/inc/share.php';
 require_once get_stylesheet_directory() . '/inc/contextual-links.php';
+require_once get_stylesheet_directory() . '/inc/security.php';
 
 /**
- * Hardening. Application passwords (REST API and XML-RPC log-ins with a per-application
- * password) are blocked for the whole site by default, the same as
- * add_filter( 'wp_is_application_passwords_available', '__return_false' ), until the block is
- * switched off under Theme Options › Security: nothing on injil.help is written through the
- * REST API from outside, so the feature is one more door than the site needs.
+ * Hardening lives in inc/security.php: XML-RPC, application passwords (the block_app_passwords
+ * setting, on by default since 3.6.0) and REST writes from outside a browser session are shut,
+ * new content is checked for gambling spam, and Theme Options › Security carries the switches,
+ * the clean-up tools and the reports.
  */
-add_filter(
-	'wp_is_application_passwords_available',
-	function ( $available ) {
-		return injil_help_get_option( 'block_app_passwords' ) ? false : $available;
-	}
-);
 
 /**
  * Styles: front end and editor.

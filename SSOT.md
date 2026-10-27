@@ -12,7 +12,7 @@ The fixed facts about The Injil theme. When another document, a comment or a pat
 | Folder and text domain | `injil-help` |
 | Parent theme | Twenty Twenty-Five (`twentytwentyfive`), must stay installed |
 | Site | https://injil.help (The Rightly-Guided Injīl). The theme is custom-built for this one site and is not intended for use on any other. |
-| Repository | https://github.com/menj/injil.help, `Primary Branch: main` (Git Updater). README.md, SSOT.md, CHANGELOG.md, UPGRADING.md and the dot-files are `export-ignore`: they stay in the repository and out of the release archive. No test files are kept in the repository; the release checks live outside it. |
+| Repository | https://github.com/menj/injil.help, `Primary Branch: main` (Git Updater). README.md, SSOT.md, CHANGELOG.md, UPGRADING.md and the dot-files are `export-ignore`: they stay in the repository and out of the release archive. The one test kept in the repository is `tests/security-detector-test.php` (export-ignore); the other release checks live outside it. |
 | Version | `Version:` in `style.css` and `INJIL_HELP_VERSION` in `functions.php`, always equal; the release tag is `v` + that number |
 | Requires | WordPress 6.6, PHP 7.4 |
 | Licence | GPL v2 or later; fonts and images keep their own licences |
@@ -54,11 +54,11 @@ The fixed facts about The Injil theme. When another document, a comment or a pat
 
 ## Theme Options (`injil_help_options`)
 
-Tabs: Colours, Branding, Sharing, Contextual links, SEO, Security, Content. Defaults: `colors` {}, `footer_mark` 1, `ornament` rich, `animate` 1, `parallax` strong, `gospel_layout` columns, `content_width` full (full and wide set prose pages in two columns from 1280px; pages with `.ih-bible` are excluded through `:has()`), `block_app_passwords` 1, `favicon_force` 0, `favicon_url` '', `share` 1, `share_networks` x, facebook, whatsapp, telegram, reddit, linkedin, bluesky, threads, `share_types` post, page, `share_label` '', `schema` auto, `home_title` '', `home_description` '', `pillar_title` '', `og_image` '', `author_name` '', `author_url` '', `same_as` menj.bio and apostleofdoom.org, `org_logo` '', `ctx_own` 1, `ctx_sister` 1, `ctx_own_max` 4 (0-15), `ctx_sister_max` 3 (0-10), `ctx_extra` '', `ctx_exclude` ''.
+Tabs: Colours, Branding, Sharing, Contextual links, SEO, Security, Content. Defaults: `colors` {}, `footer_mark` 1, `ornament` rich, `animate` 1, `parallax` strong, `gospel_layout` columns, `content_width` full (full and wide set prose pages in two columns from 1280px; pages with `.ih-bible` are excluded through `:has()`), `block_app_passwords` 1, `block_xmlrpc` 1, `block_rest_writes` 1, `spam_gate` 1, `spam_gone` 1, `favicon_force` 0, `favicon_url` '', `share` 1, `share_networks` x, facebook, whatsapp, telegram, reddit, linkedin, bluesky, threads, `share_types` post, page, `share_label` '', `schema` auto, `home_title` '', `home_description` '', `pillar_title` '', `og_image` '', `author_name` '', `author_url` '', `same_as` menj.bio and apostleofdoom.org, `org_logo` '', `ctx_own` 1, `ctx_sister` 1, `ctx_own_max` 4 (0-15), `ctx_sister_max` 3 (0-10), `ctx_extra` '', `ctx_exclude` ''.
 
 ## Filters
 
-- Hardening set by the theme: `wp_is_application_passwords_available` returns false while `block_app_passwords` is set (functions.php), which it is by default, so application passwords are off site-wide until the block is unticked under Theme Options › Security.
+- Hardening set by the theme (inc/security.php, from 3.9.0): `wp_is_application_passwords_available` returns false while `block_app_passwords` is set, XML-RPC is off while `block_xmlrpc` is set, logged-in REST writes need a browser session while `block_rest_writes` is set, the spam gate runs while `spam_gate` is set and trashed spam answers 410 while `spam_gone` is set; all on by default. `INJIL_HELP_SECURITY_LOCK` false turns the first three off. Options written: `injil_help_security_log`, `injil_help_security_gone`, `injil_help_security_counts`, `injil_help_security_failed`, `injil_help_security_htaccess`.
 
 `injil_help_seo_defaults`, `injil_help_default_og_image`, `injil_help_output_schema`, `injil_help_schema_graph`, `injil_help_share_networks`, `injil_help_contextual_links_map` (the decoded map), `injil_help_contextual_links_enabled` (bool, `$post`).
 

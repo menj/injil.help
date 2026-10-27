@@ -1,0 +1,22 @@
+/* injil.help: Security tab of Theme Options. Uses the tokens of admin.css (.ih-options). */
+.ih-sec-heading{font-size:15px;font-weight:600;margin:24px 0 6px;color:var(--ih-a-primary)}
+.ih-panel .ih-sec-heading:first-child{margin-top:16px}
+.ih-sec{margin-top:16px;border-top:1px solid var(--ih-a-rule);border-radius:10px;padding:8px 24px 20px}
+.ih-sec h2{font-size:15px;font-weight:600;margin:24px 0 8px;color:var(--ih-a-primary)}
+.ih-sec h3{font-size:12px;font-weight:600;margin:18px 0 8px;color:var(--ih-a-muted);text-transform:uppercase;letter-spacing:.05em}
+.ih-sec-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:12px 0}
+.ih-sec-form{margin:0}
+.ih-sec-status{color:var(--ih-a-muted);font-size:13px}
+.ih-sec-key{color:#8a2a1f}
+.ih-sec-scroll{max-height:420px;overflow:auto;border:1px solid var(--ih-a-rule);border-radius:8px}
+.ih-sec-scroll--tall{max-height:560px}
+.ih-sec-table{border:0}
+.ih-sec-table td,.ih-sec-table th{vertical-align:top}
+.ih-sec-links{display:flex;gap:10px;margin-top:4px;font-size:12px}
+.ih-sec-reason{display:inline-block;margin:0 4px 4px 0;padding:1px 8px;border-radius:999px;background:color-mix(in srgb,var(--ih-a-gold) 18%,#fff);color:#5c4718;font-size:11px;line-height:18px}
+.ih-sec-list{margin:8px 0 12px 18px;list-style:disc}
+.ih-sec-list li{margin:2px 0}
+@media (max-width:782px){
+	.ih-sec{padding:8px 12px 16px}
+	.ih-sec-bar{flex-direction:column;align-items:stretch}
+}

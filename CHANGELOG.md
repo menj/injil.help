@@ -2,6 +2,18 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.9.0
+
+The protection built for the Abrahamic theme (2.87.0) after the October 2026 attack on abrahamic-religions.com, ported here: password guessing through XML-RPC from 701 rotating addresses under forged "Jetpack by WordPress.com" user agents, a correct password found, then a casino spam post every 18 to 20 minutes through wp.newPost under the owner's own account.
+
+- New `inc/security.php`, `inc/security-detector.php`, `assets/js/security.js` and `assets/css/security.css`. The application-password filter moves from `functions.php` into `inc/security.php`; its setting, `block_app_passwords`, and its default are unchanged.
+- Theme Options › Security grows from one switch to five, all on by default: Turn off XML-RPC (`block_xmlrpc`: xmlrpc.php answers 403, counted per day rather than logged per request, and on Apache a "Block xmlrpc.php" section is kept in .htaccess), Block application passwords, REST API changes only from a logged-in browser (`block_rest_writes`: a logged-in write must come from a cookie session with a valid `wp_rest` nonce; anonymous requests, reads, the block editor and Rank Math are unchanged), Hold suspected gambling spam as Pending (`spam_gate`) and 410 Gone for removed spam (`spam_gone`).
+- A password sent through XML-RPC is refused even when XML-RPC is switched back on, and an admin notice says the password is known. Failed logins are counted by account name, since the attack changed address on every try.
+- The spam gate holds as Pending any post or page that reads as gambling spam, and anything published from outside the editor. The pages the theme writes are exempt: they carry `_injil_help_hash`, or match a page in `inc/data/` by title and slug.
+- The Security tab carries a batch scan (100 at a time) with a move-to-Trash button (never a permanent delete), clean-up of empty spam categories on request, buttons to revoke all application passwords and log out all sessions, reports (administrators, attacks per day, accounts being guessed, posts per day, burst publishing, starter pages with gambling links) and the security log. Only administrators (`manage_options`) see or change any of it.
+- `define( 'INJIL_HELP_SECURITY_LOCK', false );` in wp-config.php turns the XML-RPC, application-password and REST locks off without changing the options.
+- `tests/security-detector-test.php` scores every page definition, pattern and string in `inc/data/` (15,961 items) at zero and flags all 52 attack samples. The bare word "bet" (the Hebrew letter), "slot", "spins" and "odds" no longer count, so Bethlehem, Bethel, the alphabet, "Mary spins purple thread" and the Bonus pages read clean.
+
 ## 3.8.3
 
 - Every URL the site had before stays alive: a former path redirects to the present word-based URL with a 301. The map comes from the `former` lists the pages already carry, so it covers the 27 numbered gospel sections, the nine commentary groups with verse numbers in their slugs, every numbered commentary part and /about-the-author/. WordPress copies of these (/gospel-according-to-islam/1-2/, /quran/commentaries/al-imran-33-64/tabari/2-3/) and of a present path (/about-2/) redirect too, and so does any address below a former path.

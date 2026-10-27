@@ -34,6 +34,10 @@ function injil_help_option_defaults() {
 		'gospel_layout'    => 'columns',
 		'content_width'    => 'full',
 		'block_app_passwords' => 1,
+		'block_xmlrpc'     => 1,
+		'block_rest_writes' => 1,
+		'spam_gate'        => 1,
+		'spam_gone'        => 1,
 		'favicon_force'    => 0,
 		'favicon_url'      => '',
 		'share'            => 1,
@@ -85,7 +89,11 @@ function injil_help_sanitize_options( $in ) {
 	$out['parallax']         = injil_help_pick( $in, 'parallax', array( 'strong', 'gentle', 'off' ), 'strong' );
 	$out['gospel_layout']    = injil_help_pick( $in, 'gospel_layout', array( 'columns', 'single', 'plain' ), 'columns' );
 	$out['content_width']    = injil_help_pick( $in, 'content_width', array( 'full', 'wide', 'reading' ), 'full' );
-	$out['block_app_passwords'] = empty( $in['block_app_passwords'] ) ? 0 : 1;
+	// The Security switches change only for someone who may manage options; anyone else keeps the stored values.
+	$stored = injil_help_get_option();
+	foreach ( array( 'block_app_passwords', 'block_xmlrpc', 'block_rest_writes', 'spam_gate', 'spam_gone' ) as $key ) {
+		$out[ $key ] = current_user_can( 'manage_options' ) ? ( empty( $in[ $key ] ) ? 0 : 1 ) : ( empty( $stored[ $key ] ) ? 0 : 1 );
+	}
 	$out['favicon_force']    = empty( $in['favicon_force'] ) ? 0 : 1;
 	$out['favicon_url']      = esc_url_raw( $in['favicon_url'] ?? '' );
 	$out['share']            = empty( $in['share'] ) ? 0 : 1;
@@ -404,15 +412,13 @@ function injil_help_render_options() {
 			</section>
 
 			<section class="ih-panel" id="panel-security" role="tabpanel" aria-labelledby="tab-security">
-				<table class="form-table" role="presentation">
-					<tr>
-						<th scope="row"><?php esc_html_e( 'Application passwords', 'injil-help' ); ?></th>
-						<td>
-							<label><input type="checkbox" name="<?php echo esc_attr( $name ); ?>[block_app_passwords]" value="1" <?php checked( $o['block_app_passwords'] ); ?>> <?php esc_html_e( 'Block application passwords (on by default)', 'injil-help' ); ?></label>
-							<p class="description"><?php esc_html_e( 'Application passwords let a client (a mobile app, a publishing tool, a script) log in through the REST API or XML-RPC with a password made for it alone. Nothing on this site needs that door, so the theme keeps it shut: the panel disappears from user profiles and such log-ins are refused. Untick the box only while a client you trust needs it.', 'injil-help' ); ?></p>
-						</td>
-					</tr>
-				</table>
+				<?php
+				if ( current_user_can( 'manage_options' ) ) {
+					injil_help_sec_render_settings( $o );
+				} else {
+					echo '<p class="description">' . esc_html__( 'Only an administrator can change the Security settings.', 'injil-help' ) . '</p>';
+				}
+				?>
 			</section>
 
 			<section class="ih-panel" id="panel-content" role="tabpanel" aria-labelledby="tab-content">
@@ -458,6 +464,10 @@ function injil_help_render_options() {
 
 			<?php submit_button(); ?>
 		</form>
+		<?php
+		// The Security tools post their own forms, so they sit outside the options form; security.js shows them with the tab.
+		injil_help_sec_render_tools();
+		?>
 	</div>
 	<?php
 }
