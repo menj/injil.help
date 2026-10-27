@@ -87,7 +87,6 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 = 3.8.0 =
 * One owner page per keyword: the pillar gains "What is the Islamic Dilemma?" and "Is the Islamic Dilemma valid?" FAQs and a new title tag; /quran/servant/ becomes "The Messiah in Islam" with sections on al-Masīḥ and six FAQs (Do Muslims believe in Jesus? Is Jesus the son of God in Islam?); the /paul/ hub owns "the gospel of Paul of Tarsus"; Paul of Tarsus vs Jesus, the false apostles and Acts against Galatians (Paul of Tarsus in Arabia) get new titles or excerpts and FAQs.
 = 3.7.4 =
-* The Islamic Dilemma pillar page carries "The Islamic Dilemma across the network", a box linking the six sister pieces on compelling-evidence.com, abrahamic-religions.com, bestofislam.org, apostleofdoom.org, murtadd.org and lailatulqadar.guide.
 = 3.7.3 =
 * Content corrections: Ibn Isḥāq's report of the Christians' 7 hours; the "taught to write" reading of 3:48 and 5:110 conceded to the commentators; 46:30 quoted correctly; al-Saʿdī on 3:55 retranslated from his Arabic; the Codex Sinaiticus alt text.
 = 3.7.2 =

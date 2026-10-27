@@ -4,6 +4,8 @@ All notable changes to The Injil theme. The `Changelog` section of `readme.txt` 
 
 ## 3.8.0
 
+- The Islamic Dilemma pillar page carries no "across the network" box: SSOT.md forbids presenting bestofislam.org and apostleofdoom.org as sister sites, so the box planned for 3.7.4 is removed before release.
+
 Keyword ownership from the October 2026 keyword map: each primary keyword has one owner page on this site.
 
 - The Islamic Dilemma pillar (/the-islamic-dilemma/) keeps "Islamic dilemma" as its focus keyword. Title tag (`pillar_title` default in `inc/seo.php`): "The Islamic Dilemma: What It Is and Why It Fails". Meta (excerpt) opens on "What is the Islamic Dilemma?". Its FAQ block gains "What is the Islamic Dilemma?" and "Is there a book on the Islamic Dilemma?", and "Is the Islamic Dilemma a good argument?" becomes "Is the Islamic Dilemma valid?".
@@ -17,7 +19,6 @@ Keyword ownership from the October 2026 keyword map: each primary keyword has on
 
 ## 3.7.4
 
-- The Islamic Dilemma pillar page (/the-islamic-dilemma/, `inc/data/patterns/islamic-dilemma-page.json`, included by `inc/data/pages/pillar.json`) carries "The Islamic Dilemma across the network" before its Sources: an `is-style-criterion` box with one line per sister piece and its angle, linking compelling-evidence.com/articles/islamic-dilemma-quran-and-bible/, abrahamic-religions.com/islamic-dilemma/, bestofislam.org/islamic-dilemma/, apostleofdoom.org/islamic-dilemma/, murtadd.org/guides/islamic-dilemma/ and lailatulqadar.guide/islamic-dilemma/ (`rel="noopener"`, same tab, as the contextual links do).
 - On-page SEO checked, nothing else changed: the keyword "the Islamic Dilemma" is already in the title tag ("The Islamic Dilemma, answered: Qur’an 5:47 and the Injīl"), the H1, the meta description (the page excerpt) and the first 100 words. No new article.
 
 ## 3.7.3
