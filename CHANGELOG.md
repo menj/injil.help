@@ -2,6 +2,34 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.8.0
+
+- The Islamic Dilemma pillar page carries no "across the network" box: SSOT.md forbids presenting bestofislam.org and apostleofdoom.org as sister sites, so the box planned for 3.7.4 is removed before release.
+
+Keyword ownership from the October 2026 keyword map: each primary keyword has one owner page on this site.
+
+- The Islamic Dilemma pillar (/the-islamic-dilemma/) keeps "Islamic dilemma" as its focus keyword. Title tag (`pillar_title` default in `inc/seo.php`): "The Islamic Dilemma: What It Is and Why It Fails". Meta (excerpt) opens on "What is the Islamic Dilemma?". Its FAQ block gains "What is the Islamic Dilemma?" and "Is there a book on the Islamic Dilemma?", and "Is the Islamic Dilemma a good argument?" becomes "Is the Islamic Dilemma valid?".
+- /quran/servant/ owns "messiah in islam" and "who is the messiah in islam": title "The Messiah in Islam: a servant and a messenger", a new excerpt, new H2s "Who is the Messiah in Islam?", "What “Messiah” means in the Qur’an" (al-Ṭabarī on 3:45, reports 7063-7066, checked on shamela.ws) and "Are Muslims waiting for the Messiah?" (al-Bukhārī 3448 and 3439, checked on shamela.ws), and six FAQs, among them "Do Muslims believe in Jesus?" and "Is Jesus the son of God in Islam?". The count of al-Masīḥ is corrected to 11 times in 9 verses (checked on api.quran.com). The son-of-God FAQ moves there from the /quran/ hub, which takes "Did Jesus have disciples in the Qur’an?" in its place. No new /quran/messiah/ page: the servant page was the close match.
+- /paul/ hub owns "gospel of paul": title "Paul of Tarsus and his gospel", H1 the same (it was "Paul of Tarsus, the false apostle", which competed with /paul/false-apostles/), a new excerpt, an H2 "The gospel of Paul of Tarsus and the Injīl", and the FAQ "What is the gospel of Paul of Tarsus?" in place of "Did Paul of Tarsus and Jesus teach the same thing?", which moves to /paul/paul-against-jesus/.
+- /paul/paul-against-jesus/ ("paul vs jesus"): excerpt opens "Paul of Tarsus vs Jesus"; three FAQs. Title and H1 unchanged.
+- /paul/false-apostles/ ("was paul a false apostle"): title "The false apostles: was Paul of Tarsus one?", a new excerpt, three FAQs. The laʿnat Allāh mark stays where it was; none is added.
+- /paul/acts-galatians/ ("how long was paul in arabia"): title "Acts against Galatians: Paul of Tarsus in Arabia and Jerusalem", a new excerpt, an H2 "Paul of Tarsus in Arabia" and three FAQs.
+- Prose revised to the house style.
+- The version bump makes the update rewrite these pages on existing sites unless the owner edited them.
+
+## 3.7.4
+
+- On-page SEO checked, nothing else changed: the keyword "the Islamic Dilemma" is already in the title tag ("The Islamic Dilemma, answered: Qur’an 5:47 and the Injīl"), the H1, the meta description (the page excerpt) and the first 100 words. No new article.
+
+## 3.7.3
+
+- Five content errors from the content review are corrected.
+  - Ibn Isḥāq's 7 hours of death is the Christians' claim, which he reports (al-Ṭabarī on 3:55); the Islamic Dilemma page gave it as his own view. The sentence now says so.
+  - "Taught to write" (3:48; 5:110): the page called the reading a slip and a misreading, but al-Ṭabarī, al-Jalālayn, al-Baghawī, al-Qurṭubī (from Ibn Jurayj) and Ibn Kathīr, in the site's own translations, all gloss <em>al-kitāb</em> there as writing. The page now concedes the reading and answers what the argument builds on it.
+  - 46:30 was quoted as confirming "what came after Moses"; the verse calls the Qur'an "a Book sent down after Moses, confirming what was before it".
+  - The al-Saʿdī commentary on 3:55 is retranslated from his Arabic (quran.com tafsir 91). The passage on the descent of Jesus and the quotation of 24:55 are not in his text and are removed; his remarks on God's exaltation, the restraint of the Children of Israel (5:110) and the Christians and then the Muslims prevailing are added.
+  - The alt text of the Codex Sinaiticus image on the Mark page no longer says the codex has the shorter ending; it ends Mark at 16:8.
+
 ## 3.7.2
 
 - The Qur'anic face is served as `assets/fonts/KFGQPC-Hafs-Uthmanic.woff2` (107 KB) in place of the original TTF (298 KB, removed). The owner chose on 2026-10-26 to serve a WOFF2 conversion of the KFGQPC HAFS Uthmanic Script (107 KB, from 298 KB), accepting that the KFGQPC licence forbids modifying the font. The conversion is lossless for glyphs, cmap and OpenType layout; the digital signature (DSIG) is dropped. Recorded in SSOT.md; the credits page says so.
