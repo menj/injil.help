@@ -11,3 +11,5 @@ README.md export-ignore
 SSOT.md export-ignore
 CHANGELOG.md export-ignore
 UPGRADING.md export-ignore
+CLAUDE.md export-ignore
+.claude export-ignore

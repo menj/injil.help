@@ -126,6 +126,8 @@
         "gospels/discrepancies/resurrection"
     ],
     "the-islamic-dilemma": [
+        "the-islamic-dilemma/what-is-the-injil",
+        "the-islamic-dilemma/torah-in-islam",
         "the-islamic-dilemma/secular-form",
         "the-islamic-dilemma/balance-of-truth",
         "method",
@@ -362,7 +364,8 @@
     "resources/glossary": [
         "resources/timeline",
         "resources/sources",
-        "method"
+        "method",
+        "the-islamic-dilemma/what-is-the-injil"
     ],
     "resources/sources": [
         "resources/timeline",
@@ -428,5 +431,18 @@
         "resources/sources",
         "about",
         "terms-of-use"
+    ],
+    "the-islamic-dilemma/what-is-the-injil": [
+        "the-islamic-dilemma",
+        "the-islamic-dilemma/torah-in-islam",
+        "quran",
+        "gospels",
+        "gospel-according-to-islam"
+    ],
+    "the-islamic-dilemma/torah-in-islam": [
+        "the-islamic-dilemma/what-is-the-injil",
+        "the-islamic-dilemma",
+        "method",
+        "the-islamic-dilemma/balance-of-truth"
     ]
 }

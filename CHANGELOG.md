@@ -2,6 +2,20 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.9.0
+
+Keyword work from the October 2026 keyword lists (the editorially refined list of 3,259 keywords and the superlist of 4,226). Each search intent has one owner page.
+
+- New page /the-islamic-dilemma/what-is-the-injil/ ("What is the Injīl? The meaning of Injil and Injeel in Islam") owns "injil", "injeel", "what is the injil", "injeel meaning", "injil in English", "is the injil the bible" and "koran vs bible". It covers the meaning and spellings of the word, the 12 verses that name it, the Bible and the New Testament, the language Jesus spoke, how the Injīl was revealed, what happened to it, the Gospel of Barnabas, and the Qur'an and the Bible compared, with 10 FAQs.
+- New page /the-islamic-dilemma/torah-in-islam/ ("The Torah in Islam: the Tawrāt and the Qur'an") owns the Torah keywords of the superlist: "islam torah", "taurat book", "quran vs torah", "torah in the quran", "do muslims read the torah". The 18 verses, the Pentateuch, a comparison table marked agrees, conflicts and unclear, and 7 FAQs.
+- /quran/ hub: a new excerpt ("What does the Qur'an say about Jesus?") and 5 FAQs: the Muslim name for Jesus, how many times he is mentioned, which verses are about him, whether the Qur'an calls him a Muslim, and what it says about Jews and Christians (5:82 among them).
+- /quran/servant/ gains 2 FAQs: "Does the Qur'an say Jesus is God?" and "Does the Qur'an call Jesus the word of God?".
+- The glossary entries for Injīl and Tawrāt give the English spellings and link the new pages; the pillar FAQ and the /quran/ hub link What is the Injīl?; related.json gives both pages a "Read next" row.
+- Home meta description names the Injil (Injeel) and what the Qur'an says about Jesus.
+- The two parts of the Islamic Dilemma are its two claims throughout. The front-page diagram reads "Claim 1" and "Claim 2", "Both claims rest on one assumption"; the pillar and Pfander pages say "both claims" and "two-part form"; the diagram's CSS classes are now `ih-claim*`. The al-Jalālayn footnote on 3:50 glosses <em>ṣīṣiya</em> as a spur, spike or hard protrusion. SSOT.md bans the old term.
+- The writing rules in `.claude/skills/anti-ai-writing-style/SKILL.md` are now the house style for every piece of English prose (SSOT.md, CLAUDE.md). Both stay out of the release archive.
+- 178 pages. The version bump makes the update create the 2 new pages and rewrite the changed ones on existing sites unless the owner edited them.
+
 ## 3.8.2
 
 - "About the author" is now "About", at /about/: the page describes the website and names no person. The old page is moved to the new address in place (its ID and any edits stay), and /about-the-author/ redirects to /about/ with a 301. The footer link, the related-pages map and the structured data (AboutPage) follow.
@@ -141,7 +155,7 @@ Keyword ownership from the October 2026 keyword map: each primary keyword has on
 ## 3.5.1
 
 - Images from Wikimedia Commons on twenty-eight article pages (the five gospels and the Thomas pages, the discrepancy tables, the six Paul of Tarsus pages, the two Islamic Dilemma pages and the measure, the Qur'an theme pages, the source library and the objections): each a public-domain or CC0 manuscript page or painting chosen for the page, set as a plate near the top with its caption, credit and a link to its Commons page. The same image is sideloaded into the Media Library and set as the page's featured image, a few pages per admin screen load, so the Open Graph card and the structured data carry it. The map is inc/data/images.json (file name, alt, caption, credit), read by inc/images.php; the pages still without one are the nativity and crucifixion tables, the good news of Aḥmad, the borrowing page and the composition page.
-- The dilemma section on the front page is drawn as a diagram: the two horns side by side with "or" between them, a labelled rule joining them to the assumption they share, which now spans the width beneath them and says in a line why it fails. The cards used to sit in an open-ended grid that left a fourth empty column on wide screens.
+- The dilemma section on the front page is drawn as a diagram: the two claims side by side with "or" between them, a labelled rule joining them to the assumption they share, which now spans the width beneath them and says in a line why it fails. The cards used to sit in an open-ended grid that left a fourth empty column on wide screens.
 - Fix: the entry cards on the home sections and the index pages no longer stretch to the height of the section head beside them (the grid's rows were filling the stretched container), so the coloured boxes fit their text again.
 - Prose pass against the house writing rules: the composition page's departures list is plain bullets and its "not a translation, not a harmony, not a life" run is positive statements; "the measure is its rule" replaces "not its rule"; the pillar page's "reads them as free-standing statements" sentence, "What is worth noting", two "in order to" and "Nobody knows" rewritten.
 
