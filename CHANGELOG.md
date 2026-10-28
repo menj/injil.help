@@ -14,6 +14,7 @@ Keyword work from the October 2026 keyword lists (the editorially refined list o
 - Home meta description names the Injil (Injeel) and what the Qur'an says about Jesus.
 - The two parts of the Islamic Dilemma are its two claims throughout. The front-page diagram reads "Claim 1" and "Claim 2", "Both claims rest on one assumption"; the pillar and Pfander pages say "both claims" and "two-part form"; the diagram's CSS classes are now `ih-claim*`. The al-Jalālayn footnote on 3:50 glosses <em>ṣīṣiya</em> as a spur, spike or hard protrusion. SSOT.md bans the old term.
 - The writing rules in `.claude/skills/anti-ai-writing-style/SKILL.md` are now the house style for every piece of English prose (SSOT.md, CLAUDE.md). Both stay out of the release archive.
+- Facts checked before release: the counts of ʿĪsā (25), ibn Maryam (23), al-Masīḥ (11), al-Injīl (12 verses) and al-Tawrāh (18) against the Tanzil simple-clean text; the Ramaḍān report (Aḥmad, <em>Musnad</em> 16984, graded <em>ḥasan</em> by al-Albānī, its chain faulted by others); the Gospel of Barnabas jubilee passage; the 2012 Ankara manuscript reports; Rashi on Deuteronomy 18:15.
 - 178 pages. The version bump makes the update create the 2 new pages and rewrite the changed ones on existing sites unless the owner edited them.
 
 ## 3.8.2
