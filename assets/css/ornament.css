@@ -175,7 +175,7 @@ body.ih-px-gentle{--ih-px:.45}
 @media (max-width:600px){
  html.ih-px .ih-cover .ih-plate{transform:translate3d(0,calc(var(--ih-p,0) * -40px * var(--ih-px,1)),0)}
  html.ih-px .ih-section-head::after{transform:translate3d(0,calc(var(--ih-p,0) * -50px * var(--ih-px,1)),0) rotate(-8deg)}
- html.ih-px .ih-entries > .ih-entry,html.ih-px .ih-horns > .ih-horn{transform:none}
+ html.ih-px .ih-entries > .ih-entry,html.ih-px .ih-claims > .ih-claim{transform:none}
 }
 
 /* Motion: cards and answers rise into view. ornament.js adds .ih-js and .is-in. */

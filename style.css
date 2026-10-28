@@ -5,7 +5,7 @@ Description: Custom child theme of Twenty Twenty-Five built for one site, The Ri
 Author: MENJ
 Author URI: https://menj.blog
 Template: twentytwentyfive
-Version: 3.8.2
+Version: 3.9.0
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -300,28 +300,28 @@ p.ih-cite{margin:0;font-size:13px;color:var(--wp--preset--color--muted)}
 /* The Islamic Dilemma */
 .ih-dilemma{margin-block-start:var(--wp--preset--spacing--50) !important}
 .ih-dilemma > * + *{margin-top:var(--wp--preset--spacing--30) !important}
-/* The dilemma as a diagram: the two horns side by side with "or" between them, the assumption they share beneath, joined by a labelled rule */
-.ih-horns{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:14px 14px;align-items:stretch}
-.ih-horn-1{grid-column:1}
-.ih-horn-or{grid-column:2;align-self:center;justify-self:center;margin:0 !important;font-family:var(--ih-sans);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--wp--preset--color--accent-2);border:1.5px solid var(--wp--preset--color--accent-2);border-radius:var(--ih-r-pill);padding:.35em .8em;background:var(--wp--preset--color--base);text-align:center !important}
-.ih-horn-2{grid-column:3}
-.ih-horn-join{grid-column:1 / -1;margin:4px 0 0 !important;display:flex;align-items:center;gap:14px;font-family:var(--ih-sans);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--wp--preset--color--accent-1);text-align:center !important;hyphens:manual}
-.ih-horn-join::before,.ih-horn-join::after{content:"";flex:1;border-top:1.5px solid var(--wp--preset--color--accent-1);opacity:.6}
-.ih-horn-join::before{border-inline-start:1.5px solid var(--wp--preset--color--accent-1);height:14px;border-top-left-radius:6px;align-self:flex-start;margin-inline-start:12%}
-.ih-horn-join::after{border-inline-end:1.5px solid var(--wp--preset--color--accent-1);height:14px;border-top-right-radius:6px;align-self:flex-start;margin-inline-end:12%}
-.ih-horn-base{grid-column:1 / -1;border:1.5px solid var(--wp--preset--color--accent-1)}
-.ih-horn-base .ih-horn-text{font-weight:400;font-size:19px}
+/* The dilemma as a diagram: the two claims side by side with "or" between them, the assumption they share beneath, joined by a labelled rule */
+.ih-claims{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:14px 14px;align-items:stretch}
+.ih-claim-1{grid-column:1}
+.ih-claim-or{grid-column:2;align-self:center;justify-self:center;margin:0 !important;font-family:var(--ih-sans);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--wp--preset--color--accent-2);border:1.5px solid var(--wp--preset--color--accent-2);border-radius:var(--ih-r-pill);padding:.35em .8em;background:var(--wp--preset--color--base);text-align:center !important}
+.ih-claim-2{grid-column:3}
+.ih-claim-join{grid-column:1 / -1;margin:4px 0 0 !important;display:flex;align-items:center;gap:14px;font-family:var(--ih-sans);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--wp--preset--color--accent-1);text-align:center !important;hyphens:manual}
+.ih-claim-join::before,.ih-claim-join::after{content:"";flex:1;border-top:1.5px solid var(--wp--preset--color--accent-1);opacity:.6}
+.ih-claim-join::before{border-inline-start:1.5px solid var(--wp--preset--color--accent-1);height:14px;border-top-left-radius:6px;align-self:flex-start;margin-inline-start:12%}
+.ih-claim-join::after{border-inline-end:1.5px solid var(--wp--preset--color--accent-1);height:14px;border-top-right-radius:6px;align-self:flex-start;margin-inline-end:12%}
+.ih-claim-base{grid-column:1 / -1;border:1.5px solid var(--wp--preset--color--accent-1)}
+.ih-claim-base .ih-claim-text{font-weight:400;font-size:19px}
 @media (max-width:700px){
- .ih-horns{grid-template-columns:1fr}
- .ih-horn-1,.ih-horn-or,.ih-horn-2,.ih-horn-join,.ih-horn-base{grid-column:1}
- .ih-horn-join::before,.ih-horn-join::after{height:0;border-inline-start:0;border-inline-end:0;margin:0}
+ .ih-claims{grid-template-columns:1fr}
+ .ih-claim-1,.ih-claim-or,.ih-claim-2,.ih-claim-join,.ih-claim-base{grid-column:1}
+ .ih-claim-join::before,.ih-claim-join::after{height:0;border-inline-start:0;border-inline-end:0;margin:0}
 }
-.ih-horn{border-radius:var(--ih-r-md);padding:22px;margin:0 !important;display:flex;flex-direction:column;gap:8px}
-.ih-horn > *{margin:0 !important}
-.ih-horn-red{background:var(--wp--preset--color--red-tint)}
-.ih-horn-green{background:var(--wp--preset--color--green-tint)}
-.ih-horn-green .ih-k{color:var(--wp--preset--color--accent-1)}
-.ih-horn-text{font-family:var(--ih-serif);font-weight:600;font-size:22px;line-height:1.2;text-align:start !important;hyphens:manual}
+.ih-claim{border-radius:var(--ih-r-md);padding:22px;margin:0 !important;display:flex;flex-direction:column;gap:8px}
+.ih-claim > *{margin:0 !important}
+.ih-claim-red{background:var(--wp--preset--color--red-tint)}
+.ih-claim-green{background:var(--wp--preset--color--green-tint)}
+.ih-claim-green .ih-k{color:var(--wp--preset--color--accent-1)}
+.ih-claim-text{font-family:var(--ih-serif);font-weight:600;font-size:22px;line-height:1.2;text-align:start !important;hyphens:manual}
 .ih-points{display:flex;flex-direction:column;gap:12px}
 .ih-point{background:var(--wp--preset--color--accent-5);border-radius:var(--ih-r-md);padding:22px 24px;margin:0 !important;display:flex;flex-direction:column;gap:8px}
 .ih-point > *{margin:0 !important}
@@ -413,7 +413,7 @@ img,video,iframe{max-width:100%;height:auto}
  .ih-section{margin-block-start:var(--wp--preset--spacing--40) !important}
  .ih-section-head h2{font-size:30px}
  p.ih-gloss.ih-ar{font-size:20px}
- .ih-entry,.is-style-answer-item,.ih-point,.ih-horn{padding:16px 18px}
+ .ih-entry,.is-style-answer-item,.ih-point,.ih-claim{padding:16px 18px}
  .ih-entries-list .ih-entry{padding:16px 18px}
  .ih-entries-list .ih-entry h3{font-size:22px}
  .is-style-objection-reply{grid-template-columns:1fr}
