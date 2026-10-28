@@ -442,7 +442,7 @@ This document captures taste. It is a guide. Apply it with judgment.
 
 **Natural variation matters:**
 - Do not use the same opening formula every time just because it works.
-- Do not avoid a word forever just because it is on a banned list (sometimes it is genuinely the right word, e.g. "transparent" when discussing literal transparency in glass, or "robust" in a statistical sense).
+- The banned list (Section 3) targets the puffery senses of its words. A banned word used in its plain literal or technical sense, such as "transparent" for glass or "robust" in statistics, is outside the ban, and this is the only exception to the rule that one banned word fails the output.
 - Let the content dictate structure.
 
 **The litmus test:**
@@ -485,7 +485,7 @@ import re
 text = " ".join(open("draft.txt").read().split())
 
 # 1. Anaphoric runs: 3+ consecutive sentences sharing their first two words
-sents = re.split(r'(?<=[.;])\s+(?=[A-Z“])', text)
+sents = re.split(r'(?<=[.;?!])\s+(?=[A-Z“])', text)
 def key(s):
     w = re.findall(r"[A-Za-z’]+", s)[:2]
     return tuple(x.lower() for x in w)
@@ -500,7 +500,7 @@ while i < len(sents):
         i += 1
 
 # 2. Coordinated triads: "a, b, and/or c", short items
-for m in re.finditer(r'([a-z][\w’\- ]{2,38}), ([\w’\- ]{2,38}), (?:and|or) ([\w’\- ]{2,42})', text):
+for m in re.finditer(r'([A-Za-z][\w’\- ]{2,38}), ([\w’\- ]{2,38}), (?:and|or) ([\w’\- ]{2,42})', text):
     if all(len(g.split()) <= 3 for g in m.groups()):
         print("TRIAD:", m.group(0)[:90])
 
