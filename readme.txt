@@ -84,6 +84,8 @@ This file is the user-facing manual that WordPress and Git Updater read. The rep
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add the entry to CHANGELOG.md and to the Changelog section here, note anything an existing site must know under "Updating an existing site" in UPGRADING.md, merge to main, and tag the commit with the same number (for example v3.4.0). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 3.9.1 =
+* The Islamic Dilemma website (islamicdilemma.com) answered on /resources/responses/, claim by claim; 3 new FAQs on the pillar page; Mark 1:14-15 and Mark 4:26-29 on What is the Injīl?
 = 3.9.0 =
 * Two new pages: What is the Injīl? (/the-islamic-dilemma/what-is-the-injil/), on the meaning of Injil and Injeel, its 12 verses, its language and the Bible; and the Torah in Islam (/the-islamic-dilemma/torah-in-islam/). The Jesus in the Qur'an hub gains 5 FAQs and a new excerpt, the Messiah page 2 FAQs. 178 pages.
 * The front-page diagram and the pillar page call the two parts of the Islamic Dilemma its two claims throughout, and the diagram's CSS classes follow.

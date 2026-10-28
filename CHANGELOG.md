@@ -2,6 +2,15 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.9.1
+
+The arguments of the Islamic Dilemma website (islamicdilemma.com) answered. The site is named; the person behind it is not. Its devotional pages are left alone.
+
+- /resources/responses/ gains a fifth section with 11 claims and replies. Among them: "where is this separate book?" (Mark 1:14-15, where Jesus preaches the gospel before any of the four books exists); the "book in the hands of Christians in 700" (the Qur'an was revealed between 610 and 632); 29:46 and 5:48 read in full; how and when the text changed, from the Qur'an's 4 verbs and the bracketed passages in Nestle-Aland; and the claim that one lie weighs the same as murder, answered from John 19:11, Luke 12:47-48 and Luke 18:13-14. The page notes that the website's home page and its own Injil page give 2 different definitions of the Injil.
+- The pillar FAQ gains 3 questions: 29:46, how revealed guidance could be altered (5:44, 15:9, Jeremiah 8:8), and the ways the Qur'an says it was altered.
+- What is the Injīl? adds Mark 1:14-15 to "Is the Injīl the Bible?", and sets the seed of 48:29 beside Mark 4:26-29.
+- The excerpt of the responses page, the Resources index and the source library count the website with the 4 articles.
+
 ## 3.9.0
 
 Keyword work from the October 2026 keyword lists (the editorially refined list of 3,259 keywords and the superlist of 4,226). Each search intent has one owner page.
