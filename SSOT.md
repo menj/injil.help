@@ -12,7 +12,7 @@ The fixed facts about The Injil theme. When another document, a comment or a pat
 | Folder and text domain | `injil-help` |
 | Parent theme | Twenty Twenty-Five (`twentytwentyfive`), must stay installed |
 | Site | https://injil.help (The Rightly-Guided Injīl). The theme is custom-built for this one site and is not intended for use on any other. |
-| Repository | https://github.com/menj/injil.help, `Primary Branch: main` (Git Updater). README.md, SSOT.md, CLAUDE.md, CHANGELOG.md, UPGRADING.md and the dot-files (including `.claude/`) are `export-ignore`: they stay in the repository and out of the release archive. No test files are kept in the repository; the release checks live outside it. |
+| Repository | https://github.com/menj/injil.help, `Primary Branch: main` (Git Updater). README.md, SSOT.md, CLAUDE.md, FARUQI.md, CHANGELOG.md, UPGRADING.md and the dot-files (including `.claude/`) are `export-ignore`: they stay in the repository and out of the release archive. No test files are kept in the repository; the release checks live outside it. |
 | Version | `Version:` in `style.css` and `INJIL_HELP_VERSION` in `functions.php`, always equal; the release tag is `v` + that number |
 | Requires | WordPress 6.6, PHP 7.4 |
 | Licence | GPL v2 or later; fonts and images keep their own licences |

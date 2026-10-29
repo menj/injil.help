@@ -1,6 +1,8 @@
 # Working on this repository
 
-Read `SSOT.md` first: it holds the fixed facts and the rules for contributors, and it wins over every other file. `README.md` is the technical reference.
+Read `FARUQI.md` first. It sets out the Faruqian core, al-tawḥīd as Ismāʿīl Rājī al-Fārūqī expounded it in *Al Tawhid: Its Implications for Thought and Life*, which runs through the themes and content of this site and its eight sister sites. Do not deviate from it.
+
+Then read `SSOT.md`: it holds the fixed facts and the rules for contributors, and it wins over every other file on matters of fact. `README.md` is the technical reference.
 
 Two rules that apply to every edit:
 
