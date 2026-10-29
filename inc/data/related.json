@@ -444,5 +444,24 @@
         "the-islamic-dilemma",
         "method",
         "the-islamic-dilemma/balance-of-truth"
+    ],
+    "why-islam": [
+        "quran/servant",
+        "servant-of-god",
+        "paul/leave-the-gospel-of-paul",
+        "gospel-according-to-islam",
+        "the-islamic-dilemma/what-is-the-injil"
+    ],
+    "servant-of-god": [
+        "why-islam",
+        "quran/servant",
+        "quran/birth"
+    ],
+    "paul/leave-the-gospel-of-paul": [
+        "paul/paul-against-jesus",
+        "paul/false-apostles",
+        "paul/james",
+        "paul/seven-letters",
+        "why-islam"
     ]
 }

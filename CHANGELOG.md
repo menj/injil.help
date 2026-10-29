@@ -2,6 +2,24 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.10.0
+
+Three pages that speak to the Christian reader directly, in answer to the "Why Jesus?" and "identity in Christ" pages of the Islamic Dilemma website. Each is between 1,600 and 2,500 words.
+
+- /why-islam/, "Why Islam? The message in one page": the one God, shirk as the sin not forgiven to one who dies on it (4:48), the Messiah's own words against the Trinity (Mark 10:18; 13:32; John 17:3), forgiveness before the cross (Mark 2:5; Matthew 9:13), the way back (5:74; 39:53), the testimony with the words on ʿĪsā from al-Bukhārī 3435, what changes in daily life, what the Qur'an says of Christians, and 6 FAQs.
+- /paul/leave-the-gospel-of-paul/, "Leave the gospel of Paul of Tarsus": where his gospel came from, the 4 places it parts from the words of Jesus, the law, the death, the charge in Jerusalem (Acts 21:20-24), the disciples and James, his own method (1 Corinthians 9:20-22), what leaving him means in practice, and 5 FAQs.
+- /servant-of-god/, "Who you are as a servant of God": what the Qur'an says the believer is, item by item, from 51:56 to 84:6, with steps to take tonight and 4 FAQs.
+- The laʿnat Allāh mark after Paul of Tarsus, by the owner's decision, once on Leave the gospel of Paul of Tarsus and once on Why Islam?; SSOT.md records the exception.
+- Linked from /quran/servant/, /paul/false-apostles/ and /paul/paul-against-jesus/; related.json gives each a "Read next" row. 181 pages.
+- The background page job starts again from the first page when it was begun under another version. A job left unfinished by one update used to resume at its old offset in the new, longer page list, skip the pages added before that offset, and still record the new version as done.
+
+The arguments of the Islamic Dilemma website (islamicdilemma.com) answered. The site is named; the person behind it is not. Its devotional pages are left alone.
+
+- /resources/responses/ gains a fifth section with 11 claims and replies. Among them: "where is this separate book?" (Mark 1:14-15, where Jesus preaches the gospel before any of the four books exists); the "book in the hands of Christians in 700" (the Qur'an was revealed between 610 and 632); 29:46 and 5:48 read in full; how and when the text changed, from the Qur'an's 4 verbs and the bracketed passages in Nestle-Aland; and the claim that one lie weighs the same as murder, answered from John 19:11, Luke 12:47-48 and Luke 18:13-14. The page notes that the website's home page and its own Injil page give 2 different definitions of the Injil.
+- The pillar FAQ gains 3 questions: 29:46, how revealed guidance could be altered (5:44, 15:9, Jeremiah 8:8), and the ways the Qur'an says it was altered.
+- What is the Injīl? adds Mark 1:14-15 to "Is the Injīl the Bible?", and sets the seed of 48:29 beside Mark 4:26-29.
+- The excerpt of the responses page, the Resources index and the source library count the website with the 4 articles.
+
 ## 3.9.0
 
 Keyword work from the October 2026 keyword lists (the editorially refined list of 3,259 keywords and the superlist of 4,226). Each search intent has one owner page.

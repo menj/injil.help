@@ -564,7 +564,12 @@ function injil_help_populate_job_run( $seconds = 20 ) {
 	if ( ! is_array( $job ) ) {
 		return;
 	}
-	$run = injil_help_populate_step( ! empty( $job['overwrite'] ), false, (int) $job['offset'], $seconds, $job['tally'] ?? null );
+	// A job begun under another version holds an offset into that version's page list, which pages added since have shifted: start again from the first page.
+	if ( ( $job['version'] ?? '' ) !== INJIL_HELP_VERSION ) {
+		injil_help_populate_job_start( true );
+		$job = get_option( 'injil_help_populate_job' );
+	}
+	$run =injil_help_populate_step( ! empty( $job['overwrite'] ), false, (int) $job['offset'], $seconds, $job['tally'] ?? null );
 	if ( ! empty( $run['busy'] ) ) {
 		return;
 	}
