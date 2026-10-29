@@ -10,7 +10,7 @@
 defined( 'ABSPATH' ) || exit;
 
 define( 'INJIL_HELP_KEYWORD', 'the Islamic Dilemma' );
-define( 'INJIL_HELP_PILLAR_SLUG', 'the-islamic-dilemma' );
+define( 'INJIL_HELP_PILLAR_SLUG', 'islamic-dilemma' );
 
 function injil_help_seo_defaults() {
 	return apply_filters(

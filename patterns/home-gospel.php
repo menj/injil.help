@@ -65,7 +65,7 @@
 <p class="ih-k">Section · V</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/john-the-baptist/">John the Baptist</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/john-baptist/">John the Baptist</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">The prophet in the wilderness, and the call to repent.</p>
@@ -131,7 +131,7 @@
 <p class="ih-k">Section · XX</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/entry-into-jerusalem-and-cleansing-of-the-temple/">Jerusalem</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/entry-into-jerusalem-and-cleansing-of-temple/">Jerusalem</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">The entry on a colt, and the cleansing of the temple.</p>
@@ -142,7 +142,7 @@
 <p class="ih-k">Section · XXI</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/questions-in-the-temple/">Questions in the temple</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/questions-in-temple/">Questions in the temple</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">Authority, tribute, the resurrection, and the first commandment.</p>
@@ -153,7 +153,7 @@
 <p class="ih-k">Section · XXIII</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/last-supper-future-of-the-temple-and-man-of-perfection/">The last supper</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/last-supper-future-of-temple-and-man-of-perfection/">The last supper</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">The two swords, the passover, the future of the temple and the Man of perfection.</p>
@@ -164,7 +164,7 @@
 <p class="ih-k">Section · XXIV</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/the-hour-and-promise-of-the-counsellor/">The hour and the Counsellor</a></h3>
+<h3 class="wp-block-heading"><a href="/gospel-according-to-islam/hour-and-promise-of-counsellor/">The hour and the Counsellor</a></h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-d"} -->
 <p class="ih-d">The promise of the one who comes after.</p>

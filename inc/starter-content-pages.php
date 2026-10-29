@@ -91,14 +91,61 @@ function injil_help_related_map() {
 	return $map;
 }
 
+/**
+ * Old page paths and the paths they moved to (inc/data/slug-history.json, { old: new }). A page
+ * renamed twice is followed to its present path.
+ */
+function injil_help_slug_history() {
+	static $map = null;
+	if ( null === $map ) {
+		$map = array_filter( injil_help_data_file( 'slug-history' ), 'is_string' );
+	}
+	return $map;
+}
+
+/** The present path of an old one, or '' when the path never moved. */
+function injil_help_slug_history_resolve( $path ) {
+	$map  = injil_help_slug_history();
+	$path = trim( (string) $path, '/' );
+	$seen = array();
+	while ( isset( $map[ $path ] ) && ! isset( $seen[ $path ] ) ) {
+		$seen[ $path ] = true;
+		$path          = $map[ $path ];
+	}
+	return $seen ? $path : '';
+}
+
+/**
+ * The history turned round: { present path: [ old paths ] }. Each old path is listed as it was
+ * and also with its last word under the parent's present path, because a parent renamed earlier
+ * in the same run has already taken its children with it.
+ */
+function injil_help_slug_history_by_path() {
+	$by = array();
+	foreach ( array_keys( injil_help_slug_history() ) as $old ) {
+		$new = injil_help_slug_history_resolve( $old );
+		$dir = dirname( $new );
+		foreach ( array( $old, ( '.' === $dir ? '' : $dir . '/' ) . basename( $old ) ) as $path ) {
+			if ( $path !== $new ) {
+				$by[ $new ][] = $path;
+			}
+		}
+	}
+	return array_map( 'array_unique', $by );
+}
+
 function injil_help_starter_pages() {
 	static $pages = null;
 	if ( null !== $pages ) {
 		return $pages;
 	}
-	$pages = injil_help_starter_pages_list();
-	$map   = injil_help_related_map();
+	$pages   = injil_help_starter_pages_list();
+	$map     = injil_help_related_map();
+	$history = injil_help_slug_history_by_path();
 	foreach ( $pages as &$def ) {
+		if ( isset( $history[ $def['path'] ] ) ) {
+			$def['former'] = array_values( array_unique( array_merge( (array) ( $def['former'] ?? array() ), $history[ $def['path'] ] ) ) );
+		}
 		$paths = array();
 		foreach ( array_merge( (array) ( $def['related'] ?? array() ), (array) ( $map[ $def['path'] ] ?? array() ) ) as $item ) {
 			if ( is_string( $item ) && $item !== $def['path'] && ! in_array( $item, $paths, true ) ) {

@@ -222,11 +222,11 @@ function injil_help_related_blocks( $def, $content = '' ) {
 }
 
 /**
- * Every URL on the site is made of words (/gospel-according-to-islam/john-the-baptist/,
+ * Every URL on the site is made of words (/gospel-according-to-islam/john-baptist/,
  * /quran/commentaries/birth-of-jesus/tabari-part-two/), as the Google SEO Starter Guide asks.
  * Versions up to 3.5 numbered the gospel sections and the commentary parts and put the verse
  * numbers in the group slugs; populate() renames those existing pages in place (see
- * injil_help_adopt_former_page()), so no page is duplicated. The old URLs are not redirected.
+ * injil_help_adopt_former_page()), so no page is duplicated. Paths listed in inc/data/slug-history.json are also redirected (injil_help_redirect_moved_page()).
  */
 const INJIL_HELP_RULES = '3'; // bump when the rewrite rules change; populate() flushes when the stored value differs
 
@@ -267,14 +267,29 @@ function injil_help_adopt_former_page( $def ) {
 	return null;
 }
 
-/** The About page was /about-the-author/ before 3.8.2: send the old address to the new one. */
-function injil_help_redirect_about() {
-	if ( is_404() && 'about-the-author' === trim( (string) wp_parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ), '/' ) ) {
-		wp_safe_redirect( home_url( '/about/' ), 301 );
-		exit;
+/**
+ * A page that moved (inc/data/slug-history.json: /about-the-author/ in 3.8.2, the paths without
+ * "the", "a" and "an" in 3.11.0) answers its old address with a 301 to the new one, so links and
+ * search results carry over. Only requests that would otherwise be a 404 are looked up.
+ */
+function injil_help_redirect_moved_page() {
+	if ( ! is_404() ) {
+		return;
 	}
+	$path = (string) wp_parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput -- compared with a fixed list, never printed
+	$home = (string) wp_parse_url( home_url( '/' ), PHP_URL_PATH );
+	if ( '' !== trim( $home, '/' ) && 0 === strpos( $path, $home ) ) {
+		$path = substr( $path, strlen( $home ) );
+	}
+	$new = injil_help_slug_history_resolve( rawurldecode( $path ) );
+	if ( '' === $new ) {
+		return;
+	}
+	$query = (string) wp_parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_QUERY ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput -- passed through esc_url_raw by wp_safe_redirect
+	wp_safe_redirect( home_url( '/' . $new . '/' ) . ( '' !== $query ? '?' . $query : '' ), 301 );
+	exit;
 }
-add_action( 'template_redirect', 'injil_help_redirect_about' );
+add_action( 'template_redirect', 'injil_help_redirect_moved_page' );
 
 /**
  * Versions before 3.5.1 created the numbered pages under slugs WordPress renamed ("2-2", and

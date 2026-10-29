@@ -20,7 +20,7 @@
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:heading -->
-<h2 class="wp-block-heading"><a href="/the-islamic-dilemma/">The Islamic Dilemma</a></h2>
+<h2 class="wp-block-heading"><a href="/islamic-dilemma/">The Islamic Dilemma</a></h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"className":"ih-intro"} -->
 <p class="ih-intro">A Christian argument holds that the Qur’an traps itself. It tells the people of the Injīl to judge by it (5:47), yet it denies what the four gospels teach. It forces a choice between 2 options. Both rest on one assumption.</p>
@@ -57,7 +57,7 @@
 <p class="ih-claim-text">That the Injīl the Qur’an affirms is the four gospels. The Qur’an says the Injīl was given to ʿĪsā (5:46); the four gospels were written about him, by others, decades later. Remove the assumption and both claims fall.</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"className":"ih-full"} -->
-<p class="ih-full"><a href="/the-islamic-dilemma/">Read the answer</a></p>
+<p class="ih-full"><a href="/islamic-dilemma/">Read the answer</a></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group --></section>

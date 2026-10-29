@@ -38,7 +38,7 @@
 <p class="ih-answer-text">The Islamic Dilemma is a Christian apologetic argument, popularised online in the 2010s. It says the Qur’an affirms the Torah and the Gospel yet contradicts them. If those books are preserved, the Qur’an is wrong to contradict them; if they are corrupted, the Qur’an is wrong to affirm them. Either way, it concludes, the Qur’an fails.</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"className":"ih-full"} -->
-<p class="ih-full"><?php esc_html_e( 'Full evidence:', 'injil-help' ); ?> <a href="/the-islamic-dilemma/">The Islamic Dilemma, answered</a></p>
+<p class="ih-full"><?php esc_html_e( 'Full evidence:', 'injil-help' ); ?> <a href="/islamic-dilemma/">The Islamic Dilemma, answered</a></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:group {"className":"is-style-answer-item","layout":{"type":"default"}} -->
@@ -52,7 +52,7 @@
 <p class="ih-answer-text">No. The verse tells the people of the Injīl to judge by what God revealed in it. The Qur’an names the Injīl as a revelation given to ʿĪsā (5:46); the four accounts about him were written decades later by others. The command reaches the revelation within those books, which the Qur’an, as guardian over them (5:48), identifies.</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"className":"ih-full"} -->
-<p class="ih-full"><?php esc_html_e( 'Full evidence:', 'injil-help' ); ?> <a href="/the-islamic-dilemma/">The Islamic Dilemma, answered</a></p>
+<p class="ih-full"><?php esc_html_e( 'Full evidence:', 'injil-help' ); ?> <a href="/islamic-dilemma/">The Islamic Dilemma, answered</a></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:group {"className":"is-style-answer-item","layout":{"type":"default"}} -->
