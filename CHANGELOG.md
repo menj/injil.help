@@ -11,6 +11,7 @@ Three pages that speak to the Christian reader directly, in answer to the "Why J
 - /servant-of-god/, "Who you are as a servant of God": what the Qur'an says the believer is, item by item, from 51:56 to 84:6, with steps to take tonight and 4 FAQs.
 - The laʿnat Allāh mark after Paul of Tarsus, by the owner's decision, once on Leave the gospel of Paul of Tarsus and once on Why Islam?; SSOT.md records the exception.
 - Linked from /quran/servant/, /paul/false-apostles/ and /paul/paul-against-jesus/; related.json gives each a "Read next" row. 181 pages.
+- The background page job starts again from the first page when it was begun under another version. A job left unfinished by one update used to resume at its old offset in the new, longer page list, skip the pages added before that offset, and still record the new version as done.
 
 The arguments of the Islamic Dilemma website (islamicdilemma.com) answered. The site is named; the person behind it is not. Its devotional pages are left alone.
 
