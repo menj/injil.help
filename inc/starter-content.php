@@ -282,8 +282,25 @@ function injil_help_redirect_moved_page() {
 	if ( '' === $new ) {
 		return;
 	}
+	$status = 301;
+	if ( ! injil_help_find_page( $new ) ) {
+		// The update renames pages a few at a time: a parent can have moved before its child. Until the
+		// child moves too, send the visitor to wherever it stands now, and only for now (302).
+		$now = '';
+		foreach ( injil_help_slug_history_by_path()[ $new ] ?? array() as $old ) {
+			if ( injil_help_find_page( $old ) ) {
+				$now = $old;
+				break;
+			}
+		}
+		if ( '' === $now ) {
+			return;
+		}
+		$new    = $now;
+		$status = 302;
+	}
 	$query = (string) wp_parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_QUERY ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput -- passed through esc_url_raw by wp_safe_redirect
-	wp_safe_redirect( home_url( '/' . $new . '/' ) . ( '' !== $query ? '?' . $query : '' ), 301 );
+	wp_safe_redirect( home_url( '/' . $new . '/' ) . ( '' !== $query ? '?' . $query : '' ), $status );
 	exit;
 }
 add_action( 'template_redirect', 'injil_help_redirect_moved_page' );
