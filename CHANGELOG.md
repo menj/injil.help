@@ -20,6 +20,8 @@ Every content seed is JSON.
 - The words the markup writes into pages (Scholarly consensus, Minority view, Islamic position, the 5 status badges, "Notes" and "Back to the text") and the tagline set on activation move from PHP strings to `text.json`, under `markup` and `site`. Every page renders byte for byte as before.
 
 
+## 3.10.0
+
 Three pages that speak to the Christian reader directly, in answer to the "Why Jesus?" and "identity in Christ" pages of the Islamic Dilemma website. Each is between 1,600 and 2,500 words.
 
 - /why-islam/, "Why Islam? The message in one page": the one God, shirk as the sin not forgiven to one who dies on it (4:48), the Messiah's own words against the Trinity (Mark 10:18; 13:32; John 17:3), forgiveness before the cross (Mark 2:5; Matthew 9:13), the way back (5:74; 39:53), the testimony with the words on ʿĪsā from al-Bukhārī 3435, what changes in daily life, what the Qur'an says of Christians, and 6 FAQs.
