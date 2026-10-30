@@ -14,6 +14,11 @@ URL slugs drop the articles "the", "a" and "an": 32 of the 181 pages move. Every
 - Every internal link, "Read next" row, image key, front-page pattern, header and footer link, and this site's 4 entries in `network-links.json` use the new paths. `INJIL_HELP_PILLAR_SLUG` is `islamic-dilemma`.
 - SSOT.md: no slug contains "the", "a" or "an".
 
+Every content seed is JSON.
+
+- The 15 PHP patterns, the 8 front-page sections and the 7 building blocks for the editor, are now JSON in `inc/data/patterns/`, with the same slugs and the same output. The `patterns/` folder is gone. functions.php already registers every JSON pattern there.
+- The words the markup writes into pages (Scholarly consensus, Minority view, Islamic position, the 5 status badges, "Notes" and "Back to the text") and the tagline set on activation move from PHP strings to `text.json`, under `markup` and `site`. Every page renders byte for byte as before.
+
 
 Three pages that speak to the Christian reader directly, in answer to the "Why Jesus?" and "identity in Christ" pages of the Islamic Dilemma website. Each is between 1,600 and 2,500 words.
 

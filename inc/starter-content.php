@@ -26,18 +26,15 @@ require_once get_stylesheet_directory() . '/inc/starter-content-pages.php';
  * [notneeded] to show a colour-coded status badge.
  */
 function injil_help_markup_to_blocks( $lines ) {
-	$labels = array(
-		'consensus' => __( 'Scholarly consensus', 'injil-help' ),
-		'minority'  => __( 'Minority view', 'injil-help' ),
-		'islamic'   => __( 'Islamic position', 'injil-help' ),
-	);
-	$status = array(
-		'agree'     => __( 'Agrees', 'injil-help' ),
-		'beyond'    => __( 'Beyond the measure', 'injil-help' ),
-		'unclear'   => __( 'Unclear', 'injil-help' ),
-		'conflict'  => __( 'Conflicts', 'injil-help' ),
-		'notneeded' => __( 'Not needed', 'injil-help' ),
-	);
+	// The words the markup adds to a page are kept with the other builder words in inc/data/text.json.
+	$labels = array();
+	foreach ( array( 'consensus', 'minority', 'islamic' ) as $key ) {
+		$labels[ $key ] = injil_help_text( 'markup', $key );
+	}
+	$status = array();
+	foreach ( array( 'agree', 'beyond', 'unclear', 'conflict', 'notneeded' ) as $key ) {
+		$status[ $key ] = injil_help_text( 'markup', $key );
+	}
 	$out    = '';
 	$notes  = array();
 	$list   = array();
@@ -80,12 +77,12 @@ function injil_help_markup_to_blocks( $lines ) {
 		$start = $flushed + 1;
 		$class = $heading ? 'ih-footnotes' : 'ih-footnotes ih-apparatus';
 		if ( $heading ) {
-			$out .= "<!-- wp:heading -->\n<h2 class=\"wp-block-heading\" id=\"notes\">" . esc_html__( 'Notes', 'injil-help' ) . "</h2>\n<!-- /wp:heading -->\n";
+			$out .= "<!-- wp:heading -->\n<h2 class=\"wp-block-heading\" id=\"notes\">" . esc_html( injil_help_text( 'markup', 'notes_heading' ) ) . "</h2>\n<!-- /wp:heading -->\n";
 		}
 		$out .= '<!-- wp:list {"ordered":true' . ( $start > 1 ? ',"start":' . $start : '' ) . ',"className":"' . $class . '"} -->' . "\n" . '<ol' . ( $start > 1 ? ' start="' . $start . '"' : '' ) . ' class="wp-block-list ' . $class . '">';
 		foreach ( $notes as $i => $note ) {
 			$n    = $flushed + $i + 1;
-			$out .= sprintf( "<!-- wp:list-item -->\n<li id=\"fn-%1\$d\">%2\$s <a href=\"#fnref-%1\$d\" aria-label=\"%3\$s\">↩</a></li>\n<!-- /wp:list-item -->", $n, wp_kses_post( $note ), esc_attr__( 'Back to the text', 'injil-help' ) );
+			$out .= sprintf( "<!-- wp:list-item -->\n<li id=\"fn-%1\$d\">%2\$s <a href=\"#fnref-%1\$d\" aria-label=\"%3\$s\">↩</a></li>\n<!-- /wp:list-item -->", $n, wp_kses_post( $note ), esc_attr( injil_help_text( 'markup', 'note_back' ) ) );
 		}
 		$out     .= "</ol>\n<!-- /wp:list -->\n";
 		$flushed += count( $notes );
@@ -655,7 +652,7 @@ function injil_help_remove_sample_content() {
 		wp_trash_comment( $comment );
 	}
 	if ( 'Just another WordPress site' === get_option( 'blogdescription' ) ) {
-		update_option( 'blogdescription', __( 'The Islamic Dilemma, answered', 'injil-help' ) );
+		update_option( 'blogdescription', injil_help_text( 'site', 'tagline' ) );
 	}
 }
 
