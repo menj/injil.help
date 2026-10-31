@@ -86,6 +86,7 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 == Changelog ==
 = 3.11.0 =
 * URL slugs drop "the", "a" and "an": 32 pages move, the pillar page to /islamic-dilemma/. The update renames the existing pages in place, and every old address redirects to the new one with a 301.
+* Every title tag is "page part | site name" and under 60 characters; long page titles have short title-tag versions in inc/data/seo-titles.json.
 * Five pages gain images: photographs of manuscripts and an inscription from Pexels, credited in their captions; the privacy policy names images.pexels.com.
 * Every content seed is JSON: the front-page sections and editor patterns move from PHP to inc/data/patterns/, and the claim labels, badges and "Notes" heading to text.json.
 = 3.10.0 =

@@ -14,6 +14,13 @@ URL slugs drop the articles "the", "a" and "an": 32 of the 181 pages move. Every
 - Every internal link, "Read next" row, image key, front-page pattern, header and footer link, and this site's 4 entries in `network-links.json` use the new paths. `INJIL_HELP_PILLAR_SLUG` is `islamic-dilemma`.
 - SSOT.md: no slug contains "the", "a" or "an".
 
+Title tags.
+
+- Every title tag is "page part | site name", under 60 characters. With the site name The Rightly-Guided Injīl the page part has 32 characters. 132 of the 181 page titles are longer; each has a short title in the new `inc/data/seo-titles.json` ("What is the Injil (Injeel)?", "Questions in the temple", "al-Ṭabarī on 3:33-64, part 2"). The page's own heading is unchanged.
+- `injil_help_document_title()` builds the title for every request, the front page, search and 404 included, and fits anything still too long at a colon or between words. It also answers the title filters of Rank Math, Yoast and SEOPress, so their titles follow the same rule.
+- The default pillar title is "The Islamic Dilemma explained". All 181 titles are unique; the longest is 59 characters.
+- SSOT.md and CLAUDE.md state the rule.
+
 Images from Pexels.
 
 - What is the Injīl?, the Torah in Islam, Why Islam?, Who you are as a servant of God and Leave the gospel of Paul of Tarsus each gain an image, chosen to keep the site's rule that its only images are texts: a medieval Latin manuscript, a Sefer Torah, a Qur'an manuscript open at al-Anbiyāʾ 21:105-112, an illuminated Arabic manuscript, and a Greek inscription in marble.
