@@ -31,7 +31,7 @@
         "gospels/luke",
         "resources/manuscripts"
     ],
-    "gospel-according-to-islam/john-the-baptist": [
+    "gospel-according-to-islam/john-baptist": [
         "quran/birth",
         "gospels/mark"
     ],
@@ -51,7 +51,7 @@
         "gospels/thomas",
         "gospels/luke"
     ],
-    "gospel-according-to-islam/traditions-of-the-elders-and-syrophoenician-woman": [
+    "gospel-according-to-islam/traditions-of-elders-and-syrophoenician-woman": [
         "quran/servant",
         "gospels/mark"
     ],
@@ -63,7 +63,7 @@
         "gospels/mark",
         "gospels/thomas"
     ],
-    "gospel-according-to-islam/the-twelve-and-their-mission": [
+    "gospel-according-to-islam/twelve-and-their-mission": [
         "quran/servant",
         "paul/ebionites",
         "gospels/thomas"
@@ -80,7 +80,7 @@
         "quran/table",
         "gospels/discrepancies/last-supper"
     ],
-    "gospel-according-to-islam/meaning-of-the-vision-leaven-and-tares": [
+    "gospel-according-to-islam/meaning-of-vision-leaven-and-tares": [
         "gospels/thomas",
         "gospels/synoptic-problem"
     ],
@@ -92,11 +92,11 @@
         "gospels/mark",
         "gospels/thomas"
     ],
-    "gospel-according-to-islam/entry-into-jerusalem-and-cleansing-of-the-temple": [
+    "gospel-according-to-islam/entry-into-jerusalem-and-cleansing-of-temple": [
         "gospels/john",
         "gospels/discrepancies"
     ],
-    "gospel-according-to-islam/questions-in-the-temple": [
+    "gospel-according-to-islam/questions-in-temple": [
         "quran/servant",
         "gospels/mark"
     ],
@@ -104,11 +104,11 @@
         "quran/servant",
         "gospels/thomas"
     ],
-    "gospel-according-to-islam/last-supper-future-of-the-temple-and-man-of-perfection": [
+    "gospel-according-to-islam/last-supper-future-of-temple-and-man-of-perfection": [
         "quran/table",
         "gospels/discrepancies/last-supper"
     ],
-    "gospel-according-to-islam/the-hour-and-promise-of-the-counsellor": [
+    "gospel-according-to-islam/hour-and-promise-of-counsellor": [
         "quran/ahmad",
         "gospels/john"
     ],
@@ -119,38 +119,38 @@
     "gospel-according-to-islam/trial-barabbas-and-raising-of-jesus": [
         "quran/raised",
         "gospels/discrepancies/crucifixion",
-        "the-islamic-dilemma"
+        "islamic-dilemma"
     ],
     "gospel-according-to-islam/empty-tomb-reports-and-return": [
         "quran/raised",
         "gospels/discrepancies/resurrection"
     ],
-    "the-islamic-dilemma": [
-        "the-islamic-dilemma/what-is-the-injil",
-        "the-islamic-dilemma/torah-in-islam",
-        "the-islamic-dilemma/secular-form",
-        "the-islamic-dilemma/balance-of-truth",
+    "islamic-dilemma": [
+        "islamic-dilemma/what-is-injil",
+        "islamic-dilemma/torah-in-islam",
+        "islamic-dilemma/secular-form",
+        "islamic-dilemma/balance-of-truth",
         "method",
         "answers",
         "resources/objections"
     ],
-    "the-islamic-dilemma/secular-form": [
-        "the-islamic-dilemma",
-        "the-islamic-dilemma/balance-of-truth",
+    "islamic-dilemma/secular-form": [
+        "islamic-dilemma",
+        "islamic-dilemma/balance-of-truth",
         "method",
         "quran/raised",
         "resources/responses"
     ],
-    "the-islamic-dilemma/balance-of-truth": [
-        "the-islamic-dilemma",
-        "the-islamic-dilemma/secular-form",
+    "islamic-dilemma/balance-of-truth": [
+        "islamic-dilemma",
+        "islamic-dilemma/secular-form",
         "method",
         "resources/responses",
         "quran/ahmad",
         "resources/timeline"
     ],
     "method": [
-        "the-islamic-dilemma",
+        "islamic-dilemma",
         "about",
         "corrections",
         "gospel-according-to-islam/how-composed"
@@ -161,7 +161,7 @@
         "about"
     ],
     "answers": [
-        "the-islamic-dilemma",
+        "islamic-dilemma",
         "resources/objections",
         "resources/responses",
         "resources/glossary"
@@ -322,18 +322,18 @@
     ],
     "quran/signs": [
         "quran/commentaries/family-of-imran",
-        "quran/commentaries/the-table-and-the-questioning",
+        "quran/commentaries/table-and-questioning",
         "gospel-according-to-islam/bird-of-clay-beelzebub-and-unclean-spirit",
         "resources/borrowing"
     ],
     "quran/servant": [
-        "quran/commentaries/son-of-mary-as-an-example",
+        "quran/commentaries/son-of-mary-as-example",
         "quran/commentaries/compassion-mercy-and-monasticism",
         "gospels/john",
-        "gospel-according-to-islam/questions-in-the-temple"
+        "gospel-according-to-islam/questions-in-temple"
     ],
     "quran/table": [
-        "quran/commentaries/the-table-and-the-questioning",
+        "quran/commentaries/table-and-questioning",
         "gospels/discrepancies/last-supper",
         "gospel-according-to-islam/table-from-heaven-caesarea-philippi-and-vision"
     ],
@@ -342,12 +342,12 @@
         "gospels/discrepancies/crucifixion",
         "gospel-according-to-islam/trial-barabbas-and-raising-of-jesus",
         "gospel-according-to-islam/empty-tomb-reports-and-return",
-        "the-islamic-dilemma/secular-form"
+        "islamic-dilemma/secular-form"
     ],
     "quran/ahmad": [
         "quran/commentaries/good-news-of-ahmad",
-        "gospel-according-to-islam/the-hour-and-promise-of-the-counsellor",
-        "the-islamic-dilemma/balance-of-truth",
+        "gospel-according-to-islam/hour-and-promise-of-counsellor",
+        "islamic-dilemma/balance-of-truth",
         "gospels/john"
     ],
     "quran/commentaries": [
@@ -359,13 +359,13 @@
         "resources/glossary",
         "resources/sources",
         "resources/manuscripts",
-        "the-islamic-dilemma/balance-of-truth"
+        "islamic-dilemma/balance-of-truth"
     ],
     "resources/glossary": [
         "resources/timeline",
         "resources/sources",
         "method",
-        "the-islamic-dilemma/what-is-the-injil"
+        "islamic-dilemma/what-is-injil"
     ],
     "resources/sources": [
         "resources/timeline",
@@ -386,15 +386,15 @@
     ],
     "resources/objections": [
         "resources/responses",
-        "the-islamic-dilemma/balance-of-truth",
+        "islamic-dilemma/balance-of-truth",
         "answers",
-        "the-islamic-dilemma"
+        "islamic-dilemma"
     ],
     "resources/responses": [
         "resources/objections",
-        "the-islamic-dilemma/balance-of-truth",
-        "the-islamic-dilemma/secular-form",
-        "the-islamic-dilemma"
+        "islamic-dilemma/balance-of-truth",
+        "islamic-dilemma/secular-form",
+        "islamic-dilemma"
     ],
     "bonus": [
         "bonus/epistle",
@@ -432,32 +432,32 @@
         "about",
         "terms-of-use"
     ],
-    "the-islamic-dilemma/what-is-the-injil": [
-        "the-islamic-dilemma",
-        "the-islamic-dilemma/torah-in-islam",
+    "islamic-dilemma/what-is-injil": [
+        "islamic-dilemma",
+        "islamic-dilemma/torah-in-islam",
         "quran",
         "gospels",
         "gospel-according-to-islam"
     ],
-    "the-islamic-dilemma/torah-in-islam": [
-        "the-islamic-dilemma/what-is-the-injil",
-        "the-islamic-dilemma",
+    "islamic-dilemma/torah-in-islam": [
+        "islamic-dilemma/what-is-injil",
+        "islamic-dilemma",
         "method",
-        "the-islamic-dilemma/balance-of-truth"
+        "islamic-dilemma/balance-of-truth"
     ],
     "why-islam": [
         "quran/servant",
         "servant-of-god",
-        "paul/leave-the-gospel-of-paul",
+        "paul/leave-gospel-of-paul",
         "gospel-according-to-islam",
-        "the-islamic-dilemma/what-is-the-injil"
+        "islamic-dilemma/what-is-injil"
     ],
     "servant-of-god": [
         "why-islam",
         "quran/servant",
         "quran/birth"
     ],
-    "paul/leave-the-gospel-of-paul": [
+    "paul/leave-gospel-of-paul": [
         "paul/paul-against-jesus",
         "paul/false-apostles",
         "paul/james",

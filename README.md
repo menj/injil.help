@@ -33,7 +33,7 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 |---|---|
 | Type | Block theme (theme.json v3), child of `twentytwentyfive` |
 | Folder, text domain, pattern prefix | `injil-help` |
-| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.10.0) |
+| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.11.0) |
 | PHP in `inc/` | options, starter-content, starter-content-pages, gospel-islam, quran-jesus, tafsir, seo, schema, share |
 | Data | `inc/data/` 2.6 MB of JSON: 181 starter pages, the gospel narrative, the Qur'anic passages, Thomas (woven sections and two full texts), the infancy gospels, the substitution witnesses, eight commentaries (315,000 words) |
 | Front-end assets | `style.css` 32 KB; `assets/css/ornament.css` 12 KB, `share.css` 3 KB, `bible.css` 3 KB; `assets/js/ornament.js` 3 KB, `share.js` 2 KB; all plain, no build step |
@@ -69,7 +69,7 @@ injil-help/
 ├─ inc/
 │  ├─ options.php         Theme Options page, defaults, sanitiser, body classes, colour CSS
 │  ├─ starter-content.php markup parser, page writer, populate(), activation and update hooks
-│  ├─ images.php          Commons plates in page content; featured images sideloaded a few pages per admin load
+│  ├─ images.php          Commons and Pexels plates in page content; featured images sideloaded a few pages per admin load
 │  ├─ starter-content-pages.php  the page list, merged from the JSON files and the builders
 │  ├─ gospel-islam.php    gospel sections from narrative.json + thomas + substitution + commentaries
 │  ├─ quran-jesus.php     the Qur'anic passages page from quran-jesus.json
@@ -78,14 +78,13 @@ injil-help/
 │  ├─ schema.php          the JSON-LD graph
 │  ├─ rank-math.php       Rank Math: graph merge, breadcrumbs, home description
 │  ├─ share.php           share row
-│  └─ data/               all content written to the database, JSON only (pages/, patterns/, tafsir/ and the data files)
+│  └─ data/               all content, JSON only (pages/, the 32 block patterns in patterns/, tafsir/ and the data files)
 ├─ templates/, parts/     block templates and the header and footer parts
-├─ patterns/              15 PHP block patterns: the front-page sections and the editor's building blocks (none is written to the database)
 ├─ assets/css|js|fonts|icons|images
 └─ languages/             .mo files
 ```
 
-Everything the theme writes to the database is JSON in `inc/data/`: the page definitions, the page bodies, the 17 page patterns, the texts they draw on, and the words the PHP builders add (`text.json`, `commentaries.json`). The PHP only arranges them; the interface labels it prints ("Notes", the claim labels, "Back to the text") go through WordPress translation. No `.html` or `.txt` file is read to populate the database, and none may be added for that purpose. The PHP patterns in `patterns/` are only the front-page sections, which the front-page template renders from the theme and never stores, and the small building blocks an editor inserts by hand. PHP never holds article text. The front end has no framework: two small scripts add to pages that already work without them.
+Everything the theme writes to the database is JSON in `inc/data/`: the page definitions, the page bodies, the 17 page patterns, the texts they draw on, and the words the PHP builders add (`text.json`, `commentaries.json`), the claim labels, "Notes", "Back to the text" and the activation tagline among them. The front-page sections and the editor's building blocks are JSON patterns in the same folder. The PHP only arranges the data. No `.html`, `.txt` or PHP file holds content, and none may be added for that purpose; only the admin screens and notices keep their words in PHP, for translation. The front end has no framework: two small scripts add to pages that already work without them.
 
 ## Boot sequence
 
@@ -93,7 +92,7 @@ Everything the theme writes to the database is JSON in `inc/data/`: the page def
 
 - `wp_enqueue_scripts`: `style.css`; `ornament.css` unless Ornament is Off; `ornament.js` (deferred, footer) when the reveal animation or parallax is on. `share.css` and `share.js` are enqueued by `share.php` only on pages that show the row. `bible.css` is enqueued on a singular post whose content contains the `ih-bible` block, which is every gospel section.
 - `after_setup_theme`: text domain from `languages/`; `style.css` as editor style.
-- `init`: pattern category `injil-help` and the 17 JSON patterns of `inc/data/patterns/`, registered with `register_block_pattern()`; the block style variations listed under [Block styles](#block-styles-and-css).
+- `init`: pattern category `injil-help` and the 32 JSON patterns of `inc/data/patterns/`, registered with `register_block_pattern()`; the block style variations listed under [Block styles](#block-styles-and-css).
 - `wp_head`: favicon link (custom URL, or the SVG brandmark when forced or when no Site Icon is set).
 
 `options.php` adds `enqueue_block_assets` (palette overrides in the editor), `body_class` (`ih-orn`, `ih-px-strong|gentle|off`), and filters on `injil_help_seo_defaults`, `injil_help_default_og_image` and `injil_help_output_schema` that apply the option values. `seo.php` filters `document_title_parts` and prints meta and Open Graph at `wp_head`. `schema.php` prints the graph at `wp_head` priority 5. `share.php` filters `the_content` at priority 20.
@@ -104,15 +103,15 @@ Everything the theme writes to the database is JSON in `inc/data/`: the page def
 |---|---|---|
 | `pages/pillar.json`, `gospels.json`, `paul.json`, `quran.json`, `gospel.json`, `bonus.json`, `resources.json`, `site.json` | the starter pages, one file per part, in site order | array of `{path, title, excerpt, pattern? \| body?, body_file?, template?, related?, former?}`; `body_file` names a file in `inc/data/` whose list of lines is appended to `body`; `related` lists the paths linked in the page's "Read next" row; `former` lists the paths the page had in earlier versions, which `populate()` renames in place |
 | `narrative.json` | The Narrative of Jesus, Son of Mary | `{chapters: [{number, title, sections: [{number, lines[]}]}], notes: {n: text}}`; `[^n]` note markers, `[v]` verse breaks and `[qS:A]` Qur'anic verse references in lines |
-| `gospel-islam.json` | section titles, section URL slugs, Introduction | `{section_titles: {n: title}, section_slugs: {n: slug}, front: {introduction: {title, paras[]}}}`; the slug is the section's URL segment (`/gospel-according-to-islam/john-the-baptist/`), never its number |
+| `gospel-islam.json` | section titles, section URL slugs, Introduction | `{section_titles: {n: title}, section_slugs: {n: slug}, front: {introduction: {title, paras[]}}}`; the slug is the section's URL segment (`/gospel-according-to-islam/john-baptist/`), never its number |
 | `related.json` | the curated map of related pages behind the "Read next" row | `{path: [path, …]}`, merged with what the builders set (`injil_help_related_map()`) |
 | `quran-jesus.json` | the Qur'anic passages | `{surahs: {n: name}, passages: [{surah, verses_range, heading, verses: {n: text}}]}` |
 | `thomas.json`, `infancy.json`, `substitution.json` | woven passages (Thomas, the infancy gospels, the substitution witnesses, merged in that order) | `{section: [markup lines]}` |
 | `thomas-mattison.json`, `thomas-patterson-meyer.json` | the full text of the Gospel of Thomas in two translations | `[markup lines]`, loaded through `body_file` |
-| `patterns/{name}.json` | the 17 patterns that supply whole pages: the pillar, the measure, the five section indexes, the FAQs, how the gospel was composed, the corrections log, the five discrepancy tables, the manuscripts table and the sayings-order test | `{title, slug, description, categories, keywords?, content[]}`; `content` is the block markup, one line per item, joined with newlines by `injil_help_pattern_file()`, which also refuses a name that is not a plain slug and a file that is malformed |
+| `patterns/{name}.json` | all 32 block patterns: the 17 that supply whole pages (the pillar, the measure, the five section indexes, the FAQs, how the gospel was composed, the corrections log, the five discrepancy tables, the manuscripts table and the sayings-order test), the 8 front-page sections and the 7 building blocks for the editor | `{title, slug, description, categories, keywords?, content[]}`; `content` is the block markup, one line per item, joined with newlines by `injil_help_pattern_file()`, which also refuses a name that is not a plain slug and a file that is malformed |
 | `text.json` | the words the PHP builders put on pages: the commentaries index with its FAQs, the group and part pages, the colophon and the folds (`commentaries`); the running heads, navigation, titles and excerpts of the gospel sections (`gospel`); the title, introduction and source note of The Qur'an on Jesus (`quran_passages`); the "Read next" label (`related`) | `{group: {key: string \| [markup lines]}}`; format strings keep their `sprintf` placeholders; read with `injil_help_text( $group, $key )`. Without this file or `commentaries.json` the page list is empty, so nothing is published with gaps |
 | `commentaries.json` | the eight commentaries and the nine verse groups | `{works: {key: {short, title, author, died, about, source}}, groups: {slug: {former, surah, from, to, name, title, intro}}}`, in display order |
-| `images.json` | one Commons image per page that has one | `{path: {file, alt, caption, credit}}`; `inc/images.php` puts the plate into the content and sideloads the file as the featured image |
+| `images.json` | one image per page that has one, from Commons or Pexels | `{path: {file, alt, caption, credit}}`, and for Pexels also `{source: "pexels", url, page}` with `file` set to `pexels-{id}`; `inc/images.php` puts the plate into the content and sideloads the file as the featured image |
 | `tafsir/{work}.json` | one commentary | `{work, entries: [{surah, from, to, arabic_words, english_words, paragraphs[]}]}` |
 
 `injil_help_starter_pages()` (static-cached per request) concatenates: pillar, gospels, paul, quran, the Qur'an page built by `injil_help_quran_page()`, the commentary pages from `injil_help_tafsir_pages()`, gospel, the 28 gospel pages from `injil_help_gospel_islam_pages()`, bonus, resources, site. Parents precede children in that order, which `populate()` relies on to resolve `post_parent`.
@@ -201,8 +200,7 @@ Appearance › Theme Options (`inc/options.php`), one option array `injil_help_o
 
 - `templates/`: `front-page.html`, `page.html`, `page-section.html` ("Section index"), `page-wide.html` ("Wide page (tables)"), `single.html`, `archive.html`, `home.html`, `index.html`, `search.html`, `404.html`. The two custom templates are declared in `theme.json` `customTemplates` for pages.
 - `parts/header.html`, `parts/footer.html`: navigation, brandmark, Qur'anic gloss (class `ih-gloss ih-ar ih-quran`, `dir="rtl" lang="ar"`).
-- `patterns/` (PHP, category `injil-help`): the front-page sections `hero`, `home-dilemma`, `home-gospels`, `home-paul`, `home-quran`, `home-gospel`, `home-resources`, `home-answers`, which `templates/front-page.html` renders, and the building blocks `parts-grid`, `quran-verse-index`, `answer-capsule`, `claim-labels`, `gospel-verse`, `objection-reply`, `faq`. None of them is written to the database by the theme.
-- `inc/data/patterns/` (JSON, same category, registered on `init`): `islamic-dilemma-page`, `criterion-statement`, `section-gospels`, `section-paul`, `section-quran`, `section-gospel`, `section-resources`, `answers-page`, `how-composed`, `corrections-log`, `discrepancy-genealogies`, `discrepancy-nativity`, `discrepancy-last-supper`, `discrepancy-crucifixion`, `discrepancy-resurrection`, `thomas-correlation`, `manuscripts-table`. A page definition names one by file name and `injil_help_page_content()` reads it with `injil_help_pattern_file()`, so populating never depends on the pattern registry. A pattern whose copy is written to pages is added here, as JSON, never under `patterns/`.
+- `inc/data/patterns/` (JSON, category `injil-help`, registered on `init`), the only patterns the theme has. The front-page sections `hero`, `home-dilemma`, `home-gospels`, `home-paul`, `home-quran`, `home-gospel`, `home-resources`, `home-answers`, which `templates/front-page.html` renders by slug. The building blocks `parts-grid`, `quran-verse-index`, `answer-capsule`, `claim-labels`, `gospel-verse`, `objection-reply`, `faq`. And the page patterns: `islamic-dilemma-page`, `criterion-statement`, `section-gospels`, `section-paul`, `section-quran`, `section-gospel`, `section-resources`, `answers-page`, `how-composed`, `corrections-log`, `discrepancy-genealogies`, `discrepancy-nativity`, `discrepancy-last-supper`, `discrepancy-crucifixion`, `discrepancy-resurrection`, `thomas-correlation`, `manuscripts-table`. A page definition names one by file name and `injil_help_page_content()` reads it with `injil_help_pattern_file()`, so populating never depends on the pattern registry. Every new pattern is added here, as JSON.
 
 ## Block styles and CSS
 
@@ -236,7 +234,7 @@ All faces are bundled in `assets/fonts/` and declared as `fontFace` in `theme.js
 
 ## SEO and structured data
 
-`inc/seo.php`: `injil_help_seo_defaults()` (filterable) supplies the home title, home description and pillar title; `document_title_parts` applies them; `wp_head` prints `meta description` (the excerpt or the first paragraph, trimmed to 160 characters at a sentence end by `injil_help_trim_description()`), Open Graph and Twitter card tags, and the featured image or the default social image (`assets/images/og-default.jpg`, filter `injil_help_default_og_image`). `injil_help_is_pillar()` identifies `/the-islamic-dilemma/`. `injil_help_breadcrumb_html()` prepends the visible breadcrumb row (Home, the parents, the page) to the content of every page and post below the front page at `the_content` priority 5; search result pages carry `noindex` through `wp_robots`.
+`inc/seo.php`: `injil_help_seo_defaults()` (filterable) supplies the home title, home description and pillar title. `injil_help_document_title()` builds every title tag as "page part | site name" under 60 characters: the page part is the short title in `inc/data/seo-titles.json` for that path, else the page title, fitted by `injil_help_title_fit()` to the room the site name leaves. It answers `pre_get_document_title`, and Rank Math's, Yoast's and SEOPress's title filters at priority 99. `wp_head` prints `meta description` (the excerpt or the first paragraph, trimmed to 160 characters at a sentence end by `injil_help_trim_description()`), Open Graph and Twitter card tags, and the featured image or the default social image (`assets/images/og-default.jpg`, filter `injil_help_default_og_image`). `injil_help_is_pillar()` identifies `/islamic-dilemma/`. `injil_help_breadcrumb_html()` prepends the visible breadcrumb row (Home, the parents, the page) to the content of every page and post below the front page at `the_content` priority 5; search result pages carry `noindex` through `wp_robots`.
 
 `inc/schema.php`: `injil_help_schema_enabled()` honours the SEO option and switches off when Yoast, Rank Math or SEOPress is active (filter `injil_help_output_schema`). `injil_help_schema_graph()` builds one `@graph` at `wp_head` priority 5 from every schema.org type the content supports, whatever a search engine shows: Organization (logo, sameAs, ContactPoint), Person (author from the SEO tab or the post author), WebSite (SearchAction; about ʿĪsā ibn Maryam, the Qur'an and the Islamic Dilemma), Person and Book nodes for those two subjects with Wikidata identifiers, an ItemList of SiteNavigationElement from the header, the page node typed by `injil_help_schema_page_type()` (CollectionPage with an ItemList when the page has three or more entries or is the sitemap, ProfilePage + AboutPage for the About page, ContactPage, SearchResultsPage, else WebPage; every page carries a SpeakableSpecification), BreadcrumbList from ancestors, Article + ScholarlyArticle or BlogPosting when `injil_help_schema_is_article()` says so (word count, dates, section, images, `citation` parsed from the Sources list as CreativeWork or ScholarlyArticle-in-Periodical), Book + Chapter for the gospel sections, Book (Arabic, with its author) + CreativeWork (the English rendering, `translationOfWork`) for each commentary page, DefinedTermSet + DefinedTerm for the glossary, Table for every comparison table, Dataset for the sayings-order test, Event for every dated timeline entry, Quotation for every quote block (at most 40), FAQPage from `is-style-faq` details and `answer-item` groups, ImageObject for every figure (licence read from the caption, creator from "Photo: Name", acquireLicensePage from the Commons link). Patterns are expanded with `injil_help_expand_patterns()` so the collectors see the real blocks. Filter the finished array with `injil_help_schema_graph`.
 
@@ -278,7 +276,7 @@ Actions used: `after_switch_theme`, `admin_init`, `admin_post_injil_help_populat
 
 ## Development workflow
 
-1. Edit content in `inc/data/` (JSON only for anything written to the database; the front-page sections and building blocks stay in `patterns/`), behaviour in `inc/`, styles in `style.css` or `assets/css/`. Never put article text in PHP.
+1. Edit content in `inc/data/` (JSON only, patterns included), behaviour in `inc/`, styles in `style.css` or `assets/css/`. Never put article text in PHP.
 2. Checks before committing (all run without WordPress):
    - `for f in $(git ls-files '*.php'); do php -l $f; done`
    - JSON validity: `for f in $(git ls-files 'inc/data/*.json' 'inc/data/**/*.json'); do python3 -m json.tool $f > /dev/null || echo $f; done`

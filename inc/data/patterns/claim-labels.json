@@ -1,0 +1,21 @@
+{
+    "title": "Claim labels",
+    "slug": "injil-help/claim-labels",
+    "categories": [
+        "injil-help"
+    ],
+    "description": "The three claim-status labels. Place one above each contested claim.",
+    "content": [
+        "<!-- wp:group {\"layout\":{\"type\":\"flex\",\"flexWrap\":\"wrap\"},\"style\":{\"spacing\":{\"blockGap\":\"var:preset|spacing|10\"}}} -->",
+        "<div class=\"wp-block-group\"><!-- wp:paragraph {\"className\":\"is-style-label-consensus\"} -->",
+        "<p class=\"is-style-label-consensus\">Scholarly consensus</p>",
+        "<!-- /wp:paragraph -->",
+        "<!-- wp:paragraph {\"className\":\"is-style-label-minority\"} -->",
+        "<p class=\"is-style-label-minority\">Minority view</p>",
+        "<!-- /wp:paragraph -->",
+        "<!-- wp:paragraph {\"className\":\"is-style-label-islamic\"} -->",
+        "<p class=\"is-style-label-islamic\">Islamic position</p>",
+        "<!-- /wp:paragraph --></div>",
+        "<!-- /wp:group -->"
+    ]
+}

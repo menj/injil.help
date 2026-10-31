@@ -2,6 +2,37 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.11.0
+
+URL slugs drop the articles "the", "a" and "an": 32 of the 181 pages move. Every old address answers with a 301 to the new one.
+
+- The pillar page moves from /the-islamic-dilemma/ to /islamic-dilemma/, and its 4 child pages with it; What is the Injīl? becomes /islamic-dilemma/what-is-injil/.
+- /paul/leave-the-gospel-of-paul/ becomes /paul/leave-gospel-of-paul/.
+- 2 commentary groups and their 16 work pages move: /quran/commentaries/table-and-questioning/ and /quran/commentaries/son-of-mary-as-example/.
+- 8 sections of The Gospel According to Islam move, among them /gospel-according-to-islam/john-baptist/ and /gospel-according-to-islam/hour-and-promise-of-counsellor/.
+- New data file `inc/data/slug-history.json` lists each old path with its new one. `injil_help_starter_pages()` adds the old paths to each page's `former`, so the update renames the existing pages in place (same IDs, edits and featured images), and `injil_help_redirect_moved_page()` sends a request for an old path to the new one with a 301. It replaces the single redirect for /about-the-author/, which is now one line of the same file. While the update is still moving pages, a renamed parent can stand at its new path before its renamed child does; until the child moves, the old address is sent with a 302 to wherever the page stands, and the 301 takes over once the rename is done.
+- Every internal link, "Read next" row, image key, front-page pattern, header and footer link, and this site's 4 entries in `network-links.json` use the new paths. `INJIL_HELP_PILLAR_SLUG` is `islamic-dilemma`.
+- SSOT.md: no slug contains "the", "a" or "an".
+
+Title tags.
+
+- Every title tag is "page part | site name", under 60 characters. With the site name The Rightly-Guided Injīl the page part has 32 characters. 132 of the 181 page titles are longer; each has a short title in the new `inc/data/seo-titles.json` ("What is the Injil (Injeel)?", "Questions in the temple", "al-Ṭabarī on 3:33-64, part 2"). The page's own heading is unchanged.
+- `injil_help_document_title()` builds the title for every request, the front page, search and 404 included, and fits anything still too long at a colon or between words. It also answers the title filters of Rank Math, Yoast and SEOPress, so their titles follow the same rule.
+- The default pillar title is "The Islamic Dilemma explained". All 181 titles are unique; the longest is 59 characters.
+- SSOT.md and CLAUDE.md state the rule.
+
+Images from Pexels.
+
+- What is the Injīl?, the Torah in Islam, Why Islam?, Who you are as a servant of God and Leave the gospel of Paul of Tarsus each gain an image, chosen to keep the site's rule that its only images are texts: a medieval Latin manuscript, a Sefer Torah, a Qur'an manuscript open at al-Anbiyāʾ 21:105-112, an illuminated Arabic manuscript, and a Greek inscription in marble.
+- `inc/images.php` takes an image from Pexels as well as Commons: an entry with `"source": "pexels"` gives the photo's `url` and `page`, the plate loads the photo from images.pexels.com and links its Pexels page, and the featured image is sideloaded from the same URL. `inc/schema.php` gives such an image the Pexels License URL; the "Photo: name" credit names its creator.
+- SSOT.md, the credits page and the privacy policy name Pexels. Pixabay is not used, because its licence requires a copy on the site's own server and the plates load from the source.
+
+Every content seed is JSON.
+
+- The 15 PHP patterns, the 8 front-page sections and the 7 building blocks for the editor, are now JSON in `inc/data/patterns/`, with the same slugs and the same output. The `patterns/` folder is gone. functions.php already registers every JSON pattern there.
+- The words the markup writes into pages (Scholarly consensus, Minority view, Islamic position, the 5 status badges, "Notes" and "Back to the text") and the tagline set on activation move from PHP strings to `text.json`, under `markup` and `site`. Every page renders byte for byte as before.
+
+
 ## 3.10.0
 
 Three pages that speak to the Christian reader directly, in answer to the "Why Jesus?" and "identity in Christ" pages of the Islamic Dilemma website. Each is between 1,600 and 2,500 words.

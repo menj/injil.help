@@ -26,18 +26,15 @@ require_once get_stylesheet_directory() . '/inc/starter-content-pages.php';
  * [notneeded] to show a colour-coded status badge.
  */
 function injil_help_markup_to_blocks( $lines ) {
-	$labels = array(
-		'consensus' => __( 'Scholarly consensus', 'injil-help' ),
-		'minority'  => __( 'Minority view', 'injil-help' ),
-		'islamic'   => __( 'Islamic position', 'injil-help' ),
-	);
-	$status = array(
-		'agree'     => __( 'Agrees', 'injil-help' ),
-		'beyond'    => __( 'Beyond the measure', 'injil-help' ),
-		'unclear'   => __( 'Unclear', 'injil-help' ),
-		'conflict'  => __( 'Conflicts', 'injil-help' ),
-		'notneeded' => __( 'Not needed', 'injil-help' ),
-	);
+	// The words the markup adds to a page are kept with the other builder words in inc/data/text.json.
+	$labels = array();
+	foreach ( array( 'consensus', 'minority', 'islamic' ) as $key ) {
+		$labels[ $key ] = injil_help_text( 'markup', $key );
+	}
+	$status = array();
+	foreach ( array( 'agree', 'beyond', 'unclear', 'conflict', 'notneeded' ) as $key ) {
+		$status[ $key ] = injil_help_text( 'markup', $key );
+	}
 	$out    = '';
 	$notes  = array();
 	$list   = array();
@@ -80,12 +77,12 @@ function injil_help_markup_to_blocks( $lines ) {
 		$start = $flushed + 1;
 		$class = $heading ? 'ih-footnotes' : 'ih-footnotes ih-apparatus';
 		if ( $heading ) {
-			$out .= "<!-- wp:heading -->\n<h2 class=\"wp-block-heading\" id=\"notes\">" . esc_html__( 'Notes', 'injil-help' ) . "</h2>\n<!-- /wp:heading -->\n";
+			$out .= "<!-- wp:heading -->\n<h2 class=\"wp-block-heading\" id=\"notes\">" . esc_html( injil_help_text( 'markup', 'notes_heading' ) ) . "</h2>\n<!-- /wp:heading -->\n";
 		}
 		$out .= '<!-- wp:list {"ordered":true' . ( $start > 1 ? ',"start":' . $start : '' ) . ',"className":"' . $class . '"} -->' . "\n" . '<ol' . ( $start > 1 ? ' start="' . $start . '"' : '' ) . ' class="wp-block-list ' . $class . '">';
 		foreach ( $notes as $i => $note ) {
 			$n    = $flushed + $i + 1;
-			$out .= sprintf( "<!-- wp:list-item -->\n<li id=\"fn-%1\$d\">%2\$s <a href=\"#fnref-%1\$d\" aria-label=\"%3\$s\">↩</a></li>\n<!-- /wp:list-item -->", $n, wp_kses_post( $note ), esc_attr__( 'Back to the text', 'injil-help' ) );
+			$out .= sprintf( "<!-- wp:list-item -->\n<li id=\"fn-%1\$d\">%2\$s <a href=\"#fnref-%1\$d\" aria-label=\"%3\$s\">↩</a></li>\n<!-- /wp:list-item -->", $n, wp_kses_post( $note ), esc_attr( injil_help_text( 'markup', 'note_back' ) ) );
 		}
 		$out     .= "</ol>\n<!-- /wp:list -->\n";
 		$flushed += count( $notes );
@@ -222,11 +219,11 @@ function injil_help_related_blocks( $def, $content = '' ) {
 }
 
 /**
- * Every URL on the site is made of words (/gospel-according-to-islam/john-the-baptist/,
+ * Every URL on the site is made of words (/gospel-according-to-islam/john-baptist/,
  * /quran/commentaries/birth-of-jesus/tabari-part-two/), as the Google SEO Starter Guide asks.
  * Versions up to 3.5 numbered the gospel sections and the commentary parts and put the verse
  * numbers in the group slugs; populate() renames those existing pages in place (see
- * injil_help_adopt_former_page()), so no page is duplicated. The old URLs are not redirected.
+ * injil_help_adopt_former_page()), so no page is duplicated. Paths listed in inc/data/slug-history.json are also redirected (injil_help_redirect_moved_page()).
  */
 const INJIL_HELP_RULES = '3'; // bump when the rewrite rules change; populate() flushes when the stored value differs
 
@@ -267,14 +264,46 @@ function injil_help_adopt_former_page( $def ) {
 	return null;
 }
 
-/** The About page was /about-the-author/ before 3.8.2: send the old address to the new one. */
-function injil_help_redirect_about() {
-	if ( is_404() && 'about-the-author' === trim( (string) wp_parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ), '/' ) ) {
-		wp_safe_redirect( home_url( '/about/' ), 301 );
-		exit;
+/**
+ * A page that moved (inc/data/slug-history.json: /about-the-author/ in 3.8.2, the paths without
+ * "the", "a" and "an" in 3.11.0) answers its old address with a 301 to the new one, so links and
+ * search results carry over. Only requests that would otherwise be a 404 are looked up.
+ */
+function injil_help_redirect_moved_page() {
+	if ( ! is_404() ) {
+		return;
 	}
+	$path = (string) wp_parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput -- compared with a fixed list, never printed
+	$home = (string) wp_parse_url( home_url( '/' ), PHP_URL_PATH );
+	if ( '' !== trim( $home, '/' ) && 0 === strpos( $path, $home ) ) {
+		$path = substr( $path, strlen( $home ) );
+	}
+	$new = injil_help_slug_history_resolve( rawurldecode( $path ) );
+	if ( '' === $new ) {
+		return;
+	}
+	$status = 301;
+	if ( ! injil_help_find_page( $new ) ) {
+		// The update renames pages a few at a time: a parent can have moved before its child. Until the
+		// child moves too, send the visitor to wherever it stands now, and only for now (302).
+		$now = '';
+		foreach ( injil_help_slug_history_by_path()[ $new ] ?? array() as $old ) {
+			if ( injil_help_find_page( $old ) ) {
+				$now = $old;
+				break;
+			}
+		}
+		if ( '' === $now ) {
+			return;
+		}
+		$new    = $now;
+		$status = 302;
+	}
+	$query = (string) wp_parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_QUERY ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput -- passed through esc_url_raw by wp_safe_redirect
+	wp_safe_redirect( home_url( '/' . $new . '/' ) . ( '' !== $query ? '?' . $query : '' ), $status );
+	exit;
 }
-add_action( 'template_redirect', 'injil_help_redirect_about' );
+add_action( 'template_redirect', 'injil_help_redirect_moved_page' );
 
 /**
  * Versions before 3.5.1 created the numbered pages under slugs WordPress renamed ("2-2", and
@@ -640,7 +669,7 @@ function injil_help_remove_sample_content() {
 		wp_trash_comment( $comment );
 	}
 	if ( 'Just another WordPress site' === get_option( 'blogdescription' ) ) {
-		update_option( 'blogdescription', __( 'The Islamic Dilemma, answered', 'injil-help' ) );
+		update_option( 'blogdescription', injil_help_text( 'site', 'tagline' ) );
 	}
 }
 

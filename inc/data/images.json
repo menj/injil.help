@@ -95,7 +95,7 @@
         "caption": "James the Just, the brother of Jesus who led the Jerusalem church, in a traditional icon.",
         "credit": "Public domain."
     },
-    "the-islamic-dilemma": {
+    "islamic-dilemma": {
         "file": "Maghribi script sura 5.jpg",
         "alt": "A Qur’an manuscript in Maghribi script showing Sūrat al-Māʾida, the fifth sūra",
         "caption": "Sūrat al-Māʾida in a Qur’an written in Maghribi script. Verses 46 to 48 of this sūra, the Injīl given to ʿĪsā and the Qur’an as guardian over the earlier scripture, are the ground on which the dilemma is answered.",
@@ -137,7 +137,7 @@
         "caption": "The Temple of Herod in the model of first-century Jerusalem at the Israel Museum. The Ebionites kept the law of the Temple’s city after its fall. Photograph by Berthold Werner.",
         "credit": "Public domain."
     },
-    "the-islamic-dilemma/secular-form": {
+    "islamic-dilemma/secular-form": {
         "file": "Birmingham Quran manuscript.jpg",
         "alt": "The Birmingham Qur’an manuscript, 2 leaves in Hijazi script, radiocarbon-dated to the seventh century",
         "caption": "The Birmingham Qur’an manuscript (Mingana 1572a), Hijazi script, radiocarbon-dated to between 568 and 645 CE. Cadbury Research Library, University of Birmingham.",
@@ -178,5 +178,50 @@
         "alt": "Giotto, The Crucifixion, Scrovegni Chapel, Padua, about 1305",
         "caption": "Giotto, The Crucifixion (about 1305), Scrovegni Chapel, Padua. The four accounts of the day, the hour and the last words differ, and the Qur’an says it was made to appear so to them (4:157).",
         "credit": "Public domain."
+    },
+    "islamic-dilemma/what-is-injil": {
+        "file": "pexels-30019470",
+        "source": "pexels",
+        "url": "https://images.pexels.com/photos/30019470/pexels-photo-30019470.jpeg",
+        "page": "https://www.pexels.com/photo/close-up-of-ancient-manuscript-with-latin-text-30019470/",
+        "alt": "A medieval Latin manuscript open at two hand-written pages",
+        "caption": "A medieval manuscript in Latin. The gospels reached the Middle Ages only in hand copies like this one, made by scribes many centuries after ʿĪsā.",
+        "credit": "Photo: Magda Ehlers, Pexels License"
+    },
+    "islamic-dilemma/torah-in-islam": {
+        "file": "pexels-5986493",
+        "source": "pexels",
+        "url": "https://images.pexels.com/photos/5986493/pexels-photo-5986493.jpeg",
+        "page": "https://www.pexels.com/photo/a-close-up-shot-of-a-sefer-torah-5986493/",
+        "alt": "An open Torah scroll on its wooden rollers, the Hebrew text in columns",
+        "caption": "A Sefer Torah: the five books of Moses written by hand on a parchment scroll, as the synagogue still reads them.",
+        "credit": "Photo: cottonbro studio, Pexels License"
+    },
+    "why-islam": {
+        "file": "pexels-18491910",
+        "source": "pexels",
+        "url": "https://images.pexels.com/photos/18491910/pexels-photo-18491910.jpeg",
+        "page": "https://www.pexels.com/photo/old-book-with-handwriting-18491910/",
+        "alt": "A Qur'an manuscript open at Sūrat al-Anbiyāʾ, verses 105 to 112",
+        "caption": "A Qur'an manuscript open at al-Anbiyāʾ 21:105-112: “Say: it is revealed to me that your god is one God; will you then submit?” (21:108).",
+        "credit": "Photo: Adam Noor, Pexels License"
+    },
+    "servant-of-god": {
+        "file": "pexels-29342494",
+        "source": "pexels",
+        "url": "https://images.pexels.com/photos/29342494/pexels-photo-29342494.jpeg",
+        "page": "https://www.pexels.com/photo/close-up-of-illuminated-manuscript-text-29342494/",
+        "alt": "An illuminated Arabic manuscript, its headings in gold on red and blue bands",
+        "caption": "An illuminated Arabic manuscript: headings in gold on red and blue bands, with the text in black between them.",
+        "credit": "Photo: mohamed abdelghaffar, Pexels License"
+    },
+    "paul/leave-gospel-of-paul": {
+        "file": "pexels-6493630",
+        "source": "pexels",
+        "url": "https://images.pexels.com/photos/6493630/pexels-photo-6493630.jpeg",
+        "page": "https://www.pexels.com/photo/close-up-of-greek-writing-on-the-stone-6493630/",
+        "alt": "A Greek inscription cut in a cracked marble block",
+        "caption": "A Greek inscription in marble. Paul of Tarsus wrote his letters in Greek, to churches in the Greek-speaking cities of the Roman east.",
+        "credit": "Photo: ROMAN ODINTSOV, Pexels License"
     }
 }
