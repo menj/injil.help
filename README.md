@@ -69,7 +69,7 @@ injil-help/
 ├─ inc/
 │  ├─ options.php         Theme Options page, defaults, sanitiser, body classes, colour CSS
 │  ├─ starter-content.php markup parser, page writer, populate(), activation and update hooks
-│  ├─ images.php          Commons plates in page content; featured images sideloaded a few pages per admin load
+│  ├─ images.php          Commons and Pexels plates in page content; featured images sideloaded a few pages per admin load
 │  ├─ starter-content-pages.php  the page list, merged from the JSON files and the builders
 │  ├─ gospel-islam.php    gospel sections from narrative.json + thomas + substitution + commentaries
 │  ├─ quran-jesus.php     the Qur'anic passages page from quran-jesus.json
@@ -111,7 +111,7 @@ Everything the theme writes to the database is JSON in `inc/data/`: the page def
 | `patterns/{name}.json` | all 32 block patterns: the 17 that supply whole pages (the pillar, the measure, the five section indexes, the FAQs, how the gospel was composed, the corrections log, the five discrepancy tables, the manuscripts table and the sayings-order test), the 8 front-page sections and the 7 building blocks for the editor | `{title, slug, description, categories, keywords?, content[]}`; `content` is the block markup, one line per item, joined with newlines by `injil_help_pattern_file()`, which also refuses a name that is not a plain slug and a file that is malformed |
 | `text.json` | the words the PHP builders put on pages: the commentaries index with its FAQs, the group and part pages, the colophon and the folds (`commentaries`); the running heads, navigation, titles and excerpts of the gospel sections (`gospel`); the title, introduction and source note of The Qur'an on Jesus (`quran_passages`); the "Read next" label (`related`) | `{group: {key: string \| [markup lines]}}`; format strings keep their `sprintf` placeholders; read with `injil_help_text( $group, $key )`. Without this file or `commentaries.json` the page list is empty, so nothing is published with gaps |
 | `commentaries.json` | the eight commentaries and the nine verse groups | `{works: {key: {short, title, author, died, about, source}}, groups: {slug: {former, surah, from, to, name, title, intro}}}`, in display order |
-| `images.json` | one Commons image per page that has one | `{path: {file, alt, caption, credit}}`; `inc/images.php` puts the plate into the content and sideloads the file as the featured image |
+| `images.json` | one image per page that has one, from Commons or Pexels | `{path: {file, alt, caption, credit}}`, and for Pexels also `{source: "pexels", url, page}` with `file` set to `pexels-{id}`; `inc/images.php` puts the plate into the content and sideloads the file as the featured image |
 | `tafsir/{work}.json` | one commentary | `{work, entries: [{surah, from, to, arabic_words, english_words, paragraphs[]}]}` |
 
 `injil_help_starter_pages()` (static-cached per request) concatenates: pillar, gospels, paul, quran, the Qur'an page built by `injil_help_quran_page()`, the commentary pages from `injil_help_tafsir_pages()`, gospel, the 28 gospel pages from `injil_help_gospel_islam_pages()`, bonus, resources, site. Parents precede children in that order, which `populate()` relies on to resolve `post_parent`.

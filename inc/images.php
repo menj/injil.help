@@ -1,9 +1,11 @@
 <?php
 /**
- * Images for the starter pages, from Wikimedia Commons.
+ * Images for the starter pages, from Wikimedia Commons or Pexels.
  *
  * inc/data/images.json maps a page path to one image: { "path": { "file", "alt", "caption", "credit" } },
- * where "file" is the Commons file name without the "File:" prefix. Each page that has an entry gets a
+ * where "file" is the Commons file name without the "File:" prefix. A Pexels photo adds "source": "pexels",
+ * "url" (the photo on images.pexels.com) and "page" (its page on pexels.com), and "file" is then only the
+ * key the Media Library copy is found by, "pexels-{id}". Each page that has an entry gets a
  * plate (a linked figure with the credit in its caption) near the top of its content, and, once the page
  * exists, the same image sideloaded into the Media Library and set as its featured image, which the
  * Open Graph tags and the structured data then use. The sideload runs a few pages at a time on admin
@@ -25,6 +27,16 @@ function injil_help_images() {
 	return $map;
 }
 
+/** The page an image is credited to and licensed from: its Commons page, or its Pexels page. */
+function injil_help_image_page( $img ) {
+	return 'pexels' === ( $img['source'] ?? '' ) ? (string) ( $img['page'] ?? '' ) : injil_help_commons_page( $img['file'] );
+}
+
+/** A copy of an image at most $width pixels wide: from Commons, or from the Pexels image server, which scales on request. */
+function injil_help_image_url( $img, $width ) {
+	return 'pexels' === ( $img['source'] ?? '' ) ? (string) ( $img['url'] ?? '' ) . '?auto=compress&cs=tinysrgb&w=' . (int) $width : injil_help_commons_url( $img['file'], $width );
+}
+
 /** The Commons page of a file. */
 function injil_help_commons_page( $file ) {
 	return 'https://commons.wikimedia.org/wiki/File:' . rawurlencode( str_replace( ' ', '_', $file ) );
@@ -40,9 +52,9 @@ function injil_help_image_block( $img ) {
 	$caption = trim( (string) ( $img['caption'] ?? '' ) );
 	$credit  = trim( (string) ( $img['credit'] ?? '' ) );
 	$text    = $caption . ( $caption && $credit ? ' ' : '' ) . $credit . ( $credit && '.' !== substr( $credit, -1 ) ? '.' : '' );
-	$text   .= ' <a href="' . esc_url( injil_help_commons_page( $img['file'] ) ) . '">Wikimedia Commons</a>.';
+	$text   .= ' <a href="' . esc_url( injil_help_image_page( $img ) ) . '">' . ( 'pexels' === ( $img['source'] ?? '' ) ? 'Pexels' : 'Wikimedia Commons' ) . '</a>.';
 	return '<!-- wp:image {"sizeSlug":"large","linkDestination":"custom","className":"ih-plate"} -->' . "\n"
-		. '<figure class="wp-block-image size-large ih-plate"><a href="' . esc_url( injil_help_commons_page( $img['file'] ) ) . '"><img src="' . esc_url( injil_help_commons_url( $img['file'], 900 ) ) . '" alt="' . esc_attr( (string) ( $img['alt'] ?? '' ) ) . '"/></a><figcaption class="wp-element-caption">' . wp_kses_post( $text ) . '</figcaption></figure>' . "\n"
+		. '<figure class="wp-block-image size-large ih-plate"><a href="' . esc_url( injil_help_image_page( $img ) ) . '"><img src="' . esc_url( injil_help_image_url( $img, 900 ) ) . '" alt="' . esc_attr( (string) ( $img['alt'] ?? '' ) ) . '"/></a><figcaption class="wp-element-caption">' . wp_kses_post( $text ) . '</figcaption></figure>' . "\n"
 		. "<!-- /wp:image -->\n";
 }
 
@@ -112,7 +124,7 @@ function injil_help_feature_page( $post_id, $path ) {
 		require_once ABSPATH . 'wp-admin/includes/media.php';
 		require_once ABSPATH . 'wp-admin/includes/file.php';
 		require_once ABSPATH . 'wp-admin/includes/image.php';
-		$att = media_sideload_image( injil_help_commons_url( $file, 1600 ), $post_id, (string) ( $img['alt'] ?? $file ), 'id' );
+		$att = media_sideload_image( injil_help_image_url( $img, 1600 ), $post_id, (string) ( $img['alt'] ?? $file ), 'id' );
 		if ( ! $att || is_wp_error( $att ) ) {
 			$failed[ $file ] = time();
 			update_option( 'injil_help_image_failures', $failed, false );
@@ -123,7 +135,7 @@ function injil_help_feature_page( $post_id, $path ) {
 			array(
 				'ID'           => $att,
 				'post_excerpt' => trim( (string) ( $img['caption'] ?? '' ) . ( $credit ? ' ' . $credit . ( '.' === substr( $credit, -1 ) ? '' : '.' ) : '' ) ),
-				'post_content' => 'Source: ' . injil_help_commons_page( $file ),
+				'post_content' => 'Source: ' . injil_help_image_page( $img ),
 			)
 		);
 		update_post_meta( $att, '_wp_attachment_image_alt', (string) ( $img['alt'] ?? '' ) );
