@@ -109,13 +109,110 @@ function injil_help_markup_to_blocks( $lines ) {
 	return $out;
 }
 
+/** Split block markup into its top-level blocks. */
+function injil_help_top_blocks( $html ) {
+	preg_match_all( '/<!-- (\/?)wp:[a-z0-9\/-]+(?: \{.*?\})? (\/?)-->/', $html, $m, PREG_OFFSET_CAPTURE );
+	$blocks = array();
+	$depth  = 0;
+	$start  = 0;
+	foreach ( $m[0] as $i => $tag ) {
+		$closing = '/' === $m[1][ $i ][0];
+		$self    = '/' === $m[2][ $i ][0];
+		if ( ! $closing && ! $self ) {
+			if ( 0 === $depth ) {
+				$start = $tag[1];
+			}
+			++$depth;
+		} elseif ( $closing ) {
+			--$depth;
+			if ( 0 === $depth ) {
+				$blocks[] = substr( $html, $start, $tag[1] + strlen( $tag[0] ) - $start );
+			}
+		} elseif ( 0 === $depth ) {
+			$blocks[] = $tag[0];
+		}
+	}
+	return $blocks;
+}
+
+/** Images chosen for each page: inc/data/images.json, keyed by page path. */
+function injil_help_page_images( $path ) {
+	static $all = null;
+	if ( null === $all ) {
+		$raw = file_get_contents( get_stylesheet_directory() . '/inc/data/images.json' );
+		$all = $raw ? json_decode( $raw, true ) : array();
+	}
+	return $all[ $path ] ?? array();
+}
+
+/** One captioned figure. The first image of a page is the featured one. */
+function injil_help_figure( $img, $featured ) {
+	$url     = get_stylesheet_directory_uri() . '/assets/images/articles/' . $img['file'];
+	$class   = 'ih-plate ' . ( $featured ? 'ih-feature' : 'ih-fig' );
+	$caption = esc_html( $img['caption'] ) . ' ' . esc_html( $img['credit'] ) . ' <a href="' . esc_url( $img['source'] ) . '">Wikimedia Commons</a>.';
+	return '<!-- wp:image {"sizeSlug":"large","linkDestination":"none","className":"' . $class . '"} -->' . "\n"
+		. '<figure class="wp-block-image size-large ' . $class . '"><img src="' . esc_url( $url ) . '" alt="' . esc_attr( $img['alt'] ) . '" title="' . esc_attr( $img['title'] ) . '" width="' . (int) $img['w'] . '" height="' . (int) $img['h'] . '" loading="' . ( $featured ? 'eager' : 'lazy' ) . '" decoding="async"/><figcaption class="wp-element-caption">' . $caption . '</figcaption></figure>' . "\n"
+		. '<!-- /wp:image -->' . "\n";
+}
+
+/**
+ * Place a page's images: the featured one after the opening paragraph, the others
+ * spread through the text, each after a paragraph and clear of the notes.
+ */
+function injil_help_insert_images( $content, $path ) {
+	$images = injil_help_page_images( $path );
+	if ( ! $images || false !== strpos( $content, '<img ' ) ) {
+		return $content;
+	}
+	$blocks = injil_help_top_blocks( $content );
+	$n      = count( $blocks );
+	$end    = $n;
+	foreach ( $blocks as $i => $b ) {
+		if ( false !== strpos( $b, 'id="notes"' ) ) {
+			$end = $i;
+			break;
+		}
+	}
+	$after = array();
+	$first = 0;
+	foreach ( $blocks as $i => $b ) {
+		if ( 0 === strpos( $b, '<!-- wp:paragraph' ) ) {
+			$first = $i;
+			break;
+		}
+	}
+	$after[ $first ] = 0;
+	$rest            = count( $images ) - 1;
+	$prev            = $first;
+	for ( $k = 1; $k <= $rest; $k++ ) {
+		$target = (int) round( $first + ( $end - 1 - $first ) * $k / ( $rest + 1 ) );
+		$idx    = max( $target, $prev + 2 );
+		while ( $idx < $end - 1 && 0 !== strpos( $blocks[ $idx ], '<!-- wp:paragraph' ) ) {
+			++$idx;
+		}
+		if ( $idx >= $end || isset( $after[ $idx ] ) ) {
+			break;
+		}
+		$after[ $idx ] = $k;
+		$prev          = $idx;
+	}
+	$out = '';
+	foreach ( $blocks as $i => $b ) {
+		$out .= $b . "\n";
+		if ( isset( $after[ $i ] ) && isset( $images[ $after[ $i ] ] ) ) {
+			$out .= injil_help_figure( $images[ $after[ $i ] ], 0 === $after[ $i ] );
+		}
+	}
+	return $out;
+}
+
 /** Block content for one page definition, or '' when its pattern is missing. */
 function injil_help_page_content( $def ) {
 	if ( ! empty( $def['pattern'] ) ) {
 		$pattern = WP_Block_Patterns_Registry::get_instance()->get_registered( 'injil-help/' . $def['pattern'] );
 		return $pattern ? $pattern['content'] : '';
 	}
-	return injil_help_markup_to_blocks( $def['body'] ?? array() );
+	return injil_help_insert_images( injil_help_markup_to_blocks( $def['body'] ?? array() ), $def['path'] );
 }
 
 function injil_help_find_page( $path ) {

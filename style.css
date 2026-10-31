@@ -245,6 +245,10 @@ p.ih-cite{margin:0;font-size:13px;color:var(--wp--preset--color--muted)}
 .ih-plate{margin:var(--wp--preset--spacing--20) 0 0 !important}
 .ih-plate img{border-radius:var(--ih-r-md);background:var(--wp--preset--color--accent-5);box-shadow:0 0 0 6px var(--wp--preset--color--accent-5);width:100%;height:auto;max-height:420px;object-fit:cover}
 .ih-plate figcaption{font-size:13px;line-height:1.45;color:var(--wp--preset--color--muted);text-align:left;margin-top:12px}
+.ih-feature,.ih-fig{margin:var(--wp--preset--spacing--40) 0 !important}
+.ih-fig img{max-height:360px}
+.ih-feature img{max-height:460px}
+.ih-feature figcaption,.ih-fig figcaption{text-align:justify;text-justify:inter-word}
 .ih-cover .ih-plate img{box-shadow:0 0 0 6px var(--wp--preset--color--green-deep);background:var(--wp--preset--color--green-deep);max-height:none}
 .ih-cover .ih-plate figcaption,.ih-cover .ih-plate figcaption a{color:var(--wp--preset--color--green-tint)}
 
