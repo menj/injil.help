@@ -2,6 +2,15 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.11.1
+
+Fixes from a review of the 3.9.0 to 3.11.0 code. No page text changes.
+
+- The redirect from a moved page runs at `template_redirect` priority 9, before WordPress's `redirect_canonical()` guesses at a 404, so the old address always goes where `slug-history.json` says.
+- The structured data took the journal of a quoted article from a point found with `mb_strpos()`, a character count, and cut there with `substr()`, which counts bytes. With curly quotes and transliterated names before it, the cut fell early, and a title with an italic word in it would have given that word as the journal. It now uses `strpos()`. No citation on the site was affected yet: 0 of 151 change.
+- Theme Options, SEO: the home and pillar title fields say how many characters fit beside " | " and the site name, and that a longer title is cut.
+- A comment in `functions.php` now says every pattern is JSON.
+
 ## 3.11.0
 
 URL slugs drop the articles "the", "a" and "an": 32 of the 181 pages move. Every old address answers with a 301 to the new one.

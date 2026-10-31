@@ -84,6 +84,8 @@ This file is the user-facing manual that WordPress and Git Updater read. The rep
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add the entry to CHANGELOG.md and to the Changelog section here, note anything an existing site must know under "Updating an existing site" in UPGRADING.md, merge to main, and tag the commit with the same number (for example v3.4.0). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 3.11.1 =
+* Fixes: the redirect from a moved page runs before WordPress's own 404 guess; an article's journal in the structured data is found by byte position; the home and pillar title fields say how many characters fit.
 = 3.11.0 =
 * URL slugs drop "the", "a" and "an": 32 pages move, the pillar page to /islamic-dilemma/. The update renames the existing pages in place, and every old address redirects to the new one with a 301.
 * Every title tag is "page part | site name" and under 60 characters; long page titles have short title-tag versions in inc/data/seo-titles.json.

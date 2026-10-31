@@ -303,7 +303,7 @@ function injil_help_redirect_moved_page() {
 	wp_safe_redirect( home_url( '/' . $new . '/' ) . ( '' !== $query ? '?' . $query : '' ), $status );
 	exit;
 }
-add_action( 'template_redirect', 'injil_help_redirect_moved_page' );
+add_action( 'template_redirect', 'injil_help_redirect_moved_page', 9 ); // before redirect_canonical() guesses at a 404 (priority 10)
 
 /**
  * Versions before 3.5.1 created the numbered pages under slugs WordPress renamed ("2-2", and

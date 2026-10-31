@@ -376,7 +376,7 @@ function injil_help_render_options() {
 					</tr>
 					<tr>
 						<th scope="row"><label for="ih-home-title"><?php esc_html_e( 'Home title', 'injil-help' ); ?></label></th>
-						<td><input type="text" class="large-text" id="ih-home-title" name="<?php echo esc_attr( $name ); ?>[home_title]" value="<?php echo esc_attr( $o['home_title'] ); ?>" placeholder="<?php echo esc_attr( injil_help_seo_defaults()['home_title'] ); ?>"></td>
+						<td><input type="text" class="large-text" id="ih-home-title" name="<?php echo esc_attr( $name ); ?>[home_title]" value="<?php echo esc_attr( $o['home_title'] ); ?>" placeholder="<?php echo esc_attr( injil_help_seo_defaults()['home_title'] ); ?>"><p class="description"><?php echo esc_html( sprintf( /* translators: %d: number of characters */ __( 'The title tag adds " | " and the site name. %d characters fit; a longer title is cut.', 'injil-help' ), INJIL_HELP_TITLE_MAX - mb_strlen( ' | ' . wp_strip_all_tags( get_bloginfo( 'name' ) ) ) ) ); ?></p></td>
 					</tr>
 					<tr>
 						<th scope="row"><label for="ih-home-desc"><?php esc_html_e( 'Home description', 'injil-help' ); ?></label></th>
@@ -384,7 +384,7 @@ function injil_help_render_options() {
 					</tr>
 					<tr>
 						<th scope="row"><label for="ih-pillar-title"><?php esc_html_e( 'Pillar page title', 'injil-help' ); ?></label></th>
-						<td><input type="text" class="large-text" id="ih-pillar-title" name="<?php echo esc_attr( $name ); ?>[pillar_title]" value="<?php echo esc_attr( $o['pillar_title'] ); ?>" placeholder="<?php echo esc_attr( injil_help_seo_defaults()['pillar_title'] ); ?>"></td>
+						<td><input type="text" class="large-text" id="ih-pillar-title" name="<?php echo esc_attr( $name ); ?>[pillar_title]" value="<?php echo esc_attr( $o['pillar_title'] ); ?>" placeholder="<?php echo esc_attr( injil_help_seo_defaults()['pillar_title'] ); ?>"><p class="description"><?php echo esc_html( sprintf( /* translators: %d: number of characters */ __( 'The title tag adds " | " and the site name. %d characters fit; a longer title is cut.', 'injil-help' ), INJIL_HELP_TITLE_MAX - mb_strlen( ' | ' . wp_strip_all_tags( get_bloginfo( 'name' ) ) ) ) ); ?></p></td>
 					</tr>
 					<tr>
 						<th scope="row"><label for="ih-og"><?php esc_html_e( 'Default social image URL', 'injil-help' ); ?></label></th>
