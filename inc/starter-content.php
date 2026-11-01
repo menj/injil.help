@@ -349,7 +349,8 @@ function injil_help_repair_former_slug( $path, $keep_id = 0 ) {
 	$copies = array();
 	foreach ( $ids as $id ) {
 		if ( (int) $id !== $keep_id && preg_match( '/^' . preg_quote( $slug, '/' ) . '(-\d+)?$/', (string) get_post_field( 'post_name', $id ) ) ) {
-			$copies[ (int) $id ] = injil_help_page_is_edited( get_post( $id ) );
+			// A copy without the theme's hash was not written by the theme: treat it as edited (draft, never the bin).
+			$copies[ (int) $id ] = '' === (string) get_post_meta( $id, INJIL_HELP_HASH_META, true ) || injil_help_page_is_edited( get_post( $id ) );
 		}
 	}
 	if ( ! $copies ) {
@@ -384,7 +385,7 @@ function injil_help_repair_former_slug( $path, $keep_id = 0 ) {
 /** Every former path of a starter page, mapped to its present path. Cached per theme version. */
 function injil_help_former_map() {
 	$key   = 'injil_help_former_map';
-	$ver   = (string) wp_get_theme( get_template() )->get( 'Version' );
+	$ver   = INJIL_HELP_VERSION;
 	$cache = get_transient( $key );
 	if ( is_array( $cache ) && ( $cache['ver'] ?? '' ) === $ver ) {
 		return $cache['map'];
@@ -444,8 +445,9 @@ function injil_help_redirect_former() {
 	}
 	// A 301 is cached for good, so it is only sent once the page stands at its present address. While an
 	// update is still moving pages, injil_help_redirect_moved_page() sends the visitor on with a 302.
-	if ( null === $target || ! injil_help_find_page( $target ) ) {
-		return;
+	$found = null === $target ? null : injil_help_find_page( $target );
+	if ( ! $found || 'publish' !== $found->post_status ) {
+		return; // a draft or private target would answer 404 to the visitor: no permanent redirect to it
 	}
 	wp_safe_redirect( home_url( '/' . $target . '/' ), 301 );
 	exit;
@@ -633,6 +635,7 @@ function injil_help_populate_step( $overwrite, $force, $offset, $seconds, $tally
 	}
 	$start = microtime( true );
 	add_filter( 'wp_revisions_to_keep', '__return_zero', 99 );
+	$GLOBALS['injil_help_seeding'] = true; // the spam gate exempts the theme's own page writing (injil_help_sec_is_seeded())
 	$i = max( 0, (int) $offset );
 	while ( $i < $total ) {
 		$result = injil_help_populate_page( $i, $pages[ $i ], $overwrite, $force );
@@ -643,6 +646,7 @@ function injil_help_populate_step( $overwrite, $force, $offset, $seconds, $tally
 		}
 	}
 	remove_filter( 'wp_revisions_to_keep', '__return_zero', 99 );
+	$GLOBALS['injil_help_seeding'] = false;
 
 	$next = $i >= $total ? -1 : $i;
 	if ( -1 === $next ) {

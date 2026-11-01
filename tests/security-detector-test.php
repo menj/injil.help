@@ -46,6 +46,10 @@ function ih_test_strings( $value, &$out ) {
 	}
 }
 
+if ( ! is_dir( $data_dir ) ) {
+	echo "MISSING: inc/data\nFAILED: 1\n";
+	exit( 1 );
+}
 $files = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $data_dir, FilesystemIterator::SKIP_DOTS ) );
 $paths = array();
 foreach ( $files as $file ) {
@@ -58,8 +62,9 @@ sort( $paths );
 $pages = 0;
 foreach ( $paths as $path ) {
 	$rel  = substr( $path, strlen( $data_dir ) + 1 );
-	$json = json_decode( (string) file_get_contents( $path ), true );
-	if ( null === $json ) {
+	$raw  = file_get_contents( $path );
+	$json = false === $raw ? null : json_decode( $raw, true );
+	if ( ! is_array( $json ) ) {
 		++$fail;
 		echo "UNREADABLE: $rel\n";
 		continue;
@@ -98,6 +103,13 @@ foreach ( $paths as $path ) {
 			++$fail;
 			ih_test_fp( $rel . ' "' . mb_substr( $s, 0, 80 ) . '"', $r );
 		}
+	}
+}
+// The files the test is meant to read must be there: no data, or no page definitions, is a failure.
+foreach ( array( 'pages' => $pages, 'data files' => count( $paths ) ) as $what => $count ) {
+	if ( ! $count ) {
+		++$fail;
+		echo "MISSING: no $what found under inc/data\n";
 	}
 }
 echo 'Data files: ' . count( $paths ) . ", page definitions: $pages, items checked: $n\n";
@@ -194,6 +206,13 @@ $r = injil_help_spam_score( 'A guide', '', '<p>See <a href="https://best-casino.
 if ( ! $r['spam'] ) {
 	++$fail;
 	echo "MISSED: gambling link\n";
+}
+// Upper-case Cyrillic must match on raw text, as it reaches the patterns when mbstring is absent.
+$casino = injil_help_spam_patterns()['casino'][0];
+$brand  = injil_help_spam_patterns()['gambling brand'][0];
+if ( ! preg_match( $casino, 'ОНЛАЙН КАЗИНО' ) || ! preg_match( $brand, 'ВАВАДА ЗЕРКАЛО' ) || ! preg_match( $casino, 'ONLINE CASINO' ) ) {
+	++$fail;
+	echo "MISSED: upper-case text without lower-casing\n";
 }
 echo 'Spam samples checked: ' . ( count( $spam ) + 1 ) . "\n";
 echo $fail ? "FAILED: $fail\n" : "PASS\n";

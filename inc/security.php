@@ -147,12 +147,14 @@ function injil_help_sec_sync_htaccess( $force = false ) {
 	}
 	$want    = injil_help_sec_on( 'block_xmlrpc' );
 	$current = function_exists( 'extract_from_markers' ) ? extract_from_markers( $file, 'Block xmlrpc.php' ) : array();
+	$ok      = true;
 	if ( $want && $current !== injil_help_sec_htaccess_lines() ) {
-		insert_with_markers( $file, 'Block xmlrpc.php', injil_help_sec_htaccess_lines() );
+		$ok = true === insert_with_markers( $file, 'Block xmlrpc.php', injil_help_sec_htaccess_lines() );
 	} elseif ( ! $want && $current ) {
-		insert_with_markers( $file, 'Block xmlrpc.php', array() );
+		$ok = true === insert_with_markers( $file, 'Block xmlrpc.php', array() );
 	}
-	update_option( 'injil_help_security_htaccess', $want ? 'written' : 'off', false );
+	// 'written' only when the block is really in the file: a failed write reads as unavailable.
+	update_option( 'injil_help_security_htaccess', $ok ? ( $want ? 'written' : 'off' ) : 'unavailable', false );
 }
 add_action( 'admin_init', 'injil_help_sec_sync_htaccess' );
 add_action( 'after_switch_theme', function () { injil_help_sec_sync_htaccess( true ); } );
@@ -298,8 +300,9 @@ function injil_help_sec_counts() {
 	$counts = is_array( $counts ) ? $counts : array();
 	$rows   = $wpdb->get_results( "SELECT option_name, option_value FROM {$wpdb->options} WHERE option_name LIKE 'injil\\_help\\_security\\_tally\\_%'" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery
 	$today  = gmdate( 'Ymd' );
+	$oldest = gmdate( 'Y-m-d', time() - 29 * DAY_IN_SECONDS ); // thirty days, today included
 	$live   = array();
-	$done   = array();
+	$done   = false;
 	foreach ( (array) $rows as $row ) {
 		if ( ! preg_match( '/^injil_help_security_tally_([a-z0-9_-]+)_(\d{8})$/', $row->option_name, $m ) ) {
 			continue;
@@ -309,16 +312,25 @@ function injil_help_sec_counts() {
 			$live[ $m[1] ] = (int) $row->option_value;
 			continue;
 		}
+		// Delete only the value read: an increment that lands between the read and the delete
+		// changes the row, the delete matches nothing, and the row is folded on a later call.
+		$gone = $wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name = %s AND option_value = %s", $row->option_name, $row->option_value ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+		wp_cache_delete( $row->option_name, 'options' );
+		if ( ! $gone ) {
+			continue;
+		}
 		$counts[ $day ][ $m[1] ] = ( isset( $counts[ $day ][ $m[1] ] ) ? (int) $counts[ $day ][ $m[1] ] : 0 ) + (int) $row->option_value;
-		$done[]                  = $row->option_name;
+		$done                    = true;
+	}
+	foreach ( array_keys( $counts ) as $day ) {
+		if ( strcmp( (string) $day, $oldest ) < 0 ) {
+			unset( $counts[ $day ] );
+			$done = true;
+		}
 	}
 	krsort( $counts );
-	$counts = array_slice( $counts, 0, 30, true );
 	if ( $done ) {
 		update_option( INJIL_HELP_SEC_COUNTS, $counts, false );
-		foreach ( $done as $name ) {
-			delete_option( $name );
-		}
 	}
 	$day = gmdate( 'Y-m-d' );
 	foreach ( $live as $key => $n ) {
@@ -344,8 +356,9 @@ function injil_help_sec_fake_jetpack() {
 }
 
 /**
- * Whether this request is a remote, non-browser call: XML-RPC, or REST with
- * an application password or other header login.
+ * Whether this request is a remote, non-browser call: XML-RPC, REST with
+ * an application password or other header login, or WP-CLI outside the
+ * theme's own page writing.
  *
  * @return bool
  */
@@ -356,7 +369,21 @@ function injil_help_sec_is_remote() {
 	if ( defined( 'REST_REQUEST' ) && REST_REQUEST && is_user_logged_in() ) {
 		return true !== ( isset( $GLOBALS['wp_rest_auth_cookie'] ) ? $GLOBALS['wp_rest_auth_cookie'] : null );
 	}
+	// WP-CLI is outside the editor too; the theme's own page writing is not remote.
+	if ( defined( 'WP_CLI' ) && WP_CLI ) {
+		return ! injil_help_sec_seeding();
+	}
 	return false;
+}
+
+/**
+ * Whether the theme's own page writing (injil_help_populate_step()) is running in this request.
+ * Only theme code sets the flag, so no request can claim it.
+ *
+ * @return bool
+ */
+function injil_help_sec_seeding() {
+	return ! empty( $GLOBALS['injil_help_seeding'] );
 }
 
 /**
@@ -410,6 +437,10 @@ function injil_help_sec_failed_login( $login ) {
 		return;
 	}
 	$row = isset( $failed[ $login ] ) ? $failed[ $login ] : array( 'n' => 0, 'first' => $now, 'last' => $now, 'ips' => array() );
+	if ( $now - (int) $row['first'] > DAY_IN_SECONDS ) {
+		// A steady trickle keeps 'last' fresh: start the count again so it covers one day only.
+		$row = array( 'n' => 0, 'first' => $now, 'last' => $now, 'ips' => array() );
+	}
 	$row['n']++;
 	$row['last'] = $now;
 	$ip          = injil_help_sec_ip();
@@ -422,6 +453,24 @@ function injil_help_sec_failed_login( $login ) {
 add_action( 'wp_login_failed', 'injil_help_sec_failed_login' );
 
 /**
+ * Failed logins of the last 24 hours, by account name. Rows whose last failure is older
+ * are left out even before the next failure prunes them.
+ *
+ * @return array
+ */
+function injil_help_sec_failed_recent() {
+	$failed = get_option( INJIL_HELP_SEC_FAILED, array() );
+	$now    = time();
+	$out    = array();
+	foreach ( is_array( $failed ) ? $failed : array() as $name => $row ) {
+		if ( is_array( $row ) && $now - (int) ( $row['last'] ?? 0 ) <= DAY_IN_SECONDS && $now - (int) ( $row['first'] ?? 0 ) <= DAY_IN_SECONDS ) {
+			$out[ $name ] = $row;
+		}
+	}
+	return $out;
+}
+
+/**
  * Admin notice when an existing account is being guessed at: ten or more
  * failures in a day, or a correct password refused on the remote route.
  */
@@ -429,9 +478,9 @@ function injil_help_sec_attack_notice() {
 	if ( ! current_user_can( 'manage_options' ) ) {
 		return;
 	}
-	$failed = get_option( INJIL_HELP_SEC_FAILED, array() );
+	$failed = injil_help_sec_failed_recent();
 	$hit    = array();
-	foreach ( (array) $failed as $name => $row ) {
+	foreach ( $failed as $name => $row ) {
 		if ( (int) $row['n'] >= 10 && ( username_exists( $name ) || email_exists( $name ) ) ) {
 			$hit[] = sprintf( '%s (%d, %d)', $name, (int) $row['n'], count( (array) $row['ips'] ) );
 		}
@@ -519,30 +568,30 @@ function injil_help_sec_log( $entry ) {
 
 /**
  * Whether a post is starter content: it carries the hash the theme stamps on
- * every page it writes (_injil_help_hash, see injil_help_stamp_page()), or its
- * title and slug are those of a page in inc/data/ (the theme writes the page
- * before it stamps it, so a new starter page has no hash yet when the gate runs).
+ * every page it writes (_injil_help_hash, see injil_help_stamp_page()), or the
+ * request is the theme's own page writing (injil_help_populate_step(), which
+ * stamps a new page only after the gate has run). A title or slug that matches a
+ * page in inc/data/ is never enough, so a deleted starter slug grants nothing,
+ * and a remote request (XML-RPC, REST without a cookie session, WP-CLI) is exempt
+ * only through the hash.
  *
- * @param int    $post_id Post ID, 0 for a new post.
- * @param string $title   Title.
- * @param string $slug    Slug.
+ * @param int $post_id Post ID, 0 for a new post.
  * @return bool
  */
-function injil_help_sec_is_seeded( $post_id, $title = '', $slug = '' ) {
+function injil_help_sec_is_seeded( $post_id ) {
 	if ( $post_id && '' !== (string) get_post_meta( $post_id, INJIL_HELP_HASH_META, true ) ) {
 		return true;
 	}
-	static $index = null;
-	if ( null === $index ) {
-		$index = array();
-		$pages = function_exists( 'injil_help_starter_pages' ) ? injil_help_starter_pages() : array();
-		foreach ( $pages as $def ) {
-			if ( ! empty( $def['path'] ) && isset( $def['title'] ) ) {
-				$index[ $def['title'] . '|' . strtolower( basename( (string) $def['path'] ) ) ] = true;
-			}
-		}
+	if ( ! injil_help_sec_seeding() ) {
+		return false;
 	}
-	return isset( $index[ $title . '|' . strtolower( rawurldecode( (string) $slug ) ) ] );
+	if ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) {
+		return false;
+	}
+	if ( defined( 'REST_REQUEST' ) && REST_REQUEST && true !== ( isset( $GLOBALS['wp_rest_auth_cookie'] ) ? $GLOBALS['wp_rest_auth_cookie'] : null ) ) {
+		return false;
+	}
+	return true;
 }
 
 /**
@@ -556,8 +605,9 @@ function injil_help_sec_types() {
 }
 
 /**
- * Hold suspected spam: any post going public whose title, slug or content
- * scores as gambling spam is saved as Pending instead.
+ * Hold suspected spam: any post going public (publish or future) whose title,
+ * slug or content scores as gambling spam, or that comes from outside the
+ * editor (XML-RPC, REST without a cookie session, WP-CLI), is saved as Pending.
  *
  * @param array $data    Sanitised post data.
  * @param array $postarr Raw post data.
@@ -567,11 +617,12 @@ function injil_help_sec_gate( $data, $postarr ) {
 	if ( ! injil_help_sec_on( 'spam_gate' ) || ! in_array( $data['post_type'], injil_help_sec_types(), true ) ) {
 		return $data;
 	}
-	$public = in_array( $data['post_status'], array( 'publish', 'future', 'private' ), true );
+	// Private posts are not public: they are logged when flagged, never changed to Pending.
+	$public = in_array( $data['post_status'], array( 'publish', 'future' ), true );
 	$id     = isset( $postarr['ID'] ) ? (int) $postarr['ID'] : 0;
 	$title  = wp_unslash( $data['post_title'] );
 	$slug   = $data['post_name'];
-	if ( injil_help_sec_is_seeded( $id, $title, $slug ) ) {
+	if ( injil_help_sec_is_seeded( $id ) ) {
 		return $data;
 	}
 	$verdict = injil_help_spam_score( $title, $slug, wp_unslash( $data['post_content'] ) );
@@ -587,7 +638,7 @@ function injil_help_sec_gate( $data, $postarr ) {
 		$data['post_status'] = 'pending';
 	}
 	$GLOBALS['injil_help_sec_held'] = array(
-		'event'   => $public ? 'held' : 'flagged-draft',
+		'event'   => $public ? 'held' : ( 'private' === $data['post_status'] ? 'flagged-private' : 'flagged-draft' ),
 		'title'   => $title,
 		'reasons' => $verdict['reasons'],
 	);
@@ -641,7 +692,7 @@ function injil_help_sec_path( $url ) {
 function injil_help_sec_remember_gone( $post ) {
 	$gone = get_option( INJIL_HELP_SEC_GONE, array() );
 	$gone = is_array( $gone ) ? $gone : array();
-	foreach ( array( get_permalink( $post ), home_url( '/?p=' . $post->ID ) ) as $url ) {
+	foreach ( array( get_permalink( $post ) ) as $url ) {
 		$path = injil_help_sec_path( $url );
 		if ( '' !== $path ) {
 			$gone[ $path ] = (int) $post->ID;
@@ -650,6 +701,8 @@ function injil_help_sec_remember_gone( $post ) {
 	if ( $post->post_name ) {
 		$gone[ strtolower( rawurldecode( $post->post_name ) ) ] = (int) $post->ID;
 	}
+	// The query permalink, /?p=ID, has no path: keep it under its own key.
+	$gone[ '?p=' . (int) $post->ID ] = (int) $post->ID;
 	update_option( INJIL_HELP_SEC_GONE, array_slice( $gone, -INJIL_HELP_SEC_GONE_MAX, null, true ), false );
 }
 
@@ -669,7 +722,19 @@ function injil_help_sec_send_gone() {
 	$uri  = isset( $_SERVER['REQUEST_URI'] ) ? esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
 	$path = injil_help_sec_path( $uri );
 	$last = basename( $path );
-	if ( isset( $gone[ $path ] ) || ( '' !== $last && isset( $gone[ $last ] ) && false === strpos( $path, '/' ) ) ) {
+	$query = array();
+	wp_parse_str( (string) wp_parse_url( $uri, PHP_URL_QUERY ), $query );
+	$qid   = 0;
+	foreach ( array( 'p', 'page_id' ) as $var ) {
+		if ( ! $qid && ! empty( $query[ $var ] ) ) {
+			$qid = absint( $query[ $var ] );
+		}
+	}
+	$hit = $qid && isset( $gone[ '?p=' . $qid ] );
+	if ( '' !== $path && ( isset( $gone[ $path ] ) || ( '' !== $last && isset( $gone[ $last ] ) && false === strpos( $path, '/' ) ) ) ) {
+		$hit = true;
+	}
+	if ( $hit ) {
 		status_header( 410 );
 		nocache_headers();
 		header( 'X-Robots-Tag: noindex', true );
@@ -850,7 +915,7 @@ function injil_help_sec_ajax_scan() {
 	);
 	$rows = array();
 	foreach ( $query->posts as $post ) {
-		if ( injil_help_sec_is_seeded( $post->ID, $post->post_title, $post->post_name ) ) {
+		if ( injil_help_sec_is_seeded( $post->ID ) ) {
 			continue;
 		}
 		$verdict = injil_help_spam_score( $post->post_title, $post->post_name, $post->post_content );
@@ -895,7 +960,7 @@ function injil_help_sec_ajax_trash() {
 	$skipped = array();
 	foreach ( array_filter( $ids ) as $id ) {
 		$post = get_post( $id );
-		if ( ! $post || ! in_array( $post->post_type, injil_help_sec_types(), true ) || 'trash' === $post->post_status || ! current_user_can( 'delete_post', $id ) || injil_help_sec_is_seeded( $id, $post->post_title, $post->post_name ) ) {
+		if ( ! $post || ! in_array( $post->post_type, injil_help_sec_types(), true ) || 'trash' === $post->post_status || ! current_user_can( 'delete_post', $id ) || injil_help_sec_is_seeded( $id ) ) {
 			$skipped[] = $id;
 			continue;
 		}
@@ -1160,12 +1225,6 @@ function injil_help_sec_render_tools() {
 	if ( ! current_user_can( 'manage_options' ) ) {
 		return;
 	}
-	$format = get_option( 'date_format' ) . ' ' . get_option( 'time_format' );
-	$admins = injil_help_sec_admin_rows();
-	$total  = 0;
-	foreach ( $admins as $a ) {
-		$total += count( $a['apps'] );
-	}
 	?>
 	<section class="ih-panel ih-sec" id="ih-security-tools" aria-label="<?php esc_attr_e( 'Security tools and reports', 'injil-help' ); ?>" hidden>
 		<?php injil_help_sec_notice(); ?>
@@ -1203,6 +1262,40 @@ function injil_help_sec_render_tools() {
 			?>
 		</p>
 
+		<div id="ih-sec-reports" aria-busy="true">
+			<p class="description"><?php esc_html_e( 'Loading the reports…', 'injil-help' ); ?></p>
+		</div>
+	</section>
+	<?php
+}
+
+/**
+ * AJAX: the reports of the Security tab. They query users, posts, terms and the
+ * counts, so they are built only when the tab is opened, not on every load of
+ * Theme Options (which renders all its tabs at once).
+ */
+function injil_help_sec_ajax_reports() {
+	check_ajax_referer( 'injil_help_sec_ajax', 'nonce' );
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_send_json_error( array( 'message' => __( 'You do not have permission to do that.', 'injil-help' ) ), 403 );
+	}
+	ob_start();
+	injil_help_sec_render_reports();
+	wp_send_json_success( array( 'html' => ob_get_clean() ) );
+}
+add_action( 'wp_ajax_injil_help_sec_reports', 'injil_help_sec_ajax_reports' );
+
+/**
+ * The reports: spam categories, passwords and sessions, attacks, activity and the log.
+ */
+function injil_help_sec_render_reports() {
+	$format = get_option( 'date_format' ) . ' ' . get_option( 'time_format' );
+	$admins = injil_help_sec_admin_rows();
+	$total  = 0;
+	foreach ( $admins as $a ) {
+		$total += count( $a['apps'] );
+	}
+	?>
 		<h2><?php esc_html_e( 'Spam categories', 'injil-help' ); ?></h2>
 		<?php $cats = injil_help_sec_spam_categories(); ?>
 		<?php if ( $cats ) : ?>
@@ -1288,8 +1381,7 @@ function injil_help_sec_render_tools() {
 		<h3><?php esc_html_e( 'Accounts being guessed, last 24 hours', 'injil-help' ); ?></h3>
 		<p class="description"><?php esc_html_e( 'Attackers change address on every try, so failures are counted by account name. An account of yours in this list should get a new, long password, and ideally a new name that is not the site name.', 'injil-help' ); ?></p>
 		<?php
-		$failed = get_option( INJIL_HELP_SEC_FAILED, array() );
-		$failed = is_array( $failed ) ? $failed : array();
+		$failed = injil_help_sec_failed_recent();
 		uasort(
 			$failed,
 			function ( $x, $y ) {
@@ -1405,6 +1497,5 @@ function injil_help_sec_render_tools() {
 		<?php else : ?>
 			<p class="description"><?php esc_html_e( 'Nothing logged yet.', 'injil-help' ); ?></p>
 		<?php endif; ?>
-	</section>
 	<?php
 }

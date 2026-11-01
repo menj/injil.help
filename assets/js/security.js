@@ -16,12 +16,26 @@
 		return;
 	}
 
-	// The tools card sits outside the options form; show it with the tab.
+	var reports = document.getElementById( 'ih-sec-reports' );
+	var reportsLoaded = false;
+
+	// The tools card sits outside the options form; show it with the tab, and
+	// fetch the reports the first time the tab is shown.
 	function sync() {
 		tools.hidden = panel.hidden;
+		if ( ! panel.hidden && reports && ! reportsLoaded ) {
+			reportsLoaded = true;
+			post( 'injil_help_sec_reports', {} )
+				.then( function ( data ) {
+					reports.innerHTML = data.html;
+					reports.removeAttribute( 'aria-busy' );
+				} )
+				.catch( function ( err ) {
+					reportsLoaded = false;
+					reports.textContent = err.message;
+				} );
+		}
 	}
-	sync();
-	new MutationObserver( sync ).observe( panel, { attributes: true, attributeFilter: [ 'hidden' ] } );
 
 	function format( text ) {
 		var args = Array.prototype.slice.call( arguments, 1 );
@@ -56,6 +70,9 @@
 			} );
 	}
 
+	sync();
+	new MutationObserver( sync ).observe( panel, { attributes: true, attributeFilter: [ 'hidden' ] } );
+
 	var scanBtn = document.getElementById( 'ih-sec-scan' );
 	var trashBtn = document.getElementById( 'ih-sec-trash' );
 	var status = document.getElementById( 'ih-sec-status' );
@@ -67,7 +84,15 @@
 		return tbody ? Array.prototype.slice.call( tbody.querySelectorAll( 'input[type="checkbox"]' ) ) : [];
 	}
 
+	// True while a scan or a move to the trash runs: the trash button stays off
+	// and checkbox changes cannot turn it back on.
+	var busy = false;
+
 	function refresh() {
+		if ( busy ) {
+			trashBtn.disabled = true;
+			return;
+		}
 		var picked = boxes().filter( function ( b ) {
 			return b.checked;
 		} );
@@ -135,6 +160,7 @@
 			table.hidden = true;
 			scanBtn.disabled = true;
 			trashBtn.disabled = true;
+			busy = true;
 
 			function step( offset ) {
 				post( 'injil_help_sec_scan', { offset: offset } )
@@ -147,6 +173,7 @@
 						if ( data.done ) {
 							status.textContent = found ? format( i18n.done, data.next, found ) : i18n.none;
 							scanBtn.disabled = false;
+							busy = false;
 							refresh();
 							return;
 						}
@@ -156,6 +183,8 @@
 					.catch( function ( err ) {
 						status.textContent = err.message;
 						scanBtn.disabled = false;
+						busy = false;
+						refresh();
 					} );
 			}
 			step( 0 );
@@ -191,12 +220,14 @@
 			var skipped = 0;
 			trashBtn.disabled = true;
 			scanBtn.disabled = true;
+			busy = true;
 
 			function step() {
 				var chunk = ids.splice( 0, 100 );
 				if ( ! chunk.length ) {
 					status.textContent = format( i18n.trashed, moved, skipped );
 					scanBtn.disabled = false;
+					busy = false;
 					refresh();
 					return;
 				}
@@ -216,6 +247,7 @@
 					.catch( function ( err ) {
 						status.textContent = err.message;
 						scanBtn.disabled = false;
+						busy = false;
 						refresh();
 					} );
 			}
@@ -224,11 +256,11 @@
 	}
 
 	// Confirm the admin-post buttons (revoke, log out, delete categories, clear log).
-	Array.prototype.forEach.call( tools.querySelectorAll( 'form[data-ih-confirm]' ), function ( form ) {
-		form.addEventListener( 'submit', function ( e ) {
-			if ( ! window.confirm( form.getAttribute( 'data-ih-confirm' ) ) ) {
-				e.preventDefault();
-			}
-		} );
+	// Delegated, so the forms in the reports loaded later are covered too.
+	tools.addEventListener( 'submit', function ( e ) {
+		var form = e.target;
+		if ( form && form.hasAttribute && form.hasAttribute( 'data-ih-confirm' ) && ! window.confirm( form.getAttribute( 'data-ih-confirm' ) ) ) {
+			e.preventDefault();
+		}
 	} );
 }() );
