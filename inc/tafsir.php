@@ -103,11 +103,11 @@ function injil_help_tafsir_group_related( $slug ) {
 	$themes = array(
 		'family-of-imran'                  => array( 'quran/birth', 'quran/signs' ),
 		'neither-killed-nor-crucified'     => array( 'quran/raised' ),
-		'the-table-and-the-questioning'    => array( 'quran/table', 'quran/signs' ),
+		'table-and-questioning'    => array( 'quran/table', 'quran/signs' ),
 		'birth-of-jesus'                   => array( 'quran/birth' ),
 		'she-who-guarded-her-chastity'     => array( 'quran/birth' ),
 		'refuge-on-high-ground'            => array( 'quran/birth' ),
-		'son-of-mary-as-an-example'        => array( 'quran/servant' ),
+		'son-of-mary-as-example'        => array( 'quran/servant' ),
 		'compassion-mercy-and-monasticism' => array( 'quran/servant' ),
 		'good-news-of-ahmad'               => array( 'quran/ahmad' ),
 	);

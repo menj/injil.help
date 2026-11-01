@@ -12,3 +12,6 @@ SSOT.md export-ignore
 CHANGELOG.md export-ignore
 UPGRADING.md export-ignore
 tests/ export-ignore
+CLAUDE.md export-ignore
+FARUQI.md export-ignore
+.claude export-ignore

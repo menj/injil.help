@@ -90,5 +90,20 @@
     },
     "related": {
         "label": "Read next"
+    },
+    "markup": {
+        "consensus": "Scholarly consensus",
+        "minority": "Minority view",
+        "islamic": "Islamic position",
+        "agree": "Agrees",
+        "beyond": "Beyond the measure",
+        "unclear": "Unclear",
+        "conflict": "Conflicts",
+        "notneeded": "Not needed",
+        "notes_heading": "Notes",
+        "note_back": "Back to the text"
+    },
+    "site": {
+        "tagline": "The Islamic Dilemma, answered"
     }
 }

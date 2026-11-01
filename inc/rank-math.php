@@ -1,8 +1,10 @@
 <?php
 /**
- * Rank Math SEO. When the plugin is active the theme hands it the head (title, meta
- * description, canonical, robots, Open Graph, the sitemap) and works inside it instead of
- * beside it:
+ * Rank Math SEO. When the plugin is active the theme hands it the head (meta description,
+ * canonical, robots, Open Graph, the sitemap) and works inside it instead of beside it. The
+ * title is the exception: inc/seo.php answers rank_math/frontend/title with the site's own
+ * "page part | site name" title, under 60 characters.
+ *
  *
  *   - breadcrumbs: the theme declares rank-math-breadcrumbs support and, while Rank Math's
  *     breadcrumbs are on, prints Rank Math's own trail in the theme's breadcrumb row, so the

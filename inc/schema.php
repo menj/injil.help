@@ -323,6 +323,9 @@ function injil_help_collect_images( $html ) {
 			$node['license']         = 'https://creativecommons.org/publicdomain/zero/1.0/';
 			$node['copyrightNotice'] = 'CC0';
 		}
+		if ( false !== stripos( $caption, 'Pexels License' ) ) {
+			$node['license'] = 'https://www.pexels.com/license/';
+		}
 		if ( preg_match( '#Photo: ([^.,]+)#', $caption, $ph ) ) {
 			$node['creator']         = array(
 				'@type' => 'Person',
@@ -378,7 +381,7 @@ function injil_help_collect_citations( $html ) {
 			$cite['@type'] = 'ScholarlyArticle';
 			$cite['name']  = trim( $art[2] );
 			$author        = trim( $art[1], " ,;:\u{2019}" );
-			$after         = substr( $li, (int) mb_strpos( $li, '”' ) );
+			$after         = substr( $li, (int) strpos( $li, '”' ) ); // a byte offset, as substr() expects
 			if ( preg_match( '#<em>(.*?)</em>#s', $after, $j ) ) {
 				$cite['isPartOf'] = array( '@type' => 'Periodical', 'name' => html_entity_decode( trim( wp_strip_all_tags( $j[1] ) ), ENT_QUOTES ) );
 			}

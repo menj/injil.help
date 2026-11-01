@@ -2,11 +2,9 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
-## 3.9.1
+## 3.12.0
 
 - Refused XML-RPC requests and other security counters are now one atomic upsert on a small daily row, folded into the thirty-day counts once a day, instead of a rewrite of the whole counts option on every request.
-
-## 3.9.0
 
 The protection built for the Abrahamic theme (2.87.0) after the October 2026 attack on abrahamic-religions.com, ported here: password guessing through XML-RPC from 701 rotating addresses under forged "Jetpack by WordPress.com" user agents, a correct password found, then a casino spam post every 18 to 20 minutes through wp.newPost under the owner's own account.
 
@@ -18,12 +16,86 @@ The protection built for the Abrahamic theme (2.87.0) after the October 2026 att
 - `define( 'INJIL_HELP_SECURITY_LOCK', false );` in wp-config.php turns the XML-RPC, application-password and REST locks off without changing the options.
 - `tests/security-detector-test.php` scores every page definition, pattern and string in `inc/data/` (15,961 items) at zero and flags all 52 attack samples. The bare word "bet" (the Hebrew letter), "slot", "spins" and "odds" no longer count, so Bethlehem, Bethel, the alphabet, "Mary spins purple thread" and the Bonus pages read clean.
 
-## 3.8.3
-
 - Every URL the site had before stays alive: a former path redirects to the present word-based URL with a 301. The map comes from the `former` lists the pages already carry, so it covers the 27 numbered gospel sections, the nine commentary groups with verse numbers in their slugs, every numbered commentary part and /about-the-author/. WordPress copies of these (/gospel-according-to-islam/1-2/, /quran/commentaries/al-imran-33-64/tabari/2-3/) and of a present path (/about-2/) redirect too, and so does any address below a former path.
 - The update now clears copies in every case. Before, a `-2` copy survived when the page itself had already moved. Now unedited copies go to the bin and edited ones become drafts.
 - The redirect for /about-the-author/ is folded into the general one.
 - Scan of all 176 page paths: none carries a verse number, a numeric prefix or a `-N` suffix.
+
+## 3.11.1
+
+Fixes from a review of the 3.9.0 to 3.11.0 code and an audit of all 181 pages against SSOT.md.
+
+- The redirect from a moved page runs at `template_redirect` priority 9, before WordPress's `redirect_canonical()` guesses at a 404, so the old address always goes where `slug-history.json` says.
+- The structured data took the journal of a quoted article from a point found with `mb_strpos()`, a character count, and cut there with `substr()`, which counts bytes. With curly quotes and transliterated names before it, the cut fell early, and a title with an italic word in it would have given that word as the journal. It now uses `strpos()`. No citation on the site was affected yet: 0 of 151 change.
+- Theme Options, SEO: the home and pillar title fields say how many characters fit beside " | " and the site name, and that a longer title is cut.
+- A comment in `functions.php` now says every pattern is JSON.
+- `injil_help_title_room()` gives the characters left beside " | " and the site name, never below 0, and both the title tag and the Theme Options hint use it; a site name over 56 characters showed a negative number in the hint.
+- Leave the gospel of Paul of Tarsus said "Paul’s formula" once; it now says "the formula of Paul of Tarsus", as SSOT.md asks. The rest of the audit found no breach: every page has inbound links, every key in images.json, seo-titles.json and related.json is a page, the laʿnat Allāh mark stands only in its 4 recorded places, and the em dashes left are in reproduced texts (The Clear Quran on /quran/passages/ and Shafaat's Introduction).
+
+## 3.11.0
+
+URL slugs drop the articles "the", "a" and "an": 32 of the 181 pages move. Every old address answers with a 301 to the new one.
+
+- The pillar page moves from /the-islamic-dilemma/ to /islamic-dilemma/, and its 4 child pages with it; What is the Injīl? becomes /islamic-dilemma/what-is-injil/.
+- /paul/leave-the-gospel-of-paul/ becomes /paul/leave-gospel-of-paul/.
+- 2 commentary groups and their 16 work pages move: /quran/commentaries/table-and-questioning/ and /quran/commentaries/son-of-mary-as-example/.
+- 8 sections of The Gospel According to Islam move, among them /gospel-according-to-islam/john-baptist/ and /gospel-according-to-islam/hour-and-promise-of-counsellor/.
+- New data file `inc/data/slug-history.json` lists each old path with its new one. `injil_help_starter_pages()` adds the old paths to each page's `former`, so the update renames the existing pages in place (same IDs, edits and featured images), and `injil_help_redirect_moved_page()` sends a request for an old path to the new one with a 301. It replaces the single redirect for /about-the-author/, which is now one line of the same file. While the update is still moving pages, a renamed parent can stand at its new path before its renamed child does; until the child moves, the old address is sent with a 302 to wherever the page stands, and the 301 takes over once the rename is done.
+- Every internal link, "Read next" row, image key, front-page pattern, header and footer link, and this site's 4 entries in `network-links.json` use the new paths. `INJIL_HELP_PILLAR_SLUG` is `islamic-dilemma`.
+- SSOT.md: no slug contains "the", "a" or "an".
+
+Title tags.
+
+- Every title tag is "page part | site name", under 60 characters. With the site name The Rightly-Guided Injīl the page part has 32 characters. 132 of the 181 page titles are longer; each has a short title in the new `inc/data/seo-titles.json` ("What is the Injil (Injeel)?", "Questions in the temple", "al-Ṭabarī on 3:33-64, part 2"). The page's own heading is unchanged.
+- `injil_help_document_title()` builds the title for every request, the front page, search and 404 included, and fits anything still too long at a colon or between words. It also answers the title filters of Rank Math, Yoast and SEOPress, so their titles follow the same rule.
+- The default pillar title is "The Islamic Dilemma explained". All 181 titles are unique; the longest is 59 characters.
+- SSOT.md and CLAUDE.md state the rule.
+
+Images from Pexels.
+
+- What is the Injīl?, the Torah in Islam, Why Islam?, Who you are as a servant of God and Leave the gospel of Paul of Tarsus each gain an image, chosen to keep the site's rule that its only images are texts: a medieval Latin manuscript, a Sefer Torah, a Qur'an manuscript open at al-Anbiyāʾ 21:105-112, an illuminated Arabic manuscript, and a Greek inscription in marble.
+- `inc/images.php` takes an image from Pexels as well as Commons: an entry with `"source": "pexels"` gives the photo's `url` and `page`, the plate loads the photo from images.pexels.com and links its Pexels page, and the featured image is sideloaded from the same URL. `inc/schema.php` gives such an image the Pexels License URL; the "Photo: name" credit names its creator.
+- SSOT.md, the credits page and the privacy policy name Pexels. Pixabay is not used, because its licence requires a copy on the site's own server and the plates load from the source.
+
+Every content seed is JSON.
+
+- The 15 PHP patterns, the 8 front-page sections and the 7 building blocks for the editor, are now JSON in `inc/data/patterns/`, with the same slugs and the same output. The `patterns/` folder is gone. functions.php already registers every JSON pattern there.
+- The words the markup writes into pages (Scholarly consensus, Minority view, Islamic position, the 5 status badges, "Notes" and "Back to the text") and the tagline set on activation move from PHP strings to `text.json`, under `markup` and `site`. Every page renders byte for byte as before.
+
+
+## 3.10.0
+
+Three pages that speak to the Christian reader directly, in answer to the "Why Jesus?" and "identity in Christ" pages of the Islamic Dilemma website. Each is between 1,600 and 2,500 words.
+
+- /why-islam/, "Why Islam? The message in one page": the one God, shirk as the sin not forgiven to one who dies on it (4:48), the Messiah's own words against the Trinity (Mark 10:18; 13:32; John 17:3), forgiveness before the cross (Mark 2:5; Matthew 9:13), the way back (5:74; 39:53), the testimony with the words on ʿĪsā from al-Bukhārī 3435, what changes in daily life, what the Qur'an says of Christians, and 6 FAQs.
+- /paul/leave-the-gospel-of-paul/, "Leave the gospel of Paul of Tarsus": where his gospel came from, the 4 places it parts from the words of Jesus, the law, the death, the charge in Jerusalem (Acts 21:20-24), the disciples and James, his own method (1 Corinthians 9:20-22), what leaving him means in practice, and 5 FAQs.
+- /servant-of-god/, "Who you are as a servant of God": what the Qur'an says the believer is, item by item, from 51:56 to 84:6, with steps to take tonight and 4 FAQs.
+- The laʿnat Allāh mark after Paul of Tarsus, by the owner's decision, once on Leave the gospel of Paul of Tarsus and once on Why Islam?; SSOT.md records the exception.
+- Linked from /quran/servant/, /paul/false-apostles/ and /paul/paul-against-jesus/; related.json gives each a "Read next" row. 181 pages.
+- The background page job starts again from the first page when it was begun under another version. A job left unfinished by one update used to resume at its old offset in the new, longer page list, skip the pages added before that offset, and still record the new version as done.
+
+The arguments of the Islamic Dilemma website (islamicdilemma.com) answered. The site is named; the person behind it is not. Its devotional pages are left alone.
+
+- /resources/responses/ gains a fifth section with 11 claims and replies. Among them: "where is this separate book?" (Mark 1:14-15, where Jesus preaches the gospel before any of the four books exists); the "book in the hands of Christians in 700" (the Qur'an was revealed between 610 and 632); 29:46 and 5:48 read in full; how and when the text changed, from the Qur'an's 4 verbs and the bracketed passages in Nestle-Aland; and the claim that one lie weighs the same as murder, answered from John 19:11, Luke 12:47-48 and Luke 18:13-14. The page notes that the website's home page and its own Injil page give 2 different definitions of the Injil.
+- The pillar FAQ gains 3 questions: 29:46, how revealed guidance could be altered (5:44, 15:9, Jeremiah 8:8), and the ways the Qur'an says it was altered.
+- What is the Injīl? adds Mark 1:14-15 to "Is the Injīl the Bible?", and sets the seed of 48:29 beside Mark 4:26-29.
+- The excerpt of the responses page, the Resources index and the source library count the website with the 4 articles.
+
+## 3.9.0
+
+Keyword work from the October 2026 keyword lists (the editorially refined list of 3,259 keywords and the superlist of 4,226). Each search intent has one owner page.
+
+- New page /the-islamic-dilemma/what-is-the-injil/ ("What is the Injīl? The meaning of Injil and Injeel in Islam") owns "injil", "injeel", "what is the injil", "injeel meaning", "injil in English", "is the injil the bible" and "koran vs bible". It covers the meaning and spellings of the word, the 12 verses that name it, the Bible and the New Testament, the language Jesus spoke, how the Injīl was revealed, what happened to it, the Gospel of Barnabas, and the Qur'an and the Bible compared, with 10 FAQs.
+- New page /the-islamic-dilemma/torah-in-islam/ ("The Torah in Islam: the Tawrāt and the Qur'an") owns the Torah keywords of the superlist: "islam torah", "taurat book", "quran vs torah", "torah in the quran", "do muslims read the torah". The 18 verses, the Pentateuch, a comparison table marked agrees, conflicts and unclear, and 7 FAQs.
+- /quran/ hub: a new excerpt ("What does the Qur'an say about Jesus?") and 5 FAQs: the Muslim name for Jesus, how many times he is mentioned, which verses are about him, whether the Qur'an calls him a Muslim, and what it says about Jews and Christians (5:82 among them).
+- /quran/servant/ gains 2 FAQs: "Does the Qur'an say Jesus is God?" and "Does the Qur'an call Jesus the word of God?".
+- The glossary entries for Injīl and Tawrāt give the English spellings and link the new pages; the pillar FAQ and the /quran/ hub link What is the Injīl?; related.json gives both pages a "Read next" row.
+- Home meta description names the Injil (Injeel) and what the Qur'an says about Jesus.
+- The two parts of the Islamic Dilemma are its two claims throughout. The front-page diagram reads "Claim 1" and "Claim 2", "Both claims rest on one assumption"; the pillar and Pfander pages say "both claims" and "two-part form"; the diagram's CSS classes are now `ih-claim*`. The al-Jalālayn footnote on 3:50 glosses <em>ṣīṣiya</em> as a spur, spike or hard protrusion. SSOT.md bans the old term.
+- The writing rules in `.claude/skills/anti-ai-writing-style/SKILL.md` are now the house style for every piece of English prose (SSOT.md, CLAUDE.md). Both stay out of the release archive.
+- Facts checked before release: the counts of ʿĪsā (25), ibn Maryam (23), al-Masīḥ (11), al-Injīl (12 verses) and al-Tawrāh (18) against the Tanzil simple-clean text; the Ramaḍān report (Aḥmad, <em>Musnad</em> 16984, graded <em>ḥasan</em> by al-Albānī, its chain faulted by others); the Gospel of Barnabas jubilee passage; the 2012 Ankara manuscript reports; Rashi on Deuteronomy 18:15.
+- Review fixes: the Torah page marks the seventh day as unclear, with Exodus 31:17 beside Genesis 2:2 and 50:38; the readme's install steps say the pages are written in 20-second steps over the first admin screen loads; the `\bhorn` check in SSOT.md and CLAUDE.md excludes the two files that state the rule; the style skill's audit script splits sentences on `?` and `!` and catches sentence-initial triads, and its one exception to the banned list is stated plainly.
+- 178 pages. The version bump makes the update create the 2 new pages and rewrite the changed ones on existing sites unless the owner edited them.
 
 ## 3.8.2
 
@@ -164,7 +236,7 @@ Keyword ownership from the October 2026 keyword map: each primary keyword has on
 ## 3.5.1
 
 - Images from Wikimedia Commons on twenty-eight article pages (the five gospels and the Thomas pages, the discrepancy tables, the six Paul of Tarsus pages, the two Islamic Dilemma pages and the measure, the Qur'an theme pages, the source library and the objections): each a public-domain or CC0 manuscript page or painting chosen for the page, set as a plate near the top with its caption, credit and a link to its Commons page. The same image is sideloaded into the Media Library and set as the page's featured image, a few pages per admin screen load, so the Open Graph card and the structured data carry it. The map is inc/data/images.json (file name, alt, caption, credit), read by inc/images.php; the pages still without one are the nativity and crucifixion tables, the good news of Aḥmad, the borrowing page and the composition page.
-- The dilemma section on the front page is drawn as a diagram: the two horns side by side with "or" between them, a labelled rule joining them to the assumption they share, which now spans the width beneath them and says in a line why it fails. The cards used to sit in an open-ended grid that left a fourth empty column on wide screens.
+- The dilemma section on the front page is drawn as a diagram: the two claims side by side with "or" between them, a labelled rule joining them to the assumption they share, which now spans the width beneath them and says in a line why it fails. The cards used to sit in an open-ended grid that left a fourth empty column on wide screens.
 - Fix: the entry cards on the home sections and the index pages no longer stretch to the height of the section head beside them (the grid's rows were filling the stretched container), so the coloured boxes fit their text again.
 - Prose pass against the house writing rules: the composition page's departures list is plain bullets and its "not a translation, not a harmony, not a life" run is positive statements; "the measure is its rule" replaces "not its rule"; the pillar page's "reads them as free-standing statements" sentence, "What is worth noting", two "in order to" and "Nobody knows" rewritten.
 
