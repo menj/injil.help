@@ -4,12 +4,14 @@ All notable changes to The Injil theme. The `Changelog` section of `readme.txt` 
 
 ## 3.11.1
 
-Fixes from a review of the 3.9.0 to 3.11.0 code. No page text changes.
+Fixes from a review of the 3.9.0 to 3.11.0 code and an audit of all 181 pages against SSOT.md.
 
 - The redirect from a moved page runs at `template_redirect` priority 9, before WordPress's `redirect_canonical()` guesses at a 404, so the old address always goes where `slug-history.json` says.
 - The structured data took the journal of a quoted article from a point found with `mb_strpos()`, a character count, and cut there with `substr()`, which counts bytes. With curly quotes and transliterated names before it, the cut fell early, and a title with an italic word in it would have given that word as the journal. It now uses `strpos()`. No citation on the site was affected yet: 0 of 151 change.
 - Theme Options, SEO: the home and pillar title fields say how many characters fit beside " | " and the site name, and that a longer title is cut.
 - A comment in `functions.php` now says every pattern is JSON.
+- `injil_help_title_room()` gives the characters left beside " | " and the site name, never below 0, and both the title tag and the Theme Options hint use it; a site name over 56 characters showed a negative number in the hint.
+- Leave the gospel of Paul of Tarsus said "Paul’s formula" once; it now says "the formula of Paul of Tarsus", as SSOT.md asks. The rest of the audit found no breach: every page has inbound links, every key in images.json, seo-titles.json and related.json is a page, the laʿnat Allāh mark stands only in its 4 recorded places, and the em dashes left are in reproduced texts (The Clear Quran on /quran/passages/ and Shafaat's Introduction).
 
 ## 3.11.0
 

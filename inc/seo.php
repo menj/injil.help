@@ -97,10 +97,20 @@ function injil_help_title_part() {
 	return '';
 }
 
+/** The site name as the title tag carries it, fitted to the whole length on its own. */
+function injil_help_title_site() {
+	return injil_help_title_fit( wp_strip_all_tags( get_bloginfo( 'name' ) ), INJIL_HELP_TITLE_MAX );
+}
+
+/** The characters left for the page part beside " | " and the site name; never below 0. */
+function injil_help_title_room() {
+	return max( 0, INJIL_HELP_TITLE_MAX - mb_strlen( ' | ' . injil_help_title_site() ) );
+}
+
 /** The whole title: "<page part> | <site name>", under 60 characters. */
 function injil_help_document_title() {
-	$site = injil_help_title_fit( wp_strip_all_tags( get_bloginfo( 'name' ) ), INJIL_HELP_TITLE_MAX );
-	$part = injil_help_title_fit( injil_help_title_part(), INJIL_HELP_TITLE_MAX - mb_strlen( ' | ' . $site ) );
+	$site = injil_help_title_site();
+	$part = injil_help_title_fit( injil_help_title_part(), injil_help_title_room() );
 	return '' !== $part ? $part . ' | ' . $site : $site;
 }
 
