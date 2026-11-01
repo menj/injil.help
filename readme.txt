@@ -84,6 +84,12 @@ This file is the user-facing manual that WordPress and Git Updater read. The rep
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add the entry to CHANGELOG.md and to the Changelog section here, note anything an existing site must know under "Updating an existing site" in UPGRADING.md, merge to main, and tag the commit with the same number (for example v3.4.0). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 3.13.1 =
+* Security fixes: case-insensitive spam patterns, the gate exempts only pages that carry the theme's hash, private posts are left private, WP-CLI counts as outside the editor, 410 at /?p=ID, safer daily tallies, a 24-hour window for failed logins, reports load with the Security tab. The former-URL 301 goes only to published pages, and unhashed -N copies become drafts.
+= 3.13.0 =
+* Refused XML-RPC requests and other security counters are now one atomic upsert on a small daily row, folded into the thirty-day counts once a day, instead of a rewrite of the whole counts option on every request.
+* Security tab: XML-RPC off, application passwords off, REST writes only from a logged-in browser, a spam gate that holds gambling spam and remote publishing as Pending, a spam scan with move to Trash, 410 Gone for removed spam, revoke-all and log-out-all buttons, attack reports and a security log. INJIL_HELP_SECURITY_LOCK set to false in wp-config.php turns the locks off.
+* Every old URL (numbered gospel sections, commentary groups with verse numbers, numbered commentary parts, their -2/-3 copies, /about-the-author/) redirects to the present URL with a 301. Leftover -2 copies are binned, or made drafts when edited.
 = 3.12.0 =
 * The 404 page in the site's dress: the gloss of Q 1:6, a large 404, a search field and the six parts of the website.
 * The log-in screen in the site's own dress: brandmark, Kagnue title, the gloss of Q 5:47, the star lattice and the site's colours and typefaces.

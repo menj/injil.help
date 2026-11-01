@@ -223,7 +223,9 @@ function injil_help_related_blocks( $def, $content = '' ) {
  * /quran/commentaries/birth-of-jesus/tabari-part-two/), as the Google SEO Starter Guide asks.
  * Versions up to 3.5 numbered the gospel sections and the commentary parts and put the verse
  * numbers in the group slugs; populate() renames those existing pages in place (see
- * injil_help_adopt_former_page()), so no page is duplicated. Paths listed in inc/data/slug-history.json are also redirected (injil_help_redirect_moved_page()).
+ * injil_help_adopt_former_page()), so no page is duplicated, and injil_help_redirect_former() sends
+ * every old URL to the new one with a 301. Paths listed in inc/data/slug-history.json are also
+ * redirected (injil_help_redirect_moved_page()).
  */
 const INJIL_HELP_RULES = '3'; // bump when the rewrite rules change; populate() flushes when the stored value differs
 
@@ -235,10 +237,7 @@ const INJIL_HELP_RULES = '3'; // bump when the rewrite rules change; populate() 
  */
 function injil_help_adopt_former_page( $def ) {
 	foreach ( (array) ( $def['former'] ?? array() ) as $old ) {
-		$page = injil_help_find_page( $old );
-		if ( ! $page ) {
-			$page = injil_help_repair_numeric_slug( $old );
-		}
+		$page = injil_help_repair_former_slug( $old );
 		if ( ! $page ) {
 			continue;
 		}
@@ -258,10 +257,22 @@ function injil_help_adopt_former_page( $def ) {
 		clean_post_cache( $page->ID );
 		$moved = injil_help_find_page( $def['path'] );
 		if ( $moved ) {
+			injil_help_clear_former_copies( $def, $moved->ID );
 			return $moved;
 		}
 	}
 	return null;
+}
+
+/**
+ * Once a page sits at its present path, no copy may stay public under a former path or under a
+ * WordPress "-2" slug of either: unedited copies are binned, edited ones are made drafts, so their
+ * text is kept and their URLs redirect.
+ */
+function injil_help_clear_former_copies( $def, $keep_id ) {
+	foreach ( array_merge( (array) ( $def['former'] ?? array() ), array( $def['path'] ) ) as $path ) {
+		injil_help_repair_former_slug( $path, (int) $keep_id );
+	}
 }
 
 /**
@@ -306,25 +317,27 @@ function injil_help_redirect_moved_page() {
 add_action( 'template_redirect', 'injil_help_redirect_moved_page', 9 ); // before redirect_canonical() guesses at a 404 (priority 10)
 
 /**
- * Versions before 3.5.1 created the numbered pages under slugs WordPress renamed ("2-2", and
- * "2-3", "2-4" from later runs that could not find them): rename the oldest copy back to the
- * numeric slug, so that injil_help_adopt_former_page() can move it on, and bin the duplicates
- * that were never edited. Returns the repaired page or null.
+ * Find the page published at $path, or at a copy WordPress renamed "{slug}-2", "{slug}-3" (versions
+ * before 3.5.1 made such copies when a slug was taken). The copy to keep is the oldest edited one,
+ * or the oldest of all when none was edited; it gets the plain slug back so that
+ * injil_help_adopt_former_page() can move it on. The other copies are binned when unedited and made
+ * drafts when edited. With $keep_id (the page already at its present path) every copy is surplus
+ * and null is returned. Returns the kept page or null.
  */
-function injil_help_repair_numeric_slug( $path ) {
+function injil_help_repair_former_slug( $path, $keep_id = 0 ) {
 	$parts = explode( '/', $path );
 	$slug  = array_pop( $parts );
-	if ( ! $parts || ! preg_match( '/^\d+$/', $slug ) ) {
+	if ( '' === $slug ) {
 		return null;
 	}
-	$parent = injil_help_find_page( implode( '/', $parts ) );
-	if ( ! $parent ) {
+	$parent = $parts ? injil_help_find_page( implode( '/', $parts ) ) : null;
+	if ( $parts && ! $parent ) {
 		return null;
 	}
 	$ids = get_posts(
 		array(
 			'post_type'        => 'page',
-			'post_parent'      => $parent->ID,
+			'post_parent'      => $parent ? $parent->ID : 0,
 			'post_status'      => 'publish',
 			'posts_per_page'   => -1,
 			'orderby'          => 'ID',
@@ -333,33 +346,113 @@ function injil_help_repair_numeric_slug( $path ) {
 			'suppress_filters' => true,
 		)
 	);
-	// The copy to keep is the oldest edited one, or the oldest of all when none was edited; unedited duplicates are binned, edited ones left alone.
 	$copies = array();
 	foreach ( $ids as $id ) {
-		if ( preg_match( '/^' . preg_quote( $slug, '/' ) . '-\d+$/', (string) get_post_field( 'post_name', $id ) ) ) {
-			$copies[ (int) $id ] = injil_help_page_is_edited( get_post( $id ) );
+		if ( (int) $id !== $keep_id && preg_match( '/^' . preg_quote( $slug, '/' ) . '(-\d+)?$/', (string) get_post_field( 'post_name', $id ) ) ) {
+			// A copy without the theme's hash was not written by the theme: treat it as edited (draft, never the bin).
+			$copies[ (int) $id ] = '' === (string) get_post_meta( $id, INJIL_HELP_HASH_META, true ) || injil_help_page_is_edited( get_post( $id ) );
 		}
 	}
 	if ( ! $copies ) {
 		return null;
 	}
-	$edited = array_keys( array_filter( $copies ) );
-	$keep   = $edited ? (int) $edited[0] : (int) array_key_first( $copies );
+	$keep = 0;
+	if ( ! $keep_id ) {
+		$edited = array_keys( array_filter( $copies ) );
+		$keep   = $edited ? (int) $edited[0] : (int) array_key_first( $copies );
+	}
 	foreach ( $copies as $id => $is_edited ) {
-		if ( $id !== $keep && ! $is_edited ) {
+		if ( $id === $keep ) {
+			continue;
+		}
+		if ( $is_edited ) {
+			wp_update_post( array( 'ID' => $id, 'post_status' => 'draft' ) );
+		} else {
 			wp_trash_post( $id );
 		}
 	}
-	wp_update_post(
-		array(
-			'ID'        => $keep,
-			'post_name' => $slug,
-		)
-	);
-	clean_post_cache( $keep );
+	if ( ! $keep ) {
+		return null;
+	}
+	if ( $slug !== get_post_field( 'post_name', $keep ) ) {
+		wp_update_post( array( 'ID' => $keep, 'post_name' => $slug ) );
+		clean_post_cache( $keep );
+	}
 	$page = get_post( $keep );
 	return $page && $slug === $page->post_name ? $page : null;
 }
+
+/** Every former path of a starter page, mapped to its present path. Cached per theme version. */
+function injil_help_former_map() {
+	$key   = 'injil_help_former_map';
+	$ver   = INJIL_HELP_VERSION;
+	$cache = get_transient( $key );
+	if ( is_array( $cache ) && ( $cache['ver'] ?? '' ) === $ver ) {
+		return $cache['map'];
+	}
+	$map = array();
+	foreach ( injil_help_starter_pages() as $def ) {
+		foreach ( (array) ( $def['former'] ?? array() ) as $old ) {
+			$map[ trim( $old, '/' ) ] = trim( $def['path'], '/' );
+		}
+	}
+	foreach ( injil_help_starter_pages() as $def ) {
+		unset( $map[ trim( $def['path'], '/' ) ] ); // a present path is never redirected
+	}
+	if ( $map ) {
+		set_transient( $key, array( 'ver' => $ver, 'map' => $map ), WEEK_IN_SECONDS );
+	}
+	return $map;
+}
+
+/**
+ * Send the URL of an earlier version to the page's present address with a 301: a former path, its
+ * WordPress copies ("/gospel-according-to-islam/1-2/", "/tabari/2-3/"), a "-2" copy of a present
+ * path, and any address under a former path ("/quran/commentaries/al-imran-33-64/tabari/6/" goes to
+ * the Tabari page of that group). Runs before WordPress reads "/2/" as page two of the parent.
+ */
+function injil_help_redirect_former() {
+	if ( is_admin() || is_preview() ) {
+		return;
+	}
+	$path = trim( (string) wp_parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ), '/' );
+	$home = trim( (string) wp_parse_url( home_url(), PHP_URL_PATH ), '/' );
+	if ( '' !== $home && 0 === strpos( $path . '/', $home . '/' ) ) {
+		$path = trim( substr( $path, strlen( $home ) ), '/' );
+	}
+	$path = strtolower( rawurldecode( $path ) );
+	if ( '' === $path ) {
+		return;
+	}
+	$page = get_page_by_path( $path, OBJECT, 'page' );
+	if ( $page && 'publish' === $page->post_status ) {
+		return;
+	}
+	$map    = injil_help_former_map();
+	$target = $map[ $path ] ?? null;
+	if ( null === $target && preg_match( '#^(.+?)-\d+$#', $path, $m ) ) {
+		$target = $map[ $m[1] ] ?? null;
+		if ( null === $target && injil_help_find_page( $m[1] ) ) {
+			$target = $m[1];
+		}
+	}
+	if ( null === $target && is_404() ) {
+		$parts = explode( '/', $path );
+		while ( count( $parts ) > 1 && null === $target ) {
+			array_pop( $parts );
+			$target = $map[ implode( '/', $parts ) ] ?? null;
+		}
+	}
+	// A 301 is cached for good, so it is only sent once the page stands at its present address. While an
+	// update is still moving pages, injil_help_redirect_moved_page() sends the visitor on with a 302.
+	$found = null === $target ? null : injil_help_find_page( $target );
+	if ( ! $found || 'publish' !== $found->post_status ) {
+		return; // a draft or private target would answer 404 to the visitor: no permanent redirect to it
+	}
+	wp_safe_redirect( home_url( '/' . $target . '/' ), 301 );
+	exit;
+}
+add_action( 'template_redirect', 'injil_help_redirect_former', 1 );
 
 function injil_help_find_page( $path ) {
 	$page = get_page_by_path( $path, OBJECT, 'page' );
@@ -405,6 +498,8 @@ function injil_help_populate_page( $order, $def, $overwrite = false, $force = fa
 	$existing = injil_help_find_page( $def['path'] );
 	if ( ! $existing ) {
 		$existing = injil_help_adopt_former_page( $def );
+	} else {
+		injil_help_clear_former_copies( $def, $existing->ID );
 	}
 	if ( $existing && ! $overwrite ) {
 		return 'unchanged';
@@ -540,6 +635,7 @@ function injil_help_populate_step( $overwrite, $force, $offset, $seconds, $tally
 	}
 	$start = microtime( true );
 	add_filter( 'wp_revisions_to_keep', '__return_zero', 99 );
+	$GLOBALS['injil_help_seeding'] = true; // the spam gate exempts the theme's own page writing (injil_help_sec_is_seeded())
 	$i = max( 0, (int) $offset );
 	while ( $i < $total ) {
 		$result = injil_help_populate_page( $i, $pages[ $i ], $overwrite, $force );
@@ -550,6 +646,7 @@ function injil_help_populate_step( $overwrite, $force, $offset, $seconds, $tally
 		}
 	}
 	remove_filter( 'wp_revisions_to_keep', '__return_zero', 99 );
+	$GLOBALS['injil_help_seeding'] = false;
 
 	$next = $i >= $total ? -1 : $i;
 	if ( -1 === $next ) {

@@ -2,6 +2,41 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.13.1
+
+Fixes to the Security tab and the starter pages.
+
+- The spam patterns carry the `i` flag, so upper-case Cyrillic is caught on hosts without mbstring.
+- The spam gate exempts a post only when it carries `_injil_help_hash`, or when the theme itself is writing its pages. A matching title or slug grants nothing, so a deleted starter slug cannot shelter a new post. XML-RPC, REST without a cookie session and WP-CLI count as outside the editor; the theme's own page writing does not.
+- Private posts stay private. Only Publish and Scheduled are held as Pending; a private post that reads as spam is logged as `flagged-private`.
+- Trashed spam answers 410 at its query address, /?p=ID, as well as at its permalink.
+- The daily tallies are folded with a delete that removes only the value read, so a late increment is kept for the next fold. The attack table holds 30 days, today included.
+- Failed logins older than 24 hours drop out of the notice and the report at once, and a count restarts when its first failure is more than a day old.
+- .htaccess is reported as written only when WordPress confirms the write.
+- The reports on the Security tab load when the tab is opened, so the other tabs of Theme Options no longer pay for their queries. The trash button stays off for the whole of a scan.
+- `tests/security-detector-test.php` fails when `inc/data/` or its page files are missing or unreadable, and checks upper-case text against the raw patterns.
+- The former-URL map is cached by `INJIL_HELP_VERSION`. Its 301 goes out only to a published page. A `-N` copy without the theme's hash is treated as edited: it becomes a draft and never goes to the bin.
+
+## 3.13.0
+
+- The former-URL redirect sends its 301 only once the page stands at its present address. While an update is still moving pages, the slug-history handler sends a 302 instead, so no browser or search engine caches a permanent redirect to an address that would still answer 404.
+- Refused XML-RPC requests and other security counters are now one atomic upsert on a small daily row, folded into the thirty-day counts once a day, instead of a rewrite of the whole counts option on every request.
+
+The protection built for the Abrahamic theme (2.87.0) after the October 2026 attack on abrahamic-religions.com, ported here: password guessing through XML-RPC from 701 rotating addresses under forged "Jetpack by WordPress.com" user agents, a correct password found, then a casino spam post every 18 to 20 minutes through wp.newPost under the owner's own account.
+
+- New `inc/security.php`, `inc/security-detector.php`, `assets/js/security.js` and `assets/css/security.css`. The application-password filter moves from `functions.php` into `inc/security.php`; its setting, `block_app_passwords`, and its default are unchanged.
+- Theme Options › Security grows from one switch to five, all on by default: Turn off XML-RPC (`block_xmlrpc`: xmlrpc.php answers 403, counted per day rather than logged per request, and on Apache a "Block xmlrpc.php" section is kept in .htaccess), Block application passwords, REST API changes only from a logged-in browser (`block_rest_writes`: a logged-in write must come from a cookie session with a valid `wp_rest` nonce; anonymous requests, reads, the block editor and Rank Math are unchanged), Hold suspected gambling spam as Pending (`spam_gate`) and 410 Gone for removed spam (`spam_gone`).
+- A password sent through XML-RPC is refused even when XML-RPC is switched back on, and an admin notice says the password is known. Failed logins are counted by account name, since the attack changed address on every try.
+- The spam gate holds as Pending any post or page that reads as gambling spam, and anything published from outside the editor. The pages the theme writes are exempt: they carry `_injil_help_hash` (see 3.13.1).
+- The Security tab carries a batch scan (100 at a time) with a move-to-Trash button (never a permanent delete), clean-up of empty spam categories on request, buttons to revoke all application passwords and log out all sessions, reports (administrators, attacks per day, accounts being guessed, posts per day, burst publishing, starter pages with gambling links) and the security log. Only administrators (`manage_options`) see or change any of it.
+- `define( 'INJIL_HELP_SECURITY_LOCK', false );` in wp-config.php turns the XML-RPC, application-password and REST locks off without changing the options.
+- `tests/security-detector-test.php` scores every page definition, pattern and string in `inc/data/` (15,961 items) at zero and flags all 52 attack samples. The bare word "bet" (the Hebrew letter), "slot", "spins" and "odds" no longer count, so Bethlehem, Bethel, the alphabet, "Mary spins purple thread" and the Bonus pages read clean.
+
+- Every URL the site had before stays alive: a former path redirects to the present word-based URL with a 301. The map comes from the `former` lists the pages already carry, so it covers the 27 numbered gospel sections, the nine commentary groups with verse numbers in their slugs, every numbered commentary part and /about-the-author/. WordPress copies of these (/gospel-according-to-islam/1-2/, /quran/commentaries/al-imran-33-64/tabari/2-3/) and of a present path (/about-2/) redirect too, and so does any address below a former path.
+- The update now clears copies in every case. Before, a `-2` copy survived when the page itself had already moved. Now unedited copies go to the bin and edited ones become drafts.
+- The redirect for /about-the-author/ is folded into the general one.
+- Scan of all 176 page paths: none carries a verse number, a numeric prefix or a `-N` suffix.
+
 ## 3.12.0
 
 The log-in screen, and structured data for every element and piece of content that fits a schema.org type.
@@ -23,6 +58,7 @@ The log-in screen, and structured data for every element and piece of content th
 - The 404 page is the site's own: a green hero with the gloss of Q 1:6, ٱهۡدِنَا ٱلصِّرَٰطَ ٱلۡمُسۡتَقِيمَ ("guide us on the straight path"), a large 404 in Kagnue, a search field, and the six parts of the website in a row-of-three grid of tinted, numbered cards. The page is the JSON pattern `inc/data/patterns/page-404.json`; `templates/404.html` only places it.
 - Checked by running the graph for all 181 pages, the front page and a 404: 183 graphs, every node typed, none of the new nodes empty, the largest graph 31 KB.
 
+## 3.11.1
 
 Fixes from a review of the 3.9.0 to 3.11.0 code and an audit of all 181 pages against SSOT.md.
 
