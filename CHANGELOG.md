@@ -2,7 +2,7 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
-## 3.12.0
+## 3.13.0
 
 - The former-URL redirect sends its 301 only once the page stands at its present address. While an update is still moving pages, the slug-history handler sends a 302 instead, so no browser or search engine caches a permanent redirect to an address that would still answer 404.
 - Refused XML-RPC requests and other security counters are now one atomic upsert on a small daily row, folded into the thirty-day counts once a day, instead of a rewrite of the whole counts option on every request.
@@ -21,6 +21,27 @@ The protection built for the Abrahamic theme (2.87.0) after the October 2026 att
 - The update now clears copies in every case. Before, a `-2` copy survived when the page itself had already moved. Now unedited copies go to the bin and edited ones become drafts.
 - The redirect for /about-the-author/ is folded into the general one.
 - Scan of all 176 page paths: none carries a verse number, a numeric prefix or a `-N` suffix.
+
+## 3.12.0
+
+The log-in screen, and structured data for every element and piece of content that fits a schema.org type.
+
+- The log-in screen wears the site's dress in place of the WordPress defaults: the brandmark and the site name in Kagnue, linking to the site; the gloss of the header, وَلۡيَحۡكُمۡ أَهۡلُ ٱلۡإِنجِيلِ (Q 5:47), in KFGQPC Hafs; the gold star lattice and the washes of the front-page hero; a card with Evangelion labels, a gold focus ring and a green pill button. `assets/css/login.css` reads only the theme.json tokens, which `inc/login.php` prints on that screen with the font faces and any colours set under Theme Options. The words are in `text.json` (`login`), and the title tag reads "Log in | The Rightly-Guided Injīl".
+- `inc/schema-content.php` adds to the graph:
+  - the editorial policies on the Organization (publishingPrinciples, verificationFactCheckingPolicy, correctionsPolicy, actionableFeedbackPolicy, masthead);
+  - the page's elements: WPHeader, SiteNavigationElement and WPFooter on every page, mainContentOfPage, the notes and the share row as WebPageElements with their CSS selectors;
+  - the share row's networks as ShareActions, and the "Read next" row as relatedLink;
+  - 263 Claims on 43 pages, from the claim labels and the status badges;
+  - each objection-and-reply block as a Question, the best Christian reply as suggestedAnswer, the response as acceptedAnswer;
+  - the 32 claims on the responses page, each with the article it first appeared in;
+  - the corrections log as 5 CorrectionComments, each also on the page it corrected;
+  - the Qur'anic glosses as Quotations tied to their verse;
+  - the 20 rows of the manuscripts table as Manuscripts;
+  - the Thomas full texts (Mattison; Patterson and Meyer) and The Clear Quran (Mustafa Khattab) as translation CreativeWorks;
+  - each part's subjects as about and mentions, from the new `inc/data/schema-entities.json`, with Wikidata sameAs only where the identity is certain (Paul of Tarsus, the Torah, the Bible, the New Testament, Islam, Christianity, Muḥammad, Maryam).
+- The 404 page has a graph; the log-in screen has none, since WordPress marks it noindex.
+- The 404 page is the site's own: a green hero with the gloss of Q 1:6, ٱهۡدِنَا ٱلصِّرَٰطَ ٱلۡمُسۡتَقِيمَ ("guide us on the straight path"), a large 404 in Kagnue, a search field, and the six parts of the website in a row-of-three grid of tinted, numbered cards. The page is the JSON pattern `inc/data/patterns/page-404.json`; `templates/404.html` only places it.
+- Checked by running the graph for all 181 pages, the front page and a 404: 183 graphs, every node typed, none of the new nodes empty, the largest graph 31 KB.
 
 ## 3.11.1
 

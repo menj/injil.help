@@ -5,7 +5,7 @@ Description: Custom child theme of Twenty Twenty-Five built for one site, The Ri
 Author: MENJ
 Author URI: https://menj.blog
 Template: twentytwentyfive
-Version: 3.12.0
+Version: 3.13.0
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -66,6 +66,23 @@ h1,h2,h3{text-wrap:balance}
 .ih-parts > .ih-tint-red{background:var(--wp--preset--color--red-tint)}
 .ih-parts > .ih-tint-green{background:var(--wp--preset--color--green-tint)}
 .ih-parts > .ih-tint-gold{background:var(--wp--preset--color--gold-tint)}
+/* The 404 page: the green hero with the gloss of Q 1:6, a large numeral in the display face, and a search field on the hero; then the six parts. */
+.ih-404{position:relative;text-align:center;padding-top:var(--wp--preset--spacing--40)}
+.ih-404 .ih-gloss-row{justify-content:center}
+.ih-404 .ih-gloss{color:var(--wp--preset--color--gold-tint)}
+.ih-404 p.ih-cite{color:color-mix(in srgb,var(--wp--preset--color--base) 72%,transparent)}
+.ih-404-numeral{margin:var(--wp--preset--spacing--20) 0 0;font-family:var(--ih-display);font-size:clamp(88px,16vw,168px);line-height:.9;letter-spacing:.02em;color:var(--wp--preset--color--accent-3)}
+.ih-404 h1{margin-top:var(--wp--preset--spacing--10)}
+.ih-404 .ih-intro{max-width:36em;margin-left:auto;margin-right:auto;text-align:center !important;hyphens:manual;color:color-mix(in srgb,var(--wp--preset--color--base) 88%,transparent)}
+.ih-404-search{max-width:30rem;margin:var(--wp--preset--spacing--30) auto 0}
+.ih-404-search .wp-block-search__inside-wrapper{gap:8px}
+.ih-404-search .wp-block-search__input{background:var(--wp--preset--color--base);color:var(--wp--preset--color--contrast);border:1px solid var(--wp--preset--color--accent-6);padding:10px 14px;font-size:17px}
+.ih-404-search .wp-block-search__input:focus{outline:2px solid var(--wp--preset--color--accent-3);outline-offset:2px}
+.ih-404-search .wp-block-search__button{margin:0;background:var(--wp--preset--color--accent-3);color:var(--wp--preset--color--contrast);border:0;border-radius:var(--ih-r-pill);padding:10px 22px;font-family:var(--ih-sans);font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.ih-404-search .wp-block-search__button:hover{background:var(--wp--preset--color--gold-tint)}
+.ih-404-parts-heading{text-align:center;margin-top:var(--wp--preset--spacing--50)}
+.ih-404-parts h3 a{color:inherit;text-decoration:none}
+.ih-404-parts h3 a:hover{color:var(--wp--preset--color--accent-1);text-decoration:underline}
 .ih-parts .ih-tint-lapis .ih-numeral{color:var(--wp--preset--color--accent-4)}
 .ih-parts .ih-tint-green .ih-numeral{color:var(--wp--preset--color--accent-1)}
 .ih-parts h3 a{text-decoration:none;color:inherit}

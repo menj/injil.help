@@ -1,0 +1,76 @@
+{
+    "about": "Things a page is about, by path prefix: the longest matching prefix wins, and \"*\" applies to every page. Each entry is a schema.org Thing; sameAs carries a Wikidata item only where the identity is certain.",
+    "entities": {
+        "islam": {
+            "@type": "Thing",
+            "name": "Islam",
+            "sameAs": "https://www.wikidata.org/wiki/Q432"
+        },
+        "christianity": {
+            "@type": "Thing",
+            "name": "Christianity",
+            "sameAs": "https://www.wikidata.org/wiki/Q5043"
+        },
+        "bible": {
+            "@type": "Book",
+            "name": "The Bible",
+            "sameAs": "https://www.wikidata.org/wiki/Q1845"
+        },
+        "new-testament": {
+            "@type": "Book",
+            "name": "The New Testament",
+            "sameAs": "https://www.wikidata.org/wiki/Q18813"
+        },
+        "paul": {
+            "@type": "Person",
+            "name": "Paul of Tarsus",
+            "alternateName": "Paul the Apostle",
+            "sameAs": "https://www.wikidata.org/wiki/Q9200"
+        },
+        "muhammad": {
+            "@type": "Person",
+            "name": "Muḥammad",
+            "sameAs": "https://www.wikidata.org/wiki/Q9458"
+        },
+        "mary": {
+            "@type": "Person",
+            "name": "Maryam",
+            "alternateName": "Mary, mother of Jesus",
+            "sameAs": "https://www.wikidata.org/wiki/Q345"
+        },
+        "torah": {
+            "@type": "Book",
+            "name": "The Torah",
+            "alternateName": "al-Tawrāh",
+            "sameAs": "https://www.wikidata.org/wiki/Q34990"
+        },
+        "injil": {
+            "@type": "Thing",
+            "name": "The Injīl",
+            "alternateName": [ "Injil", "Injeel", "the Gospel given to Jesus" ]
+        },
+        "islamic-dilemma": {
+            "@type": "Thing",
+            "name": "The Islamic Dilemma"
+        },
+        "gospel-of-thomas": {
+            "@type": "Book",
+            "name": "The Gospel of Thomas"
+        }
+    },
+    "paths": {
+        "*": [ "islam", "christianity" ],
+        "islamic-dilemma": [ "islamic-dilemma", "injil", "bible" ],
+        "islamic-dilemma/what-is-injil": [ "injil", "bible", "new-testament" ],
+        "islamic-dilemma/torah-in-islam": [ "torah", "bible" ],
+        "gospels": [ "new-testament", "injil" ],
+        "gospels/thomas": [ "gospel-of-thomas" ],
+        "paul": [ "paul", "new-testament" ],
+        "quran": [ "mary", "muhammad" ],
+        "gospel-according-to-islam": [ "injil", "mary" ],
+        "why-islam": [ "islam", "christianity", "muhammad" ],
+        "servant-of-god": [ "islam" ],
+        "resources/responses": [ "islamic-dilemma", "injil" ],
+        "resources/objections": [ "islamic-dilemma", "injil" ]
+    }
+}
