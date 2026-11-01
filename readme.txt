@@ -84,6 +84,9 @@ This file is the user-facing manual that WordPress and Git Updater read. The rep
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add the entry to CHANGELOG.md and to the Changelog section here, note anything an existing site must know under "Updating an existing site" in UPGRADING.md, merge to main, and tag the commit with the same number (for example v3.4.0). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 3.9.1 =
+* Refused XML-RPC requests and other security counters are now one atomic upsert on a small daily row, folded into the thirty-day counts once a day, instead of a rewrite of the whole counts option on every request.
+
 = 3.9.0 =
 * Security tab: XML-RPC off, application passwords off, REST writes only from a logged-in browser, a spam gate that holds gambling spam and remote publishing as Pending, a spam scan with move to Trash, 410 Gone for removed spam, revoke-all and log-out-all buttons, attack reports and a security log. INJIL_HELP_SECURITY_LOCK set to false in wp-config.php turns the locks off.
 = 3.8.3 =
