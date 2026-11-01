@@ -33,10 +33,10 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 |---|---|
 | Type | Block theme (theme.json v3), child of `twentytwentyfive` |
 | Folder, text domain, pattern prefix | `injil-help` |
-| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.11.1) |
-| PHP in `inc/` | options, starter-content, starter-content-pages, gospel-islam, quran-jesus, tafsir, seo, schema, share |
+| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.12.0) |
+| PHP in `inc/` | options, starter-content, starter-content-pages, gospel-islam, quran-jesus, tafsir, images, seo, schema, schema-content, rank-math, share, contextual-links, login |
 | Data | `inc/data/` 2.6 MB of JSON: 181 starter pages, the gospel narrative, the Qur'anic passages, Thomas (woven sections and two full texts), the infancy gospels, the substitution witnesses, eight commentaries (315,000 words) |
-| Front-end assets | `style.css` 32 KB; `assets/css/ornament.css` 12 KB, `share.css` 3 KB, `bible.css` 3 KB; `assets/js/ornament.js` 3 KB, `share.js` 2 KB; all plain, no build step |
+| Front-end assets | `style.css` 32 KB; `assets/css/ornament.css` 12 KB, `share.css` 3 KB, `bible.css` 3 KB, `login.css` 7 KB; `assets/js/ornament.js` 3 KB, `share.js` 2 KB; all plain, no build step |
 | Fonts | 16 MB in `assets/fonts/`, 18 `fontFace` entries in `theme.json` |
 | Admin | one tabbed page, Appearance › Theme Options, option `injil_help_options` |
 | Updates | Git Updater via the `GitHub Theme URI` and `Primary Branch: main` headers; tag `vX.Y.Z` |
@@ -76,6 +76,8 @@ injil-help/
 │  ├─ tafsir.php          the commentaries: works, verse groups, section map, pages, fold blocks
 │  ├─ seo.php             document title, meta description, Open Graph
 │  ├─ schema.php          the JSON-LD graph
+│  ├─ schema-content.php  the graph's content and page-element nodes: policies, elements, claims, objections, corrections, glosses, manuscripts, translations, subjects
+│  ├─ login.php           the log-in screen in the site's dress
 │  ├─ rank-math.php       Rank Math: graph merge, breadcrumbs, home description
 │  ├─ share.php           share row
 │  └─ data/               all content, JSON only (pages/, the 32 block patterns in patterns/, tafsir/ and the data files)

@@ -105,5 +105,15 @@
     },
     "site": {
         "tagline": "The Islamic Dilemma, answered"
+    },
+    "login": {
+        "gloss": "وَلۡيَحۡكُمۡ أَهۡلُ ٱلۡإِنجِيلِ",
+        "gloss_en": "Let the people of the Injīl judge · Qur’an 5:47",
+        "title_login": "Log in",
+        "title_lostpassword": "Lost password",
+        "title_retrievepassword": "Lost password",
+        "title_rp": "Set a new password",
+        "title_resetpass": "Set a new password",
+        "title_register": "Register"
     }
 }

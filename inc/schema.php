@@ -31,6 +31,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
+require_once get_stylesheet_directory() . '/inc/schema-content.php';
+
 function injil_help_schema_enabled() {
 	$plugin_active = defined( 'WPSEO_VERSION' ) || class_exists( 'RankMath' ) || defined( 'SEOPRESS_VERSION' );
 	return (bool) apply_filters( 'injil_help_output_schema', ! $plugin_active );
@@ -119,6 +121,13 @@ function injil_help_schema_site_nodes( $post = null ) {
 			'availableLanguage' => array( 'en', 'ms' ),
 		),
 	);
+	$org              = array_merge( $org, injil_help_schema_policies() );
+	$org['knowsAbout'] = array(
+		array( '@type' => 'Thing', 'name' => 'The Islamic Dilemma' ),
+		array( '@id' => $ids['jesus'] ),
+		array( '@id' => $ids['quran'] ),
+		array( '@type' => 'Thing', 'name' => 'The Injīl' ),
+	);
 	if ( $same ) {
 		$org['sameAs'] = $same;
 	}
@@ -148,6 +157,7 @@ function injil_help_schema_site_nodes( $post = null ) {
 		'author'        => array( '@id' => $ids['author'] ),
 		'copyrightHolder' => array( '@id' => $ids['author'] ),
 		'isAccessibleForFree' => true,
+		'publishingPrinciples' => home_url( '/method/' ),
 		'about'         => array(
 			array( '@type' => 'Thing', 'name' => 'The Islamic Dilemma' ),
 			array( '@id' => $ids['jesus'] ),
@@ -625,6 +635,27 @@ function injil_help_schema_graph() {
 		'cssSelector' => array( 'h1', '.entry-content > p' ),
 	);
 	$webpage['speakable'] = $speakable;
+	$webpage              = array_merge( $webpage, injil_help_schema_page_elements( $url, $html ) );
+	$related              = injil_help_schema_related_links( $html );
+	if ( $related ) {
+		$webpage['relatedLink'] = $related;
+	}
+	$shares = injil_help_schema_share_actions( $post );
+	if ( $shares ) {
+		$webpage['potentialAction'] = $shares;
+	}
+	$path_str = implode( '/', $path );
+	$subjects = injil_help_schema_entities( $path_str );
+	if ( ! isset( $webpage['about'] ) && $subjects['about'] ) {
+		$webpage['about'] = $subjects['about'];
+	}
+	// Corrections to a page that is not an article (a section index) go on the page itself; an article carries its own.
+	if ( $post && ! injil_help_schema_is_article( $post, $page_type ) ) {
+		$corrections = injil_help_schema_corrections( $path_str );
+		if ( $corrections ) {
+			$webpage['correction'] = $corrections;
+		}
+	}
 	$graph[] = $webpage;
 
 	// Breadcrumb.
@@ -704,6 +735,20 @@ function injil_help_schema_graph() {
 		$citations = injil_help_collect_citations( $html );
 		if ( $citations ) {
 			$article['citation'] = $citations;
+		}
+		$about            = array_merge( $article['about'], $subjects['about'] );
+		$article['about'] = array_values( array_intersect_key( $about, array_unique( array_map( 'wp_json_encode', $about ) ) ) );
+		if ( $subjects['mentions'] ) {
+			$article['mentions'] = $subjects['mentions'];
+		}
+		$corrections = injil_help_schema_corrections( $path_str );
+		if ( $corrections ) {
+			$article['correction'] = $corrections;
+		}
+		$translation = injil_help_schema_translations( $path_str, $ids['quran'] );
+		if ( $translation ) {
+			$article['isPartOf'] = array( '@id' => $translation['part_of'] );
+			$graph               = array_merge( $graph, $translation['nodes'] );
 		}
 
 		// The gospel: Book and Chapter.
@@ -849,6 +894,40 @@ function injil_help_schema_graph() {
 		);
 	}
 
+	// Claims: the labelled paragraphs and the status badges, as they appear on this page.
+	$appears_in = ( $post && is_singular() && injil_help_schema_is_article( $post, $page_type ) ) ? $article_id : $webpage_id;
+	foreach ( injil_help_schema_claims( $html, $appears_in, $ids['org'] ) as $claim ) {
+		$graph[] = $claim;
+	}
+
+	// Objection and reply: the objection, the best Christian reply and the response.
+	foreach ( injil_help_schema_objections( $html ) as $question ) {
+		$question['isPartOf'] = array( '@id' => $webpage_id );
+		$graph[]              = $question;
+	}
+
+	// The claims of the named articles answered on the responses page.
+	if ( 'resources/responses' === $path_str ) {
+		foreach ( injil_help_schema_response_claims( $html, $ids['org'] ) as $claim ) {
+			$claim['appearance'] = array( '@id' => $appears_in );
+			$graph[]             = $claim;
+		}
+	}
+
+	// The corrections log.
+	if ( 'corrections' === $path_str ) {
+		foreach ( injil_help_schema_corrections() as $correction ) {
+			$correction['isPartOf'] = array( '@id' => $webpage_id );
+			$graph[]                = $correction;
+		}
+	}
+
+	// The Qur'anic glosses and the manuscripts table.
+	foreach ( array_merge( injil_help_schema_glosses( $html, $ids['quran'] ), injil_help_schema_manuscripts( $html ) ) as $node ) {
+		$node['isPartOf'] = $node['isPartOf'] ?? array( '@id' => $webpage_id );
+		$graph[]          = $node;
+	}
+
 	// FAQ.
 	$faq = array();
 	if ( $blocks ) {
@@ -882,7 +961,7 @@ function injil_help_schema_graph() {
 add_action(
 	'wp_head',
 	function () {
-		if ( is_404() || ! injil_help_schema_enabled() ) {
+		if ( ! injil_help_schema_enabled() ) {
 			return;
 		}
 		$graph = injil_help_schema_graph();
