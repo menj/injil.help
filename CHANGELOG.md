@@ -2,6 +2,14 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.12.1
+
+The layout reads at every width.
+
+- The reading column is the default content width: 720px of text under the 1240px header, footer, front page and grids, the layout theme.json has always declared. Full width had been the default since 3.6.1, when it set prose in two columns on wide screens; 3.6.5 dropped the columns, and full width was left running each line of text across the whole screen, about 1,870px on a 1,920px display. A site still on that default moves to the reading column once (option `injil_help_width_312`); choosing full width again under Theme Options › Branding keeps it.
+- In every width, running text now stops at a readable measure, `--ih-measure`, 46rem: paragraphs, lists, headings, folds, answer capsules and asides, and the intro paragraphs of section heads and front-page bands. Grids, tables, plates, the hero and the dilemma diagram keep the full width.
+- Checked on the live pages at 390, 768, 1,024, 1,440 and 1,920px with the new rules applied: no page scrolls sideways at any width, and no paragraph of running text is wider than the measure.
+
 ## 3.12.0
 
 The log-in screen, and structured data for every element and piece of content that fits a schema.org type.
