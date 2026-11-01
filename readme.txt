@@ -84,6 +84,10 @@ This file is the user-facing manual that WordPress and Git Updater read. The rep
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add the entry to CHANGELOG.md and to the Changelog section here, note anything an existing site must know under "Updating an existing site" in UPGRADING.md, merge to main, and tag the commit with the same number (for example v3.4.0). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 3.12.0 =
+* The 404 page in the site's dress: the gloss of Q 1:6, a large 404, a search field and the six parts of the website.
+* The log-in screen in the site's own dress: brandmark, Kagnue title, the gloss of Q 5:47, the star lattice and the site's colours and typefaces.
+* Structured data for every element and piece of content that fits a schema.org type: editorial policies, page elements, share actions, claims, objections, corrections, Qur'anic glosses, manuscripts, translations and subjects.
 = 3.11.1 =
 * Fixes: the redirect from a moved page runs before WordPress's own 404 guess; an article's journal in the structured data is found by byte position; the home and pillar title fields say how many characters fit.
 = 3.11.0 =

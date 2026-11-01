@@ -1,0 +1,132 @@
+/*
+ * The log-in screen in the site's own dress. Colours and typefaces come only from the theme.json
+ * tokens, which inc/login.php prints on this screen; nothing here names a colour of its own.
+ */
+
+/* Ground: the base colour, the gold eight-pointed star lattice, and the washes of the front-page hero. */
+body.login{
+ background:var(--wp--preset--color--base);
+ background-image:
+  radial-gradient(circle at 88% 10%,color-mix(in srgb,var(--wp--preset--color--accent-3) 22%,transparent),transparent 44%),
+  radial-gradient(circle at 10% 92%,color-mix(in srgb,var(--wp--preset--color--accent-4) 26%,transparent),transparent 50%);
+ color:var(--wp--preset--color--contrast);
+ font-family:var(--wp--preset--font-family--sabon);
+ min-height:100vh;
+ isolation:isolate; /* WordPress gives html a background, so the lattice below needs its own stacking context to show */
+}
+body.login::before{
+ content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+ background:var(--wp--preset--color--accent-3);
+ opacity:.09;
+ -webkit-mask:url(../images/pattern-star.svg) 0 0/112px 112px repeat;
+ mask:url(../images/pattern-star.svg) 0 0/112px 112px repeat;
+}
+#login{width:360px;max-width:calc(100vw - 32px);padding:6vh 0 32px}
+
+/* The brandmark and the site name, linking home. */
+.login h1 a{
+ background:url(../brandmark.svg) top center/72px 72px no-repeat;
+ width:auto;height:auto;margin:0 auto 18px;padding-top:86px;
+ text-indent:0;overflow:visible;
+ font-family:var(--wp--preset--font-family--kagnue);
+ font-size:30px;font-weight:400;line-height:1.15;letter-spacing:.01em;
+ color:var(--wp--preset--color--contrast);
+ text-align:center;text-decoration:none;
+}
+.login h1 a:hover{color:var(--wp--preset--color--accent-1)}
+.login h1 a:focus{box-shadow:none;outline:2px solid var(--wp--preset--color--accent-3);outline-offset:6px;border-radius:8px}
+
+/* The gloss: Q 5:47 in KFGQPC Hafs, its English in the label face. */
+.ih-login-gloss{margin:0 0 20px;text-align:center}
+.ih-login-gloss .ih-quran{
+ display:block;direction:rtl;unicode-bidi:isolate;
+ font-family:var(--wp--preset--font-family--hafs);
+ font-size:28px;line-height:1.9;color:var(--wp--preset--color--accent-2);
+}
+.ih-login-gloss-en{
+ display:block;margin-top:2px;
+ font-family:var(--wp--preset--font-family--evangelion);
+ font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+ color:var(--wp--preset--color--muted);
+}
+
+/* The card. */
+.login form{
+ margin-top:0;padding:28px 28px 30px;
+ background:var(--wp--preset--color--base);
+ border:1px solid var(--wp--preset--color--accent-6);
+ border-top:3px solid var(--wp--preset--color--accent-3);
+ border-radius:22px;
+ box-shadow:0 18px 40px -22px color-mix(in srgb,var(--wp--preset--color--contrast) 45%,transparent);
+}
+.login label{
+ font-family:var(--wp--preset--font-family--evangelion);
+ font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+ color:var(--wp--preset--color--muted);
+}
+.login form .input,.login input[type=text],.login input[type=password],.login input[type=email]{
+ margin-top:6px;padding:8px 12px;min-height:46px;
+ font-family:var(--wp--preset--font-family--sabon);font-size:18px;
+ color:var(--wp--preset--color--contrast);
+ background:var(--wp--preset--color--accent-5);
+ border:1px solid var(--wp--preset--color--accent-6);
+ border-radius:8px;box-shadow:none;
+}
+.login form .input:focus,.login input[type=text]:focus,.login input[type=password]:focus,.login input[type=email]:focus{
+ border-color:var(--wp--preset--color--accent-3);
+ box-shadow:0 0 0 3px color-mix(in srgb,var(--wp--preset--color--accent-3) 35%,transparent);
+ outline:none;
+}
+.login .button.wp-hide-pw{color:var(--wp--preset--color--accent-1);min-height:46px;margin-top:6px}
+.login .button.wp-hide-pw:focus{border-color:var(--wp--preset--color--accent-3);box-shadow:0 0 0 2px var(--wp--preset--color--accent-3)}
+.login .forgetmenot label{text-transform:none;letter-spacing:0;font-family:var(--wp--preset--font-family--sabon);font-size:15px;font-weight:400;color:var(--wp--preset--color--contrast)}
+.login input[type=checkbox]{border-color:var(--wp--preset--color--accent-6);border-radius:4px}
+.login input[type=checkbox]:checked::before{filter:none}
+.login input[type=checkbox]:focus{border-color:var(--wp--preset--color--accent-3);box-shadow:0 0 0 2px var(--wp--preset--color--accent-3)}
+
+/* The button: a green pill in the label face. */
+.login .button-primary,
+.wp-core-ui .button-primary{
+ min-height:44px;padding:0 24px;
+ font-family:var(--wp--preset--font-family--evangelion);
+ font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+ background:var(--wp--preset--color--accent-1);
+ border:1px solid var(--wp--preset--color--accent-1);
+ border-radius:999px;color:var(--wp--preset--color--base);
+ text-shadow:none;box-shadow:none;
+}
+.login .button-primary:hover,.login .button-primary:focus,
+.wp-core-ui .button-primary:hover,.wp-core-ui .button-primary:focus{
+ background:var(--wp--preset--color--green-deep);
+ border-color:var(--wp--preset--color--green-deep);
+ color:var(--wp--preset--color--base);
+}
+.login .button-primary:focus{box-shadow:0 0 0 3px color-mix(in srgb,var(--wp--preset--color--accent-3) 50%,transparent)}
+
+/* Messages. */
+.login .message,.login .notice,.login #login_error,.login .success{
+ margin-bottom:18px;padding:12px 16px;
+ font-size:15px;line-height:1.5;
+ background:var(--wp--preset--color--base);
+ border:1px solid var(--wp--preset--color--accent-6);
+ border-left:4px solid var(--wp--preset--color--accent-1);
+ border-radius:14px;box-shadow:none;
+}
+.login #login_error,.login .notice-error{border-left-color:var(--wp--preset--color--accent-2)}
+.login .message a,.login #login_error a{color:var(--wp--preset--color--accent-1)}
+
+/* The links under the card. */
+.login #nav,.login #backtoblog{margin:16px 0 0;padding:0 8px;text-align:center;font-family:var(--wp--preset--font-family--garamond);font-size:16px}
+.login #nav a,.login #backtoblog a,.login .privacy-policy-page-link a{color:var(--wp--preset--color--accent-1);text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--wp--preset--color--accent-1) 35%,transparent);text-underline-offset:3px}
+.login #nav a:hover,.login #backtoblog a:hover,.login .privacy-policy-page-link a:hover{color:var(--wp--preset--color--accent-2);text-decoration-color:currentColor}
+.login .privacy-policy-page-link{margin:24px 0 0;text-align:center;font-family:var(--wp--preset--font-family--garamond)}
+
+/* The language switcher, when WordPress shows one. */
+.language-switcher{margin-top:20px}
+.language-switcher label .dashicons{color:var(--wp--preset--color--muted)}
+.language-switcher select{border-color:var(--wp--preset--color--accent-6);border-radius:8px}
+.language-switcher .button{border-color:var(--wp--preset--color--accent-1);color:var(--wp--preset--color--accent-1);border-radius:999px}
+
+@media (prefers-reduced-motion:no-preference){
+ .login .button-primary{transition:background-color .2s ease,border-color .2s ease}
+}

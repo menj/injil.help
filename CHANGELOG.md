@@ -2,7 +2,27 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
-## 3.11.1
+## 3.12.0
+
+The log-in screen, and structured data for every element and piece of content that fits a schema.org type.
+
+- The log-in screen wears the site's dress in place of the WordPress defaults: the brandmark and the site name in Kagnue, linking to the site; the gloss of the header, وَلۡيَحۡكُمۡ أَهۡلُ ٱلۡإِنجِيلِ (Q 5:47), in KFGQPC Hafs; the gold star lattice and the washes of the front-page hero; a card with Evangelion labels, a gold focus ring and a green pill button. `assets/css/login.css` reads only the theme.json tokens, which `inc/login.php` prints on that screen with the font faces and any colours set under Theme Options. The words are in `text.json` (`login`), and the title tag reads "Log in | The Rightly-Guided Injīl".
+- `inc/schema-content.php` adds to the graph:
+  - the editorial policies on the Organization (publishingPrinciples, verificationFactCheckingPolicy, correctionsPolicy, actionableFeedbackPolicy, masthead);
+  - the page's elements: WPHeader, SiteNavigationElement and WPFooter on every page, mainContentOfPage, the notes and the share row as WebPageElements with their CSS selectors;
+  - the share row's networks as ShareActions, and the "Read next" row as relatedLink;
+  - 263 Claims on 43 pages, from the claim labels and the status badges;
+  - each objection-and-reply block as a Question, the best Christian reply as suggestedAnswer, the response as acceptedAnswer;
+  - the 32 claims on the responses page, each with the article it first appeared in;
+  - the corrections log as 5 CorrectionComments, each also on the page it corrected;
+  - the Qur'anic glosses as Quotations tied to their verse;
+  - the 20 rows of the manuscripts table as Manuscripts;
+  - the Thomas full texts (Mattison; Patterson and Meyer) and The Clear Quran (Mustafa Khattab) as translation CreativeWorks;
+  - each part's subjects as about and mentions, from the new `inc/data/schema-entities.json`, with Wikidata sameAs only where the identity is certain (Paul of Tarsus, the Torah, the Bible, the New Testament, Islam, Christianity, Muḥammad, Maryam).
+- The 404 page has a graph; the log-in screen has none, since WordPress marks it noindex.
+- The 404 page is the site's own: a green hero with the gloss of Q 1:6, ٱهۡدِنَا ٱلصِّرَٰطَ ٱلۡمُسۡتَقِيمَ ("guide us on the straight path"), a large 404 in Kagnue, a search field, and the six parts of the website in a row-of-three grid of tinted, numbered cards. The page is the JSON pattern `inc/data/patterns/page-404.json`; `templates/404.html` only places it.
+- Checked by running the graph for all 181 pages, the front page and a 404: 183 graphs, every node typed, none of the new nodes empty, the largest graph 31 KB.
+
 
 Fixes from a review of the 3.9.0 to 3.11.0 code and an audit of all 181 pages against SSOT.md.
 
