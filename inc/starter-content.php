@@ -442,7 +442,9 @@ function injil_help_redirect_former() {
 			$target = $map[ implode( '/', $parts ) ] ?? null;
 		}
 	}
-	if ( null === $target ) {
+	// A 301 is cached for good, so it is only sent once the page stands at its present address. While an
+	// update is still moving pages, injil_help_redirect_moved_page() sends the visitor on with a 302.
+	if ( null === $target || ! injil_help_find_page( $target ) ) {
 		return;
 	}
 	wp_safe_redirect( home_url( '/' . $target . '/' ), 301 );

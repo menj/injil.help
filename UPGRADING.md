@@ -82,7 +82,7 @@ Whichever is chosen, document the server settings a site needs (`max_input_vars`
 
 Git Updater reads the theme header and offers the release whose tag matches `Version:`. After the update, the first load of any admin screen rewrites the starter pages whose text changed, keeps pages you edited (marked "edited, kept on update" on the Content tab), keeps no revisions, and flushes rewrite rules only if permalinks had to be set. "Update all pages from the theme" replaces every page, edited ones included, after a confirmation. Take a database backup before updating; open the Content tab once after.
 
-- **3.12.0.** Replace the theme files. The Security tab is on by default: XML-RPC, application passwords and REST writes from outside the browser stop at once. No page is rewritten. After the October 2026 attack on the sister site abrahamic-religions.com, the owner checklist:
+- **3.12.0.** Replace the theme files. The Security tab is on by default: XML-RPC, application passwords and REST writes from outside the browser stop at once. No page text is rewritten, but the update bins unedited "-2" and "-3" copies of the old numbered pages and drafts edited ones; check Pages > Drafts afterwards. After the October 2026 attack on the sister site abrahamic-religions.com, the owner checklist:
   1. Change the password of every administrator to a long random one used nowhere else, then Log Out Everywhere Else (Users › Profile), or press "Log out all sessions" on the Security tab.
   2. Create a new administrator whose name is not the site name, log in as it, and delete the old account, attributing its content to the new one.
   3. Press "Revoke all application passwords".
