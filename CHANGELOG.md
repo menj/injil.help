@@ -20,6 +20,7 @@ The log-in screen, and structured data for every element and piece of content th
   - the Thomas full texts (Mattison; Patterson and Meyer) and The Clear Quran (Mustafa Khattab) as translation CreativeWorks;
   - each part's subjects as about and mentions, from the new `inc/data/schema-entities.json`, with Wikidata sameAs only where the identity is certain (Paul of Tarsus, the Torah, the Bible, the New Testament, Islam, Christianity, Muḥammad, Maryam).
 - The 404 page has a graph; the log-in screen has none, since WordPress marks it noindex.
+- The 404 page is the site's own: a green hero with the gloss of Q 1:6, ٱهۡدِنَا ٱلصِّرَٰطَ ٱلۡمُسۡتَقِيمَ ("guide us on the straight path"), a large 404 in Kagnue, a search field, and the six parts of the website in a row-of-three grid of tinted, numbered cards. The page is the JSON pattern `inc/data/patterns/page-404.json`; `templates/404.html` only places it.
 - Checked by running the graph for all 181 pages, the front page and a 404: 183 graphs, every node typed, none of the new nodes empty, the largest graph 31 KB.
 
 
