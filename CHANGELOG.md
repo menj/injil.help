@@ -10,6 +10,7 @@ Google's SEO Starter Guide, applied where `SSOT.md` allows. The structured data 
 - The core users sitemap is off, and an author archive (`/author/…/` or `?author=`) answers 301 to `/about/`. Every page is published under the site's name, so the archive only repeated the site under the account's name.
 - A plate (`.ih-plate`) whose image the theme has sideloaded into the Media Library is served from there, with its class `wp-image-{id}`. WordPress then adds width, height, srcset and lazy loading. Commons serves no size with its redirect, so the browser could not reserve the space. A plate with no local copy loads lazily and decodes asynchronously, except the front page cover image.
 - An image sitemap at `/image-sitemap.xml` lists each page that has an image entry, with its featured image (or the source file when the sideload has not run). `robots.txt` names it. With Rank Math's sitemap on, Rank Math lists the images and the theme's sitemap stands down.
+- The front page cover image is fetched at high priority, with no lazy loading and no async decoding, so it paints with the page. The image sitemap now opens with the front page and that cover: the Media Library copy once sideloaded, else the address in the hero pattern.
 - The author Person carries a `url` when the Author URL option is empty: the About page. Google's Article guidance asks for one.
 - All 181 starter pages were run through the title builder: every title is under 60 characters, none is cut and none repeats.
 

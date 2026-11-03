@@ -200,7 +200,8 @@ function injil_help_image_key_from_src( $src ) {
  * wp-image-{id}, so WordPress adds width, height, srcset and lazy loading when it filters the
  * content (Commons serves no size with its redirect, and the browser cannot reserve the space).
  * An image with no local copy keeps its address and gets lazy loading and async decoding,
- * except the front page's cover image, which is the first thing on screen.
+ * except the front page's cover image, which is the first thing on screen: it loads eagerly,
+ * decodes in step with the page and is fetched at high priority.
  */
 function injil_help_localise_img( $tag, $is_cover = false ) {
 	if ( preg_match( '/\swidth=/i', $tag ) || ! preg_match( '/\ssrc="([^"]+)"/i', $tag, $src ) ) {
@@ -223,7 +224,9 @@ function injil_help_localise_img( $tag, $is_cover = false ) {
 			: str_replace( '<img', '<img class="wp-image-' . $att . '"', $tag );
 		return $tag;
 	}
-	$extra = ' decoding="async"' . ( $is_cover || preg_match( '/\sloading=/i', $tag ) ? '' : ' loading="lazy"' );
+	$extra = $is_cover
+		? ( preg_match( '/\sfetchpriority=/i', $tag ) ? '' : ' fetchpriority="high"' )
+		: ' decoding="async"' . ( preg_match( '/\sloading=/i', $tag ) ? '' : ' loading="lazy"' );
 	return preg_replace( '/^<img\b/i', '<img' . $extra, $tag );
 }
 
@@ -246,9 +249,32 @@ add_filter(
 
 /* ---------- Image sitemap ---------- */
 
-/** Each page with an image entry and its image: the Media Library copy when there is one, else the source file. */
+/**
+ * The front page's cover image, resolved as the hero pattern's <img> is when it renders: the
+ * Media Library copy when the file has been sideloaded, else the address in the pattern.
+ */
+function injil_help_front_cover_url() {
+	$pattern = function_exists( 'injil_help_pattern_file' ) ? injil_help_pattern_file( 'hero' ) : null;
+	if ( ! $pattern || ! preg_match( '/<figure\b[^>]*ih-cover-image[^>]*>.*?<img\b[^>]*\ssrc="([^"]+)"/is', $pattern['content'], $m ) ) {
+		return '';
+	}
+	$src = html_entity_decode( $m[1] );
+	$key = injil_help_image_key_from_src( $src );
+	$att = '' !== $key ? injil_help_find_attachment( $key ) : 0;
+	$url = $att ? wp_get_attachment_image_url( $att, 'full' ) : false;
+	return $url ? (string) $url : $src;
+}
+
+/** Each page with an image entry and its image: the Media Library copy when there is one, else the source file. The front page comes first, with its cover. */
 function injil_help_image_sitemap_entries() {
-	$out = array();
+	$out   = array();
+	$cover = injil_help_front_cover_url();
+	if ( '' !== $cover ) {
+		$out[] = array(
+			'loc'   => home_url( '/' ),
+			'image' => $cover,
+		);
+	}
 	foreach ( injil_help_images() as $path => $img ) {
 		$page = function_exists( 'injil_help_find_page' ) ? injil_help_find_page( $path ) : null;
 		if ( ! $page || 'publish' !== $page->post_status || empty( $img['file'] ) ) {
