@@ -54,10 +54,16 @@ function injil_help_schema_ids() {
 	);
 }
 
-/** Author details: Theme Options > SEO, falling back to the site name. The post author's name is never used. */
+/**
+ * Author details: Theme Options > SEO, falling back to the site name and, for the URL, the About
+ * page (Google's Article guidance asks for an author url). The post author's name is never used.
+ */
 function injil_help_schema_author( $post = null ) {
 	$name = injil_help_get_option( 'author_name' );
 	$url  = injil_help_get_option( 'author_url' );
+	if ( ! $url ) {
+		$url = home_url( '/about/' );
+	}
 	$same = array_values( array_filter( array_map( 'trim', explode( "\n", (string) injil_help_get_option( 'same_as' ) ) ) ) );
 	return array( $name ?: get_bloginfo( 'name' ), $url, $same );
 }

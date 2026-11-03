@@ -214,6 +214,63 @@ add_filter(
 	5
 );
 
+/**
+ * The canonical address of a view that is not singular (core prints the singular one): the front
+ * page, a term, post type, date or posts-page archive, with its page number. Search, 404 and author
+ * views get none.
+ */
+function injil_help_archive_canonical() {
+	if ( is_search() || is_404() || is_author() ) {
+		return '';
+	}
+	$url = '';
+	if ( is_front_page() ) {
+		$url = home_url( '/' );
+	} elseif ( is_home() ) {
+		$page = (int) get_option( 'page_for_posts' );
+		$url  = $page ? (string) get_permalink( $page ) : home_url( '/' );
+	} elseif ( is_category() || is_tag() || is_tax() ) {
+		$link = get_term_link( get_queried_object() );
+		$url  = is_wp_error( $link ) ? '' : (string) $link;
+	} elseif ( is_post_type_archive() ) {
+		$type = get_query_var( 'post_type' );
+		$url  = (string) get_post_type_archive_link( is_array( $type ) ? (string) reset( $type ) : (string) $type );
+	} elseif ( is_year() || is_month() || is_day() ) {
+		$y   = (int) get_query_var( 'year' );
+		$m   = (int) get_query_var( 'monthnum' );
+		$d   = (int) get_query_var( 'day' );
+		$url = is_day() ? get_day_link( $y, $m, $d ) : ( is_month() ? get_month_link( $y, $m ) : get_year_link( $y ) );
+	}
+	$paged = (int) get_query_var( 'paged' );
+	if ( $url && $paged > 1 ) {
+		$url = trailingslashit( $url ) . user_trailingslashit( 'page/' . $paged, 'paged' );
+	}
+	return $url;
+}
+
+/*
+ * No author archives and no users sitemap. Every page is published under the site's name, so an
+ * author archive repeats the site under the account's name; it goes to the About page instead.
+ */
+add_filter(
+	'wp_sitemaps_add_provider',
+	function ( $provider, $name ) {
+		return 'users' === $name ? false : $provider;
+	},
+	10,
+	2
+);
+add_action(
+	'template_redirect',
+	function () {
+		if ( is_author() ) {
+			wp_safe_redirect( home_url( '/about/' ), 301 );
+			exit;
+		}
+	},
+	1
+);
+
 /* Meta description, canonical, Open Graph, Twitter. */
 add_action(
 	'wp_head',
@@ -222,7 +279,7 @@ add_action(
 			return;
 		}
 		$desc  = trim( injil_help_meta_description() );
-		$url   = is_singular() ? get_permalink() : ( is_front_page() ? home_url( '/' ) : '' );
+		$url   = is_singular() ? get_permalink() : injil_help_archive_canonical();
 		$title = wp_get_document_title();
 		$img   = is_singular() && has_post_thumbnail() ? get_the_post_thumbnail_url( null, 'large' ) : injil_help_default_og_image();
 
