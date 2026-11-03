@@ -87,7 +87,7 @@ html .ih-orn .ih-entry:hover,html.ih-px .ih-orn .ih-entries > .ih-entry:hover{tr
 .ih-orn .ih-tint-gold .ih-entry .ih-k::before{--ih-i:url(../icons/lamp.svg);background:var(--ih-gold-ink)}
 
 /* "Read next" aside: the owner's retro arrow (images/arrow-next.webp), a raster drawn at its own 35x21 pixels. Decoration only; still under reduced motion. */
-.ih-orn .ih-aside.ih-next .ih-k::after{content:"";display:inline-block;width:35px;height:21px;margin-left:.5em;vertical-align:middle;background:url(../images/arrow-next.webp) center/contain no-repeat;image-rendering:pixelated}
+.ih-orn .ih-aside.ih-next .ih-k::after{content:"";display:inline-block;width:35px;height:21px;margin-inline-start:.5em;vertical-align:middle;background:url(../images/arrow-next.webp) center/contain no-repeat;image-rendering:pixelated}
 @media (prefers-reduced-motion:reduce){.ih-orn .ih-aside.ih-next .ih-k::after{background-image:url(../images/arrow-next-static.webp)}}
 .ih-orn .ih-entry::after{
  --ih-i:url(../icons/arrow-right.svg);
