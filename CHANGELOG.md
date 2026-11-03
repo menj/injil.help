@@ -2,6 +2,10 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.16.0
+
+- The Read next row carries the owner's pixel arrow after its label (`assets/images/arrow-next.webp`, in the ornament layer of `assets/css/ornament.css`, so Ornament off removes it). Each is animated WebP drawn at its own pixel size, for decoration only; the link text is unchanged. Readers who ask for reduced motion see a still first frame.
+
 ## 3.15.0
 
 - The Islamic Dilemma page credits its source study by title only. The author's name no longer appears on the front end.
