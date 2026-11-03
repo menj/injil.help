@@ -2,6 +2,15 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.14.1
+
+Links to the sister sites follow their new addresses. On 3 November 2026 the owner ruled that no address on the network carries a verse number, a count or a year, and every site answers its old addresses with a 301.
+
+- `inc/data/network-links.json` is the same file in all seven themes again. This site's copy already held the paths from 3.11.0, and the others now carry them too. It takes `/journal/prophet-like-moses/` on Abrahamic Religions, `/deuteronomy-prophecy-and-the-paraclete/`, `/crusades-facts/`, `/taqiyya-myths/` and `/islamophobia-facts/` on Best of Islam, `/articles/sword-verse-jizya/` on Compelling Evidence and `/rebuttals/quran-wife-beating-verse-in-context/` on murtadd.org.
+- The front-page Qur'an section (`home-quran` pattern) links the Best of Islam article at `/deuteronomy-prophecy-and-the-paraclete/`.
+
+No address on this site changes.
+
 ## 3.14.0
 
 Google's SEO Starter Guide, applied where `SSOT.md` allows. The structured data types themselves are unchanged; the conflicts are listed for the owner below.
