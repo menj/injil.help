@@ -85,6 +85,10 @@ Tabs: Colours, Branding, Sharing, Contextual links, SEO, Security, Content. Defa
 - The theme's own head output and graph are off when Yoast or SEOPress is active; with Rank Math they work inside the plugin as above.
 - Six FAQs on every main page, written as search queries.
 - Default social image: `assets/images/og-default.jpg`.
+- Every view that is not singular prints a canonical link (`injil_help_archive_canonical()`), with its page number; search, 404 and author views print none.
+- No users sitemap; an author archive answers 301 to `/about/`.
+- A plate whose file is in the Media Library renders from there with width, height and srcset (`injil_help_localise_img()`); a remote plate loads lazily, the front page cover image excepted. `/image-sitemap.xml` lists each page's image, unless Rank Math's sitemap is on.
+- The author Person's `url` is the Author URL option, else `/about/`.
 
 ## Sharing
 

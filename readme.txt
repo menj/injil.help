@@ -84,6 +84,10 @@ This file is the user-facing manual that WordPress and Git Updater read. The rep
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add the entry to CHANGELOG.md and to the Changelog section here, note anything an existing site must know under "Updating an existing site" in UPGRADING.md, merge to main, and tag the commit with the same number (for example v3.4.0). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 3.14.0 =
+* Archives print a canonical link with their page number. The users sitemap is off, and an author archive goes to the About page with a 301.
+* An image plate whose file is in the Media Library is served from there, with width, height, srcset and lazy loading. A plate with no local copy loads lazily. An image sitemap at /image-sitemap.xml lists each page's image.
+* The author Person in the structured data carries a url: the Author URL option, else the About page.
 = 3.13.1 =
 * Security fixes: case-insensitive spam patterns, the gate exempts only pages that carry the theme's hash, private posts are left private, WP-CLI counts as outside the editor, 410 at /?p=ID, safer daily tallies, a 24-hour window for failed logins, reports load with the Security tab. The former-URL 301 goes only to published pages, and unhashed -N copies become drafts.
 = 3.13.0 =

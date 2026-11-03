@@ -2,6 +2,19 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.14.0
+
+Google's SEO Starter Guide, applied where `SSOT.md` allows. The structured data types themselves are unchanged; the conflicts are listed for the owner below.
+
+- Archives (terms, post types, dates, the posts page) print `<link rel="canonical">`, with `/page/N/` on paged views. Before, only the front page and single pages had one.
+- The core users sitemap is off, and an author archive (`/author/…/` or `?author=`) answers 301 to `/about/`. Every page is published under the site's name, so the archive only repeated the site under the account's name.
+- A plate (`.ih-plate`) whose image the theme has sideloaded into the Media Library is served from there, with its class `wp-image-{id}`. WordPress then adds width, height, srcset and lazy loading. Commons serves no size with its redirect, so the browser could not reserve the space. A plate with no local copy loads lazily and decodes asynchronously, except the front page cover image.
+- An image sitemap at `/image-sitemap.xml` lists each page that has an image entry, with its featured image (or the source file when the sideload has not run). `robots.txt` names it. With Rank Math's sitemap on, Rank Math lists the images and the theme's sitemap stands down.
+- The author Person carries a `url` when the Author URL option is empty: the About page. Google's Article guidance asks for one.
+- All 181 starter pages were run through the title builder: every title is under 60 characters, none is cut and none repeats.
+
+Left for the owner. Google's list of supported structured data leaves out several types that `SSOT.md` keeps: `FAQPage`, `SearchAction` on WebSite (the sitelinks search box was retired in November 2024), `SpeakableSpecification` on pages that are not news, `Event` for the timeline (Google reads Event as something people can attend), `Dataset` for the correlation page (no downloadable data), and the page-element nodes (`WPHeader`, `WPFooter`, `SiteNavigationElement`). They stay until the owner rules on them.
+
 ## 3.13.1
 
 Fixes to the Security tab and the starter pages.

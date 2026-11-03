@@ -179,3 +179,133 @@ add_action(
 	},
 	20
 );
+
+/* ---------- Plates served from the Media Library ---------- */
+
+/** The images.json key ("file") an image address points at: a Commons file name or a Pexels key; '' for any other address. */
+function injil_help_image_key_from_src( $src ) {
+	if ( preg_match( '#commons\.wikimedia\.org/wiki/Special:FilePath/([^?"\#]+)#', (string) $src, $m ) ) {
+		return str_replace( '_', ' ', rawurldecode( $m[1] ) );
+	}
+	foreach ( injil_help_images() as $img ) {
+		if ( 'pexels' === ( $img['source'] ?? '' ) && ! empty( $img['url'] ) && 0 === strpos( (string) $src, (string) $img['url'] ) ) {
+			return (string) $img['file'];
+		}
+	}
+	return '';
+}
+
+/**
+ * Point a plate's <img> at the copy already sideloaded into the Media Library, with its class
+ * wp-image-{id}, so WordPress adds width, height, srcset and lazy loading when it filters the
+ * content (Commons serves no size with its redirect, and the browser cannot reserve the space).
+ * An image with no local copy keeps its address and gets lazy loading and async decoding,
+ * except the front page's cover image, which is the first thing on screen.
+ */
+function injil_help_localise_img( $tag, $is_cover = false ) {
+	if ( preg_match( '/\swidth=/i', $tag ) || ! preg_match( '/\ssrc="([^"]+)"/i', $tag, $src ) ) {
+		return $tag;
+	}
+	static $found = array();
+	$key = injil_help_image_key_from_src( html_entity_decode( $src[1] ) );
+	if ( '' === $key ) {
+		return $tag;
+	}
+	if ( ! isset( $found[ $key ] ) ) {
+		$found[ $key ] = injil_help_find_attachment( $key );
+	}
+	$att  = (int) $found[ $key ];
+	$file = $att ? wp_get_attachment_image_src( $att, 'large' ) : false;
+	if ( $file ) {
+		$tag = str_replace( $src[0], ' src="' . esc_url( $file[0] ) . '" width="' . (int) $file[1] . '" height="' . (int) $file[2] . '"', $tag );
+		$tag = preg_match( '/\sclass="/i', $tag )
+			? preg_replace( '/\sclass="/i', ' class="wp-image-' . $att . ' ', $tag, 1 )
+			: str_replace( '<img', '<img class="wp-image-' . $att . '"', $tag );
+		return $tag;
+	}
+	$extra = ' decoding="async"' . ( $is_cover || preg_match( '/\sloading=/i', $tag ) ? '' : ' loading="lazy"' );
+	return preg_replace( '/^<img\b/i', '<img' . $extra, $tag );
+}
+
+add_filter(
+	'render_block_core/image',
+	function ( $html ) {
+		if ( false === strpos( (string) $html, '<img' ) ) {
+			return $html;
+		}
+		$cover = false !== strpos( (string) $html, 'ih-cover-image' );
+		return preg_replace_callback(
+			'/<img\b[^>]*>/i',
+			function ( $m ) use ( $cover ) {
+				return injil_help_localise_img( $m[0], $cover );
+			},
+			(string) $html
+		);
+	}
+);
+
+/* ---------- Image sitemap ---------- */
+
+/** Each page with an image entry and its image: the Media Library copy when there is one, else the source file. */
+function injil_help_image_sitemap_entries() {
+	$out = array();
+	foreach ( injil_help_images() as $path => $img ) {
+		$page = function_exists( 'injil_help_find_page' ) ? injil_help_find_page( $path ) : null;
+		if ( ! $page || 'publish' !== $page->post_status || empty( $img['file'] ) ) {
+			continue;
+		}
+		$url = has_post_thumbnail( $page->ID ) ? (string) get_the_post_thumbnail_url( $page->ID, 'full' ) : injil_help_image_url( $img, 1600 );
+		if ( '' !== $url ) {
+			$out[] = array(
+				'loc'   => (string) get_permalink( $page ),
+				'image' => $url,
+			);
+		}
+	}
+	return $out;
+}
+
+/** The address of the image sitemap. */
+function injil_help_image_sitemap_url() {
+	return home_url( '/image-sitemap.xml' );
+}
+
+/** Whether Rank Math's sitemap, which lists images itself, is serving. */
+function injil_help_rank_math_sitemap_on() {
+	if ( ! class_exists( 'RankMath' ) ) {
+		return false;
+	}
+	return ! ( class_exists( '\RankMath\Helper' ) && method_exists( '\RankMath\Helper', 'is_module_active' ) ) || (bool) \RankMath\Helper::is_module_active( 'sitemap' );
+}
+
+add_action(
+	'template_redirect',
+	function () {
+		$request = isset( $GLOBALS['wp']->request ) ? trim( (string) $GLOBALS['wp']->request, '/' ) : '';
+		if ( 'image-sitemap.xml' !== $request || injil_help_rank_math_sitemap_on() ) {
+			return;
+		}
+		status_header( 200 );
+		header( 'Content-Type: application/xml; charset=UTF-8' );
+		header( 'X-Robots-Tag: noindex, follow' );
+		echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">' . "\n";
+		foreach ( injil_help_image_sitemap_entries() as $e ) {
+			echo "\t<url><loc>" . esc_xml( $e['loc'] ) . '</loc><image:image><image:loc>' . esc_xml( $e['image'] ) . "</image:loc></image:image></url>\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped with esc_xml().
+		}
+		echo "</urlset>\n";
+		exit;
+	},
+	0
+);
+
+add_filter(
+	'robots_txt',
+	function ( $output, $public ) {
+		if ( ! $public || injil_help_rank_math_sitemap_on() ) {
+			return $output;
+		}
+		return rtrim( (string) $output ) . "\nSitemap: " . esc_url_raw( injil_help_image_sitemap_url() ) . "\n";
+	},
+	20,
+	2
+);
