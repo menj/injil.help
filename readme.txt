@@ -86,9 +86,12 @@ This file is the user-facing manual that WordPress and Git Updater read. The rep
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add the entry to CHANGELOG.md and to the Changelog section here, note anything an existing site must know under "Updating an existing site" in UPGRADING.md, merge to main, and tag the commit with the same number (for example v3.4.0). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
-= 3.17.0 =
+= 3.18.0 =
 * A Journal at /journal/, linked from the menu and the footer. Posts live at /journal/<slug>/, each with a dated breadcrumb and BlogPosting markup.
 * 8 posts ship with the theme, each on a fixed date: 3 in October, 1 in November, 4 scheduled for December. A past date is published, a future one is scheduled, and an edited or binned post is kept.
+= 3.17.0 =
+* Pages can carry up to four images: the first stays where it was and up to three more follow, spread through the text. 112 manuscript and inscription images now stand on 61 pages, including the gospel sections.
+* A sideloaded image is stored as AVIF, or as WebP when it is under 1000 pixels wide. Nothing is added to the theme.
 = 3.16.0 =
 * A small pixel arrow after the Read next label, part of the ornament layer. Still for readers who ask for reduced motion.
 = 3.15.0 =

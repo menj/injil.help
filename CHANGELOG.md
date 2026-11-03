@@ -2,7 +2,7 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
-## 3.17.0
+## 3.18.0
 
 The site has a Journal: dated posts beside the pages.
 
@@ -14,6 +14,16 @@ The site has a Journal: dated posts beside the pages.
 - 8 posts: 3 in October, 1 on 15 November and 4 in December, from the woman taken in adultery to the peace of Qur'an 19:33. Their title tags are in `inc/data/seo-titles.json` under `journal/<slug>`.
 - The WordPress sample post is still binned on activation.
 - `tests/journal-test.php` checks every entry (a slug of words only, the title tag length, 700 to 1,100 words, notes and sources, links to pages that exist) and the seeding: the status from the date, the exact date, a second run that changes nothing, and kept edits. `tests/schema-graph-test.php` now also builds each post's graph.
+
+## 3.17.0
+
+Pages can now carry more than one image.
+
+- An entry in `inc/data/images.json` may add `"more"`: up to three further images, each with `file`, `alt`, `caption` and `credit`. They are placed after paragraphs, evenly through the text and clear of the notes. The first image stays where it was.
+- The images are manuscripts and inscriptions from Wikimedia Commons, as `SSOT.md` requires. 112 images now stand on 61 pages: the 27 gospel sections that had none are covered where Commons has a fitting manuscript, and 26 pages gained one to three more.
+- A sideloaded image is stored in the Media Library as AVIF, or as WebP when it is under 1000 pixels wide, scaled to at most 1600 pixels. A server whose image library cannot write the format keeps the source format. Nothing is added to the theme: the files load from Commons until the admin pass copies them.
+- The admin pass that gave pages their featured image now also copies the extra images, six images per admin load, and records failures for a day.
+- The Qur'an translation, the base text and the fonts are unchanged.
 
 ## 3.16.0
 

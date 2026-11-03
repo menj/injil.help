@@ -3,13 +3,41 @@
         "file": "Shorter ending of Mark 16 from Codex Sinaiticus.png",
         "alt": "Codex Sinaiticus, fourth century: the Gospel of Mark ending at 16:8",
         "caption": "Codex Sinaiticus, fourth century: Mark ends at 16:8, and the verses printed after it in later Bibles are absent. British Library.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Sinaiticus, Matthew 10,17-11,5.JPG",
+                "alt": "Sinaiticus, Matthew 10,17-11,5: manuscript page",
+                "caption": "Sinaiticus, Matthew 10,17-11,5.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Sinaiticus, Matthew 9,23-10,17.JPG",
+                "alt": "Sinaiticus, Matthew 9,23-10,17, 330-360 C.E.: manuscript page",
+                "caption": "Sinaiticus, Matthew 9,23-10,17, 330-360 C.E..",
+                "credit": "Public domain."
+            }
+        ]
     },
     "gospels/matthew": {
         "file": "Codex Sinaiticus Matthew 1,1-2,5.JPG",
         "alt": "Codex Sinaiticus, fourth century: the first page of the Gospel of Matthew, the genealogy and the birth",
         "caption": "Codex Sinaiticus, fourth century: the first page of Matthew, 1:1 to 2:5.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Codex Vaticanus Matthew 1,22-2,18.jpg",
+                "alt": "Codex Vaticanus Matthew 1,22-2,18: manuscript page",
+                "caption": "Codex Vaticanus Matthew 1,22-2,18.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Hebrew Sefer Torah Scroll side view.JPG",
+                "alt": "Hebrew Sefer Torah Scroll side view, 2009-08-31: manuscript page",
+                "caption": "Hebrew Sefer Torah Scroll side view, 2009-08-31.",
+                "credit": "Bejinhan, CC BY-SA 3.0."
+            }
+        ]
     },
     "gospels/luke": {
         "file": "Dublin, Chester Beatty Ms Papyrus 45 BP I ff.13-14 Luke 11.50-12.12; 12.18-37; 12.42-13.1; 13.jpg",
@@ -21,7 +49,27 @@
         "file": "Gospel of Thomas - Nag Hammadi II-35.jpg",
         "alt": "Nag Hammadi Codex II, page 35, the Gospel of Thomas in Coptic, fourth century",
         "caption": "Nag Hammadi Codex II, page 35: the Gospel of Thomas in Coptic, the only complete copy, found in Egypt in 1945.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Nag Hammadi Codex II.jpg",
+                "alt": "Nag Hammadi Codex II: manuscript page",
+                "caption": "Nag Hammadi Codex II.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "SCarabés Nag Hammadi 41057.jpg",
+                "alt": "SCarabés Nag Hammadi 41057, 2018-04-15 17:31:12: manuscript page",
+                "caption": "SCarabés Nag Hammadi 41057, 2018-04-15 17:31:12.",
+                "credit": "G.Garitan, CC BY-SA 4.0."
+            },
+            {
+                "file": "Papyri from Oxyrhynchus A.D. 113.png",
+                "alt": "Papyri from Oxyrhynchus A.D. 113: manuscript page",
+                "caption": "Papyri from Oxyrhynchus A.D. 113.",
+                "credit": "CC0."
+            }
+        ]
     },
     "gospels/thomas/sayings": {
         "file": "Gospel of Thomas - Nag Hammadi II-36.jpg",
@@ -51,13 +99,53 @@
         "file": "P45 Marc 8.35-9.1.jpg",
         "alt": "Papyrus 45, about 200 to 250 CE: a fragment of Mark 8:35 to 9:1",
         "caption": "Papyrus 45, about 200 to 250 CE: Mark 8:35 to 9:1. Mark is the source that Matthew and Luke rewrote.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Codex Sinaiticus Petropolitanus (title).JPG",
+                "alt": "Codex Sinaiticus Petropolitanus (title): manuscript page",
+                "caption": "Codex Sinaiticus Petropolitanus (title).",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Bifolio from Paul's Letter to the Romans, the end of Paul's Letter to the Philippians and the beginning of Paul's Letter to the Colossians.jpg",
+                "alt": "Bifolio from Paul's Letter to the Romans, the end of Paul's Letter to the Philippians and the beginning of Paul's Letter to the Colossians, circa 200: manuscript page",
+                "caption": "Bifolio from Paul's Letter to the Romans, the end of Paul's Letter to the Philippians and the beginning of Paul's Letter to the Colossians, circa 200.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Uncial 0221 recto & verso.jpg",
+                "alt": "Uncial 0221 recto & verso, 2014-09-08 15:58:29: manuscript page",
+                "caption": "Uncial 0221 recto & verso, 2014-09-08 15:58:29.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "gospels/discrepancies": {
         "file": "Codex Bezae - Greek Luke 23-47 to 24-1 (The S.S. Teacher's Edition-The Holy Bible - Plate XXV).jpg",
         "alt": "Codex Bezae, fifth century: Luke 23:47 to 24:1 in Greek",
         "caption": "Codex Bezae, fifth century: Luke 23:47 to 24:1, the death and burial. Bezae differs from the other great codices at hundreds of points, which is why it stands beside the tables. Cambridge University Library.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Codex Seidelianus I 062.jpg",
+                "alt": "Codex Seidelianus I 062: manuscript page",
+                "caption": "Codex Seidelianus I 062.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Vaticanus codex B 3773 page 24.jpg",
+                "alt": "Vaticanus codex B 3773 page 24: manuscript page",
+                "caption": "Vaticanus codex B 3773 page 24.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Codex Harleianus 5613, fol. 1.jpg",
+                "alt": "Codex Harleianus 5613, fol. 1, 1407: manuscript page",
+                "caption": "Codex Harleianus 5613, fol. 1, 1407.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "gospels/discrepancies/genealogies": {
         "file": "KellsFol029rIncipitMatthew.jpg",
@@ -75,7 +163,21 @@
         "file": "Ann Arbor, University of Michigan P.Mich.inv. 6238 (Papyrus 46) fol. 158r Eph 6, 20–Gal 1, 8.jpg",
         "alt": "Papyrus 46, about 200 CE: the end of Ephesians and the beginning of Galatians, University of Michigan",
         "caption": "Papyrus 46, about 200 CE, the oldest collection of Paul of Tarsus’s letters: the end of Ephesians and the opening of Galatians. University of Michigan.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "An exposition of the Epistle of Paul the Apostle to the Romans, with large practical observations; delivered in several lectures Fleuron N008067-14.png",
+                "alt": "An exposition of the Epistle of Paul the Apostle to the Romans, with large practical observations; delivered in several lectures Fleuron N008067-14, 1766: manuscript page",
+                "caption": "An exposition of the Epistle of Paul the Apostle to the Romans, with large practical observations; delivered in several lectures Fleuron N008067-14, 1766.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Ann Arbor, University of Michigan P.Mich.inv. 6238 (Papyrus 46) fol. 142r - 2 Corinthians 11,33-12,9.jpg",
+                "alt": "Ann Arbor, University of Michigan P.Mich.inv. 6238 (Papyrus 46) fol. 142r - 2 Corinthians 11,33-12,9, c. 175–225: manuscript page",
+                "caption": "Ann Arbor, University of Michigan P.Mich.inv. 6238 (Papyrus 46) fol. 142r - 2 Corinthians 11,33-12,9, c. 175–225.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "paul/acts-galatians": {
         "file": "Conversion on the Way to Damascus-Caravaggio (c.1600-1).jpg",
@@ -87,7 +189,21 @@
         "file": "Rembrandt - Apostle Paul - WGA19120.jpg",
         "alt": "Rembrandt, The Apostle Paul, about 1657, National Gallery of Art, Washington",
         "caption": "Rembrandt, The Apostle Paul (about 1657), National Gallery of Art, Washington: Paul of Tarsus with the sword and the book.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Dublin, Chester Beatty Ms BP II fol. 15&90 Bifolio from Paul's Letter to the Romans, the end of Paul's Letter to the Philippians and the beginning of Paul's Letter to the Colossians.jpg",
+                "alt": "Dublin, Chester Beatty Ms BP II fol. 15&90 Bifolio from Paul's Letter to the Romans, the end of Paul's Letter to the Philippians and the beginning of Paul's Letter to the Colossians, circa 200: manuscript page",
+                "caption": "Dublin, Chester Beatty Ms BP II fol. 15&90 Bifolio from Paul's Letter to the Romans, the end of Paul's Letter to the Philippians and the beginning of Paul's Letter to the Colossians, circa 200.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Papyrus Bodmer VIII.jpg",
+                "alt": "Papyrus Bodmer VIII: manuscript page",
+                "caption": "Papyrus Bodmer VIII.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "paul/james": {
         "file": "Saint James the Just.jpg",
@@ -105,25 +221,93 @@
         "file": "Juan de Juanes 002.jpg",
         "alt": "Juan de Juanes, The Last Supper, about 1562, Museo del Prado",
         "caption": "Juan de Juanes, The Last Supper (about 1562), Museo del Prado, Madrid. The Qur’an’s table from heaven (5:112 to 115) is the sign the disciples asked for.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Folios from a Qur'an Manuscript MET sf26-161-1r.jpg",
+                "alt": "Folios from a Qur'an Manuscript MET sf26-161-1r: manuscript page",
+                "caption": "Folios from a Qur'an Manuscript MET sf26-161-1r.",
+                "credit": "CC0."
+            },
+            {
+                "file": "Folio from a Koran (8th-9th century).jpg",
+                "alt": "Folio from a Koran (8th-9th century): manuscript page",
+                "caption": "Folio from a Koran (8th-9th century).",
+                "credit": "Public domain."
+            }
+        ]
     },
     "resources/sources": {
         "file": "Codex Vaticanus B, 2Thess. 3,11-18, Hebr. 1,1-2,2.jpg",
         "alt": "Codex Vaticanus, fourth century: the end of 2 Thessalonians and the beginning of Hebrews",
         "caption": "Codex Vaticanus, fourth century, one of the 2 oldest complete Greek Bibles: the end of 2 Thessalonians and the opening of Hebrews. Vatican Library.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Codex Sinaiticus.jpg",
+                "alt": "Codex Sinaiticus, 2026-01-30 13:00:49: manuscript page",
+                "caption": "Codex Sinaiticus, 2026-01-30 13:00:49.",
+                "credit": "PotatoCow25, CC0."
+            },
+            {
+                "file": "Genesis 1 Dead Sea Scroll.jpg",
+                "alt": "Genesis 1 Dead Sea Scroll, 2017-09-15 05:20:30: manuscript page",
+                "caption": "Genesis 1 Dead Sea Scroll, 2017-09-15 05:20:30.",
+                "credit": "KetefHinnomFan, CC0."
+            },
+            {
+                "file": "Nag hammadi area base.jpg",
+                "alt": "Nag hammadi area base, 2009-04-04: manuscript page",
+                "caption": "Nag hammadi area base, 2009-04-04.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "resources/objections": {
         "file": "Codex Sinaiticus Matthew 6,4-32.JPG",
         "alt": "Codex Sinaiticus, fourth century: a page of Matthew 6 with the Lord’s Prayer",
         "caption": "Codex Sinaiticus, fourth century: Matthew 6:4 to 32, with the Lord’s Prayer. British Library.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Gutenberg Bible, New York Public Library, USA. Pic 01.jpg",
+                "alt": "Gutenberg Bible, New York Public Library, USA. Pic 01, 2009-05-09: manuscript page",
+                "caption": "Gutenberg Bible, New York Public Library, USA. Pic 01, 2009-05-09.",
+                "credit": "Joshua Keller, CC BY 2.0."
+            },
+            {
+                "file": "British Library medieval manuscript.jpeg",
+                "alt": "British Library medieval manuscript: manuscript page",
+                "caption": "British Library medieval manuscript.",
+                "credit": "CC BY 3.0."
+            }
+        ]
     },
     "gospels/john": {
         "file": "Papyrus 66 (GA).jpg",
         "alt": "Papyrus 66, Bodmer Papyrus II, about 200 CE: the opening of the Gospel of John",
         "caption": "Papyrus 66 (Bodmer II), about 200 CE: John 1:1 to 14, the oldest nearly complete copy of the gospel. Bodmer Library, Cologny.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Manchester, John Rylands Library Ms Greek P 457 (Papyrus 52) verso John 18, 37-38.jpg",
+                "alt": "Manchester, John Rylands Library Ms Greek P 457 (Papyrus 52) verso John 18, 37-38: manuscript page",
+                "caption": "Manchester, John Rylands Library Ms Greek P 457 (Papyrus 52) verso John 18, 37-38.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Codex Alexandrinus J 1,1-7.PNG",
+                "alt": "Codex Alexandrinus J 1,1-7, 1856: manuscript page",
+                "caption": "Codex Alexandrinus J 1,1-7, 1856.",
+                "credit": "Image from Codex Alexanrinus, CC BY-SA 3.0."
+            },
+            {
+                "file": "Codex Alexandrinus 013a Mc 6,27-54.JPG",
+                "alt": "Codex Alexandrinus 013a Mc 6,27-54: manuscript page",
+                "caption": "Codex Alexandrinus 013a Mc 6,27-54.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "paul/false-apostles": {
         "file": "Paul-epitre-galates-2-3es.jpg",
@@ -135,7 +319,15 @@
         "file": "Jerusalem Modell BW 2.JPG",
         "alt": "Model of Jerusalem and the Temple of Herod in the first century, Israel Museum",
         "caption": "The Temple of Herod in the model of first-century Jerusalem at the Israel Museum. The Ebionites kept the law of the Temple’s city after its fall. Photograph by Berthold Werner.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Psalms Scroll.jpg",
+                "alt": "Psalms Scroll, 1993-06: manuscript page",
+                "caption": "Psalms Scroll, 1993-06.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "islamic-dilemma/secular-form": {
         "file": "Birmingham Quran manuscript.jpg",
@@ -159,13 +351,41 @@
         "file": "Christ Pantocrator Deesis mosaic Hagia Sophia.jpg",
         "alt": "The Deesis mosaic of Christ in Hagia Sophia, Istanbul, thirteenth century",
         "caption": "Christ in the Deesis mosaic of Hagia Sophia, Istanbul, thirteenth century: the image of Jesus as a God; the Qur’an calls him a servant and a messenger. Photograph by Myrabella.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Samarkand Kufic Quran, 1905 (2022-07-05) 03.jpg",
+                "alt": "Samarkand Kufic Quran, 1905 (2022-07-05) 03, 2022-07-05 11:01:43: manuscript page",
+                "caption": "Samarkand Kufic Quran, 1905 (2022-07-05) 03, 2022-07-05 11:01:43.",
+                "credit": "Vyacheslav Kirillin, CC BY-SA 4.0."
+            },
+            {
+                "file": "Uthman Koran Taschkent a.jpg",
+                "alt": "Uthman Koran Taschkent a, 2006: manuscript page",
+                "caption": "Uthman Koran Taschkent a, 2006.",
+                "credit": "Wiggum, CC BY-SA 3.0."
+            }
+        ]
     },
     "quran/signs": {
         "file": "Giotto di Bondone - No. 25 Scenes from the Life of Christ - 9. Raising of Lazarus - WGA09204.jpg",
         "alt": "Giotto, The Raising of Lazarus, Scrovegni Chapel, Padua, about 1305",
         "caption": "Giotto, The Raising of Lazarus (about 1305), Scrovegni Chapel, Padua. The Qur’an: he brought the dead to life, by God’s permission (3:49; 5:110).",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Birmingham Quran manuscript full.jpg",
+                "alt": "Birmingham Quran manuscript full: manuscript page",
+                "caption": "Birmingham Quran manuscript full.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Folio Blue Quran Met 2004.88.jpg",
+                "alt": "Folio Blue Quran Met 2004.88: manuscript page",
+                "caption": "Folio Blue Quran Met 2004.88.",
+                "credit": "CC BY 2.5."
+            }
+        ]
     },
     "gospels/discrepancies/nativity": {
         "file": "Giotto - Scrovegni - -17- - Nativity, Birth of Jesus.jpg",
@@ -223,5 +443,295 @@
         "alt": "A Greek inscription cut in a cracked marble block",
         "caption": "A Greek inscription in marble. Paul of Tarsus wrote his letters in Greek, to churches in the Greek-speaking cities of the Roman east.",
         "credit": "Photo: ROMAN ODINTSOV, Pexels License"
+    },
+    "gospel-according-to-islam/family-of-amran-zacharias-and-john": {
+        "file": "Papyrus manuscript of the Gospel of Luke (Papyrus 97) (CBL BP XVII).jpg",
+        "alt": "Papyrus manuscript of the Gospel of Luke (Papyrus 97) (CBL BP XVII): manuscript page",
+        "caption": "Papyrus manuscript of the Gospel of Luke (Papyrus 97) (CBL BP XVII).",
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Uncial 070 Luke 10,21-30.jpg",
+                "alt": "Uncial 070 Luke 10,21-30, 6th-century: manuscript page",
+                "caption": "Uncial 070 Luke 10,21-30, 6th-century.",
+                "credit": "Public domain."
+            }
+        ]
+    },
+    "gospel-according-to-islam/annunciation-and-birth-of-jesus": {
+        "file": "Folio from a Qur'an Manuscript with Verses from the Surat al-Maryam MET DP374591.jpg",
+        "alt": "Folio from a Qur'an Manuscript with Verses from the Surat al-Maryam MET DP374591: manuscript page",
+        "caption": "Folio from a Qur'an Manuscript with Verses from the Surat al-Maryam MET DP374591.",
+        "credit": "CC0.",
+        "more": [
+            {
+                "file": "Paris, BnF Ms Supplement Grec 1120 (Papyrus 4) - Fragment D Luke 6, 4–16.jpg",
+                "alt": "Paris, BnF Ms Supplement Grec 1120 (Papyrus 4) - Fragment D Luke 6, 4–16, c 150–175: manuscript page",
+                "caption": "Paris, BnF Ms Supplement Grec 1120 (Papyrus 4) - Fragment D Luke 6, 4–16, c 150–175.",
+                "credit": "Public domain."
+            }
+        ]
+    },
+    "gospel-according-to-islam/promised-messenger-joseph-and-creation-of-jesus": {
+        "file": "Codex Sinaiticus Matthew 2,5-3,7.JPG",
+        "alt": "Codex Sinaiticus Matthew 2,5-3,7: manuscript page",
+        "caption": "Codex Sinaiticus Matthew 2,5-3,7.",
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Papyrus 1 - recto.jpg",
+                "alt": "Papyrus 1 - recto, c. 250: manuscript page",
+                "caption": "Papyrus 1 - recto, c. 250.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Uncial 0307, Matthew 11.png",
+                "alt": "Uncial 0307, Matthew 11, 7th century: manuscript page",
+                "caption": "Uncial 0307, Matthew 11, 7th century.",
+                "credit": "Public domain."
+            }
+        ]
+    },
+    "gospel-according-to-islam/presentation-boyhood-and-visit-to-jerusalem": {
+        "file": "Uncial 0191 (K. 9031).jpg",
+        "alt": "Uncial 0191 (K. 9031): manuscript page",
+        "caption": "Uncial 0191 (K. 9031).",
+        "credit": "Public domain."
+    },
+    "gospel-according-to-islam/john-baptist": {
+        "file": "Codex Sinaiticus Matthew 3,7-4,19.JPG",
+        "alt": "Codex Sinaiticus Matthew 3,7-4,19: manuscript page",
+        "caption": "Codex Sinaiticus Matthew 3,7-4,19.",
+        "credit": "Public domain."
+    },
+    "gospel-according-to-islam/baptism-temptation-and-return-to-nazareth": {
+        "file": "Codex Alexandrinus f41v - Luke.jpg",
+        "alt": "Codex Alexandrinus f41v - Luke: manuscript page",
+        "caption": "Codex Alexandrinus f41v - Luke.",
+        "credit": "Public domain."
+    },
+    "gospel-according-to-islam/capernaum-first-disciples-and-healings": {
+        "file": "Codex Vaticanus end or Luke.jpg",
+        "alt": "Codex Vaticanus end or Luke: manuscript page",
+        "caption": "Codex Vaticanus end or Luke.",
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Codex Bezae 0202a.JPG",
+                "alt": "Codex Bezae 0202a: manuscript page",
+                "caption": "Codex Bezae 0202a.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Codex Alexandrinus - Gospel of Mark.png",
+                "alt": "Codex Alexandrinus - Gospel of Mark: manuscript page",
+                "caption": "Codex Alexandrinus - Gospel of Mark.",
+                "credit": "Public domain."
+            }
+        ]
+    },
+    "gospel-according-to-islam/leper-sabbath-and-beatitudes": {
+        "file": "Codex Sinaiticus Matthew 4,19-5,22.JPG",
+        "alt": "Codex Sinaiticus Matthew 4,19-5,22: manuscript page",
+        "caption": "Codex Sinaiticus Matthew 4,19-5,22.",
+        "credit": "Public domain."
+    },
+    "gospel-according-to-islam/traditions-of-elders-and-syrophoenician-woman": {
+        "file": "Codex Bezae 0205.JPG",
+        "alt": "Codex Bezae 0205: manuscript page",
+        "caption": "Codex Bezae 0205.",
+        "credit": "Public domain."
+    },
+    "gospel-according-to-islam/blind-man-and-samaritan-woman": {
+        "file": "Papyrus 66 Leaf 35v.png",
+        "alt": "Papyrus 66 Leaf 35v, 2020-01-15: manuscript page",
+        "caption": "Papyrus 66 Leaf 35v, 2020-01-15.",
+        "credit": "GNT316, CC BY-SA 4.0."
+    },
+    "gospel-according-to-islam/bird-of-clay-beelzebub-and-unclean-spirit": {
+        "file": "Qur'anic Verses WDL6805.png",
+        "alt": "Qur'anic Verses WDL6805: manuscript page",
+        "caption": "Qur'anic Verses WDL6805.",
+        "credit": "Public domain."
+    },
+    "gospel-according-to-islam/meaning-of-vision-leaven-and-tares": {
+        "file": "Uncial 0237 verso.jpg",
+        "alt": "Uncial 0237 verso, 2008-10-08 16:19:27: manuscript page",
+        "caption": "Uncial 0237 verso, 2008-10-08 16:19:27.",
+        "credit": "Public domain."
+    },
+    "gospel-according-to-islam/rich-man-and-request-of-james-and-john": {
+        "file": "Codex Washingtonianus W (032) Mk 16,12-17.JPG",
+        "alt": "Codex Washingtonianus W (032) Mk 16,12-17: manuscript page",
+        "caption": "Codex Washingtonianus W (032) Mk 16,12-17.",
+        "credit": "Public domain."
+    },
+    "gospel-according-to-islam/last-supper-future-of-temple-and-man-of-perfection": {
+        "file": "Camebrige, Cambridge University Library Ms Add. 5893 Papyrus Oxyrhynchus 1078 (Papyrus 17) recto Hebrews 9, 12–14.jpg",
+        "alt": "Camebrige, Cambridge University Library Ms Add. 5893 Papyrus Oxyrhynchus 1078 (Papyrus 17) recto Hebrews 9, 12–14: manuscript page",
+        "caption": "Camebrige, Cambridge University Library Ms Add. 5893 Papyrus Oxyrhynchus 1078 (Papyrus 17) recto Hebrews 9, 12–14.",
+        "credit": "Public domain."
+    },
+    "gospel-according-to-islam/trial-barabbas-and-raising-of-jesus": {
+        "file": "Qur'an of Khorasan bint Abi al-Qasim - Folios from Majlis Library no. 2002.jpg",
+        "alt": "Qur'an of Khorasan bint Abi al-Qasim - Folios from Majlis Library no. 2002: manuscript page",
+        "caption": "Qur'an of Khorasan bint Abi al-Qasim - Folios from Majlis Library no. 2002.",
+        "credit": "Public domain."
+    },
+    "gospel-according-to-islam/empty-tomb-reports-and-return": {
+        "file": "Folio from a Qur’an, sura 5,12-13 (F1929.69).jpg",
+        "alt": "Folio from a Qur’an, sura 5,12-13 (F1929.69): manuscript page",
+        "caption": "Folio from a Qur’an, sura 5,12-13 (F1929.69).",
+        "credit": "Public domain."
+    },
+    "paul": {
+        "file": "Claromontanus 2 greek.jpg",
+        "alt": "Claromontanus 2 greek, 1854: manuscript page",
+        "caption": "Claromontanus 2 greek, 1854.",
+        "credit": "Public domain."
+    },
+    "quran/raised": {
+        "file": "Bifolio from a Koran.jpg",
+        "alt": "Bifolio from a Koran: manuscript page",
+        "caption": "Bifolio from a Koran.",
+        "credit": "Public domain."
+    },
+    "quran/ahmad": {
+        "file": "Birmingham Quran manuscript folio 1 verso.jpg",
+        "alt": "Birmingham Quran manuscript folio 1 verso, 2015-05-14 12:12:29: manuscript page",
+        "caption": "Birmingham Quran manuscript folio 1 verso, 2015-05-14 12:12:29.",
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Birmingham Quran manuscript folio 1 recto.jpg",
+                "alt": "Birmingham Quran manuscript folio 1 recto: manuscript page",
+                "caption": "Birmingham Quran manuscript folio 1 recto.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Folio from the Blue Qur'an (CBL Is 1405A, f. 1b).jpg",
+                "alt": "Folio from the Blue Qur'an (CBL Is 1405A, f. 1b), 0950: manuscript page",
+                "caption": "Folio from the Blue Qur'an (CBL Is 1405A, f. 1b), 0950.",
+                "credit": "Public domain."
+            }
+        ]
+    },
+    "resources/glossary": {
+        "file": "Aleppo Codex (Deut).jpg",
+        "alt": "Aleppo Codex (Deut): manuscript page",
+        "caption": "Aleppo Codex (Deut).",
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Lectionary 2137 GA 0038a.JPG",
+                "alt": "Lectionary 2137 GA 0038a: manuscript page",
+                "caption": "Lectionary 2137 GA 0038a.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Arabic text, Naskh calligraphy.jpg",
+                "alt": "Arabic text, Naskh calligraphy, 2011-11-22: manuscript page",
+                "caption": "Arabic text, Naskh calligraphy, 2011-11-22.",
+                "credit": "IsmaelGeorge, CC BY-SA 3.0."
+            },
+            {
+                "file": "The Great Isaiah Scroll MS A (1QIsa) - Google Art Project.jpg",
+                "alt": "The Great Isaiah Scroll MS A (1QIsa), 1st century BCE: manuscript page",
+                "caption": "The Great Isaiah Scroll MS A (1QIsa), 1st century BCE.",
+                "credit": "Public domain."
+            }
+        ]
+    },
+    "resources/manuscripts": {
+        "file": "P. Oxy. 655.jpg",
+        "alt": "P. Oxy. 655: manuscript page",
+        "caption": "P. Oxy. 655.",
+        "credit": "Public domain."
+    },
+    "resources/borrowing": {
+        "file": "Folio from a q manuscript 1180.jpg",
+        "alt": "Folio from a q manuscript 1180: manuscript page",
+        "caption": "Folio from a q manuscript 1180.",
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Codex Sabaiticus 259 66r Infancy Gospel of Thomas.jpg",
+                "alt": "Codex Sabaiticus 259 66r Infancy Gospel of Thomas, 1089: manuscript page",
+                "caption": "Codex Sabaiticus 259 66r Infancy Gospel of Thomas, 1089.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Gospel in Syriac, Syria, Israel, or West Bank, c. 1700-1800 AD - Royal Ontario Museum - DSC09613.JPG",
+                "alt": "Gospel in Syriac, Syria, Israel, or West Bank, c. 1700-1800 AD - Royal Ontario Museum - DSC09613, 2011-11-20 17:17:12: manuscript page",
+                "caption": "Gospel in Syriac, Syria, Israel, or West Bank, c. 1700-1800 AD - Royal Ontario Museum - DSC09613, 2011-11-20 17:17:12.",
+                "credit": "Daderot, CC0."
+            }
+        ]
+    },
+    "resources/responses": {
+        "file": "Abbasid Koran folio from Egypt.jpg",
+        "alt": "Abbasid Koran folio from Egypt: manuscript page",
+        "caption": "Abbasid Koran folio from Egypt.",
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Papyrus 3 - Austrian National Library, P. Vindob. G. 2323 - Gospel of Luke, 7,36–45, 10,38–42 - verso.jpg",
+                "alt": "Papyrus 3 - Austrian National Library, P. Vindob. G. 2323 - Gospel of Luke, 7,36–45, 10,38–42 - verso: manuscript page",
+                "caption": "Papyrus 3 - Austrian National Library, P. Vindob. G. 2323 - Gospel of Luke, 7,36–45, 10,38–42 - verso.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Minuscule 1424 folio 317 recto.jpg",
+                "alt": "Minuscule 1424 folio 317 recto: manuscript page",
+                "caption": "Minuscule 1424 folio 317 recto.",
+                "credit": "Public domain."
+            }
+        ]
+    },
+    "bonus": {
+        "file": "Papyrus letter in Greek MET DP137338.jpg",
+        "alt": "Papyrus letter in Greek MET DP137338: manuscript page",
+        "caption": "Papyrus letter in Greek MET DP137338.",
+        "credit": "CC0.",
+        "more": [
+            {
+                "file": "Oxford, University of Oxford, Art, Archaeology and Ancient World Library Ms P. Oxy. 2157 (Papyrus 51) recto Gal 1, 2-10.jpg",
+                "alt": "Oxford, University of Oxford, Art, Archaeology and Ancient World Library Ms P. Oxy. 2157 (Papyrus 51) recto Gal 1, 2-10: manuscript page",
+                "caption": "Oxford, University of Oxford, Art, Archaeology and Ancient World Library Ms P. Oxy. 2157 (Papyrus 51) recto Gal 1, 2-10.",
+                "credit": "Public domain."
+            }
+        ]
+    },
+    "bonus/epistle": {
+        "file": "Papyrus letter in Greek MET DP137339.jpg",
+        "alt": "Papyrus letter in Greek MET DP137339: manuscript page",
+        "caption": "Papyrus letter in Greek MET DP137339.",
+        "credit": "CC0.",
+        "more": [
+            {
+                "file": "Papyrus Fragment of a Letter MET sf14-1-543s1.jpg",
+                "alt": "Papyrus Fragment of a Letter MET sf14-1-543s1, 580–640: manuscript page",
+                "caption": "Papyrus Fragment of a Letter MET sf14-1-543s1, 580–640.",
+                "credit": "CC0."
+            },
+            {
+                "file": "Page from Coptic manuscript of the 'Pauline Epistles & Gospel of John' (CBL Cpt 813, f.3r).jpg",
+                "alt": "Page from Coptic manuscript of the 'Pauline Epistles & Gospel of John' (CBL Cpt 813, f.3r), 0600: manuscript page",
+                "caption": "Page from Coptic manuscript of the 'Pauline Epistles & Gospel of John' (CBL Cpt 813, f.3r), 0600.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Letter written in hieratic script on papyrus MET DP234741.jpg",
+                "alt": "Letter written in hieratic script on papyrus MET DP234741: manuscript page",
+                "caption": "Letter written in hieratic script on papyrus MET DP234741.",
+                "credit": "CC0."
+            }
+        ]
+    },
+    "islamic-dilemma/balance-of-truth": {
+        "file": "Folio from a Qur’an, Sura 5, verses 68-69 (S1997.102).jpg",
+        "alt": "Folio from a Qur’an, Sura 5, verses 68-69 (S1997.102), 14th-15th century: manuscript page",
+        "caption": "Folio from a Qur’an, Sura 5, verses 68-69 (S1997.102), 14th-15th century.",
+        "credit": "Public domain."
     }
 }
