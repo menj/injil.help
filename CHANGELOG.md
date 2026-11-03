@@ -2,6 +2,16 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.17.0
+
+Pages can now carry more than one image.
+
+- An entry in `inc/data/images.json` may add `"more"`: up to three further images, each with `file`, `alt`, `caption` and `credit`. They are placed after paragraphs, evenly through the text and clear of the notes. The first image stays where it was.
+- The images are manuscripts and inscriptions from Wikimedia Commons, as `SSOT.md` requires. 112 images now stand on 61 pages: the 27 gospel sections that had none are covered where Commons has a fitting manuscript, and 26 pages gained one to three more.
+- A sideloaded image is stored in the Media Library as AVIF, or as WebP when it is under 1000 pixels wide, scaled to at most 1600 pixels. A server whose image library cannot write the format keeps the source format. Nothing is added to the theme: the files load from Commons until the admin pass copies them.
+- The admin pass that gave pages their featured image now also copies the extra images, six images per admin load, and records failures for a day.
+- The Qur'an translation, the base text and the fonts are unchanged.
+
 ## 3.16.0
 
 - The Read next row carries the owner's pixel arrow after its label (`assets/images/arrow-next.webp`, in the ornament layer of `assets/css/ornament.css`, so Ornament off removes it). Each is animated WebP drawn at its own pixel size, for decoration only; the link text is unchanged. Readers who ask for reduced motion see a still first frame.
