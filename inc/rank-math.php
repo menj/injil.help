@@ -143,6 +143,14 @@ function injil_help_rank_math_json_ld( $data, $jsonld = null ) {
 			if ( array_intersect( $types, array( 'WebPage', 'CollectionPage', 'ProfilePage', 'AboutPage', 'ContactPage', 'SearchResultsPage' ) ) ) {
 				$own_page    = $id;
 				$skip[ $id ] = true;
+				// Its page elements, subjects and links fill what Rank Math's WebPage leaves empty.
+				if ( isset( $data['WebPage'] ) && is_array( $data['WebPage'] ) ) {
+					foreach ( array( 'about', 'hasPart', 'mainContentOfPage', 'significantLink', 'relatedLink', 'speakable', 'correction', 'potentialAction' ) as $prop ) {
+						if ( isset( $node[ $prop ] ) && ! isset( $data['WebPage'][ $prop ] ) ) {
+							$data['WebPage'][ $prop ] = $node[ $prop ];
+						}
+					}
+				}
 			} elseif ( array_intersect( $types, array( 'BreadcrumbList' ) ) ) {
 				$skip[ $id ] = true;
 			} elseif ( array_intersect( $types, array( 'Article', 'BlogPosting', 'ScholarlyArticle' ) ) ) {
@@ -150,7 +158,7 @@ function injil_help_rank_math_json_ld( $data, $jsonld = null ) {
 				$skip[ $id ] = true;
 				// Its citations, subjects and place in a book go onto Rank Math's Article.
 				if ( $rm_article ) {
-					foreach ( array( 'citation', 'about', 'speakable' ) as $prop ) {
+					foreach ( array( 'citation', 'about', 'mentions', 'speakable', 'abstract', 'dateCreated', 'copyrightYear', 'accessMode', 'accessModeSufficient', 'accessibilityFeature', 'correction', 'wordCount' ) as $prop ) {
 						if ( isset( $node[ $prop ] ) && ! isset( $data[ $rm_article ][ $prop ] ) ) {
 							$data[ $rm_article ][ $prop ] = $node[ $prop ];
 						}

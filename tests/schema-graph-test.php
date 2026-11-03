@@ -1,0 +1,454 @@
+<?php
+/**
+ * Self-test for the structured data (inc/schema.php, inc/schema-content.php, inc/schema-extend.php,
+ * inc/rank-math.php). Run: php tests/schema-graph-test.php
+ *
+ * WordPress is stubbed. Every starter page the theme writes (inc/starter-content-pages.php) is built
+ * from its definition, rendered and given its graph, once on its own and once merged into a stand-in
+ * Rank Math graph. Each graph must encode as JSON and decode again; every @id must be unique; every
+ * {"@id"} reference must name a node of the same graph (image addresses excepted, which are nodes
+ * too); every node must carry @type; the page, breadcrumb and article must carry their required
+ * properties; and no value may hold the calligraphic mark, the owner's name or the banned word. Exit code 0 on success.
+ *
+ * @package injil-help
+ */
+
+define( 'ABSPATH', __DIR__ . '/' );
+define( 'RANK_MATH_VERSION', 'stub' );
+$GLOBALS['ih_theme'] = dirname( __DIR__ );
+$GLOBALS['ih_post']  = null;
+$GLOBALS['ih_posts'] = array();
+
+class WP_Post {
+	public $ID;
+	public $post_name;
+	public $post_type = 'page';
+	public $post_parent = 0;
+	public $post_title;
+	public $post_content;
+	public $post_excerpt = '';
+	public $post_date = '2026-10-01 10:00:00';
+	public $post_modified = '2026-11-01 10:00:00';
+}
+class WP_Error {}
+class WP_Block_Patterns_Registry {
+	public static function get_instance() {
+		return new self();
+	}
+	public function get_registered( $slug ) {
+		$name = preg_replace( '#^injil-help/#', '', $slug );
+		$p    = function_exists( 'injil_help_pattern_file' ) ? injil_help_pattern_file( $name ) : null;
+		return $p ? array( 'content' => $p['content'] ) : null;
+	}
+}
+
+// ---------- WordPress stubs ----------
+function add_action() {}
+function add_filter() {}
+function remove_action() {}
+function register_activation_hook() {}
+function apply_filters( $tag, $value ) {
+	return 'injil_help_output_schema' === $tag ? true : $value;
+}
+function do_action() {}
+function get_stylesheet_directory() {
+	return $GLOBALS['ih_theme'];
+}
+function get_stylesheet_directory_uri() {
+	return 'https://injil.help/wp-content/themes/injil-help';
+}
+function get_stylesheet() {
+	return 'injil-help';
+}
+function home_url( $path = '' ) {
+	return 'https://injil.help' . ( '' === $path ? '' : '/' . ltrim( $path, '/' ) );
+}
+function get_bloginfo( $what ) {
+	return array(
+		'name'     => 'The Rightly-Guided Injīl',
+		'language' => 'en-GB',
+	)[ $what ] ?? '';
+}
+function __( $s ) {
+	return $s;
+}
+function esc_html( $s ) {
+	return htmlspecialchars( (string) $s, ENT_QUOTES );
+}
+function esc_attr( $s ) {
+	return htmlspecialchars( (string) $s, ENT_QUOTES );
+}
+function esc_url( $s ) {
+	return (string) $s;
+}
+function wp_kses_post( $s ) {
+	return (string) $s;
+}
+function wp_strip_all_tags( $s ) {
+	return trim( strip_tags( preg_replace( '@<(script|style)[^>]*?>.*?</\\1>@si', '', (string) $s ) ) );
+}
+function wp_json_encode( $v, $f = 0 ) {
+	return json_encode( $v, $f );
+}
+function wp_parse_url( $u, $c = -1 ) {
+	return parse_url( $u, $c );
+}
+function wp_list_pluck( $list, $field ) {
+	return array_map(
+		function ( $i ) use ( $field ) {
+			return $i[ $field ] ?? null;
+		},
+		$list
+	);
+}
+function remove_accents( $s ) {
+	$t = @iconv( 'UTF-8', 'ASCII//TRANSLIT//IGNORE', $s );
+	return false === $t ? $s : $t;
+}
+function is_wp_error( $v ) {
+	return $v instanceof WP_Error;
+}
+function number_format_i18n( $n ) {
+	return number_format( (float) $n );
+}
+function sanitize_title( $s ) {
+	return strtolower( trim( preg_replace( '/[^A-Za-z0-9]+/', '-', $s ), '-' ) );
+}
+function wp_parse_args( $a, $d ) {
+	return array_merge( $d, $a );
+}
+function get_option( $k, $d = false ) {
+	return $d;
+}
+function get_theme_mod( $k, $d = false ) {
+	return $d;
+}
+function get_post_meta() {
+	return '';
+}
+function has_site_icon() {
+	return false;
+}
+function get_site_icon_url() {
+	return '';
+}
+function get_queried_object() {
+	return $GLOBALS['ih_post'];
+}
+function is_front_page() {
+	return false;
+}
+function is_home() {
+	return false;
+}
+function is_search() {
+	return false;
+}
+function is_archive() {
+	return false;
+}
+function is_404() {
+	return false;
+}
+function is_singular() {
+	return null !== $GLOBALS['ih_post'];
+}
+function is_page( $slug = '' ) {
+	return $GLOBALS['ih_post'] && ( '' === $slug || $GLOBALS['ih_post']->post_name === $slug );
+}
+function get_post( $id ) {
+	return $GLOBALS['ih_posts'][ $id ] ?? null;
+}
+function get_post_ancestors( $post ) {
+	$out = array();
+	while ( $post && $post->post_parent ) {
+		$out[] = $post->post_parent;
+		$post  = get_post( $post->post_parent );
+	}
+	return $out;
+}
+function get_post_field( $field, $id ) {
+	$p = get_post( $id );
+	return $p ? $p->$field : '';
+}
+function get_the_title( $post ) {
+	$post = is_object( $post ) ? $post : get_post( $post );
+	return $post ? $post->post_title : '';
+}
+function get_permalink( $post ) {
+	$post  = is_object( $post ) ? $post : get_post( $post );
+	$slugs = array();
+	foreach ( array_reverse( get_post_ancestors( $post ) ) as $a ) {
+		$slugs[] = get_post( $a )->post_name;
+	}
+	$slugs[] = $post->post_name;
+	return home_url( '/' . implode( '/', $slugs ) . '/' );
+}
+function get_the_date( $f, $post ) {
+	return date( 'c' === $f ? DATE_ATOM : $f, strtotime( $post->post_date ) );
+}
+function get_the_modified_date( $f, $post ) {
+	return date( 'c' === $f ? DATE_ATOM : $f, strtotime( $post->post_modified ) );
+}
+function has_post_thumbnail() {
+	return false;
+}
+function has_excerpt( $post ) {
+	return '' !== (string) $post->post_excerpt;
+}
+function get_the_excerpt( $post ) {
+	return (string) $post->post_excerpt;
+}
+function strip_shortcodes( $s ) {
+	return $s;
+}
+function wp_get_document_title() {
+	return '';
+}
+function get_block_template() {
+	return null;
+}
+function add_query_arg() {
+	return '/';
+}
+function get_search_link() {
+	return home_url( '/?s=' );
+}
+function wp_get_attachment_image_src() {
+	return false;
+}
+
+/** A small block parser: enough of WordPress's grammar for the theme's own markup. */
+function parse_blocks( $content ) {
+	preg_match_all( '#<!--\s+(/)?wp:([a-z0-9/-]+)\s*(\{.*?\})?\s*(/)?-->#s', $content, $m, PREG_SET_ORDER | PREG_OFFSET_CAPTURE | PREG_UNMATCHED_AS_NULL );
+	$frames = array( array( 'innerBlocks' => array(), 'innerContent' => array(), 'innerHTML' => '' ) );
+	$pos    = 0;
+	$text   = function ( $html ) use ( &$frames ) {
+		if ( '' === $html ) {
+			return;
+		}
+		$k = count( $frames ) - 1;
+		$frames[ $k ]['innerHTML']     .= $html;
+		$frames[ $k ]['innerContent'][] = $html;
+	};
+	foreach ( $m as $t ) {
+		$text( substr( $content, $pos, $t[0][1] - $pos ) );
+		$pos   = $t[0][1] + strlen( $t[0][0] );
+		$name  = false === strpos( $t[2][0], '/' ) ? 'core/' . $t[2][0] : $t[2][0];
+		$attrs = null !== $t[3][0] ? (array) json_decode( $t[3][0], true ) : array();
+		if ( null !== $t[1][0] ) {
+			if ( count( $frames ) > 1 ) {
+				$block = array_pop( $frames );
+				$k     = count( $frames ) - 1;
+				$frames[ $k ]['innerBlocks'][]  = $block;
+				$frames[ $k ]['innerContent'][] = null;
+			}
+			continue;
+		}
+		$block = array( 'blockName' => $name, 'attrs' => $attrs, 'innerBlocks' => array(), 'innerContent' => array(), 'innerHTML' => '' );
+		if ( null !== $t[4][0] ) {
+			$k = count( $frames ) - 1;
+			$frames[ $k ]['innerBlocks'][]  = $block;
+			$frames[ $k ]['innerContent'][] = null;
+		} else {
+			$frames[] = $block;
+		}
+	}
+	$text( substr( $content, $pos ) );
+	while ( count( $frames ) > 1 ) {
+		$block = array_pop( $frames );
+		$k     = count( $frames ) - 1;
+		$frames[ $k ]['innerBlocks'][]  = $block;
+		$frames[ $k ]['innerContent'][] = null;
+	}
+	return $frames[0]['innerBlocks'];
+}
+function render_block( $block ) {
+	if ( 'core/pattern' === $block['blockName'] ) {
+		$out = '';
+		foreach ( injil_help_expand_patterns( array( $block ) ) as $b ) {
+			$out .= render_block( $b );
+		}
+		return $out;
+	}
+	$out = '';
+	$j   = 0;
+	foreach ( $block['innerContent'] as $piece ) {
+		$out .= null === $piece ? render_block( $block['innerBlocks'][ $j++ ] ) : $piece;
+	}
+	return $out;
+}
+
+// ---------- The theme ----------
+require $GLOBALS['ih_theme'] . '/inc/options.php';
+require $GLOBALS['ih_theme'] . '/inc/starter-content.php';
+require $GLOBALS['ih_theme'] . '/inc/seo.php';
+require $GLOBALS['ih_theme'] . '/inc/schema.php';
+require $GLOBALS['ih_theme'] . '/inc/rank-math.php';
+
+$fail = 0;
+$n    = 0;
+function ih_fail( $page, $msg ) {
+	global $fail;
+	$fail++;
+	echo "FAIL {$page}: {$msg}\n";
+}
+
+/** Check one graph. */
+function ih_check_graph( $page, $graph, $rank_math = false ) {
+	$json = json_encode( array( '@context' => 'https://schema.org', '@graph' => array_values( $graph ) ), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+	if ( false === $json || null === json_decode( $json, true ) ) {
+		ih_fail( $page, 'graph does not encode as JSON' );
+		return;
+	}
+	if ( preg_match( '/لعنة|ih-lanah/u', $json ) ) {
+		ih_fail( $page, 'the calligraphic mark is in the structured data' );
+	}
+	$owner = array( 'db57089a87a6d3ed7c940a520ae77b6d547c2216', 'ca184eff29b058d2768bae241379fe368f9d22fe', '8e53f2fddde74470942091868d29da9477674eb2' ); // SHA-1 of the owner's names, lower case
+	if ( array_intersect( $owner, array_map( 'sha1', preg_split( '/[^\p{L}]+/u', mb_strtolower( $json ), -1, PREG_SPLIT_NO_EMPTY ) ) ) ) {
+		ih_fail( $page, "the owner's name is in the structured data" );
+	}
+	if ( preg_match( '/\bhorn/i', $json ) ) {
+		ih_fail( $page, 'the banned word is in the structured data' );
+	}
+	$ids = array();
+	foreach ( $graph as $node ) {
+		if ( empty( $node['@type'] ) ) {
+			ih_fail( $page, 'node without @type: ' . substr( json_encode( $node ), 0, 120 ) );
+		}
+		if ( isset( $node['@id'] ) ) {
+			if ( isset( $ids[ $node['@id'] ] ) ) {
+				ih_fail( $page, 'duplicate @id ' . $node['@id'] );
+			}
+			$ids[ $node['@id'] ] = $node;
+		}
+	}
+	// Nested nodes with an @id and more than the @id are definitions too.
+	$nested = function ( $v ) use ( &$nested, &$ids, $page ) {
+		if ( ! is_array( $v ) ) {
+			return;
+		}
+		foreach ( $v as $c ) {
+			if ( is_array( $c ) && isset( $c['@id'] ) && count( $c ) > 1 ) {
+				$ids[ $c['@id'] ] = $ids[ $c['@id'] ] ?? $c;
+			}
+			$nested( $c );
+		}
+	};
+	foreach ( $graph as $node ) {
+		$nested( $node );
+	}
+	$refs = array();
+	injil_help_schema_refs( $graph, $refs );
+	foreach ( array_keys( $refs ) as $ref ) {
+		if ( ! isset( $ids[ $ref ] ) && ! ( $rank_math && 0 === strpos( $ref, 'rm#' ) ) ) {
+			ih_fail( $page, 'unresolved @id reference ' . $ref );
+		}
+	}
+	if ( $rank_math ) {
+		return;
+	}
+	$page_node = null;
+	foreach ( $graph as $node ) {
+		$types = (array) $node['@type'];
+		if ( array_intersect( $types, array( 'WebPage', 'CollectionPage', 'AboutPage', 'ContactPage', 'ProfilePage', 'SearchResultsPage' ) ) ) {
+			$page_node = $node;
+		}
+		if ( array_intersect( $types, array( 'Article', 'BlogPosting' ) ) ) {
+			foreach ( array( 'headline', 'author', 'datePublished', 'image', 'mainEntityOfPage' ) as $p ) {
+				if ( empty( $node[ $p ] ) ) {
+					ih_fail( $page, "Article without {$p}" );
+				}
+			}
+		}
+		if ( in_array( 'BreadcrumbList', $types, true ) && empty( $node['itemListElement'] ) ) {
+			ih_fail( $page, 'BreadcrumbList without items' );
+		}
+		if ( in_array( 'Quotation', $types, true ) && empty( $node['text'] ) ) {
+			ih_fail( $page, 'Quotation without text ' . ( $node['@id'] ?? '' ) );
+		}
+		if ( in_array( 'ImageObject', $types, true ) && empty( $node['contentUrl'] ) ) {
+			ih_fail( $page, 'ImageObject without contentUrl' );
+		}
+	}
+	if ( ! $page_node ) {
+		ih_fail( $page, 'no page node' );
+	} else {
+		foreach ( array( 'url', 'name', 'isPartOf', 'inLanguage', 'breadcrumb' ) as $p ) {
+			if ( empty( $page_node[ $p ] ) ) {
+				ih_fail( $page, "page node without {$p}" );
+			}
+		}
+	}
+}
+
+// Every starter page, its parents first.
+$defs   = injil_help_starter_pages();
+$by     = array();
+$id     = 1;
+$counts = array( 'Quotation' => 0, 'DefinedTerm' => 0, 'Chapter' => 0, 'Event' => 0 );
+foreach ( $defs as $def ) {
+	$p               = new WP_Post();
+	$p->ID           = $id++;
+	$parts           = explode( '/', $def['path'] );
+	$p->post_name    = end( $parts );
+	$p->post_title   = $def['title'];
+	$p->post_excerpt = (string) ( $def['excerpt'] ?? '' );
+	$parent          = implode( '/', array_slice( $parts, 0, -1 ) );
+	$p->post_parent  = isset( $by[ $parent ] ) ? $by[ $parent ]->ID : 0;
+	$by[ $def['path'] ] = $p;
+	$GLOBALS['ih_posts'][ $p->ID ] = $p;
+}
+foreach ( $defs as $def ) {
+	$p               = $by[ $def['path'] ];
+	$p->post_content = injil_help_page_content( $def );
+	$GLOBALS['ih_post'] = $p;
+	$GLOBALS['ih_rm']   = false;
+	$graph = injil_help_schema_graph();
+	ih_check_graph( $def['path'], $graph );
+	$json = json_encode( $graph, JSON_UNESCAPED_UNICODE );
+	$counts['Quotation']   += substr_count( $json, '"@type":"Quotation"' );
+	$counts['DefinedTerm'] += substr_count( $json, '"@type":"DefinedTerm"' );
+	$counts['Chapter']     += substr_count( $json, '"@type":"Chapter"' );
+	$counts['Event']       += substr_count( $json, '"@type":"Event"' );
+
+	// Merged into a stand-in Rank Math graph: one graph, no second copy of any @id.
+	$GLOBALS['ih_rm'] = true;
+	$url  = get_permalink( $p );
+	$rm   = array(
+		'publisher' => array( '@type' => 'Organization', '@id' => 'rm#org', 'name' => 'x' ),
+		'WebSite'   => array( '@type' => 'WebSite', '@id' => 'rm#website' ),
+		'WebPage'   => array( '@type' => 'WebPage', '@id' => $url . '#webpage', 'url' => $url ),
+		'Article'   => array( '@type' => 'Article', '@id' => $url . '#richSnippet', 'headline' => $def['title'] ),
+	);
+	$merged = injil_help_rank_math_json_ld( $rm );
+	ih_check_graph( $def['path'] . ' (Rank Math)', $merged, true );
+	$n++;
+}
+
+// Pages that must carry the new nodes.
+$expect = array(
+	'resources/glossary'                  => array( '"inDefinedTermSet"' ),
+	'resources/timeline'                  => array( '#timeline"', '"startDate"' ),
+	'gospels/thomas/sayings'              => array( '#sayings"', '"Saying 1' ),
+	'gospels/thomas/sayings-patterson-meyer' => array( '#sayings"' ),
+	'quran/passages'                      => array( '#quran-surah-', '"translationOfWork"' ),
+);
+foreach ( $expect as $path => $needles ) {
+	if ( ! isset( $by[ $path ] ) ) {
+		ih_fail( $path, 'page missing from the starter pages' );
+		continue;
+	}
+	$GLOBALS['ih_post'] = $by[ $path ];
+	$GLOBALS['ih_rm']   = false;
+	$json = json_encode( injil_help_schema_graph(), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
+	foreach ( $needles as $needle ) {
+		if ( false === strpos( $json, $needle ) ) {
+			ih_fail( $path, "expected {$needle} in the graph" );
+		}
+	}
+}
+
+echo "Pages: {$n}; Quotation {$counts['Quotation']}, DefinedTerm {$counts['DefinedTerm']}, Chapter {$counts['Chapter']}, Event {$counts['Event']}\n";
+echo $fail ? "FAILED: {$fail}\n" : "OK\n";
+exit( $fail ? 1 : 0 );

@@ -23,6 +23,9 @@
  *   FAQPage (Question, Answer)                   every page with FAQ items
  *   ImageObject (licence metadata)               every manuscript image, from its caption
  *
+ * inc/schema-extend.php then adds the Qur'an verse quotations, the Thomas sayings and timeline as
+ * ordered lists, term and entity @ids, image credits, navigation links and article details.
+ *
  * Output is skipped when Yoast, Rank Math or SEOPress is active, unless Theme
  * Options > SEO forces it on. Filter injil_help_schema_graph to change the graph.
  *
@@ -32,6 +35,7 @@
 defined( 'ABSPATH' ) || exit;
 
 require_once get_stylesheet_directory() . '/inc/schema-content.php';
+require_once get_stylesheet_directory() . '/inc/schema-extend.php';
 
 function injil_help_schema_enabled() {
 	$plugin_active = defined( 'WPSEO_VERSION' ) || class_exists( 'RankMath' ) || defined( 'SEOPRESS_VERSION' );
@@ -129,10 +133,10 @@ function injil_help_schema_site_nodes( $post = null ) {
 	);
 	$org              = array_merge( $org, injil_help_schema_policies() );
 	$org['knowsAbout'] = array(
-		array( '@type' => 'Thing', 'name' => 'The Islamic Dilemma' ),
+		array( '@id' => injil_help_schema_entity_id( 'islamic-dilemma' ) ),
 		array( '@id' => $ids['jesus'] ),
 		array( '@id' => $ids['quran'] ),
-		array( '@type' => 'Thing', 'name' => 'The Injīl' ),
+		array( '@id' => injil_help_schema_entity_id( 'injil' ) ),
 	);
 	if ( $same ) {
 		$org['sameAs'] = $same;
@@ -165,7 +169,7 @@ function injil_help_schema_site_nodes( $post = null ) {
 		'isAccessibleForFree' => true,
 		'publishingPrinciples' => home_url( '/method/' ),
 		'about'         => array(
-			array( '@type' => 'Thing', 'name' => 'The Islamic Dilemma' ),
+			array( '@id' => injil_help_schema_entity_id( 'islamic-dilemma' ) ),
 			array( '@id' => $ids['jesus'] ),
 			array( '@id' => $ids['quran'] ),
 		),
@@ -427,16 +431,22 @@ function injil_help_collect_citations( $html ) {
 /** Glossary entries: "<strong>Term</strong>: definition", several to a list item. */
 function injil_help_collect_terms( $html ) {
 	$terms = array();
-	if ( preg_match_all( '#<strong>([^<]+)</strong>\s*:\s*(.*?)(?=<strong>|</li>|</p>)#s', $html, $m, PREG_SET_ORDER ) ) {
+	if ( preg_match_all( '#<strong>([^<]+)</strong>\s*(\((?:also spelt|also written|also)\s+[^)]*\))?\s*:\s*(.*?)(?=<strong>|</li>|</p>)#s', $html, $m, PREG_SET_ORDER ) ) {
 		foreach ( $m as $e ) {
 			$name = html_entity_decode( trim( $e[1] ), ENT_QUOTES );
-			$def  = trim( preg_replace( '/\s+/', ' ', html_entity_decode( wp_strip_all_tags( $e[2] ), ENT_QUOTES ) ) );
+			$def  = trim( preg_replace( '/\s+/', ' ', html_entity_decode( wp_strip_all_tags( $e[3] ), ENT_QUOTES ) ) );
 			if ( $name && $def ) {
-				$terms[] = array(
+				$term = array(
 					'@type'       => 'DefinedTerm',
 					'name'        => $name,
 					'description' => $def,
 				);
+				// "(also spelt Injil, Injeel)": the other spellings the entry gives.
+				if ( ! empty( $e[2] ) ) {
+					$alt = preg_replace( '/^\((?:also spelt|also written|also)\s+|\)$/u', '', html_entity_decode( wp_strip_all_tags( $e[2] ), ENT_QUOTES ) );
+					$term['alternateName'] = array_values( array_filter( array_map( 'trim', preg_split( '/,|\bor\b/u', $alt ) ) ) );
+				}
+				$terms[] = $term;
 			}
 		}
 	}
@@ -576,6 +586,7 @@ function injil_help_schema_graph() {
 	foreach ( $blocks as $b ) {
 		$html .= render_block( $b );
 	}
+	$html = injil_help_schema_strip_mark( $html );
 
 	// URL and names.
 	if ( is_front_page() ) {
@@ -623,7 +634,7 @@ function injil_help_schema_graph() {
 		$webpage['breadcrumb'] = array( '@id' => $breadcrumb_id );
 	}
 	if ( is_front_page() || injil_help_is_pillar() ) {
-		$webpage['about'] = array( '@type' => 'Thing', 'name' => 'The Islamic Dilemma' );
+		$webpage['about'] = array( '@id' => injil_help_schema_entity_id( 'islamic-dilemma' ) );
 	}
 	if ( in_array( 'ProfilePage', (array) $page_type, true ) ) {
 		$webpage['mainEntity'] = array( '@id' => $ids['author'] );
@@ -734,8 +745,8 @@ function injil_help_schema_graph() {
 			$article['articleSection'] = wp_strip_all_tags( get_the_title( $parent ) );
 		}
 		if ( injil_help_is_pillar() ) {
-			$article['about'][] = array( '@type' => 'Thing', 'name' => 'The Islamic Dilemma' );
-			$article['about'][] = array( '@type' => 'Thing', 'name' => 'Injil' );
+			$article['about'][] = array( '@id' => injil_help_schema_entity_id( 'islamic-dilemma' ) );
+			$article['about'][] = array( '@id' => injil_help_schema_entity_id( 'injil' ) );
 			$article['keywords'] = 'the Islamic Dilemma, Quran 5:47, Injil, tahrif, the four gospels';
 		}
 		$citations = injil_help_collect_citations( $html );
@@ -960,6 +971,19 @@ function injil_help_schema_graph() {
 			'mainEntity' => $main,
 		);
 	}
+
+	$graph = injil_help_schema_extend(
+		$graph,
+		array(
+			'url'        => $url,
+			'webpage_id' => $webpage_id,
+			'article_id' => $article_id,
+			'html'       => $html,
+			'post'       => $post,
+			'path'       => $path_str,
+			'ids'        => $ids,
+		)
+	);
 
 	return apply_filters( 'injil_help_schema_graph', $graph );
 }
