@@ -4,6 +4,8 @@ All notable changes to The Injil theme. The `Changelog` section of `readme.txt` 
 
 ## 3.15.0
 
+- The Islamic Dilemma page credits its source study by title only. The author's name no longer appears on the front end.
+
 The structured data takes the shared model of the network's schema plan (3 November 2026). Every type the graph carried before stays. The owner keeps all schema.org markup, including the types Google does not show.
 
 - The Qur'an verses shown in English (the `ih-vq` reference spans) are each a `Quotation` with its text and reference, under a `Chapter` for its surah, which is part of the Qur'an `Book` (now with `genre` Scripture). The article cites them.
