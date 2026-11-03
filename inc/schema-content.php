@@ -382,7 +382,7 @@ function injil_help_schema_translations( $path, $quran_id ) {
 	return array();
 }
 
-/** The subjects of a page from inc/data/schema-entities.json: about (the part it belongs to) and mentions (every page). */
+/** The subjects of a page from inc/data/schema-entities.json, as @id references: about (the part it belongs to) and mentions (every page). */
 function injil_help_schema_entities( $path ) {
 	static $data = null;
 	if ( null === $data ) {
@@ -400,7 +400,7 @@ function injil_help_schema_entities( $path ) {
 		$out = array();
 		foreach ( (array) $keys as $key ) {
 			if ( isset( $entities[ $key ] ) ) {
-				$out[] = $entities[ $key ];
+				$out[] = array( '@id' => injil_help_schema_entity_id( $key ) );
 			}
 		}
 		return $out;

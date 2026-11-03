@@ -1,5 +1,5 @@
 {
-    "about": "Things a page is about, by path prefix: the longest matching prefix wins, and \"*\" applies to every page. Each entry is a schema.org Thing; sameAs carries a Wikidata item only where the identity is certain.",
+    "about": "Things a page is about, by path prefix: the longest matching prefix wins, and \"*\" applies to every page. Each entry is a schema.org Thing, defined once per page with the @id home URL + #entity- + its key; sameAs carries a Wikidata item only where the identity is certain.",
     "entities": {
         "islam": {
             "@type": "Thing",
@@ -56,6 +56,22 @@
         "gospel-of-thomas": {
             "@type": "Book",
             "name": "The Gospel of Thomas"
+        },
+        "gospel-of-mark": {
+            "@type": "Book",
+            "name": "The Gospel of Mark"
+        },
+        "gospel-of-matthew": {
+            "@type": "Book",
+            "name": "The Gospel of Matthew"
+        },
+        "gospel-of-luke": {
+            "@type": "Book",
+            "name": "The Gospel of Luke"
+        },
+        "gospel-of-john": {
+            "@type": "Book",
+            "name": "The Gospel of John"
         }
     },
     "paths": {

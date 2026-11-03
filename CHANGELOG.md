@@ -2,6 +2,30 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.15.0
+
+- The Islamic Dilemma page credits its source study by title only. The author's name no longer appears on the front end.
+
+The structured data takes the shared model of the network's schema plan (3 November 2026). Every type the graph carried before stays. The owner keeps all schema.org markup, including the types Google does not show.
+
+- The Qur'an verses shown in English (the `ih-vq` reference spans) are each a `Quotation` with its text and reference, under a `Chapter` for its surah, which is part of the Qur'an `Book` (now with `genre` Scripture). The article cites them.
+- The two full texts of Thomas carry an `ItemList` of their sayings in order, each a `Quotation`. The timeline carries an `ItemList` of its events in order.
+- Every glossary term has its own `@id` and `inDefinedTermSet`. A term whose entry reads "(also spelt Injil, Injeel)" lists those spellings as `alternateName`; such entries were missed before.
+- Images take their credit, licence, licence page, format and photographer from `inc/data/images.json`, and their width and height when the page gives them.
+- The subjects in `inc/data/schema-entities.json` are defined once per page with the `@id` home URL plus `#entity-` and the key, and referenced by that `@id`. The four canonical gospels are new entries; the comparison tables are `about` the gospels their columns name.
+- The header links are parts of the page's `SiteNavigationElement`. The site links in the body (outside "Read next") are `significantLink`.
+- Articles add `abstract` (the first paragraph), `dateCreated`, `copyrightYear`, `accessMode`, `accessModeSufficient` and `accessibilityFeature`.
+- With Rank Math, these fill what its Article and WebPage leave empty, in its one graph.
+- The calligraphic mark is removed from every value, and a paragraph that names the owner is never used as an abstract.
+- `tests/schema-graph-test.php` builds all 181 starter pages and checks each graph, alone and merged with Rank Math: valid JSON, unique `@id`s, every reference resolved, the required properties present, and no mark, owner's name or banned word.
+- An Author name in Theme Options that holds the owner's name gives way to the site name. A last pass over the theme's graph and the merged Rank Math graph removes the owner's name from every value, author nodes included. The theme matches the name by SHA-1 digest and never writes it.
+- A saying of Thomas that runs over several paragraphs, Saying 3 among them, is now quoted whole.
+- A Pexels image takes its format from its address, since its key in `images.json` has no extension.
+- A caption that reads "Photograph by" names the photographer as `creator` and `copyrightHolder`, as a "Photo:" credit already did.
+- The test puts a stand-in owner's name in the Author name and in Rank Math's author, and fails if any word of any string matches a withheld digest. It also fails on a second definition of a nested `@id`, excuses only the `@id`s of its stand-in Rank Math graph, and fails when the page, Quotation, DefinedTerm, Chapter or Event totals fall below those of this release.
+
+The new code is `inc/schema-extend.php`. The credits page lists no image one by one, so it gets no image list; no manuscript has a page of its own, so there is no `ItemPage`.
+
 ## 3.14.1
 
 Links to the sister sites follow their new addresses. On 3 November 2026 the owner ruled that no address on the network carries a verse number, a count or a year, and every site answers its old addresses with a 301.
