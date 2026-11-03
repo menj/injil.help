@@ -60,10 +60,14 @@ function injil_help_schema_ids() {
 
 /**
  * Author details: Theme Options > SEO, falling back to the site name and, for the URL, the About
- * page (Google's Article guidance asks for an author url). The post author's name is never used.
+ * page (Google's Article guidance asks for an author url). The post author's name is never used, and
+ * an Author name that holds the owner's name gives way to the site name.
  */
 function injil_help_schema_author( $post = null ) {
 	$name = injil_help_get_option( 'author_name' );
+	if ( function_exists( 'injil_help_schema_names_owner' ) && injil_help_schema_names_owner( $name ) ) {
+		$name = ''; // The owner is never named: the site stands as the author.
+	}
 	$url  = injil_help_get_option( 'author_url' );
 	if ( ! $url ) {
 		$url = home_url( '/about/' );

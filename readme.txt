@@ -86,6 +86,7 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 == Changelog ==
 = 3.15.0 =
 * Structured data: Qur'an verses as Quotations under their surahs, the Thomas sayings and the timeline as ordered lists, glossary terms and subjects with their own @id, image credits from images.json, article access details. A new test checks every page's graph.
+* The owner's name never enters the structured data, even from the Author name or from Rank Math's author. Long sayings of Thomas are quoted whole; Pexels images have a format; "Photograph by" captions name the photographer.
 = 3.14.1 =
 * Links to the sister sites follow their new addresses, which carry no verse numbers, counts or years. network-links.json is the same in all seven themes again.
 = 3.14.0 =

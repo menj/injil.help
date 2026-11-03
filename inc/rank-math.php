@@ -195,6 +195,8 @@ function injil_help_rank_math_json_ld( $data, $jsonld = null ) {
 		if ( $rm_article ) {
 			$data[ $rm_article ] = injil_help_rank_math_repoint( $data[ $rm_article ], $map );
 		}
-		return $data;
+		// Rank Math's own author and publisher come from WordPress users and settings: the owner's
+		// name is taken out of them too.
+		return function_exists( 'injil_help_schema_unname' ) ? injil_help_schema_unname( $data ) : $data;
 }
 add_filter( 'rank_math/json_ld', 'injil_help_rank_math_json_ld', 50, 2 );

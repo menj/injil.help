@@ -146,13 +146,15 @@ function injil_help_schema_verse_quotes( $html, $url, $quran_id ) {
 /** The sayings of Thomas on a full-text page, in order: "Saying N: Title" headings or "<strong>N.</strong>" paragraphs. */
 function injil_help_schema_sayings( $html, $url, $work_id ) {
 	$items = array();
-	if ( preg_match_all( '#<h3[^>]*>\s*Saying (\d+)(?::\s*(.*?))?</h3>\s*(?:<!--[^>]*-->\s*)*<p[^>]*>(.*?)</p>#s', $html, $m, PREG_SET_ORDER ) ) {
+	if ( preg_match_all( '#<h3[^>]*>\s*Saying (\d+)(?::\s*(.*?))?</h3>((?:\s*(?:<!--[^>]*-->\s*)*<p[^>]*>.*?</p>)+)#s', $html, $m, PREG_SET_ORDER ) ) {
 		foreach ( $m as $s ) {
-			$items[] = array( (int) $s[1], injil_help_schema_text( $s[2] ), injil_help_schema_text( $s[3] ) );
+			preg_match_all( '#<p[^>]*>(.*?)</p>#s', $s[3], $ps );
+			$items[] = array( (int) $s[1], injil_help_schema_text( $s[2] ), injil_help_schema_text( implode( ' ', $ps[1] ) ) );
 		}
-	} elseif ( preg_match_all( '#<p[^>]*>\s*<strong>(\d+)\.</strong>\s*(.*?)</p>#s', $html, $m, PREG_SET_ORDER ) ) {
+	} elseif ( preg_match_all( '#<p[^>]*>\s*<strong>(\d+)\.</strong>\s*(.*?)</p>((?:\s*(?:<!--[^>]*-->\s*)*<p(?:\s[^>]*)?>(?!\s*<strong>\d+\.</strong>).*?</p>)*)#s', $html, $m, PREG_SET_ORDER ) ) {
 		foreach ( $m as $s ) {
-			$items[] = array( (int) $s[1], '', injil_help_schema_text( $s[2] ) );
+			preg_match_all( '#<p[^>]*>(.*?)</p>#s', $s[3], $ps );
+			$items[] = array( (int) $s[1], '', injil_help_schema_text( implode( ' ', array_merge( array( $s[2] ), $ps[1] ) ) ) );
 		}
 	}
 	$list = array();
@@ -213,7 +215,7 @@ function injil_help_schema_media_type( $src ) {
 function injil_help_schema_enrich_image( $node, $html ) {
 	$src   = (string) ( $node['contentUrl'] ?? '' );
 	$entry = injil_help_schema_image_entry( $src );
-	$type  = injil_help_schema_media_type( $entry['file'] ?? $src );
+	$type  = injil_help_schema_media_type( $entry['file'] ?? '' ) ?: injil_help_schema_media_type( $entry['url'] ?? '' ) ?: injil_help_schema_media_type( $src );
 	if ( $type && ! isset( $node['encodingFormat'] ) ) {
 		$node['encodingFormat'] = $type;
 	}
@@ -241,7 +243,7 @@ function injil_help_schema_enrich_image( $node, $html ) {
 				$node['copyrightNotice'] = 'Public domain';
 			}
 		}
-		if ( preg_match( '#Photo: ([^.,]+)#', $credit, $ph ) ) {
+		if ( preg_match( '#Photo: ([^.,]+)#', $credit, $ph ) || preg_match( '#Photograph by ([^.,]+)#', (string) ( $entry['caption'] ?? '' ), $ph ) ) {
 			$node['creator']         = array(
 				'@type' => 'Person',
 				'name'  => trim( $ph[1] ),
@@ -276,17 +278,67 @@ function injil_help_schema_body_links( $html, $url ) {
  * SHA-1 digests of lower-case words, so the theme's source does not carry them either.
  */
 function injil_help_schema_names_owner( $text ) {
-	static $withheld = array(
-		'db57089a87a6d3ed7c940a520ae77b6d547c2216' => true,
-		'ca184eff29b058d2768bae241379fe368f9d22fe' => true,
-		'8e53f2fddde74470942091868d29da9477674eb2' => true,
-	);
+	$withheld = injil_help_schema_owner_digests();
 	foreach ( preg_split( '/[^\p{L}]+/u', mb_strtolower( (string) $text ), -1, PREG_SPLIT_NO_EMPTY ) as $word ) {
 		if ( isset( $withheld[ sha1( $word ) ] ) ) {
 			return true;
 		}
 	}
 	return false;
+}
+
+/**
+ * The SHA-1 digests of the owner's names, lower case, as keys. The filter may add digests (the
+ * test adds a stand-in name); the three built in always stay.
+ */
+function injil_help_schema_owner_digests() {
+	$base  = array(
+		'db57089a87a6d3ed7c940a520ae77b6d547c2216' => true,
+		'ca184eff29b058d2768bae241379fe368f9d22fe' => true,
+		'8e53f2fddde74470942091868d29da9477674eb2' => true,
+	);
+	$extra = apply_filters( 'injil_help_owner_digests', array() );
+	foreach ( (array) $extra as $digest ) {
+		if ( is_string( $digest ) && preg_match( '/^[0-9a-f]{40}$/', $digest ) ) {
+			$base[ $digest ] = true;
+		}
+	}
+	return $base;
+}
+
+/**
+ * The owner's name taken out of every value of a graph. A node whose name is the owner's takes the
+ * site's name instead and loses its personal properties; any other string loses the owner's words.
+ */
+function injil_help_schema_unname( $value ) {
+	if ( is_string( $value ) ) {
+		if ( ! injil_help_schema_names_owner( $value ) ) {
+			return $value;
+		}
+		$withheld = injil_help_schema_owner_digests();
+		$clean    = preg_replace_callback(
+			'/\p{L}+/u',
+			function ( $w ) use ( $withheld ) {
+				return isset( $withheld[ sha1( mb_strtolower( $w[0] ) ) ] ) ? '' : $w[0];
+			},
+			$value
+		);
+		return trim( preg_replace( '/\s{2,}/u', ' ', $clean ) );
+	}
+	if ( ! is_array( $value ) ) {
+		return $value;
+	}
+	if ( isset( $value['name'] ) && is_string( $value['name'] ) && injil_help_schema_names_owner( $value['name'] ) ) {
+		$value['name'] = get_bloginfo( 'name' );
+		unset( $value['givenName'], $value['familyName'], $value['alternateName'], $value['sameAs'], $value['image'], $value['description'] );
+		if ( isset( $value['@type'] ) && 'Person' === $value['@type'] ) {
+			$value['@type'] = 'Organization';
+		}
+	}
+	foreach ( $value as $k => $v ) {
+		$value[ $k ] = injil_help_schema_unname( $v );
+	}
+	return $value;
 }
 
 /** The first paragraph of the body, as the visible lede. */
@@ -535,5 +587,5 @@ function injil_help_schema_extend( $graph, $ctx ) {
 		}
 	}
 
-	return injil_help_schema_scrub( $graph );
+	return injil_help_schema_unname( injil_help_schema_scrub( $graph ) );
 }

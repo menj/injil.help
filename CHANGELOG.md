@@ -18,6 +18,11 @@ The structured data takes the shared model of the network's schema plan (3 Novem
 - With Rank Math, these fill what its Article and WebPage leave empty, in its one graph.
 - The calligraphic mark is removed from every value, and a paragraph that names the owner is never used as an abstract.
 - `tests/schema-graph-test.php` builds all 181 starter pages and checks each graph, alone and merged with Rank Math: valid JSON, unique `@id`s, every reference resolved, the required properties present, and no mark, owner's name or banned word.
+- An Author name in Theme Options that holds the owner's name gives way to the site name. A last pass over the theme's graph and the merged Rank Math graph removes the owner's name from every value, author nodes included. The theme matches the name by SHA-1 digest and never writes it.
+- A saying of Thomas that runs over several paragraphs, Saying 3 among them, is now quoted whole.
+- A Pexels image takes its format from its address, since its key in `images.json` has no extension.
+- A caption that reads "Photograph by" names the photographer as `creator` and `copyrightHolder`, as a "Photo:" credit already did.
+- The test puts a stand-in owner's name in the Author name and in Rank Math's author, and fails if any word of any string matches a withheld digest. It also fails on a second definition of a nested `@id`, excuses only the `@id`s of its stand-in Rank Math graph, and fails when the page, Quotation, DefinedTerm, Chapter or Event totals fall below those of this release.
 
 The new code is `inc/schema-extend.php`. The credits page lists no image one by one, so it gets no image list; no manuscript has a page of its own, so there is no `ItemPage`.
 

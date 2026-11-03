@@ -15,6 +15,10 @@
 
 define( 'ABSPATH', __DIR__ . '/' );
 define( 'RANK_MATH_VERSION', 'stub' );
+define( 'IH_STANDIN_OWNER', 'Zzqowner' );
+define( 'IH_STANDIN_DIGEST', sha1( 'zzqowner' ) );
+// Theme Options with an Author name that holds the stand-in owner's name.
+$GLOBALS['ih_options'] = array( 'injil_help_options' => array( 'author_name' => IH_STANDIN_OWNER . ' Abdullah' ) );
 $GLOBALS['ih_theme'] = dirname( __DIR__ );
 $GLOBALS['ih_post']  = null;
 $GLOBALS['ih_posts'] = array();
@@ -48,6 +52,9 @@ function add_filter() {}
 function remove_action() {}
 function register_activation_hook() {}
 function apply_filters( $tag, $value ) {
+	if ( 'injil_help_owner_digests' === $tag ) {
+		return array( IH_STANDIN_DIGEST ); // a stand-in owner's name, so the test can put it in the input
+	}
 	return 'injil_help_output_schema' === $tag ? true : $value;
 }
 function do_action() {}
@@ -118,7 +125,7 @@ function wp_parse_args( $a, $d ) {
 	return array_merge( $d, $a );
 }
 function get_option( $k, $d = false ) {
-	return $d;
+	return $GLOBALS['ih_options'][ $k ] ?? $d;
 }
 function get_theme_mod( $k, $d = false ) {
 	return $d;
@@ -295,7 +302,7 @@ function ih_fail( $page, $msg ) {
 }
 
 /** Check one graph. */
-function ih_check_graph( $page, $graph, $rank_math = false ) {
+function ih_check_graph( $page, $graph, $rank_math = array() ) {
 	$json = json_encode( array( '@context' => 'https://schema.org', '@graph' => array_values( $graph ) ), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
 	if ( false === $json || null === json_decode( $json, true ) ) {
 		ih_fail( $page, 'graph does not encode as JSON' );
@@ -304,9 +311,26 @@ function ih_check_graph( $page, $graph, $rank_math = false ) {
 	if ( preg_match( '/لعنة|ih-lanah/u', $json ) ) {
 		ih_fail( $page, 'the calligraphic mark is in the structured data' );
 	}
-	$owner = array( 'db57089a87a6d3ed7c940a520ae77b6d547c2216', 'ca184eff29b058d2768bae241379fe368f9d22fe', '8e53f2fddde74470942091868d29da9477674eb2' ); // SHA-1 of the owner's names, lower case
-	if ( array_intersect( $owner, array_map( 'sha1', preg_split( '/[^\p{L}]+/u', mb_strtolower( $json ), -1, PREG_SPLIT_NO_EMPTY ) ) ) ) {
-		ih_fail( $page, "the owner's name is in the structured data" );
+	// SHA-1 of the owner's names, lower case, and of the stand-in: no word of any string may match.
+	$owner = array_keys( injil_help_schema_owner_digests() );
+	if ( ! in_array( IH_STANDIN_DIGEST, $owner, true ) ) {
+		ih_fail( $page, 'the stand-in owner digest is not in the withheld list' );
+	}
+	$strings = array();
+	array_walk_recursive(
+		$graph,
+		function ( $v, $k ) use ( &$strings ) {
+			$strings[] = (string) $k;
+			if ( is_string( $v ) ) {
+				$strings[] = $v;
+			}
+		}
+	);
+	foreach ( $strings as $str ) {
+		if ( array_intersect( $owner, array_map( 'sha1', preg_split( '/[^\p{L}]+/u', mb_strtolower( $str ), -1, PREG_SPLIT_NO_EMPTY ) ) ) ) {
+			ih_fail( $page, "the owner's name is in the structured data" );
+			break;
+		}
 	}
 	if ( preg_match( '/\bhorn/i', $json ) ) {
 		ih_fail( $page, 'the banned word is in the structured data' );
@@ -324,13 +348,17 @@ function ih_check_graph( $page, $graph, $rank_math = false ) {
 		}
 	}
 	// Nested nodes with an @id and more than the @id are definitions too.
+	// A second definition of an @id, nested or not, is a duplicate.
 	$nested = function ( $v ) use ( &$nested, &$ids, $page ) {
 		if ( ! is_array( $v ) ) {
 			return;
 		}
 		foreach ( $v as $c ) {
 			if ( is_array( $c ) && isset( $c['@id'] ) && count( $c ) > 1 ) {
-				$ids[ $c['@id'] ] = $ids[ $c['@id'] ] ?? $c;
+				if ( isset( $ids[ $c['@id'] ] ) ) {
+					ih_fail( $page, 'duplicate @id (nested) ' . $c['@id'] );
+				}
+				$ids[ $c['@id'] ] = $c;
 			}
 			$nested( $c );
 		}
@@ -341,11 +369,11 @@ function ih_check_graph( $page, $graph, $rank_math = false ) {
 	$refs = array();
 	injil_help_schema_refs( $graph, $refs );
 	foreach ( array_keys( $refs ) as $ref ) {
-		if ( ! isset( $ids[ $ref ] ) && ! ( $rank_math && 0 === strpos( $ref, 'rm#' ) ) ) {
+		if ( ! isset( $ids[ $ref ] ) && ! isset( $rank_math[ $ref ] ) ) {
 			ih_fail( $page, 'unresolved @id reference ' . $ref );
 		}
 	}
-	if ( $rank_math ) {
+	if ( false !== $rank_math && array() !== $rank_math ) {
 		return;
 	}
 	$page_node = null;
@@ -419,10 +447,15 @@ foreach ( $defs as $def ) {
 		'publisher' => array( '@type' => 'Organization', '@id' => 'rm#org', 'name' => 'x' ),
 		'WebSite'   => array( '@type' => 'WebSite', '@id' => 'rm#website' ),
 		'WebPage'   => array( '@type' => 'WebPage', '@id' => $url . '#webpage', 'url' => $url ),
-		'Article'   => array( '@type' => 'Article', '@id' => $url . '#richSnippet', 'headline' => $def['title'] ),
+		'Article'   => array( '@type' => 'Article', '@id' => $url . '#richSnippet', 'headline' => $def['title'], 'author' => array( '@id' => 'rm#author' ) ),
+		'author'    => array( '@type' => 'Person', '@id' => 'rm#author', 'name' => IH_STANDIN_OWNER, 'description' => 'Written by ' . IH_STANDIN_OWNER . '.' ),
 	);
+	$rm_ids = array();
+	foreach ( $rm as $node ) {
+		$rm_ids[ $node['@id'] ] = true;
+	}
 	$merged = injil_help_rank_math_json_ld( $rm );
-	ih_check_graph( $def['path'] . ' (Rank Math)', $merged, true );
+	ih_check_graph( $def['path'] . ' (Rank Math)', $merged, $rm_ids );
 	$n++;
 }
 
@@ -449,6 +482,16 @@ foreach ( $expect as $path => $needles ) {
 	}
 }
 
+// The totals of 3.15.0 are the floor: fewer means a page lost nodes.
+$floor = array( 'pages' => 181, 'Quotation' => 632, 'DefinedTerm' => 71, 'Chapter' => 51, 'Event' => 49 );
+if ( $n < $floor['pages'] ) {
+	ih_fail( 'totals', "{$n} pages, expected at least {$floor['pages']}" );
+}
+foreach ( $counts as $type => $count ) {
+	if ( $count < $floor[ $type ] ) {
+		ih_fail( 'totals', "{$count} {$type} nodes, expected at least {$floor[ $type ]}" );
+	}
+}
 echo "Pages: {$n}; Quotation {$counts['Quotation']}, DefinedTerm {$counts['DefinedTerm']}, Chapter {$counts['Chapter']}, Event {$counts['Event']}\n";
 echo $fail ? "FAILED: {$fail}\n" : "OK\n";
 exit( $fail ? 1 : 0 );
