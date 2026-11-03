@@ -206,7 +206,7 @@ function injil_help_journal_breadcrumb( $items, $post ) {
 add_action(
 	'wp_enqueue_scripts',
 	function () {
-		if ( is_home() || is_archive() || is_singular( 'post' ) ) {
+		if ( is_home() || is_archive() || is_singular( 'post' ) || is_page( 'journal' ) || ( is_page() && 'page-journal' === get_page_template_slug() ) ) {
 			wp_enqueue_style( 'injil-help-journal', get_stylesheet_directory_uri() . '/assets/css/journal.css', array( 'injil-help' ), INJIL_HELP_VERSION );
 		}
 	}
