@@ -844,6 +844,13 @@
    "postTypes": [
     "page"
    ]
+  },
+  {
+   "name": "page-journal",
+   "title": "Journal (lists the posts)",
+   "postTypes": [
+    "page"
+   ]
   }
  ],
  "templateParts": [

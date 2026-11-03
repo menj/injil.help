@@ -2,6 +2,19 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.17.0
+
+The site has a Journal: dated posts beside the pages.
+
+- The Journal page is at `/journal/`, a starter page with the new template `templates/page-journal.html`, which lists the posts newest first. The reading settings are left alone. The header menu and the footer's Reference list link to it.
+- Posts live at `/journal/<slug>/` (`inc/journal.php`: a rewrite rule and the `post_link` filter). An old `/<slug>/` address redirects there through WordPress's canonical redirect. `INJIL_HELP_RULES` is 4, so the rules are flushed once after the update.
+- `templates/single.html`, `archive.html` and `home.html` are restyled to match the theme. Their CSS is `assets/css/journal.css`, loaded on those views only.
+- A post's breadcrumb reads Home, Journal, the post, in the visible row and in the `BreadcrumbList` alike (`injil_help_breadcrumb_parents()`). Each post is a `BlogPosting` in the page's one `@graph`, with its citations from the Sources list.
+- The posts are JSON in `inc/data/posts.json`, in the same compact markup as the pages. `injil_help_journal_seed()` writes them once per version with the fixed `post_date` each entry carries. A past date is published at once; a date still to come is scheduled, and WordPress publishes it on the day. A second run writes nothing. A post you edit or bin is kept as it is.
+- 8 posts: 3 in October, 1 on 15 November and 4 in December, from the woman taken in adultery to the peace of Qur'an 19:33. Their title tags are in `inc/data/seo-titles.json` under `journal/<slug>`.
+- The WordPress sample post is still binned on activation.
+- `tests/journal-test.php` checks every entry (a slug of words only, the title tag length, 700 to 1,100 words, notes and sources, links to pages that exist) and the seeding: the status from the date, the exact date, a second run that changes nothing, and kept edits. `tests/schema-graph-test.php` now also builds each post's graph.
+
 ## 3.16.0
 
 - The Read next row carries the owner's pixel arrow after its label (`assets/images/arrow-next.webp`, in the ornament layer of `assets/css/ornament.css`, so Ornament off removes it). Each is animated WebP drawn at its own pixel size, for decoration only; the link text is unchanged. Readers who ask for reduced motion see a still first frame.
