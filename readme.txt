@@ -84,6 +84,9 @@ This file is the user-facing manual that WordPress and Git Updater read. The rep
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add the entry to CHANGELOG.md and to the Changelog section here, note anything an existing site must know under "Updating an existing site" in UPGRADING.md, merge to main, and tag the commit with the same number (for example v3.4.0). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 3.16.0 =
+* Pages can carry up to four images: the first stays where it was and up to three more follow, spread through the text. 112 manuscript and inscription images now stand on 61 pages, including the gospel sections.
+* A sideloaded image is stored as AVIF, or as WebP when it is under 1000 pixels wide. Nothing is added to the theme.
 = 3.15.0 =
 * Structured data: Qur'an verses as Quotations under their surahs, the Thomas sayings and the timeline as ordered lists, glossary terms and subjects with their own @id, image credits from images.json, article access details. A new test checks every page's graph.
 * The owner's name never enters the structured data, even from the Author name or from Rank Math's author. Long sayings of Thomas are quoted whole; Pexels images have a format; "Photograph by" captions name the photographer.
