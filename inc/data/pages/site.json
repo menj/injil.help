@@ -18,6 +18,16 @@
         ]
     },
     {
+        "path": "journal",
+        "title": "Journal",
+        "template": "page-journal",
+        "excerpt": "Dated notes on the Injīl, the four gospels and Jesus in Christian and Islamic understanding, each sourced and labelled like the rest of the site.",
+        "body": [
+            "The Journal carries shorter pieces, one at a time and dated: a verse, a manuscript, a word, a feast day. Each is held to the same rules as the rest of the site. Every claim is labelled, every source is named, and the Qur’an is the measure, as <a href=\"/method/\">the measure</a> sets out.",
+            "The newest entry is first. Errors in any of them go into the <a href=\"/corrections/\">corrections log</a>."
+        ]
+    },
+    {
         "path": "terms-of-use",
         "title": "Terms of use",
         "excerpt": "Terms for using injil.help.",

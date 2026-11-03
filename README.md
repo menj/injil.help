@@ -33,10 +33,10 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 |---|---|
 | Type | Block theme (theme.json v3), child of `twentytwentyfive` |
 | Folder, text domain, pattern prefix | `injil-help` |
-| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.13.0) |
-| PHP in `inc/` | options, starter-content, starter-content-pages, gospel-islam, quran-jesus, tafsir, images, seo, schema, schema-content, rank-math, share, contextual-links, login, security, security-detector |
-| Data | `inc/data/` 2.6 MB of JSON: 181 starter pages, the gospel narrative, the Qur'anic passages, Thomas (woven sections and two full texts), the infancy gospels, the substitution witnesses, eight commentaries (315,000 words) |
-| Front-end assets | `style.css` 32 KB; `assets/css/ornament.css` 12 KB, `share.css` 3 KB, `bible.css` 3 KB, `login.css` 7 KB; `assets/js/ornament.js` 3 KB, `share.js` 2 KB; all plain, no build step |
+| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.18.0) |
+| PHP in `inc/` | options, starter-content, journal, starter-content-pages, gospel-islam, quran-jesus, tafsir, images, seo, schema, schema-content, rank-math, share, contextual-links, login, security, security-detector |
+| Data | `inc/data/` 2.6 MB of JSON: 182 starter pages, the 8 Journal posts (`posts.json`), the gospel narrative, the Qur'anic passages, Thomas (woven sections and two full texts), the infancy gospels, the substitution witnesses, eight commentaries (315,000 words) |
+| Front-end assets | `style.css` 32 KB; `assets/css/ornament.css` 12 KB, `share.css` 3 KB, `bible.css` 3 KB, `login.css` 7 KB, `journal.css` 2 KB; `assets/js/ornament.js` 3 KB, `share.js` 2 KB; all plain, no build step |
 | Fonts | 16 MB in `assets/fonts/`, 18 `fontFace` entries in `theme.json` |
 | Admin | one tabbed page, Appearance › Theme Options, option `injil_help_options` |
 | Updates | Git Updater via the `GitHub Theme URI` and `Primary Branch: main` headers; tag `vX.Y.Z` |
@@ -45,10 +45,10 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 
 - WordPress 6.6 or later, PHP 7.4 or later (tested on 8.x). Twenty Twenty-Five installed; it may be inactive but must not be deleted.
 - Pretty permalinks. The theme sets `/%postname%/` on activation if the structure is empty.
-- Memory: the starter-content run that creates or rewrites 181 pages in one request works within WordPress's default 40 MB; on hosts with a lower `memory_limit` raise it to 128 MB for the first admin load after activation or an update.
+- Memory: the starter-content run that creates or rewrites 182 pages in one request works within WordPress's default 40 MB; on hosts with a lower `memory_limit` raise it to 128 MB for the first admin load after activation or an update.
 - `max_input_vars` and `post_max_size`: the largest starter pages (gospel sections 1, 2 and 27, 370 to 560 KB of block HTML) exceed PHP's default `post_max_size` of 8 MB only on hosts that set it lower; saving them in the block editor needs `max_input_vars` of at least 5000. Reading them needs nothing.
 - Page cache: strongly advised. The large pages are generated once and served from the database; a full-page cache (host-level, or any cache plugin) keeps them off PHP entirely. An object cache helps the options page but is not required.
-- Database: the 181 pages add about 6 MB to `wp_posts`; revisions are suppressed for theme-written pages.
+- Database: the 182 pages add about 6 MB to `wp_posts`; revisions are suppressed for theme-written pages.
 - Outbound requests: none at runtime. Manuscript images are loaded by the visitor's browser from `upload.wikimedia.org`; nothing is fetched server-side.
 - No build tools, Composer or npm. Upload the folder and activate.
 
@@ -200,7 +200,8 @@ Appearance › Theme Options (`inc/options.php`), one option array `injil_help_o
 
 ## Templates, parts and patterns
 
-- `templates/`: `front-page.html`, `page.html`, `page-section.html` ("Section index"), `page-wide.html` ("Wide page (tables)"), `single.html`, `archive.html`, `home.html`, `index.html`, `search.html`, `404.html`. The two custom templates are declared in `theme.json` `customTemplates` for pages.
+- `templates/`: `front-page.html`, `page.html`, `page-section.html` ("Section index"), `page-wide.html` ("Wide page (tables)"), `page-journal.html` ("Journal", the list of posts on `/journal/`), `single.html` (a Journal post), `archive.html`, `home.html`, `index.html`, `search.html`, `404.html`. The three custom templates are declared in `theme.json` `customTemplates`.
+- The Journal (`inc/journal.php`): posts at `/journal/<slug>/` through a rewrite rule and the `post_link` filter; their text in `inc/data/posts.json`; `injil_help_journal_seed()` writes them once per version with each entry's fixed `post_date`, publishing a past date and scheduling a future one, and finds them again by the `_injil_help_post` meta so a re-run writes nothing. The list, archive and single views load `assets/css/journal.css`. `tests/journal-test.php` checks the entries and the seeding.
 - `parts/header.html`, `parts/footer.html`: navigation, brandmark, Qur'anic gloss (class `ih-gloss ih-ar ih-quran`, `dir="rtl" lang="ar"`).
 - `inc/data/patterns/` (JSON, category `injil-help`, registered on `init`), the only patterns the theme has. The front-page sections `hero`, `home-dilemma`, `home-gospels`, `home-paul`, `home-quran`, `home-gospel`, `home-resources`, `home-answers`, which `templates/front-page.html` renders by slug. The building blocks `parts-grid`, `quran-verse-index`, `answer-capsule`, `claim-labels`, `gospel-verse`, `objection-reply`, `faq`. And the page patterns: `islamic-dilemma-page`, `criterion-statement`, `section-gospels`, `section-paul`, `section-quran`, `section-gospel`, `section-resources`, `answers-page`, `how-composed`, `corrections-log`, `discrepancy-genealogies`, `discrepancy-nativity`, `discrepancy-last-supper`, `discrepancy-crucifixion`, `discrepancy-resurrection`, `thomas-correlation`, `manuscripts-table`. A page definition names one by file name and `injil_help_page_content()` reads it with `injil_help_pattern_file()`, so populating never depends on the pattern registry. Every new pattern is added here, as JSON.
 

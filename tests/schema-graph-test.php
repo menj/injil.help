@@ -82,6 +82,9 @@ function __( $s ) {
 function esc_html( $s ) {
 	return htmlspecialchars( (string) $s, ENT_QUOTES );
 }
+function esc_attr__( $s ) {
+	return $s;
+}
 function esc_attr( $s ) {
 	return htmlspecialchars( (string) $s, ENT_QUOTES );
 }
@@ -292,6 +295,12 @@ require $GLOBALS['ih_theme'] . '/inc/starter-content.php';
 require $GLOBALS['ih_theme'] . '/inc/seo.php';
 require $GLOBALS['ih_theme'] . '/inc/schema.php';
 require $GLOBALS['ih_theme'] . '/inc/rank-math.php';
+require $GLOBALS['ih_theme'] . '/inc/journal.php';
+
+/** The starter page at a path, from the pages the test has built. */
+function get_page_by_path( $path ) {
+	return $GLOBALS['ih_by_path'][ $path ] ?? null;
+}
 
 $fail = 0;
 $n    = 0;
@@ -427,6 +436,7 @@ foreach ( $defs as $def ) {
 	$by[ $def['path'] ] = $p;
 	$GLOBALS['ih_posts'][ $p->ID ] = $p;
 }
+$GLOBALS['ih_by_path'] = $by;
 foreach ( $defs as $def ) {
 	$p               = $by[ $def['path'] ];
 	$p->post_content = injil_help_page_content( $def );
@@ -481,6 +491,69 @@ foreach ( $expect as $path => $needles ) {
 		}
 	}
 }
+
+// The Journal posts (inc/data/posts.json): each a BlogPosting in the one graph, its date the entry's,
+// and its breadcrumb Home, Journal, the post.
+$journal_n = 0;
+foreach ( injil_help_journal_entries() as $entry ) {
+	$p               = new WP_Post();
+	$p->ID           = $id++;
+	$p->post_type    = 'post';
+	$p->post_name    = $entry['slug'];
+	$p->post_title   = $entry['title'];
+	$p->post_excerpt = (string) $entry['excerpt'];
+	$p->post_date    = $entry['date'];
+	$p->post_modified = $entry['date'];
+	$p->post_content = injil_help_journal_content( $entry );
+	$GLOBALS['ih_posts'][ $p->ID ] = $p;
+	$GLOBALS['ih_post'] = $p;
+	$GLOBALS['ih_rm']   = false;
+	$label = 'journal/' . $entry['slug'];
+	$graph = injil_help_schema_graph();
+	ih_check_graph( $label, $graph );
+	$posting = null;
+	$crumbs  = null;
+	foreach ( $graph as $node ) {
+		if ( in_array( 'BlogPosting', (array) $node['@type'], true ) ) {
+			$posting = $node;
+		}
+		if ( in_array( 'BreadcrumbList', (array) $node['@type'], true ) ) {
+			$crumbs = $node;
+		}
+	}
+	if ( ! $posting ) {
+		ih_fail( $label, 'no BlogPosting node' );
+	} elseif ( 0 !== strpos( $posting['datePublished'], substr( $entry['date'], 0, 10 ) ) ) {
+		ih_fail( $label, 'datePublished is not the entry date' );
+	} elseif ( empty( $posting['citation'] ) ) {
+		ih_fail( $label, 'BlogPosting without citation' );
+	}
+	if ( ! $crumbs || 3 !== count( $crumbs['itemListElement'] ) || 'Journal' !== $crumbs['itemListElement'][1]['name'] ) {
+		ih_fail( $label, 'breadcrumb is not Home, Journal, post' );
+	}
+	if ( false === strpos( injil_help_breadcrumb_html( $p ), '>Journal</a>' ) ) {
+		ih_fail( $label, 'visible breadcrumb lacks the Journal' );
+	}
+	$GLOBALS['ih_rm'] = true;
+	$url    = get_permalink( $p );
+	$rm     = array(
+		'publisher' => array( '@type' => 'Organization', '@id' => 'rm#org', 'name' => 'x' ),
+		'WebSite'   => array( '@type' => 'WebSite', '@id' => 'rm#website' ),
+		'WebPage'   => array( '@type' => 'WebPage', '@id' => $url . '#webpage', 'url' => $url ),
+		'Article'   => array( '@type' => 'BlogPosting', '@id' => $url . '#richSnippet', 'headline' => $entry['title'], 'author' => array( '@id' => 'rm#author' ) ),
+		'author'    => array( '@type' => 'Person', '@id' => 'rm#author', 'name' => 'x' ),
+	);
+	$rm_ids = array();
+	foreach ( $rm as $node ) {
+		$rm_ids[ $node['@id'] ] = true;
+	}
+	ih_check_graph( $label . ' (Rank Math)', injil_help_rank_math_json_ld( $rm ), $rm_ids );
+	$journal_n++;
+}
+if ( $journal_n < 8 ) {
+	ih_fail( 'journal', "{$journal_n} Journal posts, expected at least 8" );
+}
+echo "Journal posts: {$journal_n}\n";
 
 // The totals of 3.15.0 are the floor: fewer means a page lost nodes.
 $floor = array( 'pages' => 181, 'Quotation' => 632, 'DefinedTerm' => 71, 'Chapter' => 51, 'Event' => 49 );

@@ -81,7 +81,7 @@ function injil_help_title_part() {
 	if ( is_singular() ) {
 		$post   = get_queried_object();
 		$titles = injil_help_seo_titles();
-		$path   = $post && 'page' === $post->post_type ? get_page_uri( $post ) : '';
+		$path   = $post && 'page' === $post->post_type ? get_page_uri( $post ) : ( $post && 'post' === $post->post_type ? 'journal/' . $post->post_name : '' );
 		return $titles[ $path ] ?? wp_strip_all_tags( get_the_title( $post ) );
 	}
 	if ( is_search() ) {
@@ -181,14 +181,30 @@ add_filter(
 );
 
 /**
+ * The links between Home and the page itself, as [ name, url ] pairs: the page's ancestors, and
+ * for a Journal post the Journal page (injil_help_journal_breadcrumb() in inc/journal.php); the
+ * filter injil_help_breadcrumb_trail can change the list. The visible row and the BreadcrumbList both read this list, so they always match.
+ */
+function injil_help_breadcrumb_parents( $post ) {
+	$items = array();
+	foreach ( array_reverse( get_post_ancestors( $post ) ) as $ancestor ) {
+		$items[] = array( wp_strip_all_tags( get_the_title( $ancestor ) ), get_permalink( $ancestor ) );
+	}
+	if ( function_exists( 'injil_help_journal_breadcrumb' ) ) {
+		$items = injil_help_journal_breadcrumb( $items, $post );
+	}
+	return (array) apply_filters( 'injil_help_breadcrumb_trail', $items, $post );
+}
+
+/**
  * The visible breadcrumb row at the top of every page below the front page: Home, the parent
  * pages, the page itself. It mirrors the BreadcrumbList in the structured data, as the guide
  * asks ("a row of internal links at the top or bottom of the page").
  */
 function injil_help_breadcrumb_html( $post ) {
 	$items = array( array( __( 'Home', 'injil-help' ), home_url( '/' ) ) );
-	foreach ( array_reverse( get_post_ancestors( $post ) ) as $ancestor ) {
-		$items[] = array( wp_strip_all_tags( get_the_title( $ancestor ) ), get_permalink( $ancestor ) );
+	foreach ( injil_help_breadcrumb_parents( $post ) as $item ) {
+		$items[] = $item;
 	}
 	$html = '<nav class="ih-breadcrumb" aria-label="' . esc_attr__( 'Breadcrumb', 'injil-help' ) . '"><ol>';
 	foreach ( $items as $item ) {

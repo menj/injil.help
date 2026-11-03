@@ -532,6 +532,7 @@ function injil_help_schema_page_type( $post, $entries = array() ) {
 			case 'contact':
 				return 'ContactPage';
 			case 'sitemap':
+			case 'journal':
 				return 'CollectionPage';
 		}
 		if ( count( $entries ) >= 3 ) {
@@ -691,12 +692,12 @@ function injil_help_schema_graph() {
 		);
 		$pos    = 2;
 		if ( $post && is_singular() ) {
-			foreach ( array_reverse( get_post_ancestors( $post ) ) as $ancestor ) {
+			foreach ( injil_help_breadcrumb_parents( $post ) as $item ) {
 				$crumbs[] = array(
 					'@type'    => 'ListItem',
 					'position' => $pos++,
-					'name'     => wp_strip_all_tags( get_the_title( $ancestor ) ),
-					'item'     => get_permalink( $ancestor ),
+					'name'     => $item[0],
+					'item'     => $item[1],
 				);
 			}
 		}
