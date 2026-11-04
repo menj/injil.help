@@ -149,7 +149,7 @@ function get_queried_object() {
 	return $GLOBALS['ih_post'];
 }
 function is_front_page() {
-	return false;
+	return ! empty( $GLOBALS['ih_front'] );
 }
 function is_home() {
 	return false;
@@ -246,7 +246,10 @@ function wp_get_document_title() {
 	return '';
 }
 function get_block_template() {
-	return null;
+	if ( empty( $GLOBALS['ih_front'] ) ) {
+		return null;
+	}
+	return (object) array( 'content' => (string) file_get_contents( $GLOBALS['ih_theme'] . '/templates/front-page.html' ) );
 }
 function add_query_arg() {
 	return '/';
@@ -507,6 +510,59 @@ foreach ( injil_help_images() as $path => $img ) {
 	$GLOBALS['ih_thumbs'][ $by[ $path ]->ID ]    = array( $att, 'https://injil.help/wp-content/uploads/2026/10/' . $name );
 }
 $featured_n = count( $GLOBALS['ih_thumbs'] );
+/**
+ * Every speakable cssSelector of a graph must match the page's markup: the content as rendered, inside
+ * the .entry-content wrapper the page templates put round it (the front page has none). h1 comes from
+ * the template's title block and is not looked for here.
+ *
+ * @return bool Whether the graph has a SpeakableSpecification.
+ */
+function ih_check_speakable( $where, $graph, $content, $is_front ) {
+	$selectors = null;
+	$find = function ( $v ) use ( &$find, &$selectors ) {
+		if ( ! is_array( $v ) ) {
+			return;
+		}
+		if ( ( $v['@type'] ?? '' ) === 'SpeakableSpecification' ) {
+			$selectors = (array) $v['cssSelector'];
+			return;
+		}
+		foreach ( $v as $c ) {
+			$find( $c );
+		}
+	};
+	$find( $graph );
+	if ( null === $selectors ) {
+		return false;
+	}
+	$html = '';
+	foreach ( injil_help_expand_patterns( parse_blocks( $content ) ) as $b ) {
+		$html .= render_block( $b );
+	}
+	$doc = new DOMDocument();
+	libxml_use_internal_errors( true );
+	$doc->loadHTML( '<?xml encoding="utf-8"?><body>' . ( $is_front ? $html : '<div class="entry-content">' . $html . '</div>' ) . '</body>' );
+	libxml_clear_errors();
+	$xp = new DOMXPath( $doc );
+	foreach ( $selectors as $sel ) {
+		if ( 'h1' === $sel ) {
+			continue;
+		}
+		if ( '.entry-content > p' === $sel ) {
+			$q = "//div[@class='entry-content']/p";
+		} elseif ( preg_match( '/^\.([a-z0-9-]+)$/', $sel, $m ) ) {
+			$q = "//*[contains(concat(' ', normalize-space(@class), ' '), ' {$m[1]} ')]";
+		} else {
+			ih_fail( $where, "speakable selector {$sel} is not one the test can check" );
+			continue;
+		}
+		if ( 0 === $xp->query( $q )->length ) {
+			ih_fail( $where, "speakable selector {$sel} matches nothing on the page" );
+		}
+	}
+	return true;
+}
+
 foreach ( $defs as $def ) {
 	$p               = $by[ $def['path'] ];
 	$p->post_content = injil_help_page_content( $def );
@@ -514,6 +570,7 @@ foreach ( $defs as $def ) {
 	$GLOBALS['ih_rm']   = false;
 	$graph = injil_help_schema_graph();
 	ih_check_graph( $def['path'], $graph );
+	ih_check_speakable( $def['path'], $graph, $p->post_content, false );
 	$json = json_encode( $graph, JSON_UNESCAPED_UNICODE );
 	$counts['Quotation']   += substr_count( $json, '"@type":"Quotation"' );
 	$counts['DefinedTerm'] += substr_count( $json, '"@type":"DefinedTerm"' );
@@ -544,6 +601,26 @@ foreach ( $defs as $def ) {
 	ih_check_graph( $def['path'] . ' (Rank Math)', $merged, $rm_ids );
 	$n++;
 }
+
+// masthead and verificationFactCheckingPolicy are NewsMediaOrganization properties: the node that carries them has that type.
+foreach ( injil_help_schema_graph() as $node ) {
+	if ( ( isset( $node['masthead'] ) || isset( $node['verificationFactCheckingPolicy'] ) ) && ! in_array( 'NewsMediaOrganization', (array) $node['@type'], true ) ) {
+		ih_fail( 'organization', ( $node['@id'] ?? '' ) . ' carries masthead or verificationFactCheckingPolicy without the NewsMediaOrganization type' );
+	}
+	if ( ( $node['@id'] ?? '' ) === injil_help_schema_ids()['org'] && ( ( $node['masthead'] ?? '' ) !== home_url( '/about/' ) || ( $node['verificationFactCheckingPolicy'] ?? '' ) !== home_url( '/method/' ) || ! in_array( 'Organization', (array) $node['@type'], true ) ) ) {
+		ih_fail( 'organization', 'the Organization lost its type or its policy addresses' );
+	}
+}
+
+// The front page is rendered from its template, which has no .entry-content.
+$GLOBALS['ih_front'] = true;
+$GLOBALS['ih_rm']    = false;
+$front_graph         = injil_help_schema_graph();
+$front_html          = (string) file_get_contents( $GLOBALS['ih_theme'] . '/templates/front-page.html' );
+if ( ! ih_check_speakable( 'front page', $front_graph, $front_html, true ) ) {
+	ih_fail( 'front page', 'no SpeakableSpecification' );
+}
+$GLOBALS['ih_front'] = false;
 
 if ( $featured_n < 60 ) {
 	ih_fail( 'images', "{$featured_n} pages with a featured image, expected at least 60" );

@@ -17,7 +17,7 @@ function injil_help_schema_text( $html ) {
 	return trim( preg_replace( '/\s+/u', ' ', html_entity_decode( wp_strip_all_tags( (string) $html ), ENT_QUOTES ) ) );
 }
 
-/** The site's editorial policies, as properties of the Organization (and the WebSite). */
+/** The site's editorial policies, as properties of the Organization, which is also typed NewsMediaOrganization for masthead and verificationFactCheckingPolicy. */
 function injil_help_schema_policies() {
 	return array(
 		'publishingPrinciples'           => home_url( '/method/' ),
