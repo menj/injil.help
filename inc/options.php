@@ -627,7 +627,7 @@ function injil_help_render_options() {
 				// The list looks up every starter page; build it only on ?tab=content, or
 				// fetch it over admin-ajax when the tab is first shown.
 				// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- tab selection only.
-				$ih_tab = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : '';
+				$ih_tab = isset( $_GET['tab'] ) && is_string( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : '';
 				if ( 'content' === $ih_tab ) {
 					echo '<div id="ih-starter-pages">';
 					injil_help_render_starter_pages();

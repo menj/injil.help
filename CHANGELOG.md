@@ -8,6 +8,7 @@ A CodeAnt finding on the sister themes: Theme Options built every panel on every
 
 - The starter page list and its two buttons move into `injil_help_render_starter_pages()`. The screen builds it only on `?tab=content`. On any other load the Content tab holds a placeholder with an "Open the Content tab" link, and `admin.js` fetches the list the first time the tab is shown, through the new `wp_ajax_injil_help_starter_pages` action. That action checks `edit_theme_options` and the `injil_help_starter_pages` nonce (localised as `injilHelpPopulate.pagesNonce`).
 - The confirm prompt and the batched page writer bind through delegation on the screen, so the fetched buttons work as before.
+- The `?tab=` read checks `is_string()` first, so `?tab[]=x` cannot make `sanitize_key()` throw a TypeError on PHP 8.
 - `admin.js` opens the tab named by `?tab=` when the address has no fragment.
 - The settings fields stay in every panel, so a save from any tab keeps the others. The security reports were already fetched over admin-ajax and are unchanged. The server markup carries no `tabindex="-1"`; the script sets the roving tabindex.
 
