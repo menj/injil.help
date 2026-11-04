@@ -2,6 +2,17 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.18.1
+
+Every image the structured data refers to now has a node in the same graph.
+
+- The cause: the page's `primaryImageOfPage` pointed at the featured image's uploaded address, while the theme made `ImageObject` nodes only from the figures in the body. When the two addresses differed, the reference pointed at nothing. On 3.13.1 they always differed, since the figures still loaded from Commons; on 3.18.0 they still could, for instance after a file was stored again as AVIF. `/islamic-dilemma/` and `/gospels/mark/` showed it.
+- The featured image now gets its own `ImageObject`, with the caption, credit and licence of its `images.json` entry (found through the Commons file recorded on the attachment). A figure of the same file becomes that node, so the image is described once. The match is on the file (its Commons name, or the uploaded file name without its size suffix and extension), so a figure with a missing or different licence link still merges.
+- Any reference to an image address that no node defines is given an `ImageObject`, in the theme's graph and in the Rank Math merge alike, where Rank Math's own `primaryImageOfPage` or Article `image` may point at an upload it does not define.
+- `encodingFormat` follows the address first, so an AVIF or WebP copy is described as AVIF or WebP. `image/avif` is known.
+- A cited journal article in a Sources list carries a `headline`.
+- `tests/schema-graph-test.php` gives every page with an image a sideloaded featured image, half of them AVIF, and has Rank Math refer to it. It fails on any unresolved `@id`, on a referenced image without `contentUrl`, `creditText` or `license`, on any article node of any Article subtype, NewsArticle and TechArticle among them, nested or not, without a headline, and on a second ImageObject for the featured file when the figure's licence link is missing or changed.
+
 ## 3.18.0
 
 The site has a Journal: dated posts beside the pages.

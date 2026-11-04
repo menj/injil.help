@@ -195,6 +195,8 @@ function injil_help_rank_math_json_ld( $data, $jsonld = null ) {
 		if ( $rm_article ) {
 			$data[ $rm_article ] = injil_help_rank_math_repoint( $data[ $rm_article ], $map );
 		}
+		// An image Rank Math refers to (its primaryImageOfPage, an Article's image) and does not define gets a node.
+		$data = injil_help_schema_resolve_images( $data, 'injil-help-image-' );
 		// Rank Math's own author and publisher come from WordPress users and settings: the owner's
 		// name is taken out of them too.
 		return function_exists( 'injil_help_schema_unname' ) ? injil_help_schema_unname( $data ) : $data;

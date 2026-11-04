@@ -203,6 +203,7 @@ function injil_help_schema_media_type( $src ) {
 		'png'  => 'image/png',
 		'gif'  => 'image/gif',
 		'webp' => 'image/webp',
+		'avif' => 'image/avif',
 		'svg'  => 'image/svg+xml',
 		'tif'  => 'image/tiff',
 		'tiff' => 'image/tiff',
@@ -215,7 +216,8 @@ function injil_help_schema_media_type( $src ) {
 function injil_help_schema_enrich_image( $node, $html ) {
 	$src   = (string) ( $node['contentUrl'] ?? '' );
 	$entry = injil_help_schema_image_entry( $src );
-	$type  = injil_help_schema_media_type( $entry['file'] ?? '' ) ?: injil_help_schema_media_type( $entry['url'] ?? '' ) ?: injil_help_schema_media_type( $src );
+	// The address first: a sideloaded copy may be AVIF or WebP although the source file is not.
+	$type  = injil_help_schema_media_type( $src ) ?: injil_help_schema_media_type( $entry['file'] ?? '' ) ?: injil_help_schema_media_type( $entry['url'] ?? '' );
 	if ( $type && ! isset( $node['encodingFormat'] ) ) {
 		$node['encodingFormat'] = $type;
 	}

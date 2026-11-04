@@ -86,6 +86,8 @@ This file is the user-facing manual that WordPress and Git Updater read. The rep
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add the entry to CHANGELOG.md and to the Changelog section here, note anything an existing site must know under "Updating an existing site" in UPGRADING.md, merge to main, and tag the commit with the same number (for example v3.4.0). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 3.18.1 =
+* Structured data: the featured image has its own ImageObject with its credit and licence, so the primary image reference resolves on every page, Rank Math or not. AVIF and WebP copies carry their own format. Cited articles carry a headline.
 = 3.18.0 =
 * A Journal at /journal/, linked from the menu and the footer. Posts live at /journal/<slug>/, each with a dated breadcrumb and BlogPosting markup.
 * 8 posts ship with the theme, each on a fixed date: 3 in October, 1 in November, 4 scheduled for December. A past date is published, a future one is scheduled, and an edited or binned post is kept.
