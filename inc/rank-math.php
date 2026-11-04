@@ -197,11 +197,11 @@ function injil_help_rank_math_json_ld( $data, $jsonld = null ) {
 		}
 		// An image Rank Math refers to (its primaryImageOfPage, an Article's image) and does not define gets a node.
 		$data = injil_help_schema_resolve_images( $data, 'injil-help-image-' );
-		// One author: Rank Math's own Person nodes give way to the theme's author Person, and every
+		// One author: Rank Math's own Person nodes (and only those; the theme's subjects, such as ʿĪsā, stay) give way to the theme's author Person, and every
 		// reference to them points at it. The theme's author node is in $data already (it is never skipped).
 		$people = array();
 		foreach ( $data as $key => $entity ) {
-			if ( is_array( $entity ) && in_array( 'Person', (array) ( $entity['@type'] ?? array() ), true ) && ( $entity['@id'] ?? '' ) !== $ids['author'] ) {
+			if ( is_array( $entity ) && isset( $entity['@id'], $rm_ids[ $entity['@id'] ] ) && $entity['@id'] !== $ids['author'] && in_array( 'Person', (array) ( $entity['@type'] ?? array() ), true ) ) {
 				if ( isset( $entity['@id'] ) ) {
 					$people[ $entity['@id'] ] = $ids['author'];
 				}

@@ -374,6 +374,17 @@ function ih_check_graph( $page, $graph, $rank_math = array() ) {
 			ih_fail( $page, "Rank Math's own Person node survived the merge: " . $node['@id'] );
 		}
 	}
+	// With Rank Math, the theme's subject Persons (ʿĪsā and the rest) keep their own @id.
+	if ( ! empty( $rank_math ) ) {
+		$subject = injil_help_schema_ids()['jesus'] ?? '';
+		$found   = false;
+		foreach ( $graph as $node ) {
+			$found = $found || ( $subject && ( $node['@id'] ?? '' ) === $subject );
+		}
+		if ( $subject && ! $found ) {
+			ih_fail( $page, 'the ʿĪsā subject node was lost in the Rank Math merge' );
+		}
+	}
 	if ( 1 !== $author_seen ) {
 		ih_fail( $page, "{$author_seen} author Person nodes, expected 1" );
 	}
