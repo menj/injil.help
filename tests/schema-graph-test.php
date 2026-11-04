@@ -689,6 +689,19 @@ if ( $journal_n < 8 ) {
 }
 echo "Journal posts: {$journal_n}\n";
 
+// The header menu: each SiteNavigationElement is named by its label alone, without the Greek or Arabic gloss.
+$nav_names = array();
+foreach ( injil_help_schema_navigation()['itemListElement'] as $li ) {
+	$nav_names[] = $li['item']['name'];
+}
+$nav_want = array( 'Islamic Dilemma', 'The Gospels', 'Paul of Tarsus', "Jesus in the Qur'an", 'The Gospel', 'Resources', 'Journal', 'FAQs' );
+if ( $nav_names !== $nav_want ) {
+	ih_fail( 'navigation', 'SiteNavigationElement names are ' . implode( ' / ', $nav_names ) );
+}
+if ( ! in_array( 'Journal', $nav_names, true ) ) {
+	ih_fail( 'navigation', 'no SiteNavigationElement is named "Journal"' );
+}
+
 // The totals of 3.15.0 are the floor: fewer means a page lost nodes.
 $floor = array( 'pages' => 181, 'Quotation' => 632, 'DefinedTerm' => 71, 'Chapter' => 51, 'Event' => 49 );
 if ( $n < $floor['pages'] ) {
