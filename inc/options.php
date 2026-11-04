@@ -68,6 +68,8 @@ function injil_help_option_defaults() {
 		'progress_track'   => '',
 		'social_profiles'  => array(),
 		'social_footer'    => 1,
+		'login_design'     => 1,
+		'login_message'    => '',
 	);
 }
 
@@ -141,6 +143,8 @@ function injil_help_sanitize_options( $in ) {
 		}
 	}
 	$out['social_footer']    = empty( $in['social_footer'] ) ? 0 : 1;
+	$out['login_design']     = empty( $in['login_design'] ) ? 0 : 1;
+	$out['login_message']    = sanitize_text_field( $in['login_message'] ?? '' );
 	return $out;
 }
 
@@ -544,6 +548,11 @@ function injil_help_render_options() {
 				injil_help_ui_toggle( $o, 'footer_mark', __( 'Show the footer brandmark', 'injil-help' ), __( 'The brandmark at the top of the footer.', 'injil-help' ) );
 				injil_help_ui_toggle( $o, 'favicon_force', __( 'Always use the brandmark as favicon', 'injil-help' ), __( 'By default the brandmark is used only when no Site Icon is set (Settings > General > Site Icon). Switch this on to use it even when one is set.', 'injil-help' ) );
 				injil_help_ui_input( $o, 'favicon_url', __( 'Custom favicon URL', 'injil-help' ), 'url', __( 'Optional. Replaces the brandmark favicon. SVG, PNG or ICO.', 'injil-help' ), array( 'placeholder' => 'https://' ) );
+				injil_help_ui_card_close();
+
+				injil_help_ui_card_open( __( 'Log-in screen', 'injil-help' ) );
+				injil_help_ui_toggle( $o, 'login_design', __( 'Dress the log-in screen in the theme', 'injil-help' ), __( 'The brandmark, the gloss of Qur\'an 5:47, the star lattice and the site colours on wp-login.php, the password and registration screens included. A plugin that styles the log-in screen takes over while it is active.', 'injil-help' ) );
+				injil_help_ui_input( $o, 'login_message', __( 'Note above the form', 'injil-help' ), 'text', __( 'Optional. One line of plain text on the log-in screen, for example who may sign in.', 'injil-help' ) );
 				injil_help_ui_card_close();
 				?>
 			</section>

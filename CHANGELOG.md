@@ -2,6 +2,17 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.22.0
+
+The log-in screen gets a switch, a note and a pass for WCAG 2.2 AA. No option key, function or hook was renamed or removed.
+
+- Theme Options › Branding has a Log-in screen card. `login_design` (on by default) turns the theme's dress on wp-login.php on or off; `login_message` adds one line of plain text above the form, on the log-in screen only.
+- While a plugin that styles the log-in screen is active (LoginPress, Custom Login, Login Logo, Branda, Admin Custom Login, Login Designer, Erident), the theme leaves the screen to it. The filter `injil_help_login_plugin_active` adds others. WPS Hide Login only moves the address, so the design follows it there. The title tag keeps the site's rule either way.
+- The body carries `ih-login`, and `ih-login--interim` in the pop-up shown when a session expires. The pop-up drops the lattice and sets a tighter column.
+- Focus rings and field edges use the green and the muted brown, which reach 3:1 against the ground; the gold stays as ornament. The links under the card, the checkbox and the show-password button are at least 24px. Phones get a card with less padding.
+- The closures in `inc/login.php` are named functions now, so a child theme can unhook them.
+- `tests/login-test.php` checks the switch, the plugin check, the classes, the note and every title.
+
 ## 3.21.2
 
 Two faults in the search base, found by the review of the same code on the TBE theme. No option key, function or hook was renamed or removed.
