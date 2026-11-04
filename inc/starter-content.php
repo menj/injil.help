@@ -227,7 +227,7 @@ function injil_help_related_blocks( $def, $content = '' ) {
  * every old URL to the new one with a 301. Paths listed in inc/data/slug-history.json are also
  * redirected (injil_help_redirect_moved_page()).
  */
-const INJIL_HELP_RULES = '4'; // bump when the rewrite rules change; populate() flushes when the stored value differs
+const INJIL_HELP_RULES = '5'; // bump when the rewrite rules change; populate() flushes when the stored value differs
 
 /**
  * A page that an earlier version published under one of the definition's "former" paths (a numeric

@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.20.2
+Stable tag: 3.21.0
 Template: twentytwentyfive
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -52,6 +52,10 @@ Modelled on apostleofdoom.org: a title-page hero; each part of the study as a bl
 * Hardening under Theme Options > Security: XML-RPC off, application passwords blocked, REST writes only from a browser session, a gambling-spam gate, 410 Gone for removed spam, a spam scan and reports.
 * Manuscript plates copied into the Media Library a few at a time, so readers are served local files. Remote plates are opt-in.
 * A settings screen of cards and tabs, usable by keyboard and on a phone.
+* Profile icons in the footer, from the addresses set under Theme Options > Sharing > Profile links, and through the [injil_help_social] shortcode or the Profile links pattern. The icons take the colour of the text around them.
+* A reading progress bar on single posts and pages, set under Theme Options > Reading.
+* Unlisted posts and pages: open at their address, missing from every listing, feed, search and sitemap, and marked noindex. Tick Unlist in the editor sidebar or in Quick Edit.
+* Search results at /search/term/, with the base set under Settings > Permalinks.
 == Fonts ==
 Bundled in assets/fonts and declared in theme.json, so every face is available in the editor's font picker. Roles:
 * Sabon Next LT: body text. EB Garamond: headings. Kagnue: site title, the titles of the section index pages and home sections, the large numerals and the cover title. Evangelion CPA: labels, kickers, navigation.
@@ -113,6 +117,8 @@ No page you edited is rewritten on update. Only "Update all pages from the theme
 = Which plugins does it work with? =
 Rank Math, Yoast and SEOPress. With Rank Math the theme adds its nodes to the plugin's graph; with Yoast or SEOPress it leaves the head to the plugin.
 
+You do not need Unlist Posts & Pages, Reading Progress Bar or Pretty Search Permalinks: the theme does what each of them does. If one of them is active anyway, the theme turns its own version off.
+
 == Privacy ==
 The theme sets no cookies and loads no scripts, fonts or styles from another server. All fonts are bundled.
 * Plates: off by default, readers' browsers load plates only from this site's Media Library. With Theme Options > Content > Load plates from Wikimedia Commons and Pexels switched on, a plate with no local copy loads from commons.wikimedia.org, upload.wikimedia.org or images.pexels.com, and those hosts see the reader's IP address.
@@ -122,6 +128,13 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.21.0 =
+* Profile links: set the address of each profile under Theme Options > Sharing, and the icons show in the footer. The [injil_help_social] shortcode and the Profile links pattern put them anywhere else.
+* Reading progress bar: a thin bar fills as the reader scrolls a post or page. The new Reading tab sets the post types, the edge, the height and the colours.
+* Unlisted posts: tick Unlist in the editor sidebar, Quick Edit or Bulk Edit. The post keeps its address and drops out of every listing, feed, search, sitemap and the Read next row, and it is marked noindex.
+* Search results open at /search/term/. Change the base under Settings > Permalinks.
+* Each of these steps aside while the plugin it replaces is active.
+
 = 3.20.2 =
 * The speakable selectors name only markup the page has. On the front page and the answers page they named a paragraph that does not exist there.
 * The Organization is also a NewsMediaOrganization, the type that defines its masthead and fact-checking policy.
@@ -362,7 +375,7 @@ Fonts (assets/fonts), each under its own licence:
 Images: assets/brandmark.svg, assets/images/divider.svg, assets/images/arrow-next*.webp and the icons in assets/icons are the theme's own, GPLv2 or later. assets/images/lanat-allah.svg is outlined from Dubidam Arabic. The default social image, assets/images/og-default.jpg, is the Birmingham Qur'an manuscript, public domain. The plates listed in inc/data/images.json and in the patterns are public domain or CC0 from Wikimedia Commons, Pexels photographs under the Pexels License, and one CC BY 2.0 photograph (Richard Mortel); each caption carries its credit and source.
 
 == Credits ==
-Share icons (assets/icons/social/): Minimalist Social Icons Pack, GPL. The LinkedIn icon originates from Font Awesome Free (https://fontawesome.com), CC BY 4.0; the credit is carried on the Credits page. The brand marks remain trademarks of their owners. assets/icons/share.svg and link.svg are the theme's own.
+Share and profile icons (assets/icons/social/): Minimalist Social Icons Pack 2.8, GPL; the profile row adds Instagram, YouTube, TikTok, Mastodon, GitHub and Substack from the same pack. The LinkedIn icon originates from Font Awesome Free (https://fontawesome.com), CC BY 4.0; the credit is carried on the Credits page. The brand marks remain trademarks of their owners. assets/icons/share.svg and link.svg are the theme's own.
 Default social image: Birmingham Qur'an manuscript (Cadbury Research Library, University of Birmingham), public domain, via Wikimedia Commons.
 The classical commentaries (inc/data/tafsir/): English renderings prepared for this website from the public-domain Arabic texts of al-Tabari, al-Baghawi, al-Qurtubi, Ibn Kathir, Tanwir al-Miqbas, al-Jalalayn, al-Durr al-Manthur and al-Sa'di as published at tafsir.app, greattafsirs.com and shamela.ws; the modern editors' apparatus is not translated. Released with the theme under its licence; no second translator has checked them, and the Arabic source is named on every page.
 The Gospel According to Islam: text and notes by Ahmad Shafaat (New York: Vantage Press, 1985), used as the base text of this website's gospel. Spelling and scanning errors in the supplied text were corrected; the Gospel of Thomas sections and their notes were added by this website. Gospel of Thomas saying numbers follow the standard edition; the summaries are the website's own, prepared from T. O. Lambdin's translation in The Nag Hammadi Library in English (Brill, 1988).
