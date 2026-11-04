@@ -193,6 +193,7 @@ add_action(
 					array(
 						'ajaxUrl' => admin_url( 'admin-ajax.php' ),
 						'nonce'   => wp_create_nonce( 'injil_help_populate' ),
+						'pagesNonce' => wp_create_nonce( 'injil_help_starter_pages' ),
 						/* translators: 1: pages done, 2: pages in all */
 						'working' => __( 'Writing the pages: %1$d of %2$d done. Keep this screen open.', 'injil-help' ),
 						'busy'    => __( 'Another update is running. Trying again in a few seconds…', 'injil-help' ),
@@ -623,29 +624,22 @@ function injil_help_render_options() {
 				injil_help_ui_card_close();
 
 				injil_help_ui_card_open( __( 'Starter pages', 'injil-help' ), __( 'The theme creates these pages when it is activated. When the theme is updated, the pages whose text changed are rewritten automatically, a few at a time as you move between admin screens, and pages you have edited are kept. Both buttons work in small batches, show their progress here and report what they did at the top of the screen.', 'injil-help' ) );
-				$missing = 0;
+				// The list looks up every starter page; build it only on ?tab=content, or
+				// fetch it over admin-ajax when the tab is first shown.
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- tab selection only.
+				$ih_tab = isset( $_GET['tab'] ) && is_string( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : '';
+				if ( 'content' === $ih_tab ) {
+					echo '<div id="ih-starter-pages">';
+					injil_help_render_starter_pages();
+					echo '</div>';
+				} else {
+					printf(
+						'<div id="ih-starter-pages" data-ih-lazy="injil_help_starter_pages"><p><a class="button" href="%1$s">%2$s</a></p></div>',
+						esc_url( add_query_arg( array( 'page' => 'injil-help-options', 'tab' => 'content' ), admin_url( 'themes.php' ) ) . '#content' ),
+						esc_html__( 'Open the Content tab', 'injil-help' )
+					);
+				}
 				?>
-				<ul class="ih-pages">
-					<?php foreach ( injil_help_starter_pages() as $def ) : ?>
-						<?php
-						$page     = injil_help_find_page( $def['path'] );
-						$missing += $page ? 0 : 1;
-						?>
-						<li class="<?php echo $page ? 'is-ok' : 'is-missing'; ?>">
-							<span class="ih-dot" aria-hidden="true"></span>
-							<?php if ( $page ) : ?>
-								<a href="<?php echo esc_url( get_permalink( $page ) ); ?>"><?php echo esc_html( $def['title'] ); ?></a>
-							<?php else : ?>
-								<?php echo esc_html( $def['title'] ); ?> <span class="screen-reader-text"><?php esc_html_e( '(missing)', 'injil-help' ); ?></span>
-							<?php endif; ?>
-							<code>/<?php echo esc_html( $def['path'] ); ?>/</code>
-						</li>
-					<?php endforeach; ?>
-				</ul>
-				<p class="ih-actions">
-					<a class="button button-primary" data-ih-populate="create" href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=injil_help_populate' ), 'injil_help_populate' ) ); ?>"><?php echo esc_html( $missing ? sprintf( /* translators: %d: missing pages */ __( 'Create %d missing pages', 'injil-help' ), $missing ) : __( 'Check again', 'injil-help' ) ); ?></a>
-					<a class="button" data-ih-populate="update" data-confirm="<?php echo esc_attr__( 'Rewrite every listed page from the theme? Edits you made to those pages will be lost.', 'injil-help' ); ?>" href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=injil_help_populate&overwrite=1' ), 'injil_help_populate' ) ); ?>"><?php esc_html_e( 'Update all pages from the theme', 'injil-help' ); ?></a>
-				</p>
 				<?php injil_help_ui_card_close(); ?>
 			</section>
 
@@ -743,5 +737,49 @@ add_filter(
 	'site_icon_meta_tags',
 	function ( $tags ) {
 		return injil_help_get_option( 'favicon_force' ) || injil_help_get_option( 'favicon_url' ) ? array() : $tags;
+	}
+);
+
+/**
+ * The starter page list and its two buttons, on the Content tab. It looks up
+ * every starter page, so it runs only on ?tab=content or over admin-ajax.
+ */
+function injil_help_render_starter_pages() {
+	$missing = 0;
+	?>
+	<ul class="ih-pages">
+		<?php foreach ( injil_help_starter_pages() as $def ) : ?>
+			<?php
+			$page     = injil_help_find_page( $def['path'] );
+			$missing += $page ? 0 : 1;
+			?>
+			<li class="<?php echo $page ? 'is-ok' : 'is-missing'; ?>">
+				<span class="ih-dot" aria-hidden="true"></span>
+				<?php if ( $page ) : ?>
+					<a href="<?php echo esc_url( get_permalink( $page ) ); ?>"><?php echo esc_html( $def['title'] ); ?></a>
+				<?php else : ?>
+					<?php echo esc_html( $def['title'] ); ?> <span class="screen-reader-text"><?php esc_html_e( '(missing)', 'injil-help' ); ?></span>
+				<?php endif; ?>
+				<code>/<?php echo esc_html( $def['path'] ); ?>/</code>
+			</li>
+		<?php endforeach; ?>
+	</ul>
+	<p class="ih-actions">
+		<a class="button button-primary" data-ih-populate="create" href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=injil_help_populate' ), 'injil_help_populate' ) ); ?>"><?php echo esc_html( $missing ? sprintf( /* translators: %d: missing pages */ __( 'Create %d missing pages', 'injil-help' ), $missing ) : __( 'Check again', 'injil-help' ) ); ?></a>
+		<a class="button" data-ih-populate="update" data-confirm="<?php echo esc_attr__( 'Rewrite every listed page from the theme? Edits you made to those pages will be lost.', 'injil-help' ); ?>" href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=injil_help_populate&overwrite=1' ), 'injil_help_populate' ) ); ?>"><?php esc_html_e( 'Update all pages from the theme', 'injil-help' ); ?></a>
+	</p>
+	<?php
+}
+
+add_action(
+	'wp_ajax_injil_help_starter_pages',
+	function () {
+		if ( ! current_user_can( 'edit_theme_options' ) ) {
+			wp_send_json_error( array( 'message' => __( 'You do not have permission to do this.', 'injil-help' ) ), 403 );
+		}
+		check_ajax_referer( 'injil_help_starter_pages', 'nonce' );
+		ob_start();
+		injil_help_render_starter_pages();
+		wp_send_json_success( array( 'html' => ob_get_clean() ) );
 	}
 );

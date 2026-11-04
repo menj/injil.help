@@ -44,7 +44,42 @@
 			found.focus();
 		}
 		found.scrollIntoView( { block: 'nearest', inline: 'nearest' } );
+		loadLazy( document.getElementById( 'panel-' + id ) );
 		return true;
+	}
+
+	/*
+	 * Heavy panel parts (the starter page list) are left out of the markup
+	 * unless the screen opens on their ?tab=. Fetch them the first time the
+	 * tab is shown; the placeholder link opens that ?tab= if this fails.
+	 */
+	function loadLazy( panel ) {
+		var box = panel ? panel.querySelector( '[data-ih-lazy]' ) : null;
+		var conf = window.injilHelpPopulate;
+		if ( ! box || box.getAttribute( 'data-ih-loading' ) || ! conf || ! conf.pagesNonce || ! window.fetch ) {
+			return;
+		}
+		box.setAttribute( 'data-ih-loading', '1' );
+		box.setAttribute( 'aria-busy', 'true' );
+		var body = new URLSearchParams();
+		body.append( 'action', box.getAttribute( 'data-ih-lazy' ) );
+		body.append( 'nonce', conf.pagesNonce );
+		window.fetch( conf.ajaxUrl, { method: 'POST', credentials: 'same-origin', body: body } )
+			.then( function ( r ) {
+				return r.json();
+			} )
+			.then( function ( res ) {
+				if ( ! res || ! res.success ) {
+					throw new Error( 'failed' );
+				}
+				box.innerHTML = res.data.html;
+				box.removeAttribute( 'data-ih-lazy' );
+				box.removeAttribute( 'aria-busy' );
+			} )
+			.catch( function () {
+				box.removeAttribute( 'data-ih-loading' );
+				box.removeAttribute( 'aria-busy' );
+			} );
 	}
 
 	function select( tab, focus ) {
@@ -88,6 +123,9 @@
 	} );
 
 	var hash = window.location.hash.replace( '#', '' );
+	if ( ! hash && window.URLSearchParams ) {
+		hash = new URLSearchParams( window.location.search ).get( 'tab' ) || '';
+	}
 	if ( ! hash || ! show( hash, false ) ) {
 		show( idOf( tabs[ 0 ] ), false );
 	}
@@ -102,7 +140,8 @@
 		}
 	} );
 
-	$( '[data-confirm]' ).on( 'click', function ( e ) {
+	// Delegated, so the buttons fetched with the starter page list work too.
+	$( root ).on( 'click', '[data-confirm]', function ( e ) {
 		if ( ! window.confirm( $( this ).data( 'confirm' ) ) ) {
 			e.preventDefault();
 			e.stopImmediatePropagation();
@@ -128,7 +167,7 @@
 	function format( template, a, b ) {
 		return template.replace( '%1$d', a ).replace( '%2$d', b );
 	}
-	$( '[data-ih-populate]' ).on( 'click', function ( e ) {
+	$( root ).on( 'click', '[data-ih-populate]', function ( e ) {
 		if ( ! cfg || ! window.fetch ) {
 			return; // the link runs the job in one request
 		}
