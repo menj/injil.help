@@ -2,6 +2,19 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.20.0
+
+The owner's upgrade rules of 4 November 2026, applied without removing a feature or renaming a public identifier. The theme folder keeps its name, `injil-help`.
+
+- Theme Options is rebuilt to the settings design system of the brief. Cards replace every `form-table`. The tabs are a WAI-ARIA tablist: `role="tab"` links with `aria-selected`, a roving `tabindex`, arrow keys, Home and End, and no reload. They scroll sideways on a narrow screen. A header carries the icon, the title, a line of description and the version; a footer links to the theme details and Site Health.
+- Every on-off setting is a switch (a checkbox with `role="switch"`), the ten networks and both post types included. Content width, ornament, parallax, the gospel layout and the SEO output are selector cards (radio inputs with an active border). The two contextual-link limits are range sliders whose value shows in an `<output>` as they move. The nine colour pickers sit in a responsive grid. Below 782 pixels rows stack, controls go full width and the cards fall to one column.
+- Each tab opens with a note on how to use it.
+- `assets/css/admin.css` and `assets/js/admin.js` are rewritten and still load only on `appearance_page_injil-help-options`. The script has no globals beyond the localised settings it already read. New helpers in `inc/options.php`: `injil_help_ui_row()`, `injil_help_ui_switch()`, `injil_help_ui_toggle()`, `injil_help_ui_cards()`, `injil_help_ui_range()`, `injil_help_ui_input()`, `injil_help_ui_card_open()`, `injil_help_ui_card_close()`, `injil_help_ui_usage()` and `injil_help_options_tabs()`. `injil_help_sec_field()` and `injil_help_sec_render_settings()` keep their signatures and print the card layout. Every option key, default and sanitiser is unchanged, and the Security switches still need `manage_options`.
+- `injil_help_render_options()` checks `edit_theme_options` before it prints anything.
+- Privacy: a plate whose only copy is on Wikimedia Commons or Pexels is left out of the page until the Media Library holds it. The new option `remote_images` (off by default; Theme Options › Content) and the filter `injil_help_remote_images` bring back loading from the source. `injil_help_pattern_images()` lists the four Commons plates of the patterns that `images.json` does not carry, and the admin-load copier fetches them too. The Privacy page says so.
+- `title-tag` and `automatic-feed-links` are declared in `after_setup_theme`; core gave them to the block theme already.
+- `readme.txt` gains Description, Features, Usage, FAQ, Privacy, Upgrade Notice and Copyright and licences sections. The last lists every bundled font, image and script with its licence and source.
+
 ## 3.19.0
 
 A mobile and accessibility pass, made to two of the owner's briefs of 4 November 2026: the mobile-first theme audit and the WCAG 2.2 AA policy. Pages were rendered at 9 widths from 320 to 1280 pixels and checked with axe-core, the keyboard, text spacing and a 200% zoom. No page scrolled sideways before or after.

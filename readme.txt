@@ -1,13 +1,23 @@
 === The Injil ===
+Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-patterns, translation-ready
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
+Stable tag: 3.20.0
 Template: twentytwentyfive
 License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Custom child theme of Twenty Twenty-Five built for one site: The Rightly-Guided Injīl at injil.help. It carries that site's pages, content, fonts and licences, and is not intended for use on any other site.
 
-== Install ==
+== Description ==
+The Injil is the block theme of The Rightly-Guided Injīl. It answers the Islamic Dilemma with the Qur'an as the measure (5:48) and sets The Gospel According to Islam, after Ahmad Shafaat's text of 1985, like a printed Bible.
+
+It writes the site's 182 pages and the Journal on activation, prints one JSON-LD graph per page, and carries its own fonts, ornament layer, share row, contextual links and hardening. Everything a site owner changes lives under Appearance > Theme Options.
+
+The theme makes no remote calls from the reader's browser by default. See Privacy below.
+
+== Installation ==
 1. Install and keep Twenty Twenty-Five (the parent). Do not delete it.
 2. Upload this folder to wp-content/themes/injil-help/ and activate "The Injil". Set Settings > General > Site Title to "The Rightly-Guided Injīl" (the header and footer read it from there).
 3. (Automatic) On activation the theme sets pretty permalinks and starts writing the 182 pages listed under Theme Options > Content. It writes them about 20 seconds at a time, on activation and then on each admin screen load, and a notice at the top of the admin shows the progress. Click through a few admin screens until the notice says the pages are done; the site is then complete for visitors.
@@ -30,7 +40,7 @@ The page bodies use a small plain-text markup (headings, lists with colour marks
 == Structure ==
 Modelled on apostleofdoom.org: a title-page hero; each part of the study as a block with a gloss (Greek for New Testament parts, Arabic for Qur'anic parts, each with its verse), an intro, a "Read first" link and numbered entries; a band of FAQs with "Full evidence" links; a footer of study, reference and method links.
 
-== What it adds ==
+== Features ==
 * Patterns (Appearance > Editor, category "injil.help"): the front-page sections and FAQ band, the parts grid, the pillar page, the measure, the five section indexes and the FAQs page, how this gospel was composed, the corrections log, the five discrepancy tables, the manuscripts table, the sayings-order test, the Qur'an verse index, and the building blocks (answer capsule, claim labels, gospel verse, objection and reply, FAQ item). Insert any of them on a new page.
 * Block styles in the editor's Styles panel: ornament separator; claim labels (Scholarly consensus, Minority view, Islamic position); source labels (Qur'an, NT-attested, Editorial); answer capsule; gospel verse; objection and reply; criterion box; discrepancy table; FAQ item (which also feeds the page's FAQ rich result).
 * Page templates: "Section index" for index pages and "Wide page (tables)" for pages with wide comparison tables.
@@ -38,6 +48,10 @@ Modelled on apostleofdoom.org: a title-page hero; each part of the study as a bl
 * Structured data for search engines on every page, switched off automatically when Yoast or SEOPress is active and added to Rank Math's own when Rank Math is active.
 * Contextual links in the text: the first mention of a phrase the network map knows (inc/data/network-links.json, the same file in all seven of the author's themes) links to the inner page that treats it, on this site or a sister site. Set under Theme Options > Contextual links.
 * A share row under posts and pages: X, Facebook, WhatsApp, Telegram, Reddit, LinkedIn, Bluesky, Threads, Pinterest and LINE, with Copy link and, where the browser allows, a button that opens the device's share sheet. Choose the networks and the label under Theme Options > Sharing.
+* The Journal: the site's one blog, standard posts at /journal/<slug>/, seeded from inc/data/posts.json.
+* Hardening under Theme Options > Security: XML-RPC off, application passwords blocked, REST writes only from a browser session, a gambling-spam gate, 410 Gone for removed spam, a spam scan and reports.
+* Manuscript plates copied into the Media Library a few at a time, so readers are served local files. Remote plates are opt-in.
+* A settings screen of cards and tabs, usable by keyboard and on a phone.
 == Fonts ==
 Bundled in assets/fonts and declared in theme.json, so every face is available in the editor's font picker. Roles:
 * Sabon Next LT: body text. EB Garamond: headings. Kagnue: site title, the titles of the section index pages and home sections, the large numerals and the cover title. Evangelion CPA: labels, kickers, navigation.
@@ -46,7 +60,7 @@ Bundled in assets/fonts and declared in theme.json, so every face is available i
 * Estrangelo Edessa: Syriac. Noto Sans Cuneiform: cuneiform. Special Elite: the corrections log. Ferments, Angel: available, unused by default.
 The class names and language codes that select each face are listed in README.md.
 
-Licensing: Sabon Next LT (Linotype) and Kagnue (Youthlabs Studio) are commercial faces licensed to the site owner; a new site must hold its own licences for them. Angel is freeware and asks for its README to be kept with the font (assets/fonts/Angel-README.txt). The rest are OFL or free for use; keep their licence files.
+Licensing: Sabon Next LT (Linotype) and Kagnue (Youthlabs Studio) are commercial faces licensed to the site owner; a new site must hold its own licences for them. Angel is freeware and asks for its README to be kept with the font (assets/fonts/Angel-README.txt). The rest are OFL or free for use; keep their licence files. Every face, with its licence and source, is listed under Copyright and licences below.
 
 == SEO: "the Islamic Dilemma" ==
 * The pillar page is /islamic-dilemma/, created for you. Its excerpt is its meta description: keyword first, under 160 characters.
@@ -56,21 +70,22 @@ Licensing: Sabon Next LT (Linotype) and Kagnue (Youthlabs Studio) are commercial
 * The keyword appears in the home kicker and lede, the home dilemma section, the first nav item, the first two FAQs and the footer. Link to /islamic-dilemma/ from every new article that touches Qur'an 5:47, taḥrīf or the identity of the Injīl, with varied anchor text.
 * The default social image can be replaced under Theme Options > SEO.
 == Images ==
-Manuscript images load from Wikimedia Commons, and five photographs of manuscripts and an inscription from Pexels, each with its credit and a link to its source page in the caption. All are public domain except the Kairouan Qur'an photograph (Richard Mortel, CC BY 2.0), which must keep its credit. Every image carries a descriptive alt attribute (what it is, its date and holding institution) and a short title; keep that pattern for new images, and write alt text for the subject, not for decoration. WordPress adds lazy loading itself. The default Open Graph image is a bundled copy of the Birmingham Qur'an manuscript (assets/images/og-default.jpg, public domain, 1280 × 833); replace it under Theme Options > SEO. To host the manuscript images yourself, download from the linked Commons page into the Media Library and swap the URL. Readers' browsers contact upload.wikimedia.org and images.pexels.com; the privacy policy says so. Thirty-five article pages also carry a plate listed in inc/data/images.json, and the same image becomes the page's featured image once the host has fetched it (six pages per admin screen load; a failed fetch is retried after a day). To change a page's image, edit its entry: the Commons file name without "File:", the alt text, the caption and the credit. Use only public-domain or CC0 files from Commons, or Pexels photographs credited as "Photo: name, Pexels License" with source, url and page set; check that the file exists.
+Manuscript images come from Wikimedia Commons, and five photographs of manuscripts and an inscription from Pexels, each with its credit and a link to its source page in the caption. All are public domain except the Kairouan Qur'an photograph (Richard Mortel, CC BY 2.0), which must keep its credit. Every image carries a descriptive alt attribute (what it is, its date and holding institution) and a short title; keep that pattern for new images, and write alt text for the subject, not for decoration. WordPress adds lazy loading itself. The default Open Graph image is a bundled copy of the Birmingham Qur'an manuscript (assets/images/og-default.jpg, public domain, 1280 × 833); replace it under Theme Options > SEO. To host the manuscript images yourself, download from the linked Commons page into the Media Library and swap the URL. From 3.20.0 readers are served the Media Library copy only, and a plate without one is hidden, unless Theme Options > Content allows remote plates; with that switch on, readers' browsers contact upload.wikimedia.org and images.pexels.com, and the privacy policy should say so. Thirty-five article pages also carry a plate listed in inc/data/images.json, and the same image becomes the page's featured image once the host has fetched it (six pages per admin screen load; a failed fetch is retried after a day). To change a page's image, edit its entry: the Commons file name without "File:", the alt text, the caption and the credit. Use only public-domain or CC0 files from Commons, or Pexels photographs credited as "Photo: name, Pexels License" with source, url and page set; check that the file exists.
 
 == Branding ==
 * Brandmark: assets/brandmark.svg (an open codex with rays of light, Qur'an 5:46). It appears as the link before the site title in the header and at the top of the footer's first column (class ih-mark; the footer adds ih-mark-foot).
 * Favicon: if no Site Icon is set under Settings > General > Site Icon (or in the Site Editor), the theme outputs assets/brandmark.svg as an SVG favicon. A Site Icon takes precedence unless Theme Options > Branding is set to force the brandmark or to use a custom favicon URL. Some older browsers ignore SVG favicons, so set a PNG Site Icon for full coverage.
 
-== Theme Options ==
-Appearance > Theme Options is a tabbed page:
-* Colours: nine palette overrides with colour pickers; empty keeps the default.
-* Branding: ornament layer (Rich, Subtle, Off) and the reveal animation; show or hide the footer brandmark; always use the brandmark as favicon even with a Site Icon; custom favicon URL.
-* Sharing: show or hide the share row, on posts and/or pages; which networks, in order; the row's label.
-* Contextual links: link the first mention of a known phrase to its page on this site and/or on the sister sites; the most of each kind on one page (4 and 3 by default); more phrases, one per line as phrase | address; pages that get no links.
-* Content: lists every starter page with its status, creates missing ones, and rewrites all of them from the theme on demand.
-* SEO: theme SEO output automatic, always on or always off; home title and description; pillar page title; default social image URL; structured data: author name and URL, profile links (sameAs), organization logo URL.
-The page's own colours follow the Colours tab.
+== Usage ==
+Appearance > Theme Options holds every setting, in seven tabs. Each tab opens with a short note on how to use it. Click a tab, or move between tabs with the arrow keys, Home and End; nothing reloads until you press Save Changes. Switches turn a feature on or off, cards choose one style of several, and sliders show their number as they move.
+* Colours: nine palette overrides in a grid of colour pickers; an empty field keeps the default.
+* Branding: content width, ornament (Rich, Subtle, Off) and parallax depth as cards; the reveal animation, the footer brandmark and the forced brandmark favicon as switches; a custom favicon URL.
+* Sharing: the share row on or off, on posts and on pages; one switch per network, in the order shown; the label of the row.
+* Contextual links: links to this site and to the sister sites, each with a slider for the most on one page (4 and 3 by default); more phrases, one per line as phrase | address; pages that get no links.
+* SEO: the theme's SEO output (Automatic, Always on, Always off) as cards; home title and description; pillar page title; default social image URL; author name and URL, profile links (sameAs) and organisation logo for the structured data.
+* Security (administrators): the five hardening switches, then the spam scan, the clean-up buttons and the reports.
+* Content: the gospel layout as cards; the switch for remote plates; every starter page with its status, and the buttons that create missing pages or rewrite all of them.
+The screen's own colours follow the Colours tab. Its stylesheet and script load on that screen only.
 
 == Ornament ==
 Icons, pattern, banners and motion are a separate decorative layer, drawn so that every decoration takes its colour from the palette and follows Theme Options > Colours.
@@ -85,7 +100,35 @@ This file is the user-facing manual that WordPress and Git Updater read. The rep
 == Releasing ==
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add the entry to CHANGELOG.md and to the Changelog section here, note anything an existing site must know under "Updating an existing site" in UPGRADING.md, merge to main, and tag the commit with the same number (for example v3.4.0). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
+== Frequently Asked Questions ==
+= Why are some manuscript plates missing on a new site? =
+Remote plates are off by default. The theme copies each plate from Wikimedia Commons or Pexels into the Media Library, six files per admin screen load, and shows a plate once its copy is there. Load a few admin screens, or switch on Theme Options > Content > Load plates from Wikimedia Commons and Pexels.
+
+= Can I use the theme on another site? =
+It is built for injil.help. Sabon Next LT and Kagnue are commercial fonts licensed to this site, so another site needs its own licences for them.
+
+= Will an update overwrite my edits to a page? =
+No page you edited is rewritten on update. Only "Update all pages from the theme" on the Content tab rewrites edited pages, and it asks first.
+
+= Which plugins does it work with? =
+Rank Math, Yoast and SEOPress. With Rank Math the theme adds its nodes to the plugin's graph; with Yoast or SEOPress it leaves the head to the plugin.
+
+== Privacy ==
+The theme sets no cookies and loads no scripts, fonts or styles from another server. All fonts are bundled.
+* Plates: off by default, readers' browsers load plates only from this site's Media Library. With Theme Options > Content > Load plates from Wikimedia Commons and Pexels switched on, a plate with no local copy loads from commons.wikimedia.org, upload.wikimedia.org or images.pexels.com, and those hosts see the reader's IP address.
+* The server fetches each plate from Commons or Pexels once, on an admin screen load, to store it in the Media Library. No reader data is sent.
+* Share links are plain links; a network sees the reader only after the reader clicks.
+* Security log: the theme records the IP address and time of failed log-ins, the last log-in of each administrator, and the posts held by the spam gate, in the options and user meta tables. Clear the log under Theme Options > Security.
+* Say so in the site's privacy policy if you switch remote plates on.
+
 == Changelog ==
+= 3.20.0 =
+* Theme Options rebuilt as cards in place of form tables: tabs with full ARIA and arrow-key support, switches for every on-off setting, selector cards for the style choices, sliders that show their value, and the colour pickers in a grid. The layout stacks at 782 pixels. Every option key and its behaviour is unchanged.
+* Each tab opens with a note on how to use it; a header with the version and a footer with links to the theme details and Site Health.
+* Privacy: plates from Wikimedia Commons and Pexels no longer load in the reader's browser by default. A plate is shown from its Media Library copy, and the switch remote_images (Theme Options > Content) brings back remote loading. The plates of the front-page and section patterns are now copied into the Media Library too.
+* title-tag and automatic-feed-links are declared by the theme; the options screen checks edit_theme_options before it renders.
+* readme: description, features, usage, FAQ, privacy, copyright and upgrade notice sections.
+
 = 3.19.0 =
 * Mobile and accessibility, to the owner's mobile-first audit and WCAG 2.2 AA briefs: a focus ring with enough contrast, a header that no longer hides the title at 320 pixels, 44-pixel touch targets on phones, page numbers at least 24 pixels wide, lang attributes on the Greek and Arabic glosses, and a spoken status for Copy link. New file assets/css/responsive.css.
 * Structured data: the Journal menu item is named Journal, without its Greek gloss.
@@ -288,6 +331,28 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 * "Answers" and "Short answers" renamed "FAQs" in the header, footer, patterns and docs (the page slug stays /answers/).
 * Brandmark added to the footer.
 * New screenshot.
+
+== Upgrade Notice ==
+= 3.20.0 =
+Remote plates are now opt-in. A plate with no Media Library copy is hidden until the copy is made, a few files per admin screen load. Switch on Theme Options > Content > Load plates from Wikimedia Commons and Pexels to show them from the source meanwhile.
+
+== Copyright and licences ==
+The Injil, Copyright 2025-2026 its author, as named in the style.css header. Distributed under the GNU General Public License v2 or later. Its parent, Twenty Twenty-Five, is GPLv2 or later, by the WordPress team.
+
+Scripts and styles: the theme's own (assets/css, assets/js), GPLv2 or later, unminified. It uses jQuery, Iris and wp-color-picker as WordPress registers them and bundles no third-party library.
+
+Fonts (assets/fonts), each under its own licence:
+* EB Garamond (Georg Duffner, Octavio Pardo) and Amiri (Khaled Hosny): SIL Open Font License 1.1, licence files OFL-EBGaramond.txt and OFL-Amiri.txt beside them.
+* Noto Naskh Arabic and Noto Sans Cuneiform (The Noto Project Authors, https://github.com/notofonts): SIL Open Font License 1.1, stated in the font files.
+* Evangelion CPA (The Evangelion CPA Project Authors, https://github.com/typiconman/Evangelion-CPA): SIL Open Font License 1.1.
+* Special Elite (Astigmatic): Apache License 2.0, stated in the font file.
+* KFGQPC HAFS Uthmanic Script (King Fahd Glorious Qur'an Printing Complex): free use and distribution, no modification; KFGQPC-Hafs-Uthmanic-LICENSE.txt beside it. Served as a WOFF2 conversion by the owner's decision of 26 October 2026.
+* SBL Greek, SBL Hebrew and SBL BibLit (John Hudson, Tiro Typeworks, for the Society of Biblical Literature): the SBL font EULA, free for non-commercial use.
+* Sabon Next LT (Linotype, Monotype) and Kagnue (Youthlabs Studio): commercial, licensed to the site owner.
+* Dubidam Arabic (NamelaType): free personal-use licence per its metadata; a web licence is the site owner's to hold.
+* Arslan Wessam (Arslan, Dev-Point.com), Ferments (Haksen Studio), Estrangelo Edessa (Beth Mardutho) and Angel (JuliaL, freeware; Angel-README.txt beside it): free to use as their authors publish them.
+
+Images: assets/brandmark.svg, assets/images/divider.svg, assets/images/arrow-next*.webp and the icons in assets/icons are the theme's own, GPLv2 or later. assets/images/lanat-allah.svg is outlined from Dubidam Arabic. The default social image, assets/images/og-default.jpg, is the Birmingham Qur'an manuscript, public domain. The plates listed in inc/data/images.json and in the patterns are public domain or CC0 from Wikimedia Commons, Pexels photographs under the Pexels License, and one CC BY 2.0 photograph (Richard Mortel); each caption carries its credit and source.
 
 == Credits ==
 Share icons (assets/icons/social/): Minimalist Social Icons Pack, GPL. The LinkedIn icon originates from Font Awesome Free (https://fontawesome.com), CC BY 4.0; the credit is carried on the Credits page. The brand marks remain trademarks of their owners. assets/icons/share.svg and link.svg are the theme's own.
