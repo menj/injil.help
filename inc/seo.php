@@ -169,12 +169,15 @@ function injil_help_meta_description() {
 	return injil_help_trim_description( get_bloginfo( 'description' ) );
 }
 
-/** Search result pages are not indexed; the guide asks that crawling be kept off them. */
+/** Search result pages and the 404 page are not indexed; the guide asks that crawling be kept off them. Links on the 404 page are still followed. */
 add_filter(
 	'wp_robots',
 	function ( $robots ) {
-		if ( is_search() ) {
+		if ( is_search() || is_404() ) {
 			$robots['noindex'] = true;
+		}
+		if ( is_404() ) {
+			$robots['follow'] = true;
 		}
 		return $robots;
 	}

@@ -80,6 +80,9 @@ Whichever is chosen, document the server settings a site needs (`max_input_vars`
 
 ## Updating an existing site
 
+**To 3.23.0.** Nothing changes until you act. Open Theme Options, scroll to Error pages at the foot and press Install error pages. If a row says another file is there, a plugin or host wrote that file; the theme leaves it alone. To use the static pages for server errors, add the four `ErrorDocument` lines from the same section to `.htaccess`.
+
+
 Git Updater reads the theme header and offers the release whose tag matches `Version:`. After the update, the first load of any admin screen rewrites the starter pages whose text changed, keeps pages you edited (marked "edited, kept on update" on the Content tab), keeps no revisions, and flushes rewrite rules only if permalinks had to be set. "Update all pages from the theme" replaces every page, edited ones included, after a confirmation. Take a database backup before updating; open the Content tab once after.
 
 - **3.20.2.** Nothing to do. A page or Journal post that carries no hash from the theme is kept on every update from now on, so it keeps your text and does not take the new one. To give such a page the theme's text, press "Update all pages from the theme".
