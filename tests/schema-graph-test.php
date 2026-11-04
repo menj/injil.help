@@ -772,6 +772,20 @@ if ( $journal_n < 8 ) {
 }
 echo "Journal posts: {$journal_n}\n";
 
+// sameAs: the Organization and the author Person carry https://menj.bio.
+$ih_same_graph = injil_help_schema_site_nodes();
+foreach ( array( 'org', 'author' ) as $ih_same_key ) {
+	$ih_same_found = false;
+	foreach ( $ih_same_graph as $node ) {
+		if ( isset( $node['@id'] ) && injil_help_schema_ids()[ $ih_same_key ] === $node['@id'] ) {
+			$ih_same_found = in_array( 'https://menj.bio', (array) ( $node['sameAs'] ?? array() ), true );
+		}
+	}
+	if ( ! $ih_same_found ) {
+		ih_fail( 'sameAs', "the {$ih_same_key} node does not list https://menj.bio" );
+	}
+}
+
 // The header menu: each SiteNavigationElement is named by its label alone, without the Greek or Arabic gloss.
 $nav_names = array();
 foreach ( injil_help_schema_navigation()['itemListElement'] as $li ) {
