@@ -6,8 +6,8 @@
  * WordPress is stubbed. Every starter page the theme writes (inc/starter-content-pages.php) is built
  * from its definition, rendered and given its graph, once on its own and once merged into a stand-in
  * Rank Math graph. Each graph must encode as JSON and decode again; every @id must be unique; every
- * {"@id"} reference must name a node of the same graph (image addresses excepted, which are nodes
- * too); every node must carry @type; the page, breadcrumb and article must carry their required
+ * {"@id"} reference must name a node of the same graph, image addresses included, and an image
+ * that is referenced must be an ImageObject with contentUrl, creditText and licence; every node must carry @type; the page, breadcrumb and article must carry their required
  * properties; and no value may hold the calligraphic mark, the owner's name or the banned word. Exit code 0 on success.
  *
  * @package injil-help
@@ -133,7 +133,10 @@ function get_option( $k, $d = false ) {
 function get_theme_mod( $k, $d = false ) {
 	return $d;
 }
-function get_post_meta() {
+function get_post_meta( $id = 0, $key = '', $single = false ) {
+	if ( '_injil_help_commons' === $key ) {
+		return $GLOBALS['ih_attachments'][ $id ] ?? '';
+	}
 	return '';
 }
 function has_site_icon() {
@@ -200,8 +203,35 @@ function get_the_date( $f, $post ) {
 function get_the_modified_date( $f, $post ) {
 	return date( 'c' === $f ? DATE_ATOM : $f, strtotime( $post->post_modified ) );
 }
-function has_post_thumbnail() {
-	return false;
+// Featured images: $GLOBALS['ih_thumbs'][ post ID ] = array( attachment ID, uploaded address ).
+// $GLOBALS['ih_attachments'][ attachment ID ] = the Commons file it was sideloaded from.
+$GLOBALS['ih_thumbs']       = array();
+$GLOBALS['ih_attachments']  = array();
+function ih_thumb( $post ) {
+	$id = is_object( $post ) ? $post->ID : (int) $post;
+	return $GLOBALS['ih_thumbs'][ $id ] ?? null;
+}
+function has_post_thumbnail( $post = null ) {
+	return null !== ih_thumb( $post ?? $GLOBALS['ih_post'] );
+}
+function get_the_post_thumbnail_url( $post, $size = '' ) {
+	$t = ih_thumb( $post );
+	return $t ? $t[1] : false;
+}
+function get_post_thumbnail_id( $post ) {
+	$t = ih_thumb( $post );
+	return $t ? $t[0] : 0;
+}
+function attachment_url_to_postid( $url ) {
+	foreach ( $GLOBALS['ih_thumbs'] as $t ) {
+		if ( $t[1] === $url ) {
+			return $t[0];
+		}
+	}
+	return 0;
+}
+function wp_get_attachment_caption( $id ) {
+	return '';
 }
 function has_excerpt( $post ) {
 	return '' !== (string) $post->post_excerpt;
@@ -380,8 +410,31 @@ function ih_check_graph( $page, $graph, $rank_math = array() ) {
 	foreach ( array_keys( $refs ) as $ref ) {
 		if ( ! isset( $ids[ $ref ] ) && ! isset( $rank_math[ $ref ] ) ) {
 			ih_fail( $page, 'unresolved @id reference ' . $ref );
+		} elseif ( isset( $ids[ $ref ] ) && preg_match( '#/wp-content/uploads/|Special:FilePath/#', $ref ) ) {
+			$img = $ids[ $ref ];
+			if ( 'ImageObject' !== ( $img['@type'] ?? '' ) ) {
+				ih_fail( $page, 'image reference is not an ImageObject ' . $ref );
+			}
+			foreach ( array( 'contentUrl', 'creditText', 'license' ) as $p ) {
+				if ( empty( $img[ $p ] ) ) {
+					ih_fail( $page, "image {$ref} without {$p}" );
+				}
+			}
 		}
 	}
+	// Article types, nested ones included, carry a headline.
+	$heads = function ( $v ) use ( &$heads, $page ) {
+		if ( ! is_array( $v ) ) {
+			return;
+		}
+		if ( array_intersect( (array) ( $v['@type'] ?? array() ), array( 'Article', 'ScholarlyArticle', 'BlogPosting' ) ) && empty( $v['headline'] ) ) {
+			ih_fail( $page, 'article node without headline ' . ( $v['@id'] ?? ( $v['name'] ?? '' ) ) );
+		}
+		foreach ( $v as $c ) {
+			$heads( $c );
+		}
+	};
+	$heads( $graph );
 	if ( false !== $rank_math && array() !== $rank_math ) {
 		return;
 	}
@@ -437,6 +490,23 @@ foreach ( $defs as $def ) {
 	$GLOBALS['ih_posts'][ $p->ID ] = $p;
 }
 $GLOBALS['ih_by_path'] = $by;
+// Every page with an images.json entry has a sideloaded featured image, as on the live site. Half
+// are stored in another format than the source (3.17.0 writes AVIF or WebP), and the figures in the
+// body keep their Commons address, since the stub renders no localised <img>.
+$att = 9000;
+foreach ( injil_help_images() as $path => $img ) {
+	if ( empty( $img['file'] ) || ! isset( $by[ $path ] ) ) {
+		continue;
+	}
+	$att++;
+	$name = str_replace( ' ', '_', $img['file'] );
+	if ( 0 === $att % 2 ) {
+		$name = preg_replace( '/\.[A-Za-z]+$/', '.avif', $name );
+	}
+	$GLOBALS['ih_attachments'][ $att ]           = $img['file'];
+	$GLOBALS['ih_thumbs'][ $by[ $path ]->ID ]    = array( $att, 'https://injil.help/wp-content/uploads/2026/10/' . $name );
+}
+$featured_n = count( $GLOBALS['ih_thumbs'] );
 foreach ( $defs as $def ) {
 	$p               = $by[ $def['path'] ];
 	$p->post_content = injil_help_page_content( $def );
@@ -460,6 +530,12 @@ foreach ( $defs as $def ) {
 		'Article'   => array( '@type' => 'Article', '@id' => $url . '#richSnippet', 'headline' => $def['title'], 'author' => array( '@id' => 'rm#author' ) ),
 		'author'    => array( '@type' => 'Person', '@id' => 'rm#author', 'name' => IH_STANDIN_OWNER, 'description' => 'Written by ' . IH_STANDIN_OWNER . '.' ),
 	);
+	// Rank Math refers to the featured image as its primary image without defining it.
+	$thumb = ih_thumb( $p );
+	if ( $thumb ) {
+		$rm['WebPage']['primaryImageOfPage'] = array( '@id' => $thumb[1] );
+		$rm['Article']['image']              = array( '@id' => $thumb[1] );
+	}
 	$rm_ids = array();
 	foreach ( $rm as $node ) {
 		$rm_ids[ $node['@id'] ] = true;
@@ -468,6 +544,29 @@ foreach ( $defs as $def ) {
 	ih_check_graph( $def['path'] . ' (Rank Math)', $merged, $rm_ids );
 	$n++;
 }
+
+if ( $featured_n < 60 ) {
+	ih_fail( 'images', "{$featured_n} pages with a featured image, expected at least 60" );
+}
+// The two pages reported on the live site: their primary image resolves, in the format it was stored in.
+foreach ( array( 'islamic-dilemma', 'gospels/mark' ) as $path ) {
+	$GLOBALS['ih_post'] = $by[ $path ];
+	$GLOBALS['ih_rm']   = false;
+	$thumb = ih_thumb( $by[ $path ] );
+	$found = null;
+	foreach ( injil_help_schema_graph() as $node ) {
+		if ( ( $node['@id'] ?? '' ) === $thumb[1] ) {
+			$found = $node;
+		}
+	}
+	$want = preg_match( '/\.avif$/', $thumb[1] ) ? 'image/avif' : '';
+	if ( ! $found ) {
+		ih_fail( $path, 'no ImageObject for the featured image' );
+	} elseif ( $want && ( $found['encodingFormat'] ?? '' ) !== $want ) {
+		ih_fail( $path, 'featured image encodingFormat is not ' . $want );
+	}
+}
+echo "Featured images: {$featured_n}\n";
 
 // Pages that must carry the new nodes.
 $expect = array(

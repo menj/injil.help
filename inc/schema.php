@@ -362,6 +362,94 @@ function injil_help_collect_images( $html ) {
 	return array_values( $images );
 }
 
+/**
+ * The images.json entry for a Media Library attachment, found by the Commons file (or Pexels key)
+ * recorded when it was sideloaded. A page's first image and its "more" images are both searched.
+ */
+function injil_help_schema_attachment_entry( $att ) {
+	$key = $att && defined( 'INJIL_HELP_COMMONS_META' ) ? (string) get_post_meta( (int) $att, INJIL_HELP_COMMONS_META, true ) : '';
+	if ( '' === $key || ! function_exists( 'injil_help_images' ) ) {
+		return array();
+	}
+	foreach ( injil_help_images() as $img ) {
+		foreach ( array_merge( array( $img ), (array) ( $img['more'] ?? array() ) ) as $one ) {
+			if ( ( $one['file'] ?? '' ) === $key ) {
+				return $one;
+			}
+		}
+	}
+	return array();
+}
+
+/**
+ * An ImageObject for an uploaded image address (a featured image, or an image Rank Math refers to),
+ * with the same caption, credit and licence a figure of that image carries. The address is its @id
+ * and contentUrl, so a reference to it resolves whatever format the upload was stored in.
+ */
+function injil_help_schema_upload_image( $url, $att = 0 ) {
+	if ( ! $att && function_exists( 'attachment_url_to_postid' ) ) {
+		$att = (int) attachment_url_to_postid( $url );
+	}
+	$entry = injil_help_schema_attachment_entry( $att );
+	$node  = array();
+	if ( $entry && function_exists( 'injil_help_image_block' ) ) {
+		$found = injil_help_collect_images( injil_help_image_block( $entry ) );
+		$node  = $found ? $found[0] : array();
+	}
+	if ( ! $node ) {
+		$node = array( '@type' => 'ImageObject' );
+		$alt  = $att ? trim( (string) get_post_meta( (int) $att, '_wp_attachment_image_alt', true ) ) : '';
+		if ( $alt ) {
+			$node['name']        = $alt;
+			$node['description'] = $alt;
+		}
+		$caption = $att && function_exists( 'wp_get_attachment_caption' ) ? trim( wp_strip_all_tags( (string) wp_get_attachment_caption( $att ) ) ) : '';
+		$node['caption']    = $caption ?: get_bloginfo( 'name' );
+		$node['creditText'] = $node['caption'];
+	}
+	$node['@id']        = $url;
+	$node['contentUrl'] = $url;
+	$node['url']        = $url;
+	return $node;
+}
+
+/**
+ * Make every {"@id"} reference to an image address resolve: an address no node defines gets an
+ * ImageObject of its own. Other references are left alone. A keyed graph (Rank Math's) takes a key prefix.
+ */
+function injil_help_schema_resolve_images( $graph, $key_prefix = '' ) {
+	$refs = array();
+	injil_help_schema_refs( $graph, $refs );
+	$have = array();
+	$walk = function ( $v ) use ( &$walk, &$have ) {
+		if ( ! is_array( $v ) ) {
+			return;
+		}
+		if ( isset( $v['@id'] ) && is_string( $v['@id'] ) && count( $v ) > 1 ) {
+			$have[ $v['@id'] ] = true;
+		}
+		foreach ( $v as $c ) {
+			$walk( $c );
+		}
+	};
+	$walk( $graph );
+	foreach ( array_keys( $refs ) as $ref ) {
+		if ( ! isset( $have[ $ref ] ) && preg_match( '#^https?://[^\s]+\.(?:avif|webp|jpe?g|png|gif|svg|tiff?)(?:\?.*)?$#i', $ref ) ) {
+			$node = injil_help_schema_upload_image( $ref );
+			if ( function_exists( 'injil_help_schema_enrich_image' ) ) {
+				$node = injil_help_schema_enrich_image( $node, '' );
+			}
+			if ( '' === $key_prefix ) {
+				$graph[] = $node;
+			} else {
+				$graph[ $key_prefix . count( $have ) ] = $node;
+			}
+			$have[ $ref ] = true;
+		}
+	}
+	return $graph;
+}
+
 /** Section index entries (the cards) and the sitemap's page list, for an ItemList. */
 function injil_help_collect_entries( $html ) {
 	$list = array();
@@ -404,6 +492,7 @@ function injil_help_collect_citations( $html ) {
 		if ( $quote_first && preg_match( '#^(.*?)“(.+?)”(.*)$#su', $plain, $art ) ) {
 			$cite['@type'] = 'ScholarlyArticle';
 			$cite['name']  = trim( $art[2] );
+			$cite['headline'] = mb_substr( $cite['name'], 0, 110 );
 			$author        = trim( $art[1], " ,;:\u{2019}" );
 			$after         = substr( $li, (int) strpos( $li, '”' ) ); // a byte offset, as substr() expects
 			if ( preg_match( '#<em>(.*?)</em>#s', $after, $j ) ) {
@@ -611,7 +700,27 @@ function injil_help_schema_graph() {
 	$title         = is_front_page() ? injil_help_seo_defaults()['home_title'] : ( $post ? wp_strip_all_tags( get_the_title( $post ) ) : wp_strip_all_tags( wp_get_document_title() ) );
 	$description   = trim( injil_help_meta_description() );
 	$images        = injil_help_collect_images( $html );
-	$featured      = $post && has_post_thumbnail( $post ) ? get_the_post_thumbnail_url( $post, 'large' ) : '';
+	$featured      = $post && has_post_thumbnail( $post ) ? (string) get_the_post_thumbnail_url( $post, 'large' ) : '';
+	// The featured image is the primary image, so it needs a node of its own. A figure of the same
+	// file (still at its Commons address, or at another upload of it) becomes that node; otherwise
+	// one is built from the attachment's images.json entry.
+	if ( $featured && ! in_array( $featured, wp_list_pluck( $images, 'contentUrl' ), true ) ) {
+		$thumb = injil_help_schema_upload_image( $featured, (int) get_post_thumbnail_id( $post ) );
+		$match = null;
+		foreach ( $images as $i => $image ) {
+			if ( ( $image['acquireLicensePage'] ?? '' ) !== '' && ( $image['acquireLicensePage'] ?? '' ) === ( $thumb['acquireLicensePage'] ?? '' ) ) {
+				$match = $i;
+				break;
+			}
+		}
+		if ( null !== $match ) {
+			$images[ $match ]['@id']        = $featured;
+			$images[ $match ]['contentUrl'] = $featured;
+			$images[ $match ]['url']        = $featured;
+		} else {
+			$images[] = $thumb;
+		}
+	}
 	$primary_image = $featured ?: ( $images ? $images[0]['contentUrl'] : injil_help_default_og_image() );
 
 	// WebPage.
@@ -990,7 +1099,7 @@ function injil_help_schema_graph() {
 		)
 	);
 
-	return apply_filters( 'injil_help_schema_graph', $graph );
+	return injil_help_schema_resolve_images( apply_filters( 'injil_help_schema_graph', $graph ) );
 }
 
 add_action(
