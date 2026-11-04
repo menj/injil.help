@@ -115,5 +115,84 @@
         "title_rp": "Set a new password",
         "title_resetpass": "Set a new password",
         "title_register": "Register"
+    },
+    "errors": {
+        "maintenance": {
+            "status": 503,
+            "retry": 600,
+            "eyebrow": "Maintenance",
+            "title": "Back shortly",
+            "lines": [
+                "The site is offline for a few minutes while it is updated.",
+                "Please try again shortly. Nothing you were reading has gone anywhere."
+            ],
+            "again": "Try again"
+        },
+        "php-error": {
+            "status": 500,
+            "retry": 0,
+            "eyebrow": "Error 500",
+            "title": "Something went wrong",
+            "lines": [
+                "A fault on our side stopped this page from loading. It is not something you did.",
+                "Please try again in a few minutes."
+            ],
+            "again": "Try again"
+        },
+        "db-error": {
+            "status": 503,
+            "retry": 600,
+            "eyebrow": "Database unavailable",
+            "title": "We cannot reach our database",
+            "lines": [
+                "The site cannot reach its database just now. This is temporary, and nothing you did caused it.",
+                "Please try again in a few minutes."
+            ],
+            "again": "Try again"
+        },
+        "403": {
+            "status": 403,
+            "retry": 0,
+            "eyebrow": "Error 403",
+            "title": "Access denied",
+            "lines": [
+                "This address is closed to visitors.",
+                "Every page of the site is open from the home page."
+            ],
+            "again": "Go to the home page"
+        },
+        "500": {
+            "status": 500,
+            "retry": 0,
+            "eyebrow": "Error 500",
+            "title": "Something went wrong",
+            "lines": [
+                "A fault on our side stopped this page from loading. It is not something you did.",
+                "Please try again in a few minutes."
+            ],
+            "again": "Try again"
+        },
+        "502": {
+            "status": 502,
+            "retry": 0,
+            "eyebrow": "Error 502",
+            "title": "Bad gateway",
+            "lines": [
+                "A server between you and the site gave a wrong answer.",
+                "Please try again in a few minutes."
+            ],
+            "again": "Try again"
+        },
+        "503": {
+            "status": 503,
+            "retry": 600,
+            "eyebrow": "Error 503",
+            "title": "Temporarily unavailable",
+            "lines": [
+                "The site is busy or offline for a short while.",
+                "Please try again in a few minutes."
+            ],
+            "again": "Try again"
+        }
     }
 }

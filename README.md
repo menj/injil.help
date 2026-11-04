@@ -33,7 +33,7 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 |---|---|
 | Type | Block theme (theme.json v3), child of `twentytwentyfive` |
 | Folder, text domain, pattern prefix | `injil-help` |
-| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.22.0) |
+| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.23.0) |
 | PHP in `inc/` | options, social, progress, unlist, unlist-admin, search-permalinks, starter-content, journal, starter-content-pages, gospel-islam, quran-jesus, tafsir, images, seo, schema, schema-content, rank-math, share, contextual-links, login, security, security-detector |
 | Data | `inc/data/` 2.6 MB of JSON: 182 starter pages, the 8 Journal posts (`posts.json`), the gospel narrative, the Qur'anic passages, Thomas (woven sections and two full texts), the infancy gospels, the substitution witnesses, eight commentaries (315,000 words) |
 | Front-end assets | `style.css` 32 KB; `assets/css/ornament.css` 12 KB, `share.css` 3 KB, `bible.css` 3 KB, `login.css` 7 KB, `journal.css` 2 KB, `responsive.css` 2 KB (phone header, touch targets, focus ring, loaded on every view); `assets/js/ornament.js` 3 KB, `share.js` 2 KB; all plain, no build step |
@@ -296,6 +296,27 @@ Actions used: `after_switch_theme`, `admin_init`, `admin_post_injil_help_populat
 - Share links open third-party sites with `rel="noopener noreferrer nofollow"`.
 - Application passwords are blocked by default: `wp_is_application_passwords_available` returns false while the `block_app_passwords` option is set (its default), so no client can log in through the REST API or XML-RPC with a per-application password. Untick the block under Theme Options › Security for a client that needs them.
 - `inc/security.php` (from 3.13.0, ported from the Abrahamic theme 2.87.0): XML-RPC answers 403 (`block_xmlrpc`; counted per day in `injil_help_security_counts`; on Apache a "Block xmlrpc.php" marker section in .htaccess, shared with the sister themes); a password login through XML-RPC is refused whatever the switch; logged-in REST writes need a cookie session with a valid `wp_rest` nonce (`block_rest_writes`; filter `injil_help_sec_rest_allow` lists route prefixes exempt from it); failed logins are counted by account name (`injil_help_security_failed`); the spam gate (`spam_gate`, `wp_insert_post_data`) holds gambling spam and anything published or scheduled through XML-RPC, a header login or WP-CLI as Pending (private posts are only logged), posts and pages only, starter pages (`_injil_help_hash`, or the theme's own page writing) exempt; trashed spam answers 410 (`spam_gone`). The detector is `inc/security-detector.php`, plain PHP; `php tests/security-detector-test.php` checks it against every string in `inc/data/` and the attack samples. `INJIL_HELP_SECURITY_LOCK` false in wp-config.php turns the three locks off. The theme registers no REST routes and no front-end forms, so nothing of its own writes through the REST API.
+
+## Error pages
+
+WordPress reads three files from `wp-content` when it cannot build a page. `inc/error-pages.php` writes them, and only when an administrator presses **Install error pages** at the foot of Theme Options (`admin_post_injil_help_install_error_pages`, nonce and `manage_options`). The table beside the button shows each file as not installed, installed, outdated or another file left alone.
+
+| File | Shown when | Status sent |
+|---|---|---|
+| `maintenance.php` | WordPress is updating | 503, `Retry-After: 600` |
+| `php-error.php` | a fatal PHP error | 500 |
+| `db-error.php` | the database cannot be reached | 503, `Retry-After: 600` |
+
+Each file starts with the marker `The Injil error page drop-in`. The button writes a missing file or one with that marker, and leaves any other file alone. The pages come from `inc/error-page-html.php` with their words in `text.json` (`errors`). They hold their style inline, call no WordPress function and touch no database, so they work with the theme half uploaded. Each sends `noindex` and `no-store`.
+
+The web server answers some errors before WordPress starts. `errors/` holds static 403, 500, 502 and 503 pages for those, rebuilt with `php bin/build-error-pages.php` (`--check` fails on a stale page). Point the server at them in `.htaccess`, with the folder name of the theme:
+
+```
+ErrorDocument 403 /wp-content/themes/injil.help/errors/403.html
+ErrorDocument 500 /wp-content/themes/injil.help/errors/500.html
+ErrorDocument 502 /wp-content/themes/injil.help/errors/502.html
+ErrorDocument 503 /wp-content/themes/injil.help/errors/503.html
+```
 
 ## Development workflow
 

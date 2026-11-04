@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'INJIL_HELP_VERSION', '3.22.0' );
+define( 'INJIL_HELP_VERSION', '3.23.0' );
 
 require_once get_stylesheet_directory() . '/inc/options.php';
 require_once get_stylesheet_directory() . '/inc/starter-content.php';
@@ -23,6 +23,7 @@ require_once get_stylesheet_directory() . '/inc/social.php';
 require_once get_stylesheet_directory() . '/inc/progress.php';
 require_once get_stylesheet_directory() . '/inc/unlist.php';
 require_once get_stylesheet_directory() . '/inc/search-permalinks.php';
+require_once get_stylesheet_directory() . '/inc/error-pages.php';
 
 /**
  * Hardening lives in inc/security.php: XML-RPC, application passwords (the block_app_passwords

@@ -2,6 +2,18 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.23.0
+
+Error pages for the moments WordPress cannot build a page, and a `noindex` on the 404 page. No option key, function or hook was renamed or removed.
+
+- `inc/error-pages.php` writes `wp-content/maintenance.php`, `php-error.php` and `db-error.php` when an administrator presses Install error pages at the foot of Theme Options. The handler checks `manage_options` and a nonce. A file is written to a temporary name and then renamed, so WordPress never reads half of one. On a network only the main site writes.
+- Each file carries the marker `The Injil error page drop-in` and its kind. The button writes a missing file or one with that marker and leaves every other file alone. The table beside it reads not installed, installed, outdated or another file left alone.
+- `maintenance.php` sends 503 with `Retry-After: 600`. `php-error.php` sends 500 and says "Something went wrong". `db-error.php` sends 503 with `Retry-After: 600` and says "We cannot reach our database". All three send `X-Robots-Tag: noindex`, the robots meta tag and `Cache-Control: no-store`.
+- `inc/error-page-html.php` builds the pages in the site's paper, green and gold, with the brandmark inline and a dark version for a dark system setting. The style is inline and no WordPress function runs, so a page shows with the theme half uploaded or the database down. The words are in `text.json` (`errors`). Titles keep the title rule.
+- `errors/403.html`, `500.html`, `502.html` and `503.html` are static copies for the web server's `ErrorDocument` lines, built by `bin/build-error-pages.php`. The README lists the `.htaccess` lines.
+- The 404 page sends `noindex, follow`.
+- `tests/error-pages-test.php` checks each status, header and wording, runs each file without WordPress, checks the installer against foreign and outdated files, and compares `errors/` with the builder.
+
 ## 3.22.0
 
 The log-in screen gets a switch, a note and a pass for WCAG 2.2 AA. No option key, function or hook was renamed or removed.

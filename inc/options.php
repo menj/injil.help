@@ -740,6 +740,10 @@ function injil_help_render_options() {
 		<?php
 		// The Security tools post their own forms, so they sit outside the options form; security.js shows them with the tab.
 		injil_help_sec_render_tools();
+		// The error pages post their own form, so they sit outside the options form too.
+		echo '<section class="ih-panel ih-error-pages" aria-label="' . esc_attr__( 'Error pages', 'injil-help' ) . '">';
+		injil_help_render_error_pages_section();
+		echo '</section>';
 		?>
 		<footer class="ih-footer">
 			<a href="<?php echo esc_url( admin_url( 'themes.php?theme=' . get_stylesheet() ) ); ?>"><span class="dashicons dashicons-media-text" aria-hidden="true"></span><?php esc_html_e( 'Theme details and readme', 'injil-help' ); ?></a>

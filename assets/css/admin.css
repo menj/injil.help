@@ -156,3 +156,4 @@ fieldset.ih-field{padding:16px 0}
  .ih-savebar .button{width:100%;min-height:44px}
  .ih-footer__version{margin-left:0}
 }
+.ih-error-pages{margin-top:24px;border-top:1px solid var(--ih-a-rule);border-radius:var(--ih-a-radius)}
