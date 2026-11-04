@@ -46,6 +46,7 @@ function admin_url( $path = '' ) { return 'https://injil.help/wp-admin/' . $path
 function wp_parse_url( $url, $component = -1 ) { return parse_url( $url, $component ); }
 function trailingslashit( $s ) { return rtrim( $s, '/' ) . '/'; }
 function get_permalink( $id ) { return 'https://injil.help/page-' . (int) $id . '/'; }
+function get_page_by_path( $path ) { return in_array( $path, array( 'gospels', 'paul' ), true ) ? (object) array( 'ID' => 1 ) : null; }
 function sanitize_key( $k ) { return preg_replace( '/[^a-z0-9_\-]/', '', strtolower( (string) $k ) ); }
 
 require dirname( __DIR__ ) . '/inc/unlist.php';
@@ -123,6 +124,14 @@ check( 'https://injil.help/search/x/?post_type%5B0%5D=post&post_type%5B1%5D=page
 check( 'search' === injil_help_search_base(), 'the default base is search' );
 $GLOBALS['ih_options']['injil_help_search_base'] = 'Find Me!';
 check( 'findme' === injil_help_search_base(), 'the base is sanitised' );
+$GLOBALS['ih_options']['injil_help_search_base'] = 'my_search';
+check( 'mysearch' === injil_help_search_base(), 'underscores are removed, as the help text says' );
+foreach ( array( 'feed', 'Page', 'wp-json', 'tag', 'author' ) as $reserved ) {
+	$GLOBALS['ih_options']['injil_help_search_base'] = $reserved;
+	check( 'search' === injil_help_search_base(), "the reserved base {$reserved} falls back to search" );
+}
+check( '' === injil_help_search_clean_base( 'gospels' ), 'a base that is the address of a page is refused' );
+check( 'find' === injil_help_search_clean_base( 'find' ), 'a free base is kept' );
 check( isset( $GLOBALS['ih_hooks']['template_redirect'] ), 'the redirect is hooked' );
 
 echo $fail ? "\n{$fail} failed\n" : "\nall passed\n";

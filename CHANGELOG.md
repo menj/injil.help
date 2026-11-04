@@ -2,6 +2,14 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.21.1
+
+A review of the matching change on the TBE theme found two faults in the search base under Settings › Permalinks. No option key, function or hook was renamed or removed.
+
+- The help text said the base takes letters, digits and hyphens only, but `sanitize_key()` kept underscores. `injil_help_search_clean_base()` now removes them, so `my_search` is stored as `mysearch`, and the help text says so.
+- A base that WordPress keeps for itself (`feed`, `page`, `tag`, `author`, `wp-json` and the like) or the Journal's base would have clashed with those rewrite rules. So would the address of a page: a base of `gospels` would have turned `/gospels/mark/` into a search. Such a base is refused on save with a notice, and `search` is used. The list is in `injil_help_search_reserved_bases()`, with a filter of the same name.
+- `tests/plugin-features-test.php` checks both.
+
 ## 3.21.0
 
 The owner asked for four plugins to be built into the theme: the Minimalist Social Icons Pack, Reading Progress Bar, Unlist Posts & Pages and Pretty Search Permalinks. No option key, function, hook or class was renamed or removed.

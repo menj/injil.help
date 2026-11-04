@@ -20,9 +20,39 @@ function injil_help_search_permalinks_on() {
 	return ! function_exists( 'wpseosearch_base' ) && (bool) apply_filters( 'injil_help_search_permalinks_enabled', true );
 }
 
-/** The search base: lower-case letters, digits, hyphens and underscores; "search" when empty. */
+/**
+ * Slugs the search base may not take: the paths WordPress keeps for itself and the Journal's
+ * base. Filter injil_help_search_reserved_bases.
+ *
+ * @return string[]
+ */
+function injil_help_search_reserved_bases() {
+	$journal = defined( 'INJIL_HELP_JOURNAL_BASE' ) ? array( INJIL_HELP_JOURNAL_BASE ) : array();
+	return (array) apply_filters(
+		'injil_help_search_reserved_bases',
+		array_merge( array( 'wp-admin', 'wp-content', 'wp-includes', 'wp-json', 'feed', 'page', 'comments', 'category', 'tag', 'author', 'embed', 'trackback', 'attachment', 'type' ), $journal )
+	);
+}
+
+/**
+ * A base as it is stored: lower-case letters, digits and hyphens. An empty or reserved base,
+ * or one a page already uses as its address, gives ''; the search rule would take that page's
+ * children (a base of gospels would turn /gospels/mark/ into a search).
+ *
+ * @param mixed $raw Submitted or stored value.
+ * @return string
+ */
+function injil_help_search_clean_base( $raw ) {
+	$base = str_replace( '_', '', sanitize_key( (string) $raw ) );
+	if ( '' === $base || in_array( $base, injil_help_search_reserved_bases(), true ) ) {
+		return '';
+	}
+	return ( 'search' !== $base && function_exists( 'get_page_by_path' ) && get_page_by_path( $base ) ) ? '' : $base;
+}
+
+/** The search base; "search" when the stored value is empty or reserved. */
 function injil_help_search_base() {
-	$base = sanitize_key( (string) get_option( 'injil_help_search_base', 'search' ) );
+	$base = injil_help_search_clean_base( get_option( 'injil_help_search_base', 'search' ) );
 	return '' === $base ? 'search' : $base;
 }
 
@@ -85,7 +115,19 @@ if ( injil_help_search_permalinks_on() ) {
 		function () {
 			if ( isset( $_POST['injil_help_search_base'] ) && current_user_can( 'manage_options' ) ) {
 				check_admin_referer( 'update-permalink' );
-				$base = sanitize_key( wp_unslash( $_POST['injil_help_search_base'] ) );
+				$raw  = sanitize_key( wp_unslash( $_POST['injil_help_search_base'] ) );
+				$base = injil_help_search_clean_base( $raw );
+				if ( '' !== $raw && '' === $base ) {
+					add_settings_error(
+						'injil_help_search_base',
+						'injil_help_search_base_reserved',
+						/* translators: %s: the refused base */
+						sprintf( __( 'The search base "%s" is taken by WordPress or by a page of the site, so "search" is used instead.', 'injil-help' ), str_replace( '_', '', $raw ) ),
+						'warning'
+					);
+					// The Permalinks screen redirects after saving; settings_errors() reads this transient there.
+					set_transient( 'settings_errors', get_settings_errors(), 30 );
+				}
 				update_option( 'injil_help_search_base', '' === $base ? 'search' : $base );
 				global $wp_rewrite;
 				$wp_rewrite->search_base = injil_help_search_base();
@@ -97,7 +139,7 @@ if ( injil_help_search_permalinks_on() ) {
 					printf(
 						'<input type="text" name="injil_help_search_base" id="injil_help_search_base" value="%1$s" class="regular-text code" aria-describedby="injil-help-search-base-help"><p class="description" id="injil-help-search-base-help">%2$s</p>',
 						esc_attr( injil_help_search_base() ),
-						esc_html__( 'Search results open at /search/term/ by default. Letters, digits and hyphens only; empty keeps "search".', 'injil-help' )
+						esc_html__( 'Search results open at /search/term/ by default. Lower-case letters, digits and hyphens; anything else is removed. Empty, a path WordPress keeps (feed, page, tag and the like) or the address of a page keeps "search".', 'injil-help' )
 					);
 				},
 				'permalink',
