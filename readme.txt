@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.21.2
+Stable tag: 3.22.0
 Template: twentytwentyfive
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -128,6 +128,9 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.22.0 =
+* The log-in screen has its own card under Theme Options > Branding: a switch for the theme's dress and a line of text above the form. A plugin that styles the log-in screen takes over while it is active.
+
 = 3.21.2 =
 * When a plugin or post type takes the search base, the theme moves to the first free one of search, find and search-results, and rebuilds the rewrite rules with it.
 
