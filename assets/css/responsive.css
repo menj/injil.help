@@ -1,0 +1,38 @@
+/*
+ * Mobile and accessibility layer (3.19.0). Loaded after style.css on every front-end view.
+ * Base rules serve the smallest screen; the media queries below say where a rule stops or starts.
+ * Nothing here changes how a page looks on a desktop with a mouse, except the colour of the
+ * keyboard focus ring. Colours are the theme.json tokens.
+ */
+
+/* Focus ring: green on parchment, parchment on the green panels. The gold ring measured 2.3:1
+   against the parchment, under the 3:1 that WCAG 1.4.11 asks of a focus indicator. */
+:where(a,button,input,select,textarea,summary,.wp-element-button):focus-visible{outline-color:var(--wp--preset--color--accent-1)}
+.ih-entry:focus-within{outline-color:var(--wp--preset--color--accent-1)}
+.ih-404-search .wp-block-search__input:focus{outline-color:var(--wp--preset--color--accent-1)}
+:where(.ih-cover,.ih-footer,.ih-404) :where(a,button,input,select,textarea,summary,.wp-element-button):focus-visible{outline-color:var(--wp--preset--color--base)}
+
+/* Header: on a narrow screen the title may take a second line, so the menu button never sits on top of it. */
+.ih-header .ih-brand{flex-shrink:1;min-width:0}
+.ih-header .ih-nav{flex-shrink:0}
+@media (min-width:600px){
+ .ih-header .ih-brand{flex-shrink:0}
+ .ih-header .ih-nav{flex-shrink:1}
+}
+
+/* Page numbers: at least 24px each on every screen (WCAG 2.5.8); the bare digits were 9px wide and 13px apart. */
+.wp-block-query-pagination .page-numbers{display:inline-flex;align-items:center;justify-content:center;min-width:24px;min-height:24px}
+
+/* Touch targets of 44px on phones and wherever the pointer is coarse. Inline links get padding,
+   which widens the area that takes a tap without moving the text. */
+@media (max-width:599px),(pointer:coarse){
+ .ih-breadcrumb a,.wp-block-post-terms a{padding-block:13px}
+ .ih-foot-list a,.ih-legal a{display:inline-block;padding-block:10px}
+ .wp-block-query-pagination .page-numbers,
+ .wp-block-query-pagination-previous,
+ .wp-block-query-pagination-next{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px}
+ .wp-block-post-navigation-link a{display:inline-flex;align-items:center;min-height:44px}
+}
+
+/* Long words in a plate caption break rather than spill past the panel (text spacing, WCAG 1.4.12). */
+.ih-plate figcaption{overflow-wrap:anywhere}

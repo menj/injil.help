@@ -9,7 +9,7 @@
         "<!-- wp:group {\"className\":\"ih-section-head\",\"layout\":{\"type\":\"default\"}} -->",
         "<div class=\"wp-block-group ih-section-head\"><!-- wp:group {\"className\":\"ih-gloss-row\",\"layout\":{\"type\":\"flex\",\"flexWrap\":\"wrap\",\"verticalAlignment\":\"bottom\"}} -->",
         "<div class=\"wp-block-group ih-gloss-row\"><!-- wp:paragraph {\"className\":\"ih-gloss\"} -->",
-        "<p class=\"ih-gloss\">ΠΑΥΛΟΣ</p>",
+        "<p class=\"ih-gloss\"><span lang=\"el\">ΠΑΥΛΟΣ</span></p>",
         "<!-- /wp:paragraph -->",
         "<!-- wp:paragraph {\"className\":\"ih-cite\"} -->",
         "<p class=\"ih-cite\">Paul of Tarsus · Acts 13:9</p>",

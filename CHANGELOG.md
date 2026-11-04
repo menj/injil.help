@@ -2,6 +2,18 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.19.0
+
+A mobile and accessibility pass, made to two of the owner's briefs of 4 November 2026: the mobile-first theme audit and the WCAG 2.2 AA policy. Pages were rendered at 9 widths from 320 to 1280 pixels and checked with axe-core, the keyboard, text spacing and a 200% zoom. No page scrolled sideways before or after.
+
+- `assets/css/responsive.css` is new and loads after the ornament on every view. Base rules serve the phone; the media queries say where each stops.
+- The keyboard focus ring is green on parchment and parchment on the green panels. The gold ring measured 2.3:1 against the parchment, under the 3:1 WCAG 1.4.11 asks for.
+- At 320 and 360 pixels the menu button sat on top of the site title and hid "Injīl". The title now takes a second line there; from 600 pixels the header is as it was.
+- Footer links, breadcrumbs, post categories, the previous and next links, page numbers and the share buttons are 44 pixels tall on phones and touch screens. Page numbers are 24 pixels wide on every screen (WCAG 2.5.8); the digits were 9 pixels wide and 13 apart.
+- The Greek glosses in the menu, the footer and the section heads carry `lang="el"`, and two Arabic words in running text carry `lang="ar"` (WCAG 3.1.2). The glosses in the patterns are wrapped in a span, so the paragraph blocks stay valid. The pages built from these patterns, and `/islamic-dilemma/what-is-injil/`, are rewritten once after the update; a page the owner edited is kept.
+- The Copy link button announces "copied" or the failure through a polite live region (WCAG 4.1.3).
+- A long word in a plate caption breaks instead of spilling past the panel when the reader widens the text spacing (WCAG 1.4.12).
+
 ## 3.18.1
 
 Every image the structured data refers to now has a node in the same graph.

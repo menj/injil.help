@@ -186,7 +186,7 @@
         "<!-- /wp:details -->",
         "<!-- wp:details {\"className\":\"is-style-faq\"} -->",
         "<details class=\"wp-block-details is-style-faq\"><summary>What is the Muslim name for Jesus?</summary><!-- wp:paragraph -->",
-        "<p>ʿĪsā (عيسى), said EE-sa. The Qur’an calls him ʿĪsā ibn Maryam, Jesus son of Mary, and gives him the title al-Masīḥ, the Messiah (3:45); Arabic-speaking Christians call him Yasūʿ. His titles are set out on <a href=\"/quran/servant/\">the Messiah in Islam</a>.</p>",
+        "<p>ʿĪsā (<span lang=\"ar\" dir=\"rtl\">عيسى</span>), said EE-sa. The Qur’an calls him ʿĪsā ibn Maryam, Jesus son of Mary, and gives him the title al-Masīḥ, the Messiah (3:45); Arabic-speaking Christians call him Yasūʿ. His titles are set out on <a href=\"/quran/servant/\">the Messiah in Islam</a>.</p>",
         "<!-- /wp:paragraph --></details>",
         "<!-- /wp:details -->",
         "<!-- wp:details {\"className\":\"is-style-faq\"} -->",
