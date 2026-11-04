@@ -46,11 +46,12 @@ function admin_url( $path = '' ) { return 'https://injil.help/wp-admin/' . $path
 function wp_parse_url( $url, $component = -1 ) { return parse_url( $url, $component ); }
 function trailingslashit( $s ) { return rtrim( $s, '/' ) . '/'; }
 function get_permalink( $id ) { return 'https://injil.help/page-' . (int) $id . '/'; }
-function get_page_by_path( $path ) { return in_array( $path, array( 'gospels', 'paul' ), true ) ? (object) array( 'ID' => 1 ) : null; }
+function get_page_by_path( $path ) { return in_array( $path, array_merge( array( 'gospels', 'paul' ), $GLOBALS['ih_pages'] ?? array() ), true ) ? (object) array( 'ID' => 1 ) : null; }
 function get_post_types( $args = array(), $output = 'names' ) { return array( 'book' => (object) array( 'rewrite' => array( 'slug' => 'library/books' ) ), 'post' => (object) array( 'rewrite' => false ) ); }
-function get_taxonomies( $args = array(), $output = 'names' ) { return array( 'topic' => (object) array( 'rewrite' => array( 'slug' => '/topics/' ) ) ); }
+$GLOBALS['ih_extra_slugs'] = array();
+function get_taxonomies( $args = array(), $output = 'names' ) { $out = array( 'topic' => (object) array( 'rewrite' => array( 'slug' => '/topics/' ) ) ); foreach ( $GLOBALS['ih_extra_slugs'] as $i => $slug ) { $out[ 'x' . $i ] = (object) array( 'rewrite' => array( 'slug' => $slug ) ); } return $out; }
 $GLOBALS['ih_flushes'] = 0;
-function flush_rewrite_rules( $hard = true ) { $GLOBALS['ih_flushes']++; }
+function flush_rewrite_rules( $hard = true ) { $GLOBALS['ih_flushes']++; $GLOBALS['ih_flush_base'] = $GLOBALS['wp_rewrite']->search_base ?? null; }
 function sanitize_key( $k ) { return preg_replace( '/[^a-z0-9_\-]/', '', strtolower( (string) $k ) ); }
 
 require dirname( __DIR__ ) . '/inc/unlist.php';
@@ -152,6 +153,26 @@ foreach ( $GLOBALS['ih_hooks']['init'] as $cb ) { $cb(); }
 check( 1 === $GLOBALS['ih_flushes'] && 'search' === $GLOBALS['ih_options']['injil_help_search_rules_base'], 'a newly refused base flushes the rules once' );
 foreach ( $GLOBALS['ih_hooks']['init'] as $cb ) { $cb(); }
 check( 1 === $GLOBALS['ih_flushes'], 'the next load does not flush again' );
+
+// A post type that takes "search" itself: the fallback moves on, and the flush uses the new base.
+$GLOBALS['ih_extra_slugs'] = array( 'search' );
+check( 'find' === injil_help_search_fallback_base(), 'the fallback skips a reserved search' );
+$GLOBALS['ih_extra_slugs'] = array( 'search', 'find' );
+check( 'search-results' === injil_help_search_fallback_base(), 'then skips find' );
+$GLOBALS['ih_options']['injil_help_search_base'] = 'search';
+$GLOBALS['wp_rewrite']->search_base = 'search';
+$GLOBALS['ih_flush_base'] = null;
+foreach ( $GLOBALS['ih_hooks']['init'] as $cb ) { $cb(); }
+check( 'search-results' === $GLOBALS['ih_flush_base'], 'the rules are flushed with the base in force, set before the flush' );
+$GLOBALS['ih_extra_slugs'] = array();
+
+// A page at /search/ takes the base too, and when all three fallbacks are taken a number is added.
+$GLOBALS['ih_pages'] = array( 'search' );
+check( 'find' === injil_help_search_fallback_base(), 'a page at /search/ moves the fallback to find' );
+$GLOBALS['ih_extra_slugs'] = array( 'find', 'search-results', 'search-results-2' );
+check( 'search-results-3' === injil_help_search_fallback_base(), 'with all three taken, the first free numbered base is used' );
+$GLOBALS['ih_pages']       = array();
+$GLOBALS['ih_extra_slugs'] = array();
 
 echo $fail ? "\n{$fail} failed\n" : "\nall passed\n";
 exit( $fail ? 1 : 0 );

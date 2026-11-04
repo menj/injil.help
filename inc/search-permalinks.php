@@ -88,13 +88,36 @@ function injil_help_search_clean_base( $raw ) {
 	if ( '' === $base || in_array( $base, injil_help_search_reserved_bases(), true ) ) {
 		return '';
 	}
-	return ( 'search' !== $base && function_exists( 'get_page_by_path' ) && get_page_by_path( $base ) ) ? '' : $base;
+	// No exemption for "search": a page at /search/ would lose its children to the search rule too.
+	return ( function_exists( 'get_page_by_path' ) && get_page_by_path( $base ) ) ? '' : $base;
 }
 
 /** The search base; "search" when the stored value is empty or reserved. */
 function injil_help_search_base() {
 	$base = injil_help_search_clean_base( get_option( 'injil_help_search_base', 'search' ) );
-	return '' === $base ? 'search' : $base;
+	return '' === $base ? injil_help_search_fallback_base() : $base;
+}
+
+/**
+ * The base used when the chosen one is empty or refused: the first of search, find and
+ * search-results that is free (a post type, a taxonomy or a page may take "search" itself),
+ * else search-results-2, search-results-3 and on.
+ *
+ * @return string
+ */
+function injil_help_search_fallback_base() {
+	foreach ( array( 'search', 'find', 'search-results' ) as $candidate ) {
+		if ( '' !== injil_help_search_clean_base( $candidate ) ) {
+			return $candidate;
+		}
+	}
+	// All three are taken: number the last until one is free.
+	for ( $n = 2; $n < 100; $n++ ) {
+		if ( '' !== injil_help_search_clean_base( 'search-results-' . $n ) ) {
+			return 'search-results-' . $n;
+		}
+	}
+	return 'search-results-' . wp_rand( 100, 999999 );
 }
 
 /**
@@ -155,7 +178,11 @@ if ( injil_help_search_permalinks_on() ) {
 	add_action(
 		'init',
 		function () {
-			$base = injil_help_search_base();
+			// The base can change here: a post type registered on init after priority 1 may have
+			// taken it. Set it again on every load, so links and any flush use the base in force.
+			global $wp_rewrite;
+			$base                    = injil_help_search_base();
+			$wp_rewrite->search_base = $base;
 			if ( get_option( 'injil_help_search_rules_base' ) !== $base ) {
 				flush_rewrite_rules( false );
 				update_option( 'injil_help_search_rules_base', $base, false );
@@ -178,14 +205,14 @@ if ( injil_help_search_permalinks_on() ) {
 					add_settings_error(
 						'injil_help_search_base',
 						'injil_help_search_base_reserved',
-						/* translators: %s: the refused base */
-						sprintf( __( 'The search base "%s" is taken by WordPress or by a page of the site, so "search" is used instead.', 'injil-help' ), str_replace( '_', '', $raw ) ),
+						/* translators: 1: the refused base, 2: the base used instead */
+						sprintf( __( 'The search base "%1$s" is taken by WordPress or by a page of the site, so "%2$s" is used instead.', 'injil-help' ), str_replace( '_', '', $raw ), injil_help_search_fallback_base() ),
 						'warning'
 					);
 					// The Permalinks screen redirects after saving; settings_errors() reads this transient there.
 					set_transient( 'settings_errors', get_settings_errors(), 30 );
 				}
-				update_option( 'injil_help_search_base', '' === $base ? 'search' : $base );
+				update_option( 'injil_help_search_base', '' === $base ? injil_help_search_fallback_base() : $base );
 				global $wp_rewrite;
 				$wp_rewrite->search_base = injil_help_search_base();
 			}
