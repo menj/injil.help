@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'INJIL_HELP_VERSION', '3.19.0' );
+define( 'INJIL_HELP_VERSION', '3.20.0' );
 
 require_once get_stylesheet_directory() . '/inc/options.php';
 require_once get_stylesheet_directory() . '/inc/starter-content.php';
@@ -52,6 +52,9 @@ add_action(
 	'after_setup_theme',
 	function () {
 		load_child_theme_textdomain( 'injil-help', get_stylesheet_directory() . '/languages' );
+		// Block themes get both from core; stated here so the theme does not depend on that.
+		add_theme_support( 'title-tag' );
+		add_theme_support( 'automatic-feed-links' );
 		add_editor_style( 'style.css' );
 	}
 );

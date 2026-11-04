@@ -294,6 +294,13 @@ add_action(
 		if ( get_option( 'injil_help_featured' ) === INJIL_HELP_VERSION || ! injil_help_images() ) {
 			return;
 		}
+		// One pass at a time: two admin requests at once would fetch the same plate twice.
+		if ( ! add_option( 'injil_help_image_lock', time(), '', false ) ) {
+			if ( time() - (int) get_option( 'injil_help_image_lock' ) < 5 * MINUTE_IN_SECONDS ) {
+				return;
+			}
+			update_option( 'injil_help_image_lock', time(), false );
+		}
 		$budget  = 6;
 		$pending = false;
 		foreach ( injil_help_images() as $path => $img ) {
@@ -308,6 +315,16 @@ add_action(
 				}
 				$budget--;
 				if ( ! injil_help_feature_page( $page->ID, $path ) ) {
+					$pending = true;
+				}
+			} elseif ( ! empty( $img['file'] ) && ! injil_help_find_attachment( $img['file'] ) ) {
+				// A page with a featured image of its own still needs the copy of its plate, which is hidden without one.
+				if ( $budget <= 0 ) {
+					$pending = true;
+					break;
+				}
+				$budget--;
+				if ( ! injil_help_sideload_image( $img, $page->ID ) ) {
 					$pending = true;
 				}
 			}
@@ -325,12 +342,76 @@ add_action(
 				}
 			}
 		}
+		// The plates of the front-page and section patterns, which belong to no single page. They
+		// have a budget of their own, so a page plate that keeps failing never holds them back.
+		$budget = max( $budget, 2 );
+		foreach ( injil_help_pattern_images() as $img ) {
+			if ( injil_help_find_attachment( $img['file'] ) ) {
+				continue;
+			}
+			if ( $budget <= 0 ) {
+				$pending = true;
+				break;
+			}
+			$budget--;
+			if ( ! injil_help_sideload_image( $img, 0 ) ) {
+				$pending = true;
+			}
+		}
 		if ( ! $pending ) {
 			update_option( 'injil_help_featured', INJIL_HELP_VERSION, false );
 		}
+		delete_option( 'injil_help_image_lock' );
 	},
 	20
 );
+
+/**
+ * Whether plates may load from Wikimedia Commons or Pexels in the reader's browser.
+ * Off by default (option remote_images, 3.20.0); the filter injil_help_remote_images can turn it on.
+ *
+ * @return bool
+ */
+function injil_help_remote_images_on() {
+	return (bool) apply_filters( 'injil_help_remote_images', (bool) injil_help_get_option( 'remote_images' ) );
+}
+
+/**
+ * The Commons plates the block patterns carry that inc/data/images.json does not list, as image
+ * entries, so the admin_init copier gives them a Media Library copy too (3.20.0).
+ *
+ * @return array[]
+ */
+function injil_help_pattern_images() {
+	$known = array();
+	foreach ( injil_help_images() as $img ) {
+		$known[ (string) ( $img['file'] ?? '' ) ] = true;
+		foreach ( (array) ( $img['more'] ?? array() ) as $extra ) {
+			$known[ (string) ( $extra['file'] ?? '' ) ] = true;
+		}
+	}
+	$out = array();
+	foreach ( (array) glob( get_stylesheet_directory() . '/inc/data/patterns/*.json' ) as $file ) {
+		$pattern = function_exists( 'injil_help_pattern_file' ) ? injil_help_pattern_file( basename( (string) $file, '.json' ) ) : null;
+		if ( ! $pattern || ! preg_match_all( '/<img\b[^>]*>/i', (string) $pattern['content'], $tags ) ) {
+			continue;
+		}
+		foreach ( $tags[0] as $tag ) {
+			if ( ! preg_match( '/\ssrc="([^"]+)"/i', $tag, $src ) || false === strpos( $src[1], 'commons.wikimedia.org' ) ) {
+				continue;
+			}
+			$name = injil_help_image_key_from_src( html_entity_decode( $src[1] ) );
+			$alt  = preg_match( '/\salt="([^"]*)"/i', $tag, $a ) ? html_entity_decode( $a[1] ) : $name;
+			if ( '' !== $name && empty( $known[ $name ] ) && ! isset( $out[ $name ] ) ) {
+				$out[ $name ] = array(
+					'file' => $name,
+					'alt'  => $alt,
+				);
+			}
+		}
+	}
+	return array_values( $out );
+}
 
 /* ---------- Plates served from the Media Library ---------- */
 
@@ -389,6 +470,16 @@ add_filter(
 			return $html;
 		}
 		$cover = false !== strpos( (string) $html, 'ih-cover-image' );
+		// No remote calls by default: a plate whose only copy is on Wikimedia Commons or Pexels is left
+		// out until the Media Library has it, unless Theme Options > Content allows remote plates.
+		if ( ! injil_help_remote_images_on() && preg_match_all( '/<img\b[^>]*\ssrc="([^"]+)"/i', (string) $html, $srcs ) ) {
+			foreach ( $srcs[1] as $src ) {
+				$key = injil_help_image_key_from_src( html_entity_decode( $src ) );
+				if ( '' !== $key && ! injil_help_find_attachment( $key ) ) {
+					return '';
+				}
+			}
+		}
 		return preg_replace_callback(
 			'/<img\b[^>]*>/i',
 			function ( $m ) use ( $cover ) {

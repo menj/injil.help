@@ -1044,59 +1044,44 @@ function injil_help_sec_notice() {
 }
 
 /**
- * One checkbox row of the Security tab, in the markup of the other tabs.
+ * One switch row of the Security tab, in the card layout of the other tabs.
  *
  * @param array  $o     Current options.
  * @param string $key   Option key.
  * @param string $title Row heading.
- * @param string $label Checkbox label.
+ * @param string $label Switch label.
  * @param string $help  Description.
  */
 function injil_help_sec_field( $o, $key, $title, $label, $help ) {
-	?>
-	<tr>
-		<th scope="row"><?php echo esc_html( $title ); ?></th>
-		<td>
-			<label><input type="checkbox" name="<?php echo esc_attr( INJIL_HELP_OPTION ); ?>[<?php echo esc_attr( $key ); ?>]" value="1" <?php checked( ! empty( $o[ $key ] ) ); ?>> <?php echo esc_html( $label ); ?></label>
-			<p class="description"><?php echo esc_html( $help ); ?></p>
-		</td>
-	</tr>
-	<?php
+	// The switch is named by its action; the heading and the explanation follow as its description.
+	injil_help_ui_toggle( $o, $key, $label, $title . ': ' . $help );
 }
 
 /**
- * Toggles, shown inside the Theme Options form on the Security tab.
+ * Switches, shown inside the Theme Options form on the Security tab.
  *
  * @param array $o Current options.
  */
 function injil_help_sec_render_settings( $o ) {
-	?>
-	<h2 class="ih-sec-heading"><?php esc_html_e( 'Remote publishing', 'injil-help' ); ?></h2>
-	<p class="description"><?php esc_html_e( 'Spam tools publish from outside the site with a stored password. These switches close the doors they use. Writing in the editor is not affected.', 'injil-help' ); ?></p>
-	<table class="form-table" role="presentation">
-		<?php
-		injil_help_sec_field( $o, 'block_xmlrpc', __( 'XML-RPC', 'injil-help' ), __( 'Turn off XML-RPC (on by default)', 'injil-help' ), __( 'xmlrpc.php answers 403 and the pingback header goes. On Apache the theme also blocks it in .htaccess, and removes that block when this is switched off. The Jetpack plugin and old mobile apps need XML-RPC.', 'injil-help' ) );
-		$state = get_option( 'injil_help_security_htaccess', '' );
-		if ( 'written' === $state ) {
-			echo '<tr><th scope="row"></th><td><p class="description">' . esc_html__( 'The web server also refuses xmlrpc.php: the theme keeps a "Block xmlrpc.php" section in .htaccess and repairs it if it goes missing.', 'injil-help' ) . '</p></td></tr>';
-		} elseif ( 'unavailable' === $state ) {
-			echo '<tr><th scope="row"></th><td><p class="description ih-sec-key">' . esc_html__( 'The theme could not write .htaccess (the server is not Apache, or the file is read-only). WordPress still refuses xmlrpc.php; ask the host to deny it at the server as well.', 'injil-help' ) . '</p></td></tr>';
-		}
-		injil_help_sec_field( $o, 'block_app_passwords', __( 'Application passwords', 'injil-help' ), __( 'Block application passwords (on by default)', 'injil-help' ), __( 'Application passwords let a client (a mobile app, a publishing tool, a script) log in through the REST API or XML-RPC with a password made for it alone. Nothing on this site needs that door, so the theme keeps it shut: the panel disappears from user profiles and such log-ins are refused. Revoke stored ones as well, below, so they cannot return if this is switched off.', 'injil-help' ) );
-		injil_help_sec_field( $o, 'block_rest_writes', __( 'REST API', 'injil-help' ), __( 'Allow REST API changes only from a logged-in browser (on by default)', 'injil-help' ), __( 'Any request that creates, changes or deletes content while logged in must come from a browser session on this site. Basic authentication and passwords sent in a header are refused. Reading through the API, and anything a visitor does without logging in, is unchanged.', 'injil-help' ) );
-		?>
-	</table>
-	<h2 class="ih-sec-heading"><?php esc_html_e( 'New content', 'injil-help' ); ?></h2>
-	<table class="form-table" role="presentation">
-		<?php
-		injil_help_sec_field( $o, 'spam_gate', __( 'Spam gate', 'injil-help' ), __( 'Hold suspected gambling spam as Pending (on by default)', 'injil-help' ), __( 'A post or page whose title, address or text reads as casino or betting spam, or that is published from outside the editor, is saved as Pending, never published, and logged below. The pages the theme writes are exempt.', 'injil-help' ) );
-		injil_help_sec_field( $o, 'spam_gone', __( 'Removed spam', 'injil-help' ), __( 'Answer 410 Gone on the address of removed spam (on by default)', 'injil-help' ), __( 'Search engines drop a 410 address faster than a 404 one. Only addresses of spam moved to the trash from this tab are affected.', 'injil-help' ) );
-		?>
-	</table>
-	<?php
-	if ( defined( 'INJIL_HELP_SECURITY_LOCK' ) && ! INJIL_HELP_SECURITY_LOCK ) {
-		echo '<p class="description ih-sec-key">' . esc_html__( 'INJIL_HELP_SECURITY_LOCK is false in wp-config.php, so the three remote-publishing switches are off whatever they show.', 'injil-help' ) . '</p>';
+	injil_help_ui_card_open( __( 'Remote publishing', 'injil-help' ), __( 'Spam tools publish from outside the site with a stored password. These switches close the doors they use. Writing in the editor is not affected.', 'injil-help' ) );
+	injil_help_sec_field( $o, 'block_xmlrpc', __( 'XML-RPC', 'injil-help' ), __( 'Turn off XML-RPC (on by default)', 'injil-help' ), __( 'xmlrpc.php answers 403 and the pingback header goes. On Apache the theme also blocks it in .htaccess, and removes that block when this is switched off. The Jetpack plugin and old mobile apps need XML-RPC.', 'injil-help' ) );
+	$state = get_option( 'injil_help_security_htaccess', '' );
+	if ( 'written' === $state ) {
+		echo '<p class="description ih-field-note">' . esc_html__( 'The web server also refuses xmlrpc.php: the theme keeps a "Block xmlrpc.php" section in .htaccess and repairs it if it goes missing.', 'injil-help' ) . '</p>';
+	} elseif ( 'unavailable' === $state ) {
+		echo '<p class="description ih-field-note ih-sec-key">' . esc_html__( 'The theme could not write .htaccess (the server is not Apache, or the file is read-only). WordPress still refuses xmlrpc.php; ask the host to deny it at the server as well.', 'injil-help' ) . '</p>';
 	}
+	injil_help_sec_field( $o, 'block_app_passwords', __( 'Application passwords', 'injil-help' ), __( 'Block application passwords (on by default)', 'injil-help' ), __( 'Application passwords let a client (a mobile app, a publishing tool, a script) log in through the REST API or XML-RPC with a password made for it alone. Nothing on this site needs that door, so the theme keeps it shut: the panel disappears from user profiles and such log-ins are refused. Revoke stored ones as well, below, so they cannot return if this is switched off.', 'injil-help' ) );
+	injil_help_sec_field( $o, 'block_rest_writes', __( 'REST API', 'injil-help' ), __( 'Allow REST API changes only from a logged-in browser (on by default)', 'injil-help' ), __( 'Any request that creates, changes or deletes content while logged in must come from a browser session on this site. Basic authentication and passwords sent in a header are refused. Reading through the API, and anything a visitor does without logging in, is unchanged.', 'injil-help' ) );
+	if ( defined( 'INJIL_HELP_SECURITY_LOCK' ) && ! INJIL_HELP_SECURITY_LOCK ) {
+		echo '<p class="description ih-field-note ih-sec-key">' . esc_html__( 'INJIL_HELP_SECURITY_LOCK is false in wp-config.php, so the three remote-publishing switches are off whatever they show.', 'injil-help' ) . '</p>';
+	}
+	injil_help_ui_card_close();
+
+	injil_help_ui_card_open( __( 'New content', 'injil-help' ) );
+	injil_help_sec_field( $o, 'spam_gate', __( 'Spam gate', 'injil-help' ), __( 'Hold suspected gambling spam as Pending (on by default)', 'injil-help' ), __( 'A post or page whose title, address or text reads as casino or betting spam, or that is published from outside the editor, is saved as Pending, never published, and logged below. The pages the theme writes are exempt.', 'injil-help' ) );
+	injil_help_sec_field( $o, 'spam_gone', __( 'Removed spam', 'injil-help' ), __( 'Answer 410 Gone on the address of removed spam (on by default)', 'injil-help' ), __( 'Search engines drop a 410 address faster than a 404 one. Only addresses of spam moved to the trash from this tab are affected.', 'injil-help' ) );
+	injil_help_ui_card_close();
 }
 
 /**
