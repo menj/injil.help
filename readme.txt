@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.24.0
+Stable tag: 3.25.0
 Template: twentytwentyfive
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -128,6 +128,9 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.25.0 =
+* The structured data declares the site's author in the markup only. Nothing a visitor sees has changed.
+
 = 3.24.0 =
 * Three new questions on the Islamic Dilemma page and the FAQs page: the Christian dilemma, rereading without a charge of alteration, and Qur’an 3:81.
 * The secular-form page reads muṣaddiq as confirming and adds the older precedents for rereading. The Torah in Islam adds Tawrāt as law and two retellings.

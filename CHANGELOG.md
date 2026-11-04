@@ -2,6 +2,15 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.25.0
+
+The owner is declared as the schema author, in the markup only. No option key, function or hook was renamed or removed; two constants were added.
+
+- `INJIL_HELP_SCHEMA_AUTHOR_NAME` and `INJIL_HELP_SCHEMA_AUTHOR_URL` (`inc/schema.php`) give the author Person its name and url, `https://menj.bio`. The sameAs list keeps the Theme Options entries and always includes `https://menj.bio`.
+- `injil_help_schema_unname()` leaves the author Person's name, url and sameAs alone and strips the name from every other node, as before.
+- Every page node now names the author Person. With Rank Math, its own Person nodes are removed, references to them point at the theme's author, and its Article and WebPage take that author.
+- `tests/schema-graph-test.php` requires one author Person with the name, url and sameAs, the author on every page and article node, and the name nowhere else.
+
 ## 3.24.0
 
 New answers on the Islamic Dilemma pages and a corrected reading of *muṣaddiq*. No option key, function or hook was renamed or removed.

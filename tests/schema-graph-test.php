@@ -358,9 +358,48 @@ function ih_check_graph( $page, $graph, $rank_math = array() ) {
 	if ( ! in_array( IH_STANDIN_DIGEST, $owner, true ) ) {
 		ih_fail( $page, 'the stand-in owner digest is not in the withheld list' );
 	}
+	// The author Person is the one node that names the owner (owner's decision, 4 November 2026):
+	// it must carry the schema author's name, url and sameAs, and no other value may hold the name.
+	$author_id   = injil_help_schema_ids()['author'];
+	$author_seen = 0;
+	$scan        = $graph;
+	foreach ( $scan as $i => $node ) {
+		if ( is_array( $node ) && ( $node['@id'] ?? '' ) === $author_id ) {
+			$author_seen++;
+			if ( 'Person' !== ( $node['@type'] ?? '' ) || INJIL_HELP_SCHEMA_AUTHOR_NAME !== ( $node['name'] ?? '' ) || 'https://menj.bio' !== ( $node['url'] ?? '' ) || ! in_array( 'https://menj.bio', (array) ( $node['sameAs'] ?? array() ), true ) ) {
+				ih_fail( $page, 'the author Person lacks the schema author name, url or sameAs' );
+			}
+			unset( $scan[ $i ]['name'], $scan[ $i ]['url'], $scan[ $i ]['sameAs'] );
+		} elseif ( is_array( $node ) && in_array( 'Person', (array) ( $node['@type'] ?? array() ), true ) && isset( $node['@id'], $rank_math[ $node['@id'] ] ) ) {
+			ih_fail( $page, "Rank Math's own Person node survived the merge: " . $node['@id'] );
+		}
+	}
+	// With Rank Math, the theme's subject Persons (ʿĪsā and the rest) keep their own @id.
+	if ( ! empty( $rank_math ) ) {
+		$subject = injil_help_schema_ids()['jesus'] ?? '';
+		$found   = false;
+		foreach ( $graph as $node ) {
+			$found = $found || ( $subject && ( $node['@id'] ?? '' ) === $subject );
+		}
+		if ( $subject && ! $found ) {
+			ih_fail( $page, 'the ʿĪsā subject node was lost in the Rank Math merge' );
+		}
+	}
+	if ( 1 !== $author_seen ) {
+		ih_fail( $page, "{$author_seen} author Person nodes, expected 1" );
+	}
+	// Every page, article and post names that Person as author.
+	foreach ( $graph as $node ) {
+		$types = (array) ( $node['@type'] ?? array() );
+		if ( array_intersect( $types, array( 'WebPage', 'Article', 'BlogPosting', 'ScholarlyArticle', 'CollectionPage', 'ProfilePage', 'AboutPage', 'ContactPage', 'SearchResultsPage' ) ) ) {
+			if ( ( $node['author']['@id'] ?? '' ) !== $author_id ) {
+				ih_fail( $page, 'content node without the author Person: ' . ( $node['@id'] ?? implode( '/', $types ) ) );
+			}
+		}
+	}
 	$strings = array();
 	array_walk_recursive(
-		$graph,
+		$scan,
 		function ( $v, $k ) use ( &$strings ) {
 			$strings[] = (string) $k;
 			if ( is_string( $v ) ) {

@@ -1,4 +1,12 @@
 <?php
+/** The schema author: declared in the author Person node only (owner's decision, 4 November 2026). */
+if ( ! defined( 'INJIL_HELP_SCHEMA_AUTHOR_NAME' ) ) {
+	define( 'INJIL_HELP_SCHEMA_AUTHOR_NAME', 'Mohd Elfie Nieshaem Juferi' );
+}
+if ( ! defined( 'INJIL_HELP_SCHEMA_AUTHOR_URL' ) ) {
+	define( 'INJIL_HELP_SCHEMA_AUTHOR_URL', 'https://menj.bio' );
+}
+
 /**
  * Structured data: one JSON-LD graph per page, built from every schema.org type the
  * site's content supports (https://schema.org), whether or not a search engine shows it.
@@ -59,25 +67,17 @@ function injil_help_schema_ids() {
 }
 
 /**
- * Author details: Theme Options > SEO, falling back to the site name and, for the URL, the About
- * page (Google's Article guidance asks for an author url). The post author's name is never used, and
- * an Author name that holds the owner's name gives way to the site name.
+ * Author details. By the owner's decision of 4 November 2026 the schema author is the owner,
+ * Mohd Elfie Nieshaem Juferi, with url https://menj.bio. The name is declared in the author Person
+ * node only and never in visible text (SSOT.md); injil_help_schema_unname() keeps it out of every
+ * other node. The sameAs links come from Theme Options > SEO, with https://menj.bio always among them.
  */
 function injil_help_schema_author( $post = null ) {
-	$name = injil_help_get_option( 'author_name' );
-	if ( function_exists( 'injil_help_schema_names_owner' ) && injil_help_schema_names_owner( $name ) ) {
-		$name = ''; // The owner is never named: the site stands as the author.
-	}
-	$url  = injil_help_get_option( 'author_url' );
-	if ( ! $url ) {
-		$url = home_url( '/about/' );
-	}
 	$same = array_values( array_filter( array_map( 'trim', explode( "\n", (string) injil_help_get_option( 'same_as' ) ) ) ) );
-	// The owner's profile is always among the sameAs links of the Organization and the author.
-	if ( ! in_array( 'https://menj.bio', $same, true ) ) {
-		$same[] = 'https://menj.bio';
+	if ( ! in_array( INJIL_HELP_SCHEMA_AUTHOR_URL, $same, true ) ) {
+		$same[] = INJIL_HELP_SCHEMA_AUTHOR_URL;
 	}
-	return array( $name ?: get_bloginfo( 'name' ), $url, $same );
+	return array( INJIL_HELP_SCHEMA_AUTHOR_NAME, INJIL_HELP_SCHEMA_AUTHOR_URL, $same );
 }
 
 function injil_help_schema_logo_url() {
@@ -837,6 +837,7 @@ function injil_help_schema_graph() {
 		'@type'       => 'SpeakableSpecification',
 		'cssSelector' => injil_help_schema_speakable_selectors( $blocks, $html, is_front_page() ),
 	);
+	$webpage['author']    = array( '@id' => $ids['author'] );
 	$webpage['speakable'] = $speakable;
 	$webpage              = array_merge( $webpage, injil_help_schema_page_elements( $url, $html ) );
 	$related              = injil_help_schema_related_links( $html );

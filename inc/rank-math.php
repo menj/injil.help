@@ -197,8 +197,30 @@ function injil_help_rank_math_json_ld( $data, $jsonld = null ) {
 		}
 		// An image Rank Math refers to (its primaryImageOfPage, an Article's image) and does not define gets a node.
 		$data = injil_help_schema_resolve_images( $data, 'injil-help-image-' );
-		// Rank Math's own author and publisher come from WordPress users and settings: the owner's
-		// name is taken out of them too.
+		// One author: Rank Math's own Person nodes (and only those; the theme's subjects, such as ʿĪsā, stay) give way to the theme's author Person, and every
+		// reference to them points at it. The theme's author node is in $data already (it is never skipped).
+		$people = array();
+		foreach ( $data as $key => $entity ) {
+			if ( is_array( $entity ) && isset( $entity['@id'], $rm_ids[ $entity['@id'] ] ) && $entity['@id'] !== $ids['author'] && in_array( 'Person', (array) ( $entity['@type'] ?? array() ), true ) ) {
+				if ( isset( $entity['@id'] ) ) {
+					$people[ $entity['@id'] ] = $ids['author'];
+				}
+				unset( $data[ $key ] );
+			}
+		}
+		if ( $people ) {
+			foreach ( $data as $key => $entity ) {
+				$data[ $key ] = injil_help_rank_math_repoint( $entity, $people );
+			}
+		}
+		if ( $rm_article && isset( $data[ $rm_article ] ) ) {
+			$data[ $rm_article ]['author'] = array( '@id' => $ids['author'] );
+		}
+		if ( isset( $data['WebPage'] ) && is_array( $data['WebPage'] ) ) {
+			$data['WebPage']['author'] = array( '@id' => $ids['author'] );
+		}
+		// Rank Math's publisher and any other value: the owner's name is taken out of everything but
+		// the author Person.
 		return function_exists( 'injil_help_schema_unname' ) ? injil_help_schema_unname( $data ) : $data;
 }
 add_filter( 'rank_math/json_ld', 'injil_help_rank_math_json_ld', 50, 2 );
