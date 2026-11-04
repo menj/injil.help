@@ -15,6 +15,8 @@
 			var button = copy.querySelector( 'button' );
 			var name = button.querySelector( '.ih-share-name' );
 			var original = name.textContent;
+			// The label changes to say the link was copied, or could not be; a polite live region reads that out.
+			name.setAttribute( 'aria-live', 'polite' );
 			var restore = function () {
 				window.setTimeout( function () {
 					copy.classList.remove( 'is-done', 'is-failed' );

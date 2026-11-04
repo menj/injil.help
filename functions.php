@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'INJIL_HELP_VERSION', '3.18.1' );
+define( 'INJIL_HELP_VERSION', '3.19.0' );
 
 require_once get_stylesheet_directory() . '/inc/options.php';
 require_once get_stylesheet_directory() . '/inc/starter-content.php';
@@ -43,6 +43,8 @@ add_action(
 				wp_enqueue_script( 'injil-help-ornament', get_stylesheet_directory_uri() . '/assets/js/ornament.js', array(), INJIL_HELP_VERSION, array( 'in_footer' => true, 'strategy' => 'defer' ) );
 			}
 		}
+		// Phone layout, touch targets and the focus ring; after the ornament so its rules come last.
+		wp_enqueue_style( 'injil-help-responsive', get_stylesheet_directory_uri() . '/assets/css/responsive.css', array( 'injil-help' ), INJIL_HELP_VERSION );
 	}
 );
 

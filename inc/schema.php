@@ -196,13 +196,15 @@ function injil_help_schema_navigation() {
 	$part  = get_stylesheet_directory() . '/parts/header.html';
 	if ( is_readable( $part ) && preg_match_all( '~<!-- wp:navigation-link \{"label":"(.*?)","title":"(.*?)","url":"(.*?)"~u', (string) file_get_contents( $part ), $m, PREG_SET_ORDER ) ) {
 		foreach ( $m as $i => $link ) {
-			$label   = html_entity_decode( wp_strip_all_tags( str_replace( '\\"', '"', $link[1] ) ), ENT_QUOTES );
+			// The gloss under each label (Greek or Arabic) is decoration: drop the whole span before the tags go.
+			$label   = preg_replace( '~<span class="ih-gloss[^"]*"[^>]*>.*?</span>~su', '', str_replace( '\\"', '"', $link[1] ) );
+			$label   = html_entity_decode( wp_strip_all_tags( $label ), ENT_QUOTES );
 			$items[] = array(
 				'@type'    => 'ListItem',
 				'position' => $i + 1,
 				'item'     => array(
 					'@type'       => 'SiteNavigationElement',
-					'name'        => trim( preg_replace( '/\s*(ΕΥΑΓΓΕΛΙΟΝ|ΠΑΥΛΟΣ|ΑΠΟΛΟΓΙΑ|[\x{0600}-\x{06FF}\x{FB50}-\x{FDFF}\x{FE70}-\x{FEFF}\s]+)$/u', '', $label ) ),
+					'name'        => trim( $label ),
 					'description' => html_entity_decode( str_replace( '\\"', '"', $link[2] ), ENT_QUOTES ),
 					'url'         => home_url( $link[3] ),
 				),

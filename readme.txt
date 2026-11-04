@@ -86,6 +86,9 @@ This file is the user-facing manual that WordPress and Git Updater read. The rep
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add the entry to CHANGELOG.md and to the Changelog section here, note anything an existing site must know under "Updating an existing site" in UPGRADING.md, merge to main, and tag the commit with the same number (for example v3.4.0). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 3.19.0 =
+* Mobile and accessibility, to the owner's mobile-first audit and WCAG 2.2 AA briefs: a focus ring with enough contrast, a header that no longer hides the title at 320 pixels, 44-pixel touch targets on phones, page numbers at least 24 pixels wide, lang attributes on the Greek and Arabic glosses, and a spoken status for Copy link. New file assets/css/responsive.css.
+* Structured data: the Journal menu item is named Journal, without its Greek gloss.
 = 3.18.1 =
 * Structured data: the featured image has its own ImageObject with its credit and licence, so the primary image reference resolves on every page, Rank Math or not. AVIF and WebP copies carry their own format. Cited articles carry a headline.
 = 3.18.0 =
