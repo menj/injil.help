@@ -533,6 +533,7 @@ function ih_check_speakable( $where, $graph, $content, $is_front ) {
 	};
 	$find( $graph );
 	if ( null === $selectors ) {
+		ih_fail( $where, 'no SpeakableSpecification' );
 		return false;
 	}
 	$html = '';
@@ -617,8 +618,13 @@ $GLOBALS['ih_front'] = true;
 $GLOBALS['ih_rm']    = false;
 $front_graph         = injil_help_schema_graph();
 $front_html          = (string) file_get_contents( $GLOBALS['ih_theme'] . '/templates/front-page.html' );
-if ( ! ih_check_speakable( 'front page', $front_graph, $front_html, true ) ) {
-	ih_fail( 'front page', 'no SpeakableSpecification' );
+ih_check_speakable( 'front page', $front_graph, $front_html, true );
+
+// A class token is matched whole: a paragraph with only "ih-intro-extra" gives no .ih-intro selector.
+$near = injil_help_schema_speakable_selectors( array(), '<p class="ih-intro-extra wp-block-paragraph">x</p><p class="lead ih-cover-lede-x">y</p>', false );
+$exact = injil_help_schema_speakable_selectors( array(), '<p class="wp-block-paragraph ih-intro">x</p><p class="ih-cover-lede">y</p>', false );
+if ( array( 'h1' ) !== $near || array( 'h1', '.ih-cover-lede', '.ih-intro' ) !== $exact ) {
+	ih_fail( 'speakable', 'class tokens are not matched whole: ' . json_encode( array( $near, $exact ) ) );
 }
 $GLOBALS['ih_front'] = false;
 

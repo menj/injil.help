@@ -8,7 +8,10 @@ The Schema Markup Validator run of 4 November flagged two faults in the graph. N
 
 - The speakable `cssSelector` named `.entry-content > p` on every page. The front page is built from its template and has no `.entry-content`, and the answers page puts its paragraphs inside groups, so the selector matched nothing on either. The new `injil_help_schema_speakable_selectors()` gives `h1` on every page, `.ih-cover-lede` where the hero lede is, `.ih-intro` where a section intro is (front page excepted), and `.entry-content > p` only when a paragraph block sits at the top level of the post's content.
 - The Organization carried `masthead` and `verificationFactCheckingPolicy`, which schema.org defines on NewsMediaOrganization only. The node is typed `["Organization", "NewsMediaOrganization"]` now, and both properties keep their addresses (/about/ and /method/).
-- `tests/schema-graph-test.php` renders each starter page and the front page and checks each speakable selector against that markup. It also fails a node that carries `masthead` or `verificationFactCheckingPolicy` without the NewsMediaOrganization type. Both checks fail on 3.20.1.
+- A version change rewrites the starter pages and the Journal posts the theme wrote. `injil_help_page_is_edited()` counted a post with no `_injil_help_hash` as unedited, so on the first admin load after an update both seeders overwrote any page or post the theme had never stamped, whatever the owner had put in it. A post with no stored hash counts as edited now, and both seeders keep it. "Update all pages from the theme" still writes such a page.
+- The speakable classes are matched as whole tokens of the `class` attribute, so a paragraph with `ih-intro-extra` gives no `.ih-intro` selector.
+- `tests/schema-graph-test.php` renders each starter page and the front page and checks each speakable selector against that markup, and a page with no SpeakableSpecification fails. It also fails a node that carries `masthead` or `verificationFactCheckingPolicy` without the NewsMediaOrganization type. Both checks fail on 3.20.1.
+- `tests/journal-test.php` strips the hashes from two Journal posts and from a customised starter page, then runs the seeders: all 3 must come through untouched, and a forced page update must still write the page. These checks fail on 3.20.1.
 
 ## 3.20.1
 

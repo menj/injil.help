@@ -125,6 +125,7 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 = 3.20.2 =
 * The speakable selectors name only markup the page has. On the front page and the answers page they named a paragraph that does not exist there.
 * The Organization is also a NewsMediaOrganization, the type that defines its masthead and fact-checking policy.
+* An update keeps every page and Journal post the theme never stamped as its own. Before this release such a page lost your text on the first admin load after an update.
 
 = 3.20.1 =
 * Theme Options no longer looks up every starter page on each load. The Content tab fetches its page list when you open it, or builds it on ?tab=content without JavaScript. Every setting still saves from any tab.

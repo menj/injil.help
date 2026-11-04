@@ -685,10 +685,14 @@ function injil_help_schema_is_article( $post, $page_type = 'WebPage' ) {
  */
 function injil_help_schema_speakable_selectors( $blocks, $html, $is_front ) {
 	$selectors = array( 'h1' );
-	if ( false !== strpos( $html, 'ih-cover-lede' ) && preg_match( '#<p[^>]*class="[^"]*\bih-cover-lede\b#', $html ) ) {
+	// The class must be a whole token of the attribute: "ih-intro-extra" is another class.
+	$has_class = function ( $class ) use ( $html ) {
+		return (bool) preg_match( '#<p\s[^>]*\bclass="(?:[^"]*\s)?' . preg_quote( $class, '#' ) . '(?:\s[^"]*)?"#', $html );
+	};
+	if ( $has_class( 'ih-cover-lede' ) ) {
 		$selectors[] = '.ih-cover-lede';
 	}
-	if ( ! $is_front && preg_match( '#<p[^>]*class="[^"]*\bih-intro\b#', $html ) ) {
+	if ( ! $is_front && $has_class( 'ih-intro' ) ) {
 		$selectors[] = '.ih-intro';
 	}
 	if ( ! $is_front ) {
