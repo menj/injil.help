@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.20.1
+Stable tag: 3.20.2
 Template: twentytwentyfive
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -122,6 +122,11 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.20.2 =
+* The speakable selectors name only markup the page has. On the front page and the answers page they named a paragraph that does not exist there.
+* The Organization is also a NewsMediaOrganization, the type that defines its masthead and fact-checking policy.
+* An update keeps every page and Journal post the theme never stamped as its own. Before this release such a page lost your text on the first admin load after an update.
+
 = 3.20.1 =
 * Theme Options no longer looks up every starter page on each load. The Content tab fetches its page list when you open it, or builds it on ?tab=content without JavaScript. Every setting still saves from any tab.
 = 3.20.0 =

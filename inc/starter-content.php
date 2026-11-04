@@ -474,13 +474,15 @@ function injil_help_stamp_page( $id, $content, $title, $excerpt ) {
 }
 
 /**
- * True when a starter page has been edited since the theme last wrote it: the content differs
- * from the content hash, or the title or excerpt differs from the head hash. Pages written before
- * 3.6.1 carry no head hash, so for them only the content counts until the theme rewrites them.
+ * True when a starter page or Journal post may hold the owner's work, so the version-change runs
+ * must keep it: it carries no content hash (the theme never stamped it, so nothing proves it is
+ * the theme's text), or its content differs from that hash, or its title or excerpt differs from
+ * the head hash. Pages written before 3.6.1 carry no head hash, so for them only the content counts
+ * until the theme rewrites them. "Update all pages from the theme" passes $force and still writes them.
  */
 function injil_help_page_is_edited( $post ) {
-	$hash = get_post_meta( $post->ID, INJIL_HELP_HASH_META, true );
-	if ( $hash && $hash !== md5( $post->post_content ) ) {
+	$hash = (string) get_post_meta( $post->ID, INJIL_HELP_HASH_META, true );
+	if ( '' === $hash || $hash !== md5( $post->post_content ) ) {
 		return true;
 	}
 	$head = get_post_meta( $post->ID, INJIL_HELP_HEAD_META, true );

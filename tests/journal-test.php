@@ -141,9 +141,14 @@ function get_posts( $args ) {
 		if ( isset( $args['meta_key'] ) && get_post_meta( $p->ID, $args['meta_key'] ) !== $args['meta_value'] ) {
 			continue;
 		}
-		$out[] = $p;
+		$out[] = 'ids' === ( $args['fields'] ?? '' ) ? $p->ID : $p;
 	}
-	return array_slice( $out, 0, $args['numberposts'] ?? 5 );
+	$n = $args['numberposts'] ?? ( $args['posts_per_page'] ?? 5 );
+	return -1 === $n ? $out : array_slice( $out, 0, $n );
+}
+function get_post_field( $field, $id ) {
+	$p = get_post( $id );
+	return $p ? ( $p->$field ?? '' ) : '';
 }
 function get_page_by_path( $path, $output = null, $type = 'page' ) {
 	foreach ( $GLOBALS['ih_store'] as $p ) {
@@ -363,6 +368,41 @@ $second->post_status = 'trash';
 $kept = injil_help_journal_seed( $now );
 if ( 2 !== $kept['kept'] || false === strpos( $first->post_content, 'Edited.' ) || 'trash' !== $second->post_status || count( $GLOBALS['ih_store'] ) !== $count ) {
 	ih_fail( 'seed', 'edited or binned posts were not kept: ' . json_encode( $kept ) );
+}
+
+// A post with no content hash was never stamped by the theme: a version-change run keeps it,
+// whether its text differs from the shipped text or matches it.
+$third  = injil_help_journal_find( $entries[2]['slug'] );
+$fourth = injil_help_journal_find( $entries[3]['slug'] );
+$third->post_content .= "\n<p>Customised before the hash.</p>";
+foreach ( array( $third, $fourth ) as $unstamped ) {
+	unset( $GLOBALS['ih_meta'][ $unstamped->ID ][ INJIL_HELP_HASH_META ], $GLOBALS['ih_meta'][ $unstamped->ID ][ INJIL_HELP_HEAD_META ] );
+}
+$fourth_before = $fourth->post_content;
+$fourth->post_title = 'Retitled by the owner';
+$unhashed = injil_help_journal_seed( $now );
+if ( 4 !== $unhashed['kept'] || false === strpos( $third->post_content, 'Customised before the hash.' ) || 'Retitled by the owner' !== $fourth->post_title || $fourth->post_content !== $fourth_before ) {
+	ih_fail( 'seed', 'a post with no stored hash was overwritten: ' . json_encode( $unhashed ) );
+}
+if ( ! injil_help_page_is_edited( $third ) || ! injil_help_page_is_edited( $fourth ) ) {
+	ih_fail( 'seed', 'injil_help_page_is_edited() treats a post with no stored hash as unedited' );
+}
+// A stamped post that still matches its hash is the theme's own text and may be rewritten.
+$fifth = injil_help_journal_find( $entries[4]['slug'] );
+if ( injil_help_page_is_edited( $fifth ) ) {
+	ih_fail( 'seed', 'a post that matches its stored hash counts as edited' );
+}
+
+// The page seeder takes the same path: a starter page with no stored hash is kept on a version-change
+// run, and "Update all pages from the theme" ($force) still writes it.
+$page_def = array( 'path' => 'zz-unstamped', 'title' => 'Shipped title', 'excerpt' => '', 'body' => array( '<!-- wp:paragraph -->', '<p>Shipped text.</p>', '<!-- /wp:paragraph -->' ) );
+$page_id  = wp_insert_post( array( 'post_type' => 'page', 'post_status' => 'publish', 'post_name' => 'zz-unstamped', 'post_title' => 'Shipped title', 'post_excerpt' => '', 'post_content' => '<p>The owner wrote this.</p>' ) );
+$page_res = injil_help_populate_page( 0, $page_def, true, false );
+if ( 'kept' !== $page_res || '<p>The owner wrote this.</p>' !== get_post( $page_id )->post_content ) {
+	ih_fail( 'pages', 'a starter page with no stored hash was overwritten (' . $page_res . ')' );
+}
+if ( 'updated' !== injil_help_populate_page( 0, $page_def, true, true ) || false === strpos( get_post( $page_id )->post_content, 'Shipped text.' ) ) {
+	ih_fail( 'pages', 'a forced update did not write the unstamped page' );
 }
 
 echo 'Entries: ' . count( $entries ) . "; published {$published}, scheduled {$scheduled} at 3 November 2026\n";

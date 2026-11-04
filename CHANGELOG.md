@@ -2,6 +2,17 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.20.2
+
+The Schema Markup Validator run of 4 November flagged two faults in the graph. No option key, function, hook or @id was renamed or removed, and every policy address stays.
+
+- The speakable `cssSelector` named `.entry-content > p` on every page. The front page is built from its template and has no `.entry-content`, and the answers page puts its paragraphs inside groups, so the selector matched nothing on either. The new `injil_help_schema_speakable_selectors()` gives `h1` on every page, `.ih-cover-lede` where the hero lede is, `.ih-intro` where a section intro is (front page excepted), and `.entry-content > p` only when a paragraph block sits at the top level of the post's content.
+- The Organization carried `masthead` and `verificationFactCheckingPolicy`, which schema.org defines on NewsMediaOrganization only. The node is typed `["Organization", "NewsMediaOrganization"]` now, and both properties keep their addresses (/about/ and /method/).
+- A version change rewrites the starter pages and the Journal posts the theme wrote. `injil_help_page_is_edited()` counted a post with no `_injil_help_hash` as unedited, so on the first admin load after an update both seeders overwrote any page or post the theme had never stamped, whatever the owner had put in it. A post with no stored hash counts as edited now, and both seeders keep it. "Update all pages from the theme" still writes such a page.
+- The speakable classes are matched as whole tokens of the `class` attribute, so a paragraph with `ih-intro-extra` gives no `.ih-intro` selector.
+- `tests/schema-graph-test.php` renders each starter page and the front page and checks each speakable selector against that markup, and a page with no SpeakableSpecification fails. It also fails a node that carries `masthead` or `verificationFactCheckingPolicy` without the NewsMediaOrganization type. Both checks fail on 3.20.1.
+- `tests/journal-test.php` strips the hashes from two Journal posts and from a customised starter page, then runs the seeders: all 3 must come through untouched, and a forced page update must still write the page. These checks fail on 3.20.1.
+
 ## 3.20.1
 
 A CodeAnt finding on the sister themes: Theme Options built every panel on every load. Here the Content tab ran `injil_help_starter_pages()` and one `injil_help_find_page()` lookup per starter page whatever tab was open. No option key, function or hook was renamed or removed.

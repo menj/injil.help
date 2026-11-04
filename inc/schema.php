@@ -114,8 +114,10 @@ function injil_help_schema_site_nodes( $post = null ) {
 	$home = home_url( '/' );
 	list( $name, $url, $same ) = injil_help_schema_author( $post );
 
+	// masthead and verificationFactCheckingPolicy (injil_help_schema_policies()) belong to
+	// NewsMediaOrganization; without that type validators report them as unknown on an Organization.
 	$org = array(
-		'@type'        => 'Organization',
+		'@type'        => array( 'Organization', 'NewsMediaOrganization' ),
 		'@id'          => $ids['org'],
 		'name'         => get_bloginfo( 'name' ),
 		'url'          => $home,
@@ -669,6 +671,41 @@ function injil_help_schema_is_article( $post, $page_type = 'WebPage' ) {
 	return ! in_array( $post->post_name, $utility, true );
 }
 
+/**
+ * The CSS selectors of a page's SpeakableSpecification, each one only where the page's markup has it.
+ * The h1 is on every template. The front page has no .entry-content, and on a page built from groups
+ * (the answers page) no paragraph sits directly inside it, so ".entry-content > p" is given only when
+ * a paragraph block is at the top level of the post's content. The hero's lede and the section intros
+ * are named by their classes where the page carries them.
+ *
+ * @param array  $blocks   The page's top-level blocks, patterns expanded.
+ * @param string $html     The rendered content.
+ * @param bool   $is_front Whether this is the front page, rendered from its template.
+ * @return string[]
+ */
+function injil_help_schema_speakable_selectors( $blocks, $html, $is_front ) {
+	$selectors = array( 'h1' );
+	// The class must be a whole token of the attribute: "ih-intro-extra" is another class.
+	$has_class = function ( $class ) use ( $html ) {
+		return (bool) preg_match( '#<p\s[^>]*\bclass="(?:[^"]*\s)?' . preg_quote( $class, '#' ) . '(?:\s[^"]*)?"#', $html );
+	};
+	if ( $has_class( 'ih-cover-lede' ) ) {
+		$selectors[] = '.ih-cover-lede';
+	}
+	if ( ! $is_front && $has_class( 'ih-intro' ) ) {
+		$selectors[] = '.ih-intro';
+	}
+	if ( ! $is_front ) {
+		foreach ( (array) $blocks as $block ) {
+			if ( isset( $block['blockName'] ) && 'core/paragraph' === $block['blockName'] ) {
+				$selectors[] = '.entry-content > p';
+				break;
+			}
+		}
+	}
+	return $selectors;
+}
+
 /** The page's place in the site: the path of its slugs, parent first. */
 function injil_help_schema_path( $post ) {
 	if ( ! $post instanceof WP_Post ) {
@@ -794,7 +831,7 @@ function injil_help_schema_graph() {
 	}
 	$speakable = array(
 		'@type'       => 'SpeakableSpecification',
-		'cssSelector' => array( 'h1', '.entry-content > p' ),
+		'cssSelector' => injil_help_schema_speakable_selectors( $blocks, $html, is_front_page() ),
 	);
 	$webpage['speakable'] = $speakable;
 	$webpage              = array_merge( $webpage, injil_help_schema_page_elements( $url, $html ) );
