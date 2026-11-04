@@ -191,7 +191,7 @@ function injil_help_render_error_pages_section() {
 	<?php
 	$last = get_option( 'injil_help_error_pages_result' );
 	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- display of the last result only.
-	if ( isset( $_GET['injil_help_errors'] ) && is_array( $last ) ) {
+	if ( isset( $_GET['injil_help_errors'] ) && is_array( $last ) && $last ) {
 		$parts = array();
 		foreach ( $last as $file => $what ) {
 			$parts[] = $file . ': ' . ( $words[ $what ] ?? $what );
@@ -208,11 +208,15 @@ function injil_help_render_error_pages_section() {
 		<?php endforeach; ?>
 		</tbody>
 	</table>
+	<?php if ( is_multisite() && ! is_main_site() ) : ?>
+		<p><?php esc_html_e( 'The whole network shares wp-content, so the error pages are installed from the main site.', 'injil-help' ); ?></p>
+	<?php else : ?>
 	<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" style="margin:1em 0">
 		<input type="hidden" name="action" value="injil_help_install_error_pages">
 		<?php wp_nonce_field( 'injil_help_install_error_pages' ); ?>
 		<?php submit_button( __( 'Install error pages', 'injil-help' ), 'secondary', 'submit', false ); ?>
 	</form>
+	<?php endif; ?>
 	<p><?php esc_html_e( 'For errors the web server answers before WordPress starts, static pages are in the errors folder of the theme. Add these lines to .htaccess to use them:', 'injil-help' ); ?></p>
 	<textarea readonly rows="5" class="large-text code" aria-label="<?php esc_attr_e( '.htaccess lines', 'injil-help' ); ?>"><?php echo esc_textarea( injil_help_error_htaccess_snippet() ); ?></textarea>
 	</div>
