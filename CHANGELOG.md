@@ -8,7 +8,10 @@ A review of the matching change on the TBE theme found two faults in the search 
 
 - The help text said the base takes letters, digits and hyphens only, but `sanitize_key()` kept underscores. `injil_help_search_clean_base()` now removes them, so `my_search` is stored as `mysearch`, and the help text says so.
 - A base that WordPress keeps for itself (`feed`, `page`, `tag`, `author`, `wp-json` and the like) or the Journal's base would have clashed with those rewrite rules. So would the address of a page: a base of `gospels` would have turned `/gospels/mark/` into a search. Such a base is refused on save with a notice, and `search` is used. The list is in `injil_help_search_reserved_bases()`, with a filter of the same name.
-- `tests/plugin-features-test.php` checks both.
+- The reserved list also takes the live category and tag bases from Settings › Permalinks and the rewrite slug of every registered post type and taxonomy, through `injil_help_search_live_slugs()`.
+- A base stored before it was refused left the saved rewrite rules on the old base. The option `injil_help_search_rules_base` records the base the rules were built with, and `init` flushes once when the base in force differs.
+- An array posted for the field (`injil_help_search_base[]=x`) made `sanitize_key()` throw a TypeError on PHP 8. The value is checked with `is_string()` first.
+- `tests/plugin-features-test.php` checks all of these.
 
 ## 3.21.0
 

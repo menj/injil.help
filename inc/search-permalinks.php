@@ -21,6 +21,43 @@ function injil_help_search_permalinks_on() {
 }
 
 /**
+ * The first path segment of every rewrite base set on this site: the category and tag bases
+ * from Settings › Permalinks (their defaults are in the fixed list), and the rewrite slug of
+ * each registered post type and taxonomy.
+ *
+ * @return string[]
+ */
+function injil_help_search_live_slugs() {
+	$slugs = array();
+	foreach ( array( 'category_base', 'tag_base' ) as $opt ) {
+		$value = function_exists( 'get_option' ) ? get_option( $opt ) : '';
+		if ( is_string( $value ) ) {
+			$slugs[] = $value;
+		}
+	}
+	$objects = array();
+	if ( function_exists( 'get_post_types' ) ) {
+		$objects = array_merge( $objects, array_values( (array) get_post_types( array(), 'objects' ) ) );
+	}
+	if ( function_exists( 'get_taxonomies' ) ) {
+		$objects = array_merge( $objects, array_values( (array) get_taxonomies( array(), 'objects' ) ) );
+	}
+	foreach ( $objects as $obj ) {
+		if ( is_object( $obj ) && is_array( $obj->rewrite ?? null ) && isset( $obj->rewrite['slug'] ) && is_string( $obj->rewrite['slug'] ) ) {
+			$slugs[] = $obj->rewrite['slug'];
+		}
+	}
+	$out = array();
+	foreach ( $slugs as $slug ) {
+		$first = strtolower( (string) strtok( trim( $slug, '/' ), '/' ) );
+		if ( '' !== $first ) {
+			$out[] = $first;
+		}
+	}
+	return array_values( array_unique( $out ) );
+}
+
+/**
  * Slugs the search base may not take: the paths WordPress keeps for itself and the Journal's
  * base. Filter injil_help_search_reserved_bases.
  *
@@ -30,7 +67,8 @@ function injil_help_search_reserved_bases() {
 	$journal = defined( 'INJIL_HELP_JOURNAL_BASE' ) ? array( INJIL_HELP_JOURNAL_BASE ) : array();
 	return (array) apply_filters(
 		'injil_help_search_reserved_bases',
-		array_merge( array( 'wp-admin', 'wp-content', 'wp-includes', 'wp-json', 'feed', 'page', 'comments', 'category', 'tag', 'author', 'embed', 'trackback', 'attachment', 'type' ), $journal )
+		array_merge(
+			injil_help_search_live_slugs(), array( 'wp-admin', 'wp-content', 'wp-includes', 'wp-json', 'feed', 'page', 'comments', 'category', 'tag', 'author', 'embed', 'trackback', 'attachment', 'type' ), $journal )
 	);
 }
 
@@ -43,7 +81,10 @@ function injil_help_search_reserved_bases() {
  * @return string
  */
 function injil_help_search_clean_base( $raw ) {
-	$base = str_replace( '_', '', sanitize_key( (string) $raw ) );
+	if ( ! is_string( $raw ) ) {
+		return '';
+	}
+	$base = str_replace( '_', '', sanitize_key( $raw ) );
 	if ( '' === $base || in_array( $base, injil_help_search_reserved_bases(), true ) ) {
 		return '';
 	}
@@ -109,13 +150,29 @@ if ( injil_help_search_permalinks_on() ) {
 		1
 	);
 
+	// The saved rules carry the base they were built with. When the base in force differs (a
+	// stored base newly refused, or one changed outside the Permalinks screen), flush once.
+	add_action(
+		'init',
+		function () {
+			$base = injil_help_search_base();
+			if ( get_option( 'injil_help_search_rules_base' ) !== $base ) {
+				flush_rewrite_rules( false );
+				update_option( 'injil_help_search_rules_base', $base, false );
+			}
+		},
+		99
+	);
+
 	// The field under Settings › Permalinks › Optional; saved with the screen's own nonce.
 	add_action(
 		'load-options-permalink.php',
 		function () {
 			if ( isset( $_POST['injil_help_search_base'] ) && current_user_can( 'manage_options' ) ) {
 				check_admin_referer( 'update-permalink' );
-				$raw  = sanitize_key( wp_unslash( $_POST['injil_help_search_base'] ) );
+				// A posted array (injil_help_search_base[]=x) would make sanitize_key() throw on PHP 8.
+				$posted = wp_unslash( $_POST['injil_help_search_base'] );
+				$raw    = is_string( $posted ) ? sanitize_key( $posted ) : '';
 				$base = injil_help_search_clean_base( $raw );
 				if ( '' !== $raw && '' === $base ) {
 					add_settings_error(
