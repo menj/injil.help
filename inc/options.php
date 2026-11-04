@@ -634,7 +634,7 @@ function injil_help_render_options() {
 					echo '</div>';
 				} else {
 					printf(
-						'<div id="ih-starter-pages" data-ih-lazy="injil_help_starter_pages" aria-busy="true"><p><a class="button" href="%1$s">%2$s</a></p></div>',
+						'<div id="ih-starter-pages" data-ih-lazy="injil_help_starter_pages"><p><a class="button" href="%1$s">%2$s</a></p></div>',
 						esc_url( add_query_arg( array( 'page' => 'injil-help-options', 'tab' => 'content' ), admin_url( 'themes.php' ) ) . '#content' ),
 						esc_html__( 'Open the Content tab', 'injil-help' )
 					);

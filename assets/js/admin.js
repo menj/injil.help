@@ -60,6 +60,7 @@
 			return;
 		}
 		box.setAttribute( 'data-ih-loading', '1' );
+		box.setAttribute( 'aria-busy', 'true' );
 		var body = new URLSearchParams();
 		body.append( 'action', box.getAttribute( 'data-ih-lazy' ) );
 		body.append( 'nonce', conf.pagesNonce );
