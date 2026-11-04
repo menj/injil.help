@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.21.0
+Stable tag: 3.21.1
 Template: twentytwentyfive
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -128,6 +128,9 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.21.1 =
+* The search base under Settings > Permalinks drops underscores, as its help text says. A base WordPress uses for itself, or the address of a page, is refused with a notice and "search" is kept.
+
 = 3.21.0 =
 * Profile links: set the address of each profile under Theme Options > Sharing, and the icons show in the footer. The [injil_help_social] shortcode and the Profile links pattern put them anywhere else.
 * Reading progress bar: a thin bar fills as the reader scrolls a post or page. The new Reading tab sets the post types, the edge, the height and the colours.

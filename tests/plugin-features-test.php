@@ -46,6 +46,11 @@ function admin_url( $path = '' ) { return 'https://injil.help/wp-admin/' . $path
 function wp_parse_url( $url, $component = -1 ) { return parse_url( $url, $component ); }
 function trailingslashit( $s ) { return rtrim( $s, '/' ) . '/'; }
 function get_permalink( $id ) { return 'https://injil.help/page-' . (int) $id . '/'; }
+function get_page_by_path( $path ) { return in_array( $path, array( 'gospels', 'paul' ), true ) ? (object) array( 'ID' => 1 ) : null; }
+function get_post_types( $args = array(), $output = 'names' ) { return array( 'book' => (object) array( 'rewrite' => array( 'slug' => 'library/books' ) ), 'post' => (object) array( 'rewrite' => false ) ); }
+function get_taxonomies( $args = array(), $output = 'names' ) { return array( 'topic' => (object) array( 'rewrite' => array( 'slug' => '/topics/' ) ) ); }
+$GLOBALS['ih_flushes'] = 0;
+function flush_rewrite_rules( $hard = true ) { $GLOBALS['ih_flushes']++; }
 function sanitize_key( $k ) { return preg_replace( '/[^a-z0-9_\-]/', '', strtolower( (string) $k ) ); }
 
 require dirname( __DIR__ ) . '/inc/unlist.php';
@@ -123,7 +128,30 @@ check( 'https://injil.help/search/x/?post_type%5B0%5D=post&post_type%5B1%5D=page
 check( 'search' === injil_help_search_base(), 'the default base is search' );
 $GLOBALS['ih_options']['injil_help_search_base'] = 'Find Me!';
 check( 'findme' === injil_help_search_base(), 'the base is sanitised' );
+$GLOBALS['ih_options']['injil_help_search_base'] = 'my_search';
+check( 'mysearch' === injil_help_search_base(), 'underscores are removed, as the help text says' );
+foreach ( array( 'feed', 'Page', 'wp-json', 'tag', 'author' ) as $reserved ) {
+	$GLOBALS['ih_options']['injil_help_search_base'] = $reserved;
+	check( 'search' === injil_help_search_base(), "the reserved base {$reserved} falls back to search" );
+}
+check( '' === injil_help_search_clean_base( 'gospels' ), 'a base that is the address of a page is refused' );
+$GLOBALS['ih_options']['category_base'] = '/subjects/';
+$GLOBALS['ih_options']['tag_base']      = 'labels';
+foreach ( array( 'subjects', 'labels', 'library', 'topics' ) as $live ) {
+	check( '' === injil_help_search_clean_base( $live ), "the live rewrite slug {$live} is refused" );
+}
+check( '' === injil_help_search_clean_base( array( 'x' ) ), 'an array for the base gives the empty string, no TypeError' );
+check( 'find' === injil_help_search_clean_base( 'find' ), 'a free base is kept' );
 check( isset( $GLOBALS['ih_hooks']['template_redirect'] ), 'the redirect is hooked' );
+
+// The rules are flushed once when the base in force differs from the one they were built with.
+$GLOBALS['wp_rewrite'] = (object) array( 'search_base' => 'search' );
+$GLOBALS['ih_options']['injil_help_search_base'] = 'feed'; // stored before it was refused
+$GLOBALS['ih_options']['injil_help_search_rules_base'] = 'feed';
+foreach ( $GLOBALS['ih_hooks']['init'] as $cb ) { $cb(); }
+check( 1 === $GLOBALS['ih_flushes'] && 'search' === $GLOBALS['ih_options']['injil_help_search_rules_base'], 'a newly refused base flushes the rules once' );
+foreach ( $GLOBALS['ih_hooks']['init'] as $cb ) { $cb(); }
+check( 1 === $GLOBALS['ih_flushes'], 'the next load does not flush again' );
 
 echo $fail ? "\n{$fail} failed\n" : "\nall passed\n";
 exit( $fail ? 1 : 0 );
