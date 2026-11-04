@@ -112,6 +112,18 @@ fieldset.ih-field{padding:16px 0}
 .ih-share-threads{--ih-i:url(../icons/social/threads.svg)}
 .ih-share-pinterest{--ih-i:url(../icons/social/pinterest.svg)}
 .ih-share-line{--ih-i:url(../icons/social/line.svg)}
+.ih-share-instagram{--ih-i:url(../icons/social/instagram.svg)}
+.ih-share-youtube{--ih-i:url(../icons/social/youtube.svg)}
+.ih-share-tiktok{--ih-i:url(../icons/social/tiktok.svg)}
+.ih-share-mastodon{--ih-i:url(../icons/social/mastodon.svg)}
+.ih-share-github{--ih-i:url(../icons/social/github.svg)}
+.ih-share-substack{--ih-i:url(../icons/social/substack.svg)}
+
+/* Sharing tab: profile addresses, one card per network */
+.ih-profiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin:8px 0 12px}
+.ih-profile{display:flex;flex-direction:column;gap:6px;padding:10px 12px;border:1px solid #dcdcde;border-radius:var(--ih-a-radius);background:#fff}
+.ih-profile .ih-input{width:100%;max-width:none}
+.ih-profiles .ih-net-icon{width:18px;height:18px;flex:none;background:currentColor;-webkit-mask:var(--ih-i) center/contain no-repeat;mask:var(--ih-i) center/contain no-repeat}
 
 /* Content tab: the starter pages */
 .ih-pages{margin:12px 0;columns:2;column-gap:32px;max-height:480px;overflow:auto;padding:8px 12px;border:1px solid #f0f0f1;border-radius:8px}
@@ -137,7 +149,7 @@ fieldset.ih-field{padding:16px 0}
  .ih-field{grid-template-columns:1fr;gap:10px}
  .ih-field--toggle{grid-template-columns:1fr auto}
  .ih-field--toggle .ih-field__control{justify-self:end}
- .ih-choices,.ih-colors,.ih-networks{grid-template-columns:1fr}
+ .ih-choices,.ih-colors,.ih-networks,.ih-profiles{grid-template-columns:1fr}
  .ih-input,.ih-options select{width:100%;max-width:none;min-height:44px}
  .ih-tab{padding:12px 14px}
  .ih-pages{columns:1}

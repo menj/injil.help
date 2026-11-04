@@ -60,6 +60,14 @@ function injil_help_option_defaults() {
 		'ctx_extra'        => '',
 		'ctx_exclude'      => '',
 		'remote_images'    => 0,
+		'progress'         => 1,
+		'progress_types'   => array( 'post', 'page' ),
+		'progress_position' => 'top',
+		'progress_height'  => 3,
+		'progress_color'   => '',
+		'progress_track'   => '',
+		'social_profiles'  => array(),
+		'social_footer'    => 1,
 	);
 }
 
@@ -120,6 +128,30 @@ function injil_help_sanitize_options( $in ) {
 	$out['ctx_extra']        = implode( "\n", array_filter( array_map( 'injil_help_sanitize_ctx_line', preg_split( '/\r\n|\r|\n/', (string) ( $in['ctx_extra'] ?? '' ) ) ) ) );
 	$out['ctx_exclude']      = implode( "\n", array_filter( array_map( 'injil_help_sanitize_ctx_slug', preg_split( '/\r\n|\r|\n/', (string) ( $in['ctx_exclude'] ?? '' ) ) ) ) );
 	$out['remote_images']    = empty( $in['remote_images'] ) ? 0 : 1;
+	$out['progress']         = empty( $in['progress'] ) ? 0 : 1;
+	$out['progress_types']   = array_values( array_intersect( array_keys( injil_help_progress_type_choices() ), array_map( 'sanitize_key', (array) ( $in['progress_types'] ?? array() ) ) ) );
+	$out['progress_position'] = injil_help_pick( $in, 'progress_position', array( 'top', 'bottom' ), 'top' );
+	$out['progress_height']  = max( 1, min( 12, (int) ( $in['progress_height'] ?? 3 ) ) );
+	$out['progress_color']   = (string) sanitize_hex_color( $in['progress_color'] ?? '' );
+	$out['progress_track']   = (string) sanitize_hex_color( $in['progress_track'] ?? '' );
+	foreach ( array_keys( injil_help_social_networks() ) as $net ) {
+		$url = esc_url_raw( trim( (string) ( $in['social_profiles'][ $net ] ?? '' ) ), array( 'https', 'http' ) );
+		if ( '' !== $url ) {
+			$out['social_profiles'][ $net ] = $url;
+		}
+	}
+	$out['social_footer']    = empty( $in['social_footer'] ) ? 0 : 1;
+	return $out;
+}
+
+/** The post types the reading bar can be shown on: every public type but attachments, name => label. */
+function injil_help_progress_type_choices() {
+	$out = array();
+	foreach ( get_post_types( array( 'public' => true ), 'objects' ) as $name => $obj ) {
+		if ( 'attachment' !== $name ) {
+			$out[ $name ] = $obj->labels->singular_name;
+		}
+	}
 	return $out;
 }
 
@@ -395,6 +427,7 @@ function injil_help_options_tabs() {
 		'colours'  => array( __( 'Colours', 'injil-help' ), 'dashicons-art' ),
 		'branding' => array( __( 'Branding', 'injil-help' ), 'dashicons-admin-appearance' ),
 		'sharing'  => array( __( 'Sharing', 'injil-help' ), 'dashicons-share' ),
+		'reading'  => array( __( 'Reading', 'injil-help' ), 'dashicons-performance' ),
 		'links'    => array( __( 'Contextual links', 'injil-help' ), 'dashicons-admin-links' ),
 		'seo'      => array( __( 'SEO', 'injil-help' ), 'dashicons-search' ),
 		'security' => array( __( 'Security', 'injil-help' ), 'dashicons-shield' ),
@@ -414,7 +447,7 @@ function injil_help_render_options() {
 			<span class="ih-header__icon dashicons dashicons-book-alt" aria-hidden="true"></span>
 			<div class="ih-header__text">
 				<h1><?php esc_html_e( 'Theme Options', 'injil-help' ); ?> <span class="ih-badge"><?php echo esc_html( sprintf( /* translators: %s: theme version */ __( 'Version %s', 'injil-help' ), INJIL_HELP_VERSION ) ); ?></span></h1>
-				<p class="ih-header__desc"><?php esc_html_e( 'Colours, layout, sharing, links, search output, security and the starter pages of The Injil. Choose a tab, change what you need and press Save Changes.', 'injil-help' ); ?></p>
+				<p class="ih-header__desc"><?php esc_html_e( 'Colours, layout, sharing, the reading bar, links, search output, security and the starter pages of The Injil. Choose a tab, change what you need and press Save Changes.', 'injil-help' ); ?></p>
 			</div>
 		</header>
 		<?php
@@ -534,6 +567,56 @@ function injil_help_render_options() {
 						<div class="ih-network">
 							<label class="ih-network__label" for="<?php echo esc_attr( $nid ); ?>"><span class="ih-net-icon ih-share-<?php echo esc_attr( $key ); ?>" aria-hidden="true"></span><?php echo esc_html( $net[0] ); ?></label>
 							<?php echo injil_help_ui_switch( $nid, injil_help_ui_name( 'share_networks', '[]' ), in_array( $key, (array) $o['share_networks'], true ), $key, 'aria-label="' . esc_attr( sprintf( /* translators: %s: network name */ __( 'Show %s in the share row', 'injil-help' ), $net[0] ) ) . '"' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped inside. ?>
+						</div>
+					<?php endforeach; ?>
+				</div>
+				<?php
+				injil_help_ui_card_close();
+
+				injil_help_ui_card_open( __( 'Profile links', 'injil-help' ), __( 'The site’s own profiles, shown as icons. Paste the full address of each profile you want shown; leave the rest empty.', 'injil-help' ) );
+				injil_help_ui_toggle( $o, 'social_footer', __( 'Show the profile icons in the footer', 'injil-help' ), __( 'Under the footer links. Anywhere else, use the shortcode [injil_help_social] or the Profile links pattern.', 'injil-help' ) );
+				?>
+				<div class="ih-profiles">
+					<?php foreach ( injil_help_social_networks() as $key => $name ) : ?>
+						<?php $pid = 'ih-profile-' . $key; ?>
+						<div class="ih-profile">
+							<label class="ih-network__label" for="<?php echo esc_attr( $pid ); ?>"><span class="ih-net-icon ih-share-<?php echo esc_attr( $key ); ?>" aria-hidden="true"></span><?php echo esc_html( $name ); ?></label>
+							<input type="url" class="ih-input" id="<?php echo esc_attr( $pid ); ?>" name="<?php echo esc_attr( injil_help_ui_name( 'social_profiles', '[' . $key . ']' ) ); ?>" value="<?php echo esc_attr( $o['social_profiles'][ $key ] ?? '' ); ?>" placeholder="https://">
+						</div>
+					<?php endforeach; ?>
+				</div>
+				<?php injil_help_ui_card_close(); ?>
+			</section>
+
+			<section class="ih-panel" id="panel-reading" role="tabpanel" aria-labelledby="tab-reading" tabindex="0">
+				<?php
+				injil_help_ui_usage( __( 'A thin bar at the edge of the window fills as the reader scrolls a post or page. Switch it on, pick the post types, the edge and the height, and choose its colours. An empty colour follows the palette. The front page never shows the bar.', 'injil-help' ) );
+				injil_help_ui_card_open( __( 'Reading progress bar', 'injil-help' ) );
+				injil_help_ui_toggle( $o, 'progress', __( 'Show the reading progress bar', 'injil-help' ), __( 'Search engines and screen readers ignore it: the bar is decoration, and the scroll bar already gives the same information.', 'injil-help' ) );
+				foreach ( injil_help_progress_type_choices() as $ptype => $plabel ) {
+					$tid = 'ih-progress-types-' . $ptype;
+					/* translators: %s: post type name, such as Post or Page */
+					injil_help_ui_row( $tid, sprintf( __( 'Show it on: %s', 'injil-help' ), $plabel ), injil_help_ui_switch( $tid, injil_help_ui_name( 'progress_types', '[]' ), in_array( $ptype, (array) $o['progress_types'], true ), $ptype ), '', 'ih-field--toggle' );
+				}
+				injil_help_ui_cards(
+					$o,
+					'progress_position',
+					__( 'Position', 'injil-help' ),
+					array(
+						'top'    => array( __( 'Top', 'injil-help' ), __( 'Along the top edge, under the admin bar.', 'injil-help' ), 'dashicons-arrow-up-alt' ),
+						'bottom' => array( __( 'Bottom', 'injil-help' ), __( 'Along the bottom edge.', 'injil-help' ), 'dashicons-arrow-down-alt' ),
+					)
+				);
+				injil_help_ui_range( $o, 'progress_height', __( 'Height in pixels', 'injil-help' ), 1, 12, __( 'From 1 to 12. The default is 3.', 'injil-help' ) );
+				injil_help_ui_card_close();
+
+				injil_help_ui_card_open( __( 'Colours', 'injil-help' ), __( 'Empty uses the primary green for the bar and no track.', 'injil-help' ) );
+				?>
+				<div class="ih-colors">
+					<?php foreach ( array( 'progress_color' => array( __( 'Bar', 'injil-help' ), '#1f5c4a' ), 'progress_track' => array( __( 'Track behind the bar', 'injil-help' ), '' ) ) as $ckey => $c ) : ?>
+						<div class="ih-color-card">
+							<label class="ih-field__label" for="ih-<?php echo esc_attr( str_replace( '_', '-', $ckey ) ); ?>"><?php echo esc_html( $c[0] ); ?></label>
+							<input type="text" class="ih-color" id="ih-<?php echo esc_attr( str_replace( '_', '-', $ckey ) ); ?>" name="<?php echo esc_attr( injil_help_ui_name( $ckey ) ); ?>" value="<?php echo esc_attr( $o[ $ckey ] ); ?>" data-default-color="<?php echo esc_attr( $c[1] ); ?>">
 						</div>
 					<?php endforeach; ?>
 				</div>
