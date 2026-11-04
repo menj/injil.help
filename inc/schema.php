@@ -73,6 +73,10 @@ function injil_help_schema_author( $post = null ) {
 		$url = home_url( '/about/' );
 	}
 	$same = array_values( array_filter( array_map( 'trim', explode( "\n", (string) injil_help_get_option( 'same_as' ) ) ) ) );
+	// The owner's profile is always among the sameAs links of the Organization and the author.
+	if ( ! in_array( 'https://menj.bio', $same, true ) ) {
+		$same[] = 'https://menj.bio';
+	}
 	return array( $name ?: get_bloginfo( 'name' ), $url, $same );
 }
 

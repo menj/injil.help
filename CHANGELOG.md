@@ -2,6 +2,16 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.24.0
+
+New answers on the Islamic Dilemma pages and a corrected reading of *muṣaddiq*. No option key, function or hook was renamed or removed.
+
+- `patterns/islamic-dilemma-page.json` and `patterns/answers-page.json` carry three new questions, each answered in under 60 words: "Is there a Christian dilemma?", "Can the Qur’an reinterpret the Bible without calling it altered?" and one on Qur’an 3:81. The FAQPage markup is built from the same blocks, so it picks them up.
+- The secular-form page reads *muṣaddiq* as confirming, declaring true, after 3:50, which states confirming the Torah and making lawful as two acts. Matthew 5:17 is now cited as the Christian reading of "fulfil", set against it.
+- "The biblical dilemma" gains a paragraph on Daniel 9 rereading Jeremiah's seventy years and on the Qumran commentary on Habakkuk, and a line that the test proves too much and proves nothing for the Qur’an.
+- `/islamic-dilemma/torah-in-islam/` adds Tawrāt as law and instruction, with the oral Torah marked as a scholarly view, and Genesis 18 and Moses' hand (20:22; 27:12; 28:32) as retellings.
+- The Organization and author Person always list `https://menj.bio` in `sameAs`; `tests/schema-graph-test.php` checks it.
+
 ## 3.23.0
 
 Error pages for the moments WordPress cannot build a page, and a `noindex` on the 404 page. No option key, function or hook was renamed or removed.
