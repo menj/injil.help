@@ -2,6 +2,14 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.21.2
+
+Two faults in the search base, found by the review of the same code on the TBE theme. No option key, function or hook was renamed or removed.
+
+- A post type registered on `init` after priority 1 could take the stored base. The late `init` hook switched to the fallback but flushed while `$wp_rewrite->search_base` still held the old base, so the rebuilt rules kept it. The hook now sets the base in force on every load, before any flush, so the rules and the search links agree.
+- When a post type or taxonomy registers `search` itself, the fallback was reserved too. A refused base now falls back to the first free one of `search`, `find` and `search-results` (`injil_help_search_fallback_base()`), and the notice names the base used.
+- `tests/plugin-features-test.php` checks both.
+
 ## 3.21.1
 
 A review of the matching change on the TBE theme found two faults in the search base under Settings › Permalinks. No option key, function or hook was renamed or removed.
