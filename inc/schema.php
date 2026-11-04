@@ -382,6 +382,27 @@ function injil_help_schema_attachment_entry( $att ) {
 }
 
 /**
+ * The file an image shows, as one comparable key: a Commons file name (from its address or as
+ * given), a Pexels key, or an uploaded address's file name, each lower case, with spaces as
+ * underscores and without the extension or WordPress's -WIDTHxHEIGHT and -scaled suffixes. So the
+ * Commons source, its JPEG upload and an AVIF or resized copy of it give the same key.
+ */
+function injil_help_schema_file_key( $src ) {
+	$src = (string) $src;
+	if ( '' === $src ) {
+		return '';
+	}
+	$key = false !== strpos( $src, '://' ) && function_exists( 'injil_help_image_key_from_src' ) ? injil_help_image_key_from_src( $src ) : '';
+	if ( '' === $key ) {
+		$path = false !== strpos( $src, '://' ) ? (string) wp_parse_url( $src, PHP_URL_PATH ) : $src;
+		$key  = rawurldecode( basename( $path ) );
+	}
+	$key = strtolower( str_replace( ' ', '_', $key ) );
+	$key = preg_replace( '/\.[a-z0-9]+$/', '', $key );
+	return (string) preg_replace( '/(?:-\d+x\d+|-scaled|-e\d{10,})+$/', '', $key );
+}
+
+/**
  * An ImageObject for an uploaded image address (a featured image, or an image Rank Math refers to),
  * with the same caption, credit and licence a figure of that image carries. The address is its @id
  * and contentUrl, so a reference to it resolves whatever format the upload was stored in.
@@ -706,9 +727,17 @@ function injil_help_schema_graph() {
 	// one is built from the attachment's images.json entry.
 	if ( $featured && ! in_array( $featured, wp_list_pluck( $images, 'contentUrl' ), true ) ) {
 		$thumb = injil_help_schema_upload_image( $featured, (int) get_post_thumbnail_id( $post ) );
+		$att   = (int) get_post_thumbnail_id( $post );
+		$want  = array_filter(
+			array(
+				injil_help_schema_file_key( $featured ),
+				$att && defined( 'INJIL_HELP_COMMONS_META' ) ? injil_help_schema_file_key( (string) get_post_meta( $att, INJIL_HELP_COMMONS_META, true ) ) : '',
+			)
+		);
 		$match = null;
 		foreach ( $images as $i => $image ) {
-			if ( ( $image['acquireLicensePage'] ?? '' ) !== '' && ( $image['acquireLicensePage'] ?? '' ) === ( $thumb['acquireLicensePage'] ?? '' ) ) {
+			$key = injil_help_schema_file_key( (string) ( $image['contentUrl'] ?? '' ) );
+			if ( '' !== $key && in_array( $key, $want, true ) ) {
 				$match = $i;
 				break;
 			}

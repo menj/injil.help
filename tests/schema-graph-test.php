@@ -422,12 +422,12 @@ function ih_check_graph( $page, $graph, $rank_math = array() ) {
 			}
 		}
 	}
-	// Article types, nested ones included, carry a headline.
+	// Article and every subtype of it (those Rank Math emits among them), nested ones included, carry a headline.
 	$heads = function ( $v ) use ( &$heads, $page ) {
 		if ( ! is_array( $v ) ) {
 			return;
 		}
-		if ( array_intersect( (array) ( $v['@type'] ?? array() ), array( 'Article', 'ScholarlyArticle', 'BlogPosting' ) ) && empty( $v['headline'] ) ) {
+		if ( array_intersect( (array) ( $v['@type'] ?? array() ), array( 'Article', 'BlogPosting', 'NewsArticle', 'ScholarlyArticle', 'TechArticle', 'Report', 'SocialMediaPosting', 'LiveBlogPosting', 'DiscussionForumPosting', 'AdvertiserContentArticle', 'SatiricalArticle', 'OpinionNewsArticle', 'ReportageNewsArticle', 'AnalysisNewsArticle', 'BackgroundNewsArticle', 'ReviewNewsArticle', 'AskPublicNewsArticle', 'APIReference' ) ) && empty( $v['headline'] ) ) {
 			ih_fail( $page, 'article node without headline ' . ( $v['@id'] ?? ( $v['name'] ?? '' ) ) );
 		}
 		foreach ( $v as $c ) {
@@ -565,6 +565,41 @@ foreach ( array( 'islamic-dilemma', 'gospels/mark' ) as $path ) {
 	} elseif ( $want && ( $found['encodingFormat'] ?? '' ) !== $want ) {
 		ih_fail( $path, 'featured image encodingFormat is not ' . $want );
 	}
+}
+// One image, one node: a body figure of the featured file is that node, matched on the file and
+// never on its licence link, so a figure whose link is missing or different still merges.
+$keys = array(
+	'https://commons.wikimedia.org/wiki/Special:FilePath/Maghribi_script_sura_5.jpg?width=900' => 'maghribi_script_sura_5',
+	'https://injil.help/wp-content/uploads/2026/10/Maghribi_script_sura_5-1024x768.avif'    => 'maghribi_script_sura_5',
+	'https://injil.help/wp-content/uploads/2026/10/Maghribi_script_sura_5-scaled.jpg'       => 'maghribi_script_sura_5',
+	'Maghribi script sura 5.jpg'                                                            => 'maghribi_script_sura_5',
+);
+foreach ( $keys as $src => $want ) {
+	if ( injil_help_schema_file_key( $src ) !== $want ) {
+		ih_fail( 'file key', $src . ' gives ' . injil_help_schema_file_key( $src ) );
+	}
+}
+foreach ( array( 'islamic-dilemma' => 'changed', 'gospels/mark' => 'removed' ) as $path => $link ) {
+	$p    = $by[ $path ];
+	$keep = $p->post_content;
+	if ( 'removed' === $link ) {
+		$p->post_content = preg_replace( '#<a href="https://commons\.wikimedia\.org/wiki/File:[^"]*">(.*?)</a>#s', '$1', $keep );
+	} else {
+		$p->post_content = str_replace( 'https://commons.wikimedia.org/wiki/File:', 'https://commons.wikimedia.org/wiki/File:Other_', $keep );
+	}
+	$GLOBALS['ih_post'] = $p;
+	$GLOBALS['ih_rm']   = false;
+	$thumb = ih_thumb( $p );
+	$same  = 0;
+	foreach ( injil_help_schema_graph() as $node ) {
+		if ( 'ImageObject' === ( $node['@type'] ?? '' ) && injil_help_schema_file_key( $node['contentUrl'] ?? '' ) === injil_help_schema_file_key( $thumb[1] ) ) {
+			$same++;
+		}
+	}
+	if ( 1 !== $same ) {
+		ih_fail( $path, "{$same} ImageObjects for the featured file with its licence link {$link}, expected 1" );
+	}
+	$p->post_content = $keep;
 }
 echo "Featured images: {$featured_n}\n";
 
