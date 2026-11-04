@@ -68,7 +68,7 @@ $_REQUEST = array();
 foreach ( array( 'login', 'lostpassword', 'retrievepassword', 'rp', 'resetpass', 'register', 'bogus', 'logout' ) as $action ) {
 	$_REQUEST['action'] = $action;
 	$t = injil_help_login_title( 'x' );
-	check( mb_strlen( $t ) < 60 && 1 === substr_count( $t, ' | ' ) && str_ends_with( $t, ' | The Rightly-Guided Injīl' ), "title for $action: $t" );
+	check( mb_strlen( $t ) < 60 && 1 === substr_count( $t, ' | ' ) && ' | The Rightly-Guided Injīl' === substr( $t, -strlen( ' | The Rightly-Guided Injīl' ) ), "title for $action: $t" );
 }
 $_REQUEST = array();
 

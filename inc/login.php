@@ -145,6 +145,7 @@ function injil_help_login_title( $title ) {
 	$action = injil_help_login_action();
 	$key    = in_array( $action, array( 'lostpassword', 'retrievepassword', 'rp', 'resetpass', 'register' ), true ) ? $action : 'login';
 	$part   = injil_help_text( 'login', 'title_' . $key );
-	return injil_help_title_fit( '' !== $part ? $part : injil_help_text( 'login', 'title_login' ), injil_help_title_room() ) . ' | ' . injil_help_title_site();
+	$page = injil_help_title_fit( '' !== $part ? $part : injil_help_text( 'login', 'title_login' ), injil_help_title_room() );
+	return '' !== $page ? $page . ' | ' . injil_help_title_site() : injil_help_title_site();
 }
 add_filter( 'login_title', 'injil_help_login_title' );
