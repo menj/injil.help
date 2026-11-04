@@ -520,7 +520,7 @@ function injil_help_image_sitemap_entries() {
 	}
 	foreach ( injil_help_images() as $path => $img ) {
 		$page = function_exists( 'injil_help_find_page' ) ? injil_help_find_page( $path ) : null;
-		if ( ! $page || 'publish' !== $page->post_status || empty( $img['file'] ) || ( function_exists( 'injil_help_unlist_on' ) && injil_help_unlist_on() && injil_help_is_unlisted( $page->ID ) ) ) {
+		if ( ! $page || 'publish' !== $page->post_status || empty( $img['file'] ) || ( function_exists( 'injil_help_unlisted_live_ids' ) && in_array( (int) $page->ID, injil_help_unlisted_live_ids(), true ) ) ) {
 			continue;
 		}
 		$url = has_post_thumbnail( $page->ID ) ? (string) get_the_post_thumbnail_url( $page->ID, 'full' ) : injil_help_image_url( $img, 1600 );

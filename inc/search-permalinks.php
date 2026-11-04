@@ -51,6 +51,24 @@ function injil_help_search_pretty_url( $home, $base, $term, $paged = 1, $extra =
 	return $extra ? $url . '?' . http_build_query( $extra, '', '&', PHP_QUERY_RFC3986 ) : $url;
 }
 
+/**
+ * The other query arguments of a search, sanitised, arrays such as post_type[] kept whole.
+ *
+ * @param array $args Unslashed arguments.
+ * @return array
+ */
+function injil_help_search_clean_args( $args ) {
+	$out = array();
+	foreach ( (array) $args as $key => $value ) {
+		if ( is_array( $value ) ) {
+			$out[ $key ] = injil_help_search_clean_args( $value );
+		} elseif ( is_scalar( $value ) ) {
+			$out[ $key ] = sanitize_text_field( (string) $value );
+		}
+	}
+	return $out;
+}
+
 if ( injil_help_search_permalinks_on() ) {
 	add_action(
 		'init',
@@ -105,7 +123,7 @@ if ( injil_help_search_permalinks_on() ) {
 				injil_help_search_base(),
 				(string) get_query_var( 's' ),
 				max( 1, (int) get_query_var( 'paged' ) ),
-				array_map( 'sanitize_text_field', array_filter( $extra, 'is_string' ) ),
+				injil_help_search_clean_args( $extra ),
 				'/' === substr( (string) get_option( 'permalink_structure' ), -1 )
 			);
 			if ( '' !== $url ) {
