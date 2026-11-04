@@ -1053,7 +1053,8 @@ function injil_help_sec_notice() {
  * @param string $help  Description.
  */
 function injil_help_sec_field( $o, $key, $title, $label, $help ) {
-	injil_help_ui_toggle( $o, $key, $title, $label . '. ' . $help );
+	// The switch is named by its action; the heading and the explanation follow as its description.
+	injil_help_ui_toggle( $o, $key, $label, $title . ': ' . $help );
 }
 
 /**

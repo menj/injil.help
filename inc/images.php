@@ -294,6 +294,13 @@ add_action(
 		if ( get_option( 'injil_help_featured' ) === INJIL_HELP_VERSION || ! injil_help_images() ) {
 			return;
 		}
+		// One pass at a time: two admin requests at once would fetch the same plate twice.
+		if ( ! add_option( 'injil_help_image_lock', time(), '', false ) ) {
+			if ( time() - (int) get_option( 'injil_help_image_lock' ) < 5 * MINUTE_IN_SECONDS ) {
+				return;
+			}
+			update_option( 'injil_help_image_lock', time(), false );
+		}
 		$budget  = 6;
 		$pending = false;
 		foreach ( injil_help_images() as $path => $img ) {
@@ -308,6 +315,16 @@ add_action(
 				}
 				$budget--;
 				if ( ! injil_help_feature_page( $page->ID, $path ) ) {
+					$pending = true;
+				}
+			} elseif ( ! empty( $img['file'] ) && ! injil_help_find_attachment( $img['file'] ) ) {
+				// A page with a featured image of its own still needs the copy of its plate, which is hidden without one.
+				if ( $budget <= 0 ) {
+					$pending = true;
+					break;
+				}
+				$budget--;
+				if ( ! injil_help_sideload_image( $img, $page->ID ) ) {
 					$pending = true;
 				}
 			}
@@ -325,25 +342,26 @@ add_action(
 				}
 			}
 		}
-		// The plates of the front-page and section patterns, which belong to no single page.
-		if ( ! $pending ) {
-			foreach ( injil_help_pattern_images() as $img ) {
-				if ( injil_help_find_attachment( $img['file'] ) ) {
-					continue;
-				}
-				if ( $budget <= 0 ) {
-					$pending = true;
-					break;
-				}
-				$budget--;
-				if ( ! injil_help_sideload_image( $img, 0 ) ) {
-					$pending = true;
-				}
+		// The plates of the front-page and section patterns, which belong to no single page. They
+		// have a budget of their own, so a page plate that keeps failing never holds them back.
+		$budget = max( $budget, 2 );
+		foreach ( injil_help_pattern_images() as $img ) {
+			if ( injil_help_find_attachment( $img['file'] ) ) {
+				continue;
+			}
+			if ( $budget <= 0 ) {
+				$pending = true;
+				break;
+			}
+			$budget--;
+			if ( ! injil_help_sideload_image( $img, 0 ) ) {
+				$pending = true;
 			}
 		}
 		if ( ! $pending ) {
 			update_option( 'injil_help_featured', INJIL_HELP_VERSION, false );
 		}
+		delete_option( 'injil_help_image_lock' );
 	},
 	20
 );

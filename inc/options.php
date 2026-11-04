@@ -492,7 +492,7 @@ function injil_help_render_options() {
 					),
 					__( 'The star pattern, section icons, tinted banners, badges and image frames. Everything takes its colour from the Colours tab.', 'injil-help' )
 				);
-				injil_help_ui_toggle( $o, 'animate', __( 'Rise into view', 'injil-help' ), __( 'Cards and answers rise into view as the page scrolls.', 'injil-help' ) );
+				injil_help_ui_toggle( $o, 'animate', __( 'Let cards and answers rise into view', 'injil-help' ), __( 'They rise as the page scrolls.', 'injil-help' ) );
 				injil_help_ui_cards(
 					$o,
 					'parallax',
@@ -507,7 +507,7 @@ function injil_help_render_options() {
 				injil_help_ui_card_close();
 
 				injil_help_ui_card_open( __( 'Brandmark and favicon', 'injil-help' ) );
-				injil_help_ui_toggle( $o, 'footer_mark', __( 'Footer brandmark', 'injil-help' ), __( 'Show the brandmark at the top of the footer.', 'injil-help' ) );
+				injil_help_ui_toggle( $o, 'footer_mark', __( 'Show the footer brandmark', 'injil-help' ), __( 'The brandmark at the top of the footer.', 'injil-help' ) );
 				injil_help_ui_toggle( $o, 'favicon_force', __( 'Always use the brandmark as favicon', 'injil-help' ), __( 'By default the brandmark is used only when no Site Icon is set (Settings > General > Site Icon). Switch this on to use it even when one is set.', 'injil-help' ) );
 				injil_help_ui_input( $o, 'favicon_url', __( 'Custom favicon URL', 'injil-help' ), 'url', __( 'Optional. Replaces the brandmark favicon. SVG, PNG or ICO.', 'injil-help' ), array( 'placeholder' => 'https://' ) );
 				injil_help_ui_card_close();
@@ -520,8 +520,8 @@ function injil_help_render_options() {
 				injil_help_ui_card_open( __( 'Share row', 'injil-help' ) );
 				injil_help_ui_toggle( $o, 'share', __( 'Show share links', 'injil-help' ), __( 'Icons take their colour from the Colours tab.', 'injil-help' ) );
 				$types = (array) $o['share_types'];
-				injil_help_ui_row( 'ih-share-types-post', __( 'On posts', 'injil-help' ), injil_help_ui_switch( 'ih-share-types-post', injil_help_ui_name( 'share_types', '[]' ), in_array( 'post', $types, true ), 'post' ), '', 'ih-field--toggle' );
-				injil_help_ui_row( 'ih-share-types-page', __( 'On pages', 'injil-help' ), injil_help_ui_switch( 'ih-share-types-page', injil_help_ui_name( 'share_types', '[]' ), in_array( 'page', $types, true ), 'page' ), '', 'ih-field--toggle' );
+				injil_help_ui_row( 'ih-share-types-post', __( 'Show share links on posts', 'injil-help' ), injil_help_ui_switch( 'ih-share-types-post', injil_help_ui_name( 'share_types', '[]' ), in_array( 'post', $types, true ), 'post' ), '', 'ih-field--toggle' );
+				injil_help_ui_row( 'ih-share-types-page', __( 'Show share links on pages', 'injil-help' ), injil_help_ui_switch( 'ih-share-types-page', injil_help_ui_name( 'share_types', '[]' ), in_array( 'page', $types, true ), 'page' ), '', 'ih-field--toggle' );
 				injil_help_ui_input( $o, 'share_label', __( 'Label', 'injil-help' ), 'text', __( 'The word before the icons. Empty shows "Share".', 'injil-help' ), array( 'placeholder' => __( 'Share', 'injil-help' ) ) );
 				injil_help_ui_card_close();
 
@@ -532,7 +532,7 @@ function injil_help_render_options() {
 						<?php $nid = 'ih-net-' . $key; ?>
 						<div class="ih-network">
 							<label class="ih-network__label" for="<?php echo esc_attr( $nid ); ?>"><span class="ih-net-icon ih-share-<?php echo esc_attr( $key ); ?>" aria-hidden="true"></span><?php echo esc_html( $net[0] ); ?></label>
-							<?php echo injil_help_ui_switch( $nid, injil_help_ui_name( 'share_networks', '[]' ), in_array( $key, (array) $o['share_networks'], true ), $key ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped inside. ?>
+							<?php echo injil_help_ui_switch( $nid, injil_help_ui_name( 'share_networks', '[]' ), in_array( $key, (array) $o['share_networks'], true ), $key, 'aria-label="' . esc_attr( sprintf( /* translators: %s: network name */ __( 'Show %s in the share row', 'injil-help' ), $net[0] ) ) . '"' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped inside. ?>
 						</div>
 					<?php endforeach; ?>
 				</div>
@@ -543,9 +543,9 @@ function injil_help_render_options() {
 				<?php
 				injil_help_ui_usage( __( 'In the running text of a page, the first mention of a phrase the network map knows becomes a link to the inner page that treats it, here or on one of the six sister sites. Links are made as the page is shown, and the stored text is never changed. Set the two limits with the sliders, add your own phrases, and list the pages that should carry no links.', 'injil-help' ) );
 				injil_help_ui_card_open( __( 'Where links go', 'injil-help' ), __( 'Never in a heading, a quotation, a verse, the gospel text, Arabic, a note, a table or an existing link. At most one new link in a paragraph, and each page is linked once.', 'injil-help' ) );
-				injil_help_ui_toggle( $o, 'ctx_own', __( 'Pages on this site', 'injil-help' ), __( 'Link to pages on injil.help.', 'injil-help' ) );
+				injil_help_ui_toggle( $o, 'ctx_own', __( 'Link to pages on this site', 'injil-help' ), __( 'Pages on injil.help.', 'injil-help' ) );
 				injil_help_ui_range( $o, 'ctx_own_max', __( 'Links to this site on one page', 'injil-help' ), 0, 15, __( 'At most this many, from 0 to 15.', 'injil-help' ) );
-				injil_help_ui_toggle( $o, 'ctx_sister', __( 'Pages on the sister sites', 'injil-help' ), __( 'Link to pages on bestofislam.org, apostleofdoom.org, abrahamic-religions.com, compelling-evidence.com, murtadd.org and lailatulqadar.guide.', 'injil-help' ) );
+				injil_help_ui_toggle( $o, 'ctx_sister', __( 'Link to pages on the sister sites', 'injil-help' ), __( 'Pages on bestofislam.org, apostleofdoom.org, abrahamic-religions.com, compelling-evidence.com, murtadd.org and lailatulqadar.guide.', 'injil-help' ) );
 				injil_help_ui_range( $o, 'ctx_sister_max', __( 'Links to sister sites on one page', 'injil-help' ), 0, 10, __( 'At most this many, from 0 to 10.', 'injil-help' ) );
 				injil_help_ui_card_close();
 
