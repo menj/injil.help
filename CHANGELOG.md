@@ -8,7 +8,9 @@ Two faults in the search base, found by the review of the same code on the TBE t
 
 - A post type registered on `init` after priority 1 could take the stored base. The late `init` hook switched to the fallback but flushed while `$wp_rewrite->search_base` still held the old base, so the rebuilt rules kept it. The hook now sets the base in force on every load, before any flush, so the rules and the search links agree.
 - When a post type or taxonomy registers `search` itself, the fallback was reserved too. A refused base now falls back to the first free one of `search`, `find` and `search-results` (`injil_help_search_fallback_base()`), and the notice names the base used.
-- `tests/plugin-features-test.php` checks both.
+- The page check exempted `search`, so a page at `/search/` lost its child paths to the search rule. Every base is checked against the pages now, the fallback candidates included.
+- When `search`, `find` and `search-results` are all taken, the fallback numbers the last (`search-results-2`, `search-results-3` and on) until one is free.
+- `tests/plugin-features-test.php` checks all of these.
 
 ## 3.21.1
 

@@ -88,7 +88,8 @@ function injil_help_search_clean_base( $raw ) {
 	if ( '' === $base || in_array( $base, injil_help_search_reserved_bases(), true ) ) {
 		return '';
 	}
-	return ( 'search' !== $base && function_exists( 'get_page_by_path' ) && get_page_by_path( $base ) ) ? '' : $base;
+	// No exemption for "search": a page at /search/ would lose its children to the search rule too.
+	return ( function_exists( 'get_page_by_path' ) && get_page_by_path( $base ) ) ? '' : $base;
 }
 
 /** The search base; "search" when the stored value is empty or reserved. */
@@ -99,7 +100,8 @@ function injil_help_search_base() {
 
 /**
  * The base used when the chosen one is empty or refused: the first of search, find and
- * search-results that is free, since a post type or taxonomy may register "search" itself.
+ * search-results that is free (a post type, a taxonomy or a page may take "search" itself),
+ * else search-results-2, search-results-3 and on.
  *
  * @return string
  */
@@ -109,7 +111,13 @@ function injil_help_search_fallback_base() {
 			return $candidate;
 		}
 	}
-	return 'search-results';
+	// All three are taken: number the last until one is free.
+	for ( $n = 2; $n < 100; $n++ ) {
+		if ( '' !== injil_help_search_clean_base( 'search-results-' . $n ) ) {
+			return 'search-results-' . $n;
+		}
+	}
+	return 'search-results-' . wp_rand( 100, 999999 );
 }
 
 /**
