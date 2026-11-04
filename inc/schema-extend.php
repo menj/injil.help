@@ -275,7 +275,7 @@ function injil_help_schema_body_links( $html, $url ) {
 }
 
 /**
- * True when a text names the site's owner. The owner is never named in structured data (SSOT.md),
+ * True when a text names the site's owner. The owner is named in structured data only as the author Person (SSOT.md),
  * so a paragraph that cites the owner's study is not taken as an abstract. The names are kept as
  * SHA-1 digests of lower-case words, so the theme's source does not carry them either.
  */
@@ -329,6 +329,14 @@ function injil_help_schema_unname( $value ) {
 	}
 	if ( ! is_array( $value ) ) {
 		return $value;
+	}
+	// The one exception: the author Person node declares the owner as the schema author, with its
+	// name, url and sameAs (owner's decision, 4 November 2026). Its other values are cleaned as usual.
+	$ids = function_exists( 'injil_help_schema_ids' ) ? injil_help_schema_ids() : array();
+	if ( isset( $value['@id'], $ids['author'] ) && $ids['author'] === $value['@id'] && 'Person' === ( $value['@type'] ?? '' ) ) {
+		$keep = array_intersect_key( $value, array_flip( array( '@type', '@id', 'name', 'url', 'sameAs' ) ) );
+		$rest = injil_help_schema_unname( array_diff_key( $value, $keep ) );
+		return array_merge( $keep, $rest );
 	}
 	if ( isset( $value['name'] ) && is_string( $value['name'] ) && injil_help_schema_names_owner( $value['name'] ) ) {
 		$value['name'] = get_bloginfo( 'name' );

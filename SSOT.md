@@ -99,7 +99,7 @@ Tabs: Colours, Branding, Sharing, Reading, Contextual links, SEO, Security, Cont
 - Every view that is not singular prints a canonical link (`injil_help_archive_canonical()`), with its page number; search, 404 and author views print none.
 - No users sitemap; an author archive answers 301 to `/about/`.
 - A plate whose file is in the Media Library renders from there with width, height and srcset (`injil_help_localise_img()`); a remote plate is left out unless `remote_images` is on, and then loads lazily, the front page cover image excepted. `/image-sitemap.xml` lists each page's image, unless Rank Math's sitemap is on.
-- The author Person's `url` is the Author URL option, else `/about/`.
+- The schema author is the owner, Mohd Elfie Nieshaem Juferi, by the owner's decision of 4 November 2026. The name is declared only as the schema author, in the one author Person node (`#author`, url `https://menj.bio`, sameAs including `https://menj.bio`); every page, article and post names that node as `author`, and with Rank Math its own Person nodes give way to it. The name never appears in visible text, bylines, the meta author tag, feeds or any other node: `injil_help_schema_unname()` strips it everywhere else, and `tests/schema-graph-test.php` checks both.
 
 ## Sharing
 
