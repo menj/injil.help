@@ -773,7 +773,11 @@ if ( $journal_n < 8 ) {
 echo "Journal posts: {$journal_n}\n";
 
 // sameAs: the Organization and the author Person carry https://menj.bio.
+// A stored list without the profile still gets it: the fallback is tested, not the default.
+$ih_saved_options = $GLOBALS['ih_options'];
+$GLOBALS['ih_options']['injil_help_options']['same_as'] = 'https://apostleofdoom.org';
 $ih_same_graph = injil_help_schema_site_nodes();
+$GLOBALS['ih_options'] = $ih_saved_options;
 foreach ( array( 'org', 'author' ) as $ih_same_key ) {
 	$ih_same_found = false;
 	foreach ( $ih_same_graph as $node ) {
