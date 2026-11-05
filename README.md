@@ -33,7 +33,7 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 |---|---|
 | Type | Block theme (theme.json v3), child of `twentytwentyfive` |
 | Folder, text domain, pattern prefix | `injil-help` |
-| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.25.8) |
+| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.25.9) |
 | PHP in `inc/` | options, social, progress, unlist, unlist-admin, search-permalinks, starter-content, journal, starter-content-pages, gospel-islam, quran-jesus, tafsir, images, seo, schema, schema-content, schema-extend, rank-math, share, contextual-links, login, security, security-detector, error-pages, error-page-html, article (26 files) |
 | Data | `inc/data/` 2.6 MB of JSON: 182 starter pages, the 8 Journal posts (`posts.json`), the gospel narrative, the Qur'anic passages, Thomas (woven sections and two full texts), the infancy gospels, the substitution witnesses, eight commentaries (315,000 words) |
 | Front-end assets | `style.css` 32 KB; `assets/css/ornament.css` 12 KB, `share.css` 3 KB, `bible.css` 3 KB, `login.css` 7 KB, `journal.css` 2 KB, `responsive.css` 2 KB (phone header, touch targets, focus ring, loaded on every view); `assets/js/ornament.js` 3 KB, `share.js` 2 KB; all plain, no build step |
@@ -65,7 +65,7 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 injil-help/
 ├─ style.css              theme header; tokens (--ih-*); every component style
 ├─ theme.json             palette, spacing, 18 font families (29 fontFace entries), custom templates
-├─ functions.php          version constant, requires, enqueues, pattern category, block styles, favicon
+├─ functions.php          version constant, requires, enqueues, pattern category, block styles
 ├─ inc/
 │  ├─ options.php         Theme Options page, defaults, sanitiser, body classes, colour CSS
 │  ├─ starter-content.php markup parser, page writer, populate(), activation and update hooks
@@ -111,7 +111,7 @@ Everything the theme writes to the database is JSON in `inc/data/`: the page def
 - `wp_enqueue_scripts`: `style.css`; `ornament.css` unless Ornament is Off; `ornament.js` (deferred, footer) when the reveal animation or parallax is on. `share.css` and `share.js` are enqueued by `share.php` only on pages that show the row. `bible.css` is enqueued on a singular post whose content contains the `ih-bible` block, which is every gospel section.
 - `after_setup_theme`: text domain from `languages/`; `style.css` as editor style.
 - `init`: pattern category `injil-help` and the 34 JSON patterns of `inc/data/patterns/`, registered with `register_block_pattern()`; the block style variations listed under [Block styles](#block-styles-and-css).
-- `wp_head`: favicon link (custom URL, or the SVG brandmark when forced or when no Site Icon is set).
+- `inc/favicon.php` hooks `wp_head`, `login_head` and `admin_head`: a custom favicon URL prints that one link; in brandmark mode (forced, or no Site Icon) the theme prints `assets/images/favicon.svg`, `favicon-32.png`, `apple-touch-icon.png`, `site.webmanifest` and `theme-color` #1f5c4a; with a Site Icon, WordPress prints its own. `/favicon.ico` reaches WordPress when no such file sits in the site root, and `injil_help_serve_favicon()` answers it on `template_redirect` (priority 0, so HEAD is covered) and `do_faviconico`: the icon with `Cache-Control: public, max-age=86400` and an ETag (304 on a match) in brandmark mode, a 302 to a custom URL, or WordPress's redirect to the Site Icon. The manifest is static, with relative icon paths, so it works in a subfolder. The theme `.htaccess` refuses Markdown, `.git*`, `.claude`, `tests` and `bin` only, so every icon file is served.
 
 `options.php` adds `enqueue_block_assets` (palette overrides in the editor), `body_class` (`ih-orn`, `ih-px-strong|gentle|off`), and filters on `injil_help_seo_defaults`, `injil_help_default_og_image` and `injil_help_output_schema` that apply the option values. `seo.php` filters `document_title_parts` and prints meta and Open Graph at `wp_head`. `schema.php` prints the graph at `wp_head` priority 5. `share.php` filters `the_content` at priority 20.
 
@@ -400,6 +400,8 @@ WordPress reads three files from `wp-content` when it cannot build a page. `inc/
 | `db-error.php` | the database cannot be reached | 503, `Retry-After: 600` |
 
 Each file starts with the marker `The Injil error page drop-in`. The theme writes a missing file, one with that marker, or a copy another theme left behind (marked "Written by the ... theme; safe to delete"). It leaves any other file alone. The pages come from `inc/error-page-html.php` with their words in `text.json` (`errors`). They hold their style inline, call no WordPress function and touch no database, so they work with the theme half uploaded. Each sends `noindex` and `no-store`.
+
+Every page carries the brandmark as its tab icon, as a `data:` address built from the inline mark, so it needs no path.
 
 The web server answers some errors before WordPress starts. The theme writes static 403, 500, 502, 503 and 504 pages for those into `wp-content/injil-help-errors/`, at the same times as the drop-ins and with the same marker. Each copy carries the site's name and its real home address, so the home link works on a site in a subfolder. The theme removes them when another theme is activated, so take the `ErrorDocument` lines out of `.htaccess` at the same time; until you do, Apache answers those errors with its own plain message. On a network the files stay, and only the main site writes them, since every site shares `wp-content` and one `.htaccess`. Point the server at them with the lines from the Error pages section, which are built from the real address of `wp-content`. At the domain root they read:
 

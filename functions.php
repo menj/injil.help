@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'INJIL_HELP_VERSION', '3.25.8' );
+define( 'INJIL_HELP_VERSION', '3.25.9' );
 
 /**
  * The theme's PHP files in inc/, in the order functions.php loads them. The files they pull in
@@ -19,7 +19,7 @@ define( 'INJIL_HELP_VERSION', '3.25.8' );
  */
 function injil_help_theme_files() {
 	return array(
-		'load' => array( 'options', 'starter-content', 'journal', 'seo', 'schema', 'rank-math', 'share', 'contextual-links', 'security', 'login', 'social', 'progress', 'unlist', 'search-permalinks', 'error-pages', 'article' ),
+		'load' => array( 'options', 'starter-content', 'journal', 'seo', 'schema', 'rank-math', 'share', 'contextual-links', 'security', 'login', 'favicon', 'social', 'progress', 'unlist', 'search-permalinks', 'error-pages', 'article' ),
 		'also' => array( 'starter-content-pages', 'gospel-islam', 'tafsir', 'quran-jesus', 'images', 'schema-content', 'schema-extend', 'security-detector', 'unlist-admin', 'error-page-html' ),
 	);
 }
@@ -205,15 +205,4 @@ add_action(
 	}
 );
 
-/* Favicon: custom URL, else the brandmark (always, or when no Site Icon is set). */
-add_action(
-	'wp_head',
-	function () {
-		$custom = injil_help_get_option( 'favicon_url' );
-		if ( $custom ) {
-			printf( '<link rel="icon" href="%s">' . "\n", esc_url( $custom ) );
-		} elseif ( injil_help_get_option( 'favicon_force' ) || ! has_site_icon() ) {
-			printf( '<link rel="icon" type="image/svg+xml" href="%s">' . "\n", esc_url( get_stylesheet_directory_uri() . '/assets/brandmark.svg' ) );
-		}
-	}
-);
+/* Favicon: inc/favicon.php. */

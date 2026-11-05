@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.25.8
+Stable tag: 3.25.9
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -92,7 +92,7 @@ Manuscript images come from Wikimedia Commons, and five photographs of manuscrip
 
 == Branding ==
 * Brandmark: assets/brandmark.svg (an open codex with rays of light, Qur'an 5:46). It appears as the link before the site title in the header and at the top of the footer's first column (class ih-mark; the footer adds ih-mark-foot).
-* Favicon: if no Site Icon is set under Settings > General > Site Icon (or in the Site Editor), the theme outputs assets/brandmark.svg as an SVG favicon. A Site Icon takes precedence unless Theme Options > Branding is set to force the brandmark or to use a custom favicon URL. Some older browsers ignore SVG favicons, so set a PNG Site Icon for full coverage.
+* Favicon: if no Site Icon is set under Settings > General > Site Icon (or in the Site Editor), the theme uses its own icons, all drawn from the brandmark: an SVG icon, a 32px icon, a home screen icon, favicon.ico and a web app manifest, on the site, the log-in screen and the admin. Browsers that ask for /favicon.ico get the icon too. A Site Icon takes precedence unless Theme Options > Branding is set to force the brandmark or to use a custom favicon URL.
 
 == Usage ==
 Appearance > Theme Options holds every setting, in eight tabs. Each tab opens with a short note on how to use it. Click a tab, or move between tabs with the arrow keys, Home and End; nothing reloads until you press Save Changes. Switches turn a feature on or off, cards choose one style of several, and sliders show their number as they move.
@@ -153,6 +153,9 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.25.9 =
+* The browser icon set is complete: favicon.ico, an SVG icon, 32px, home screen, 192px, 512px and maskable icons and a web app manifest, all drawn from the brandmark. The site answers /favicon.ico with the icon, the icons show on the log-in screen and in the admin, and the error pages show it in the tab.
+
 = 3.25.8 =
 * The FTP update steps send the theme's .htaccess file first, so its private files stay closed while the rest uploads. On Nginx, the theme rule in README.md now covers the temporary folders too.
 
@@ -435,6 +438,9 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * New screenshot.
 
 == Upgrade Notice ==
+= 3.25.9 =
+Upload the whole theme. Open one admin screen so the error pages are written again with the icon.
+
 = 3.25.8 =
 Documentation only. Upload the whole theme. On Nginx, update the theme rule in the server block from README.md.
 
