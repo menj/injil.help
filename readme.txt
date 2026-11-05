@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.25.9
+Stable tag: 3.25.10
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -144,6 +144,10 @@ The Security tab turns off XML-RPC, application passwords and REST changes from 
 = What are the error pages? =
 WordPress shows a plain screen when it is updating, when PHP fails or when the database is down. The theme writes its own pages for those three, and for the errors the web server answers itself (403, 500, 502, 503 and 504). The Error pages section at the foot of Theme Options shows their state and gives the lines for .htaccess.
 
+= My site is in a subfolder. Where does the browser icon go? =
+
+Browsers ask for /favicon.ico at the top of the domain, such as example.com/favicon.ico, even when the site lives in example.com/blog/. WordPress never sees that request, so put a copy of the theme's favicon.ico in the domain root folder. The icon tags in each page cover the pages either way. If you have set a Site Icon, put that icon there as favicon.ico instead.
+
 == Privacy ==
 The theme sets no cookies and loads no scripts, fonts or styles from another server. All fonts are bundled.
 * Plates: off by default, readers' browsers load plates only from this site's Media Library. With Theme Options > Content > Load plates from Wikimedia Commons and Pexels switched on, a plate with no local copy loads from commons.wikimedia.org, upload.wikimedia.org or images.pexels.com, and those hosts see the reader's IP address.
@@ -153,6 +157,10 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.25.10 =
+* The settings and the readme speak of the other sites in plain words. Links to them stay.
+* The readme says where the browser icon goes on a site in a subfolder: a copy of favicon.ico in the domain root.
+
 = 3.25.9 =
 * The browser icon set is complete: favicon.ico, an SVG icon, 32px, home screen, 192px, 512px and maskable icons and a web app manifest, all drawn from the brandmark. The site answers /favicon.ico with the icon, the icons show on the log-in screen and in the admin, and the error pages show it in the tab.
 
@@ -438,6 +446,9 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * New screenshot.
 
 == Upgrade Notice ==
+= 3.25.10 =
+Upload the whole theme. On a site in a subfolder, also put a copy of assets/images/favicon.ico in the domain root folder (or, with a Site Icon set, that icon as favicon.ico); otherwise nothing to do.
+
 = 3.25.9 =
 Upload the whole theme. Open one admin screen so the error pages are written again with the icon.
 

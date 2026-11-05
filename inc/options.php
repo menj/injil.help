@@ -634,16 +634,16 @@ function injil_help_render_options() {
 
 			<section class="ih-panel" id="panel-links" role="tabpanel" aria-labelledby="tab-links" tabindex="0">
 				<?php
-				injil_help_ui_usage( __( 'In the running text of a page, the first mention of a phrase the network map knows becomes a link to the inner page that treats it, here or on one of the six sister sites. Links are made as the page is shown, and the stored text is never changed. Set the two limits with the sliders, add your own phrases, and list the pages that should carry no links.', 'injil-help' ) );
+				injil_help_ui_usage( __( 'In the running text of a page, the first mention of a phrase the shared phrase map knows becomes a link to the inner page that treats it, here or on one of the six other sites. Links are made as the page is shown, and the stored text is never changed. Set the two limits with the sliders, add your own phrases, and list the pages that should carry no links.', 'injil-help' ) );
 				injil_help_ui_card_open( __( 'Where links go', 'injil-help' ), __( 'Never in a heading, a quotation, a verse, the gospel text, Arabic, a note, a table or an existing link. At most one new link in a paragraph, and each page is linked once.', 'injil-help' ) );
 				injil_help_ui_toggle( $o, 'ctx_own', __( 'Link to pages on this site', 'injil-help' ), __( 'Pages on injil.help.', 'injil-help' ) );
 				injil_help_ui_range( $o, 'ctx_own_max', __( 'Links to this site on one page', 'injil-help' ), 0, 15, __( 'At most this many, from 0 to 15.', 'injil-help' ) );
-				injil_help_ui_toggle( $o, 'ctx_sister', __( 'Link to pages on the sister sites', 'injil-help' ), __( 'Pages on bestofislam.org, apostleofdoom.org, abrahamic-religions.com, compelling-evidence.com, murtadd.org and lailatulqadar.guide.', 'injil-help' ) );
-				injil_help_ui_range( $o, 'ctx_sister_max', __( 'Links to sister sites on one page', 'injil-help' ), 0, 10, __( 'At most this many, from 0 to 10.', 'injil-help' ) );
+				injil_help_ui_toggle( $o, 'ctx_sister', __( 'Link to pages on the other sites', 'injil-help' ), __( 'Pages on bestofislam.org, apostleofdoom.org, abrahamic-religions.com, compelling-evidence.com, murtadd.org and lailatulqadar.guide.', 'injil-help' ) );
+				injil_help_ui_range( $o, 'ctx_sister_max', __( 'Links to other sites on one page', 'injil-help' ), 0, 10, __( 'At most this many, from 0 to 10.', 'injil-help' ) );
 				injil_help_ui_card_close();
 
 				injil_help_ui_card_open( __( 'Your own phrases', 'injil-help' ) );
-				injil_help_ui_input( $o, 'ctx_extra', __( 'More phrases', 'injil-help' ), 'textarea', __( 'One per line: phrase | address. A path such as /paul/james/ is a page on this site; a full address must be on one of the sister sites. These come before the shared map, so a phrase here wins.', 'injil-help' ), array( 'rows' => '6', 'placeholder' => 'Gospel of Peter | /gospels/peter/', 'class' => 'code' ) );
+				injil_help_ui_input( $o, 'ctx_extra', __( 'More phrases', 'injil-help' ), 'textarea', __( 'One per line: phrase | address. A path such as /paul/james/ is a page on this site; a full address must be on one of the other sites. These come before the shared map, so a phrase here wins.', 'injil-help' ), array( 'rows' => '6', 'placeholder' => 'Gospel of Peter | /gospels/peter/', 'class' => 'code' ) );
 				injil_help_ui_input( $o, 'ctx_exclude', __( 'Pages without links', 'injil-help' ), 'textarea', __( 'One per line: a page slug (terms) or its path (paul/james).', 'injil-help' ), array( 'rows' => '3', 'placeholder' => 'terms' ) );
 				injil_help_ui_card_close();
 				?>
