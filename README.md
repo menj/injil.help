@@ -33,7 +33,7 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 |---|---|
 | Type | Block theme (theme.json v3), child of `twentytwentyfive` |
 | Folder, text domain, pattern prefix | `injil-help` |
-| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.25.4) |
+| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.25.5) |
 | PHP in `inc/` | options, social, progress, unlist, unlist-admin, search-permalinks, starter-content, journal, starter-content-pages, gospel-islam, quran-jesus, tafsir, images, seo, schema, schema-content, rank-math, share, contextual-links, login, security, security-detector |
 | Data | `inc/data/` 2.6 MB of JSON: 182 starter pages, the 8 Journal posts (`posts.json`), the gospel narrative, the Qur'anic passages, Thomas (woven sections and two full texts), the infancy gospels, the substitution witnesses, eight commentaries (315,000 words) |
 | Front-end assets | `style.css` 32 KB; `assets/css/ornament.css` 12 KB, `share.css` 3 KB, `bible.css` 3 KB, `login.css` 7 KB, `journal.css` 2 KB, `responsive.css` 2 KB (phone header, touch targets, focus ring, loaded on every view); `assets/js/ornament.js` 3 KB, `share.js` 2 KB; all plain, no build step |
@@ -299,8 +299,46 @@ Actions used: `after_switch_theme`, `admin_init`, `admin_post_injil_help_populat
 - Account names stay private to visitors who are not logged in: the REST routes `/wp/v2/users` and `/wp/v2/users/<id>` are removed for them (`rest_endpoints`), `?author=N` goes to `/about/` at `parse_request` before `redirect_canonical()` can name the slug, and oEmbed answers carry no `author_name` or `author_url`. Author archives already go to `/about/`.
 - The theme's `.htaccess` refuses `.git*`, `.claude`, `tests`, `bin` and `*.md` inside the theme folder on Apache. Nginx needs the rule in the server block: `location ~* /wp-content/themes/injil[.-]help/((\.git[^/]*|\.claude|tests|bin)(/|$)|.*\.md$) { return 403; }` (the folder is `injil-help` in a release archive and `injil.help` in a copy of the repository). On a production site `injil_help_dev_cleanup()` deletes the entries of `injil_help_dev_entries()` (what `.gitattributes` leaves out of the release archive) on the next admin screen opened by a user who can update themes (on a network, a network administrator). It skips a site whose `wp_get_environment_type()` is not `production`, a local host name or private address, and a site with `INJIL_HELP_KEEP_DEV_FILES` set to true. It removes links without following them and stays inside the theme folder.
 - Every PHP file in `tests/` and `bin/` answers a web request with a 404 before it runs anything.
+- WordPress's own files (from 3.25.5). On Apache the theme keeps a second marked section in the site's `.htaccess`, `# BEGIN The Injil: deny direct core files`, written with the xmlrpc.php section by `injil_help_sec_sync_htaccess()` and taken out on a theme switch. It answers 403 for the PHP files in `wp-includes`, `wp-settings.php`, `wp-config-sample.php`, `readme.html`, `wp-admin/install.php`, `wp-admin/setup-config.php` and, while XML-RPC is off, `xmlrpc.php`. Bots ask for these by address, and each request for a `wp-includes` file ended in a fatal error in the log. TinyMCE's loader under `wp-includes/js/tinymce/` and `ms-files.php`, which a network's rules hand uploads to, stay open. The check runs on admin pages at most once an hour, and at once when what the sections should hold has changed (Jetpack switched on, a constant added, the XML-RPC switch moved); a failed write is tried again on the next admin page. With WordPress in its own subfolder the rules carry that folder (`injil_help_sec_core_prefix()`); with WordPress outside the `.htaccess` folder no section is written. `define( 'INJIL_HELP_ALLOW_CORE_FILES', true );` in wp-config.php takes it out. Where the theme cannot write `.htaccess`, the Security tab shows the lines to paste after the WordPress section (`injil_help_sec_htaccess_snippet()`). At the domain root they read:
+
+  ```
+  # BEGIN Block xmlrpc.php
+  <Files xmlrpc.php>
+  <IfModule mod_authz_core.c>
+  Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+  Order Deny,Allow
+  Deny from all
+  </IfModule>
+  </Files>
+  # END Block xmlrpc.php
+  # BEGIN The Injil: deny direct core files
+  <IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^wp-includes/(?!js/tinymce/|ms-files\.php$).+\.php$ - [F,L]
+  RewriteRule ^(wp-settings|wp-config-sample)\.php$ - [F,L]
+  RewriteRule ^readme\.html$ - [F,L]
+  RewriteRule ^wp-admin/(install|setup-config)\.php$ - [F,L]
+  RewriteRule ^xmlrpc\.php$ - [F,L]
+  </IfModule>
+  # END The Injil: deny direct core files
+  ```
+
+  On Nginx the same rules go in the server block: `location ~ ^/wp-includes/(?!js/tinymce/|ms-files\.php$).+\.php$ { return 403; }` and `location ~ ^/(wp-settings\.php|wp-config-sample\.php|readme\.html|xmlrpc\.php|wp-admin/(install|setup-config)\.php)$ { return 403; }`. `php tests/live-logs-test.php` checks the switch, the Jetpack and constant cases, the lines, the subfolder prefix and the writing and removal of both sections.
+- The installer lock. The site was taken over through an open `wp-admin/setup-config.php` while WordPress core sat on the server without `wp-config.php`. In that state the installer answers anyone, and the first visitor to reach it can connect the site to a database he controls. The theme cannot help then, because WordPress never loads it. Two things do. Never upload WordPress core to a live folder without its `wp-config.php` (upload `wp-config.php` first, or install in a folder the web server does not serve). And once the site is installed, put this rule in the server configuration, or at the top of the site's `.htaccess` above every `# BEGIN` section, where no plugin or theme rewrites it:
+
+  ```
+  # Installer lock: the site is installed. Keep this above every BEGIN section.
+  <IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^wp-admin/(install|setup-config)\.php$ - [F,L]
+  </IfModule>
+  ```
+
+  In an Apache virtual host the same lock is `<LocationMatch "^/(.+/)?wp-admin/(install|setup-config)\.php$"> Require all denied </LocationMatch>`; on Nginx it is `location ~ ^/(.+/)?wp-admin/(install|setup-config)\.php$ { return 403; }`. A site in a subfolder puts the `.htaccess` rule in that folder's `.htaccess`. Upgrades are untouched: they run through `wp-admin/upgrade.php`. Take the rule out for the length of a fresh install and put it back after.
 - Application passwords are blocked by default: `wp_is_application_passwords_available` returns false while the `block_app_passwords` option is set (its default), so no client can log in through the REST API or XML-RPC with a per-application password. Untick the block under Theme Options › Security for a client that needs them.
-- `inc/security.php` (from 3.13.0, ported from the Abrahamic theme 2.87.0): XML-RPC answers 403 (`block_xmlrpc`; counted per day in `injil_help_security_counts`; on Apache a "Block xmlrpc.php" marker section in .htaccess, shared with the sister themes); a password login through XML-RPC is refused whatever the switch; logged-in REST writes need a cookie session with a valid `wp_rest` nonce (`block_rest_writes`; filter `injil_help_sec_rest_allow` lists route prefixes exempt from it); failed logins are counted by account name (`injil_help_security_failed`); the spam gate (`spam_gate`, `wp_insert_post_data`) holds gambling spam and anything published or scheduled through XML-RPC, a header login or WP-CLI as Pending (private posts are only logged), posts and pages only, starter pages (`_injil_help_hash`, or the theme's own page writing) exempt; trashed spam answers 410 (`spam_gone`). The detector is `inc/security-detector.php`, plain PHP; `php tests/security-detector-test.php` checks it against every string in `inc/data/` and the attack samples. `INJIL_HELP_SECURITY_LOCK` false in wp-config.php turns the three locks off. The theme registers no REST routes and no front-end forms, so nothing of its own writes through the REST API.
+- `inc/security.php` (from 3.13.0, ported from the Abrahamic theme 2.87.0): XML-RPC answers 403 (`block_xmlrpc`; counted per day in `injil_help_security_counts`; on Apache a "Block xmlrpc.php" marker section in .htaccess, shared with the sister themes). With it off, `xmlrpc_enabled` is false, `xmlrpc_methods` is empty (the pingback methods with the rest), the `X-Pingback` header and the RSD link go and pings close. From 3.25.5 it stays on while the Jetpack plugin is active, or with `define( 'INJIL_HELP_ALLOW_XMLRPC', true );` in wp-config.php (`injil_help_sec_xmlrpc_allowed()`), and the .htaccess section is then taken out; a password login through XML-RPC is refused whatever the switch; logged-in REST writes need a cookie session with a valid `wp_rest` nonce (`block_rest_writes`; filter `injil_help_sec_rest_allow` lists route prefixes exempt from it); failed logins are counted by account name (`injil_help_security_failed`); the spam gate (`spam_gate`, `wp_insert_post_data`) holds gambling spam and anything published or scheduled through XML-RPC, a header login or WP-CLI as Pending (private posts are only logged), posts and pages only, starter pages (`_injil_help_hash`, or the theme's own page writing) exempt; trashed spam answers 410 (`spam_gone`). The detector is `inc/security-detector.php`, plain PHP; `php tests/security-detector-test.php` checks it against every string in `inc/data/` and the attack samples. `INJIL_HELP_SECURITY_LOCK` false in wp-config.php turns the three locks off. The theme registers no REST routes and no front-end forms, so nothing of its own writes through the REST API.
 
 ## Error pages
 

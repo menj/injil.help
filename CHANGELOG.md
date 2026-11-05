@@ -2,6 +2,17 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.25.5
+
+The rest of the fixes from the live log of November 2026: XML-RPC with a way to keep it for Jetpack, a server block for WordPress's own files, and the installer lock in the notes. No option key, function or hook was renamed or removed.
+
+- The log showed 586 POSTs to `xmlrpc.php`, password guesses, answered with 200. XML-RPC is off as before while "Turn off XML-RPC" is on: `xmlrpc_enabled` is false, `xmlrpc_methods` is empty (the pingback methods go with the rest), the `X-Pingback` header and the RSD link go, and `xmlrpc.php` answers 403. It now stays on while the Jetpack plugin is active, which needs it, or with `define( 'INJIL_HELP_ALLOW_XMLRPC', true );` (`injil_help_sec_xmlrpc_allowed()`, `injil_help_sec_xmlrpc_off()`). The "Block xmlrpc.php" section of `.htaccess` follows the same test. Password logins through XML-RPC stay refused while the XML-RPC or REST switch is on.
+- A second marked section in the site's `.htaccess`, "The Injil: deny direct core files", answers 403 for the PHP files in `wp-includes` (TinyMCE's loader and `ms-files.php` excepted), `wp-settings.php`, `wp-config-sample.php`, `readme.html`, `wp-admin/install.php`, `wp-admin/setup-config.php` and, while XML-RPC is off, `xmlrpc.php` (`injil_help_sec_core_lines()`). It carries WordPress's folder when WordPress sits in a subfolder of the `.htaccess` folder, and is left out when WordPress sits outside it (`injil_help_sec_core_prefix()`). `define( 'INJIL_HELP_ALLOW_CORE_FILES', true );` takes it out. A theme switch removes it with the xmlrpc.php section.
+- The hourly `.htaccess` check runs again at once when what the sections should hold has changed: Jetpack switched on or off, a constant added, the XML-RPC switch moved (`injil_help_sec_htaccess_state()`). A failed write reads as "could not write" and is tried again on the next admin screen.
+- Where the theme cannot write `.htaccess`, the Security tab shows both sections to paste after the WordPress section (`injil_help_sec_htaccess_snippet()`). It also says when Jetpack or the constant keeps XML-RPC on, and names the core-file section and its constant.
+- `UPGRADING.md` and the README carry the installer lock. The site was taken over through an open `setup-config.php` while WordPress core sat without `wp-config.php`, a state in which the theme never loads. The notes give the rule that refuses `setup-config.php` and `install.php` once the site is installed, for `.htaccess`, an Apache virtual host and Nginx, and say never to upload core without `wp-config.php`. The README also gives the Nginx form of the core-file rules.
+- `tests/live-logs-test.php` checks the switch, the Jetpack and constant cases, the lines and which paths they refuse and leave open, the subfolder prefix, the writing, retry and removal of both sections, and the paste lines. The rules were also run on Apache 2.4, at the domain root, in a subfolder site and with WordPress in its own folder.
+
 ## 3.25.4
 
 A page no longer fails when the structured data meets a malformed block, and a theme caught half uploaded answers 503. No option key, function or hook was renamed or removed.
