@@ -6,6 +6,12 @@
  * @package injil-help
  */
 
+// A command-line script: a web request to it gets a 404 and nothing runs.
+if ( 'cli' !== PHP_SAPI ) {
+	http_response_code( 404 );
+	exit;
+}
+
 define( 'ABSPATH', dirname( __DIR__ ) . '/' );
 require dirname( __DIR__ ) . '/inc/error-page-html.php';
 

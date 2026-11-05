@@ -7,6 +7,12 @@
  *
  * Run: php tests/error-pages-test.php
  */
+
+// A command-line script: a web request to it gets a 404 and nothing runs.
+if ( 'cli' !== PHP_SAPI ) {
+	http_response_code( 404 );
+	exit;
+}
 define( 'ABSPATH', __DIR__ . '/' );
 define( 'INJIL_HELP_VERSION', '9.9.9' );
 // A fresh directory of its own, so the cleanup at the end removes only what this test wrote.

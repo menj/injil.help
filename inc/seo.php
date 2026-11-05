@@ -234,6 +234,22 @@ add_filter(
 );
 
 /**
+ * The address of a term archive, or '' when the queried object is no term or its taxonomy is not
+ * registered (a plugin that registered it was switched off). get_term_link() on such a term reads
+ * the query_var of a taxonomy that does not exist and warns in taxonomy.php.
+ *
+ * @param mixed $term The queried object.
+ * @return string
+ */
+function injil_help_term_link( $term ) {
+	if ( ! $term instanceof WP_Term || ! taxonomy_exists( $term->taxonomy ) ) {
+		return '';
+	}
+	$link = get_term_link( $term );
+	return is_wp_error( $link ) ? '' : (string) $link;
+}
+
+/**
  * The canonical address of a view that is not singular (core prints the singular one): the front
  * page, a term, post type, date or posts-page archive, with its page number. Search, 404 and author
  * views get none.
@@ -249,8 +265,7 @@ function injil_help_archive_canonical() {
 		$page = (int) get_option( 'page_for_posts' );
 		$url  = $page ? (string) get_permalink( $page ) : home_url( '/' );
 	} elseif ( is_category() || is_tag() || is_tax() ) {
-		$link = get_term_link( get_queried_object() );
-		$url  = is_wp_error( $link ) ? '' : (string) $link;
+		$url = injil_help_term_link( get_queried_object() );
 	} elseif ( is_post_type_archive() ) {
 		$type = get_query_var( 'post_type' );
 		$url  = (string) get_post_type_archive_link( is_array( $type ) ? (string) reset( $type ) : (string) $type );

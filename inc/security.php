@@ -261,7 +261,182 @@ function injil_help_sec_rest_guard( $result, $server, $request ) {
 add_filter( 'rest_pre_dispatch', 'injil_help_sec_rest_guard', 5, 3 );
 
 /* -------------------------------------------------------------------------
- * 1b. Signals from the October 2026 attack
+ * 1a. Account names stay private
+ *
+ * A password guesser first needs a login name, and WordPress gives one away in three places: the
+ * REST users routes, "?author=N" (which redirect_canonical() turns into /author/{slug}/) and the
+ * author link of an oEmbed. All three are shut for visitors who are not logged in. The block
+ * editor reads the users routes as a logged-in user, so it is unaffected.
+ * ---------------------------------------------------------------------- */
+
+/**
+ * The REST users routes, /wp/v2/users and /wp/v2/users/<id>, are left out for visitors who are not
+ * logged in. /wp/v2/users/me needs a login anyway and stays.
+ *
+ * @param array $endpoints Registered routes.
+ * @return array
+ */
+function injil_help_sec_hide_user_routes( $endpoints ) {
+	if ( is_user_logged_in() ) {
+		return $endpoints;
+	}
+	foreach ( array_keys( $endpoints ) as $route ) {
+		if ( '/wp/v2/users' === $route || 0 === strpos( $route, '/wp/v2/users/(?P<id>' ) ) {
+			unset( $endpoints[ $route ] );
+		}
+	}
+	return $endpoints;
+}
+add_filter( 'rest_endpoints', 'injil_help_sec_hide_user_routes', 99 );
+
+/**
+ * "?author=N" goes to the About page before WordPress can redirect it to the author's slug, whether
+ * or not the account exists, so an answer tells nothing. A logged-in user and the admin keep it.
+ *
+ * @param WP $wp The request.
+ */
+function injil_help_sec_author_query( $wp ) {
+	if ( is_admin() || is_user_logged_in() || ! isset( $_GET['author'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification -- only its presence is read
+		return;
+	}
+	if ( ! empty( $wp->query_vars['rest_route'] ) ) {
+		return; // a REST listing filtered by author answers with IDs, never a slug
+	}
+	wp_safe_redirect( home_url( '/about/' ), 301 );
+	exit;
+}
+add_action( 'parse_request', 'injil_help_sec_author_query', 1 );
+
+/**
+ * oEmbed answers name the page's author and link to /author/{slug}/: both go, as the author archive
+ * itself does (inc/seo.php). The site's name stays as the provider.
+ *
+ * @param array $data The oEmbed response.
+ * @return array
+ */
+function injil_help_sec_oembed_author( $data ) {
+	unset( $data['author_name'], $data['author_url'] );
+	return $data;
+}
+add_filter( 'oembed_response_data', 'injil_help_sec_oembed_author', 99 );
+
+/* -------------------------------------------------------------------------
+ * 1b. Development files off the live site
+ *
+ * A theme copied up by FTP from a working copy carries what the release archive leaves out
+ * (.gitattributes export-ignore): the Git history, .claude, tests and the Markdown notes. The
+ * theme's .htaccess refuses them on Apache. On a production site they are also deleted, on the
+ * next admin screen an administrator opens after they appear. A local, development or staging site keeps them
+ * (wp_get_environment_type()), and so does any site that defines INJIL_HELP_KEEP_DEV_FILES as true
+ * in wp-config.php, such as one deployed with git pull.
+ * ---------------------------------------------------------------------- */
+
+/**
+ * The entries of the theme folder that only development needs, as the release archive leaves
+ * them out. bin/ stays: the archive carries it.
+ *
+ * @return string[]
+ */
+function injil_help_dev_entries() {
+	return array( '.git', '.gitignore', '.gitattributes', '.claude', 'tests', 'README.md', 'SSOT.md', 'CHANGELOG.md', 'UPGRADING.md' );
+}
+
+/**
+ * Whether this site may lose the development files: a production site, not on a local host
+ * name, with no INJIL_HELP_KEEP_DEV_FILES. A site that sets no environment type counts as
+ * production, so a local host name (localhost, *.local, *.test, *.localhost) is kept as well.
+ *
+ * @return bool
+ */
+function injil_help_dev_cleanup_wanted() {
+	if ( defined( 'INJIL_HELP_KEEP_DEV_FILES' ) && INJIL_HELP_KEEP_DEV_FILES ) {
+		return false;
+	}
+	if ( 'production' !== wp_get_environment_type() ) {
+		return false;
+	}
+	$host = strtolower( (string) wp_parse_url( home_url( '/' ), PHP_URL_HOST ) );
+	return '' !== $host && 'localhost' !== $host && ! preg_match( '/\.(local|test|localhost|invalid|example)$/', $host ) && ! filter_var( $host, FILTER_VALIDATE_IP );
+}
+
+/**
+ * Delete a file or a folder and everything in it, inside $root only. A link is removed and never
+ * followed.
+ *
+ * @param string $path Path to delete.
+ * @param string $root The theme folder.
+ * @return bool Whether nothing is left at $path.
+ */
+function injil_help_dev_delete( $path, $root ) {
+	if ( is_link( $path ) || is_file( $path ) ) {
+		return @unlink( $path ); // phpcs:ignore WordPress.PHP.NoSilencedErrors, WordPress.WP.AlternativeFunctions
+	}
+	if ( ! is_dir( $path ) ) {
+		return ! file_exists( $path );
+	}
+	$real = realpath( $path );
+	if ( false === $real || 0 !== strpos( $real, rtrim( $root, '/' ) . '/' ) ) {
+		return false;
+	}
+	foreach ( (array) scandir( $path ) as $name ) {
+		if ( '.' !== $name && '..' !== $name ) {
+			injil_help_dev_delete( $path . '/' . $name, $root );
+		}
+	}
+	return @rmdir( $path ); // phpcs:ignore WordPress.PHP.NoSilencedErrors, WordPress.WP.AlternativeFunctions
+}
+
+/**
+ * Delete the development files from the theme folder. Nine file checks when there is nothing to
+ * do; after a failed deletion (the files belong to another account), one try a day. Returns the
+ * entries that were removed.
+ *
+ * @param bool $force Try again even after a failure today.
+ * @return string[]
+ */
+function injil_help_dev_cleanup( $force = false ) {
+	if ( ! injil_help_dev_cleanup_wanted() ) {
+		return array();
+	}
+	if ( ! $force && get_transient( 'injil_help_dev_cleanup_failed' ) ) {
+		return array();
+	}
+	$root    = realpath( get_stylesheet_directory() );
+	$removed = array();
+	$left    = array();
+	if ( false === $root ) {
+		return array();
+	}
+	foreach ( injil_help_dev_entries() as $entry ) {
+		$path = $root . '/' . $entry;
+		if ( ! file_exists( $path ) && ! is_link( $path ) ) {
+			continue;
+		}
+		if ( injil_help_dev_delete( $path, $root ) ) {
+			$removed[] = $entry;
+		} else {
+			$left[] = $entry;
+		}
+	}
+	if ( $removed || $left ) {
+		error_log( 'The Injil: development files removed from the theme folder: ' . ( $removed ? implode( ', ', $removed ) : 'none' ) . ( $left ? '; could not remove: ' . implode( ', ', $left ) : '' ) . '.' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions
+	}
+	if ( $left ) {
+		set_transient( 'injil_help_dev_cleanup_failed', $left, DAY_IN_SECONDS );
+	}
+	return $removed;
+}
+add_action(
+	'admin_init',
+	function () {
+		if ( ! wp_doing_ajax() && current_user_can( 'update_themes' ) ) {
+			injil_help_dev_cleanup();
+		}
+	}
+);
+
+/* -------------------------------------------------------------------------
+ * 1c. Signals from the October 2026 attack
  *
  * The access logs showed the pattern: password guessing through xmlrpc.php
  * from 15 October, sent with forged "Jetpack by WordPress.com" user agents;

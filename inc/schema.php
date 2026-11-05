@@ -227,23 +227,137 @@ function injil_help_schema_navigation() {
 
 /* ---------- Content parsing ---------- */
 
-/** Replace core/pattern references with the pattern's blocks, so the parsers see template content. */
-function injil_help_expand_patterns( $blocks ) {
+/**
+ * Replace core/pattern references with the pattern's blocks, so the parsers see template content.
+ *
+ * A pattern can expand to no block (its slug is not registered, as while the theme is being
+ * uploaded or when a saved template names a pattern that has since gone) or to several (with the
+ * whitespace between them). Each expansion takes the place of the pattern's own placeholder in
+ * innerContent, so the parent keeps one null for each inner block. Core's WP_Block::render() ends
+ * the request with a fatal error when a null has no inner block to go with it.
+ *
+ * @param array $blocks Parsed blocks.
+ * @param array $seen   Pattern slugs being expanded, so a pattern that names itself stops.
+ * @return array
+ */
+function injil_help_expand_patterns( $blocks, $seen = array() ) {
 	$out = array();
 	foreach ( $blocks as $block ) {
-		if ( 'core/pattern' === $block['blockName'] && ! empty( $block['attrs']['slug'] ) ) {
-			$pattern = WP_Block_Patterns_Registry::get_instance()->get_registered( $block['attrs']['slug'] );
-			if ( $pattern ) {
-				$out = array_merge( $out, injil_help_expand_patterns( parse_blocks( $pattern['content'] ) ) );
+		if ( ! is_array( $block ) ) {
+			continue;
+		}
+		if ( 'core/pattern' === ( $block['blockName'] ?? null ) ) {
+			$slug = (string) ( $block['attrs']['slug'] ?? '' );
+			if ( '' !== $slug && ! isset( $seen[ $slug ] ) ) {
+				$pattern = WP_Block_Patterns_Registry::get_instance()->get_registered( $slug );
+				if ( $pattern && isset( $pattern['content'] ) ) {
+					$out = array_merge( $out, injil_help_expand_patterns( parse_blocks( (string) $pattern['content'] ), $seen + array( $slug => true ) ) );
+				}
 			}
 			continue;
 		}
-		if ( ! empty( $block['innerBlocks'] ) ) {
-			$block['innerBlocks'] = injil_help_expand_patterns( $block['innerBlocks'] );
+		$block = injil_help_schema_normalise_block( $block );
+		if ( $block['innerBlocks'] ) {
+			$inner   = array();
+			$content = array();
+			$i       = 0;
+			foreach ( $block['innerContent'] as $piece ) {
+				if ( is_string( $piece ) ) {
+					$content[] = $piece;
+					continue;
+				}
+				foreach ( injil_help_expand_patterns( array( $block['innerBlocks'][ $i++ ] ), $seen ) as $b ) {
+					$inner[]   = $b;
+					$content[] = null;
+				}
+			}
+			$block['innerBlocks']  = $inner;
+			$block['innerContent'] = $content;
 		}
 		$out[] = $block;
 	}
 	return $out;
+}
+
+/**
+ * A parsed block whose innerContent holds exactly one null for each inner block, at every depth.
+ *
+ * A block built or changed by hand can carry more inner blocks than placeholders, or fewer. A
+ * placeholder without its block is dropped; an inner block without a placeholder gets one at the
+ * end, so its text is still read.
+ *
+ * @param array $block A parsed block.
+ * @return array
+ */
+function injil_help_schema_normalise_block( $block ) {
+	$block += array(
+		'blockName'    => null,
+		'attrs'        => array(),
+		'innerBlocks'  => array(),
+		'innerHTML'    => '',
+		'innerContent' => array(),
+	);
+	$block['attrs']        = is_array( $block['attrs'] ) ? $block['attrs'] : array();
+	$block['innerHTML']    = is_string( $block['innerHTML'] ) ? $block['innerHTML'] : '';
+	$block['innerBlocks']  = array_values( array_filter( (array) $block['innerBlocks'], 'is_array' ) );
+	$block['innerBlocks']  = array_map( 'injil_help_schema_normalise_block', $block['innerBlocks'] );
+	$count                 = count( $block['innerBlocks'] );
+	$content               = array();
+	$nulls                 = 0;
+	if ( ! $block['innerContent'] && '' !== $block['innerHTML'] ) {
+		$content[] = $block['innerHTML']; // a block built by hand with its markup in innerHTML only
+	}
+	foreach ( (array) $block['innerContent'] as $piece ) {
+		if ( is_string( $piece ) ) {
+			$content[] = $piece;
+		} elseif ( null === $piece && $nulls < $count ) {
+			$content[] = null;
+			++$nulls;
+		}
+	}
+	for ( ; $nulls < $count; $nulls++ ) {
+		$content[] = null;
+	}
+	$block['innerContent'] = $content;
+	return $block;
+}
+
+/**
+ * A block's markup written out from its own pieces, with no block rendered: the fallback when
+ * rendering fails.
+ *
+ * @param array $block A parsed block.
+ * @return string
+ */
+function injil_help_schema_block_markup( $block ) {
+	$block = injil_help_schema_normalise_block( $block );
+	$html  = '';
+	$i     = 0;
+	foreach ( $block['innerContent'] as $piece ) {
+		$html .= is_string( $piece ) ? $piece : injil_help_schema_block_markup( $block['innerBlocks'][ $i++ ] );
+	}
+	return $html;
+}
+
+/**
+ * Render a block for the structured data only. The block is normalised first, and a render that
+ * throws falls back to the block's own markup, so a malformed block costs the graph some text
+ * and never the page.
+ *
+ * @param array $block A parsed block.
+ * @return string
+ */
+function injil_help_schema_render( $block ) {
+	if ( ! is_array( $block ) ) {
+		return '';
+	}
+	$block = injil_help_schema_normalise_block( $block );
+	try {
+		return (string) render_block( $block );
+	} catch ( \Throwable $e ) {
+		error_log( 'The Injil: a block could not be rendered for the structured data (' . $e->getMessage() . '); its markup was read instead.' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions
+		return injil_help_schema_block_markup( $block );
+	}
 }
 
 /** FAQ items: core/details styled "FAQ item", and "Short answer" groups (heading + .ih-answer-text). */
@@ -254,7 +368,7 @@ function injil_help_collect_faq( $blocks, &$items ) {
 			if ( preg_match( '#<summary>(.*?)</summary>#s', $block['innerHTML'], $q ) ) {
 				$answer = '';
 				foreach ( $block['innerBlocks'] as $inner ) {
-					$answer .= ' ' . wp_strip_all_tags( render_block( $inner ) );
+					$answer .= ' ' . wp_strip_all_tags( injil_help_schema_render( $inner ) );
 				}
 				$items[] = array( html_entity_decode( wp_strip_all_tags( $q[1] ), ENT_QUOTES ), trim( preg_replace( '/\s+/', ' ', html_entity_decode( $answer, ENT_QUOTES ) ) ) );
 			}
@@ -267,7 +381,7 @@ function injil_help_collect_faq( $blocks, &$items ) {
 				if ( 'core/heading' === $inner['blockName'] && ! $q ) {
 					$q = html_entity_decode( wp_strip_all_tags( $inner['innerHTML'] ), ENT_QUOTES );
 				} elseif ( false !== strpos( $inner['attrs']['className'] ?? '', 'ih-answer-text' ) ) {
-					$a = html_entity_decode( wp_strip_all_tags( render_block( $inner ) ), ENT_QUOTES );
+					$a = html_entity_decode( wp_strip_all_tags( injil_help_schema_render( $inner ) ), ENT_QUOTES );
 				}
 			}
 			if ( $q && $a ) {
@@ -287,7 +401,7 @@ function injil_help_collect_quotes( $blocks, &$quotes ) {
 		if ( 'core/quote' === $block['blockName'] ) {
 			$text = '';
 			foreach ( $block['innerBlocks'] as $inner ) {
-				$text .= ' ' . wp_strip_all_tags( render_block( $inner ) );
+				$text .= ' ' . wp_strip_all_tags( injil_help_schema_render( $inner ) );
 			}
 			$text = trim( preg_replace( '/\s+/', ' ', html_entity_decode( $text, ENT_QUOTES ) ) );
 			if ( $text ) {
@@ -742,7 +856,7 @@ function injil_help_schema_graph() {
 	$blocks = $content ? injil_help_expand_patterns( parse_blocks( $content ) ) : array();
 	$html   = '';
 	foreach ( $blocks as $b ) {
-		$html .= render_block( $b );
+		$html .= injil_help_schema_render( $b );
 	}
 	$html = injil_help_schema_strip_mark( $html );
 
@@ -754,8 +868,9 @@ function injil_help_schema_graph() {
 	} elseif ( is_search() ) {
 		$url = get_search_link();
 	} elseif ( is_archive() ) {
-		$url = get_term_link( get_queried_object() );
-		$url = is_wp_error( $url ) ? home_url( add_query_arg( array() ) ) : $url;
+		// A post type, date or author archive has no term; get_term_link() would warn on it.
+		$url = injil_help_term_link( get_queried_object() );
+		$url = '' !== $url ? $url : home_url( add_query_arg( array() ) );
 	} else {
 		$url = home_url( add_query_arg( array() ) );
 	}
@@ -1181,7 +1296,13 @@ add_action(
 		if ( ! injil_help_schema_enabled() ) {
 			return;
 		}
-		$graph = injil_help_schema_graph();
+		// The graph is extra to the page: whatever goes wrong while it is built, the page is still sent.
+		try {
+			$graph = injil_help_schema_graph();
+		} catch ( \Throwable $e ) {
+			error_log( 'The Injil: the structured data was left out of this page (' . $e->getMessage() . ').' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions
+			return;
+		}
 		if ( ! $graph ) {
 			return;
 		}

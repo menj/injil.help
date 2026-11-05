@@ -7,23 +7,83 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'INJIL_HELP_VERSION', '3.25.3' );
+define( 'INJIL_HELP_VERSION', '3.25.4' );
 
-require_once get_stylesheet_directory() . '/inc/options.php';
-require_once get_stylesheet_directory() . '/inc/starter-content.php';
-require_once get_stylesheet_directory() . '/inc/journal.php';
-require_once get_stylesheet_directory() . '/inc/seo.php';
-require_once get_stylesheet_directory() . '/inc/schema.php';
-require_once get_stylesheet_directory() . '/inc/rank-math.php';
-require_once get_stylesheet_directory() . '/inc/share.php';
-require_once get_stylesheet_directory() . '/inc/contextual-links.php';
-require_once get_stylesheet_directory() . '/inc/security.php';
-require_once get_stylesheet_directory() . '/inc/login.php';
-require_once get_stylesheet_directory() . '/inc/social.php';
-require_once get_stylesheet_directory() . '/inc/progress.php';
-require_once get_stylesheet_directory() . '/inc/unlist.php';
-require_once get_stylesheet_directory() . '/inc/search-permalinks.php';
-require_once get_stylesheet_directory() . '/inc/error-pages.php';
+/**
+ * The theme's PHP files in inc/, in the order functions.php loads them. The files they pull in
+ * themselves (starter-content-pages, gospel-islam, tafsir, quran-jesus, images, schema-content,
+ * schema-extend, security-detector, unlist-admin, error-page-html) are listed after them, so the
+ * check below sees every file before any is read.
+ *
+ * @return array{load: string[], also: string[]}
+ */
+function injil_help_theme_files() {
+	return array(
+		'load' => array( 'options', 'starter-content', 'journal', 'seo', 'schema', 'rank-math', 'share', 'contextual-links', 'security', 'login', 'social', 'progress', 'unlist', 'search-permalinks', 'error-pages' ),
+		'also' => array( 'starter-content-pages', 'gospel-islam', 'tafsir', 'quran-jesus', 'images', 'schema-content', 'schema-extend', 'security-detector', 'unlist-admin', 'error-page-html' ),
+	);
+}
+
+/**
+ * Send a 503 "being updated" page and stop: the static 503 page the theme writes into
+ * wp-content, then the theme's own copy, then a few lines of HTML. Nothing here needs the rest of
+ * the theme.
+ */
+function injil_help_serve_incomplete() {
+	if ( ! headers_sent() ) {
+		status_header( 503 );
+		header( 'Retry-After: 300' );
+		header( 'Cache-Control: no-store, max-age=0' );
+		header( 'Content-Type: text/html; charset=utf-8' );
+	}
+	foreach ( array( WP_CONTENT_DIR . '/injil-help-errors/503.html', __DIR__ . '/errors/503.html' ) as $page ) {
+		if ( is_readable( $page ) && filesize( $page ) > 0 ) {
+			readfile( $page ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+			exit;
+		}
+	}
+	echo '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="60"><title>Back shortly</title></head><body><h1>Back shortly</h1><p>The site is being updated. Please try again in a few minutes.</p></body></html>';
+	exit;
+}
+
+/**
+ * Load the theme's files, or report that the theme is incomplete.
+ *
+ * A theme uploaded file by file (by FTP) is incomplete for a few minutes: a file not there yet,
+ * or there and half written. A failed require_once ends the request in a fatal error for every
+ * visitor (25 October 2026: functions.php line 12, inc/options.php). So every file is checked
+ * first, and each is loaded inside a try that catches the ParseError of a half-written file.
+ * While anything is wrong, visitors and the admin get a 503 page and the theme stops loading.
+ * The login screen, cron, AJAX and the command line go on without the theme. What was wrong goes
+ * to the error log.
+ *
+ * @return bool Whether every file loaded.
+ */
+function injil_help_load_theme_files() {
+	$files = injil_help_theme_files();
+	$dir   = __DIR__ . '/inc/';
+	try {
+		foreach ( array_merge( $files['load'], $files['also'] ) as $name ) {
+			if ( ! is_readable( $dir . $name . '.php' ) ) {
+				throw new RuntimeException( 'inc/' . $name . '.php is missing' );
+			}
+		}
+		foreach ( $files['load'] as $name ) {
+			require_once $dir . $name . '.php';
+		}
+		return true;
+	} catch ( Throwable $e ) {
+		error_log( 'The Injil: the theme is incomplete or being uploaded (' . $e->getMessage() . '); a 503 page is sent until it is whole.' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions
+		if ( ! wp_doing_cron() && ! wp_doing_ajax() && 'wp-login.php' !== ( $GLOBALS['pagenow'] ?? '' ) && 'cli' !== PHP_SAPI ) {
+			injil_help_serve_incomplete();
+		}
+		return false;
+	}
+}
+
+if ( ! injil_help_load_theme_files() ) {
+	return;
+}
 
 /**
  * Hardening lives in inc/security.php: XML-RPC, application passwords (the block_app_passwords

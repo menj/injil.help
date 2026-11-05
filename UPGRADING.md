@@ -80,6 +80,8 @@ Whichever is chosen, document the server settings a site needs (`max_input_vars`
 
 ## Updating an existing site
 
+**To 3.25.4.** Open any admin screen as an administrator after the update. On a production site the theme deletes `.git`, `.claude`, `tests` and the Markdown notes from its folder; if you deploy the theme with `git pull`, add `define( 'INJIL_HELP_KEEP_DEV_FILES', true );` to `wp-config.php` first. A local copy should set `WP_ENVIRONMENT_TYPE` to `local` or `development`. On Nginx, which reads no `.htaccess`, add the deny rule from the Security section of the README. The content sync publishes `/privacy-policy/` from the draft WordPress made on install.
+
 **To 3.25.3.** Nothing to do. The front page takes the new order from the theme. If you saved your own copy of the Front Page template in the Site Editor, that copy keeps its order; reset it under Appearance › Editor › Templates to take the new one.
 
 **To 3.25.2.** Open any admin screen as an administrator after the update. The theme writes its static error pages into `wp-content/injil-help-errors/`. If `.htaccess` has `ErrorDocument` lines that point at `/wp-content/themes/injil.help/errors/`, replace them with the lines from the Error pages section. The old lines still work on a site at the domain root.
