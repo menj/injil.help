@@ -2,6 +2,13 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.25.10
+
+The settings and readme speak of the other sites in plain words, and the docs name the subfolder favicon step. No feature or setting removed.
+
+- Changed: the Contextual links tab, its help text and the code comments in `inc/contextual-links.php` and `inc/security.php` say "the other sites" and "the shared phrase map". The `ctx_sister` option keys and the `ih-ctx-link--sister` class keep their names.
+- Changed: `readme.txt` and `README.md` say that a site in a subfolder needs a copy of `favicon.ico` at the domain root, because browsers ask for it there and WordPress never sees the request.
+
 ## 3.25.9
 
 The browser icon set is complete. No feature or setting removed.

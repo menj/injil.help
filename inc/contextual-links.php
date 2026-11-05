@@ -1,8 +1,8 @@
 <?php
 /**
  * Contextual links: in the running text of a single post or page, the first mention of a
- * phrase the network map knows links to the inner page that treats it, here or on one of the
- * six sister sites. The map is inc/data/network-links.json, one file identical in all seven
+ * phrase the shared phrase map knows links to the inner page that treats it, here or on one of the
+ * six other sites. The map is inc/data/network-links.json, one file identical in all seven
  * themes; Theme Options › Contextual links switches each kind on or off, caps them, and adds
  * phrases of its own. The stored text is never touched: links are made as the page renders.
  *
@@ -125,7 +125,7 @@ function injil_help_ctx_compiled() {
 		}
 		$host = strtolower( preg_replace( '/^www\./i', '', (string) wp_parse_url( $parts[1], PHP_URL_HOST ) ) );
 		if ( ! preg_match( '#^https?://#i', $parts[1] ) || ! isset( $hosts[ $host ] ) ) {
-			continue; // Only this site and the sister domains in the map.
+			continue; // Only this site and the other domains in the map.
 		}
 		$own = INJIL_HELP_SITE_KEY === $hosts[ $host ];
 		$add( $parts[0], $own ? home_url( (string) wp_parse_url( $parts[1], PHP_URL_PATH ) ) : $parts[1], $own );

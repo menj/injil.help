@@ -113,7 +113,7 @@ add_action( 'after_setup_theme', 'injil_help_sec_xmlrpc', 1 );
 
 /**
  * Lines that deny xmlrpc.php at the web server, for Apache 2.4 and 2.2. The
- * marker name is shared by all seven sister themes, so switching between
+ * marker name is shared by all seven themes, so switching between
  * them never writes the block twice.
  *
  * @return string[]
@@ -326,8 +326,8 @@ add_action( 'update_option_' . INJIL_HELP_OPTION, function () { injil_help_sec_s
 add_action( 'add_option_' . INJIL_HELP_OPTION, function () { injil_help_sec_sync_htaccess( true ); } );
 
 /**
- * Take the block out when the theme is switched to one outside the sister
- * themes. A sister theme writes the same block back on its first admin load.
+ * Take the block out when the theme is switched to one outside the seven
+ * themes. Another of the seven themes writes the same block back on its first admin load.
  */
 function injil_help_sec_remove_htaccess() {
 	$file = injil_help_sec_htaccess_file();
