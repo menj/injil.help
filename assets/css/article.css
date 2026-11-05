@@ -1,0 +1,30 @@
+/* A Journal post (inc/article.php): the dek under the title, the meta row, "In short", the contents
+   list and the Sources block. Colours and faces come from the theme.json tokens. */
+
+.ih-journal-single .ih-dek{margin-block:var(--wp--preset--spacing--10) 0;font-family:var(--ih-serif);font-size:var(--wp--preset--font-size--large);line-height:1.45;color:var(--wp--preset--color--muted)}
+.ih-journal-single .ih-dek p{margin:0}
+
+.ih-journal-meta > p{display:contents}
+.ih-journal-meta .ih-meta-item{display:inline-block}
+.ih-journal-meta .ih-updated time{font-variant-numeric:tabular-nums}
+
+.ih-points{margin-block:var(--wp--preset--spacing--30)}
+.ih-points h2.ih-capsule-q{margin:0;font-size:var(--wp--preset--font-size--large)}
+.ih-points ul{margin:0;padding-inline-start:1.2em}
+.ih-points li + li{margin-block-start:.35em}
+
+.ih-contents{margin-block:var(--wp--preset--spacing--30);padding:var(--wp--preset--spacing--20) var(--wp--preset--spacing--30);border:1px solid var(--wp--preset--color--accent-6);border-radius:var(--ih-r-md)}
+.ih-contents .ih-k{margin:0 0 .4em}
+.ih-contents ol{margin:0;padding-inline-start:1.4em}
+.ih-contents li + li{margin-block-start:.25em}
+.ih-contents a{color:var(--wp--preset--color--contrast);text-decoration:underline;text-decoration-color:var(--wp--preset--color--accent-3);text-underline-offset:.2em}
+.ih-contents a:hover,.ih-contents a:focus-visible{color:var(--wp--preset--color--accent-1)}
+.ih-journal-single .wp-block-post-content h2[id]{scroll-margin-block-start:6rem}
+
+.ih-sources{margin-block:var(--wp--preset--spacing--40);padding:var(--wp--preset--spacing--20) var(--wp--preset--spacing--30);background:var(--wp--preset--color--accent-5);border-radius:var(--ih-r-md)}
+.ih-sources > h2{margin-block:var(--wp--preset--spacing--20) .4em;font-size:var(--wp--preset--font-size--large)}
+.ih-sources > h2:first-child{margin-block-start:0}
+
+@media (max-width:600px){
+ .ih-contents,.ih-sources{padding:var(--wp--preset--spacing--20)}
+}

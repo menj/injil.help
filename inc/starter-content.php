@@ -385,7 +385,11 @@ function injil_help_repair_former_slug( $path, $keep_id = 0 ) {
 /** Every former path of a starter page, mapped to its present path. Cached per theme version. */
 function injil_help_former_map() {
 	$key   = 'injil_help_former_map';
-	$ver   = INJIL_HELP_VERSION;
+	// The map is built from the data files. An FTP upload writes the PHP before the data, so a map
+	// built in between lacks every page whose data had not landed (1 November 2026: the commentary
+	// pages, while inc/data/tafsir/ was still uploading). The key carries the files' sizes and times,
+	// so the map is rebuilt as soon as the data changes, within the same version.
+	$ver   = INJIL_HELP_VERSION . ':' . injil_help_data_fingerprint();
 	$cache = get_transient( $key );
 	if ( is_array( $cache ) && ( $cache['ver'] ?? '' ) === $ver ) {
 		return $cache['map'];
@@ -403,6 +407,65 @@ function injil_help_former_map() {
 		set_transient( $key, array( 'ver' => $ver, 'map' => $map ), WEEK_IN_SECONDS );
 	}
 	return $map;
+}
+
+/**
+ * A short fingerprint of the JSON files the page list is built from: their names, sizes and times.
+ *
+ * @return string
+ */
+function injil_help_data_fingerprint() {
+	$dir   = get_stylesheet_directory() . '/inc/data/';
+	$files = array_merge( (array) glob( $dir . '*.json' ), (array) glob( $dir . 'pages/*.json' ), (array) glob( $dir . 'tafsir/*.json' ) );
+	$sig   = '';
+	foreach ( $files as $file ) {
+		$sig .= basename( (string) $file ) . ':' . (int) @filesize( $file ) . ':' . (int) @filemtime( $file ) . ';'; // phpcs:ignore WordPress.PHP.NoSilencedErrors -- a file removed between glob and stat counts as empty.
+	}
+	return substr( md5( $sig ), 0, 12 );
+}
+
+/**
+ * The present path for an address of the commentaries in an earlier scheme, read from the groups
+ * and works in inc/data/commentaries.json alone, so it holds while the commentary texts are absent
+ * or half uploaded. Covers the group slugs of 3.5 and earlier, which carried the verse numbers
+ * ("az-zukhruf-57-65"), with or without a work and a part number ("tabari/2"), and the numbered
+ * parts under a present group. Returns null for any other path.
+ *
+ * @param string $path A path without slashes at either end.
+ * @return string|null
+ */
+function injil_help_former_commentary_target( $path ) {
+	$base = 'quran/commentaries';
+	if ( ! preg_match( '#^' . preg_quote( $base, '#' ) . '/([a-z0-9-]+)(?:/([a-z-]+?)(?:-(\d+))?(?:/(\d+)(?:-\d+)?)?)?$#', (string) $path, $m ) ) {
+		return null;
+	}
+	$group = null;
+	$old   = false;
+	foreach ( injil_help_tafsir_groups() as $slug => $g ) {
+		if ( (string) ( $g['former'] ?? '' ) === $m[1] ) {
+			$group = $slug;
+			$old   = true;
+			break;
+		}
+		if ( $slug === $m[1] ) {
+			$group = $slug;
+		}
+	}
+	if ( null === $group ) {
+		return null;
+	}
+	$work = $m[2] ?? '';
+	if ( '' === $work ) {
+		return $old ? $base . '/' . $group : null;
+	}
+	if ( ! isset( injil_help_tafsir_works()[ $work ] ) ) {
+		return $base . '/' . $group;
+	}
+	$part = (int) ( $m[4] ?? 0 );
+	if ( ! $old && $part < 1 && empty( $m[3] ) ) {
+		return null; // a present work page: nothing to send on
+	}
+	return injil_help_tafsir_part_path( $base, $group, $work, max( 1, $part ) );
 }
 
 /**
@@ -436,11 +499,17 @@ function injil_help_redirect_former() {
 			$target = $m[1];
 		}
 	}
+	// A commentary address of an earlier scheme, read from the groups and works themselves, so it
+	// resolves even when the map was built without the commentary texts.
+	if ( null === $target ) {
+		$target = injil_help_former_commentary_target( $path );
+	}
 	if ( null === $target && is_404() ) {
 		$parts = explode( '/', $path );
 		while ( count( $parts ) > 1 && null === $target ) {
 			array_pop( $parts );
-			$target = $map[ implode( '/', $parts ) ] ?? null;
+			$up     = implode( '/', $parts );
+			$target = $map[ $up ] ?? injil_help_former_commentary_target( $up );
 		}
 	}
 	// A 301 is cached for good, so it is only sent once the page stands at its present address. While an

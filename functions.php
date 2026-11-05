@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'INJIL_HELP_VERSION', '3.25.6' );
+define( 'INJIL_HELP_VERSION', '3.25.7' );
 
 /**
  * The theme's PHP files in inc/, in the order functions.php loads them. The files they pull in
@@ -19,7 +19,7 @@ define( 'INJIL_HELP_VERSION', '3.25.6' );
  */
 function injil_help_theme_files() {
 	return array(
-		'load' => array( 'options', 'starter-content', 'journal', 'seo', 'schema', 'rank-math', 'share', 'contextual-links', 'security', 'login', 'social', 'progress', 'unlist', 'search-permalinks', 'error-pages' ),
+		'load' => array( 'options', 'starter-content', 'journal', 'seo', 'schema', 'rank-math', 'share', 'contextual-links', 'security', 'login', 'social', 'progress', 'unlist', 'search-permalinks', 'error-pages', 'article' ),
 		'also' => array( 'starter-content-pages', 'gospel-islam', 'tafsir', 'quran-jesus', 'images', 'schema-content', 'schema-extend', 'security-detector', 'unlist-admin', 'error-page-html' ),
 	);
 }

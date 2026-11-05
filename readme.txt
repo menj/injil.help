@@ -3,10 +3,10 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.25.6
+Stable tag: 3.25.7
 Template: twentytwentyfive
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License: GNU General Public License v3 or later
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 Custom child theme of Twenty Twenty-Five built for one site: The Rightly-Guided Injīl at injil.help. It carries that site's pages, content, fonts and licences, and is not intended for use on any other site.
 
@@ -62,7 +62,7 @@ Modelled on apostleofdoom.org: a title-page hero; each part of the study as a bl
 * Structured data for search engines on every page, switched off automatically when Yoast or SEOPress is active and added to Rank Math's own when Rank Math is active.
 * Contextual links in the text: the first mention of a phrase the shared map knows (inc/data/network-links.json) links to the inner page that treats it, on this site or another. Set under Theme Options > Contextual links.
 * A share row under posts and pages: X, Facebook, WhatsApp, Telegram, Reddit, LinkedIn, Bluesky, Threads, Pinterest and LINE, with Copy link and, where the browser allows, a button that opens the device's share sheet. Choose the networks and the label under Theme Options > Sharing.
-* The Journal: the site's one blog, standard posts at /journal/<slug>/, seeded from inc/data/posts.json.
+* The Journal: the site's one blog, standard posts at /journal/<slug>/, seeded from inc/data/posts.json. Each post shows its summary, the reading time, the updated date, "In short" when it has key points (the Key points box on the edit screen), a list of its sections, a FAQ when it has questions, and its Sources and Notes together at the end.
 * Hardening under Theme Options > Security: XML-RPC off, application passwords blocked, REST writes only from a browser session, a gambling-spam gate, 410 Gone for removed spam, a spam scan and reports.
 * Manuscript plates copied into the Media Library a few at a time, so readers are served local files. Remote plates are opt-in.
 * A settings screen of cards and tabs, usable by keyboard and on a phone.
@@ -153,6 +153,12 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.25.7 =
+* The old commentary addresses, such as /quran/commentaries/az-zukhruf-57-65/jalalayn/, reach their pages again. They had answered "not found" since 1 November, when the commentary texts were still uploading as the list of old addresses was built and kept.
+* A Journal post shows its summary under the title, the reading time and, when it changed later, the date it was updated.
+* A post with key points opens with an "In short" box. A post with three or more sections lists them under the breadcrumb row. The Sources and the Notes sit together in one block at the end.
+* The theme is now licensed under the GNU GPL, version 3 or later. The full text is in the LICENSE file.
+
 = 3.25.6 =
 * The documentation is up to date with the theme: updating by FTP, the eight settings tabs, the security switches, the error pages and the files the theme removes from a live site. UPGRADING.md sorts the roadmap into Next, Later and Ideas.
 
@@ -426,13 +432,16 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * New screenshot.
 
 == Upgrade Notice ==
+= 3.25.7 =
+Upload the whole theme, the inc/data folder included, then open any admin screen. The old commentary addresses redirect again.
+
 = 3.20.0 =
 Remote plates are now opt-in. A plate with no Media Library copy is hidden until the copy is made, a few files per admin screen load. Switch on Theme Options > Content > Load plates from Wikimedia Commons and Pexels to show them from the source meanwhile.
 
 == Copyright and licences ==
-The Injil, Copyright 2025-2026 its author, as named in the style.css header. Distributed under the GNU General Public License v2 or later. Its parent, Twenty Twenty-Five, is GPLv2 or later, by the WordPress team.
+The Injil, Copyright 2025-2026 its author, as named in the style.css header. Distributed under the GNU General Public License v3 or later; the full text is in the LICENSE file. Its parent, Twenty Twenty-Five, is GPLv2 or later, by the WordPress team.
 
-Scripts and styles: the theme's own (assets/css, assets/js), GPLv2 or later, unminified. It uses jQuery, Iris and wp-color-picker as WordPress registers them and bundles no third-party library.
+Scripts and styles: the theme's own (assets/css, assets/js), GPLv3 or later, unminified. It uses jQuery, Iris and wp-color-picker as WordPress registers them and bundles no third-party library.
 
 Fonts (assets/fonts), each under its own licence:
 * EB Garamond (Georg Duffner, Octavio Pardo) and Amiri (Khaled Hosny): SIL Open Font License 1.1, licence files OFL-EBGaramond.txt and OFL-Amiri.txt beside them.

@@ -33,8 +33,8 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 |---|---|
 | Type | Block theme (theme.json v3), child of `twentytwentyfive` |
 | Folder, text domain, pattern prefix | `injil-help` |
-| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.25.6) |
-| PHP in `inc/` | options, social, progress, unlist, unlist-admin, search-permalinks, starter-content, journal, starter-content-pages, gospel-islam, quran-jesus, tafsir, images, seo, schema, schema-content, schema-extend, rank-math, share, contextual-links, login, security, security-detector, error-pages, error-page-html (25 files) |
+| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.25.7) |
+| PHP in `inc/` | options, social, progress, unlist, unlist-admin, search-permalinks, starter-content, journal, starter-content-pages, gospel-islam, quran-jesus, tafsir, images, seo, schema, schema-content, schema-extend, rank-math, share, contextual-links, login, security, security-detector, error-pages, error-page-html, article (26 files) |
 | Data | `inc/data/` 2.6 MB of JSON: 182 starter pages, the 8 Journal posts (`posts.json`), the gospel narrative, the Qur'anic passages, Thomas (woven sections and two full texts), the infancy gospels, the substitution witnesses, eight commentaries (315,000 words) |
 | Front-end assets | `style.css` 32 KB; `assets/css/ornament.css` 12 KB, `share.css` 3 KB, `bible.css` 3 KB, `login.css` 7 KB, `journal.css` 2 KB, `responsive.css` 2 KB (phone header, touch targets, focus ring, loaded on every view); `assets/js/ornament.js` 3 KB, `share.js` 2 KB; all plain, no build step |
 | Fonts | 16 MB in `assets/fonts/`, 18 font families with 29 `fontFace` entries in `theme.json` |
@@ -82,6 +82,7 @@ injil-help/
 │  ├─ rank-math.php       Rank Math: graph merge, breadcrumbs, home description
 │  ├─ share.php           share row
 │  ├─ journal.php         the Journal: posts at /journal/<slug>/ from posts.json
+│  ├─ article.php         a post's parts: meta row, In short, contents, Sources block
 │  ├─ contextual-links.php links from known phrases in the text (shared map in data/network-links.json)
 │  ├─ social.php          profile links in the footer, shortcode and pattern
 │  ├─ progress.php        reading progress bar
@@ -96,7 +97,7 @@ injil-help/
 ├─ assets/css|js|fonts|icons|images
 ├─ errors/                static 403, 500, 502, 503, 504 pages for a site at the domain root
 ├─ bin/                   build-error-pages.php (command line only)
-├─ tests/                 nine command-line self-tests (export-ignore; refused by .htaccess)
+├─ tests/                 ten command-line self-tests (export-ignore; refused by .htaccess)
 ├─ .htaccess              refuses .git*, .claude, tests, bin and *.md in the theme folder
 └─ languages/             .mo files
 ```
@@ -265,6 +266,8 @@ All faces are bundled in `assets/fonts/` and declared as `fontFace` in `theme.js
 `inc/rank-math.php`. With Rank Math active and the SEO option on Automatic (`injil_help_rank_math_mode()`), the theme's own head output and graph are off and the theme works inside the plugin: `injil_help_rank_math_json_ld()` on `rank_math/json_ld` (priority 50) merges into Rank Math's data every node of `injil_help_schema_graph()` that Rank Math does not make, skips the theme's Organization, WebSite, page node, BreadcrumbList and Article (the author Person is kept, since Rank Math's publisher may be an Organization), copies the Article's `citation`, `about`, `speakable` and extra `isPartOf` onto Rank Math's Article, and repoints every reference to those (`injil_help_rank_math_repoint()`) to Rank Math's publisher, WebPage and Article. A FAQPage is added only when Rank Math has none. `add_theme_support( 'rank-math-breadcrumbs' )` is declared; while Rank Math's breadcrumbs are on, the `injil_help_breadcrumb_html` filter replaces the theme's trail with `rank_math_get_breadcrumbs()` wrapped in the theme's `.ih-breadcrumb` nav. `rank_math/frontend/description` supplies the theme's home description when Rank Math's is empty. "Always on" prints the theme's head and graph beside the plugin's; "Always off" prints nothing.
 
 ## Share row
+
+`inc/article.php` (3.25.7) builds the parts of a Journal post: `[injil_help_article_meta]` (reading time and the updated date, in the template's meta row), ids on the level-two headings (`the_content` priority 12), and at priority 16, after the contextual links and before the share row, "In short" from `_injil_help_points`, the contents list from three headings, and the `.ih-sources` frame around the Sources list and the Notes. Styles in `assets/css/article.css`. `injil_help_redirect_former()` in `inc/starter-content.php` keys its cached map by `injil_help_data_fingerprint()` and resolves old commentary addresses through `injil_help_former_commentary_target()`; `tests/former-redirect-test.php` checks the address shapes from the November 2026 log.
 
 `inc/share.php` appends the row to `the_content` (priority 20) on singular posts and pages of the chosen types, not on the front page, and not when the filter runs for an excerpt (`doing_filter('get_the_excerpt')`) or for a post that is not the queried one. Networks are a filterable table of `{key: [name, endpoint with {url} {title} {image}]}`; icons are masks over `assets/icons/social/{key}.svg`, coloured by the palette. `assets/js/share.js` reveals the Copy link button when `navigator.clipboard` is available in a secure context (with "Copied" and failure feedback) and the More… button when `navigator.share` exists.
 
@@ -436,4 +439,4 @@ ErrorDocument 504 /wp-content/injil-help-errors/504.html
 
 ## Licence
 
-GPL v2 or later for the theme code and the site's own text, including the English renderings of the commentaries. Fonts, the gospel base text, the Qur'an translation, the Nag Hammadi translations and the manuscript images keep their own licences, named in `readme.txt` and on the Credits page.
+GPL v3 or later for the theme code and the site's own text, including the English renderings of the commentaries; the full text is in `LICENSE`. Fonts, the gospel base text, the Qur'an translation, the Nag Hammadi translations and the manuscript images keep their own licences, named in `readme.txt` and on the Credits page.
