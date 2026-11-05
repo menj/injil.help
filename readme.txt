@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.25.7
+Stable tag: 3.25.8
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -30,7 +30,7 @@ Git Updater offers each new release from the theme header. To update by hand, up
 
 By FTP:
 1. Turn on hidden files in your FTP program, so the .htaccess file goes up.
-2. Upload the new folder next to the old one under a temporary name, such as wp-content/themes/injil-help-new. Wait until every file has arrived.
+2. Upload the new folder next to the old one under a temporary name, such as wp-content/themes/injil-help-new. Send its .htaccess file first, the one at the top of the folder. On Apache it closes the theme's private files to visitors while the rest arrives. Wait until every file has arrived.
 3. Rename the old folder (injil-help-old, say) and, straight after, give the new folder the old folder's exact name. Between the two renames the site has no theme folder and its pages may fail for that moment, so do them one after the other and keep the admin closed until both are done.
 4. Open any admin screen as an administrator, check the site, then delete the old folder.
 
@@ -153,6 +153,9 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.25.8 =
+* The FTP update steps send the theme's .htaccess file first, so its private files stay closed while the rest uploads.
+
 = 3.25.7 =
 * The old commentary addresses, such as /quran/commentaries/az-zukhruf-57-65/jalalayn/, reach their pages again. They had answered "not found" since 1 November, when the commentary texts were still uploading as the list of old addresses was built and kept.
 * A Journal post shows its summary under the title, the reading time and, when it changed later, the date it was updated.
@@ -432,6 +435,9 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * New screenshot.
 
 == Upgrade Notice ==
+= 3.25.8 =
+Documentation only. Upload the whole theme; nothing else to do.
+
 = 3.25.7 =
 Upload the whole theme, the inc/data folder included, then open any admin screen. The old commentary addresses redirect again.
 

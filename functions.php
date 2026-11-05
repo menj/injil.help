@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'INJIL_HELP_VERSION', '3.25.7' );
+define( 'INJIL_HELP_VERSION', '3.25.8' );
 
 /**
  * The theme's PHP files in inc/, in the order functions.php loads them. The files they pull in

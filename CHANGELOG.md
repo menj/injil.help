@@ -2,6 +2,13 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.25.8
+
+Documentation only.
+
+- Changed: the FTP update steps in `readme.txt` and `UPGRADING.md` send the theme's `.htaccess` file first, so its private files stay closed to visitors while the rest uploads.
+- Changed: `.claude/skills/theme-docs/SKILL.md` takes the refreshed standard.
+
 ## 3.25.7
 
 The anatomy of a Journal post, and the old commentary addresses fixed. No option key, function or hook was renamed or removed.
