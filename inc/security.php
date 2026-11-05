@@ -9,6 +9,9 @@
  *
  * Emergency switch: define( 'INJIL_HELP_SECURITY_LOCK', false ); in wp-config.php turns
  * the XML-RPC, application password and REST locks off without touching the options.
+ * XML-RPC also stays on while the Jetpack plugin is active, or with
+ * define( 'INJIL_HELP_ALLOW_XMLRPC', true ); and the "The Injil: deny direct core
+ * files" block in .htaccess goes with define( 'INJIL_HELP_ALLOW_CORE_FILES', true );.
  *
  * @package injil-help
  */
@@ -51,10 +54,35 @@ function injil_help_sec_url( $args = array() ) {
  * ---------------------------------------------------------------------- */
 
 /**
- * XML-RPC off: no methods, no pingback header, xmlrpc.php answers 403.
+ * Whether XML-RPC must stay on whatever the switch says: the Jetpack plugin
+ * talks to WordPress.com through it, and a site that needs it for another
+ * client adds define( 'INJIL_HELP_ALLOW_XMLRPC', true ); to wp-config.php.
+ *
+ * @return bool
+ */
+function injil_help_sec_xmlrpc_allowed() {
+	if ( defined( 'INJIL_HELP_ALLOW_XMLRPC' ) && INJIL_HELP_ALLOW_XMLRPC ) {
+		return true;
+	}
+	return class_exists( 'Jetpack' ) || defined( 'JETPACK__VERSION' );
+}
+
+/**
+ * Whether XML-RPC is off on this site: the switch is on and nothing needs it.
+ *
+ * @return bool
+ */
+function injil_help_sec_xmlrpc_off() {
+	return injil_help_sec_on( 'block_xmlrpc' ) && ! injil_help_sec_xmlrpc_allowed();
+}
+
+/**
+ * XML-RPC off: no methods (the pingback ones included), no pingback header or
+ * RSD link, and xmlrpc.php answers 403. The live log of November 2026 showed
+ * 586 password-guessing POSTs to xmlrpc.php answered with 200.
  */
 function injil_help_sec_xmlrpc() {
-	if ( ! injil_help_sec_on( 'block_xmlrpc' ) ) {
+	if ( ! injil_help_sec_xmlrpc_off() ) {
 		return;
 	}
 	add_filter( 'xmlrpc_enabled', '__return_false' );
@@ -104,6 +132,127 @@ function injil_help_sec_htaccess_lines() {
 	);
 }
 
+/** The .htaccess marker of the block that denies WordPress's own files. */
+defined( 'INJIL_HELP_SEC_CORE_MARKER' ) || define( 'INJIL_HELP_SEC_CORE_MARKER', 'The Injil: deny direct core files' );
+
+/**
+ * Lines that deny WordPress's own files that are never meant to be asked for
+ * by address: the PHP files in wp-includes (bots ask for blocks/rss.php and
+ * the like, which then fail with a fatal error and fill the error log),
+ * wp-settings.php, wp-config-sample.php, readme.html (which names the
+ * version), wp-admin/install.php and wp-admin/setup-config.php (the installer
+ * a hijacker used on a site left without wp-config.php), and xmlrpc.php while
+ * XML-RPC is off. The editor's TinyMCE loader (wp-includes/js/tinymce/) and
+ * ms-files.php, which a network's rewrite rules hand uploads to, stay
+ * reachable. The paths are relative to the folder that holds .htaccess, with
+ * WordPress's folder in front when it is installed in its own subfolder.
+ *
+ * @param string $prefix WordPress's folder relative to the .htaccess folder, '' or "wp/".
+ * @param bool   $xmlrpc Whether xmlrpc.php is denied as well.
+ * @param string $base   URL path of WordPress's folder, for the mod_alias lines used without mod_rewrite.
+ * @return string[]
+ */
+function injil_help_sec_core_lines( $prefix = '', $xmlrpc = true, $base = '/' ) {
+	$p     = str_replace( ' ', '\\ ', preg_quote( $prefix, '#' ) );
+	$files = array(
+		'wp-includes/(?!js/tinymce/|ms-files\\.php$).+\\.php',
+		'(wp-settings|wp-config-sample)\\.php',
+		'readme\\.html',
+		'wp-admin/(install|setup-config)\\.php',
+	);
+	if ( $xmlrpc ) {
+		$files[] = 'xmlrpc\\.php';
+	}
+	// Without mod_rewrite, mod_alias refuses the same files by their whole URL path.
+	$b       = str_replace( '"', '', preg_quote( '/' . trim( (string) $base, '/' ) . ( '' === trim( (string) $base, '/' ) ? '' : '/' ), '#' ) );
+	$rewrite = array( '<IfModule mod_rewrite.c>', 'RewriteEngine On' );
+	$alias   = array( '<IfModule !mod_rewrite.c>', '<IfModule mod_alias.c>' );
+	foreach ( $files as $f ) {
+		$rewrite[] = 'RewriteRule ^' . $p . $f . '$ - [F,L]';
+		$alias[]   = 'RedirectMatch 403 "^' . $b . $f . '$"';
+	}
+	return array_merge( $rewrite, array( '</IfModule>' ), $alias, array( '</IfModule>', '</IfModule>' ) );
+}
+
+/**
+ * The URL path of WordPress's folder, "/" at the domain root, "/wp/" or
+ * "/blog/" in a subfolder.
+ *
+ * @return string
+ */
+function injil_help_sec_core_base() {
+	$path = (string) wp_parse_url( site_url( '/' ), PHP_URL_PATH );
+	return '/' . ltrim( '' === $path ? '/' : $path, '/' );
+}
+
+/**
+ * WordPress's folder relative to the folder that holds .htaccess: '' when
+ * they are the same, "wp/" when WordPress sits in its own subfolder, null
+ * when WordPress is outside it (the block is then not written).
+ *
+ * @param string $home The folder that holds .htaccess.
+ * @param string $abs  ABSPATH.
+ * @return string|null
+ */
+function injil_help_sec_core_prefix( $home, $abs ) {
+	$home = rtrim( str_replace( '\\', '/', (string) $home ), '/' ) . '/';
+	$abs  = rtrim( str_replace( '\\', '/', (string) $abs ), '/' ) . '/';
+	return 0 === strpos( $abs, $home ) ? (string) substr( $abs, strlen( $home ) ) : null;
+}
+
+/**
+ * The core-file block this site should carry: empty when WordPress sits
+ * outside the .htaccess folder, or when
+ * define( 'INJIL_HELP_ALLOW_CORE_FILES', true ); in wp-config.php turns it
+ * off (for a plugin or host that needs one of those files by address).
+ *
+ * @param string|null $prefix WordPress's folder relative to the .htaccess folder; worked out when null.
+ * @return string[]
+ */
+function injil_help_sec_core_wanted( $prefix = null ) {
+	if ( defined( 'INJIL_HELP_ALLOW_CORE_FILES' ) && INJIL_HELP_ALLOW_CORE_FILES ) {
+		return array();
+	}
+	if ( null === $prefix ) {
+		if ( ! function_exists( 'get_home_path' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+		}
+		$prefix = injil_help_sec_core_prefix( get_home_path(), ABSPATH );
+	}
+	return null === $prefix ? array() : injil_help_sec_core_lines( $prefix, injil_help_sec_xmlrpc_off(), injil_help_sec_core_base() );
+}
+
+/**
+ * Both blocks as they read in .htaccess, with their markers, for a site
+ * whose .htaccess the theme cannot write: the Security tab shows them to
+ * paste after the WordPress section.
+ *
+ * @param string|null $prefix WordPress's folder relative to the .htaccess folder; worked out when null.
+ * @return string
+ */
+function injil_help_sec_htaccess_snippet( $prefix = null ) {
+	$lines = array();
+	if ( injil_help_sec_xmlrpc_off() ) {
+		$lines = array_merge( array( '# BEGIN Block xmlrpc.php' ), injil_help_sec_htaccess_lines(), array( '# END Block xmlrpc.php' ) );
+	}
+	$core = injil_help_sec_core_wanted( $prefix );
+	if ( $core ) {
+		$lines = array_merge( $lines, array( '# BEGIN ' . INJIL_HELP_SEC_CORE_MARKER ), $core, array( '# END ' . INJIL_HELP_SEC_CORE_MARKER ) );
+	}
+	return implode( "\n", $lines );
+}
+
+/**
+ * What the two blocks should hold now, as one short key. The hourly check
+ * runs again at once when it changes: Jetpack switched on or off, a constant
+ * added to wp-config.php, the XML-RPC switch moved.
+ *
+ * @return string
+ */
+function injil_help_sec_htaccess_state() {
+	return md5( wp_json_encode( array( injil_help_sec_xmlrpc_off(), injil_help_sec_core_wanted() ) ) );
+}
+
 /**
  * Path of the site's .htaccess, or '' when the server is not Apache or the
  * file cannot be written.
@@ -129,23 +278,28 @@ function injil_help_sec_htaccess_file() {
 }
 
 /**
- * Keep the server-level block in step with the XML-RPC switch: written while
- * the switch is on, removed when it is off. Runs in the admin, at most once an
- * hour, so a lost or overwritten .htaccess is repaired without any action.
+ * Keep the server-level blocks in step: the xmlrpc.php block while XML-RPC
+ * is off, removed when it is on, and the core-file block while the theme
+ * runs. Runs in the admin, at most once an hour, so a lost or overwritten
+ * .htaccess is repaired without any action; at once when what the blocks
+ * should hold has changed (injil_help_sec_htaccess_state()).
  *
  * @param bool $force Skip the hourly throttle.
  */
 function injil_help_sec_sync_htaccess( $force = false ) {
-	if ( ! $force && get_transient( 'injil_help_sec_htaccess_checked' ) ) {
+	$state = injil_help_sec_htaccess_state();
+	if ( ! $force && get_transient( 'injil_help_sec_htaccess_checked' ) === $state ) {
 		return;
 	}
-	set_transient( 'injil_help_sec_htaccess_checked', 1, HOUR_IN_SECONDS );
+	set_transient( 'injil_help_sec_htaccess_checked', $state, HOUR_IN_SECONDS );
 	$file = injil_help_sec_htaccess_file();
 	if ( '' === $file ) {
 		update_option( 'injil_help_security_htaccess', 'unavailable', false );
+		// Checked again on the next admin page, so a file made writable is written at once.
+		delete_transient( 'injil_help_sec_htaccess_checked' );
 		return;
 	}
-	$want    = injil_help_sec_on( 'block_xmlrpc' );
+	$want    = injil_help_sec_xmlrpc_off();
 	$current = function_exists( 'extract_from_markers' ) ? extract_from_markers( $file, 'Block xmlrpc.php' ) : array();
 	$ok      = true;
 	if ( $want && $current !== injil_help_sec_htaccess_lines() ) {
@@ -153,7 +307,17 @@ function injil_help_sec_sync_htaccess( $force = false ) {
 	} elseif ( ! $want && $current ) {
 		$ok = true === insert_with_markers( $file, 'Block xmlrpc.php', array() );
 	}
-	// 'written' only when the block is really in the file: a failed write reads as unavailable.
+	// The core-file block is kept while the theme runs, whatever the XML-RPC switch.
+	$core = injil_help_sec_core_wanted();
+	if ( ( function_exists( 'extract_from_markers' ) ? extract_from_markers( $file, INJIL_HELP_SEC_CORE_MARKER ) : array() ) !== $core
+		&& true !== insert_with_markers( $file, INJIL_HELP_SEC_CORE_MARKER, $core ) ) {
+		$ok = false;
+	}
+	if ( ! $ok ) {
+		// Tried again on the next admin page, not an hour later.
+		delete_transient( 'injil_help_sec_htaccess_checked' );
+	}
+	// 'written' only when the blocks are really in the file: a failed write reads as unavailable.
 	update_option( 'injil_help_security_htaccess', $ok ? ( $want ? 'written' : 'off' ) : 'unavailable', false );
 }
 add_action( 'admin_init', 'injil_help_sec_sync_htaccess' );
@@ -169,6 +333,7 @@ function injil_help_sec_remove_htaccess() {
 	$file = injil_help_sec_htaccess_file();
 	if ( '' !== $file ) {
 		insert_with_markers( $file, 'Block xmlrpc.php', array() );
+		insert_with_markers( $file, INJIL_HELP_SEC_CORE_MARKER, array() );
 	}
 	delete_transient( 'injil_help_sec_htaccess_checked' );
 }
@@ -1245,12 +1410,27 @@ function injil_help_sec_field( $o, $key, $title, $label, $help ) {
  */
 function injil_help_sec_render_settings( $o ) {
 	injil_help_ui_card_open( __( 'Remote publishing', 'injil-help' ), __( 'Spam tools publish from outside the site with a stored password. These switches close the doors they use. Writing in the editor is not affected.', 'injil-help' ) );
-	injil_help_sec_field( $o, 'block_xmlrpc', __( 'XML-RPC', 'injil-help' ), __( 'Turn off XML-RPC (on by default)', 'injil-help' ), __( 'xmlrpc.php answers 403 and the pingback header goes. On Apache the theme also blocks it in .htaccess, and removes that block when this is switched off. The Jetpack plugin and old mobile apps need XML-RPC.', 'injil-help' ) );
+	injil_help_sec_field( $o, 'block_xmlrpc', __( 'XML-RPC', 'injil-help' ), __( 'Turn off XML-RPC (on by default)', 'injil-help' ), __( 'xmlrpc.php answers 403, its methods go (the pingback ones included) and so does the pingback header. On Apache the theme also blocks it in .htaccess, and removes that block when this is switched off. XML-RPC stays on while the Jetpack plugin is active, since Jetpack needs it, or when wp-config.php sets INJIL_HELP_ALLOW_XMLRPC to true.', 'injil-help' ) );
+	if ( injil_help_sec_on( 'block_xmlrpc' ) && injil_help_sec_xmlrpc_allowed() ) {
+		echo '<p class="description ih-field-note ih-sec-key">' . esc_html__( 'XML-RPC is on all the same: the Jetpack plugin is active, or wp-config.php sets INJIL_HELP_ALLOW_XMLRPC. Password logins through it stay refused while this switch or the REST API switch is on.', 'injil-help' ) . '</p>';
+	}
 	$state = get_option( 'injil_help_security_htaccess', '' );
+	$core  = injil_help_sec_core_wanted();
 	if ( 'written' === $state ) {
 		echo '<p class="description ih-field-note">' . esc_html__( 'The web server also refuses xmlrpc.php: the theme keeps a "Block xmlrpc.php" section in .htaccess and repairs it if it goes missing.', 'injil-help' ) . '</p>';
 	} elseif ( 'unavailable' === $state ) {
-		echo '<p class="description ih-field-note ih-sec-key">' . esc_html__( 'The theme could not write .htaccess (the server is not Apache, or the file is read-only). WordPress still refuses xmlrpc.php; ask the host to deny it at the server as well.', 'injil-help' ) . '</p>';
+		if ( ! empty( $GLOBALS['is_nginx'] ) ) {
+			echo '<p class="description ih-field-note ih-sec-key">' . esc_html__( 'This server is Nginx, which reads no .htaccess. WordPress still refuses xmlrpc.php while XML-RPC is off. To refuse it and the WordPress files below at the web server as well, ask the host to add the Nginx rules from the Security section of the theme\'s README (github.com/menj/injil.help) to the server block.', 'injil-help' ) . '</p>';
+		} else {
+			echo '<p class="description ih-field-note ih-sec-key">' . esc_html__( 'The theme could not write .htaccess (the server is not Apache, or the file is read-only). WordPress still refuses xmlrpc.php while XML-RPC is off. To refuse it and the WordPress files below at the web server as well, paste these lines into .htaccess after the WordPress section, or ask the host for the same rules.', 'injil-help' ) . '</p>';
+		}
+		$snippet = empty( $GLOBALS['is_nginx'] ) ? injil_help_sec_htaccess_snippet() : '';
+		if ( '' !== $snippet ) {
+			echo '<textarea readonly rows="14" class="ih-input ih-input--area code" aria-label="' . esc_attr__( 'Lines for .htaccess', 'injil-help' ) . '" onclick="this.select()">' . esc_textarea( $snippet ) . '</textarea>';
+		}
+	}
+	if ( 'unavailable' !== $state && $core ) {
+		echo '<p class="description ih-field-note">' . esc_html__( 'On Apache the theme also keeps a "The Injil: deny direct core files" section in .htaccess. It answers 403 for the PHP files in wp-includes (the editor\'s TinyMCE loader and ms-files.php excepted), wp-settings.php, wp-config-sample.php, readme.html, wp-admin/install.php, wp-admin/setup-config.php and, while XML-RPC is off, xmlrpc.php. Bots ask for these by address. If a plugin or the host needs one of them, add define( \'INJIL_HELP_ALLOW_CORE_FILES\', true ); to wp-config.php.', 'injil-help' ) . '</p>';
 	}
 	injil_help_sec_field( $o, 'block_app_passwords', __( 'Application passwords', 'injil-help' ), __( 'Block application passwords (on by default)', 'injil-help' ), __( 'Application passwords let a client (a mobile app, a publishing tool, a script) log in through the REST API or XML-RPC with a password made for it alone. Nothing on this site needs that door, so the theme keeps it shut: the panel disappears from user profiles and such log-ins are refused. Revoke stored ones as well, below, so they cannot return if this is switched off.', 'injil-help' ) );
 	injil_help_sec_field( $o, 'block_rest_writes', __( 'REST API', 'injil-help' ), __( 'Allow REST API changes only from a logged-in browser (on by default)', 'injil-help' ), __( 'Any request that creates, changes or deletes content while logged in must come from a browser session on this site. Basic authentication and passwords sent in a header are refused. Reading through the API, and anything a visitor does without logging in, is unchanged.', 'injil-help' ) );

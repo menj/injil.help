@@ -80,6 +80,20 @@ Whichever is chosen, document the server settings a site needs (`max_input_vars`
 
 ## Updating an existing site
 
+**To 3.25.5.** Open any admin screen after the update. On Apache the theme adds a "The Injil: deny direct core files" section to the site's `.htaccess`, after the WordPress section. If a plugin or the host needs one of those files by address, add `define( 'INJIL_HELP_ALLOW_CORE_FILES', true );` to `wp-config.php`, and the next admin screen takes the section out. XML-RPC now stays on by itself while Jetpack is active, so a site that switched "Turn off XML-RPC" off for Jetpack can switch it on again; `define( 'INJIL_HELP_ALLOW_XMLRPC', true );` keeps XML-RPC on for any other client. If the Security tab says the theme could not write `.htaccess`, paste the lines it shows, or ask the host. On Nginx, add the rules from the Security section of the README to the server block.
+
+Then lock the installer, which the theme cannot do for you. The site was taken over through an open `wp-admin/setup-config.php` while WordPress core sat on the server without `wp-config.php`: in that state WordPress never loads the theme, and the installer answers anyone. Never upload WordPress core to a live folder without its `wp-config.php`. Upload `wp-config.php` first, or unpack core in a folder the web server does not serve and move it in whole. And add this rule at the top of the site's `.htaccess`, above every `# BEGIN` section, so no plugin or theme rewrites it:
+
+```
+# Installer lock: the site is installed. Keep this above every BEGIN section.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^(.+/)?wp-admin/(install|setup-config)\.php$ - [F,L]
+</IfModule>
+```
+
+The `(.+/)?` covers WordPress in a subfolder of the `.htaccess` folder too, such as `wp/wp-admin/setup-config.php`. On Nginx the lock is `location ~ ^/(.+/)?wp-admin/(install|setup-config)\.php$ { return 403; }`, and in an Apache virtual host `<LocationMatch "^/(.+/)?wp-admin/(install|setup-config)\.php$"> Require all denied </LocationMatch>`. Updates of WordPress are untouched, since they run through `wp-admin/upgrade.php`. Take the rule out only for the length of a fresh install.
+
 **To 3.25.4.** Open any admin screen after the update as a user who can update themes (on a network, a network administrator). On a production site the theme deletes `.git`, `.claude`, `tests` and the Markdown notes from its folder; if you deploy the theme with `git pull`, add `define( 'INJIL_HELP_KEEP_DEV_FILES', true );` to `wp-config.php` first. A local copy should set `WP_ENVIRONMENT_TYPE` to `local` or `development`. On Nginx, which reads no `.htaccess`, add the deny rule from the Security section of the README. The content sync publishes `/privacy-policy/` from the draft WordPress made on install.
 
 **To 3.25.3.** Nothing to do. The front page takes the new order from the theme. If you saved your own copy of the Front Page template in the Site Editor, that copy keeps its order; reset it under Appearance › Editor › Templates to take the new one.
