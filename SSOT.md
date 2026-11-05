@@ -15,6 +15,7 @@ The fixed facts about The Injil theme. When another document, a comment or a pat
 | Repository | https://github.com/menj/injil.help, `Primary Branch: main` (Git Updater). README.md, SSOT.md, CHANGELOG.md, UPGRADING.md and the dot-files (including `.claude/`, which holds `CLAUDE.md`, `FARUQI.md` and the writing-style skill) are `export-ignore`: they stay in the repository and out of the release archive. The tests kept in the repository are `tests/security-detector-test.php`, `tests/schema-graph-test.php`, `tests/journal-test.php`, `tests/plugin-features-test.php`, `tests/login-test.php`, `tests/error-pages-test.php`, `tests/schema-render-test.php`, `tests/hardening-test.php` and `tests/live-logs-test.php`; the other release checks live outside it. |
 | Version | `Version:` in `style.css` and `INJIL_HELP_VERSION` in `functions.php`, always equal; the release tag is `v` + that number |
 | Requires | WordPress 6.6, PHP 7.4 |
+| Folder on the live server | `wp-content/themes/injil.help`, a copy of the repository (the November 2026 error log shows that path). A release archive unpacks as `injil-help`; an update by hand keeps whichever name the site already uses |
 | Licence | GPL v2 or later; fonts and images keep their own licences |
 
 ## Purpose and position
@@ -60,7 +61,7 @@ The fixed facts about The Injil theme. When another document, a comment or a pat
 
 - `injil_help_populate( $overwrite = false, $force = false )`. On activation: create missing pages, set pretty permalinks, bin the untouched sample post, page and comment, replace the default tagline.
 - After an update (once per version, first admin load): rewrite pages whose text changed, skip pages the owner edited (post meta `_injil_help_hash` is missing or differs from the stored content, or `_injil_help_head` differs from the title and excerpt), keep no revisions, slash data, flush rewrite rules only when permalinks were set. "Update all pages from the theme" rewrites everything, edited pages included.
-- Options written: `injil_help_populated` (version stamped only after a non-empty page list), `injil_help_populating` (lock, stale after a minute), `injil_help_options`.
+- Options written: `injil_help_populated` (version stamped only after a non-empty page list), `injil_help_populating` (lock, stale after two minutes), `injil_help_options`.
 
 ## Theme Options (`injil_help_options`)
 
@@ -68,9 +69,12 @@ Tabs: Colours, Branding, Sharing, Reading, Contextual links, SEO, Security, Cont
 
 ## Filters
 
+- Every login sent through XML-RPC is refused while `block_xmlrpc` or `block_rest_writes` is on (`injil_help_sec_refuse_remote_password()`), so an XML-RPC client that logs in needs both off; application passwords also need `block_app_passwords` off.
 - Hardening set by the theme (inc/security.php, from 3.13.0): `wp_is_application_passwords_available` returns false while `block_app_passwords` is set, XML-RPC is off while `block_xmlrpc` is set, logged-in REST writes need a browser session while `block_rest_writes` is set, the spam gate runs while `spam_gate` is set and trashed spam answers 410 while `spam_gone` is set; all on by default. `INJIL_HELP_SECURITY_LOCK` false turns the first three off. From 3.25.5 XML-RPC also stays on while Jetpack is active or `INJIL_HELP_ALLOW_XMLRPC` is true, and on Apache the theme keeps a "The Injil: deny direct core files" section in the site's `.htaccess` (wp-includes PHP except TinyMCE and `ms-files.php`, `wp-settings.php`, `wp-config-sample.php`, `readme.html`, `wp-admin/install.php`, `wp-admin/setup-config.php`, and `xmlrpc.php` while XML-RPC is off), with WordPress's subfolder in front when it has one; `INJIL_HELP_ALLOW_CORE_FILES` true takes it out. Options written: `injil_help_security_log`, `injil_help_security_gone`, `injil_help_security_counts`, `injil_help_security_failed`, `injil_help_security_htaccess`.
 
-`injil_help_seo_defaults`, `injil_help_default_og_image`, `injil_help_output_schema`, `injil_help_schema_graph`, `injil_help_share_networks`, `injil_help_contextual_links_map` (the decoded map), `injil_help_contextual_links_enabled` (bool, `$post`).
+`injil_help_seo_defaults`, `injil_help_default_og_image`, `injil_help_output_schema`, `injil_help_schema_graph`, `injil_help_share_networks`, `injil_help_social_networks`, `injil_help_contextual_links_map` (the decoded map), `injil_help_contextual_links_enabled` (bool, `$post`), `injil_help_breadcrumb_trail`, `injil_help_breadcrumb_html`, `injil_help_remote_images`, `injil_help_login_plugin_active`, `injil_help_sec_rest_allow`, `injil_help_owner_digests`, `injil_help_unlist_enabled`, `unlist_posts_enabled`, `injil_help_search_permalinks_enabled`, `injil_help_search_reserved_bases`.
+
+Constants read from `wp-config.php`: `INJIL_HELP_SECURITY_LOCK`, `INJIL_HELP_ALLOW_XMLRPC`, `INJIL_HELP_ALLOW_CORE_FILES`, `INJIL_HELP_KEEP_DEV_FILES`, `INJIL_HELP_SPAM_THRESHOLD`, and the schema author pair `INJIL_HELP_SCHEMA_AUTHOR_NAME` and `INJIL_HELP_SCHEMA_AUTHOR_URL`. On a production site the theme deletes the entries `.gitattributes` leaves out of the archive (`.git*`, `.claude`, `tests` and the Markdown notes) on the next admin screen opened by a user who can update themes, unless `INJIL_HELP_KEEP_DEV_FILES` is true.
 
 ## Design tokens
 
@@ -146,4 +150,5 @@ Shafaat (1985) for the gospel text; Alham Ahmed and The Clear Quran for the pass
 - apostleofdoom.org (the case against Paul of Tarsus) and bestofislam.org (objections to Islam answered) are linked within the running text only, article by article, where the subject meets, as any source is cited: a sentence naming the article and the site. Never present them as companion or sister sites, never in the footer, the menus or a declared row, and never nofollow them.
 - Paul is always "Paul of Tarsus" in the site's own text, including headings and link text; book titles, quotations and the glossary term "New perspective on Paul" keep their wording.
 - Release: bump both version strings, update `CHANGELOG.md` and the readme changelog, add an `UPGRADING.md` note if an existing site must act, merge to `main`, tag `vX.Y.Z`.
-- Run before pushing: `php -l` on every PHP file, JSON validity on every data file, the page link check and the block-balance render check (the scratch harnesses used in development live outside the repository; rebuild them from `inc/starter-content-pages.php` and `inc/schema.php` if needed).
+- Run before pushing: `php -l` on every PHP file, JSON validity on every data file, every test in `tests/` (`for t in tests/*.php; do php "$t" || exit 1; done`), `php bin/build-error-pages.php --check`, the banned-word grep from `.claude/CLAUDE.md`, the page link check and the block-balance render check (those last two are scratch scripts that live outside the repository; rebuild them from `inc/starter-content-pages.php` and `inc/schema.php` if needed).
+- Public text, `readme.txt` included, never calls the other sites companion or sister sites or a network. The shared phrase map is a file name, not a claim.

@@ -33,11 +33,11 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 |---|---|
 | Type | Block theme (theme.json v3), child of `twentytwentyfive` |
 | Folder, text domain, pattern prefix | `injil-help` |
-| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.25.5) |
-| PHP in `inc/` | options, social, progress, unlist, unlist-admin, search-permalinks, starter-content, journal, starter-content-pages, gospel-islam, quran-jesus, tafsir, images, seo, schema, schema-content, rank-math, share, contextual-links, login, security, security-detector |
+| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.25.6) |
+| PHP in `inc/` | options, social, progress, unlist, unlist-admin, search-permalinks, starter-content, journal, starter-content-pages, gospel-islam, quran-jesus, tafsir, images, seo, schema, schema-content, schema-extend, rank-math, share, contextual-links, login, security, security-detector, error-pages, error-page-html (25 files) |
 | Data | `inc/data/` 2.6 MB of JSON: 182 starter pages, the 8 Journal posts (`posts.json`), the gospel narrative, the Qur'anic passages, Thomas (woven sections and two full texts), the infancy gospels, the substitution witnesses, eight commentaries (315,000 words) |
 | Front-end assets | `style.css` 32 KB; `assets/css/ornament.css` 12 KB, `share.css` 3 KB, `bible.css` 3 KB, `login.css` 7 KB, `journal.css` 2 KB, `responsive.css` 2 KB (phone header, touch targets, focus ring, loaded on every view); `assets/js/ornament.js` 3 KB, `share.js` 2 KB; all plain, no build step |
-| Fonts | 16 MB in `assets/fonts/`, 18 `fontFace` entries in `theme.json` |
+| Fonts | 16 MB in `assets/fonts/`, 18 font families with 29 `fontFace` entries in `theme.json` |
 | Admin | one tabbed page, Appearance › Theme Options, option `injil_help_options` |
 | Updates | Git Updater via the `GitHub Theme URI` and `Primary Branch: main` headers; tag `vX.Y.Z` |
 
@@ -56,7 +56,7 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 
 1. Install Twenty Twenty-Five. Clone or unzip this repository to `wp-content/themes/injil-help` (the folder name must be `injil-help`).
 2. Activate "The Injil". `after_switch_theme` creates every page, sets permalinks, bins the untouched sample post, page and comment and replaces the default tagline.
-3. Updates: Git Updater reads the header and offers the release whose tag matches `Version:`. The archive GitHub builds for it leaves out the development files marked `export-ignore` in `.gitattributes` (README.md, SSOT.md, CHANGELOG.md, UPGRADING.md and the two dot-files), so a site updated that way carries only what WordPress reads: the code, the assets, the content, readme.txt and the screenshot. There are no test files in the theme; the checks run before each release live outside the repository. On the first admin screen load after the update, `admin_init` rewrites the starter pages whose text changed and leaves edited ones alone (see [Starter content lifecycle](#starter-content-lifecycle)). Take a database backup before updating.
+3. Updates: Git Updater reads the header and offers the release whose tag matches `Version:`. The archive GitHub builds for it leaves out the development files marked `export-ignore` in `.gitattributes` (README.md, SSOT.md, CHANGELOG.md, UPGRADING.md and the two dot-files), so a site updated that way carries only what WordPress reads: the code, the assets, the content, readme.txt and the screenshot. The nine self-tests in `tests/` stay in the repository and out of the archive (`export-ignore`); the page, link and render scripts described under [Development workflow](#development-workflow) still live outside it. On the first admin screen load after the update, `admin_init` rewrites the starter pages whose text changed and leaves edited ones alone (see [Starter content lifecycle](#starter-content-lifecycle)). Take a database backup before updating.
 4. Release procedure: bump both version strings together, add the entry to `CHANGELOG.md` and to the Changelog section of `readme.txt`, note anything an existing site must do in `UPGRADING.md`, merge to `main`, tag `vX.Y.Z`.
 
 ## Architecture
@@ -64,7 +64,7 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 ```
 injil-help/
 ├─ style.css              theme header; tokens (--ih-*); every component style
-├─ theme.json             palette, spacing, 18 fontFace entries, custom templates
+├─ theme.json             palette, spacing, 18 font families (29 fontFace entries), custom templates
 ├─ functions.php          version constant, requires, enqueues, pattern category, block styles, favicon
 ├─ inc/
 │  ├─ options.php         Theme Options page, defaults, sanitiser, body classes, colour CSS
@@ -78,11 +78,26 @@ injil-help/
 │  ├─ schema.php          the JSON-LD graph
 │  ├─ schema-content.php  the graph's content and page-element nodes: policies, elements, claims, objections, corrections, glosses, manuscripts, translations, subjects
 │  ├─ login.php           the log-in screen in the site's dress
+│  ├─ schema-extend.php   further graph nodes for the page elements
 │  ├─ rank-math.php       Rank Math: graph merge, breadcrumbs, home description
 │  ├─ share.php           share row
+│  ├─ journal.php         the Journal: posts at /journal/<slug>/ from posts.json
+│  ├─ contextual-links.php links from known phrases in the text (shared map in data/network-links.json)
+│  ├─ social.php          profile links in the footer, shortcode and pattern
+│  ├─ progress.php        reading progress bar
+│  ├─ unlist.php, unlist-admin.php  unlisted posts and pages
+│  ├─ search-permalinks.php  /search/{term}/ addresses
+│  ├─ security.php        Security tab: locks, spam gate, 410 Gone, the two .htaccess sections, development-file clean-up
+│  ├─ security-detector.php  gambling spam score, plain PHP
+│  ├─ error-pages.php     wp-content drop-ins and static error pages, the Error pages section
+│  ├─ error-page-html.php the error pages as plain HTML, no WordPress function
 │  └─ data/               all content, JSON only (pages/, the 34 block patterns in patterns/, tafsir/ and the data files)
 ├─ templates/, parts/     block templates and the header and footer parts
 ├─ assets/css|js|fonts|icons|images
+├─ errors/                static 403, 500, 502, 503, 504 pages for a site at the domain root
+├─ bin/                   build-error-pages.php (command line only)
+├─ tests/                 nine command-line self-tests (export-ignore; refused by .htaccess)
+├─ .htaccess              refuses .git*, .claude, tests, bin and *.md in the theme folder
 └─ languages/             .mo files
 ```
 
@@ -190,10 +205,11 @@ Appearance › Theme Options (`inc/options.php`), one option array `injil_help_o
 | Tab | Keys |
 |---|---|
 | Colours | `colors` (nine palette slugs → hex; empty keeps theme.json) |
-| Branding | `content_width` full\|wide\|reading (default full: the content fills the page between the gutters; wide is the 1240px of the header and footer; reading is the 720px column of theme.json; body class `ih-width-{value}`; at full and wide, prose pages flow in two columns from 1280px with headings, tables, plates, folds and asides spanning both, while pages carrying `.ih-bible` keep the gospel's own columns), `ornament` rich\|subtle\|off, `animate` 0\|1, `parallax` strong\|gentle\|off, `footer_mark`, `favicon_force`, `favicon_url` |
+| Branding | `login_design` 0\|1 and `login_message` (the log-in screen, `inc/login.php`); `content_width` full\|wide\|reading (default full: the content fills the page between the gutters; wide is the 1240px of the header and footer; reading is the 720px column of theme.json; body class `ih-width-{value}`; at full and wide, prose pages flow in two columns from 1280px with headings, tables, plates, folds and asides spanning both, while pages carrying `.ih-bible` keep the gospel's own columns), `ornament` rich\|subtle\|off, `animate` 0\|1, `parallax` strong\|gentle\|off, `footer_mark`, `favicon_force`, `favicon_url` |
 | Sharing | `share`, `share_types` (post, page), `share_networks` (ordered subset of the network keys), `share_label`; `social_profiles` (network key to profile URL) and `social_footer` 0\|1 for the profile icons (3.21.0) |
 | Reading | `progress` 0\|1, `progress_types` (public post types), `progress_position` top\|bottom, `progress_height` 1-12, `progress_color`, `progress_track` (hex, empty follows the palette) (3.21.0) |
 | SEO | `schema` auto\|on\|off, `home_title`, `home_description`, `pillar_title`, `og_image`, `author_name`, `author_url`, `same_as` (one URL per line), `org_logo` |
+| Contextual links | `ctx_own`, `ctx_sister` 0\|1 (links to this site and to the other sites); `ctx_own_max`, `ctx_sister_max` (caps per page, 4 and 3); `ctx_extra` (one `phrase \| address` per line, wins over the shared map); `ctx_exclude` (pages that get no links) |
 | Security | `block_app_passwords`, `block_xmlrpc`, `block_rest_writes`, `spam_gate`, `spam_gone`, each 0\|1, default 1 (see [Security](#security)); changed only by a user with `manage_options`. Below the form: the spam scan, clean-up buttons, reports and the security log |
 | Content | `gospel_layout` columns\|single\|plain (the Bible layout of the gospel sections); `remote_images` 0\|1, default 0 (3.20.0: a plate with no Media Library copy is hidden unless it is 1; filter `injil_help_remote_images`); lists every starter page as present (linked, green dot) or missing (gold dot) and runs the two populate actions |
 
@@ -279,6 +295,25 @@ Since 3.21.0 the theme does the work of four plugins. Each of the last three tur
 | `injil_help_social_networks( array )` | the networks a profile link can point to |
 | `injil_help_unlist_enabled( bool )` | turn unlisting off |
 | `injil_help_search_permalinks_enabled( bool )` | turn the search addresses off |
+| `injil_help_search_reserved_bases( array )` | words the search base may not take |
+| `injil_help_breadcrumb_trail( array )`, `injil_help_breadcrumb_html( string )` | edit the breadcrumb trail, or its markup |
+| `injil_help_contextual_links_enabled( bool, WP_Post )`, `injil_help_contextual_links_map( array )` | switch contextual links off for one page; change the shared phrase map |
+| `injil_help_remote_images( bool )` | serve plates that have no Media Library copy from Commons and Pexels |
+| `injil_help_login_plugin_active( bool )` | whether a log-in plugin owns the log-in screen |
+| `injil_help_sec_rest_allow( array )` | REST route prefixes that may write with non-cookie authentication |
+| `injil_help_owner_digests( array )` | add SHA-1 digests of names the structured data must keep out of everything but the author node (`inc/schema-extend.php`); the built-in ones always stay |
+| `unlist_posts_enabled( bool )` | the plugin's own switch, honoured as well |
+
+Constants, each optional, set in `wp-config.php`:
+
+| Constant | Effect |
+|---|---|
+| `INJIL_HELP_SECURITY_LOCK` | `false` lifts the three locks (XML-RPC, application passwords, REST writes) without changing the options |
+| `INJIL_HELP_ALLOW_XMLRPC` | `true` keeps XML-RPC on for a client other than Jetpack, and leaves the xmlrpc.php lines out of `.htaccess` |
+| `INJIL_HELP_ALLOW_CORE_FILES` | `true` takes "The Injil: deny direct core files" out of `.htaccess` |
+| `INJIL_HELP_KEEP_DEV_FILES` | `true` keeps `.git`, `.claude`, `tests` and the notes on a production site |
+| `INJIL_HELP_SPAM_THRESHOLD` | spam score at which a post is held (default 3) |
+| `INJIL_HELP_SCHEMA_AUTHOR_NAME`, `INJIL_HELP_SCHEMA_AUTHOR_URL` | the schema author, defined in `inc/schema.php` unless set first (`SSOT.md`, Structured data and SEO) |
 
 Actions used: `after_switch_theme`, `admin_init`, `admin_post_injil_help_populate`, `admin_menu`, `admin_enqueue_scripts`, `enqueue_block_assets`, `wp_enqueue_scripts`, `wp_head`, `init`, `after_setup_theme`. Options written: `injil_help_options`, `injil_help_populated`, `injil_help_populating`. Post meta: `_injil_help_hash`.
 
@@ -384,7 +419,8 @@ ErrorDocument 504 /wp-content/injil-help-errors/504.html
    - Page list and links: a script that stubs `get_stylesheet_directory()` and the handful of WordPress functions the loaders call, requires `inc/starter-content-pages.php`, calls `injil_help_starter_pages()`, and asserts no duplicate paths, every child has a parent, and every `href="/…/"` in a body or pattern points at a starter path.
    - Render: with the same stubs plus WordPress's block parser classes, run every definition through `injil_help_page_content()`, `parse_blocks()` it, and assert every `wp:details` opens and closes and no `null` block names appear where a block was intended.
    - Structured data: with the stubs, call `injil_help_schema_graph()` for one page of each type and check every `@id` reference resolves.
-   These harnesses lived in a scratch directory during development; `UPGRADING.md` asks for them to be brought into `tools/` and run in CI.
+   - The self-tests in the repository, each a plain PHP script with WordPress stubbed: `for t in tests/*.php; do php "$t" || exit 1; done`, and `php bin/build-error-pages.php --check`, which fails on a stale static error page.
+   The page, render and structured-data scripts lived in a scratch directory during development; `UPGRADING.md` asks for them to be brought into the repository and run in CI.
 3. Commit messages describe the change; no tool or model names in any artefact.
 4. Release as in [Install and update](#install-and-update).
 
@@ -392,7 +428,7 @@ ErrorDocument 504 /wp-content/injil-help-errors/504.html
 
 - **Pages missing after activation.** Open Appearance › Theme Options › Content and press "Create missing pages". If the list itself is empty, a data file failed to parse: validate the JSON.
 - **An update did not change a page.** The page was edited after the theme wrote it (shown as "edited, kept on update"). Use "Update all pages from the theme" to replace it, or re-apply your edit after.
-- **Populate seems stuck.** The lock option `injil_help_populating` expires after a minute; reload.
+- **Populate seems stuck.** The lock option `injil_help_populating` is treated as stale after two minutes; reload.
 - **Saving a gospel section fails in the editor.** Raise `max_input_vars` (5000) and `post_max_size`; or edit the data file and rewrite the page.
 - **No structured data in the source.** An SEO plugin is active (the theme defers to it), or the SEO tab is set to Off.
 - **Fonts do not load.** Check the host serves `.ttf` and `.otf` with a font MIME type and that `assets/fonts/` uploaded completely (16 MB).
