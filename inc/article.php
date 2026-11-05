@@ -61,7 +61,8 @@ function injil_help_article_meta() {
 	if ( ! $post ) {
 		return '';
 	}
-	$words   = str_word_count( injil_help_article_text( strip_shortcodes( $post->post_content ) ) );
+	// Counted as runs of letters and digits in any script: str_word_count() splits "Injīl" at the ī.
+	$words   = (int) preg_match_all( '/[\p{L}\p{N}][\p{L}\p{N}\p{M}\'’-]*/u', injil_help_article_text( strip_shortcodes( $post->post_content ) ) );
 	$minutes = max( 1, (int) round( $words / 220 ) );
 	/* translators: %d: minutes. */
 	$out = '<span class="ih-meta-item ih-reading-time">' . esc_html( sprintf( _n( '%d minute to read', '%d minutes to read', $minutes, 'injil-help' ), $minutes ) ) . '</span>';
