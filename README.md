@@ -319,6 +319,8 @@ ErrorDocument 503 /wp-content/themes/injil.help/errors/503.html
 ErrorDocument 504 /wp-content/themes/injil.help/errors/504.html
 ```
 
+These lines assume WordPress at the root of the domain. On a site installed in a subfolder, or with `wp-content` moved, copy the lines from the theme's Error pages section instead: it builds them from the real address. The static pages themselves cannot learn that address, so their home link points to `/`.
+
 ## Development workflow
 
 1. Edit content in `inc/data/` (JSON only, patterns included), behaviour in `inc/`, styles in `style.css` or `assets/css/`. Never put article text in PHP.
