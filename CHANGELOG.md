@@ -2,6 +2,16 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.25.3
+
+The front page follows one story from top to bottom. No section, pattern slug, option key, function or hook was renamed or removed.
+
+- `templates/front-page.html` renders the FAQs (`home-answers`) before Resources (`home-resources`), so the reader meets the objections after the evidence and ends on the sources and the corrections log.
+- The FAQs carry the label "Part VI · The questions" (it was "In brief") and Resources "Part VII · Test it yourself" (it was "Apparatus"). The section headings are unchanged.
+- The intros of the Five Gospels, Paul of Tarsus, Jesus in the Qur'an, the Gospel According to Islam, the FAQs and Resources each open with a line that leads on from the section before.
+- `SSOT.md` and `README.md` record the order and the job of each section.
+- The README says `injil_help_error_remove()` leaves the error pages in place on a network, as the code already did.
+
 ## 3.25.2
 
 The web server error pages work on a site in a subfolder. No option key, function or hook was renamed or removed.
