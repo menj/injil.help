@@ -9,3 +9,5 @@ Three rules that apply to every edit:
 - **Never use the word "horn".** It is banned for the Islamic Dilemma and everywhere else on the site, in text, titles, excerpts, CSS class names, comments and documentation. The two parts of the dilemma are its two "claims" ("both claims", "the first claim", "its two-part form"). Before committing, run `git grep -niP '\bhorn' -- ':!SSOT.md' ':!.claude/CLAUDE.md'` and expect no output; `SSOT.md` and `.claude/CLAUDE.md` name the word only to ban it.
 - **Write every piece of English prose to `.claude/skills/anti-ai-writing-style/SKILL.md`.** Load that skill before drafting or revising page text, excerpts, FAQs, patterns, the readme, README or changelog entries. Quotations and reproduced texts keep their authors' wording.
 - **Every title tag is `<page title, keyword or description> | <site name>`, under 60 characters.** That leaves 32 characters for the page part. A page whose title is longer needs a short title in `inc/data/seo-titles.json`. `SSOT.md` has the details.
+
+Keep the five base documents to `.claude/skills/theme-docs/SKILL.md` whenever a change affects what they describe.
