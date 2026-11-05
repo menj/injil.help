@@ -10,4 +10,4 @@ Three rules that apply to every edit:
 - **Write every piece of English prose to `.claude/skills/anti-ai-writing-style/SKILL.md`.** Load that skill before drafting or revising page text, excerpts, FAQs, patterns, the readme, README or changelog entries. Quotations and reproduced texts keep their authors' wording.
 - **Every title tag is `<page title, keyword or description> | <site name>`, under 60 characters.** That leaves 32 characters for the page part. A page whose title is longer needs a short title in `inc/data/seo-titles.json`. `SSOT.md` has the details.
 
-Keep the five base documents to `.claude/skills/theme-docs/SKILL.md` on every change.
+Keep the five base documents to `.claude/skills/theme-docs/SKILL.md` whenever a change affects what they describe.
