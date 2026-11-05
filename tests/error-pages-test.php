@@ -22,7 +22,10 @@ function __( $s ) { return $s; }
 function get_bloginfo() { return 'The Rightly-Guided Injīl'; }
 function wp_specialchars_decode( $s ) { return $s; }
 function wp_parse_url( $u, $c = -1 ) { return parse_url( $u, $c ); }
-function home_url( $p = '' ) { return 'https://example.test' . $p; }
+function home_url( $p = '' ) { return $GLOBALS['err_home'] . $p; }
+$GLOBALS['err_home'] = 'https://example.test';
+function content_url( $p = '' ) { return $GLOBALS['err_home'] . '/wp-content' . $p; }
+function wp_mkdir_p( $d ) { return is_dir( $d ) || mkdir( $d, 0700, true ); }
 function untrailingslashit( $s ) { return rtrim( $s, '/' ); }
 function get_stylesheet_directory_uri() { return 'https://example.test/wp-content/themes/injil.help'; }
 function update_option( $k, $v ) { $GLOBALS['err_opt'][ $k ] = $v; return true; }
@@ -86,8 +89,23 @@ unlink( "$err_tmp/php-error.php" );
 err_check( injil_help_error_needs_install(), 'a missing file is noticed' );
 injil_help_error_maybe_install();
 err_check( 'installed' === injil_help_error_state( 'php-error.php' ), 'an administrator\'s visit writes it back' );
+$err_st = 'injil-help-errors/403.html';
+err_check( 'installed' === injil_help_error_state( $err_st ) && false !== strpos( (string) file_get_contents( "$err_tmp/$err_st" ), 'href="/"' ), 'the static copies are written with the home link' );
+$GLOBALS['err_home'] = 'https://example.test/blog';
+err_check( 'outdated' === injil_help_error_state( $err_st ) && injil_help_error_needs_install(), 'a subfolder home makes the static copies outdated' );
+injil_help_error_maybe_install();
+err_check( false !== strpos( (string) file_get_contents( "$err_tmp/$err_st" ), 'href="/blog/"' ), 'a subfolder install gets its own home link' );
+err_check( false !== strpos( injil_help_error_htaccess_snippet(), 'ErrorDocument 503 /blog/wp-content/injil-help-errors/503.html' ) && false !== strpos( injil_help_error_htaccess_snippet(), 'ErrorDocument 504 /blog/wp-content/injil-help-errors/504.html' ), '.htaccess lines point at the site copies under the subfolder' );
+file_put_contents( "$err_tmp/injil-help-errors/500.html", "<p>own</p>\n" );
+err_check( 'kept' === injil_help_error_install()['injil-help-errors/500.html'], 'a static page the theme did not write is kept' );
 injil_help_error_remove();
+err_check( 'missing' === injil_help_error_state( $err_st ) && file_exists( "$err_tmp/injil-help-errors/500.html" ), 'switching away removes the theme\'s static copies only' );
+unlink( "$err_tmp/injil-help-errors/500.html" );
+rmdir( "$err_tmp/injil-help-errors" );
 err_check( 'missing' === injil_help_error_state( 'maintenance.php' ) && 'missing' === injil_help_error_state( 'php-error.php' ) && "<?php // Somebody else's page\n" === file_get_contents( "$err_tmp/db-error.php" ), 'switching away removes only the theme\'s own files' );
+file_put_contents( "$err_tmp/maintenance.php", "<?php // someone else's, written after the check\n" );
+err_check( false === @link( __FILE__, "$err_tmp/maintenance.php" ), 'a hard link never replaces a file that exists' );
+unlink( "$err_tmp/maintenance.php" );
 foreach ( glob( "$err_tmp/*.tmp" ) as $err_left ) {
 	err_check( false, "temporary file left: $err_left" );
 }
@@ -98,7 +116,6 @@ foreach ( array( '403', '500', '502', '503', '504' ) as $err_c ) {
 	$err_h = (string) @file_get_contents( dirname( __DIR__ ) . "/errors/$err_c.html" );
 	err_check( false !== strpos( $err_h, 'noindex' ) && false === strpos( $err_h, '<?php' ), "errors/$err_c.html is static and noindex" );
 }
-err_check( false !== strpos( injil_help_error_htaccess_snippet(), 'ErrorDocument 503 /wp-content/themes/injil.help/errors/503.html' ) && false !== strpos( injil_help_error_htaccess_snippet(), 'ErrorDocument 504 /wp-content/themes/injil.help/errors/504.html' ), '.htaccess lines point at errors/' );
 
 array_map( 'unlink', glob( "$err_tmp/*" ) );
 rmdir( $err_tmp );
