@@ -419,7 +419,11 @@ function injil_help_data_fingerprint() {
 	$files = array_merge( (array) glob( $dir . '*.json' ), (array) glob( $dir . 'pages/*.json' ), (array) glob( $dir . 'tafsir/*.json' ) );
 	$sig   = '';
 	foreach ( $files as $file ) {
-		$sig .= basename( (string) $file ) . ':' . (int) @filesize( $file ) . ':' . (int) @filemtime( $file ) . ';'; // phpcs:ignore WordPress.PHP.NoSilencedErrors -- a file removed between glob and stat counts as empty.
+		// Size, modification and change times and the inode: an upload that replaces a file gives it a
+		// new inode or change time even when the size and the second of the modification time match.
+		// Reading the files' bytes on every request would cost more than the map saves.
+		$st   = @stat( $file ); // phpcs:ignore WordPress.PHP.NoSilencedErrors -- a file removed between glob and stat counts as empty.
+		$sig .= basename( (string) $file ) . ':' . ( $st ? $st['size'] . ':' . $st['mtime'] . ':' . $st['ctime'] . ':' . $st['ino'] : '0' ) . ';';
 	}
 	return substr( md5( $sig ), 0, 12 );
 }
@@ -441,14 +445,24 @@ function injil_help_former_commentary_target( $path ) {
 	}
 	$group = null;
 	$old   = false;
-	foreach ( injil_help_tafsir_groups() as $slug => $g ) {
-		if ( (string) ( $g['former'] ?? '' ) === $m[1] ) {
-			$group = $slug;
-			$old   = true;
-			break;
-		}
-		if ( $slug === $m[1] ) {
-			$group = $slug;
+	// The segment as written, then without a WordPress copy suffix ("az-zukhruf-57-65-2"). The old
+	// slugs end in verse numbers themselves, so the exact match is tried first.
+	$names = array( $m[1] );
+	if ( preg_match( '#^(.+)-\d+$#', $m[1], $copy ) ) {
+		$names[] = $copy[1];
+	}
+	foreach ( $names as $name ) {
+		foreach ( injil_help_tafsir_groups() as $slug => $g ) {
+			if ( (string) ( $g['former'] ?? '' ) === $name ) {
+				$group = $slug;
+				$old   = true;
+				break 2;
+			}
+			if ( $slug === $name ) {
+				$group = $slug;
+				$old   = $name !== $m[1]; // a copy of a present group page is a former address
+				break 2;
+			}
 		}
 	}
 	if ( null === $group ) {
@@ -459,7 +473,8 @@ function injil_help_former_commentary_target( $path ) {
 		return $old ? $base . '/' . $group : null;
 	}
 	if ( ! isset( injil_help_tafsir_works()[ $work ] ) ) {
-		return $base . '/' . $group;
+		// An unknown work under an old group goes to the group; under a present group it is a real 404.
+		return $old ? $base . '/' . $group : null;
 	}
 	$part = (int) ( $m[4] ?? 0 );
 	if ( ! $old && $part < 1 && empty( $m[3] ) ) {

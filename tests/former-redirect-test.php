@@ -135,6 +135,10 @@ $cases = array(
 	'/quran/commentaries/al-maidah-110-120/qurtubi/'        => '301 https://injil.help/quran/commentaries/table-and-questioning/qurtubi/',
 	'/quran/commentaries/AZ-ZUKHRUF-57-65/Jalalayn/'        => '301 https://injil.help/quran/commentaries/son-of-mary-as-example/jalalayn/',
 	'/about-the-author/'                                     => '301 https://injil.help/about/',
+	'/quran/commentaries/az-zukhruf-57-65-2/'               => '301 https://injil.help/quran/commentaries/son-of-mary-as-example/',
+	'/quran/commentaries/as-saff-6-2/tabari/'               => '302 https://injil.help/quran/commentaries/',
+	'/quran/commentaries/son-of-mary-as-example-2/'         => '301 https://injil.help/quran/commentaries/son-of-mary-as-example/',
+	'/quran/commentaries/family-of-imran/no-such-work/'     => 'none',
 	// The target not written yet, or a draft: for now, the nearest published page above it.
 	'/quran/commentaries/al-imran-33-64/saadi/'             => '302 https://injil.help/quran/commentaries/family-of-imran/',
 	'/quran/commentaries/al-maidah-110-120/baghawi/'        => '302 https://injil.help/quran/commentaries/table-and-questioning/',

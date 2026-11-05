@@ -649,7 +649,7 @@ function injil_help_collect_citations( $html ) {
 			$cite['name'] = trim( preg_replace( '/\s+/u', ' ', $plain ) );
 			$author       = '';
 			if ( preg_match( '#href="(https?://[^"]+)"#', $li, $u ) ) {
-				$cite['url'] = $u[1];
+				$cite['url'] = html_entity_decode( $u[1], ENT_QUOTES | ENT_HTML5, 'UTF-8' ); // "&amp;" in the markup is "&" in the address
 			}
 		}
 		if ( ! $cite['name'] ) {
