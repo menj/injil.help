@@ -7,6 +7,7 @@ All notable changes to The Injil theme. The `Changelog` section of `readme.txt` 
 Documentation only.
 
 - Changed: the FTP update steps in `readme.txt` and `UPGRADING.md` send the theme's `.htaccess` file first, so its private files stay closed to visitors while the rest uploads.
+- Changed: the Nginx theme rule in `README.md` matches `injil[.-]help[^/]*`, so it also covers the `-new` and `-old` folders of an FTP update, and the FTP steps tell Nginx sites to add it first.
 - Changed: `.claude/skills/theme-docs/SKILL.md` takes the refreshed standard.
 
 ## 3.25.7
