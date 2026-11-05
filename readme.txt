@@ -26,15 +26,15 @@ The theme makes no remote calls from the reader's browser by default. See Privac
 6. To rebuild a page by hand: the section pages (/gospels/, /paul/, /quran/, /gospel-according-to-islam/, /resources/, /answers/) use the "Section index" template with their "Section index: ..." pattern (or "FAQs page"); /method/ is the "Criterion statement" pattern, /corrections/ the "Corrections log", /islamic-dilemma/ the pillar-page pattern; every other page is built from inc/data/ and is restored from Theme Options > Content.
 
 == Updating ==
-Git Updater offers each new release from the theme header. To update by hand, upload the new zip under Appearance > Themes > Add New > Upload Theme and choose "Replace active with uploaded". Then open any admin screen: the theme rewrites the pages whose text changed, keeps the pages you edited, and brings its error pages and .htaccess sections up to date.
+Git Updater offers each new release from the theme header. To update by hand, upload the new zip under Appearance > Themes > Add New > Upload Theme and choose "Replace active with uploaded". Then open any admin screen as an administrator: the theme rewrites the pages whose text changed, keeps the pages you edited, and brings its error pages and .htaccess sections up to date.
 
 By FTP:
 1. Turn on hidden files in your FTP program, so the .htaccess file goes up.
 2. Upload the new folder next to the old one under a temporary name, such as wp-content/themes/injil-help-new. Wait until every file has arrived.
 3. Rename the old folder (injil-help-old, say) and, straight after, give the new folder the old folder's exact name. Between the two renames the site has no theme folder and its pages may fail for that moment, so do them one after the other and keep the admin closed until both are done.
-4. Open any admin screen, check the site, then delete the old folder.
+4. Open any admin screen as an administrator, check the site, then delete the old folder.
 
-If you upload straight over the live folder and the copy stops halfway, leaving a file missing or broken, visitors see a short "Back shortly" page with a 503 status instead of an error. Upload the rest and the site returns. That page comes from functions.php, so it cannot help while functions.php itself is missing or half written, or in the moment between the two renames above. A file cut short at a point where it still reads as valid code also slips past it.
+If you upload straight over the live folder and the copy stops halfway, leaving one of the theme's PHP files missing or broken, visitors see a short "Back shortly" page with a 503 status instead of an error. Upload the rest and the site returns. That page comes from functions.php, so it cannot help while functions.php itself is missing or half written, or in the moment between the two renames above. It checks the PHP files only: a missing stylesheet, font or data file, or a PHP file cut short at a point where it still reads as valid code, slips past it.
 
 Never upload WordPress itself to the live folder without its wp-config.php. In that state WordPress opens its installer to anyone, and the first visitor can connect the site to his own database. Upload wp-config.php first, or unpack WordPress in a folder the web server does not serve. UPGRADING.md has the installer lock to add to .htaccess once the site is installed.
 
@@ -136,10 +136,10 @@ Rank Math, Yoast and SEOPress. With Rank Math the theme adds its nodes to the pl
 You do not need Unlist Posts & Pages, Reading Progress Bar or Pretty Search Permalinks: the theme does what each of them does. If one of them is active anyway, the theme turns its own version off.
 
 = Why did the theme delete .git, tests and the notes from its folder? =
-They are development files, and a web server can hand them to anyone who asks. On a live site the theme removes them on the next admin screen opened by someone who can update themes, and until then Apache refuses them through the theme's .htaccess; Nginx does so only if the host has added the rule in README.md. A site you deploy with git pull keeps them with define( 'INJIL_HELP_KEEP_DEV_FILES', true ); in wp-config.php.
+They are development files, and a web server can hand them to anyone who asks. On a live site the theme removes them on the next admin screen opened by someone who can update themes, and until then Apache refuses them through the theme's .htaccess; Nginx does so only if the host has added the rule in README.md, so on Nginx open an admin screen straight after an upload. A site you deploy with git pull keeps them with define( 'INJIL_HELP_KEEP_DEV_FILES', true ); in wp-config.php.
 
 = A tool I use stopped publishing after an update. =
-The Security tab turns off XML-RPC, application passwords and REST changes from outside a logged-in browser, because spam tools use them. Switch off the one your tool needs. A tool that logs in to XML-RPC with a password needs both the XML-RPC switch and the REST switch off, since either one refuses password logins there. XML-RPC stays on by itself while Jetpack is active. In an emergency, define( 'INJIL_HELP_SECURITY_LOCK', false ); in wp-config.php lifts all three locks.
+The Security tab turns off XML-RPC, application passwords and REST changes from outside a logged-in browser, because spam tools use them. Switch off the one your tool needs. Password logins sent through XML-RPC are refused while either the XML-RPC switch or the REST switch is on (the REST switch guards that route too), so a tool that logs in to XML-RPC with a password needs both off. A tool that writes through the REST API needs only the REST switch off. XML-RPC stays on by itself while Jetpack is active. In an emergency, define( 'INJIL_HELP_SECURITY_LOCK', false ); in wp-config.php lifts all three locks.
 
 = What are the error pages? =
 WordPress shows a plain screen when it is updating, when PHP fails or when the database is down. The theme writes its own pages for those three, and for the errors the web server answers itself (403, 500, 502, 503 and 504). The Error pages section at the foot of Theme Options shows their state and gives the lines for .htaccess.
