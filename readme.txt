@@ -146,7 +146,7 @@ WordPress shows a plain screen when it is updating, when PHP fails or when the d
 
 = My site is in a subfolder. Where does the browser icon go? =
 
-Browsers ask for /favicon.ico at the top of the domain, such as example.com/favicon.ico, even when the site lives in example.com/blog/. WordPress never sees that request, so put a copy of the theme's favicon.ico in the domain root folder. The icon tags in each page cover the pages either way.
+Browsers ask for /favicon.ico at the top of the domain, such as example.com/favicon.ico, even when the site lives in example.com/blog/. WordPress never sees that request, so put a copy of the theme's favicon.ico in the domain root folder. The icon tags in each page cover the pages either way. If you have set a Site Icon, put that icon there as favicon.ico instead.
 
 == Privacy ==
 The theme sets no cookies and loads no scripts, fonts or styles from another server. All fonts are bundled.
@@ -447,7 +447,7 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 
 == Upgrade Notice ==
 = 3.25.10 =
-Upload the whole theme. On a site in a subfolder, also put a copy of assets/images/favicon.ico in the domain root folder; otherwise nothing to do.
+Upload the whole theme. On a site in a subfolder, also put a copy of assets/images/favicon.ico in the domain root folder (or, with a Site Icon set, that icon as favicon.ico); otherwise nothing to do.
 
 = 3.25.9 =
 Upload the whole theme. Open one admin screen so the error pages are written again with the icon.
