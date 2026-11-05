@@ -12,7 +12,7 @@ The fixed facts about The Injil theme. When another document, a comment or a pat
 | Folder and text domain | `injil-help` |
 | Parent theme | Twenty Twenty-Five (`twentytwentyfive`), must stay installed |
 | Site | https://injil.help (The Rightly-Guided Injīl). The theme is custom-built for this one site and is not intended for use on any other. |
-| Repository | https://github.com/menj/injil.help, `Primary Branch: main` (Git Updater). README.md, SSOT.md, CHANGELOG.md, UPGRADING.md and the dot-files (including `.claude/`, which holds `CLAUDE.md`, `FARUQI.md` and the writing-style skill) are `export-ignore`: they stay in the repository and out of the release archive. The tests kept in the repository are `tests/security-detector-test.php`, `tests/schema-graph-test.php`, `tests/journal-test.php`, `tests/plugin-features-test.php` and `tests/login-test.php`; the other release checks live outside it. |
+| Repository | https://github.com/menj/injil.help, `Primary Branch: main` (Git Updater). README.md, SSOT.md, CHANGELOG.md, UPGRADING.md and the dot-files (including `.claude/`, which holds `CLAUDE.md`, `FARUQI.md` and the writing-style skill) are `export-ignore`: they stay in the repository and out of the release archive. The tests kept in the repository are `tests/security-detector-test.php`, `tests/schema-graph-test.php`, `tests/journal-test.php`, `tests/plugin-features-test.php`, `tests/login-test.php` and `tests/error-pages-test.php`; the other release checks live outside it. |
 | Version | `Version:` in `style.css` and `INJIL_HELP_VERSION` in `functions.php`, always equal; the release tag is `v` + that number |
 | Requires | WordPress 6.6, PHP 7.4 |
 | Licence | GPL v2 or later; fonts and images keep their own licences |

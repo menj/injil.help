@@ -8,7 +8,9 @@ The web server error pages work on a site in a subfolder. No option key, functio
 
 - `injil_help_error_install()` also writes a copy of each static page into `wp-content/injil-help-errors/` with the site's name and home address (`injil_help_error_static_files()`, `injil_help_error_file_source()`). The automatic install, the admin check, the status table and `injil_help_error_remove()` cover these copies as they cover the drop-ins. `injil_help_error_htaccess_snippet()` points at that folder. `errors/` stays as the copy for a site at the domain root.
 - `CLAUDE.md` and `FARUQI.md` moved into `.claude/`, which `.gitattributes` already kept out of the release archive. Their two root entries in `.gitattributes` are gone, and `SSOT.md` and `.claude/CLAUDE.md` name the new paths, the check for the banned word among them.
-- `tests/error-pages-test.php` covers the static copies.
+- `injil_help_error_install()` puts a new file in place with a hard link, which fails when a file has appeared since the check, and checks an existing file again just before the swap. A file someone else wrote in the meantime is never replaced.
+- The README says to take the `ErrorDocument` lines out of `.htaccess` when switching theme. `SSOT.md` lists `tests/error-pages-test.php` among the tests kept in the repository.
+- `tests/error-pages-test.php` covers the static copies, with the `.htaccess` lines under a subfolder.
 
 ## 3.25.1
 
