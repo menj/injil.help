@@ -36,6 +36,7 @@ $GLOBALS['ih_options'] = array( 'injil_help_options' => array( 'block_xmlrpc' =>
 $GLOBALS['ih_trans']   = array();
 $GLOBALS['ih_filters'] = array();
 $GLOBALS['ih_home']    = ABSPATH;
+$GLOBALS['ih_site']    = 'https://injil.help';
 $GLOBALS['is_apache']  = true;
 
 function add_action() {}
@@ -69,6 +70,12 @@ function delete_transient( $k ) {
 }
 function wp_json_encode( $v, $f = 0 ) {
 	return json_encode( $v, $f );
+}
+function site_url( $p = '' ) {
+	return $GLOBALS['ih_site'] . $p;
+}
+function wp_parse_url( $u, $c = -1 ) {
+	return parse_url( $u, $c );
 }
 function get_home_path() {
 	return $GLOBALS['ih_home'];
@@ -181,8 +188,22 @@ $want  = array(
 	'RewriteRule ^wp-admin/(install|setup-config)\.php$ - [F,L]',
 	'RewriteRule ^xmlrpc\.php$ - [F,L]',
 	'</IfModule>',
+	'<IfModule !mod_rewrite.c>',
+	'<IfModule mod_alias.c>',
+	'RedirectMatch 403 "^/wp-includes/(?!js/tinymce/|ms-files\.php$).+\.php$"',
+	'RedirectMatch 403 "^/(wp-settings|wp-config-sample)\.php$"',
+	'RedirectMatch 403 "^/readme\.html$"',
+	'RedirectMatch 403 "^/wp-admin/(install|setup-config)\.php$"',
+	'RedirectMatch 403 "^/xmlrpc\.php$"',
+	'</IfModule>',
+	'</IfModule>',
 );
-ih_check( $want === $lines, 'the core-file lines: ' . json_encode( $lines ) );
+ih_check( $want === injil_help_sec_core_lines( '', true, '/' ), 'the core-file lines: ' . json_encode( $lines ) );
+ih_check( '/' === injil_help_sec_core_base(), 'WordPress at the domain root: base /' );
+$GLOBALS['ih_site'] = 'https://example.org/blog';
+ih_check( '/blog/' === injil_help_sec_core_base(), 'WordPress in /blog: base /blog/' );
+ih_check( in_array( 'RedirectMatch 403 "^/blog/readme\.html$"', injil_help_sec_core_lines( '', true, injil_help_sec_core_base() ), true ), 'the mod_alias lines carry the URL path' );
+$GLOBALS['ih_site'] = 'https://injil.help';
 ih_check( ! preg_grep( '/xmlrpc/', injil_help_sec_core_lines( '', false ) ), 'xmlrpc.php is left out when XML-RPC is on' );
 foreach ( array( 'wp-includes/blocks/rss.php', 'wp-includes/ms-settings.php', 'wp-settings.php', 'wp-config-sample.php', 'readme.html', 'wp-admin/install.php', 'wp-admin/setup-config.php', 'xmlrpc.php' ) as $path ) {
 	$hit = false;
@@ -260,6 +281,7 @@ $GLOBALS['is_apache'] = false;
 ih_check( '' === injil_help_sec_htaccess_file(), 'no .htaccess on a server that is not Apache' );
 injil_help_sec_sync_htaccess( true );
 ih_check( 'unavailable' === get_option( 'injil_help_security_htaccess' ), 'not Apache: unavailable' );
+ih_check( false === get_transient( 'injil_help_sec_htaccess_checked' ), 'an unwritable .htaccess is checked again on the next admin page' );
 $GLOBALS['is_apache'] = true;
 
 // 10. The runs with Jetpack and with the constants, in their own processes.

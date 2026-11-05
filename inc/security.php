@@ -149,23 +149,40 @@ defined( 'INJIL_HELP_SEC_CORE_MARKER' ) || define( 'INJIL_HELP_SEC_CORE_MARKER',
  *
  * @param string $prefix WordPress's folder relative to the .htaccess folder, '' or "wp/".
  * @param bool   $xmlrpc Whether xmlrpc.php is denied as well.
+ * @param string $base   URL path of WordPress's folder, for the mod_alias lines used without mod_rewrite.
  * @return string[]
  */
-function injil_help_sec_core_lines( $prefix = '', $xmlrpc = true ) {
+function injil_help_sec_core_lines( $prefix = '', $xmlrpc = true, $base = '/' ) {
 	$p     = str_replace( ' ', '\\ ', preg_quote( $prefix, '#' ) );
-	$lines = array(
-		'<IfModule mod_rewrite.c>',
-		'RewriteEngine On',
-		'RewriteRule ^' . $p . 'wp-includes/(?!js/tinymce/|ms-files\\.php$).+\\.php$ - [F,L]',
-		'RewriteRule ^' . $p . '(wp-settings|wp-config-sample)\\.php$ - [F,L]',
-		'RewriteRule ^' . $p . 'readme\\.html$ - [F,L]',
-		'RewriteRule ^' . $p . 'wp-admin/(install|setup-config)\\.php$ - [F,L]',
+	$files = array(
+		'wp-includes/(?!js/tinymce/|ms-files\\.php$).+\\.php',
+		'(wp-settings|wp-config-sample)\\.php',
+		'readme\\.html',
+		'wp-admin/(install|setup-config)\\.php',
 	);
 	if ( $xmlrpc ) {
-		$lines[] = 'RewriteRule ^' . $p . 'xmlrpc\\.php$ - [F,L]';
+		$files[] = 'xmlrpc\\.php';
 	}
-	$lines[] = '</IfModule>';
-	return $lines;
+	// Without mod_rewrite, mod_alias refuses the same files by their whole URL path.
+	$b       = str_replace( '"', '', preg_quote( '/' . trim( (string) $base, '/' ) . ( '' === trim( (string) $base, '/' ) ? '' : '/' ), '#' ) );
+	$rewrite = array( '<IfModule mod_rewrite.c>', 'RewriteEngine On' );
+	$alias   = array( '<IfModule !mod_rewrite.c>', '<IfModule mod_alias.c>' );
+	foreach ( $files as $f ) {
+		$rewrite[] = 'RewriteRule ^' . $p . $f . '$ - [F,L]';
+		$alias[]   = 'RedirectMatch 403 "^' . $b . $f . '$"';
+	}
+	return array_merge( $rewrite, array( '</IfModule>' ), $alias, array( '</IfModule>', '</IfModule>' ) );
+}
+
+/**
+ * The URL path of WordPress's folder, "/" at the domain root, "/wp/" or
+ * "/blog/" in a subfolder.
+ *
+ * @return string
+ */
+function injil_help_sec_core_base() {
+	$path = (string) wp_parse_url( site_url( '/' ), PHP_URL_PATH );
+	return '/' . ltrim( '' === $path ? '/' : $path, '/' );
 }
 
 /**
@@ -202,7 +219,7 @@ function injil_help_sec_core_wanted( $prefix = null ) {
 		}
 		$prefix = injil_help_sec_core_prefix( get_home_path(), ABSPATH );
 	}
-	return null === $prefix ? array() : injil_help_sec_core_lines( $prefix, injil_help_sec_xmlrpc_off() );
+	return null === $prefix ? array() : injil_help_sec_core_lines( $prefix, injil_help_sec_xmlrpc_off(), injil_help_sec_core_base() );
 }
 
 /**
@@ -278,6 +295,8 @@ function injil_help_sec_sync_htaccess( $force = false ) {
 	$file = injil_help_sec_htaccess_file();
 	if ( '' === $file ) {
 		update_option( 'injil_help_security_htaccess', 'unavailable', false );
+		// Checked again on the next admin page, so a file made writable is written at once.
+		delete_transient( 'injil_help_sec_htaccess_checked' );
 		return;
 	}
 	$want    = injil_help_sec_xmlrpc_off();
@@ -1400,8 +1419,12 @@ function injil_help_sec_render_settings( $o ) {
 	if ( 'written' === $state ) {
 		echo '<p class="description ih-field-note">' . esc_html__( 'The web server also refuses xmlrpc.php: the theme keeps a "Block xmlrpc.php" section in .htaccess and repairs it if it goes missing.', 'injil-help' ) . '</p>';
 	} elseif ( 'unavailable' === $state ) {
-		echo '<p class="description ih-field-note ih-sec-key">' . esc_html__( 'The theme could not write .htaccess (the server is not Apache, or the file is read-only). WordPress still refuses xmlrpc.php while XML-RPC is off. To refuse it and the WordPress files below at the web server as well, paste these lines into .htaccess after the WordPress section, or ask the host for the same rules.', 'injil-help' ) . '</p>';
-		$snippet = injil_help_sec_htaccess_snippet();
+		if ( ! empty( $GLOBALS['is_nginx'] ) ) {
+			echo '<p class="description ih-field-note ih-sec-key">' . esc_html__( 'This server is Nginx, which reads no .htaccess. WordPress still refuses xmlrpc.php while XML-RPC is off. To refuse it and the WordPress files below at the web server as well, ask the host to add the Nginx rules from the Security section of the theme\'s README (github.com/menj/injil.help) to the server block.', 'injil-help' ) . '</p>';
+		} else {
+			echo '<p class="description ih-field-note ih-sec-key">' . esc_html__( 'The theme could not write .htaccess (the server is not Apache, or the file is read-only). WordPress still refuses xmlrpc.php while XML-RPC is off. To refuse it and the WordPress files below at the web server as well, paste these lines into .htaccess after the WordPress section, or ask the host for the same rules.', 'injil-help' ) . '</p>';
+		}
+		$snippet = empty( $GLOBALS['is_nginx'] ) ? injil_help_sec_htaccess_snippet() : '';
 		if ( '' !== $snippet ) {
 			echo '<textarea readonly rows="14" class="ih-input ih-input--area code" aria-label="' . esc_attr__( 'Lines for .htaccess', 'injil-help' ) . '" onclick="this.select()">' . esc_textarea( $snippet ) . '</textarea>';
 		}

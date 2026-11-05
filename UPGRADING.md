@@ -88,11 +88,11 @@ Then lock the installer, which the theme cannot do for you. The site was taken o
 # Installer lock: the site is installed. Keep this above every BEGIN section.
 <IfModule mod_rewrite.c>
 RewriteEngine On
-RewriteRule ^wp-admin/(install|setup-config)\.php$ - [F,L]
+RewriteRule ^(.+/)?wp-admin/(install|setup-config)\.php$ - [F,L]
 </IfModule>
 ```
 
-On Nginx the lock is `location ~ ^/(.+/)?wp-admin/(install|setup-config)\.php$ { return 403; }`, and in an Apache virtual host `<LocationMatch "^/(.+/)?wp-admin/(install|setup-config)\.php$"> Require all denied </LocationMatch>`. Updates of WordPress are untouched, since they run through `wp-admin/upgrade.php`. Take the rule out only for the length of a fresh install.
+The `(.+/)?` covers WordPress in a subfolder of the `.htaccess` folder too, such as `wp/wp-admin/setup-config.php`. On Nginx the lock is `location ~ ^/(.+/)?wp-admin/(install|setup-config)\.php$ { return 403; }`, and in an Apache virtual host `<LocationMatch "^/(.+/)?wp-admin/(install|setup-config)\.php$"> Require all denied </LocationMatch>`. Updates of WordPress are untouched, since they run through `wp-admin/upgrade.php`. Take the rule out only for the length of a fresh install.
 
 **To 3.25.4.** Open any admin screen after the update as a user who can update themes (on a network, a network administrator). On a production site the theme deletes `.git`, `.claude`, `tests` and the Markdown notes from its folder; if you deploy the theme with `git pull`, add `define( 'INJIL_HELP_KEEP_DEV_FILES', true );` to `wp-config.php` first. A local copy should set `WP_ENVIRONMENT_TYPE` to `local` or `development`. On Nginx, which reads no `.htaccess`, add the deny rule from the Security section of the README. The content sync publishes `/privacy-policy/` from the draft WordPress made on install.
 
