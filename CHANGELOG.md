@@ -2,6 +2,16 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.25.9
+
+The browser icon set is complete. No feature or setting removed.
+
+- Added: `assets/images/favicon.svg` (the brandmark without its metadata, 832 bytes), `favicon.ico` (16, 32 and 48px), `favicon-32.png`, `apple-touch-icon.png` (180px on the paper colour), `icon-192.png`, `icon-512.png`, `icon-maskable-512.png` and `site.webmanifest`, all rendered from `assets/brandmark.svg`.
+- Added: `inc/favicon.php`. The brandmark mode prints the SVG, 32px, touch icon, manifest and `theme-color` (#1f5c4a) on the site, the log-in screen and the admin. A custom favicon URL still prints that one link, and a Site Icon still gets WordPress's own tags.
+- Added: `/favicon.ico` answers with the icon in brandmark mode, with a day's cache and an ETag (304 while unchanged; HEAD gets the headers alone). With a custom favicon URL it redirects there; with a Site Icon, WordPress redirects to it.
+- Added: the error pages and drop-ins carry the brandmark as their tab icon, as a `data:` address, so it shows on any path and in a subfolder install.
+- Changed: the favicon code moves from `functions.php` to `inc/favicon.php`, and the SVG link names `assets/images/favicon.svg` in place of `assets/brandmark.svg`.
+
 ## 3.25.8
 
 Documentation only.

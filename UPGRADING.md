@@ -52,6 +52,8 @@ The general steps, for any version:
 3. Open any admin screen as an administrator (page rewrites and the error pages need `edit_theme_options`, the development-file clean-up needs `update_themes`). The theme rewrites the pages whose text changed and keeps the ones you edited, writes its error pages, checks its `.htaccess` sections (at most hourly), and on a production site removes its development files.
 4. Read the note for the version you are moving to.
 
+**To 3.25.9.** Upload the whole theme. The new files are `inc/favicon.php` and eight in `assets/images/`: `favicon.svg`, `favicon.ico`, `favicon-32.png`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`, `icon-maskable-512.png` and `site.webmanifest`. Open one admin screen so the error pages are written again with the icon. If a `favicon.ico` file sits in the site root, the web server sends it and the theme never answers; delete it to use the theme's.
+
 **To 3.25.8.** Documentation only: the FTP steps send the `.htaccess` file first. Upload the whole theme. On Nginx, replace the theme rule in the server block with the one in the README, which also covers the `-new` and `-old` folders.
 
 **To 3.25.7.** Upload the whole theme, `inc/data/` included, then open any admin screen. The old commentary addresses redirect again; nothing else to do. Key points for a Journal post go in the new Key points box on its edit screen. The theme is now GPL version 3 or later; the new `LICENSE` file holds the text.
