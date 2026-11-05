@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.25.3
+Stable tag: 3.25.4
 Template: twentytwentyfive
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -128,6 +128,13 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.25.4 =
+* A page no longer fails when the structured data meets a malformed block. The front page broke this way twice after an update, and now renders whatever the stored template holds.
+* A theme caught half uploaded answers with a 503 "being updated" page.
+* Account names are no longer given away through the REST API, ?author= addresses or oEmbed.
+* Former commentary addresses whose page is not published yet go to the nearest page above them, and /privacy-policy/ is published from the draft WordPress made on install.
+* An .htaccess in the theme refuses the development files, and a production site deletes them.
+
 = 3.25.3 =
 * The front page reads as one story in seven parts: the argument, the books, the man who changed the message, the measure, the gospel restored, the questions, and the sources to test it by. The FAQs now come before Resources, and each section opens with a line that leads on from the one before.
 

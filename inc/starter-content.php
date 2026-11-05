@@ -446,11 +446,46 @@ function injil_help_redirect_former() {
 	// A 301 is cached for good, so it is only sent once the page stands at its present address. While an
 	// update is still moving pages, injil_help_redirect_moved_page() sends the visitor on with a 302.
 	$found = null === $target ? null : injil_help_find_page( $target );
-	if ( ! $found || 'publish' !== $found->post_status ) {
-		return; // a draft or private target would answer 404 to the visitor: no permanent redirect to it
+	if ( $found && 'publish' === $found->post_status ) {
+		wp_safe_redirect( home_url( '/' . $target . '/' ), 301 );
+		exit;
 	}
-	wp_safe_redirect( home_url( '/' . $target . '/' ), 301 );
-	exit;
+	// The target is missing, a draft or private: the update writes pages a few at a time. Until it
+	// is published, a former address that would answer 404 goes for now (302) to the nearest
+	// published page above the target, such as the group or work page of a commentary. An address
+	// under no former path is left to WordPress.
+	if ( null === $target || ! is_404() ) {
+		return;
+	}
+	$near = injil_help_published_ancestor( $target, $map );
+	if ( '' !== $near ) {
+		wp_safe_redirect( home_url( '/' . $near . '/' ), 302 );
+		exit;
+	}
+}
+
+/**
+ * The nearest published page above a path, or '': each shorter path in turn, as it stands or as
+ * the former map sends it on. The front page is never the answer; a visitor sent there from a
+ * deep link would not know why.
+ *
+ * @param string $path A path without slashes at either end.
+ * @param array  $map  injil_help_former_map().
+ * @return string
+ */
+function injil_help_published_ancestor( $path, $map ) {
+	$parts = explode( '/', trim( (string) $path, '/' ) );
+	while ( count( $parts ) > 1 ) {
+		array_pop( $parts );
+		$up = implode( '/', $parts );
+		foreach ( array_unique( array( $up, $map[ $up ] ?? $up ) ) as $candidate ) {
+			$page = injil_help_find_page( $candidate );
+			if ( $page && 'publish' === $page->post_status ) {
+				return $candidate;
+			}
+		}
+	}
+	return '';
 }
 add_action( 'template_redirect', 'injil_help_redirect_former', 1 );
 
@@ -490,6 +525,29 @@ function injil_help_page_is_edited( $post ) {
 }
 
 /**
+ * The ID of the privacy page WordPress drafted on install when it is what stands at the
+ * definition's path, or 0. It is the page named in wp_page_for_privacy_policy, still a draft, never
+ * written by the theme (no hash) and never edited since WordPress made it, so a privacy draft the
+ * owner wrote or changed is left alone.
+ *
+ * @param WP_Post $page The page at the definition's path.
+ * @param array   $def  The page definition.
+ * @return int
+ */
+function injil_help_installer_draft( $page, $def ) {
+	if ( 'privacy-policy' !== $def['path'] || 'draft' !== $page->post_status || (int) get_option( 'wp_page_for_privacy_policy' ) !== (int) $page->ID ) {
+		return 0;
+	}
+	if ( $page->post_modified_gmt !== $page->post_date_gmt ) {
+		return 0; // edited since the installer made it: the owner's draft
+	}
+	if ( '' !== (string) get_post_meta( $page->ID, INJIL_HELP_HASH_META, true ) ) {
+		return 0; // the theme wrote it and someone made it a draft since: their choice stands
+	}
+	return (int) $page->ID;
+}
+
+/**
  * Write one starter page. Returns what happened: "created", "updated", "unchanged" (the stored
  * text already matches, or the page exists and $overwrite is off), "kept" (edited since the
  * theme wrote it, and $force is off) or "failed". With $overwrite, an existing page is rewritten
@@ -498,7 +556,12 @@ function injil_help_page_is_edited( $post ) {
  */
 function injil_help_populate_page( $order, $def, $overwrite = false, $force = false ) {
 	$existing = injil_help_find_page( $def['path'] );
-	if ( ! $existing ) {
+	// The privacy page WordPress drafts on install holds the slug "privacy-policy". The theme never
+	// wrote it, so it is filled in and published below; as a draft it answers 404.
+	$adopt = $existing ? injil_help_installer_draft( $existing, $def ) : 0;
+	if ( $adopt ) {
+		$existing = null;
+	} elseif ( ! $existing ) {
 		$existing = injil_help_adopt_former_page( $def );
 	} else {
 		injil_help_clear_former_copies( $def, $existing->ID );
@@ -539,9 +602,12 @@ function injil_help_populate_page( $order, $def, $overwrite = false, $force = fa
 	$parent = $parts ? injil_help_find_page( implode( '/', $parts ) ) : null;
 
 	// The privacy page WordPress drafts for new sites is filled in rather than duplicated.
-	$id = 'privacy-policy' === $def['path'] ? (int) get_option( 'wp_page_for_privacy_policy' ) : 0;
-	if ( $id && 'draft' !== get_post_status( $id ) ) {
-		$id = 0;
+	$id = $adopt;
+	if ( ! $id && 'privacy-policy' === $def['path'] ) {
+		$id = (int) get_option( 'wp_page_for_privacy_policy' );
+		if ( $id && 'draft' !== get_post_status( $id ) ) {
+			$id = 0;
+		}
 	}
 
 	$args = array(
@@ -909,3 +975,6 @@ add_action(
 		wp_send_json_success( $run );
 	}
 );
+
+// The last line: functions.php checks for it, so a file an upload cut short is caught.
+$GLOBALS['injil_help_loaded'][ basename( __FILE__, '.php' ) ] = true;

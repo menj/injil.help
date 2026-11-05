@@ -1,0 +1,20 @@
+# The Injil theme: files for development only, never for visitors.
+# A copy of the theme uploaded by FTP can carry the Git history (.git, .gitignore,
+# .gitattributes), .claude, tests, bin and the Markdown notes. Apache refuses them here.
+# Nginx reads no .htaccess: see "Security" in README.md for the lines to add there.
+
+# Markdown notes and the Git files in this folder.
+<FilesMatch "(?i)(\.md|^\.git.*)$">
+	<IfModule mod_authz_core.c>
+		Require all denied
+	</IfModule>
+	<IfModule !mod_authz_core.c>
+		Order Deny,Allow
+		Deny from all
+	</IfModule>
+</FilesMatch>
+
+# Folders: .git, .claude, tests and bin, and anything inside them.
+<IfModule mod_alias.c>
+	RedirectMatch 403 (?i)/(\.git[^/]*|\.claude|tests|bin)(/.*)?$
+</IfModule>

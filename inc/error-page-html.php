@@ -116,3 +116,6 @@ function injil_help_error_dropin_head( $kind, $version ) {
 		. "\theader( 'Cache-Control: no-store, max-age=0' );\n"
 		. "}\n?>\n";
 }
+
+// The last line: functions.php checks for it, so a file an upload cut short is caught.
+$GLOBALS['injil_help_loaded'][ basename( __FILE__, '.php' ) ] = true;

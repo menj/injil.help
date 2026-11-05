@@ -178,3 +178,6 @@ function injil_help_starter_pages_list() {
 	);
 	return $pages;
 }
+
+// The last line: functions.php checks for it, so a file an upload cut short is caught.
+$GLOBALS['injil_help_loaded'][ basename( __FILE__, '.php' ) ] = true;

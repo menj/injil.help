@@ -105,11 +105,14 @@ function injil_help_rank_math_repoint( $node, $map ) {
  * WebSite, WebPage, BreadcrumbList, primary image, author, its Article); the theme adds the rest.
  */
 function injil_help_rank_math_json_ld( $data, $jsonld = null ) {
-		if ( ! injil_help_rank_math_mode() || is_404() || ! function_exists( 'injil_help_schema_graph' ) ) {
+		if ( ! injil_help_rank_math_mode() || is_404() || ! function_exists( 'injil_help_schema_graph_safe' ) ) {
 			return $data;
 		}
 		$ids   = injil_help_schema_ids();
-		$graph = injil_help_schema_graph();
+		$graph = injil_help_schema_graph_safe();
+		if ( ! $graph ) {
+			return $data; // the graph failed: Rank Math's own nodes go out as they are
+		}
 
 		// What Rank Math already holds.
 		$rm_ids     = array();
@@ -224,3 +227,6 @@ function injil_help_rank_math_json_ld( $data, $jsonld = null ) {
 		return function_exists( 'injil_help_schema_unname' ) ? injil_help_schema_unname( $data ) : $data;
 }
 add_filter( 'rank_math/json_ld', 'injil_help_rank_math_json_ld', 50, 2 );
+
+// The last line: functions.php checks for it, so a file an upload cut short is caught.
+$GLOBALS['injil_help_loaded'][ basename( __FILE__, '.php' ) ] = true;

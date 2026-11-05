@@ -879,3 +879,6 @@ add_action(
 		wp_send_json_success( array( 'html' => ob_get_clean() ) );
 	}
 );
+
+// The last line: functions.php checks for it, so a file an upload cut short is caught.
+$GLOBALS['injil_help_loaded'][ basename( __FILE__, '.php' ) ] = true;

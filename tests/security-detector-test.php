@@ -10,6 +10,12 @@
  * @package injil-help
  */
 
+// A command-line script: a web request to it gets a 404 and nothing runs.
+if ( 'cli' !== PHP_SAPI ) {
+	http_response_code( 404 );
+	exit;
+}
+
 define( 'INJIL_HELP_SECURITY_TEST', true );
 require dirname( __DIR__ ) . '/inc/security-detector.php';
 

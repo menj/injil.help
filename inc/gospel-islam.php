@@ -287,3 +287,6 @@ function injil_help_gospel_islam_pages() {
 	}
 	return $pages;
 }
+
+// The last line: functions.php checks for it, so a file an upload cut short is caught.
+$GLOBALS['injil_help_loaded'][ basename( __FILE__, '.php' ) ] = true;
