@@ -299,7 +299,7 @@ Actions used: `after_switch_theme`, `admin_init`, `admin_post_injil_help_populat
 
 ## Error pages
 
-WordPress reads three files from `wp-content` when it cannot build a page. `inc/error-pages.php` writes them, and only when an administrator presses **Install error pages** at the foot of Theme Options (`admin_post_injil_help_install_error_pages`, nonce and `manage_options`). The table beside the button shows each file as not installed, installed, outdated or another file left alone.
+WordPress reads three files from `wp-content` when it cannot build a page. `inc/error-pages.php` writes them when the theme is activated (`after_switch_theme`), again on an administrator's next admin page when a file is missing or outdated (`admin_init`, `edit_theme_options`), and at once when an administrator presses **Install error pages** at the foot of Theme Options (`admin_post_injil_help_install_error_pages`, nonce and `manage_options`). When another theme is activated (`switch_theme`), it deletes the files that carry its marker. The table beside the button shows each file as not installed, installed, outdated, left behind by another theme or another file left alone.
 
 | File | Shown when | Status sent |
 |---|---|---|
@@ -307,15 +307,16 @@ WordPress reads three files from `wp-content` when it cannot build a page. `inc/
 | `php-error.php` | a fatal PHP error | 500 |
 | `db-error.php` | the database cannot be reached | 503, `Retry-After: 600` |
 
-Each file starts with the marker `The Injil error page drop-in`. The button writes a missing file or one with that marker, and leaves any other file alone. The pages come from `inc/error-page-html.php` with their words in `text.json` (`errors`). They hold their style inline, call no WordPress function and touch no database, so they work with the theme half uploaded. Each sends `noindex` and `no-store`.
+Each file starts with the marker `The Injil error page drop-in`. The theme writes a missing file, one with that marker, or a copy another theme left behind (marked "Written by the ... theme; safe to delete"). It leaves any other file alone. The pages come from `inc/error-page-html.php` with their words in `text.json` (`errors`). They hold their style inline, call no WordPress function and touch no database, so they work with the theme half uploaded. Each sends `noindex` and `no-store`.
 
-The web server answers some errors before WordPress starts. `errors/` holds static 403, 500, 502 and 503 pages for those, rebuilt with `php bin/build-error-pages.php` (`--check` fails on a stale page). Point the server at them in `.htaccess`, with the folder name of the theme:
+The web server answers some errors before WordPress starts. `errors/` holds static 403, 500, 502, 503 and 504 pages for those, rebuilt with `php bin/build-error-pages.php` (`--check` fails on a stale page). Point the server at them in `.htaccess`, with the folder name of the theme:
 
 ```
 ErrorDocument 403 /wp-content/themes/injil.help/errors/403.html
 ErrorDocument 500 /wp-content/themes/injil.help/errors/500.html
 ErrorDocument 502 /wp-content/themes/injil.help/errors/502.html
 ErrorDocument 503 /wp-content/themes/injil.help/errors/503.html
+ErrorDocument 504 /wp-content/themes/injil.help/errors/504.html
 ```
 
 ## Development workflow

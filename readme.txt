@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.25.0
+Stable tag: 3.25.1
 Template: twentytwentyfive
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -128,6 +128,10 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.25.1 =
+* The error pages are written when the theme is activated, with no button press, and removed when another theme is activated. Pages another theme left behind are replaced.
+* A 504 page for the web server, with its .htaccess line.
+
 = 3.25.0 =
 * The structured data declares the site's author in the markup only. Nothing a visitor sees has changed.
 
