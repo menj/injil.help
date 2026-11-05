@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.25.2
+Stable tag: 3.25.3
 Template: twentytwentyfive
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -128,6 +128,9 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.25.3 =
+* The front page reads as one story in seven parts: the argument, the books, the man who changed the message, the measure, the gospel restored, the questions, and the sources to test it by. The FAQs now come before Resources, and each section opens with a line that leads on from the one before.
+
 = 3.25.2 =
 * The web server error pages work on a site in a subfolder. The theme writes a copy of each into wp-content/injil-help-errors with the site's home address, and the .htaccess lines in the Error pages section point there.
 
