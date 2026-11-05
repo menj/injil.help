@@ -344,7 +344,8 @@ function injil_help_dev_entries() {
 /**
  * Whether this site may lose the development files: a production site, not on a local host
  * name, with no INJIL_HELP_KEEP_DEV_FILES. A site that sets no environment type counts as
- * production, so a local host name (localhost, *.local, *.test, *.localhost) is kept as well.
+ * production, so a local host name (localhost, *.local, *.test, *.localhost) or a private
+ * address keeps them as well.
  *
  * @return bool
  */
@@ -356,7 +357,12 @@ function injil_help_dev_cleanup_wanted() {
 		return false;
 	}
 	$host = strtolower( (string) wp_parse_url( home_url( '/' ), PHP_URL_HOST ) );
-	return '' !== $host && 'localhost' !== $host && ! preg_match( '/\.(local|test|localhost|invalid|example)$/', $host ) && ! filter_var( $host, FILTER_VALIDATE_IP );
+	if ( '' === $host || 'localhost' === $host || preg_match( '/\.(local|test|localhost|invalid|example)$/', $host ) ) {
+		return false;
+	}
+	// An address in a private or reserved range is a machine on a local network; a public one is a live site.
+	$ip = trim( $host, '[]' );
+	return ! filter_var( $ip, FILTER_VALIDATE_IP ) || (bool) filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE );
 }
 
 /**
@@ -1659,3 +1665,6 @@ function injil_help_sec_render_reports() {
 		<?php endif; ?>
 	<?php
 }
+
+// The last line: functions.php checks for it, so a file an upload cut short is caught.
+$GLOBALS['injil_help_loaded'][ basename( __FILE__, '.php' ) ] = true;

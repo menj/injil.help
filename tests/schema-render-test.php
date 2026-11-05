@@ -31,6 +31,7 @@ if ( isset( $argv[1] ) && 'child' === $argv[1] ) {
 	function wp_doing_cron() { return false; }
 	function wp_doing_ajax() { return false; }
 	function status_header( $code ) { $GLOBALS['ih_status'] = $code; }
+	function wp_normalize_path( $p ) { return str_replace( '\\', '/', $p ); }
 	ini_set( 'error_log', $argv[2] . '/error.log' );
 	if ( 'serve' === $argv[3] ) {
 		// Load the guard, then send the page as a visitor would get it.
@@ -356,7 +357,7 @@ $child = function ( $mode, $setup ) use ( $ih_theme ) {
 };
 $all = function ( $dir ) use ( $inc ) {
 	foreach ( $inc as $name ) {
-		file_put_contents( $dir . '/theme/inc/' . $name . '.php', "<?php\n" );
+		file_put_contents( $dir . '/theme/inc/' . $name . '.php', "<?php\n\$GLOBALS['injil_help_loaded'][ basename( __FILE__, '.php' ) ] = true;\n" );
 	}
 };
 
@@ -383,6 +384,22 @@ $r = $child(
 	}
 );
 ih_check( false !== strpos( $r['log'] ?? '', 'incomplete or being uploaded' ), 'a half-written file is caught: ' . json_encode( $r ) );
+
+$r = $child(
+	'load',
+	function ( $dir ) use ( $all ) {
+		$all( $dir );
+		file_put_contents( $dir . '/theme/inc/schema.php', "<?php\nfunction injil_help_cut_here() {}\n" ); // cut short where it still parses
+	}
+);
+ih_check( false !== strpos( $r['log'] ?? '', 'inc/schema.php is incomplete' ), 'a file cut short where it still parses is caught: ' . json_encode( $r ) );
+
+$r = $child( 'load', $all );
+ih_check( '' === ( $r['log'] ?? 'x' ) && ! empty( $r['files'] ), 'a whole theme loads without a word in the log: ' . json_encode( $r ) );
+foreach ( $inc as $name ) {
+	$tail = substr( rtrim( (string) file_get_contents( $ih_theme . '/inc/' . $name . '.php' ) ), -80 );
+	ih_check( false !== strpos( $tail, "\$GLOBALS['injil_help_loaded'][ basename( __FILE__, '.php' ) ] = true;" ), "inc/$name.php ends with its loaded flag" );
+}
 
 $r = $child(
 	'serve',

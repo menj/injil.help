@@ -1290,19 +1290,29 @@ function injil_help_schema_graph() {
 	return injil_help_schema_resolve_images( apply_filters( 'injil_help_schema_graph', $graph ) );
 }
 
+/**
+ * The graph, or an empty one when building it throws. The graph is extra to the page: whatever goes
+ * wrong while it is built, the page is still sent. The wp_head printer and the Rank Math merge
+ * (inc/rank-math.php) both read it through here.
+ *
+ * @return array
+ */
+function injil_help_schema_graph_safe() {
+	try {
+		return (array) injil_help_schema_graph();
+	} catch ( \Throwable $e ) {
+		error_log( 'The Injil: the structured data was left out of this page (' . $e->getMessage() . ').' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions
+		return array();
+	}
+}
+
 add_action(
 	'wp_head',
 	function () {
 		if ( ! injil_help_schema_enabled() ) {
 			return;
 		}
-		// The graph is extra to the page: whatever goes wrong while it is built, the page is still sent.
-		try {
-			$graph = injil_help_schema_graph();
-		} catch ( \Throwable $e ) {
-			error_log( 'The Injil: the structured data was left out of this page (' . $e->getMessage() . ').' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions
-			return;
-		}
+		$graph = injil_help_schema_graph_safe();
 		if ( ! $graph ) {
 			return;
 		}
@@ -1319,3 +1329,6 @@ add_action(
 	},
 	5
 );
+
+// The last line: functions.php checks for it, so a file an upload cut short is caught.
+$GLOBALS['injil_help_loaded'][ basename( __FILE__, '.php' ) ] = true;

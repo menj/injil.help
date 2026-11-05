@@ -125,3 +125,6 @@ add_action(
 		wp_enqueue_script( 'injil-help-share', get_stylesheet_directory_uri() . '/assets/js/share.js', array(), INJIL_HELP_VERSION, array( 'in_footer' => true, 'strategy' => 'defer' ) );
 	}
 );
+
+// The last line: functions.php checks for it, so a file an upload cut short is caught.
+$GLOBALS['injil_help_loaded'][ basename( __FILE__, '.php' ) ] = true;

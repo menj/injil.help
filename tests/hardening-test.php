@@ -42,6 +42,8 @@ class WP_Post {
 	public $post_content = '';
 	public $post_excerpt = '';
 	public $post_status  = 'publish';
+	public $post_date_gmt     = '2026-10-01 10:00:00';
+	public $post_modified_gmt = '2026-10-01 10:00:00';
 }
 class WP_Error {}
 class IH_Redirect extends Exception {}
@@ -259,9 +261,15 @@ ih_check( '' === ih_visit( '/quran/commentaries/al-muminun-50/' ), 'a request th
 $GLOBALS['ih_404'] = true;
 
 // 4. The privacy page WordPress drafted on install is filled in and published.
+$def   = array( 'path' => 'privacy-policy', 'title' => 'Privacy policy', 'excerpt' => 'How this site treats your data.', 'body' => array( 'This site sets no cookie.' ) );
 $draft = ih_page( 'privacy-policy', 'draft', 3 );
 $GLOBALS['ih_options']['wp_page_for_privacy_policy'] = 3;
-$def    = array( 'path' => 'privacy-policy', 'title' => 'Privacy policy', 'excerpt' => 'How this site treats your data.', 'body' => array( 'This site sets no cookie.' ) );
+$draft->post_modified_gmt = '2026-10-02 10:00:00';
+ih_check( 'unchanged' === injil_help_populate_page( 1, $def ) && 'draft' === $draft->post_status, 'a privacy draft edited since the install stays a draft' );
+$draft->post_modified_gmt = $draft->post_date_gmt;
+$GLOBALS['ih_options']['wp_page_for_privacy_policy'] = 9;
+ih_check( 'unchanged' === injil_help_populate_page( 1, $def ) && 'draft' === $draft->post_status, 'a draft that is not the privacy page WordPress names stays a draft' );
+$GLOBALS['ih_options']['wp_page_for_privacy_policy'] = 3;
 $result = injil_help_populate_page( 1, $def );
 ih_check( 'created' === $result, "the installer's draft is adopted ($result)" );
 ih_check( 'publish' === $draft->post_status && 'Privacy policy' === $draft->post_title && '' !== $draft->post_content, 'the adopted page is published with the theme text' );
@@ -291,6 +299,12 @@ foreach ( array( 'local', 'development', 'staging' ) as $env ) {
 $GLOBALS['ih_env']  = 'production';
 $GLOBALS['ih_home'] = 'http://injil.test';
 ih_check( array() === injil_help_dev_cleanup() && is_dir( $tmp . '/theme/tests' ), 'a production site on a local host name keeps them' );
+$GLOBALS['ih_home'] = 'http://192.168.1.20';
+ih_check( array() === injil_help_dev_cleanup() && is_dir( $tmp . '/theme/tests' ), 'a production site at a private address keeps them' );
+$GLOBALS['ih_home'] = 'http://203.0.113.9';
+ih_check( injil_help_dev_cleanup_wanted(), 'a production site at a public address loses them' );
+$GLOBALS['ih_home'] = 'http://8.8.4.4';
+ih_check( injil_help_dev_cleanup_wanted(), 'a production site at a public address loses them (2)' );
 $GLOBALS['ih_home'] = 'https://injil.help';
 ini_set( 'error_log', $tmp . '/error.log' );
 $removed = injil_help_dev_cleanup();

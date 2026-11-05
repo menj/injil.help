@@ -52,7 +52,8 @@ function injil_help_serve_incomplete() {
  * A theme uploaded file by file (by FTP) is incomplete for a few minutes: a file not there yet,
  * or there and half written. A failed require_once ends the request in a fatal error for every
  * visitor (25 October 2026: functions.php line 12, inc/options.php). So every file is checked
- * first, and each is loaded inside a try that catches the ParseError of a half-written file.
+ * first, each is loaded inside a try that catches the ParseError of a half-written file, and each
+ * must reach the flag on its last line.
  * While anything is wrong, visitors and the admin get a 503 page and the theme stops loading.
  * The login screen, cron, AJAX and the command line go on without the theme. What was wrong goes
  * to the error log.
@@ -70,6 +71,14 @@ function injil_help_load_theme_files() {
 		}
 		foreach ( $files['load'] as $name ) {
 			require_once $dir . $name . '.php';
+		}
+		// A file cut short at the end of a function still parses. Every file sets a flag on its last
+		// line; a file that was read and set none is incomplete. unlist-admin.php loads later, in the admin.
+		$read = array_flip( array_map( 'wp_normalize_path', get_included_files() ) );
+		foreach ( array_merge( $files['load'], $files['also'] ) as $name ) {
+			if ( isset( $read[ wp_normalize_path( $dir . $name . '.php' ) ] ) && empty( $GLOBALS['injil_help_loaded'][ $name ] ) ) {
+				throw new RuntimeException( 'inc/' . $name . '.php is incomplete' );
+			}
 		}
 		return true;
 	} catch ( Throwable $e ) {

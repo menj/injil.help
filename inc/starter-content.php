@@ -526,15 +526,20 @@ function injil_help_page_is_edited( $post ) {
 
 /**
  * The ID of the privacy page WordPress drafted on install when it is what stands at the
- * definition's path, or 0. It is a draft, and the theme never wrote it: it carries no hash.
+ * definition's path, or 0. It is the page named in wp_page_for_privacy_policy, still a draft, never
+ * written by the theme (no hash) and never edited since WordPress made it, so a privacy draft the
+ * owner wrote or changed is left alone.
  *
  * @param WP_Post $page The page at the definition's path.
  * @param array   $def  The page definition.
  * @return int
  */
 function injil_help_installer_draft( $page, $def ) {
-	if ( 'privacy-policy' !== $def['path'] || 'draft' !== $page->post_status ) {
+	if ( 'privacy-policy' !== $def['path'] || 'draft' !== $page->post_status || (int) get_option( 'wp_page_for_privacy_policy' ) !== (int) $page->ID ) {
 		return 0;
+	}
+	if ( $page->post_modified_gmt !== $page->post_date_gmt ) {
+		return 0; // edited since the installer made it: the owner's draft
 	}
 	if ( '' !== (string) get_post_meta( $page->ID, INJIL_HELP_HASH_META, true ) ) {
 		return 0; // the theme wrote it and someone made it a draft since: their choice stands
@@ -970,3 +975,6 @@ add_action(
 		wp_send_json_success( $run );
 	}
 );
+
+// The last line: functions.php checks for it, so a file an upload cut short is caught.
+$GLOBALS['injil_help_loaded'][ basename( __FILE__, '.php' ) ] = true;

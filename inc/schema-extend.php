@@ -599,3 +599,6 @@ function injil_help_schema_extend( $graph, $ctx ) {
 
 	return injil_help_schema_unname( injil_help_schema_scrub( $graph ) );
 }
+
+// The last line: functions.php checks for it, so a file an upload cut short is caught.
+$GLOBALS['injil_help_loaded'][ basename( __FILE__, '.php' ) ] = true;

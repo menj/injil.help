@@ -367,3 +367,6 @@ if ( injil_help_unlist_on() ) {
 		require_once __DIR__ . '/unlist-admin.php';
 	}
 }
+
+// The last line: functions.php checks for it, so a file an upload cut short is caught.
+$GLOBALS['injil_help_loaded'][ basename( __FILE__, '.php' ) ] = true;

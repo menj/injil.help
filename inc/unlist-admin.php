@@ -213,3 +213,6 @@ add_action(
 		wp_enqueue_script( 'injil-help-unlist', get_stylesheet_directory_uri() . '/assets/js/unlist-admin.js', array( 'jquery', 'inline-edit-post' ), INJIL_HELP_VERSION, true );
 	}
 );
+
+// The last line: functions.php checks for it, so a file an upload cut short is caught.
+$GLOBALS['injil_help_loaded'][ basename( __FILE__, '.php' ) ] = true;

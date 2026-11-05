@@ -149,3 +149,6 @@ function injil_help_login_title( $title ) {
 	return '' !== $page ? $page . ' | ' . injil_help_title_site() : injil_help_title_site();
 }
 add_filter( 'login_title', 'injil_help_login_title' );
+
+// The last line: functions.php checks for it, so a file an upload cut short is caught.
+$GLOBALS['injil_help_loaded'][ basename( __FILE__, '.php' ) ] = true;
