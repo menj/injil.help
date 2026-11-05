@@ -136,10 +136,10 @@ Rank Math, Yoast and SEOPress. With Rank Math the theme adds its nodes to the pl
 You do not need Unlist Posts & Pages, Reading Progress Bar or Pretty Search Permalinks: the theme does what each of them does. If one of them is active anyway, the theme turns its own version off.
 
 = Why did the theme delete .git, tests and the notes from its folder? =
-They are development files, and a web server can hand them to anyone who asks. On a live site the theme removes them on the next admin screen opened by someone who can update themes, and its .htaccess refuses them until then. A site you deploy with git pull keeps them with define( 'INJIL_HELP_KEEP_DEV_FILES', true ); in wp-config.php.
+They are development files, and a web server can hand them to anyone who asks. On a live site the theme removes them on the next admin screen opened by someone who can update themes, and until then Apache refuses them through the theme's .htaccess; Nginx does so only if the host has added the rule in README.md. A site you deploy with git pull keeps them with define( 'INJIL_HELP_KEEP_DEV_FILES', true ); in wp-config.php.
 
 = A tool I use stopped publishing after an update. =
-The Security tab turns off XML-RPC, application passwords and REST changes from outside a logged-in browser, because spam tools use them. Switch off the one your tool needs. XML-RPC stays on by itself while Jetpack is active. In an emergency, define( 'INJIL_HELP_SECURITY_LOCK', false ); in wp-config.php lifts all three locks.
+The Security tab turns off XML-RPC, application passwords and REST changes from outside a logged-in browser, because spam tools use them. Switch off the one your tool needs. A tool that logs in to XML-RPC with a password needs both the XML-RPC switch and the REST switch off, since either one refuses password logins there. XML-RPC stays on by itself while Jetpack is active. In an emergency, define( 'INJIL_HELP_SECURITY_LOCK', false ); in wp-config.php lifts all three locks.
 
 = What are the error pages? =
 WordPress shows a plain screen when it is updating, when PHP fails or when the database is down. The theme writes its own pages for those three, and for the errors the web server answers itself (403, 500, 502, 503 and 504). The Error pages section at the foot of Theme Options shows their state and gives the lines for .htaccess.
