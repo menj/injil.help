@@ -80,7 +80,7 @@ Whichever is chosen, document the server settings a site needs (`max_input_vars`
 
 ## Updating an existing site
 
-**To 3.25.1.** Open any admin screen as an administrator (a user who can edit theme options) after the update and the theme writes the error pages; the button is no longer needed. A copy another theme left in `wp-content` is replaced, and a file without a theme's mark is left alone. If you use the static pages, add the new `ErrorDocument 504` line from the Error pages section to `.htaccess`.
+**To 3.25.1.** Open any admin screen as an administrator (a user who can edit theme options; on a network, on the main site, since the sites share `wp-content`) after the update and the theme writes the error pages; the button is no longer needed. A copy another theme left in `wp-content` is replaced, and a file without a theme's mark is left alone. If you use the static pages, add the new `ErrorDocument 504` line from the Error pages section to `.htaccess`.
 
 **To 3.23.0.** The 404 page now carries `noindex, follow` as soon as the theme updates. The error pages wait for you: open Theme Options, scroll to Error pages at the foot and press Install error pages. If a row says another file is there, a plugin or host wrote that file; the theme leaves it alone. To use the static pages for server errors, add the four `ErrorDocument` lines from the same section to `.htaccess`.
 
