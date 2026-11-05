@@ -2,6 +2,17 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.25.6
+
+Documentation release. No option key, function, hook or address changed.
+
+- `readme.txt` gains an Updating section: Git Updater, the uploader's "Replace active with uploaded", and FTP (show hidden files, upload to a temporary folder and rename it into place, never upload WordPress without `wp-config.php`). Its settings list covers the eight tabs (Reading was missing, and the count said seven), the log-in screen on Branding, the profile links on Sharing and the Error pages section. Three questions are new: the development files, the Security locks and the error pages. Its public text no longer calls the linked sites sister sites or the themes a network of seven.
+- `README.md` lists all 25 files in `inc/` in the file map, `errors/`, `bin/`, `tests/` and the theme `.htaccess`, the Contextual links tab and the log-in keys on Branding, every filter the theme provides and a table of `wp-config.php` constants. It no longer says the theme has no test files, and it gives the test commands.
+- `SSOT.md` records the folder on the live server, every filter and constant, the development-file clean-up, the test commands in the push checklist and the rule against calling the linked sites a network. The populate lock is stale after two minutes, as the code has it; the file said one.
+- `UPGRADING.md` sorts the roadmap into Next, Later and Ideas, each item with its reason and evidence, drops what shipped (plates served from the Media Library, the tests in the repository), and adds the general update steps.
+- The 18 font families carry 29 `fontFace` entries; the README said 18 entries.
+- This file gains a 3.9.1 entry.
+
 ## 3.25.5
 
 The rest of the fixes from the live log of November 2026: XML-RPC with a way to keep it for Jetpack, a server block for WordPress's own files, and the installer lock in the notes. No option key, function or hook was renamed or removed.
@@ -383,6 +394,10 @@ The arguments of the Islamic Dilemma website (islamicdilemma.com) answered. The 
 - The pillar FAQ gains 3 questions: 29:46, how revealed guidance could be altered (5:44, 15:9, Jeremiah 8:8), and the ways the Qur'an says it was altered.
 - What is the Injīl? adds Mark 1:14-15 to "Is the Injīl the Bible?", and sets the seed of 48:29 beside Mark 4:26-29.
 - The excerpt of the responses page, the Resources index and the source library count the website with the 4 articles.
+
+## 3.9.1
+
+Tagged on its own branch. Its change, the security counters as one atomic upsert on a small daily row, reached sites in 3.13.0 and is listed there.
 
 ## 3.9.0
 
