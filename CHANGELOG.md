@@ -2,6 +2,14 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.25.2
+
+The web server error pages work on a site in a subfolder. No option key, function or hook was renamed or removed.
+
+- `injil_help_error_install()` also writes a copy of each static page into `wp-content/injil-help-errors/` with the site's name and home address (`injil_help_error_static_files()`, `injil_help_error_file_source()`). The automatic install, the admin check, the status table and `injil_help_error_remove()` cover these copies as they cover the drop-ins. `injil_help_error_htaccess_snippet()` points at that folder. `errors/` stays as the copy for a site at the domain root.
+- `CLAUDE.md` and `FARUQI.md` moved into `.claude/`, which `.gitattributes` already kept out of the release archive. Their two root entries in `.gitattributes` are gone, and `SSOT.md` and `.claude/CLAUDE.md` name the new paths, the check for the banned word among them.
+- `tests/error-pages-test.php` covers the static copies.
+
 ## 3.25.1
 
 The error pages install themselves. No option key, function or hook was renamed or removed.

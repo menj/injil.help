@@ -309,17 +309,17 @@ WordPress reads three files from `wp-content` when it cannot build a page. `inc/
 
 Each file starts with the marker `The Injil error page drop-in`. The theme writes a missing file, one with that marker, or a copy another theme left behind (marked "Written by the ... theme; safe to delete"). It leaves any other file alone. The pages come from `inc/error-page-html.php` with their words in `text.json` (`errors`). They hold their style inline, call no WordPress function and touch no database, so they work with the theme half uploaded. Each sends `noindex` and `no-store`.
 
-The web server answers some errors before WordPress starts. `errors/` holds static 403, 500, 502, 503 and 504 pages for those, rebuilt with `php bin/build-error-pages.php` (`--check` fails on a stale page). Point the server at them in `.htaccess`, with the folder name of the theme:
+The web server answers some errors before WordPress starts. The theme writes static 403, 500, 502, 503 and 504 pages for those into `wp-content/injil-help-errors/`, at the same times as the drop-ins and with the same marker. Each copy carries the site's name and its real home address, so the home link works on a site in a subfolder. The theme removes them when another theme is activated. Point the server at them with the lines from the Error pages section, which are built from the real address of `wp-content`. At the domain root they read:
 
 ```
-ErrorDocument 403 /wp-content/themes/injil.help/errors/403.html
-ErrorDocument 500 /wp-content/themes/injil.help/errors/500.html
-ErrorDocument 502 /wp-content/themes/injil.help/errors/502.html
-ErrorDocument 503 /wp-content/themes/injil.help/errors/503.html
-ErrorDocument 504 /wp-content/themes/injil.help/errors/504.html
+ErrorDocument 403 /wp-content/injil-help-errors/403.html
+ErrorDocument 500 /wp-content/injil-help-errors/500.html
+ErrorDocument 502 /wp-content/injil-help-errors/502.html
+ErrorDocument 503 /wp-content/injil-help-errors/503.html
+ErrorDocument 504 /wp-content/injil-help-errors/504.html
 ```
 
-These lines assume WordPress at the root of the domain. On a site installed in a subfolder, or with `wp-content` moved, copy the lines from the theme's Error pages section instead: it builds them from the real address. The static pages themselves cannot learn that address, so their home link points to `/`.
+`errors/` in the theme keeps the copies for a site at the domain root, rebuilt with `php bin/build-error-pages.php` (`--check` fails on a stale page).
 
 ## Development workflow
 
