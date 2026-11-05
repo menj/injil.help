@@ -2,6 +2,19 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.25.7
+
+The anatomy of a Journal post, and the old commentary addresses fixed. No option key, function or hook was renamed or removed.
+
+- Fixed: the November 2026 log shows 304 requests from 1 November for commentary addresses of 3.5 and earlier, such as `/quran/commentaries/az-zukhruf-57-65/jalalayn/`, answering 404 while their pages answered 200. The FTP log shows why. The PHP went up at 10:57 and `inc/data/tafsir/` at 11:10. A visit in between built the former-address map without the commentary pages and cached it for a week under the version alone. Two changes fix it. The map's cache key now carries a fingerprint of the data files (`injil_help_data_fingerprint()`: names, sizes and times), so it is rebuilt when they land. And `injil_help_former_commentary_target()` resolves every commentary address of an earlier scheme from the groups and works in `inc/data/commentaries.json` alone: the old group slugs, with or without a work, a part number (`tabari/2`) or a WordPress copy (`2-2`). The answer is a 301 to the published page, or a 302 to the nearest published page above it until the page is published. All 187 addresses the log shows resolve, with the commentary texts present or absent. `tests/former-redirect-test.php` covers the shapes.
+- Added: the post's excerpt under the title (`ih-dek`), and in the meta row the reading time and "Updated" with the date when the post changed a day or more after it was published (`[injil_help_article_meta]`, `inc/article.php`).
+- Added: "In short", the key points from a new Key points box (`_injil_help_points`) in the answer capsule's style, under the breadcrumb row. The WebPage `speakable` adds `.ih-points` when it shows.
+- Added: the contents, a list of the post's sections from three level-two headings up. Headings without an id get one from their text.
+- Added: the Sources list and the Notes framed together as one block (`.ih-sources`). The headings and lists stay as they were, so the citations read from them are unchanged. A Sources item with no italic title is now cited by its whole line, with its address when it has one.
+- The FAQ on a post is the theme's FAQ style, as on the pages; the FAQPage is built from those same blocks, so it appears only when the questions are on the page. No byline was added.
+- Licence: the theme is GNU GPL version 3 or later (`style.css`, `readme.txt`), with the full text in a new `LICENSE` file. Fonts, texts and images keep their own licences.
+- New files: `inc/article.php`, `assets/css/article.css`, `tests/former-redirect-test.php`, `LICENSE`.
+
 ## 3.25.6
 
 Documentation release. No option key, function, hook or address changed.

@@ -239,7 +239,7 @@ ih_check( array( 'provider_name' => 'Site' ) === $oembed, 'oEmbed loses the auth
 
 // 3. A former address whose target is not published yet goes for now to the nearest published page.
 $GLOBALS['ih_trans']['injil_help_former_map'] = array(
-	'ver' => INJIL_HELP_VERSION,
+	'ver' => INJIL_HELP_VERSION . ':' . injil_help_data_fingerprint(), // the key carries the data fingerprint (3.25.7)
 	'map' => array(
 		'quran/commentaries/al-muminun-50'        => 'quran/commentaries/refuge-on-high-ground',
 		'quran/commentaries/al-muminun-50/tabari' => 'quran/commentaries/refuge-on-high-ground/tabari',

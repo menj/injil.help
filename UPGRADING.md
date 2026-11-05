@@ -8,14 +8,14 @@ These are plans, not promises. Each item rests on something on record: this file
 
 ### Next
 
-- Redirect the old commentary work addresses. Why: the November 2026 log shows 304 requests for `/quran/commentaries/<old group>/<work>/` (for example `az-zukhruf-57-65/jalalayn/`) answering 404 from 1 November, where they answered 200 before; `injil_help_redirect_former()` in `inc/starter-content.php` maps the group pages, and the work pages under a renamed group need the same.
-- Bring the remaining checks into the repository and run them in CI. Why: the nine tests in `tests/` are in the repository, but the page and link check, the block-balance render and the structured-data check still live in a scratch folder (README, Development workflow). Put them beside the tests with one command, and run everything in a GitHub Actions workflow on every push and pull request; add a JSON Schema per data file under `inc/data/schema/`.
+- Bring the remaining checks into the repository and run them in CI. Why: the ten tests in `tests/` are in the repository, but the page and link check, the block-balance render and the structured-data check still live in a scratch folder (README, Development workflow). Put them beside the tests with one command, and run everything in a GitHub Actions workflow on every push and pull request; add a JSON Schema per data file under `inc/data/schema/`.
 - Fail loudly on bad data. Why: `injil_help_pages_file()` and `injil_help_data_file()` return an empty array for a missing or malformed file, which silently leaves pages missing. Keep the safe return, record the failure, show an admin notice naming the file, and add a Site Health test that reports every data file.
 - Guard the parent theme. Why: nothing checks that Twenty Twenty-Five is present or recent enough. Show an admin notice and skip what depends on it, and pin the tested parent version in `SSOT.md` and `style.css`, as the compelling-evidence theme does with `CE_PARENT_TESTED_VERSION`.
 - Security headers on front-end responses (`X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options`, HSTS as an opt-in). Why: the bestofislam theme sends them from `inc/security-headers.php`; this theme sends none, and the README already notes that a `script-src 'self'` policy would work here.
 
 ### Later
 
+- Key points for the eight Journal posts, as a `points` list in `inc/data/posts.json` written to `_injil_help_points`. Why: the "In short" box is built (3.25.7), but no post carries key points yet, so it shows nowhere until the owner types them.
 - A Doctor tab in Theme Options. Why: one screen would show missing or duplicated starter pages, edited pages, oversized pages, failing data files, the parent theme, missing fonts, the page cache and SEO plugin, and `max_input_vars` and `post_max_size` against the largest page. Waits on the data checks above, which it would display.
 - Preview before rewriting. Why: the first admin load after an update rewrites changed pages at once. A dry run listing what will change and what is kept, with a diff link, and an option to keep one revision. Waits on the Doctor tab, where it would sit.
 - Export and import edits. Why: a rebuild from scratch loses the pages an owner edited and the Theme Options; the abrahamic theme already exports and imports its options. Export both as JSON and import them on a fresh install.
@@ -34,7 +34,7 @@ These are plans, not promises. Each item rests on something on record: this file
 - Glossary terms marked on first use, with the definition on hover and focus. The compelling-evidence and bestofislam themes link or annotate glossary terms in the running text; here the glossary is a page.
 - A dark scheme. The palette is tokens, and the abrahamic theme already switches light and dark from one palette. Check the plates and the lattice against a dark base.
 - A print stylesheet for every page (no ornament, notes at the end, folds open), and an EPUB or PDF of The Gospel According to Islam from `narrative.json`. Today only `bible.css` and `progress.css` carry print rules; the abrahamic and bestofislam themes ship a print stylesheet.
-- Reading aids: remember the reader's place (local storage only), "continue reading", reading time and a table of contents on long pages. The abrahamic theme shows reading time.
+- Reading aids on the long pages: remember the reader's place (local storage only), "continue reading", and the reading time and contents list the Journal posts now carry (3.25.7). The abrahamic theme shows reading time on its pages.
 - A red-letter edition, with the words of Jesus marked `[r]` … `[/r]` in the narrative data.
 - A parallel view of the Qur'an, the gospel section and the commentaries for one verse, and the synoptic parallels with Thomas for a section.
 - A corrections feed, and a "last corrected" date on every page that has an entry.
@@ -51,6 +51,8 @@ The general steps, for any version:
 2. Update through Git Updater, or upload the zip under Appearance › Themes › Add New and choose "Replace active with uploaded". Never switch to another theme first: a switch takes the error pages and the `.htaccess` sections away. By FTP: turn on hidden files so the theme's `.htaccess` goes up; upload the folder under a temporary name; rename the old folder away and, straight after, give the new one the old folder's exact name (`injil-help`, or `injil.help` where the site runs a copy of the repository), with the admin closed in between. Never upload WordPress core to a live folder without its `wp-config.php`. Once the site is installed, keep this installer lock at the top of the site's `.htaccess`, above every `# BEGIN` section: `<IfModule mod_rewrite.c>`, `RewriteEngine On`, `RewriteRule ^(.+/)?wp-admin/(install|setup-config)\.php$ - [F,L]`, `</IfModule>`, one per line. On Nginx the same lock is `location ~ ^/(.+/)?wp-admin/(install|setup-config)\.php$ { return 403; }`. The 3.25.5 note below gives it as a block, with the virtual-host form.
 3. Open any admin screen as an administrator (page rewrites and the error pages need `edit_theme_options`, the development-file clean-up needs `update_themes`). The theme rewrites the pages whose text changed and keeps the ones you edited, writes its error pages, checks its `.htaccess` sections (at most hourly), and on a production site removes its development files.
 4. Read the note for the version you are moving to.
+
+**To 3.25.7.** Upload the whole theme, `inc/data/` included, then open any admin screen. The old commentary addresses redirect again; nothing else to do. Key points for a Journal post go in the new Key points box on its edit screen. The theme is now GPL version 3 or later; the new `LICENSE` file holds the text.
 
 **To 3.25.6.** Nothing to do. Documentation only.
 

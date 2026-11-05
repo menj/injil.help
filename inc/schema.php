@@ -645,7 +645,12 @@ function injil_help_collect_citations( $html ) {
 			$cite['name'] = html_entity_decode( trim( wp_strip_all_tags( $m[2] ) ), ENT_QUOTES );
 			$author       = html_entity_decode( trim( wp_strip_all_tags( $m[1] ), " ,;:\u{2019}" ), ENT_QUOTES );
 		} else {
-			continue;
+			// A source with no italic title is cited by its whole line, as the reader sees it (3.25.7).
+			$cite['name'] = trim( preg_replace( '/\s+/u', ' ', $plain ) );
+			$author       = '';
+			if ( preg_match( '#href="(https?://[^"]+)"#', $li, $u ) ) {
+				$cite['url'] = html_entity_decode( $u[1], ENT_QUOTES | ENT_HTML5, 'UTF-8' ); // "&amp;" in the markup is "&" in the address
+			}
 		}
 		if ( ! $cite['name'] ) {
 			continue;
@@ -952,6 +957,10 @@ function injil_help_schema_graph() {
 		'@type'       => 'SpeakableSpecification',
 		'cssSelector' => injil_help_schema_speakable_selectors( $blocks, $html, is_front_page() ),
 	);
+	// "In short" on a Journal post (inc/article.php), when it shows.
+	if ( $post && is_singular( 'post' ) && function_exists( 'injil_help_article_points_show' ) && injil_help_article_points_show( $post ) ) {
+		$speakable['cssSelector'][] = '.ih-points';
+	}
 	$webpage['author']    = array( '@id' => $ids['author'] );
 	$webpage['speakable'] = $speakable;
 	$webpage              = array_merge( $webpage, injil_help_schema_page_elements( $url, $html ) );
