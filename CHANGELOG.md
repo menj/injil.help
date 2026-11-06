@@ -2,21 +2,417 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.31.0
+
+A contents list for pages, from the plugin the owner supplied on 6 November 2026: Ikram Hawramani's *WordPress Table-of-Contents Shortcode Done Properly* (MIT licence, 2025). The theme takes its shortcode interface and writes its own code, because the plugin cannot work inside a theme as written.
+
+- Added: the `[auto_toc]` shortcode (`inc/toc.php`) with `tags` and `title`, and `assets/css/toc.css`. It lists the headings of a page as a nested list and gives a heading without an id one made from its text.
+- Added: Theme Options > Branding > Layout > "Add a contents list to long pages" (`toc_auto`, off by default). A page with 4 or more level-two headings gets the list after the breadcrumb row.
+- Added: a `[toc]` line in the page markup. The Glossary and Objections pages use it.
+- Added: `tests/toc-test.php`, 34 checks.
+- Fixed in the port: the plugin looks for its shortcode at `the_content` priority 99, after WordPress has expanded it at 11, so it finds nothing. The theme leaves a marker at 11 and fills it at 13.
+- Fixed in the port: the plugin gives every heading a new id, which would break the notes anchors and the footnote links. The theme keeps an id the author gave and never repeats one on the page.
+- Fixed in the port: the plugin rewrites the whole text through `DOMDocument`. The theme changes only the opening tag of a heading that lacks an id. The nested list is also closed properly when the levels jump or fall, which the plugin's is not.
+- Changed: `SSOT.md` credits the plugin.
+
+## 3.30.0
+
+The Aḥmad page now names the Companion and the chains behind the ḥadīth of the Prophet's five names, which 3.29.0 left unstated because the reference could not be checked then. The owner asked for both on 6 November 2026.
+
+- Added: the Companion is Jubayr ibn Muṭʿim, and the ḥadīth is in al-Bukhārī (3532) and Muslim (2354) as well as Mālik's *Muwaṭṭaʾ*. The numbers are al-Rūdānī's, from *Jamʿ al-fawāʾid* no. 6358.
+- Added: a short biography of Jubayr from Ibn ʿAbd al-Barr's *al-Istīʿāb*, with a link to his entry in the Hadith Transmitters Encyclopedia.
+- Added: three chains found in Mālik's *Muwaṭṭaʾ*, Ibn Wahb's *Jāmiʿ* and Ibn al-Ghaṭrīf's *Juzʾ*, written one to a line in the form HadithGraph reads. Each runs through al-Zuhrī, Muḥammad ibn Jubayr and Jubayr ibn Muṭʿim.
+- Changed: `SSOT.md` credits turath.io, whose full-text search was used to check the ḥadīth against the books. Nothing is quoted from it.
+
+Each chain was read in the Arabic text of the book it names. The chains of al-Bukhārī and Muslim themselves were not read, so none is given for them.
+
+## 3.29.0
+
+Two reading aids from hawramani.com, approved by the owner on 6 November 2026: the Hadith Transmitters Encyclopedia (hadithtransmitters.hawramani.com) and HadithGraph (hawramani.com/hadithgraph/).
+
+- Added: a Glossary entry for Isnād and Rijāl that explains the terms and links to both tools and to the instructions for HadithGraph.
+- Added: the Aḥmad page says where a reader can look up each transmitter in the chain of the ḥadīth it cites, and draw the chains. Both tools are listed under Sources there.
+- Changed: `SSOT.md` credits Ikram Hawramani's two tools as reading aids. The site quotes nothing from them.
+
+The theme fetches nothing from either site. The links open only when a reader clicks them. The two tools are third-party services: the Encyclopedia is a search over biographical dictionaries, and HadithGraph runs in the reader's browser on chains the reader types in.
+
+## 3.28.0
+
+Injīl and Tawrāt, which Lane's lexicon does not treat, now rest on the other classical dictionaries at arabiclexicon.hawramani.com. The owner asked for a second source on 6 November 2026.
+
+- Added: the Glossary entries for Injīl and Tawrāt report the classical views. Ibn Manẓūr calls Injīl a Hebrew or Syriac name and records the view that it is Arabic; al-Fayyūmī gives the derivation from *najaltuhu*. Abū Mūsā al-Madīnī reads Tawrāt as "brightness and light", and al-Rāghib al-Iṣfahānī as "the book they inherited from Mūsā".
+- Added: the pages on the Injīl and the Torah in Islam carry the same, with Jawharī's definition of the Injīl, Ibn Manẓūr's note on the ḥadīth "whose chests are their gospels", and the lexicons under Sources.
+- Changed: `SSOT.md` names the dictionaries and says the English renderings of their Arabic are the site's own.
+
+The modern view stays beside them: Jeffery traces Injīl to the Greek *euangelion*, and Tawrāt to the Hebrew *torah*.
+
+## 3.27.0
+
+Lane's Arabic-English Lexicon now backs more of the Arabic on the site, under the owner's approval of 6 November 2026.
+
+- Added: Lane glosses for Zabūr, Rūḥ, ʿAbd, Ahl al-Kitāb, Naṣārā, Tawaffā, al-Māʾida and Fiṭra in the Glossary, each a few quoted words with a link to the entry.
+- Added: the page on the end of ʿĪsā's earthly mission cites Lane on *tawaffā* (death or sleep), and the table page gives the Arabic derivations of *māʾida* beside the Ethiopic loanword view. Both list the lexicon under Sources.
+- Not added: Injīl, Tawrāt, Muhaymin, Āya, Shirk and Sūra. The Lane text on the Hawramani site has no usable entry for them.
+
+## 3.26.0
+
+The Glossary and the Aḥmad page cite Lane's Arabic-English Lexicon. The owner approved the source on 6 November 2026.
+
+- Added: short glosses from Lane for al-Masīḥ, al-Ḥawāriyyūn, Taḥrīf and Aḥmad in the Glossary. Each quotes a few words and links to the entry on arabiclexicon.hawramani.com.
+- Added: the Aḥmad page cites Lane for the root ḥ-m-d and lists the lexicon under Sources.
+- Changed: `SSOT.md` names Lane and the Hawramani site among the credits and says how a gloss is written.
+
+The theme fetches nothing from that site. The links open only when a reader clicks them.
+
+## 3.25.10
+
+The settings and readme speak of the other sites in plain words, and the docs name the subfolder favicon step. No feature or setting removed.
+
+- Changed: the Contextual links tab, its help text and the code comments in `inc/contextual-links.php` and `inc/security.php` say "the other sites" and "the shared phrase map". The `ctx_sister` option keys and the `ih-ctx-link--sister` class keep their names.
+- Changed: `readme.txt` and `README.md` say that a site in a subfolder needs a copy of `favicon.ico` at the domain root, because browsers ask for it there and WordPress never sees the request.
+
+## 3.25.9
+
+The browser icon set is complete. No feature or setting removed.
+
+- Added: `assets/images/favicon.svg` (the brandmark without its metadata, 832 bytes), `favicon.ico` (16, 32 and 48px), `favicon-32.png`, `apple-touch-icon.png` (180px on the paper colour), `icon-192.png`, `icon-512.png`, `icon-maskable-512.png` and `site.webmanifest`, all rendered from `assets/brandmark.svg`.
+- Added: `inc/favicon.php`. The brandmark mode prints the SVG, 32px, touch icon, manifest and `theme-color` (#1f5c4a) on the site, the log-in screen and the admin. A custom favicon URL still prints that one link, and a Site Icon still gets WordPress's own tags.
+- Added: `/favicon.ico` answers with the icon in brandmark mode, with a day's cache and an ETag (304 while unchanged; HEAD gets the headers alone). With a custom favicon URL it redirects there; with a Site Icon, WordPress redirects to it.
+- Added: the error pages and drop-ins carry the brandmark as their tab icon, as a `data:` address, so it shows on any path and in a subfolder install.
+- Changed: the favicon code moves from `functions.php` to `inc/favicon.php`, and the SVG link names `assets/images/favicon.svg` in place of `assets/brandmark.svg`.
+
+## 3.25.8
+
+Documentation only.
+
+- Changed: the FTP update steps in `readme.txt` and `UPGRADING.md` send the theme's `.htaccess` file first, so its private files stay closed to visitors while the rest uploads.
+- Changed: the Nginx theme rule in `README.md` matches `injil[.-]help[^/]*`, so it also covers the `-new` and `-old` folders of an FTP update, and the FTP steps tell Nginx sites to add it first.
+- Changed: `.claude/skills/theme-docs/SKILL.md` takes the refreshed standard.
+
+## 3.25.7
+
+The anatomy of a Journal post, and the old commentary addresses fixed. No option key, function or hook was renamed or removed.
+
+- Fixed: the November 2026 log shows 304 requests from 1 November for commentary addresses of 3.5 and earlier, such as `/quran/commentaries/az-zukhruf-57-65/jalalayn/`, answering 404 while their pages answered 200. The FTP log shows why. The PHP went up at 10:57 and `inc/data/tafsir/` at 11:10. A visit in between built the former-address map without the commentary pages and cached it for a week under the version alone. Two changes fix it. The map's cache key now carries a fingerprint of the data files (`injil_help_data_fingerprint()`: names, sizes and times), so it is rebuilt when they land. And `injil_help_former_commentary_target()` resolves every commentary address of an earlier scheme from the groups and works in `inc/data/commentaries.json` alone: the old group slugs, with or without a work, a part number (`tabari/2`) or a WordPress copy (`2-2`). The answer is a 301 to the published page, or a 302 to the nearest published page above it until the page is published. All 187 addresses the log shows resolve, with the commentary texts present or absent. `tests/former-redirect-test.php` covers the shapes.
+- Added: the post's excerpt under the title (`ih-dek`), and in the meta row the reading time and "Updated" with the date when the post changed a day or more after it was published (`[injil_help_article_meta]`, `inc/article.php`).
+- Added: "In short", the key points from a new Key points box (`_injil_help_points`) in the answer capsule's style, under the breadcrumb row. The WebPage `speakable` adds `.ih-points` when it shows.
+- Added: the contents, a list of the post's sections from three level-two headings up. Headings without an id get one from their text.
+- Added: the Sources list and the Notes framed together as one block (`.ih-sources`). The headings and lists stay as they were, so the citations read from them are unchanged. A Sources item with no italic title is now cited by its whole line, with its address when it has one.
+- The FAQ on a post is the theme's FAQ style, as on the pages; the FAQPage is built from those same blocks, so it appears only when the questions are on the page. No byline was added.
+- Licence: the theme is GNU GPL version 3 or later (`style.css`, `readme.txt`), with the full text in a new `LICENSE` file. Fonts, texts and images keep their own licences.
+- New files: `inc/article.php`, `assets/css/article.css`, `tests/former-redirect-test.php`, `LICENSE`.
+
+## 3.25.6
+
+Documentation release. No option key, function, hook or address changed.
+
+- `readme.txt` gains an Updating section: Git Updater, the uploader's "Replace active with uploaded", and FTP (show hidden files, upload to a temporary folder and rename it into place, never upload WordPress without `wp-config.php`). Its settings list covers the eight tabs (Reading was missing, and the count said seven), the log-in screen on Branding, the profile links on Sharing and the Error pages section. Three questions are new: the development files, the Security locks and the error pages. Its public text no longer calls the linked sites sister sites or the themes a network of seven.
+- `README.md` lists all 25 files in `inc/` in the file map, `errors/`, `bin/`, `tests/` and the theme `.htaccess`, the Contextual links tab and the log-in keys on Branding, every filter the theme provides and a table of `wp-config.php` constants. It no longer says the theme has no test files, and it gives the test commands.
+- `SSOT.md` records the folder on the live server, every filter and constant, the development-file clean-up, the test commands in the push checklist and the rule against calling the linked sites a network. The populate lock is stale after two minutes, as the code has it; the file said one.
+- `UPGRADING.md` sorts the roadmap into Next, Later and Ideas, each item with its reason and evidence, drops what shipped (plates served from the Media Library, the tests in the repository), and adds the general update steps.
+- The 18 font families carry 29 `fontFace` entries; the README said 18 entries.
+- This file gains a 3.9.1 entry.
+
+## 3.25.5
+
+The rest of the fixes from the live log of November 2026: XML-RPC with a way to keep it for Jetpack, a server block for WordPress's own files, and the installer lock in the notes. No option key, function or hook was renamed or removed.
+
+- The log showed 586 POSTs to `xmlrpc.php`, password guesses, answered with 200. XML-RPC is off as before while "Turn off XML-RPC" is on: `xmlrpc_enabled` is false, `xmlrpc_methods` is empty (the pingback methods go with the rest), the `X-Pingback` header and the RSD link go, and `xmlrpc.php` answers 403. It now stays on while the Jetpack plugin is active, which needs it, or with `define( 'INJIL_HELP_ALLOW_XMLRPC', true );` (`injil_help_sec_xmlrpc_allowed()`, `injil_help_sec_xmlrpc_off()`). The "Block xmlrpc.php" section of `.htaccess` follows the same test. Password logins through XML-RPC stay refused while the XML-RPC or REST switch is on.
+- A second marked section in the site's `.htaccess`, "The Injil: deny direct core files", answers 403 for the PHP files in `wp-includes` (TinyMCE's loader and `ms-files.php` excepted), `wp-settings.php`, `wp-config-sample.php`, `readme.html`, `wp-admin/install.php`, `wp-admin/setup-config.php` and, while XML-RPC is off, `xmlrpc.php` (`injil_help_sec_core_lines()`). It carries WordPress's folder when WordPress sits in a subfolder of the `.htaccess` folder, and is left out when WordPress sits outside it (`injil_help_sec_core_prefix()`). On an Apache without mod_rewrite, `RedirectMatch 403` lines refuse the same files by their URL path (`injil_help_sec_core_base()`). `define( 'INJIL_HELP_ALLOW_CORE_FILES', true );` takes it out. A theme switch removes it with the xmlrpc.php section.
+- The hourly `.htaccess` check runs again at once when what the sections should hold has changed: Jetpack switched on or off, a constant added, the XML-RPC switch moved (`injil_help_sec_htaccess_state()`). A failed write, or a `.htaccess` the theme cannot write, reads as "could not write" and is tried again on the next admin screen.
+- Where the theme cannot write `.htaccess`, the Security tab shows both sections to paste after the WordPress section (`injil_help_sec_htaccess_snippet()`). On Nginx it points to the server-block rules in the README instead. It also says when Jetpack or the constant keeps XML-RPC on, and names the core-file section and its constant.
+- `UPGRADING.md` and the README carry the installer lock. The site was taken over through an open `setup-config.php` while WordPress core sat without `wp-config.php`, a state in which the theme never loads. The notes give the rule that refuses `setup-config.php` and `install.php` once the site is installed, for `.htaccess`, an Apache virtual host and Nginx, and say never to upload core without `wp-config.php`. The `.htaccess` rule also covers WordPress in a subfolder. The README also gives the Nginx form of the core-file rules, with `xmlrpc.php` in a rule of its own for sites that keep XML-RPC on.
+- `tests/live-logs-test.php` checks the switch, the Jetpack and constant cases, the lines and which paths they refuse and leave open, the subfolder prefix, the writing, retry and removal of both sections, and the paste lines. The rules were also run on Apache 2.4, with and without mod_rewrite, at the domain root, in a subfolder site and with WordPress in its own folder.
+
+## 3.25.4
+
+A page no longer fails when the structured data meets a malformed block, and a theme caught half uploaded answers 503. No option key, function or hook was renamed or removed.
+
+- The fatal error on the front page (29 October and 1 November 2026, "Attempt to assign property "parsed_block" on null" in `class-wp-block.php`) came from `injil_help_expand_patterns()`. It swapped each `core/pattern` block for the pattern's blocks and left `innerContent` alone. A pattern that was not registered, as while the theme was being uploaded or when a stored template names a pattern that has gone, left a `null` with no inner block, and core's `WP_Block::render()` stopped the request inside `wp_head`. Visitors got a page cut off after the head.
+- `injil_help_expand_patterns()` now puts each expansion in the place of its placeholder, one `null` per block, and stops a pattern that names itself. `injil_help_schema_normalise_block()` gives any block exactly one `null` per inner block. `injil_help_schema_render()` renders through both and, if a render still throws, reads the block's own markup (`injil_help_schema_block_markup()`). Every `render_block()` call in `inc/schema.php` goes through it, and if building the graph throws, `injil_help_schema_graph_safe()` returns an empty graph: the `wp_head` printer sends the page without it, and the Rank Math merge sends Rank Math's nodes as they are.
+- A block with more inner blocks than placeholders used to lose the extra ones from the FAQ answers and quotations. They are read now.
+- `injil_help_term_link()` (`inc/seo.php`) calls `get_term_link()` only for a term whose taxonomy is registered. The graph called it on every archive, and on a post type archive core read `query_var` on false (`taxonomy.php` line 4751).
+- `functions.php` checks every file in `inc/` before it reads one, loads each inside a try and checks the flag each sets on its last line, so a file cut short where it still parses is caught too (`injil_help_theme_files()`, `injil_help_load_theme_files()`). A missing or half-written file is logged and visitors get a 503 page with `Retry-After` (`injil_help_serve_incomplete()`: the static page in `wp-content/injil-help-errors/`, then `errors/503.html`, then a few lines of HTML). The login screen, cron, AJAX and the command line go on without the theme. On 25 October 2026 a missing `inc/options.php` was a fatal error.
+- The REST users routes answer only logged-in users (`injil_help_sec_hide_user_routes()`). `?author=N` goes to the About page before WordPress can redirect it to the author's slug (`injil_help_sec_author_query()`), and oEmbed answers lose the author's name and link (`injil_help_sec_oembed_author()`).
+- A former address whose target page is missing, a draft or private now goes for now (302) to the nearest published page above the target, such as the group or work page of a commentary (`injil_help_published_ancestor()`). The logs showed about 650 requests for `/quran/commentaries/al-muminun-50/` and `an-nisa-155-159/` answered 404.
+- The privacy page WordPress drafts on install held the path `privacy-policy`, so the theme counted the page as written and `/privacy-policy/` answered 404. `injil_help_installer_draft()` lets the content sync fill it in and publish it, when it is the page named in `wp_page_for_privacy_policy` and nobody has edited it. A privacy draft the owner wrote or changed stays a draft.
+- The theme ships an `.htaccess` that refuses `.git*`, `.claude`, `tests`, `bin` and the Markdown files on Apache. On a production site the development files the release archive leaves out are deleted from the theme folder on the next admin screen (`injil_help_dev_cleanup()`). A local, development or staging site keeps them, and so does a local host name, a private address or a site that defines `INJIL_HELP_KEEP_DEV_FILES`.
+- Every PHP file in `tests/` and `bin/` answers a web request with a 404 and runs nothing.
+- `tests/schema-render-test.php` reproduces the fatal error with a block that has more placeholders than inner blocks, and checks the opposite shape, the front-page template with a pattern missing, the fall-back render, the term links and the 503 guard. `tests/hardening-test.php` covers the account-name guards, the redirect fall-back, the privacy page, the clean-up and the `.htaccess`.
+
+## 3.25.3
+
+The front page follows one story from top to bottom. No section, pattern slug, option key, function or hook was renamed or removed.
+
+- `templates/front-page.html` renders the FAQs (`home-answers`) before Resources (`home-resources`), so the reader meets the objections after the evidence and ends on the sources and the corrections log.
+- The FAQs carry the label "Part VI · The questions" (it was "In brief") and Resources "Part VII · Test it yourself" (it was "Apparatus"). The section headings are unchanged.
+- The intros of the Five Gospels, Paul of Tarsus, Jesus in the Qur'an, the Gospel According to Islam, the FAQs and Resources each open with a line that leads on from the section before.
+- `SSOT.md` and `README.md` record the order and the job of each section.
+- The README says `injil_help_error_remove()` leaves the error pages in place on a network, as the code already did.
+
+## 3.25.2
+
+The web server error pages work on a site in a subfolder. No option key, function or hook was renamed or removed.
+
+- `injil_help_error_install()` also writes a copy of each static page into `wp-content/injil-help-errors/` with the site's name and home address (`injil_help_error_static_files()`, `injil_help_error_file_source()`). The automatic install, the admin check, the status table and `injil_help_error_remove()` cover these copies as they cover the drop-ins. `injil_help_error_htaccess_snippet()` points at that folder. `errors/` stays as the copy for a site at the domain root.
+- `CLAUDE.md` and `FARUQI.md` moved into `.claude/`, which `.gitattributes` already kept out of the release archive. Their two root entries in `.gitattributes` are gone, and `SSOT.md` and `.claude/CLAUDE.md` name the new paths, the check for the banned word among them.
+- `injil_help_error_install()` puts a new file in place with a hard link, which fails when a file has appeared since the check, and checks an existing file again just before the swap. A file someone else wrote in the meantime is never replaced.
+- The README says to take the `ErrorDocument` lines out of `.htaccess` when switching theme. `SSOT.md` lists `tests/error-pages-test.php` among the tests kept in the repository.
+- `tests/error-pages-test.php` covers the static copies, with the `.htaccess` lines under a subfolder.
+
+## 3.25.1
+
+The error pages install themselves. No option key, function or hook was renamed or removed.
+
+- `injil_help_error_auto_install()` runs `injil_help_error_install()` on `after_switch_theme`. `injil_help_error_maybe_install()` runs it on `admin_init` for a user with `edit_theme_options` when a file is missing, is another theme's leftover, or was written for another version, site name or home address (option `injil_help_error_pages_fingerprint`). The Install error pages button stays.
+- A drop-in another theme left behind, marked "Written by the ... theme; safe to delete", is replaced at install (`injil_help_error_is_other_theme()`, state `theme`). A file without such a mark is still never touched.
+- `injil_help_error_remove()` on `switch_theme` deletes the drop-ins that carry the theme's marker, and only those.
+- `errors/504.html` (gateway timeout) in the design of the 502 page, with its words in `text.json`, and an `ErrorDocument 504` line in the section and the README.
+- `tests/error-pages-test.php` covers the automatic install, the replacement, the removal and the 504 page.
+
+## 3.25.0
+
+The owner is declared as the schema author, in the markup only. No option key, function or hook was renamed or removed; two constants were added.
+
+- `INJIL_HELP_SCHEMA_AUTHOR_NAME` and `INJIL_HELP_SCHEMA_AUTHOR_URL` (`inc/schema.php`) give the author Person its name and url, `https://menj.bio`. The sameAs list keeps the Theme Options entries and always includes `https://menj.bio`.
+- `injil_help_schema_unname()` leaves the author Person's name, url and sameAs alone and strips the name from every other node, as before.
+- Every page node now names the author Person. With Rank Math, its own Person nodes are removed, references to them point at the theme's author, and its Article and WebPage take that author.
+- `tests/schema-graph-test.php` requires one author Person with the name, url and sameAs, the author on every page and article node, and the name nowhere else.
+
+## 3.24.0
+
+New answers on the Islamic Dilemma pages and a corrected reading of *muṣaddiq*. No option key, function or hook was renamed or removed.
+
+- `patterns/islamic-dilemma-page.json` and `patterns/answers-page.json` carry three new questions, each answered in under 60 words: "Is there a Christian dilemma?", "Can the Qur’an reinterpret the Bible without calling it altered?" and one on Qur’an 3:81. The FAQPage markup is built from the same blocks, so it picks them up.
+- The secular-form page reads *muṣaddiq* as confirming, declaring true, after 3:50, which states confirming the Torah and making lawful as two acts. Matthew 5:17 is now cited as the Christian reading of "fulfil", set against it.
+- "The biblical dilemma" gains a paragraph on Daniel 9 rereading Jeremiah's seventy years and on the Qumran commentary on Habakkuk, and a line that the test proves too much and proves nothing for the Qur’an.
+- `/islamic-dilemma/torah-in-islam/` adds Tawrāt as law and instruction, with the oral Torah marked as a scholarly view, and Genesis 18 and Moses' hand (20:22; 27:12; 28:32) as retellings.
+- The Organization and author Person always list `https://menj.bio` in `sameAs`; `tests/schema-graph-test.php` checks it.
+
+## 3.23.0
+
+Error pages for the moments WordPress cannot build a page, and a `noindex` on the 404 page. No option key, function or hook was renamed or removed.
+
+- `inc/error-pages.php` writes `wp-content/maintenance.php`, `php-error.php` and `db-error.php` when an administrator presses Install error pages at the foot of Theme Options. The handler checks `manage_options` and a nonce. A file is written to a temporary name and then renamed, so WordPress never reads half of one. On a network only the main site writes.
+- Each file carries the marker `The Injil error page drop-in` and its kind. The button writes a missing file or one with that marker and leaves every other file alone. The table beside it reads not installed, installed, outdated or another file left alone.
+- `maintenance.php` sends 503 with `Retry-After: 600`. `php-error.php` sends 500 and says "Something went wrong". `db-error.php` sends 503 with `Retry-After: 600` and says "We cannot reach our database". All three send `X-Robots-Tag: noindex`, the robots meta tag and `Cache-Control: no-store`.
+- `inc/error-page-html.php` builds the pages in the site's paper, green and gold, with the brandmark inline and a dark version for a dark system setting. The style is inline and no WordPress function runs, so a page shows with the theme half uploaded or the database down. The words are in `text.json` (`errors`). Titles keep the title rule.
+- `errors/403.html`, `500.html`, `502.html` and `503.html` are static copies for the web server's `ErrorDocument` lines, built by `bin/build-error-pages.php`. The README lists the `.htaccess` lines.
+- The 404 page sends `noindex, follow`.
+- `tests/error-pages-test.php` checks each status, header and wording, runs each file without WordPress, checks the installer against foreign and outdated files, and compares `errors/` with the builder.
+
+## 3.22.0
+
+The log-in screen gets a switch, a note and a pass for WCAG 2.2 AA. No option key, function or hook was renamed or removed.
+
+- Theme Options › Branding has a Log-in screen card. `login_design` (on by default) turns the theme's dress on wp-login.php on or off; `login_message` adds one line of plain text above the form, on the log-in screen only.
+- While a plugin that styles the log-in screen is active (LoginPress, Custom Login, Login Logo, Branda, Admin Custom Login, Login Designer, Erident), the theme leaves the screen to it. The filter `injil_help_login_plugin_active` adds others. WPS Hide Login only moves the address, so the design follows it there. The title tag keeps the site's rule either way.
+- The body carries `ih-login`, and `ih-login--interim` in the pop-up shown when a session expires. The pop-up drops the lattice and sets a tighter column.
+- Focus rings and field edges use the green and the muted brown, which reach 3:1 against the ground; the gold stays as ornament. The links under the card, the checkbox and the show-password button are at least 24px. Phones get a card with less padding.
+- The closures in `inc/login.php` are named functions now, so a child theme can unhook them.
+- `tests/login-test.php` checks the switch, the plugin check, the classes, the note and every title.
+
+## 3.21.2
+
+Two faults in the search base, found by the review of the same code on the TBE theme. No option key, function or hook was renamed or removed.
+
+- A post type registered on `init` after priority 1 could take the stored base. The late `init` hook switched to the fallback but flushed while `$wp_rewrite->search_base` still held the old base, so the rebuilt rules kept it. The hook now sets the base in force on every load, before any flush, so the rules and the search links agree.
+- When a post type or taxonomy registers `search` itself, the fallback was reserved too. A refused base now falls back to the first free one of `search`, `find` and `search-results` (`injil_help_search_fallback_base()`), and the notice names the base used.
+- The page check exempted `search`, so a page at `/search/` lost its child paths to the search rule. Every base is checked against the pages now, the fallback candidates included.
+- When `search`, `find` and `search-results` are all taken, the fallback numbers the last (`search-results-2`, `search-results-3` and on) until one is free.
+- `tests/plugin-features-test.php` checks all of these.
+
+## 3.21.1
+
+A review of the matching change on the TBE theme found two faults in the search base under Settings › Permalinks. No option key, function or hook was renamed or removed.
+
+- The help text said the base takes letters, digits and hyphens only, but `sanitize_key()` kept underscores. `injil_help_search_clean_base()` now removes them, so `my_search` is stored as `mysearch`, and the help text says so.
+- A base that WordPress keeps for itself (`feed`, `page`, `tag`, `author`, `wp-json` and the like) or the Journal's base would have clashed with those rewrite rules. So would the address of a page: a base of `gospels` would have turned `/gospels/mark/` into a search. Such a base is refused on save with a notice, and `search` is used. The list is in `injil_help_search_reserved_bases()`, with a filter of the same name.
+- The reserved list also takes the live category and tag bases from Settings › Permalinks and the rewrite slug of every registered post type and taxonomy, through `injil_help_search_live_slugs()`.
+- A base stored before it was refused left the saved rewrite rules on the old base. The option `injil_help_search_rules_base` records the base the rules were built with, and `init` flushes once when the base in force differs.
+- An array posted for the field (`injil_help_search_base[]=x`) made `sanitize_key()` throw a TypeError on PHP 8. The value is checked with `is_string()` first.
+- `tests/plugin-features-test.php` checks all of these.
+
+## 3.21.0
+
+The owner asked for four plugins to be built into the theme: the Minimalist Social Icons Pack, Reading Progress Bar, Unlist Posts & Pages and Pretty Search Permalinks. No option key, function, hook or class was renamed or removed.
+
+- What existed already: the share row used ten icons from the Minimalist Social Icons Pack as CSS masks, and the SEO tab had the sameAs profile list for the graph. Both are kept as they were. The theme had no reading bar, no unlisting and no search rewrite.
+- Profile links (`inc/social.php`, `assets/css/social.css`). Theme Options › Sharing has a new Profile links card with an address field for each of 13 networks and a switch, on by default, for the footer. The icons are inline SVG with `fill="currentColor"`, `aria-hidden` and `focusable="false"`; each link is named by its `aria-label` and is 44 pixels square. The row shows under the footer links, and anywhere through the `[injil_help_social]` shortcode or the new Profile links pattern (`inc/data/patterns/profile-links.json`). Six icons are new in `assets/icons/social/` (Instagram, YouTube, TikTok, Mastodon, GitHub, Substack), each stripped of its title and role. With no address set, nothing is printed and no stylesheet loads. Filter: `injil_help_social_networks`.
+- Reading progress bar (`inc/progress.php`, `assets/css/progress.css`, `assets/js/progress.js`). A new Reading tab sets it on or off, the post types, the top or bottom edge, a height of 1 to 12 pixels and the colours of the bar and its track. It shows on single posts and pages, never on the front page, and the two files load only there. The script uses a passive scroll listener and one `requestAnimationFrame` per frame and moves the fill by a transform. Reduced motion drops the transition. Above 600 pixels a top bar starts under the admin bar; below that the admin bar scrolls away and covers the bar until it does. The bar is `aria-hidden`: the scroll bar already tells every reader where they are, and a live progressbar would be announced on every scroll. No bar prints while the plugin is active.
+- Unlisted posts (`inc/unlist.php`, `inc/unlist-admin.php`, `assets/js/unlist-admin.js`). Each public post type gets an Unlist box in the editor sidebar, an Unlisted column, a Quick Edit checkbox, a Bulk Edit choice, the "Unlisted" post state and an "Unlisted (n)" view. An unlisted post opens at its address and is left out of the home page, archives, feeds, search, REST collections, Query Loops, the core sitemaps, Rank Math's sitemap, the image sitemap, `wp_list_pages()`, the page-list block, the previous and next links and the "Read next" row. Its head carries `noindex`, set through `rank_math/frontend/robots` when Rank Math writes the head. Admin screens, and AJAX calls that come from this site's admin, still see it, as in the plugin. Each post keeps its state in the post meta `_injil_help_unlisted`, and every save rebuilds the option `injil_help_unlisted` from that meta, so two saves at once cannot undo each other. The list is mirrored to the plugin's `unlist_posts`. When the plugin has changed that list (on a site that ran it, or after it was switched on again and used), the theme takes the change over on its next read. The image sitemap reads the plugin's list while the plugin is active. Filter: `injil_help_unlist_enabled`.
+- Search addresses (`inc/search-permalinks.php`). `/?s=term` answers 301 to `/search/term/`, and `/?s=term&paged=2` to `/search/term/page/2/`; other query arguments are carried over, arrays such as `post_type[]` included, and an empty search is never redirected. The base is set under Settings › Permalinks › Optional, as the plugin does, in the option `injil_help_search_base`. `INJIL_HELP_RULES` goes to 5, so the rewrite rules are flushed once after this update and never on an ordinary load. Filter: `injil_help_search_permalinks_enabled`.
+- Each of the three behaviour features steps aside while its plugin is active.
+- `tests/plugin-features-test.php` checks the unlisted filtering and the search addresses.
+
+## 3.20.2
+
+The Schema Markup Validator run of 4 November flagged two faults in the graph. No option key, function, hook or @id was renamed or removed, and every policy address stays.
+
+- The speakable `cssSelector` named `.entry-content > p` on every page. The front page is built from its template and has no `.entry-content`, and the answers page puts its paragraphs inside groups, so the selector matched nothing on either. The new `injil_help_schema_speakable_selectors()` gives `h1` on every page, `.ih-cover-lede` where the hero lede is, `.ih-intro` where a section intro is (front page excepted), and `.entry-content > p` only when a paragraph block sits at the top level of the post's content.
+- The Organization carried `masthead` and `verificationFactCheckingPolicy`, which schema.org defines on NewsMediaOrganization only. The node is typed `["Organization", "NewsMediaOrganization"]` now, and both properties keep their addresses (/about/ and /method/).
+- A version change rewrites the starter pages and the Journal posts the theme wrote. `injil_help_page_is_edited()` counted a post with no `_injil_help_hash` as unedited, so on the first admin load after an update both seeders overwrote any page or post the theme had never stamped, whatever the owner had put in it. A post with no stored hash counts as edited now, and both seeders keep it. "Update all pages from the theme" still writes such a page.
+- The speakable classes are matched as whole tokens of the `class` attribute, so a paragraph with `ih-intro-extra` gives no `.ih-intro` selector.
+- `tests/schema-graph-test.php` renders each starter page and the front page and checks each speakable selector against that markup, and a page with no SpeakableSpecification fails. It also fails a node that carries `masthead` or `verificationFactCheckingPolicy` without the NewsMediaOrganization type. Both checks fail on 3.20.1.
+- `tests/journal-test.php` strips the hashes from two Journal posts and from a customised starter page, then runs the seeders: all 3 must come through untouched, and a forced page update must still write the page. These checks fail on 3.20.1.
+
+## 3.20.1
+
+A CodeAnt finding on the sister themes: Theme Options built every panel on every load. Here the Content tab ran `injil_help_starter_pages()` and one `injil_help_find_page()` lookup per starter page whatever tab was open. No option key, function or hook was renamed or removed.
+
+- The starter page list and its two buttons move into `injil_help_render_starter_pages()`. The screen builds it only on `?tab=content`. On any other load the Content tab holds a placeholder with an "Open the Content tab" link, and `admin.js` fetches the list the first time the tab is shown, through the new `wp_ajax_injil_help_starter_pages` action. That action checks `edit_theme_options` and the `injil_help_starter_pages` nonce (localised as `injilHelpPopulate.pagesNonce`).
+- The confirm prompt and the batched page writer bind through delegation on the screen, so the fetched buttons work as before.
+- The placeholder gets `aria-busy` from `admin.js` when the fetch starts, so it is never left busy where the script or `fetch` is missing.
+- The `?tab=` read checks `is_string()` first, so `?tab[]=x` cannot make `sanitize_key()` throw a TypeError on PHP 8.
+- `admin.js` opens the tab named by `?tab=` when the address has no fragment.
+- The settings fields stay in every panel, so a save from any tab keeps the others. The security reports were already fetched over admin-ajax and are unchanged. The server markup carries no `tabindex="-1"`; the script sets the roving tabindex.
+
+## 3.20.0
+
+The owner's upgrade rules of 4 November 2026, applied without removing a feature or renaming a public identifier. The theme folder keeps its name, `injil-help`.
+
+- Theme Options is rebuilt to the settings design system of the brief. Cards replace every `form-table`. The tabs are a WAI-ARIA tablist: `role="tab"` links with `aria-selected`, a roving `tabindex`, arrow keys, Home and End, and no reload. They scroll sideways on a narrow screen. A header carries the icon, the title, a line of description and the version; a footer links to the theme details and Site Health.
+- Every on-off setting is a switch (a checkbox with `role="switch"`), the ten networks and both post types included. Content width, ornament, parallax, the gospel layout and the SEO output are selector cards (radio inputs with an active border). The two contextual-link limits are range sliders whose value shows in an `<output>` as they move. The nine colour pickers sit in a responsive grid. Below 782 pixels rows stack, controls go full width and the cards fall to one column.
+- Each tab opens with a note on how to use it.
+- `assets/css/admin.css` and `assets/js/admin.js` are rewritten and still load only on `appearance_page_injil-help-options`. The script has no globals beyond the localised settings it already read. New helpers in `inc/options.php`: `injil_help_ui_row()`, `injil_help_ui_switch()`, `injil_help_ui_toggle()`, `injil_help_ui_cards()`, `injil_help_ui_range()`, `injil_help_ui_input()`, `injil_help_ui_card_open()`, `injil_help_ui_card_close()`, `injil_help_ui_usage()` and `injil_help_options_tabs()`. `injil_help_sec_field()` and `injil_help_sec_render_settings()` keep their signatures and print the card layout. Every existing option key, default and sanitiser is unchanged; one key is new, `remote_images` (below). As before, the Security switches still need `manage_options`.
+- Each switch is named by its action ("Turn off XML-RPC", "Show share links on posts", "Show X in the share row"), with its explanation attached through `aria-describedby`.
+- `injil_help_render_options()` checks `edit_theme_options` before it prints anything.
+- Privacy: a plate whose only copy is on Wikimedia Commons or Pexels is left out of the page until the Media Library holds it. The new option `remote_images` (off by default; Theme Options › Content) and the filter `injil_help_remote_images` bring back loading from the source. `injil_help_pattern_images()` lists the four Commons plates of the patterns that `images.json` does not carry, and the admin-load copier fetches them too, on a budget of their own so a failing page plate cannot hold them back. A page with a featured image of its own still gets its plate copied. An option lock (`injil_help_image_lock`, stale after 5 minutes) stops two admin requests copying the same plate at once. The Privacy page says so.
+- `title-tag` and `automatic-feed-links` are declared in `after_setup_theme`; core gave them to the block theme already.
+- `readme.txt` gains Description, Features, Usage, FAQ, Privacy, Upgrade Notice and Copyright and licences sections. The last lists every bundled font, image and script with its licence and source.
+
+## 3.19.0
+
+A mobile and accessibility pass, made to two of the owner's briefs of 4 November 2026: the mobile-first theme audit and the WCAG 2.2 AA policy. Pages were rendered at 9 widths from 320 to 1280 pixels and checked with axe-core, the keyboard, text spacing and a 200% zoom. No page scrolled sideways before or after.
+
+- `assets/css/responsive.css` is new and loads after the ornament on every view. Base rules serve the phone; the media queries say where each stops.
+- The keyboard focus ring is two rings: a 2px outline in the ink colour on a 2px halo in the page colour, swapped on the green panels. One of the two stays visible whatever the Colours tab holds. The gold ring measured 2.3:1 against the parchment, under the 3:1 WCAG 1.4.11 asks for.
+- At 320 and 360 pixels the menu button sat on top of the site title and hid "Injīl". The title now takes a second line there; from 600 pixels the header is as it was.
+- Footer links, breadcrumbs, post categories, the previous and next links, page numbers and the share buttons are 44 pixels tall on phones and touch screens. Page numbers are 24 pixels wide on every screen (WCAG 2.5.8); the digits were 9 pixels wide and 13 apart. The icon-only share links are 44 pixels wide on phones as well as tall.
+- The Greek glosses in the menu, the footer and the section heads carry `lang="el"`, and two Arabic words in running text carry `lang="ar"` (WCAG 3.1.2). The glosses in the patterns are wrapped in a span, so the paragraph blocks stay valid. The pages built from these patterns, and `/islamic-dilemma/what-is-injil/`, are rewritten once after the update; a page the owner edited is kept.
+- The Copy link button announces "copied" or the failure through a polite live region (WCAG 4.1.3).
+- The header menu's Journal item is named "Journal" in the structured data; it read "JournalΗΜΕΡΑ" since 3.18.0. `injil_help_schema_navigation()` now drops each gloss span before it strips the tags, in place of a list of known glosses, and `tests/schema-graph-test.php` checks every name.
+- A long word in a plate caption breaks instead of spilling past the panel when the reader widens the text spacing (WCAG 1.4.12).
+
+## 3.18.1
+
+Every image the structured data refers to now has a node in the same graph.
+
+- The cause: the page's `primaryImageOfPage` pointed at the featured image's uploaded address, while the theme made `ImageObject` nodes only from the figures in the body. When the two addresses differed, the reference pointed at nothing. On 3.13.1 they always differed, since the figures still loaded from Commons; on 3.18.0 they still could, for instance after a file was stored again as AVIF. `/islamic-dilemma/` and `/gospels/mark/` showed it.
+- The featured image now gets its own `ImageObject`, with the caption, credit and licence of its `images.json` entry (found through the Commons file recorded on the attachment). A figure of the same file becomes that node, so the image is described once. The match is on the file (its Commons name, or the uploaded file name without its size suffix and extension), so a figure with a missing or different licence link still merges.
+- Any reference to an image address that no node defines is given an `ImageObject`, in the theme's graph and in the Rank Math merge alike, where Rank Math's own `primaryImageOfPage` or Article `image` may point at an upload it does not define.
+- `encodingFormat` follows the address first, so an AVIF or WebP copy is described as AVIF or WebP. `image/avif` is known.
+- A cited journal article in a Sources list carries a `headline`.
+- `tests/schema-graph-test.php` gives every page with an image a sideloaded featured image, half of them AVIF, and has Rank Math refer to it. It fails on any unresolved `@id`, on a referenced image without `contentUrl`, `creditText` or `license`, on any article node of any Article subtype, NewsArticle and TechArticle among them, nested or not, without a headline, and on a second ImageObject for the featured file when the figure's licence link is missing or changed.
+
+## 3.18.0
+
+The site has a Journal: dated posts beside the pages.
+
+- The Journal page is at `/journal/`, a starter page with the new template `templates/page-journal.html`, which lists the posts newest first. The reading settings are left alone. The header menu and the footer's Reference list link to it.
+- Posts live at `/journal/<slug>/` (`inc/journal.php`: a rewrite rule and the `post_link` filter). An old `/<slug>/` address redirects there through WordPress's canonical redirect. `INJIL_HELP_RULES` is 4, so the rules are flushed once after the update.
+- `templates/single.html`, `archive.html` and `home.html` are restyled to match the theme. Their CSS is `assets/css/journal.css`, loaded on those views only.
+- A post's breadcrumb reads Home, Journal, the post, in the visible row and in the `BreadcrumbList` alike (`injil_help_breadcrumb_parents()`). Each post is a `BlogPosting` in the page's one `@graph`, with its citations from the Sources list.
+- The posts are JSON in `inc/data/posts.json`, in the same compact markup as the pages. `injil_help_journal_seed()` writes them once per version with the fixed `post_date` each entry carries. A past date is published at once; a date still to come is scheduled, and WordPress publishes it on the day. A second run writes nothing. A post you edit or bin is kept as it is.
+- 8 posts: 3 in October, 1 on 15 November and 4 in December, from the woman taken in adultery to the peace of Qur'an 19:33. Their title tags are in `inc/data/seo-titles.json` under `journal/<slug>`.
+- The WordPress sample post is still binned on activation.
+- `tests/journal-test.php` checks every entry (a slug of words only, the title tag length, 700 to 1,100 words, notes and sources, links to pages that exist) and the seeding: the status from the date, the exact date, a second run that changes nothing, and kept edits. `tests/schema-graph-test.php` now also builds each post's graph.
+
+## 3.17.0
+
+Pages can now carry more than one image.
+
+- An entry in `inc/data/images.json` may add `"more"`: up to three further images, each with `file`, `alt`, `caption` and `credit`. They are placed after paragraphs, evenly through the text and clear of the notes. The first image stays where it was.
+- The images are manuscripts and inscriptions from Wikimedia Commons, as `SSOT.md` requires. 112 images now stand on 61 pages: the 27 gospel sections that had none are covered where Commons has a fitting manuscript, and 26 pages gained one to three more.
+- A sideloaded image is stored in the Media Library as AVIF, or as WebP when it is under 1000 pixels wide, scaled to at most 1600 pixels. A server whose image library cannot write the format keeps the source format. Nothing is added to the theme: the files load from Commons until the admin pass copies them.
+- The admin pass that gave pages their featured image now also copies the extra images, six images per admin load, and records failures for a day.
+- The Qur'an translation, the base text and the fonts are unchanged.
+
+## 3.16.0
+
+- The Read next row carries the owner's pixel arrow after its label (`assets/images/arrow-next.webp`, in the ornament layer of `assets/css/ornament.css`, so Ornament off removes it). Each is animated WebP drawn at its own pixel size, for decoration only; the link text is unchanged. Readers who ask for reduced motion see a still first frame.
+
+## 3.15.0
+
+- The Islamic Dilemma page credits its source study by title only. The author's name no longer appears on the front end.
+
+The structured data takes the shared model of the network's schema plan (3 November 2026). Every type the graph carried before stays. The owner keeps all schema.org markup, including the types Google does not show.
+
+- The Qur'an verses shown in English (the `ih-vq` reference spans) are each a `Quotation` with its text and reference, under a `Chapter` for its surah, which is part of the Qur'an `Book` (now with `genre` Scripture). The article cites them.
+- The two full texts of Thomas carry an `ItemList` of their sayings in order, each a `Quotation`. The timeline carries an `ItemList` of its events in order.
+- Every glossary term has its own `@id` and `inDefinedTermSet`. A term whose entry reads "(also spelt Injil, Injeel)" lists those spellings as `alternateName`; such entries were missed before.
+- Images take their credit, licence, licence page, format and photographer from `inc/data/images.json`, and their width and height when the page gives them.
+- The subjects in `inc/data/schema-entities.json` are defined once per page with the `@id` home URL plus `#entity-` and the key, and referenced by that `@id`. The four canonical gospels are new entries; the comparison tables are `about` the gospels their columns name.
+- The header links are parts of the page's `SiteNavigationElement`. The site links in the body (outside "Read next") are `significantLink`.
+- Articles add `abstract` (the first paragraph), `dateCreated`, `copyrightYear`, `accessMode`, `accessModeSufficient` and `accessibilityFeature`.
+- With Rank Math, these fill what its Article and WebPage leave empty, in its one graph.
+- The calligraphic mark is removed from every value, and a paragraph that names the owner is never used as an abstract.
+- `tests/schema-graph-test.php` builds all 181 starter pages and checks each graph, alone and merged with Rank Math: valid JSON, unique `@id`s, every reference resolved, the required properties present, and no mark, owner's name or banned word.
+- An Author name in Theme Options that holds the owner's name gives way to the site name. A last pass over the theme's graph and the merged Rank Math graph removes the owner's name from every value, author nodes included. The theme matches the name by SHA-1 digest and never writes it.
+- A saying of Thomas that runs over several paragraphs, Saying 3 among them, is now quoted whole.
+- A Pexels image takes its format from its address, since its key in `images.json` has no extension.
+- A caption that reads "Photograph by" names the photographer as `creator` and `copyrightHolder`, as a "Photo:" credit already did.
+- The test puts a stand-in owner's name in the Author name and in Rank Math's author, and fails if any word of any string matches a withheld digest. It also fails on a second definition of a nested `@id`, excuses only the `@id`s of its stand-in Rank Math graph, and fails when the page, Quotation, DefinedTerm, Chapter or Event totals fall below those of this release.
+
+The new code is `inc/schema-extend.php`. The credits page lists no image one by one, so it gets no image list; no manuscript has a page of its own, so there is no `ItemPage`.
+
+## 3.14.1
+
+Links to the sister sites follow their new addresses. On 3 November 2026 the owner ruled that no address on the network carries a verse number, a count or a year, and every site answers its old addresses with a 301.
+
+- `inc/data/network-links.json` is the same file in all seven themes again. This site's copy already held the paths from 3.11.0, and the others now carry them too. It takes `/journal/prophet-like-moses/` on Abrahamic Religions, `/deuteronomy-prophecy-and-the-paraclete/`, `/crusades-facts/`, `/taqiyya-myths/` and `/islamophobia-facts/` on Best of Islam, `/articles/sword-verse-jizya/` on Compelling Evidence and `/rebuttals/quran-wife-beating-verse-in-context/` on murtadd.org.
+- The front-page Qur'an section (`home-quran` pattern) links the Best of Islam article at `/deuteronomy-prophecy-and-the-paraclete/`.
+
+No address on this site changes.
+
+## 3.14.0
+
+Google's SEO Starter Guide, applied where `SSOT.md` allows. The structured data types themselves are unchanged; the conflicts are listed for the owner below.
+
+- Archives (terms, post types, dates, the posts page) print `<link rel="canonical">`, with `/page/N/` on paged views. Before, only the front page and single pages had one.
+- The core users sitemap is off, and an author archive (`/author/…/` or `?author=`) answers 301 to `/about/`. Every page is published under the site's name, so the archive only repeated the site under the account's name.
+- A plate (`.ih-plate`) whose image the theme has sideloaded into the Media Library is served from there, with its class `wp-image-{id}`. WordPress then adds width, height, srcset and lazy loading. Commons serves no size with its redirect, so the browser could not reserve the space. A plate with no local copy loads lazily and decodes asynchronously, except the front page cover image.
+- An image sitemap at `/image-sitemap.xml` lists each page that has an image entry, with its featured image (or the source file when the sideload has not run). `robots.txt` names it. With Rank Math's sitemap on, Rank Math lists the images and the theme's sitemap stands down.
+- The front page cover image is fetched at high priority, with no lazy loading and no async decoding, so it paints with the page. The image sitemap now opens with the front page and that cover: the Media Library copy once sideloaded, else the address in the hero pattern.
+- The author Person carries a `url` when the Author URL option is empty: the About page. Google's Article guidance asks for one.
+- All 181 starter pages were run through the title builder: every title is under 60 characters, none is cut and none repeats.
+
+Left for the owner. Google's list of supported structured data leaves out several types that `SSOT.md` keeps: `FAQPage`, `SearchAction` on WebSite (the sitelinks search box was retired in November 2024), `SpeakableSpecification` on pages that are not news, `Event` for the timeline (Google reads Event as something people can attend), `Dataset` for the correlation page (no downloadable data), and the page-element nodes (`WPHeader`, `WPFooter`, `SiteNavigationElement`). They stay until the owner rules on them.
+
+## 3.13.1
+
+Fixes to the Security tab and the starter pages.
+
+- The spam patterns carry the `i` flag, so upper-case Cyrillic is caught on hosts without mbstring.
+- The spam gate exempts a post only when it carries `_injil_help_hash`, or when the theme itself is writing its pages. A matching title or slug grants nothing, so a deleted starter slug cannot shelter a new post. XML-RPC, REST without a cookie session and WP-CLI count as outside the editor; the theme's own page writing does not.
+- Private posts stay private. Only Publish and Scheduled are held as Pending; a private post that reads as spam is logged as `flagged-private`.
+- Trashed spam answers 410 at its query address, /?p=ID, as well as at its permalink.
+- The daily tallies are folded with a delete that removes only the value read, so a late increment is kept for the next fold. The attack table holds 30 days, today included.
+- Failed logins older than 24 hours drop out of the notice and the report at once, and a count restarts when its first failure is more than a day old.
+- .htaccess is reported as written only when WordPress confirms the write.
+- The reports on the Security tab load when the tab is opened, so the other tabs of Theme Options no longer pay for their queries. The trash button stays off for the whole of a scan.
+- `tests/security-detector-test.php` fails when `inc/data/` or its page files are missing or unreadable, and checks upper-case text against the raw patterns.
+- The former-URL map is cached by `INJIL_HELP_VERSION`. Its 301 goes out only to a published page. A `-N` copy without the theme's hash is treated as edited: it becomes a draft and never goes to the bin.
+
 ## 3.13.0
 
-Six early writings in the Gospel According to Islam.
+- The former-URL redirect sends its 301 only once the page stands at its present address. While an update is still moving pages, the slug-history handler sends a 302 instead, so no browser or search engine caches a permanent redirect to an address that would still answer 404.
+- Refused XML-RPC requests and other security counters are now one atomic upsert on a small daily row, folded into the thirty-day counts once a day, instead of a rewrite of the whole counts option on every request.
 
-- Sayings of Jesus from 1 Clement, the Epistle of Barnabas, the Gospel of Mary, the Epistle of the Apostles, Tatian's Diatessaron and the Didache are tested against the Qur'an one by one. The 21 that do not contradict it are woven into sections 8, 9, 13, 18, 21, 22 and 24 as green, blue or gold items with a note (`inc/data/early-writings.json`). The Didache appears in notes only.
-- Two new pages: `/gospel-according-to-islam/early-writings/` names the sources, the translations used and the rule, and `/gospel-according-to-islam/early-writings/set-aside/` lists the 26 passages left out with the reason for each. They include the Epistle of the Apostles' prophecy of Paul (chapters 31 and 33), set aside because it has Jesus speak from heaven after God raised him (Qur'an 5:117), and its claims of shared nature.
-- The translations are in the public domain: Roberts and Donaldson (1 Clement, Barnabas), M. R. James (1924, the Epistle of the Apostles), Mark Mattison (the Gospel of Mary), Hope Hogg (the Diatessaron) and M. B. Riddle (the Didache). The Lightfoot pages at earlychristianwritings.com refused automated requests, so the Ante-Nicene Fathers texts were used for 1 Clement and Barnabas.
+The protection built for the Abrahamic theme (2.87.0) after the October 2026 attack on abrahamic-religions.com, ported here: password guessing through XML-RPC from 701 rotating addresses under forged "Jetpack by WordPress.com" user agents, a correct password found, then a casino spam post every 18 to 20 minutes through wp.newPost under the owner's own account.
 
-## 3.12.1
+- New `inc/security.php`, `inc/security-detector.php`, `assets/js/security.js` and `assets/css/security.css`. The application-password filter moves from `functions.php` into `inc/security.php`; its setting, `block_app_passwords`, and its default are unchanged.
+- Theme Options › Security grows from one switch to five, all on by default: Turn off XML-RPC (`block_xmlrpc`: xmlrpc.php answers 403, counted per day rather than logged per request, and on Apache a "Block xmlrpc.php" section is kept in .htaccess), Block application passwords, REST API changes only from a logged-in browser (`block_rest_writes`: a logged-in write must come from a cookie session with a valid `wp_rest` nonce; anonymous requests, reads, the block editor and Rank Math are unchanged), Hold suspected gambling spam as Pending (`spam_gate`) and 410 Gone for removed spam (`spam_gone`).
+- A password sent through XML-RPC is refused even when XML-RPC is switched back on, and an admin notice says the password is known. Failed logins are counted by account name, since the attack changed address on every try.
+- The spam gate holds as Pending any post or page that reads as gambling spam, and anything published from outside the editor. The pages the theme writes are exempt: they carry `_injil_help_hash` (see 3.13.1).
+- The Security tab carries a batch scan (100 at a time) with a move-to-Trash button (never a permanent delete), clean-up of empty spam categories on request, buttons to revoke all application passwords and log out all sessions, reports (administrators, attacks per day, accounts being guessed, posts per day, burst publishing, starter pages with gambling links) and the security log. Only administrators (`manage_options`) see or change any of it.
+- `define( 'INJIL_HELP_SECURITY_LOCK', false );` in wp-config.php turns the XML-RPC, application-password and REST locks off without changing the options.
+- `tests/security-detector-test.php` scores every page definition, pattern and string in `inc/data/` (15,961 items) at zero and flags all 52 attack samples. The bare word "bet" (the Hebrew letter), "slot", "spins" and "odds" no longer count, so Bethlehem, Bethel, the alphabet, "Mary spins purple thread" and the Bonus pages read clean.
 
-The layout reads at every width.
-
-- The reading column is the default content width: 720px of text under the 1240px header, footer, front page and grids, the layout theme.json has always declared. Full width had been the default since 3.6.1, when it set prose in two columns on wide screens; 3.6.5 dropped the columns, and full width was left running each line of text across the whole screen, about 1,870px on a 1,920px display. A site still on that default moves to the reading column once (option `injil_help_width_312`); choosing full width again under Theme Options › Branding keeps it.
-- In every width, running text now stops at a readable measure, `--ih-measure`, 46rem: paragraphs, lists, headings, folds, answer capsules and asides, and the intro paragraphs of section heads and front-page bands. Grids, tables, plates, the hero and the dilemma diagram keep the full width.
-- Checked on the live pages at 390, 768, 1,024, 1,440 and 1,920px with the new rules applied: no page scrolls sideways at any width, and no paragraph of running text is wider than the measure.
+- Every URL the site had before stays alive: a former path redirects to the present word-based URL with a 301. The map comes from the `former` lists the pages already carry, so it covers the 27 numbered gospel sections, the nine commentary groups with verse numbers in their slugs, every numbered commentary part and /about-the-author/. WordPress copies of these (/gospel-according-to-islam/1-2/, /quran/commentaries/al-imran-33-64/tabari/2-3/) and of a present path (/about-2/) redirect too, and so does any address below a former path.
+- The update now clears copies in every case. Before, a `-2` copy survived when the page itself had already moved. Now unedited copies go to the bin and edited ones become drafts.
+- The redirect for /about-the-author/ is folded into the general one.
+- Scan of all 176 page paths: none carries a verse number, a numeric prefix or a `-N` suffix.
 
 ## 3.12.0
 
@@ -39,6 +435,7 @@ The log-in screen, and structured data for every element and piece of content th
 - The 404 page is the site's own: a green hero with the gloss of Q 1:6, ٱهۡدِنَا ٱلصِّرَٰطَ ٱلۡمُسۡتَقِيمَ ("guide us on the straight path"), a large 404 in Kagnue, a search field, and the six parts of the website in a row-of-three grid of tinted, numbered cards. The page is the JSON pattern `inc/data/patterns/page-404.json`; `templates/404.html` only places it.
 - Checked by running the graph for all 181 pages, the front page and a 404: 183 graphs, every node typed, none of the new nodes empty, the largest graph 31 KB.
 
+## 3.11.1
 
 Fixes from a review of the 3.9.0 to 3.11.0 code and an audit of all 181 pages against SSOT.md.
 
@@ -97,6 +494,10 @@ The arguments of the Islamic Dilemma website (islamicdilemma.com) answered. The 
 - The pillar FAQ gains 3 questions: 29:46, how revealed guidance could be altered (5:44, 15:9, Jeremiah 8:8), and the ways the Qur'an says it was altered.
 - What is the Injīl? adds Mark 1:14-15 to "Is the Injīl the Bible?", and sets the seed of 48:29 beside Mark 4:26-29.
 - The excerpt of the responses page, the Resources index and the source library count the website with the 4 articles.
+
+## 3.9.1
+
+Tagged on its own branch. Its change, the security counters as one atomic upsert on a small daily row, reached sites in 3.13.0 and is listed there.
 
 ## 3.9.0
 

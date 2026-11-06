@@ -17,7 +17,7 @@ function injil_help_schema_text( $html ) {
 	return trim( preg_replace( '/\s+/u', ' ', html_entity_decode( wp_strip_all_tags( (string) $html ), ENT_QUOTES ) ) );
 }
 
-/** The site's editorial policies, as properties of the Organization (and the WebSite). */
+/** The site's editorial policies, as properties of the Organization, which is also typed NewsMediaOrganization for masthead and verificationFactCheckingPolicy. */
 function injil_help_schema_policies() {
 	return array(
 		'publishingPrinciples'           => home_url( '/method/' ),
@@ -382,7 +382,7 @@ function injil_help_schema_translations( $path, $quran_id ) {
 	return array();
 }
 
-/** The subjects of a page from inc/data/schema-entities.json: about (the part it belongs to) and mentions (every page). */
+/** The subjects of a page from inc/data/schema-entities.json, as @id references: about (the part it belongs to) and mentions (every page). */
 function injil_help_schema_entities( $path ) {
 	static $data = null;
 	if ( null === $data ) {
@@ -400,7 +400,7 @@ function injil_help_schema_entities( $path ) {
 		$out = array();
 		foreach ( (array) $keys as $key ) {
 			if ( isset( $entities[ $key ] ) ) {
-				$out[] = $entities[ $key ];
+				$out[] = array( '@id' => injil_help_schema_entity_id( $key ) );
 			}
 		}
 		return $out;
@@ -410,3 +410,6 @@ function injil_help_schema_entities( $path ) {
 		'mentions' => $pick( $paths['*'] ?? array() ),
 	);
 }
+
+// The last line: functions.php checks for it, so a file an upload cut short is caught.
+$GLOBALS['injil_help_loaded'][ basename( __FILE__, '.php' ) ] = true;

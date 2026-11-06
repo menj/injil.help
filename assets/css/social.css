@@ -1,0 +1,8 @@
+/* Profile links (inc/social.php). The icons are currentColor, so they follow the text colour of where they sit. */
+.ih-social__list{display:flex;flex-wrap:wrap;gap:8px;margin:var(--wp--preset--spacing--20,12px) 0 0;padding:0;list-style:none}
+.ih-social__link{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;border-radius:var(--ih-r-pill,999px);color:inherit;opacity:.85;transition:opacity .15s,background-color .15s}
+.ih-social__link:hover{opacity:1;background:color-mix(in srgb,currentColor 12%,transparent)}
+.ih-social__link:focus-visible{opacity:1;outline:2px solid currentColor;outline-offset:2px}
+.ih-social__icon{width:24px;height:24px;flex:none}
+.ih-footer .ih-social__link{color:var(--wp--preset--color--base)}
+@media (prefers-reduced-motion:reduce){.ih-social__link{transition:none}}

@@ -1,0 +1,18 @@
+{
+    "title": "Profile links",
+    "slug": "injil-help/profile-links",
+    "categories": [
+        "injil-help"
+    ],
+    "keywords": [
+        "social",
+        "profiles",
+        "icons"
+    ],
+    "description": "The row of profile icons set in Theme Options, Sharing. Prints nothing while no address is set.",
+    "content": [
+        "<!-- wp:shortcode -->",
+        "[injil_help_social]",
+        "<!-- /wp:shortcode -->"
+    ]
+}

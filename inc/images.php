@@ -11,6 +11,11 @@
  * Open Graph tags and the structured data then use. The sideload runs a few pages at a time on admin
  * screen loads, so a slow host never waits on forty downloads at once.
  *
+ * An entry may also carry "more": up to three further images ({ "file", "alt", "caption", "credit" }, or a Pexels
+ * photo as above). They are placed after paragraphs spread through the page, clear of the notes, and sideloaded the
+ * same way. A sideloaded image is stored as AVIF, or as WebP when it is under 1000 pixels wide, if the server's
+ * image library can write that format; otherwise it keeps its own format.
+ *
  * @package injil-help
  */
 
@@ -58,9 +63,37 @@ function injil_help_image_block( $img ) {
 		. "<!-- /wp:image -->\n";
 }
 
+/** Split block markup into its top-level blocks. */
+function injil_help_top_blocks( $html ) {
+	preg_match_all( '/<!-- (\/?)wp:[a-z0-9\/-]+(?: \{.*?\})? (\/?)-->/', $html, $m, PREG_OFFSET_CAPTURE );
+	$blocks = array();
+	$depth  = 0;
+	$start  = 0;
+	foreach ( $m[0] as $i => $tag ) {
+		$closing = '/' === $m[1][ $i ][0];
+		$self    = '/' === $m[2][ $i ][0];
+		if ( ! $closing && ! $self ) {
+			if ( 0 === $depth ) {
+				$start = $tag[1];
+			}
+			++$depth;
+		} elseif ( $closing ) {
+			--$depth;
+			if ( 0 === $depth ) {
+				$blocks[] = substr( $html, $start, $tag[1] + strlen( $tag[0] ) - $start );
+			}
+		} elseif ( 0 === $depth ) {
+			$blocks[] = $tag[0];
+		}
+	}
+	return $blocks;
+}
+
 /**
- * Put a page's image into its block content, unless the content already carries a plate. A pattern page
- * takes it after its first group (the section head); a body page after its first ordinary paragraph.
+ * Put a page's images into its block content, unless the content already carries a plate. The first image
+ * (the featured one) goes where it always has: a pattern page takes it after its first group (the section
+ * head); a body page after its first ordinary paragraph. The "more" images follow, each after a paragraph,
+ * spread through the text and clear of the notes.
  */
 function injil_help_add_page_image( $path, $content, $is_pattern ) {
 	$images = injil_help_images();
@@ -72,16 +105,67 @@ function injil_help_add_page_image( $path, $content, $is_pattern ) {
 		$pos = strpos( $content, "<!-- /wp:group -->\n" );
 		return false === $pos ? $block . $content : substr( $content, 0, $pos + 19 ) . $block . substr( $content, $pos + 19 );
 	}
+	$done = false;
 	if ( preg_match_all( '/<!-- wp:paragraph( \{[^}]*\})? -->.*?<!-- \/wp:paragraph -->\n/s', $content, $m, PREG_OFFSET_CAPTURE ) ) {
 		foreach ( $m[0] as $i => $hit ) {
 			if ( false !== strpos( (string) ( $m[1][ $i ][0] ?? '' ), 'is-style-label-' ) ) {
 				continue;
 			}
-			$end = $hit[1] + strlen( $hit[0] );
-			return substr( $content, 0, $end ) . $block . substr( $content, $end );
+			$end     = $hit[1] + strlen( $hit[0] );
+			$content = substr( $content, 0, $end ) . $block . substr( $content, $end );
+			$done    = true;
+			break;
 		}
 	}
-	return $block . $content;
+	if ( ! $done ) {
+		$content = $block . $content;
+	}
+	return injil_help_add_more_images( $content, (array) ( $images[ $path ]['more'] ?? array() ) );
+}
+
+/** Spread a page's further plates through its content: each after a paragraph, at even steps, before the notes. */
+function injil_help_add_more_images( $content, $more ) {
+	$more = array_slice( array_values( array_filter( $more, fn( $m ) => ! empty( $m['file'] ) ) ), 0, 3 );
+	if ( ! $more ) {
+		return $content;
+	}
+	$blocks = injil_help_top_blocks( $content );
+	$count  = count( $blocks );
+	$end    = $count;
+	$first  = 0;
+	foreach ( $blocks as $i => $b ) {
+		if ( false !== strpos( $b, 'ih-plate' ) && ! $first ) {
+			$first = $i;
+		}
+		if ( false !== strpos( $b, 'id="notes"' ) || false !== strpos( $b, 'ih-footnotes' ) ) {
+			$end = min( $end, $i );
+		}
+	}
+	$after = array();
+	$prev  = $first;
+	$n     = count( $more );
+	for ( $k = 1; $k <= $n; $k++ ) {
+		$idx = max( (int) round( $first + ( $end - 1 - $first ) * $k / ( $n + 1 ) ), $prev + 2 );
+		while ( $idx < $end && 0 !== strpos( $blocks[ $idx ], '<!-- wp:paragraph' ) ) {
+			++$idx;
+		}
+		if ( $idx >= $end || isset( $after[ $idx ] ) ) {
+			break;
+		}
+		$after[ $idx ] = $more[ $k - 1 ];
+		$prev          = $idx;
+	}
+	if ( ! $after ) {
+		return $content;
+	}
+	$out = '';
+	foreach ( $blocks as $i => $b ) {
+		$out .= $b . "\n";
+		if ( isset( $after[ $i ] ) ) {
+			$out .= injil_help_image_block( $after[ $i ] );
+		}
+	}
+	return $out;
 }
 
 /** The attachment already sideloaded for a Commons file, if any. */
@@ -101,9 +185,88 @@ function injil_help_find_attachment( $file ) {
 }
 
 /**
- * Sideload a page's Commons image into the Media Library and set it as the featured image.
- * Returns true when the page has a featured image afterwards. Failures are recorded so the
- * file is not retried for a day.
+ * Download an image and store it in the Media Library as AVIF, or as WebP when it is under 1000 pixels
+ * wide, scaled to at most 1600 pixels. Where the server's image library cannot write the format, the
+ * image keeps its own. Returns the attachment ID, or 0 on failure. Failures are recorded so the file is
+ * not retried for a day.
+ */
+function injil_help_sideload_image( $img, $post_id ) {
+	$file = (string) $img['file'];
+	$att  = injil_help_find_attachment( $file );
+	if ( $att ) {
+		return $att;
+	}
+	$failed = (array) get_option( 'injil_help_image_failures', array() );
+	if ( ! empty( $failed[ $file ] ) && time() - (int) $failed[ $file ] < DAY_IN_SECONDS ) {
+		return 0;
+	}
+	require_once ABSPATH . 'wp-admin/includes/media.php';
+	require_once ABSPATH . 'wp-admin/includes/file.php';
+	require_once ABSPATH . 'wp-admin/includes/image.php';
+	$tmp = download_url( injil_help_image_url( $img, 1600 ), 60 );
+	if ( is_wp_error( $tmp ) ) {
+		$failed[ $file ] = time();
+		update_option( 'injil_help_image_failures', $failed, false );
+		return 0;
+	}
+	$stem = sanitize_title( pathinfo( $file, PATHINFO_FILENAME ) );
+	$stem = '' !== $stem ? $stem : 'plate';
+	$name = $stem . '.' . ( pathinfo( (string) wp_parse_url( injil_help_image_url( $img, 1 ), PHP_URL_PATH ), PATHINFO_EXTENSION ) ?: 'jpg' );
+	$path = $tmp;
+	$mime = '';
+	$editor = wp_get_image_editor( $tmp );
+	if ( ! is_wp_error( $editor ) ) {
+		$size = $editor->get_size();
+		$want = ( $size['width'] ?? 0 ) < 1000 ? array( 'image/webp', 'image/avif' ) : array( 'image/avif', 'image/webp' );
+		foreach ( $want as $candidate ) {
+			if ( wp_image_editor_supports( array( 'mime_type' => $candidate ) ) ) {
+				$mime = $candidate;
+				break;
+			}
+		}
+		if ( $mime ) {
+			if ( ( $size['width'] ?? 0 ) > 1600 ) {
+				$editor->resize( 1600, null );
+			}
+			$ext   = 'image/avif' === $mime ? 'avif' : 'webp';
+			$saved = $editor->save( trailingslashit( get_temp_dir() ) . wp_unique_filename( get_temp_dir(), $stem . '.' . $ext ), $mime );
+			if ( ! is_wp_error( $saved ) && ! empty( $saved['path'] ) ) {
+				wp_delete_file( $tmp );
+				$path = $saved['path'];
+				$name = $stem . '.' . $ext;
+			}
+		}
+	}
+	$att = media_handle_sideload(
+		array(
+			'name'     => $name,
+			'tmp_name' => $path,
+		),
+		$post_id,
+		(string) ( $img['alt'] ?? $file )
+	);
+	if ( is_wp_error( $att ) ) {
+		wp_delete_file( $path );
+		$failed[ $file ] = time();
+		update_option( 'injil_help_image_failures', $failed, false );
+		return 0;
+	}
+	$credit = trim( (string) ( $img['credit'] ?? '' ) );
+	wp_update_post(
+		array(
+			'ID'           => $att,
+			'post_excerpt' => trim( (string) ( $img['caption'] ?? '' ) . ( $credit ? ' ' . $credit . ( '.' === substr( $credit, -1 ) ? '' : '.' ) : '' ) ),
+			'post_content' => 'Source: ' . injil_help_image_page( $img ),
+		)
+	);
+	update_post_meta( $att, '_wp_attachment_image_alt', (string) ( $img['alt'] ?? '' ) );
+	update_post_meta( $att, INJIL_HELP_COMMONS_META, $file );
+	return (int) $att;
+}
+
+/**
+ * Sideload a page's image into the Media Library and set it as the featured image.
+ * Returns true when the page has a featured image afterwards.
  */
 function injil_help_feature_page( $post_id, $path ) {
 	$images = injil_help_images();
@@ -113,40 +276,14 @@ function injil_help_feature_page( $post_id, $path ) {
 	if ( has_post_thumbnail( $post_id ) ) {
 		return true;
 	}
-	$img  = $images[ $path ];
-	$file = $img['file'];
-	$att  = injil_help_find_attachment( $file );
-	if ( ! $att ) {
-		$failed = (array) get_option( 'injil_help_image_failures', array() );
-		if ( ! empty( $failed[ $file ] ) && time() - (int) $failed[ $file ] < DAY_IN_SECONDS ) {
-			return false;
-		}
-		require_once ABSPATH . 'wp-admin/includes/media.php';
-		require_once ABSPATH . 'wp-admin/includes/file.php';
-		require_once ABSPATH . 'wp-admin/includes/image.php';
-		$att = media_sideload_image( injil_help_image_url( $img, 1600 ), $post_id, (string) ( $img['alt'] ?? $file ), 'id' );
-		if ( ! $att || is_wp_error( $att ) ) {
-			$failed[ $file ] = time();
-			update_option( 'injil_help_image_failures', $failed, false );
-			return false;
-		}
-		$credit = trim( (string) ( $img['credit'] ?? '' ) );
-		wp_update_post(
-			array(
-				'ID'           => $att,
-				'post_excerpt' => trim( (string) ( $img['caption'] ?? '' ) . ( $credit ? ' ' . $credit . ( '.' === substr( $credit, -1 ) ? '' : '.' ) : '' ) ),
-				'post_content' => 'Source: ' . injil_help_image_page( $img ),
-			)
-		);
-		update_post_meta( $att, '_wp_attachment_image_alt', (string) ( $img['alt'] ?? '' ) );
-		update_post_meta( $att, INJIL_HELP_COMMONS_META, $file );
-	}
-	return (bool) set_post_thumbnail( $post_id, $att );
+	$att = injil_help_sideload_image( $images[ $path ], $post_id );
+	return $att ? (bool) set_post_thumbnail( $post_id, $att ) : false;
 }
 
 /**
- * On admin screen loads, give featured images to a few starter pages at a time until every page with
- * an image entry has one. A version stamp stops the scan once it finds nothing to do; populate() clears it.
+ * On admin screen loads, give featured images to a few starter pages at a time, and copy each page's
+ * further images into the Media Library, until every entry is done. A version stamp stops the scan once
+ * it finds nothing to do; populate() clears it.
  */
 add_action(
 	'admin_init',
@@ -157,11 +294,59 @@ add_action(
 		if ( get_option( 'injil_help_featured' ) === INJIL_HELP_VERSION || ! injil_help_images() ) {
 			return;
 		}
+		// One pass at a time: two admin requests at once would fetch the same plate twice.
+		if ( ! add_option( 'injil_help_image_lock', time(), '', false ) ) {
+			if ( time() - (int) get_option( 'injil_help_image_lock' ) < 5 * MINUTE_IN_SECONDS ) {
+				return;
+			}
+			update_option( 'injil_help_image_lock', time(), false );
+		}
 		$budget  = 6;
 		$pending = false;
 		foreach ( injil_help_images() as $path => $img ) {
 			$page = injil_help_find_page( $path );
-			if ( ! $page || has_post_thumbnail( $page->ID ) ) {
+			if ( ! $page ) {
+				continue;
+			}
+			if ( ! has_post_thumbnail( $page->ID ) ) {
+				if ( $budget <= 0 ) {
+					$pending = true;
+					break;
+				}
+				$budget--;
+				if ( ! injil_help_feature_page( $page->ID, $path ) ) {
+					$pending = true;
+				}
+			} elseif ( ! empty( $img['file'] ) && ! injil_help_find_attachment( $img['file'] ) ) {
+				// A page with a featured image of its own still needs the copy of its plate, which is hidden without one.
+				if ( $budget <= 0 ) {
+					$pending = true;
+					break;
+				}
+				$budget--;
+				if ( ! injil_help_sideload_image( $img, $page->ID ) ) {
+					$pending = true;
+				}
+			}
+			foreach ( (array) ( $img['more'] ?? array() ) as $extra ) {
+				if ( empty( $extra['file'] ) || injil_help_find_attachment( $extra['file'] ) ) {
+					continue;
+				}
+				if ( $budget <= 0 ) {
+					$pending = true;
+					break 2;
+				}
+				$budget--;
+				if ( ! injil_help_sideload_image( $extra, $page->ID ) ) {
+					$pending = true;
+				}
+			}
+		}
+		// The plates of the front-page and section patterns, which belong to no single page. They
+		// have a budget of their own, so a page plate that keeps failing never holds them back.
+		$budget = max( $budget, 2 );
+		foreach ( injil_help_pattern_images() as $img ) {
+			if ( injil_help_find_attachment( $img['file'] ) ) {
 				continue;
 			}
 			if ( $budget <= 0 ) {
@@ -169,13 +354,230 @@ add_action(
 				break;
 			}
 			$budget--;
-			if ( ! injil_help_feature_page( $page->ID, $path ) ) {
+			if ( ! injil_help_sideload_image( $img, 0 ) ) {
 				$pending = true;
 			}
 		}
 		if ( ! $pending ) {
 			update_option( 'injil_help_featured', INJIL_HELP_VERSION, false );
 		}
+		delete_option( 'injil_help_image_lock' );
 	},
 	20
 );
+
+/**
+ * Whether plates may load from Wikimedia Commons or Pexels in the reader's browser.
+ * Off by default (option remote_images, 3.20.0); the filter injil_help_remote_images can turn it on.
+ *
+ * @return bool
+ */
+function injil_help_remote_images_on() {
+	return (bool) apply_filters( 'injil_help_remote_images', (bool) injil_help_get_option( 'remote_images' ) );
+}
+
+/**
+ * The Commons plates the block patterns carry that inc/data/images.json does not list, as image
+ * entries, so the admin_init copier gives them a Media Library copy too (3.20.0).
+ *
+ * @return array[]
+ */
+function injil_help_pattern_images() {
+	$known = array();
+	foreach ( injil_help_images() as $img ) {
+		$known[ (string) ( $img['file'] ?? '' ) ] = true;
+		foreach ( (array) ( $img['more'] ?? array() ) as $extra ) {
+			$known[ (string) ( $extra['file'] ?? '' ) ] = true;
+		}
+	}
+	$out = array();
+	foreach ( (array) glob( get_stylesheet_directory() . '/inc/data/patterns/*.json' ) as $file ) {
+		$pattern = function_exists( 'injil_help_pattern_file' ) ? injil_help_pattern_file( basename( (string) $file, '.json' ) ) : null;
+		if ( ! $pattern || ! preg_match_all( '/<img\b[^>]*>/i', (string) $pattern['content'], $tags ) ) {
+			continue;
+		}
+		foreach ( $tags[0] as $tag ) {
+			if ( ! preg_match( '/\ssrc="([^"]+)"/i', $tag, $src ) || false === strpos( $src[1], 'commons.wikimedia.org' ) ) {
+				continue;
+			}
+			$name = injil_help_image_key_from_src( html_entity_decode( $src[1] ) );
+			$alt  = preg_match( '/\salt="([^"]*)"/i', $tag, $a ) ? html_entity_decode( $a[1] ) : $name;
+			if ( '' !== $name && empty( $known[ $name ] ) && ! isset( $out[ $name ] ) ) {
+				$out[ $name ] = array(
+					'file' => $name,
+					'alt'  => $alt,
+				);
+			}
+		}
+	}
+	return array_values( $out );
+}
+
+/* ---------- Plates served from the Media Library ---------- */
+
+/** The images.json key ("file") an image address points at: a Commons file name or a Pexels key; '' for any other address. */
+function injil_help_image_key_from_src( $src ) {
+	if ( preg_match( '#commons\.wikimedia\.org/wiki/Special:FilePath/([^?"\#]+)#', (string) $src, $m ) ) {
+		return str_replace( '_', ' ', rawurldecode( $m[1] ) );
+	}
+	foreach ( injil_help_images() as $img ) {
+		if ( 'pexels' === ( $img['source'] ?? '' ) && ! empty( $img['url'] ) && 0 === strpos( (string) $src, (string) $img['url'] ) ) {
+			return (string) $img['file'];
+		}
+	}
+	return '';
+}
+
+/**
+ * Point a plate's <img> at the copy already sideloaded into the Media Library, with its class
+ * wp-image-{id}, so WordPress adds width, height, srcset and lazy loading when it filters the
+ * content (Commons serves no size with its redirect, and the browser cannot reserve the space).
+ * An image with no local copy keeps its address and gets lazy loading and async decoding,
+ * except the front page's cover image, which is the first thing on screen: it loads eagerly,
+ * decodes in step with the page and is fetched at high priority.
+ */
+function injil_help_localise_img( $tag, $is_cover = false ) {
+	if ( preg_match( '/\swidth=/i', $tag ) || ! preg_match( '/\ssrc="([^"]+)"/i', $tag, $src ) ) {
+		return $tag;
+	}
+	static $found = array();
+	$key = injil_help_image_key_from_src( html_entity_decode( $src[1] ) );
+	if ( '' === $key ) {
+		return $tag;
+	}
+	if ( ! isset( $found[ $key ] ) ) {
+		$found[ $key ] = injil_help_find_attachment( $key );
+	}
+	$att  = (int) $found[ $key ];
+	$file = $att ? wp_get_attachment_image_src( $att, 'large' ) : false;
+	if ( $file ) {
+		$tag = str_replace( $src[0], ' src="' . esc_url( $file[0] ) . '" width="' . (int) $file[1] . '" height="' . (int) $file[2] . '"', $tag );
+		$tag = preg_match( '/\sclass="/i', $tag )
+			? preg_replace( '/\sclass="/i', ' class="wp-image-' . $att . ' ', $tag, 1 )
+			: str_replace( '<img', '<img class="wp-image-' . $att . '"', $tag );
+		return $tag;
+	}
+	$extra = $is_cover
+		? ( preg_match( '/\sfetchpriority=/i', $tag ) ? '' : ' fetchpriority="high"' )
+		: ' decoding="async"' . ( preg_match( '/\sloading=/i', $tag ) ? '' : ' loading="lazy"' );
+	return preg_replace( '/^<img\b/i', '<img' . $extra, $tag );
+}
+
+add_filter(
+	'render_block_core/image',
+	function ( $html ) {
+		if ( false === strpos( (string) $html, '<img' ) ) {
+			return $html;
+		}
+		$cover = false !== strpos( (string) $html, 'ih-cover-image' );
+		// No remote calls by default: a plate whose only copy is on Wikimedia Commons or Pexels is left
+		// out until the Media Library has it, unless Theme Options > Content allows remote plates.
+		if ( ! injil_help_remote_images_on() && preg_match_all( '/<img\b[^>]*\ssrc="([^"]+)"/i', (string) $html, $srcs ) ) {
+			foreach ( $srcs[1] as $src ) {
+				$key = injil_help_image_key_from_src( html_entity_decode( $src ) );
+				if ( '' !== $key && ! injil_help_find_attachment( $key ) ) {
+					return '';
+				}
+			}
+		}
+		return preg_replace_callback(
+			'/<img\b[^>]*>/i',
+			function ( $m ) use ( $cover ) {
+				return injil_help_localise_img( $m[0], $cover );
+			},
+			(string) $html
+		);
+	}
+);
+
+/* ---------- Image sitemap ---------- */
+
+/**
+ * The front page's cover image, resolved as the hero pattern's <img> is when it renders: the
+ * Media Library copy when the file has been sideloaded, else the address in the pattern.
+ */
+function injil_help_front_cover_url() {
+	$pattern = function_exists( 'injil_help_pattern_file' ) ? injil_help_pattern_file( 'hero' ) : null;
+	if ( ! $pattern || ! preg_match( '/<figure\b[^>]*ih-cover-image[^>]*>.*?<img\b[^>]*\ssrc="([^"]+)"/is', $pattern['content'], $m ) ) {
+		return '';
+	}
+	$src = html_entity_decode( $m[1] );
+	$key = injil_help_image_key_from_src( $src );
+	$att = '' !== $key ? injil_help_find_attachment( $key ) : 0;
+	$url = $att ? wp_get_attachment_image_url( $att, 'full' ) : false;
+	return $url ? (string) $url : $src;
+}
+
+/** Each page with an image entry and its image: the Media Library copy when there is one, else the source file. The front page comes first, with its cover. */
+function injil_help_image_sitemap_entries() {
+	$out   = array();
+	$cover = injil_help_front_cover_url();
+	if ( '' !== $cover ) {
+		$out[] = array(
+			'loc'   => home_url( '/' ),
+			'image' => $cover,
+		);
+	}
+	foreach ( injil_help_images() as $path => $img ) {
+		$page = function_exists( 'injil_help_find_page' ) ? injil_help_find_page( $path ) : null;
+		if ( ! $page || 'publish' !== $page->post_status || empty( $img['file'] ) || ( function_exists( 'injil_help_unlisted_live_ids' ) && in_array( (int) $page->ID, injil_help_unlisted_live_ids(), true ) ) ) {
+			continue;
+		}
+		$url = has_post_thumbnail( $page->ID ) ? (string) get_the_post_thumbnail_url( $page->ID, 'full' ) : injil_help_image_url( $img, 1600 );
+		if ( '' !== $url ) {
+			$out[] = array(
+				'loc'   => (string) get_permalink( $page ),
+				'image' => $url,
+			);
+		}
+	}
+	return $out;
+}
+
+/** The address of the image sitemap. */
+function injil_help_image_sitemap_url() {
+	return home_url( '/image-sitemap.xml' );
+}
+
+/** Whether Rank Math's sitemap, which lists images itself, is serving. */
+function injil_help_rank_math_sitemap_on() {
+	if ( ! class_exists( 'RankMath' ) ) {
+		return false;
+	}
+	return ! ( class_exists( '\RankMath\Helper' ) && method_exists( '\RankMath\Helper', 'is_module_active' ) ) || (bool) \RankMath\Helper::is_module_active( 'sitemap' );
+}
+
+add_action(
+	'template_redirect',
+	function () {
+		$request = isset( $GLOBALS['wp']->request ) ? trim( (string) $GLOBALS['wp']->request, '/' ) : '';
+		if ( 'image-sitemap.xml' !== $request || injil_help_rank_math_sitemap_on() ) {
+			return;
+		}
+		status_header( 200 );
+		header( 'Content-Type: application/xml; charset=UTF-8' );
+		header( 'X-Robots-Tag: noindex, follow' );
+		echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">' . "\n";
+		foreach ( injil_help_image_sitemap_entries() as $e ) {
+			echo "\t<url><loc>" . esc_xml( $e['loc'] ) . '</loc><image:image><image:loc>' . esc_xml( $e['image'] ) . "</image:loc></image:image></url>\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped with esc_xml().
+		}
+		echo "</urlset>\n";
+		exit;
+	},
+	0
+);
+
+add_filter(
+	'robots_txt',
+	function ( $output, $public ) {
+		if ( ! $public || injil_help_rank_math_sitemap_on() ) {
+			return $output;
+		}
+		return rtrim( (string) $output ) . "\nSitemap: " . esc_url_raw( injil_help_image_sitemap_url() ) . "\n";
+	},
+	20,
+	2
+);
+
+// The last line: functions.php checks for it, so a file an upload cut short is caught.
+$GLOBALS['injil_help_loaded'][ basename( __FILE__, '.php' ) ] = true;

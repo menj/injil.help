@@ -1,0 +1,18 @@
+/*
+ * The contents list (inc/toc.php): the [auto_toc] shortcode and the automatic list on long pages.
+ * It looks like the Journal's list (article.css) and nests. Loaded only on pages that carry one.
+ */
+
+.ih-toc{margin-block:var(--wp--preset--spacing--30);padding:var(--wp--preset--spacing--20) var(--wp--preset--spacing--30);border:1px solid var(--wp--preset--color--accent-6);border-radius:var(--ih-r-md)}
+.ih-toc .ih-k{margin:0 0 .4em}
+.ih-toc ol{margin:0;padding-inline-start:1.4em}
+.ih-toc ol ol{margin-block-start:.25em;list-style-type:lower-alpha}
+.ih-toc ol ol ol{list-style-type:lower-roman}
+.ih-toc li + li{margin-block-start:.25em}
+.ih-toc a{color:var(--wp--preset--color--contrast);text-decoration:underline;text-decoration-color:var(--wp--preset--color--accent-3);text-underline-offset:.2em}
+.ih-toc a:hover,.ih-toc a:focus-visible{color:var(--wp--preset--color--accent-1)}
+.wp-block-post-content :is(h1,h2,h3,h4,h5,h6)[id]{scroll-margin-block-start:6rem}
+
+@media (max-width:600px){
+ .ih-toc{padding:var(--wp--preset--spacing--20)}
+}

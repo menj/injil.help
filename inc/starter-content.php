@@ -17,7 +17,7 @@ require_once get_stylesheet_directory() . '/inc/starter-content-pages.php';
  * Convert the compact page markup to blocks.
  *
  * "## " heading, "### " sub-heading, "- " list item, "> " quote, "@consensus|@minority|@islamic"
- * claim label, anything else a paragraph. Blank lines are ignored. Inline
+ * claim label, "[toc]" the contents list, anything else a paragraph. Blank lines are ignored. Inline
  * "{{fn:text}}" becomes a numbered footnote; the notes are listed at the end, or at a "[notes]"
  * token as a reference apparatus. "[v]" opens a numbered verse and "[qS:A]" marks a Qur'anic
  * verse; "[bible]" ... "[/bible]" wraps a gospel section for the Bible layout; "[p.classes] text"
@@ -171,6 +171,8 @@ function injil_help_markup_to_blocks( $lines ) {
 			$out .= '<!-- wp:paragraph {"className":"is-style-label-' . $m[1] . "\"} -->\n<p class=\"is-style-label-" . $m[1] . '">' . esc_html( $labels[ $m[1] ] ) . "</p>\n<!-- /wp:paragraph -->\n";
 		} elseif ( '[page-list]' === $line ) {
 			$out .= "<!-- wp:page-list /-->\n";
+		} elseif ( '[toc]' === $line ) {
+			$out .= "<!-- wp:shortcode -->\n[auto_toc]\n<!-- /wp:shortcode -->\n";
 		} else {
 			$out .= "<!-- wp:paragraph -->\n<p>" . wp_kses_post( $footnote( $line ) ) . "</p>\n<!-- /wp:paragraph -->\n";
 		}
@@ -223,9 +225,11 @@ function injil_help_related_blocks( $def, $content = '' ) {
  * /quran/commentaries/birth-of-jesus/tabari-part-two/), as the Google SEO Starter Guide asks.
  * Versions up to 3.5 numbered the gospel sections and the commentary parts and put the verse
  * numbers in the group slugs; populate() renames those existing pages in place (see
- * injil_help_adopt_former_page()), so no page is duplicated. Paths listed in inc/data/slug-history.json are also redirected (injil_help_redirect_moved_page()).
+ * injil_help_adopt_former_page()), so no page is duplicated, and injil_help_redirect_former() sends
+ * every old URL to the new one with a 301. Paths listed in inc/data/slug-history.json are also
+ * redirected (injil_help_redirect_moved_page()).
  */
-const INJIL_HELP_RULES = '3'; // bump when the rewrite rules change; populate() flushes when the stored value differs
+const INJIL_HELP_RULES = '5'; // bump when the rewrite rules change; populate() flushes when the stored value differs
 
 /**
  * A page that an earlier version published under one of the definition's "former" paths (a numeric
@@ -235,10 +239,7 @@ const INJIL_HELP_RULES = '3'; // bump when the rewrite rules change; populate() 
  */
 function injil_help_adopt_former_page( $def ) {
 	foreach ( (array) ( $def['former'] ?? array() ) as $old ) {
-		$page = injil_help_find_page( $old );
-		if ( ! $page ) {
-			$page = injil_help_repair_numeric_slug( $old );
-		}
+		$page = injil_help_repair_former_slug( $old );
 		if ( ! $page ) {
 			continue;
 		}
@@ -258,10 +259,22 @@ function injil_help_adopt_former_page( $def ) {
 		clean_post_cache( $page->ID );
 		$moved = injil_help_find_page( $def['path'] );
 		if ( $moved ) {
+			injil_help_clear_former_copies( $def, $moved->ID );
 			return $moved;
 		}
 	}
 	return null;
+}
+
+/**
+ * Once a page sits at its present path, no copy may stay public under a former path or under a
+ * WordPress "-2" slug of either: unedited copies are binned, edited ones are made drafts, so their
+ * text is kept and their URLs redirect.
+ */
+function injil_help_clear_former_copies( $def, $keep_id ) {
+	foreach ( array_merge( (array) ( $def['former'] ?? array() ), array( $def['path'] ) ) as $path ) {
+		injil_help_repair_former_slug( $path, (int) $keep_id );
+	}
 }
 
 /**
@@ -306,25 +319,27 @@ function injil_help_redirect_moved_page() {
 add_action( 'template_redirect', 'injil_help_redirect_moved_page', 9 ); // before redirect_canonical() guesses at a 404 (priority 10)
 
 /**
- * Versions before 3.5.1 created the numbered pages under slugs WordPress renamed ("2-2", and
- * "2-3", "2-4" from later runs that could not find them): rename the oldest copy back to the
- * numeric slug, so that injil_help_adopt_former_page() can move it on, and bin the duplicates
- * that were never edited. Returns the repaired page or null.
+ * Find the page published at $path, or at a copy WordPress renamed "{slug}-2", "{slug}-3" (versions
+ * before 3.5.1 made such copies when a slug was taken). The copy to keep is the oldest edited one,
+ * or the oldest of all when none was edited; it gets the plain slug back so that
+ * injil_help_adopt_former_page() can move it on. The other copies are binned when unedited and made
+ * drafts when edited. With $keep_id (the page already at its present path) every copy is surplus
+ * and null is returned. Returns the kept page or null.
  */
-function injil_help_repair_numeric_slug( $path ) {
+function injil_help_repair_former_slug( $path, $keep_id = 0 ) {
 	$parts = explode( '/', $path );
 	$slug  = array_pop( $parts );
-	if ( ! $parts || ! preg_match( '/^\d+$/', $slug ) ) {
+	if ( '' === $slug ) {
 		return null;
 	}
-	$parent = injil_help_find_page( implode( '/', $parts ) );
-	if ( ! $parent ) {
+	$parent = $parts ? injil_help_find_page( implode( '/', $parts ) ) : null;
+	if ( $parts && ! $parent ) {
 		return null;
 	}
 	$ids = get_posts(
 		array(
 			'post_type'        => 'page',
-			'post_parent'      => $parent->ID,
+			'post_parent'      => $parent ? $parent->ID : 0,
 			'post_status'      => 'publish',
 			'posts_per_page'   => -1,
 			'orderby'          => 'ID',
@@ -333,33 +348,232 @@ function injil_help_repair_numeric_slug( $path ) {
 			'suppress_filters' => true,
 		)
 	);
-	// The copy to keep is the oldest edited one, or the oldest of all when none was edited; unedited duplicates are binned, edited ones left alone.
 	$copies = array();
 	foreach ( $ids as $id ) {
-		if ( preg_match( '/^' . preg_quote( $slug, '/' ) . '-\d+$/', (string) get_post_field( 'post_name', $id ) ) ) {
-			$copies[ (int) $id ] = injil_help_page_is_edited( get_post( $id ) );
+		if ( (int) $id !== $keep_id && preg_match( '/^' . preg_quote( $slug, '/' ) . '(-\d+)?$/', (string) get_post_field( 'post_name', $id ) ) ) {
+			// A copy without the theme's hash was not written by the theme: treat it as edited (draft, never the bin).
+			$copies[ (int) $id ] = '' === (string) get_post_meta( $id, INJIL_HELP_HASH_META, true ) || injil_help_page_is_edited( get_post( $id ) );
 		}
 	}
 	if ( ! $copies ) {
 		return null;
 	}
-	$edited = array_keys( array_filter( $copies ) );
-	$keep   = $edited ? (int) $edited[0] : (int) array_key_first( $copies );
+	$keep = 0;
+	if ( ! $keep_id ) {
+		$edited = array_keys( array_filter( $copies ) );
+		$keep   = $edited ? (int) $edited[0] : (int) array_key_first( $copies );
+	}
 	foreach ( $copies as $id => $is_edited ) {
-		if ( $id !== $keep && ! $is_edited ) {
+		if ( $id === $keep ) {
+			continue;
+		}
+		if ( $is_edited ) {
+			wp_update_post( array( 'ID' => $id, 'post_status' => 'draft' ) );
+		} else {
 			wp_trash_post( $id );
 		}
 	}
-	wp_update_post(
-		array(
-			'ID'        => $keep,
-			'post_name' => $slug,
-		)
-	);
-	clean_post_cache( $keep );
+	if ( ! $keep ) {
+		return null;
+	}
+	if ( $slug !== get_post_field( 'post_name', $keep ) ) {
+		wp_update_post( array( 'ID' => $keep, 'post_name' => $slug ) );
+		clean_post_cache( $keep );
+	}
 	$page = get_post( $keep );
 	return $page && $slug === $page->post_name ? $page : null;
 }
+
+/** Every former path of a starter page, mapped to its present path. Cached per theme version. */
+function injil_help_former_map() {
+	$key   = 'injil_help_former_map';
+	// The map is built from the data files. An FTP upload writes the PHP before the data, so a map
+	// built in between lacks every page whose data had not landed (1 November 2026: the commentary
+	// pages, while inc/data/tafsir/ was still uploading). The key carries the files' sizes and times,
+	// so the map is rebuilt as soon as the data changes, within the same version.
+	$ver   = INJIL_HELP_VERSION . ':' . injil_help_data_fingerprint();
+	$cache = get_transient( $key );
+	if ( is_array( $cache ) && ( $cache['ver'] ?? '' ) === $ver ) {
+		return $cache['map'];
+	}
+	$map = array();
+	foreach ( injil_help_starter_pages() as $def ) {
+		foreach ( (array) ( $def['former'] ?? array() ) as $old ) {
+			$map[ trim( $old, '/' ) ] = trim( $def['path'], '/' );
+		}
+	}
+	foreach ( injil_help_starter_pages() as $def ) {
+		unset( $map[ trim( $def['path'], '/' ) ] ); // a present path is never redirected
+	}
+	if ( $map ) {
+		set_transient( $key, array( 'ver' => $ver, 'map' => $map ), WEEK_IN_SECONDS );
+	}
+	return $map;
+}
+
+/**
+ * A short fingerprint of the JSON files the page list is built from: their names, sizes and times.
+ *
+ * @return string
+ */
+function injil_help_data_fingerprint() {
+	$dir   = get_stylesheet_directory() . '/inc/data/';
+	$files = array_merge( (array) glob( $dir . '*.json' ), (array) glob( $dir . 'pages/*.json' ), (array) glob( $dir . 'tafsir/*.json' ) );
+	$sig   = '';
+	foreach ( $files as $file ) {
+		// Size, modification and change times and the inode: an upload that replaces a file gives it a
+		// new inode or change time even when the size and the second of the modification time match.
+		// Reading the files' bytes on every request would cost more than the map saves.
+		$st   = @stat( $file ); // phpcs:ignore WordPress.PHP.NoSilencedErrors -- a file removed between glob and stat counts as empty.
+		$sig .= basename( (string) $file ) . ':' . ( $st ? $st['size'] . ':' . $st['mtime'] . ':' . $st['ctime'] . ':' . $st['ino'] : '0' ) . ';';
+	}
+	return substr( md5( $sig ), 0, 12 );
+}
+
+/**
+ * The present path for an address of the commentaries in an earlier scheme, read from the groups
+ * and works in inc/data/commentaries.json alone, so it holds while the commentary texts are absent
+ * or half uploaded. Covers the group slugs of 3.5 and earlier, which carried the verse numbers
+ * ("az-zukhruf-57-65"), with or without a work and a part number ("tabari/2"), and the numbered
+ * parts under a present group. Returns null for any other path.
+ *
+ * @param string $path A path without slashes at either end.
+ * @return string|null
+ */
+function injil_help_former_commentary_target( $path ) {
+	$base = 'quran/commentaries';
+	if ( ! preg_match( '#^' . preg_quote( $base, '#' ) . '/([a-z0-9-]+)(?:/([a-z-]+?)(?:-(\d+))?(?:/(\d+)(?:-\d+)?)?)?$#', (string) $path, $m ) ) {
+		return null;
+	}
+	$group = null;
+	$old   = false;
+	// The segment as written, then without a WordPress copy suffix ("az-zukhruf-57-65-2"). The old
+	// slugs end in verse numbers themselves, so the exact match is tried first.
+	$names = array( $m[1] );
+	if ( preg_match( '#^(.+)-\d+$#', $m[1], $copy ) ) {
+		$names[] = $copy[1];
+	}
+	foreach ( $names as $name ) {
+		foreach ( injil_help_tafsir_groups() as $slug => $g ) {
+			if ( (string) ( $g['former'] ?? '' ) === $name ) {
+				$group = $slug;
+				$old   = true;
+				break 2;
+			}
+			if ( $slug === $name ) {
+				$group = $slug;
+				$old   = $name !== $m[1]; // a copy of a present group page is a former address
+				break 2;
+			}
+		}
+	}
+	if ( null === $group ) {
+		return null;
+	}
+	$work = $m[2] ?? '';
+	if ( '' === $work ) {
+		return $old ? $base . '/' . $group : null;
+	}
+	if ( ! isset( injil_help_tafsir_works()[ $work ] ) ) {
+		// An unknown work under an old group goes to the group; under a present group it is a real 404.
+		return $old ? $base . '/' . $group : null;
+	}
+	$part = (int) ( $m[4] ?? 0 );
+	if ( ! $old && $part < 1 && empty( $m[3] ) ) {
+		return null; // a present work page: nothing to send on
+	}
+	return injil_help_tafsir_part_path( $base, $group, $work, max( 1, $part ) );
+}
+
+/**
+ * Send the URL of an earlier version to the page's present address with a 301: a former path, its
+ * WordPress copies ("/gospel-according-to-islam/1-2/", "/tabari/2-3/"), a "-2" copy of a present
+ * path, and any address under a former path ("/quran/commentaries/al-imran-33-64/tabari/6/" goes to
+ * the Tabari page of that group). Runs before WordPress reads "/2/" as page two of the parent.
+ */
+function injil_help_redirect_former() {
+	if ( is_admin() || is_preview() ) {
+		return;
+	}
+	$path = trim( (string) wp_parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ), '/' );
+	$home = trim( (string) wp_parse_url( home_url(), PHP_URL_PATH ), '/' );
+	if ( '' !== $home && 0 === strpos( $path . '/', $home . '/' ) ) {
+		$path = trim( substr( $path, strlen( $home ) ), '/' );
+	}
+	$path = strtolower( rawurldecode( $path ) );
+	if ( '' === $path ) {
+		return;
+	}
+	$page = get_page_by_path( $path, OBJECT, 'page' );
+	if ( $page && 'publish' === $page->post_status ) {
+		return;
+	}
+	$map    = injil_help_former_map();
+	$target = $map[ $path ] ?? null;
+	if ( null === $target && preg_match( '#^(.+?)-\d+$#', $path, $m ) ) {
+		$target = $map[ $m[1] ] ?? null;
+		if ( null === $target && injil_help_find_page( $m[1] ) ) {
+			$target = $m[1];
+		}
+	}
+	// A commentary address of an earlier scheme, read from the groups and works themselves, so it
+	// resolves even when the map was built without the commentary texts.
+	if ( null === $target ) {
+		$target = injil_help_former_commentary_target( $path );
+	}
+	if ( null === $target && is_404() ) {
+		$parts = explode( '/', $path );
+		while ( count( $parts ) > 1 && null === $target ) {
+			array_pop( $parts );
+			$up     = implode( '/', $parts );
+			$target = $map[ $up ] ?? injil_help_former_commentary_target( $up );
+		}
+	}
+	// A 301 is cached for good, so it is only sent once the page stands at its present address. While an
+	// update is still moving pages, injil_help_redirect_moved_page() sends the visitor on with a 302.
+	$found = null === $target ? null : injil_help_find_page( $target );
+	if ( $found && 'publish' === $found->post_status ) {
+		wp_safe_redirect( home_url( '/' . $target . '/' ), 301 );
+		exit;
+	}
+	// The target is missing, a draft or private: the update writes pages a few at a time. Until it
+	// is published, a former address that would answer 404 goes for now (302) to the nearest
+	// published page above the target, such as the group or work page of a commentary. An address
+	// under no former path is left to WordPress.
+	if ( null === $target || ! is_404() ) {
+		return;
+	}
+	$near = injil_help_published_ancestor( $target, $map );
+	if ( '' !== $near ) {
+		wp_safe_redirect( home_url( '/' . $near . '/' ), 302 );
+		exit;
+	}
+}
+
+/**
+ * The nearest published page above a path, or '': each shorter path in turn, as it stands or as
+ * the former map sends it on. The front page is never the answer; a visitor sent there from a
+ * deep link would not know why.
+ *
+ * @param string $path A path without slashes at either end.
+ * @param array  $map  injil_help_former_map().
+ * @return string
+ */
+function injil_help_published_ancestor( $path, $map ) {
+	$parts = explode( '/', trim( (string) $path, '/' ) );
+	while ( count( $parts ) > 1 ) {
+		array_pop( $parts );
+		$up = implode( '/', $parts );
+		foreach ( array_unique( array( $up, $map[ $up ] ?? $up ) ) as $candidate ) {
+			$page = injil_help_find_page( $candidate );
+			if ( $page && 'publish' === $page->post_status ) {
+				return $candidate;
+			}
+		}
+	}
+	return '';
+}
+add_action( 'template_redirect', 'injil_help_redirect_former', 1 );
 
 function injil_help_find_page( $path ) {
 	$page = get_page_by_path( $path, OBJECT, 'page' );
@@ -381,17 +595,42 @@ function injil_help_stamp_page( $id, $content, $title, $excerpt ) {
 }
 
 /**
- * True when a starter page has been edited since the theme last wrote it: the content differs
- * from the content hash, or the title or excerpt differs from the head hash. Pages written before
- * 3.6.1 carry no head hash, so for them only the content counts until the theme rewrites them.
+ * True when a starter page or Journal post may hold the owner's work, so the version-change runs
+ * must keep it: it carries no content hash (the theme never stamped it, so nothing proves it is
+ * the theme's text), or its content differs from that hash, or its title or excerpt differs from
+ * the head hash. Pages written before 3.6.1 carry no head hash, so for them only the content counts
+ * until the theme rewrites them. "Update all pages from the theme" passes $force and still writes them.
  */
 function injil_help_page_is_edited( $post ) {
-	$hash = get_post_meta( $post->ID, INJIL_HELP_HASH_META, true );
-	if ( $hash && $hash !== md5( $post->post_content ) ) {
+	$hash = (string) get_post_meta( $post->ID, INJIL_HELP_HASH_META, true );
+	if ( '' === $hash || $hash !== md5( $post->post_content ) ) {
 		return true;
 	}
 	$head = get_post_meta( $post->ID, INJIL_HELP_HEAD_META, true );
 	return $hash && $head && $head !== injil_help_head_hash( $post->post_title, $post->post_excerpt );
+}
+
+/**
+ * The ID of the privacy page WordPress drafted on install when it is what stands at the
+ * definition's path, or 0. It is the page named in wp_page_for_privacy_policy, still a draft, never
+ * written by the theme (no hash) and never edited since WordPress made it, so a privacy draft the
+ * owner wrote or changed is left alone.
+ *
+ * @param WP_Post $page The page at the definition's path.
+ * @param array   $def  The page definition.
+ * @return int
+ */
+function injil_help_installer_draft( $page, $def ) {
+	if ( 'privacy-policy' !== $def['path'] || 'draft' !== $page->post_status || (int) get_option( 'wp_page_for_privacy_policy' ) !== (int) $page->ID ) {
+		return 0;
+	}
+	if ( $page->post_modified_gmt !== $page->post_date_gmt ) {
+		return 0; // edited since the installer made it: the owner's draft
+	}
+	if ( '' !== (string) get_post_meta( $page->ID, INJIL_HELP_HASH_META, true ) ) {
+		return 0; // the theme wrote it and someone made it a draft since: their choice stands
+	}
+	return (int) $page->ID;
 }
 
 /**
@@ -403,8 +642,15 @@ function injil_help_page_is_edited( $post ) {
  */
 function injil_help_populate_page( $order, $def, $overwrite = false, $force = false ) {
 	$existing = injil_help_find_page( $def['path'] );
-	if ( ! $existing ) {
+	// The privacy page WordPress drafts on install holds the slug "privacy-policy". The theme never
+	// wrote it, so it is filled in and published below; as a draft it answers 404.
+	$adopt = $existing ? injil_help_installer_draft( $existing, $def ) : 0;
+	if ( $adopt ) {
+		$existing = null;
+	} elseif ( ! $existing ) {
 		$existing = injil_help_adopt_former_page( $def );
+	} else {
+		injil_help_clear_former_copies( $def, $existing->ID );
 	}
 	if ( $existing && ! $overwrite ) {
 		return 'unchanged';
@@ -442,9 +688,12 @@ function injil_help_populate_page( $order, $def, $overwrite = false, $force = fa
 	$parent = $parts ? injil_help_find_page( implode( '/', $parts ) ) : null;
 
 	// The privacy page WordPress drafts for new sites is filled in rather than duplicated.
-	$id = 'privacy-policy' === $def['path'] ? (int) get_option( 'wp_page_for_privacy_policy' ) : 0;
-	if ( $id && 'draft' !== get_post_status( $id ) ) {
-		$id = 0;
+	$id = $adopt;
+	if ( ! $id && 'privacy-policy' === $def['path'] ) {
+		$id = (int) get_option( 'wp_page_for_privacy_policy' );
+		if ( $id && 'draft' !== get_post_status( $id ) ) {
+			$id = 0;
+		}
 	}
 
 	$args = array(
@@ -540,6 +789,7 @@ function injil_help_populate_step( $overwrite, $force, $offset, $seconds, $tally
 	}
 	$start = microtime( true );
 	add_filter( 'wp_revisions_to_keep', '__return_zero', 99 );
+	$GLOBALS['injil_help_seeding'] = true; // the spam gate exempts the theme's own page writing (injil_help_sec_is_seeded())
 	$i = max( 0, (int) $offset );
 	while ( $i < $total ) {
 		$result = injil_help_populate_page( $i, $pages[ $i ], $overwrite, $force );
@@ -550,6 +800,7 @@ function injil_help_populate_step( $overwrite, $force, $offset, $seconds, $tally
 		}
 	}
 	remove_filter( 'wp_revisions_to_keep', '__return_zero', 99 );
+	$GLOBALS['injil_help_seeding'] = false;
 
 	$next = $i >= $total ? -1 : $i;
 	if ( -1 === $next ) {
@@ -681,6 +932,7 @@ add_action(
 			injil_help_populate_job_start( false );
 			injil_help_populate_job_run();
 		}
+		injil_help_journal_maybe_seed(); // the Journal posts, with their fixed dates (inc/journal.php)
 	}
 );
 
@@ -809,3 +1061,6 @@ add_action(
 		wp_send_json_success( $run );
 	}
 );
+
+// The last line: functions.php checks for it, so a file an upload cut short is caught.
+$GLOBALS['injil_help_loaded'][ basename( __FILE__, '.php' ) ] = true;

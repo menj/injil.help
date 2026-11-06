@@ -53,3 +53,5 @@ button.ih-share-link{font:inherit;font-family:var(--ih-sans);font-size:14px;font
  .ih-share-item:not(.ih-share-copy):not(.ih-share-native) .ih-share-name{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 }
 @media (prefers-reduced-motion:reduce){.ih-share-link{transition:none}}
+/* 44px targets on phones and touch screens (3.19.0) */
+@media (max-width:599px),(pointer:coarse){.ih-share-link{box-sizing:border-box;min-height:44px;min-width:44px;justify-content:center}}

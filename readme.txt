@@ -1,21 +1,47 @@
 === The Injil ===
+Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-patterns, translation-ready
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
+Stable tag: 3.31.0
 Template: twentytwentyfive
-License: GPLv2 or later
+License: GNU General Public License v3 or later
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 Custom child theme of Twenty Twenty-Five built for one site: The Rightly-Guided Injīl at injil.help. It carries that site's pages, content, fonts and licences, and is not intended for use on any other site.
 
-== Install ==
+== Description ==
+The Injil is the block theme of The Rightly-Guided Injīl. It answers the Islamic Dilemma with the Qur'an as the measure (5:48) and sets The Gospel According to Islam, after Ahmad Shafaat's text of 1985, like a printed Bible.
+
+It writes the site's 182 pages and the Journal on activation, prints one JSON-LD graph per page, and carries its own fonts, ornament layer, share row, contextual links and hardening. Everything a site owner changes lives under Appearance > Theme Options.
+
+The theme makes no remote calls from the reader's browser by default. See Privacy below.
+
+== Installation ==
 1. Install and keep Twenty Twenty-Five (the parent). Do not delete it.
 2. Upload this folder to wp-content/themes/injil-help/ and activate "The Injil". Set Settings > General > Site Title to "The Rightly-Guided Injīl" (the header and footer read it from there).
-3. (Automatic) On activation the theme sets pretty permalinks and starts writing the 181 pages listed under Theme Options > Content. It writes them about 20 seconds at a time, on activation and then on each admin screen load, and a notice at the top of the admin shows the progress. Click through a few admin screens until the notice says the pages are done; the site is then complete for visitors.
+3. (Automatic) On activation the theme sets pretty permalinks and starts writing the 182 pages listed under Theme Options > Content. It writes them about 20 seconds at a time, on activation and then on each admin screen load, and a notice at the top of the admin shows the progress. Click through a few admin screens until the notice says the pages are done; the site is then complete for visitors.
 4. Optional: create categories for the parts (The Five Gospels, Paul of Tarsus, Jesus in the Qur'an, The Gospel According to Islam, Resources) if you intend to publish posts.
-5. To rebuild a page by hand: the section pages (/gospels/, /paul/, /quran/, /gospel-according-to-islam/, /resources/, /answers/) use the "Section index" template with their "Section index: ..." pattern (or "FAQs page"); /method/ is the "Criterion statement" pattern, /corrections/ the "Corrections log", /islamic-dilemma/ the pillar-page pattern; every other page is built from inc/data/ and is restored from Theme Options > Content.
+5. To install by FTP instead of the uploader, turn on hidden files in your FTP program first (in FileZilla: Server > Force showing hidden files), so the theme's .htaccess goes up with the rest, then upload the folder and activate the theme as in step 2.
+6. To rebuild a page by hand: the section pages (/gospels/, /paul/, /quran/, /gospel-according-to-islam/, /resources/, /answers/) use the "Section index" template with their "Section index: ..." pattern (or "FAQs page"); /method/ is the "Criterion statement" pattern, /corrections/ the "Corrections log", /islamic-dilemma/ the pillar-page pattern; every other page is built from inc/data/ and is restored from Theme Options > Content.
+
+== Updating ==
+Git Updater offers each new release from the theme header. To update by hand, upload the new zip under Appearance > Themes > Add New > Upload Theme and choose "Replace active with uploaded". Then open any admin screen as an administrator: the theme rewrites the pages whose text changed, keeps the pages you edited, and brings its error pages and .htaccess sections up to date.
+
+By FTP:
+1. Turn on hidden files in your FTP program, so the .htaccess file goes up.
+2. Upload the new folder next to the old one under a temporary name, such as wp-content/themes/injil-help-new. Send its .htaccess file first, the one at the top of the folder. On Apache it closes the theme's private files to visitors while the rest arrives. On Nginx, which ignores it, add the theme rule from README.md before the first FTP update. Wait until every file has arrived.
+3. Rename the old folder (injil-help-old, say) and, straight after, give the new folder the old folder's exact name. Between the two renames the site has no theme folder and its pages may fail for that moment, so do them one after the other and keep the admin closed until both are done.
+4. Open any admin screen as an administrator, check the site, then delete the old folder.
+
+If you upload straight over the live folder and the copy stops halfway, leaving one of the theme's PHP files missing or broken, visitors see a short "Back shortly" page with a 503 status instead of an error. Upload the rest and the site returns. That page comes from functions.php, so it cannot help while functions.php itself is missing or half written, or in the moment between the two renames above. It checks the PHP files only: a missing stylesheet, font or data file, or a PHP file cut short at a point where it still reads as valid code, slips past it.
+
+Never upload WordPress itself to the live folder without its wp-config.php. In that state WordPress opens its installer to anyone, and the first visitor can connect the site to his own database. Upload wp-config.php first, or unpack WordPress in a folder the web server does not serve. UPGRADING.md has the installer lock to add to .htaccess once the site is installed.
 
 == Starter content ==
-The theme ships its own pages and creates them on activation (inc/starter-content-pages.php), 181 in all: the pillar page /islamic-dilemma/, its answer to the argument's secular form (/islamic-dilemma/secular-form/) and its answer to Pfander's Balance of Truth, the source of the Christian polemic (/islamic-dilemma/balance-of-truth/), What is the Injīl? (/islamic-dilemma/what-is-injil/) and the Torah in Islam (/islamic-dilemma/torah-in-islam/), Why Islam? (/why-islam/) and Who you are as a servant of God (/servant-of-god/), /method/, /corrections/, /answers/, the five section pages and their entries (the four gospels, the Gospel of Thomas with its full text in two translations, its set-aside sayings and the sayings-order test, the synoptic problem, the five discrepancy tables; seven Paul of Tarsus pages, among them Leave the gospel of Paul of Tarsus; six Qur'an pages and the full compilation of passages at /quran/passages/; the 92 pages of the classical commentaries under /quran/commentaries/; the Introduction and 27 sections of The Gospel According to Islam and how it was composed; timeline, glossary, source library, the manuscripts of the extracanonical gospels, the borrowing charge, objections and the replies to named articles), the bonus epistle, plus About, Terms, Privacy, Contact, Credits and Sitemap. Appearance > Theme Options > Content lists every page and creates any that are missing (for example after you delete one). Pages are published; edit them in the block editor. The articles are concise and sourced, and every page is complete when it is created: there is no placeholder text anywhere in the theme. On the first activation the theme also bins WordPress's own sample post, sample page and sample comment (if they were never edited) and replaces the "Just another WordPress site" tagline, so a new install is ready for visitors as it stands. After a theme update, every starter page whose text changed in the new version is rewritten from the theme (once per version, on the first admin screen load), except pages you have edited since the theme wrote them: each page the theme writes carries a hash of its content, an edited page no longer matches, and it is kept and marked "edited, kept on update" on the Content tab. Pages whose text did not change are left alone, and no revision is kept for the rewrite. Theme Options > Content has an "Update all pages from the theme" button that rewrites every page on demand, edited ones included, behind a confirmation.
+The theme ships its own pages and creates them on activation (inc/starter-content-pages.php), 182 in all: the pillar page /islamic-dilemma/, its answer to the argument's secular form (/islamic-dilemma/secular-form/) and its answer to Pfander's Balance of Truth, the source of the Christian polemic (/islamic-dilemma/balance-of-truth/), What is the Injīl? (/islamic-dilemma/what-is-injil/) and the Torah in Islam (/islamic-dilemma/torah-in-islam/), Why Islam? (/why-islam/) and Who you are as a servant of God (/servant-of-god/), /method/, /corrections/, /answers/, the five section pages and their entries (the four gospels, the Gospel of Thomas with its full text in two translations, its set-aside sayings and the sayings-order test, the synoptic problem, the five discrepancy tables; seven Paul of Tarsus pages, among them Leave the gospel of Paul of Tarsus; six Qur'an pages and the full compilation of passages at /quran/passages/; the 92 pages of the classical commentaries under /quran/commentaries/; the Introduction and 27 sections of The Gospel According to Islam and how it was composed; timeline, glossary, source library, the manuscripts of the extracanonical gospels, the borrowing charge, objections and the replies to named articles), the bonus epistle, the Journal page (/journal/), plus About, Terms, Privacy, Contact, Credits and Sitemap. Appearance > Theme Options > Content lists every page and creates any that are missing (for example after you delete one). Pages are published; edit them in the block editor. The articles are concise and sourced, and every page is complete when it is created: there is no placeholder text anywhere in the theme. On the first activation the theme also bins WordPress's own sample post, sample page and sample comment (if they were never edited) and replaces the "Just another WordPress site" tagline, so a new install is ready for visitors as it stands. After a theme update, every starter page whose text changed in the new version is rewritten from the theme (once per version, on the first admin screen load), except pages you have edited since the theme wrote them: each page the theme writes carries a hash of its content, an edited page no longer matches, and it is kept and marked "edited, kept on update" on the Content tab. Pages whose text did not change are left alone, and no revision is kept for the rewrite. Theme Options > Content has an "Update all pages from the theme" button that rewrites every page on demand, edited ones included, behind a confirmation.
+
+The Journal at /journal/ lists the site's posts, newest first; each post lives at /journal/<slug>/. The theme ships 8 of them in inc/data/posts.json, each with a fixed date. On the first admin screen load after activation or an update it writes them: a post whose date has passed is published with that date, and one whose date is still to come is scheduled and goes live on the day (WP-Cron must run on the host). Running it again writes nothing, and a post you edit or bin is kept.
 
 == Content data ==
 Everything a visitor reads is kept as data, not code: the articles, the gospel, the Qur'anic passages, the commentaries and the list of pages are JSON files in inc/data/, and so are the page layouts with their copy, kept as JSON block patterns in inc/data/patterns/, with the front-page sections and the small building blocks for the editor. Nothing a visitor reads comes from an .html, .txt or PHP file. That is why text can be corrected, translated or reviewed without touching PHP, and why the site can be rebuilt from the theme alone. The folder holds:
@@ -28,14 +54,22 @@ The page bodies use a small plain-text markup (headings, lists with colour marks
 == Structure ==
 Modelled on apostleofdoom.org: a title-page hero; each part of the study as a block with a gloss (Greek for New Testament parts, Arabic for Qur'anic parts, each with its verse), an intro, a "Read first" link and numbered entries; a band of FAQs with "Full evidence" links; a footer of study, reference and method links.
 
-== What it adds ==
+== Features ==
 * Patterns (Appearance > Editor, category "injil.help"): the front-page sections and FAQ band, the parts grid, the pillar page, the measure, the five section indexes and the FAQs page, how this gospel was composed, the corrections log, the five discrepancy tables, the manuscripts table, the sayings-order test, the Qur'an verse index, and the building blocks (answer capsule, claim labels, gospel verse, objection and reply, FAQ item). Insert any of them on a new page.
 * Block styles in the editor's Styles panel: ornament separator; claim labels (Scholarly consensus, Minority view, Islamic position); source labels (Qur'an, NT-attested, Editorial); answer capsule; gospel verse; objection and reply; criterion box; discrepancy table; FAQ item (which also feeds the page's FAQ rich result).
 * Page templates: "Section index" for index pages and "Wide page (tables)" for pages with wide comparison tables.
 * The Gospel According to Islam set like a printed Bible: a running head, the section numeral, an argument line, numbered verses, the Qur'an's own verse numbers in green, two columns on wide screens, and the notes at the foot of the text in small type. Choose two columns, one column or plain paragraphs under Theme Options > Content > Gospel text layout. The verse breaks are markers in the data and renumber themselves when the text is edited.
 * Structured data for search engines on every page, switched off automatically when Yoast or SEOPress is active and added to Rank Math's own when Rank Math is active.
-* Contextual links in the text: the first mention of a phrase the network map knows (inc/data/network-links.json, the same file in all seven of the author's themes) links to the inner page that treats it, on this site or a sister site. Set under Theme Options > Contextual links.
+* Contextual links in the text: the first mention of a phrase the shared map knows (inc/data/network-links.json) links to the inner page that treats it, on this site or another. Set under Theme Options > Contextual links.
 * A share row under posts and pages: X, Facebook, WhatsApp, Telegram, Reddit, LinkedIn, Bluesky, Threads, Pinterest and LINE, with Copy link and, where the browser allows, a button that opens the device's share sheet. Choose the networks and the label under Theme Options > Sharing.
+* The Journal: the site's one blog, standard posts at /journal/<slug>/, seeded from inc/data/posts.json. Each post shows its summary, the reading time, the updated date, "In short" when it has key points (the Key points box on the edit screen), a list of its sections, a FAQ when it has questions, and its Sources and Notes together at the end.
+* Hardening under Theme Options > Security: XML-RPC off, application passwords blocked, REST writes only from a browser session, a gambling-spam gate, 410 Gone for removed spam, a spam scan and reports.
+* Manuscript plates copied into the Media Library a few at a time, so readers are served local files. Remote plates are opt-in.
+* A settings screen of cards and tabs, usable by keyboard and on a phone.
+* Profile icons in the footer, from the addresses set under Theme Options > Sharing > Profile links, and through the [injil_help_social] shortcode or the Profile links pattern. The icons take the colour of the text around them.
+* A reading progress bar on single posts and pages, set under Theme Options > Reading.
+* Unlisted posts and pages: open at their address, missing from every listing, feed, search and sitemap, and marked noindex. Tick Unlist in the editor sidebar or in Quick Edit.
+* Search results at /search/term/, with the base set under Settings > Permalinks.
 == Fonts ==
 Bundled in assets/fonts and declared in theme.json, so every face is available in the editor's font picker. Roles:
 * Sabon Next LT: body text. EB Garamond: headings. Kagnue: site title, the titles of the section index pages and home sections, the large numerals and the cover title. Evangelion CPA: labels, kickers, navigation.
@@ -44,7 +78,7 @@ Bundled in assets/fonts and declared in theme.json, so every face is available i
 * Estrangelo Edessa: Syriac. Noto Sans Cuneiform: cuneiform. Special Elite: the corrections log. Ferments, Angel: available, unused by default.
 The class names and language codes that select each face are listed in README.md.
 
-Licensing: Sabon Next LT (Linotype) and Kagnue (Youthlabs Studio) are commercial faces licensed to the site owner; a new site must hold its own licences for them. Angel is freeware and asks for its README to be kept with the font (assets/fonts/Angel-README.txt). The rest are OFL or free for use; keep their licence files.
+Licensing: Sabon Next LT (Linotype) and Kagnue (Youthlabs Studio) are commercial faces licensed to the site owner; a new site must hold its own licences for them. Angel is freeware and asks for its README to be kept with the font (assets/fonts/Angel-README.txt). The rest are OFL or free for use; keep their licence files. Every face, with its licence and source, is listed under Copyright and licences below.
 
 == SEO: "the Islamic Dilemma" ==
 * The pillar page is /islamic-dilemma/, created for you. Its excerpt is its meta description: keyword first, under 160 characters.
@@ -54,21 +88,24 @@ Licensing: Sabon Next LT (Linotype) and Kagnue (Youthlabs Studio) are commercial
 * The keyword appears in the home kicker and lede, the home dilemma section, the first nav item, the first two FAQs and the footer. Link to /islamic-dilemma/ from every new article that touches Qur'an 5:47, taḥrīf or the identity of the Injīl, with varied anchor text.
 * The default social image can be replaced under Theme Options > SEO.
 == Images ==
-Manuscript images load from Wikimedia Commons, and five photographs of manuscripts and an inscription from Pexels, each with its credit and a link to its source page in the caption. All are public domain except the Kairouan Qur'an photograph (Richard Mortel, CC BY 2.0), which must keep its credit. Every image carries a descriptive alt attribute (what it is, its date and holding institution) and a short title; keep that pattern for new images, and write alt text for the subject, not for decoration. WordPress adds lazy loading itself. The default Open Graph image is a bundled copy of the Birmingham Qur'an manuscript (assets/images/og-default.jpg, public domain, 1280 × 833); replace it under Theme Options > SEO. To host the manuscript images yourself, download from the linked Commons page into the Media Library and swap the URL. Readers' browsers contact upload.wikimedia.org and images.pexels.com; the privacy policy says so. Thirty-five article pages also carry a plate listed in inc/data/images.json, and the same image becomes the page's featured image once the host has fetched it (six pages per admin screen load; a failed fetch is retried after a day). To change a page's image, edit its entry: the Commons file name without "File:", the alt text, the caption and the credit. Use only public-domain or CC0 files from Commons, or Pexels photographs credited as "Photo: name, Pexels License" with source, url and page set; check that the file exists.
+Manuscript images come from Wikimedia Commons, and five photographs of manuscripts and an inscription from Pexels, each with its credit and a link to its source page in the caption. All are public domain except the Kairouan Qur'an photograph (Richard Mortel, CC BY 2.0), which must keep its credit. Every image carries a descriptive alt attribute (what it is, its date and holding institution) and a short title; keep that pattern for new images, and write alt text for the subject, not for decoration. WordPress adds lazy loading itself. The default Open Graph image is a bundled copy of the Birmingham Qur'an manuscript (assets/images/og-default.jpg, public domain, 1280 × 833); replace it under Theme Options > SEO. To host the manuscript images yourself, download from the linked Commons page into the Media Library and swap the URL. From 3.20.0 readers are served the Media Library copy only, and a plate without one is hidden, unless Theme Options > Content allows remote plates; with that switch on, readers' browsers contact upload.wikimedia.org and images.pexels.com, and the privacy policy should say so. Thirty-five article pages also carry a plate listed in inc/data/images.json, and the same image becomes the page's featured image once the host has fetched it (six pages per admin screen load; a failed fetch is retried after a day). To change a page's image, edit its entry: the Commons file name without "File:", the alt text, the caption and the credit. Use only public-domain or CC0 files from Commons, or Pexels photographs credited as "Photo: name, Pexels License" with source, url and page set; check that the file exists.
 
 == Branding ==
 * Brandmark: assets/brandmark.svg (an open codex with rays of light, Qur'an 5:46). It appears as the link before the site title in the header and at the top of the footer's first column (class ih-mark; the footer adds ih-mark-foot).
-* Favicon: if no Site Icon is set under Settings > General > Site Icon (or in the Site Editor), the theme outputs assets/brandmark.svg as an SVG favicon. A Site Icon takes precedence unless Theme Options > Branding is set to force the brandmark or to use a custom favicon URL. Some older browsers ignore SVG favicons, so set a PNG Site Icon for full coverage.
+* Favicon: if no Site Icon is set under Settings > General > Site Icon (or in the Site Editor), the theme uses its own icons, all drawn from the brandmark: an SVG icon, a 32px icon, a home screen icon, favicon.ico and a web app manifest, on the site, the log-in screen and the admin. Browsers that ask for /favicon.ico get the icon too. A Site Icon takes precedence unless Theme Options > Branding is set to force the brandmark or to use a custom favicon URL.
 
-== Theme Options ==
-Appearance > Theme Options is a tabbed page:
-* Colours: nine palette overrides with colour pickers; empty keeps the default.
-* Branding: ornament layer (Rich, Subtle, Off) and the reveal animation; show or hide the footer brandmark; always use the brandmark as favicon even with a Site Icon; custom favicon URL.
-* Sharing: show or hide the share row, on posts and/or pages; which networks, in order; the row's label.
-* Contextual links: link the first mention of a known phrase to its page on this site and/or on the sister sites; the most of each kind on one page (4 and 3 by default); more phrases, one per line as phrase | address; pages that get no links.
-* Content: lists every starter page with its status, creates missing ones, and rewrites all of them from the theme on demand.
-* SEO: theme SEO output automatic, always on or always off; home title and description; pillar page title; default social image URL; structured data: author name and URL, profile links (sameAs), organization logo URL.
-The page's own colours follow the Colours tab.
+== Usage ==
+Appearance > Theme Options holds every setting, in eight tabs. Each tab opens with a short note on how to use it. Click a tab, or move between tabs with the arrow keys, Home and End; nothing reloads until you press Save Changes. Switches turn a feature on or off, cards choose one style of several, and sliders show their number as they move.
+* Colours: nine palette overrides in a grid of colour pickers; an empty field keeps the default.
+* Branding: content width, ornament (Rich, Subtle, Off) and parallax depth as cards; the reveal animation, the footer brandmark and the forced brandmark favicon as switches; a custom favicon URL; the log-in screen design and a note above its form.
+* Sharing: the share row on or off, on posts and on pages; one switch per network, in the order shown; the label of the row; the profile links and whether their icons show in the footer.
+* Reading: the reading progress bar, the post types that show it, its place (top or bottom), height and colours.
+* Contextual links: links to this site and to other sites, each with a slider for the most on one page (4 and 3 by default); more phrases, one per line as phrase | address; pages that get no links.
+* SEO: the theme's SEO output (Automatic, Always on, Always off) as cards; home title and description; pillar page title; default social image URL; author name and URL, profile links (sameAs) and organisation logo for the structured data.
+* Security (administrators): the five hardening switches, then the spam scan, the clean-up buttons and the reports.
+* Content: the gospel layout as cards; the switch for remote plates; every starter page with its status, and the buttons that create missing pages or rewrite all of them.
+Below the tabs, the Error pages section shows the pages WordPress uses when it cannot build a page, installs them, and gives the lines for .htaccess.
+The screen's own colours follow the Colours tab. Its stylesheet and script load on that screen only.
 
 == Ornament ==
 Icons, pattern, banners and motion are a separate decorative layer, drawn so that every decoration takes its colour from the palette and follows Theme Options > Colours.
@@ -83,12 +120,168 @@ This file is the user-facing manual that WordPress and Git Updater read. The rep
 == Releasing ==
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add the entry to CHANGELOG.md and to the Changelog section here, note anything an existing site must know under "Updating an existing site" in UPGRADING.md, merge to main, and tag the commit with the same number (for example v3.4.0). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
-== Changelog ==
-= 3.13.0 =
-* Sayings of Jesus from 1 Clement, Barnabas, the Gospel of Mary, the Epistle of the Apostles, the Diatessaron and the Didache are tested against the Qur'an: 21 kept in sections 8, 9, 13, 18, 21, 22 and 24, and 26 set aside with reasons on a new page.
+== Frequently Asked Questions ==
+= How do I add a contents list to a page? =
+Type [auto_toc] in a Shortcode block where the list should go. The list links to the page's level-two and level-three headings, and gives a heading an address if it has none. To have a list on every long page, switch on the option in Theme Options > Branding.
 
-= 3.12.1 =
-* The reading column is the default width again, and running text stops at a readable measure in every width, on phone, tablet and desktop alike.
+= Why are some manuscript plates missing on a new site? =
+Remote plates are off by default. The theme copies each plate from Wikimedia Commons or Pexels into the Media Library, six files per admin screen load, and shows a plate once its copy is there. Load a few admin screens, or switch on Theme Options > Content > Load plates from Wikimedia Commons and Pexels.
+
+= Can I use the theme on another site? =
+It is built for injil.help. Sabon Next LT and Kagnue are commercial fonts licensed to this site, so another site needs its own licences for them.
+
+= Will an update overwrite my edits to a page? =
+No page you edited is rewritten on update. Only "Update all pages from the theme" on the Content tab rewrites edited pages, and it asks first.
+
+= Which plugins does it work with? =
+Rank Math, Yoast and SEOPress. With Rank Math the theme adds its nodes to the plugin's graph; with Yoast or SEOPress it leaves the head to the plugin.
+
+You do not need Unlist Posts & Pages, Reading Progress Bar or Pretty Search Permalinks: the theme does what each of them does. If one of them is active anyway, the theme turns its own version off.
+
+= Why did the theme delete .git, tests and the notes from its folder? =
+They are development files, and a web server can hand them to anyone who asks. On a live site the theme removes them on the next admin screen opened by someone who can update themes, and until then Apache refuses them through the theme's .htaccess; Nginx does so only if the host has added the rule in README.md, so on Nginx open an admin screen straight after an upload. A site you deploy with git pull keeps them with define( 'INJIL_HELP_KEEP_DEV_FILES', true ); in wp-config.php.
+
+= A tool I use stopped publishing after an update. =
+The Security tab turns off XML-RPC, application passwords and REST changes from outside a logged-in browser, because spam tools use them. Switch off the one your tool needs. Every login sent through XML-RPC, with a password or any other credential, is refused while either the XML-RPC switch or the REST switch is on (the REST switch also guards XML-RPC logins, by design), so a tool that logs in to XML-RPC needs both off. A tool that writes through the REST API with an application password needs both the REST switch and the application-password switch off; one that uses a logged-in browser session needs neither. XML-RPC stays on by itself while Jetpack is active. In an emergency, define( 'INJIL_HELP_SECURITY_LOCK', false ); in wp-config.php lifts all three locks. That works in PHP at once; on Apache the xmlrpc.php block in .htaccess may stay until the theme next checks it from an admin page, so to let XML-RPC through at once, also delete the lines between # BEGIN Block xmlrpc.php and # END Block xmlrpc.php in the site's .htaccess.
+
+= What are the error pages? =
+WordPress shows a plain screen when it is updating, when PHP fails or when the database is down. The theme writes its own pages for those three, and for the errors the web server answers itself (403, 500, 502, 503 and 504). The Error pages section at the foot of Theme Options shows their state and gives the lines for .htaccess.
+
+= My site is in a subfolder. Where does the browser icon go? =
+
+Browsers ask for /favicon.ico at the top of the domain, such as example.com/favicon.ico, even when the site lives in example.com/blog/. WordPress never sees that request, so put a copy of the theme's favicon.ico in the domain root folder. The icon tags in each page cover the pages either way. If you have set a Site Icon, put that icon there as favicon.ico instead.
+
+== Privacy ==
+The theme sets no cookies and loads no scripts, fonts or styles from another server. All fonts are bundled.
+* Plates: off by default, readers' browsers load plates only from this site's Media Library. With Theme Options > Content > Load plates from Wikimedia Commons and Pexels switched on, a plate with no local copy loads from commons.wikimedia.org, upload.wikimedia.org or images.pexels.com, and those hosts see the reader's IP address.
+* The server fetches each plate from Commons or Pexels once, on an admin screen load, to store it in the Media Library. No reader data is sent.
+* Share links are plain links; a network sees the reader only after the reader clicks.
+* Security log: the theme records the IP address and time of failed log-ins, the last log-in of each administrator, and the posts held by the spam gate, in the options and user meta tables. Clear the log under Theme Options > Security.
+* Say so in the site's privacy policy if you switch remote plates on.
+
+== Changelog ==
+= 3.31.0 =
+* A contents list for pages: the [auto_toc] shortcode, and an option in Theme Options > Branding that adds the list to every page with 4 or more sections. The Glossary and the Objections page carry one.
+= 3.30.0 =
+* The Aḥmad page names the Companion behind the ḥadīth of the Prophet's five names, Jubayr ibn Muṭʿim, gives its numbers in al-Bukhārī and Muslim, and sets out three of its chains in the form HadithGraph reads. It also gives a short biography of Jubayr from Ibn ʿAbd al-Barr.
+= 3.29.0 =
+* The Glossary has a new entry, Isnād and Rijāl, that points to Ikram Hawramani's Hadith Transmitters Encyclopedia and HadithGraph. The Aḥmad page uses them to show where a reader can check the chain behind a ḥadīth.
+= 3.28.0 =
+* Injīl and Tawrāt now carry what the classical Arabic lexicons say about them: Jawharī, Ibn Manẓūr, al-Fayyūmī and Abū Mūsā al-Madīnī on Injīl; Abū Mūsā al-Madīnī and al-Rāghib al-Iṣfahānī on Tawrāt. They appear in the Glossary and on the two topic pages.
+= 3.27.0 =
+* Eight more Glossary terms quote a few words of Lane's Arabic-English Lexicon: Zabūr, Rūḥ, ʿAbd, Ahl al-Kitāb, Naṣārā, Tawaffā, al-Māʾida and Fiṭra. The pages on the end of ʿĪsā's earthly mission and on the table from heaven cite Lane too.
+= 3.26.0 =
+* The Glossary and the Aḥmad page quote a few words of Lane's Arabic-English Lexicon for four terms, and link to his entry on arabiclexicon.hawramani.com.
+= 3.25.10 =
+* The settings and the readme speak of the other sites in plain words. Links to them stay.
+* The readme says where the browser icon goes on a site in a subfolder: a copy of favicon.ico in the domain root.
+
+= 3.25.9 =
+* The browser icon set is complete: favicon.ico, an SVG icon, 32px, home screen, 192px, 512px and maskable icons and a web app manifest, all drawn from the brandmark. The site answers /favicon.ico with the icon, the icons show on the log-in screen and in the admin, and the error pages show it in the tab.
+
+= 3.25.8 =
+* The FTP update steps send the theme's .htaccess file first, so its private files stay closed while the rest uploads. On Nginx, the theme rule in README.md now covers the temporary folders too.
+
+= 3.25.7 =
+* The old commentary addresses, such as /quran/commentaries/az-zukhruf-57-65/jalalayn/, reach their pages again. They had answered "not found" since 1 November, when the commentary texts were still uploading as the list of old addresses was built and kept.
+* A Journal post shows its summary under the title, the reading time and, when it changed later, the date it was updated.
+* A post with key points opens with an "In short" box. A post with three or more sections lists them under the breadcrumb row. The Sources and the Notes sit together in one block at the end.
+* The theme is now licensed under the GNU GPL, version 3 or later. The full text is in the LICENSE file.
+
+= 3.25.6 =
+* The documentation is up to date with the theme: updating by FTP, the eight settings tabs, the security switches, the error pages and the files the theme removes from a live site. UPGRADING.md sorts the roadmap into Next, Later and Ideas.
+
+= 3.25.5 =
+* XML-RPC stays off, and with it the pingback methods and header, unless the Jetpack plugin is active or wp-config.php sets INJIL_HELP_ALLOW_XMLRPC. The live log showed 586 password guesses sent to xmlrpc.php and answered with 200.
+* On Apache the theme keeps a "The Injil: deny direct core files" section in .htaccess. It refuses the WordPress files bots ask for by address: the PHP files in wp-includes, wp-settings.php, wp-config-sample.php, readme.html, the installer pages and xmlrpc.php. INJIL_HELP_ALLOW_CORE_FILES takes it out. Where .htaccess cannot be written, the Security tab shows the lines to paste.
+* UPGRADING.md and the README give the server rule that locks setup-config.php and install.php once the site is installed, and the advice never to upload WordPress core without wp-config.php.
+
+= 3.25.4 =
+* A page no longer fails when the structured data meets a malformed block. The front page broke this way twice after an update, and now renders whatever the stored template holds.
+* A theme caught half uploaded answers with a 503 "being updated" page.
+* Account names are no longer given away through the REST API, ?author= addresses or oEmbed.
+* Former commentary addresses whose page is not published yet go to the nearest page above them, and /privacy-policy/ is published from the draft WordPress made on install.
+* An .htaccess in the theme refuses the development files, and a production site deletes them.
+
+= 3.25.3 =
+* The front page reads as one story in seven parts: the argument, the books, the man who changed the message, the measure, the gospel restored, the questions, and the sources to test it by. The FAQs now come before Resources, and each section opens with a line that leads on from the one before.
+
+= 3.25.2 =
+* The web server error pages work on a site in a subfolder. The theme writes a copy of each into wp-content/injil-help-errors with the site's home address, and the .htaccess lines in the Error pages section point there.
+
+= 3.25.1 =
+* The error pages are written when the theme is activated, with no button press, and removed when another theme is activated. Pages another theme left behind are replaced.
+* A 504 page for the web server, with its .htaccess line.
+
+= 3.25.0 =
+* The structured data declares the site's author in the markup only. Nothing a visitor sees has changed.
+
+= 3.24.0 =
+* Three new questions on the Islamic Dilemma page and the FAQs page: the Christian dilemma, rereading without a charge of alteration, and Qur’an 3:81.
+* The secular-form page reads muṣaddiq as confirming and adds the older precedents for rereading. The Torah in Islam adds Tawrāt as law and two retellings.
+
+= 3.23.0 =
+* WordPress now shows pages in the site's colours when it cannot build one: "Back shortly" during an update, "Something went wrong" after a PHP fault, "We cannot reach our database" when the database is down. Press Install error pages at the foot of Theme Options to put them in place.
+* The 404 page tells search engines not to index it.
+
+= 3.22.0 =
+* The log-in screen has its own card under Theme Options > Branding: a switch for the theme's dress and a line of text above the form. A plugin that styles the log-in screen takes over while it is active.
+
+= 3.21.2 =
+* When a plugin or post type takes the search base, the theme moves to the first free one of search, find and search-results, and rebuilds the rewrite rules with it.
+
+= 3.21.1 =
+* The search base under Settings > Permalinks drops underscores, as its help text says. A base WordPress uses for itself, or the address of a page, is refused with a notice and "search" is kept.
+
+= 3.21.0 =
+* Profile links: set the address of each profile under Theme Options > Sharing, and the icons show in the footer. The [injil_help_social] shortcode and the Profile links pattern put them anywhere else.
+* Reading progress bar: a thin bar fills as the reader scrolls a post or page. The new Reading tab sets the post types, the edge, the height and the colours.
+* Unlisted posts: tick Unlist in the editor sidebar, Quick Edit or Bulk Edit. The post keeps its address and drops out of every listing, feed, search, sitemap and the Read next row, and it is marked noindex.
+* Search results open at /search/term/. Change the base under Settings > Permalinks.
+* Each of these steps aside while the plugin it replaces is active.
+
+= 3.20.2 =
+* The speakable selectors name only markup the page has. On the front page and the answers page they named a paragraph that does not exist there.
+* The Organization is also a NewsMediaOrganization, the type that defines its masthead and fact-checking policy.
+* An update keeps every page and Journal post the theme never stamped as its own. Before this release such a page lost your text on the first admin load after an update.
+
+= 3.20.1 =
+* Theme Options no longer looks up every starter page on each load. The Content tab fetches its page list when you open it, or builds it on ?tab=content without JavaScript. Every setting still saves from any tab.
+= 3.20.0 =
+* Theme Options rebuilt as cards in place of form tables: tabs with full ARIA and arrow-key support, switches for every on-off setting, selector cards for the style choices, sliders that show their value, and the colour pickers in a grid. The layout stacks at 782 pixels. Every option key and its behaviour is unchanged.
+* Each tab opens with a note on how to use it; a header with the version and a footer with links to the theme details and Site Health.
+* Privacy: plates from Wikimedia Commons and Pexels no longer load in the reader's browser by default. A plate is shown from its Media Library copy, and the switch remote_images (Theme Options > Content) brings back remote loading. The plates of the front-page and section patterns are now copied into the Media Library too.
+* title-tag and automatic-feed-links are declared by the theme; the options screen checks edit_theme_options before it renders.
+* readme: description, features, usage, FAQ, privacy, copyright and upgrade notice sections.
+
+= 3.19.0 =
+* Mobile and accessibility, to the owner's mobile-first audit and WCAG 2.2 AA briefs: a focus ring with enough contrast, a header that no longer hides the title at 320 pixels, 44-pixel touch targets on phones, page numbers at least 24 pixels wide, lang attributes on the Greek and Arabic glosses, and a spoken status for Copy link. New file assets/css/responsive.css.
+* Structured data: the Journal menu item is named Journal, without its Greek gloss.
+= 3.18.1 =
+* Structured data: the featured image has its own ImageObject with its credit and licence, so the primary image reference resolves on every page, Rank Math or not. AVIF and WebP copies carry their own format. Cited articles carry a headline.
+= 3.18.0 =
+* A Journal at /journal/, linked from the menu and the footer. Posts live at /journal/<slug>/, each with a dated breadcrumb and BlogPosting markup.
+* 8 posts ship with the theme, each on a fixed date: 3 in October, 1 in November, 4 scheduled for December. A past date is published, a future one is scheduled, and an edited or binned post is kept.
+= 3.17.0 =
+* Pages can carry up to four images: the first stays where it was and up to three more follow, spread through the text. 112 manuscript and inscription images now stand on 61 pages, including the gospel sections.
+* A sideloaded image is stored as AVIF, or as WebP when it is under 1000 pixels wide. Nothing is added to the theme.
+= 3.16.0 =
+* A small pixel arrow after the Read next label, part of the ornament layer. Still for readers who ask for reduced motion.
+= 3.15.0 =
+* Structured data: Qur'an verses as Quotations under their surahs, the Thomas sayings and the timeline as ordered lists, glossary terms and subjects with their own @id, image credits from images.json, article access details. A new test checks every page's graph.
+* The owner's name never enters the structured data, even from the Author name or from Rank Math's author. Long sayings of Thomas are quoted whole; Pexels images have a format; "Photograph by" captions name the photographer.
+= 3.14.1 =
+* Links to other sites follow their new addresses, which carry no verse numbers, counts or years. network-links.json is current again.
+= 3.14.0 =
+* Archives print a canonical link with their page number. The users sitemap is off, and an author archive goes to the About page with a 301.
+* An image plate whose file is in the Media Library is served from there, with width, height, srcset and lazy loading. A plate with no local copy loads lazily. An image sitemap at /image-sitemap.xml lists each page's image.
+* The author Person in the structured data carries a url: the Author URL option, else the About page.
+= 3.13.1 =
+* Security fixes: case-insensitive spam patterns, the gate exempts only pages that carry the theme's hash, private posts are left private, WP-CLI counts as outside the editor, 410 at /?p=ID, safer daily tallies, a 24-hour window for failed logins, reports load with the Security tab. The former-URL 301 goes only to published pages, and unhashed -N copies become drafts.
+= 3.13.0 =
+* Refused XML-RPC requests and other security counters are now one atomic upsert on a small daily row, folded into the thirty-day counts once a day, instead of a rewrite of the whole counts option on every request.
+* Security tab: XML-RPC off, application passwords off, REST writes only from a logged-in browser, a spam gate that holds gambling spam and remote publishing as Pending, a spam scan with move to Trash, 410 Gone for removed spam, revoke-all and log-out-all buttons, attack reports and a security log. INJIL_HELP_SECURITY_LOCK set to false in wp-config.php turns the locks off.
+* Every old URL (numbered gospel sections, commentary groups with verse numbers, numbered commentary parts, their -2/-3 copies, /about-the-author/) redirects to the present URL with a 301. Leftover -2 copies are binned, or made drafts when edited.
 = 3.12.0 =
 * The 404 page in the site's dress: the gloss of Q 1:6, a large 404, a search field and the six parts of the website.
 * The log-in screen in the site's own dress: brandmark, Kagnue title, the gloss of Q 5:47, the star lattice and the site's colours and typefaces.
@@ -103,6 +296,9 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 = 3.10.0 =
 * Three new pages addressed to Christian readers: Why Islam? (/why-islam/), Leave the gospel of Paul of Tarsus (/paul/leave-the-gospel-of-paul/) and Who you are as a servant of God (/servant-of-god/). 181 pages.
 * The Islamic Dilemma website (islamicdilemma.com) answered on /resources/responses/, claim by claim; 3 new FAQs on the pillar page; Mark 1:14-15 and Mark 4:26-29 on What is the Injīl?
+= 3.9.1 =
+* Shipped with 3.13.0: the security counters are one small database write a day.
+
 = 3.9.0 =
 * Two new pages: What is the Injīl? (/the-islamic-dilemma/what-is-the-injil/), on the meaning of Injil and Injeel, its 12 verses, its language and the Bible; and the Torah in Islam (/the-islamic-dilemma/torah-in-islam/). The Jesus in the Qur'an hub gains 5 FAQs and a new excerpt, the Messiah page 2 FAQs. 178 pages.
 * The front-page diagram and the pillar page call the two parts of the Islamic Dilemma its two claims throughout, and the diagram's CSS classes follow.
@@ -123,7 +319,7 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 = 3.7.1 =
 * KFGQPC HAFS Uthmanic Script ships with its licence (assets/fonts/KFGQPC-Hafs-Uthmanic-LICENSE.txt) and is credited on the credits page; the font file is unchanged and still used for Qur'anic Arabic only (class ih-quran). A verse set as its own block gets a line height of 2.1 for the marks.
 = 3.7.0 =
-* Contextual links: the first mention of a known phrase in the text of a page links to the inner page that treats it, here or on one of the six sister sites. The shared map is inc/data/network-links.json; Theme Options > Contextual links sets the caps and adds phrases.
+* Contextual links: the first mention of a known phrase in the text of a page links to the inner page that treats it, here or on one of six other sites. The shared map is inc/data/network-links.json; Theme Options > Contextual links sets the caps and adds phrases.
 = 3.6.7 =
 * لعنة الله (the curse of God) after the name of Paul of Tarsus, as a calligraphic mark in rubric red, used twice: on the Epistle's autograph line and on the verdict of The false apostles.
 = 3.6.6 =
@@ -147,6 +343,7 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 = 3.6.2 =
 * Links to apostleofdoom.org and bestofislam.org are within the running text only, thirty sentences naming the article and the site where a point is taken further; the declared row, the footer links and the sameAs entry of 3.6.1 are removed.
 = 3.6.1 =
+* Contents list: put [auto_toc] where you want a list of the page's sections (the level-two and level-three headings), or switch on Theme Options > Branding > Add a contents list to long pages to add one to every page with 4 or more sections. [auto_toc tags="h2,h3,h4"] changes the levels and [auto_toc title="In this page"] the title.
 * Content is full width by default: every page's text, tables and plates fill the page between the side gutters, and the header, footer and front page follow. Theme Options > Branding > Content width offers full (default), wide (1240px) and reading column (720px, the former default). At full and wide widths running prose is set in two columns on screens from 1280px, as the gospel sections are, so lines stay readable; headings, tables, plates, folds and asides span both columns.
 * The Gospel of Thomas page explains why Thomas is counted: a sayings gospel of the kind Q was, with the evidence, the contrary case labelled, the Qur'anic reason and three questions.
 * "Paul of Tarsus" throughout the site's own text.
@@ -264,8 +461,55 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 * Brandmark added to the footer.
 * New screenshot.
 
+== Upgrade Notice ==
+= 3.31.0 =
+Upload the whole theme. The Glossary and Objections pages refresh on the first admin load and gain a contents list; any edits made to them are replaced.
+= 3.30.0 =
+Upload the whole theme. The Aḥmad page refreshes on the first admin load, and any edits made to it are replaced.
+= 3.29.0 =
+Upload the whole theme. The Glossary and the Aḥmad page refresh on the first admin load, and any edits made to them are replaced.
+= 3.28.0 =
+Upload the whole theme. The Glossary and two Islamic Dilemma pages refresh on the first admin load, and any edits made to them are replaced.
+= 3.27.0 =
+Upload the whole theme. The Glossary and two Qur'an pages refresh on the first admin load, and any edits made to them are replaced.
+= 3.26.0 =
+Upload the whole theme. The Glossary and the Aḥmad page refresh on the first admin load, and any edits made to them are replaced.
+= 3.25.10 =
+Upload the whole theme. On a site in a subfolder, also put a copy of assets/images/favicon.ico in the domain root folder (or, with a Site Icon set, that icon as favicon.ico); otherwise nothing to do.
+
+= 3.25.9 =
+Upload the whole theme. Open one admin screen so the error pages are written again with the icon.
+
+= 3.25.8 =
+Documentation only. Upload the whole theme. On Nginx, update the theme rule in the server block from README.md.
+
+= 3.25.7 =
+Upload the whole theme, the inc/data folder included, then open any admin screen. The old commentary addresses redirect again.
+
+= 3.20.0 =
+Remote plates are now opt-in. A plate with no Media Library copy is hidden until the copy is made, a few files per admin screen load. Switch on Theme Options > Content > Load plates from Wikimedia Commons and Pexels to show them from the source meanwhile.
+
+== Copyright and licences ==
+The Injil, Copyright 2025-2026 its author, as named in the style.css header. Distributed under the GNU General Public License v3 or later; the full text is in the LICENSE file. Its parent, Twenty Twenty-Five, is GPLv2 or later, by the WordPress team.
+
+Scripts and styles: the theme's own (assets/css, assets/js), GPLv3 or later, unminified. It uses jQuery, Iris and wp-color-picker as WordPress registers them and bundles no third-party library.
+
+Fonts (assets/fonts), each under its own licence:
+* EB Garamond (Georg Duffner, Octavio Pardo) and Amiri (Khaled Hosny): SIL Open Font License 1.1, licence files OFL-EBGaramond.txt and OFL-Amiri.txt beside them.
+* Noto Naskh Arabic and Noto Sans Cuneiform (The Noto Project Authors, https://github.com/notofonts): SIL Open Font License 1.1, stated in the font files.
+* Evangelion CPA (The Evangelion CPA Project Authors, https://github.com/typiconman/Evangelion-CPA): SIL Open Font License 1.1.
+* Special Elite (Astigmatic): Apache License 2.0, stated in the font file.
+* KFGQPC HAFS Uthmanic Script (King Fahd Glorious Qur'an Printing Complex): free use and distribution, no modification; KFGQPC-Hafs-Uthmanic-LICENSE.txt beside it. Served as a WOFF2 conversion by the owner's decision of 26 October 2026.
+* SBL Greek, SBL Hebrew and SBL BibLit (John Hudson, Tiro Typeworks, for the Society of Biblical Literature): the SBL font EULA, free for non-commercial use.
+* Sabon Next LT (Linotype, Monotype) and Kagnue (Youthlabs Studio): commercial, licensed to the site owner.
+* Dubidam Arabic (NamelaType): free personal-use licence per its metadata; a web licence is the site owner's to hold.
+* Arslan Wessam (Arslan, Dev-Point.com), Ferments (Haksen Studio), Estrangelo Edessa (Beth Mardutho) and Angel (JuliaL, freeware; Angel-README.txt beside it): free to use as their authors publish them.
+
+Images: assets/brandmark.svg, assets/images/divider.svg, assets/images/arrow-next*.webp and the icons in assets/icons are the theme's own, GPLv2 or later. assets/images/lanat-allah.svg is outlined from Dubidam Arabic. The default social image, assets/images/og-default.jpg, is the Birmingham Qur'an manuscript, public domain. The plates listed in inc/data/images.json and in the patterns are public domain or CC0 from Wikimedia Commons, Pexels photographs under the Pexels License, and one CC BY 2.0 photograph (Richard Mortel); each caption carries its credit and source.
+
 == Credits ==
-Share icons (assets/icons/social/): Minimalist Social Icons Pack, GPL. The LinkedIn icon originates from Font Awesome Free (https://fontawesome.com), CC BY 4.0; the credit is carried on the Credits page. The brand marks remain trademarks of their owners. assets/icons/share.svg and link.svg are the theme's own.
+Contents list: the [auto_toc] shortcode follows the interface of Ikram Hawramani's WordPress Table-of-Contents Shortcode Done Properly (MIT licence, 2025). The code is the theme's own.
+Share and profile icons (assets/icons/social/): Minimalist Social Icons Pack 2.8, GPL; the profile row adds Instagram, YouTube, TikTok, Mastodon, GitHub and Substack from the same pack. The LinkedIn icon originates from Font Awesome Free (https://fontawesome.com), CC BY 4.0; the credit is carried on the Credits page. The brand marks remain trademarks of their owners. assets/icons/share.svg and link.svg are the theme's own.
 Default social image: Birmingham Qur'an manuscript (Cadbury Research Library, University of Birmingham), public domain, via Wikimedia Commons.
 The classical commentaries (inc/data/tafsir/): English renderings prepared for this website from the public-domain Arabic texts of al-Tabari, al-Baghawi, al-Qurtubi, Ibn Kathir, Tanwir al-Miqbas, al-Jalalayn, al-Durr al-Manthur and al-Sa'di as published at tafsir.app, greattafsirs.com and shamela.ws; the modern editors' apparatus is not translated. Released with the theme under its licence; no second translator has checked them, and the Arabic source is named on every page.
 The Gospel According to Islam: text and notes by Ahmad Shafaat (New York: Vantage Press, 1985), used as the base text of this website's gospel. Spelling and scanning errors in the supplied text were corrected; the Gospel of Thomas sections and their notes were added by this website. Gospel of Thomas saying numbers follow the standard edition; the summaries are the website's own, prepared from T. O. Lambdin's translation in The Nag Hammadi Library in English (Brill, 1988).

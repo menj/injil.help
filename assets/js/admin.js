@@ -1,48 +1,147 @@
+/**
+ * injil.help: Theme Options screen.
+ * Tabs (WAI-ARIA tablist: arrow keys, Home and End, no reload), live slider values,
+ * colour pickers, the confirm prompts and the batched page writer of the Content tab.
+ */
 ( function ( $ ) {
 	'use strict';
 
-	var tabs = document.querySelectorAll( '.ih-tabs a' );
-	var panels = document.querySelectorAll( '.ih-panel' );
+	var root = document.querySelector( '.ih-options' );
+	var tabs = root ? Array.prototype.slice.call( root.querySelectorAll( '[role="tab"]' ) ) : [];
+	var panels = root ? Array.prototype.slice.call( root.querySelectorAll( '[role="tabpanel"]' ) ) : [];
 	if ( ! tabs.length ) {
 		return;
 	}
-	document.querySelector( '.ih-options' ).classList.add( 'ih-js' );
+	root.classList.add( 'ih-js' );
 
-	var referer = document.querySelector( 'input[name="_wp_http_referer"]' );
+	var referer = root.querySelector( 'input[name="_wp_http_referer"]' );
 
-	function show( id ) {
-		var found = false;
+	function idOf( tab ) {
+		return tab.getAttribute( 'href' ).slice( 1 );
+	}
+
+	function show( id, focus ) {
+		var found = null;
 		tabs.forEach( function ( t ) {
-			var on = t.getAttribute( 'href' ) === '#' + id;
+			var on = idOf( t ) === id;
 			t.setAttribute( 'aria-selected', on ? 'true' : 'false' );
-			found = found || on;
+			t.tabIndex = on ? 0 : -1;
+			if ( on ) {
+				found = t;
+			}
 		} );
+		if ( ! found ) {
+			return false;
+		}
 		panels.forEach( function ( p ) {
 			p.hidden = p.id !== 'panel-' + id;
 		} );
 		// The fragment is not sent with the save request, so carry it in the referer WordPress redirects back to.
-		if ( found && referer ) {
+		if ( referer ) {
 			referer.value = referer.value.replace( /#.*$/, '' ) + '#' + id;
 		}
-		return found;
-	}
-
-	function fromHash() {
-		var id = window.location.hash.replace( '#', '' );
-		if ( ! id || ! show( id ) ) {
-			show( 'colours' );
+		if ( focus ) {
+			found.focus();
 		}
+		found.scrollIntoView( { block: 'nearest', inline: 'nearest' } );
+		loadLazy( document.getElementById( 'panel-' + id ) );
+		return true;
 	}
 
-	tabs.forEach( function ( t ) {
+	/*
+	 * Heavy panel parts (the starter page list) are left out of the markup
+	 * unless the screen opens on their ?tab=. Fetch them the first time the
+	 * tab is shown; the placeholder link opens that ?tab= if this fails.
+	 */
+	function loadLazy( panel ) {
+		var box = panel ? panel.querySelector( '[data-ih-lazy]' ) : null;
+		var conf = window.injilHelpPopulate;
+		if ( ! box || box.getAttribute( 'data-ih-loading' ) || ! conf || ! conf.pagesNonce || ! window.fetch ) {
+			return;
+		}
+		box.setAttribute( 'data-ih-loading', '1' );
+		box.setAttribute( 'aria-busy', 'true' );
+		var body = new URLSearchParams();
+		body.append( 'action', box.getAttribute( 'data-ih-lazy' ) );
+		body.append( 'nonce', conf.pagesNonce );
+		window.fetch( conf.ajaxUrl, { method: 'POST', credentials: 'same-origin', body: body } )
+			.then( function ( r ) {
+				return r.json();
+			} )
+			.then( function ( res ) {
+				if ( ! res || ! res.success ) {
+					throw new Error( 'failed' );
+				}
+				box.innerHTML = res.data.html;
+				box.removeAttribute( 'data-ih-lazy' );
+				box.removeAttribute( 'aria-busy' );
+			} )
+			.catch( function () {
+				box.removeAttribute( 'data-ih-loading' );
+				box.removeAttribute( 'aria-busy' );
+			} );
+	}
+
+	function select( tab, focus ) {
+		history.replaceState( null, '', '#' + idOf( tab ) );
+		show( idOf( tab ), focus );
+	}
+
+	tabs.forEach( function ( t, i ) {
 		t.addEventListener( 'click', function ( e ) {
 			e.preventDefault();
-			history.replaceState( null, '', t.getAttribute( 'href' ) );
-			show( t.getAttribute( 'href' ).slice( 1 ) );
+			select( t, false );
+		} );
+		t.addEventListener( 'keydown', function ( e ) {
+			var next = null;
+			switch ( e.key ) {
+				case 'ArrowRight':
+				case 'ArrowDown':
+					next = tabs[ ( i + 1 ) % tabs.length ];
+					break;
+				case 'ArrowLeft':
+				case 'ArrowUp':
+					next = tabs[ ( i - 1 + tabs.length ) % tabs.length ];
+					break;
+				case 'Home':
+					next = tabs[ 0 ];
+					break;
+				case 'End':
+					next = tabs[ tabs.length - 1 ];
+					break;
+				case ' ':
+				case 'Enter':
+					e.preventDefault();
+					select( t, true );
+					return;
+			}
+			if ( next ) {
+				e.preventDefault();
+				select( next, true );
+			}
 		} );
 	} );
 
-	$( '[data-confirm]' ).on( 'click', function ( e ) {
+	var hash = window.location.hash.replace( '#', '' );
+	if ( ! hash && window.URLSearchParams ) {
+		hash = new URLSearchParams( window.location.search ).get( 'tab' ) || '';
+	}
+	if ( ! hash || ! show( hash, false ) ) {
+		show( idOf( tabs[ 0 ] ), false );
+	}
+
+	// Range sliders: the number beside each slider follows it.
+	root.querySelectorAll( '.ih-range__input' ).forEach( function ( input ) {
+		var out = document.getElementById( input.id + '-value' );
+		if ( out ) {
+			input.addEventListener( 'input', function () {
+				out.value = input.value;
+			} );
+		}
+	} );
+
+	// Delegated, so the buttons fetched with the starter page list work too.
+	$( root ).on( 'click', '[data-confirm]', function ( e ) {
 		if ( ! window.confirm( $( this ).data( 'confirm' ) ) ) {
 			e.preventDefault();
 			e.stopImmediatePropagation();
@@ -68,7 +167,7 @@
 	function format( template, a, b ) {
 		return template.replace( '%1$d', a ).replace( '%2$d', b );
 	}
-	$( '[data-ih-populate]' ).on( 'click', function ( e ) {
+	$( root ).on( 'click', '[data-ih-populate]', function ( e ) {
 		if ( ! cfg || ! window.fetch ) {
 			return; // the link runs the job in one request
 		}
@@ -121,5 +220,4 @@
 	} );
 
 	$( '.ih-color' ).wpColorPicker();
-	fromHash();
 }( jQuery ) );

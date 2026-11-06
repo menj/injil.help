@@ -18,6 +18,16 @@
         ]
     },
     {
+        "path": "journal",
+        "title": "Journal",
+        "template": "page-journal",
+        "excerpt": "Dated notes on the Injīl, the four gospels and Jesus in Christian and Islamic understanding, each sourced and labelled like the rest of the site.",
+        "body": [
+            "The Journal carries shorter pieces, one at a time and dated: a verse, a manuscript, a word, a feast day. Each is held to the same rules as the rest of the site. Every claim is labelled, every source is named, and the Qur’an is the measure, as <a href=\"/method/\">the measure</a> sets out.",
+            "The newest entry is first. Errors in any of them go into the <a href=\"/corrections/\">corrections log</a>."
+        ]
+    },
+    {
         "path": "terms-of-use",
         "title": "Terms of use",
         "excerpt": "Terms for using injil.help.",
@@ -48,7 +58,7 @@
             "This website runs on WordPress. WordPress sets cookies for people who log in to the administration area and for people who leave a comment; the theme does not enable comments, so for a reader neither applies. The theme itself sets no cookies and loads no analytics, no advertising and no tracking script of any kind.",
             "The fonts are served from this website, not from Google or any other font service. The web server keeps the ordinary access logs that every web server keeps (the address requested, the time, your browser’s identification and IP address); they are used to keep the site running and are not analysed for anything else.",
             "## What loads from other websites",
-            "Manuscript images load from Wikimedia Commons (upload.wikimedia.org), and five photographs from Pexels (images.pexels.com). When a page with such an image opens, your browser contacts that service’s servers to fetch it, and the service can see your IP address and the page that referred you, under its own privacy policy: <a href=\"https://foundation.wikimedia.org/wiki/Policy:Privacy_policy\">Wikimedia’s</a> or <a href=\"https://www.pexels.com/privacy-policy/\">Pexels’</a>. No other third-party content is loaded on any page of this website: the pattern, icons, share icons and the default social image are all served from here.",
+            "The manuscript images come from Wikimedia Commons, and five photographs from Pexels. This website keeps its own copy of each one and serves it from here, so opening a page does not make your browser contact either service. The site owner can choose to load an image from its source while the copy is being made; your browser would then contact upload.wikimedia.org or images.pexels.com, and the service could see your IP address and the page that referred you, under its own privacy policy: <a href=\"https://foundation.wikimedia.org/wiki/Policy:Privacy_policy\">Wikimedia’s</a> or <a href=\"https://www.pexels.com/privacy-policy/\">Pexels’</a>. That setting is off. No other third-party content is loaded on any page of this website: the fonts, pattern, icons, share icons and the default social image are all served from here.",
             "## Share links",
             "Under each page there is a row of share links. Each is an ordinary link to the sharing page of a network (X, Facebook, WhatsApp, Telegram, Reddit, LinkedIn, Bluesky, Threads, Pinterest or LINE), which opens in a new tab on that network’s own website with the page address and title filled in. No script from any of those networks runs on this website, no network is told that you visited a page unless you click its link, and nothing is shared until you confirm it on the network’s own page, under that network’s privacy policy.",
             "The “Copy link” button copies the page address to your clipboard and sends nothing anywhere. The “More…” button, where your browser shows it, opens your device’s own share sheet; what happens after that is between you and your device.",

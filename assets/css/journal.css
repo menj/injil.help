@@ -1,0 +1,24 @@
+/*
+ * The Journal: the list on /journal/ (templates/page-journal.html), the archives and a single post.
+ * Loaded by inc/journal.php on those views only. Colours and fonts are the theme.json tokens.
+ */
+.ih-journal-list .wp-block-post-template{display:grid;gap:var(--wp--preset--spacing--30);list-style:none;margin:0;padding:0}
+.ih-journal-list .wp-block-post-template > li{margin:0}
+.ih-journal-card{background:var(--wp--preset--color--accent-5);border:var(--ih-rule);border-inline-start:4px solid var(--wp--preset--color--accent-1);border-radius:var(--ih-r-md);padding:var(--wp--preset--spacing--30) var(--wp--preset--spacing--40)}
+.ih-journal-card .wp-block-post-title{font-size:var(--wp--preset--font-size--x-large);margin:.2em 0 .4em}
+.ih-journal-card .wp-block-post-title a{text-decoration:none;color:var(--wp--preset--color--contrast)}
+.ih-journal-card .wp-block-post-title a:hover,.ih-journal-card .wp-block-post-title a:focus-visible{color:var(--wp--preset--color--accent-1);text-decoration:underline}
+.ih-journal-card .wp-block-post-excerpt{color:var(--wp--preset--color--muted);margin:0}
+.ih-journal-card .wp-block-post-excerpt__more-text{display:none}
+.ih-journal-meta{gap:.4em 1em;font-family:var(--ih-sans);font-size:var(--wp--preset--font-size--small);letter-spacing:.08em;text-transform:uppercase;color:var(--wp--preset--color--accent-2)}
+.ih-journal-meta a{color:inherit;text-decoration:none}
+.ih-journal-meta a:hover,.ih-journal-meta a:focus-visible{text-decoration:underline}
+.ih-journal-list .wp-block-query-pagination{margin-top:var(--wp--preset--spacing--40);font-family:var(--ih-sans)}
+.ih-journal-single .ih-journal-head .wp-block-post-title{margin-bottom:.3em}
+.ih-journal-single .ih-eyebrow a{color:inherit;text-decoration:none}
+.ih-journal-nav{gap:var(--wp--preset--spacing--20);font-family:var(--ih-sans);font-size:var(--wp--preset--font-size--small)}
+.ih-journal-nav > *{max-width:48%}
+@media (max-width:600px){
+	.ih-journal-card{padding:var(--wp--preset--spacing--20) var(--wp--preset--spacing--30)}
+	.ih-journal-nav > *{max-width:100%}
+}

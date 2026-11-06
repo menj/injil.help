@@ -7,30 +7,99 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'INJIL_HELP_VERSION', '3.13.0' );
-
-require_once get_stylesheet_directory() . '/inc/options.php';
-require_once get_stylesheet_directory() . '/inc/starter-content.php';
-require_once get_stylesheet_directory() . '/inc/seo.php';
-require_once get_stylesheet_directory() . '/inc/schema.php';
-require_once get_stylesheet_directory() . '/inc/rank-math.php';
-require_once get_stylesheet_directory() . '/inc/share.php';
-require_once get_stylesheet_directory() . '/inc/contextual-links.php';
-require_once get_stylesheet_directory() . '/inc/login.php';
+define( 'INJIL_HELP_VERSION', '3.31.0' );
 
 /**
- * Hardening. Application passwords (REST API and XML-RPC log-ins with a per-application
- * password) are blocked for the whole site by default, the same as
- * add_filter( 'wp_is_application_passwords_available', '__return_false' ), until the block is
- * switched off under Theme Options › Security: nothing on injil.help is written through the
- * REST API from outside, so the feature is one more door than the site needs.
+ * The theme's PHP files in inc/, in the order functions.php loads them. The files they pull in
+ * themselves (starter-content-pages, gospel-islam, tafsir, quran-jesus, images, schema-content,
+ * schema-extend, security-detector, unlist-admin, error-page-html) are listed after them, so the
+ * check below sees every file before any is read.
+ *
+ * @return array{load: string[], also: string[]}
  */
-add_filter(
-	'wp_is_application_passwords_available',
-	function ( $available ) {
-		return injil_help_get_option( 'block_app_passwords' ) ? false : $available;
+function injil_help_theme_files() {
+	return array(
+		'load' => array( 'options', 'starter-content', 'journal', 'seo', 'schema', 'rank-math', 'share', 'contextual-links', 'security', 'login', 'favicon', 'social', 'progress', 'unlist', 'search-permalinks', 'error-pages', 'article', 'toc' ),
+		'also' => array( 'starter-content-pages', 'gospel-islam', 'tafsir', 'quran-jesus', 'images', 'schema-content', 'schema-extend', 'security-detector', 'unlist-admin', 'error-page-html' ),
+	);
+}
+
+/**
+ * Send a 503 "being updated" page and stop: the static 503 page the theme writes into
+ * wp-content, then the theme's own copy, then a few lines of HTML. Nothing here needs the rest of
+ * the theme.
+ */
+function injil_help_serve_incomplete() {
+	if ( ! headers_sent() ) {
+		status_header( 503 );
+		header( 'Retry-After: 300' );
+		header( 'Cache-Control: no-store, max-age=0' );
+		header( 'Content-Type: text/html; charset=utf-8' );
 	}
-);
+	foreach ( array( WP_CONTENT_DIR . '/injil-help-errors/503.html', __DIR__ . '/errors/503.html' ) as $page ) {
+		if ( is_readable( $page ) && filesize( $page ) > 0 ) {
+			readfile( $page ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+			exit;
+		}
+	}
+	echo '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="60"><title>Back shortly</title></head><body><h1>Back shortly</h1><p>The site is being updated. Please try again in a few minutes.</p></body></html>';
+	exit;
+}
+
+/**
+ * Load the theme's files, or report that the theme is incomplete.
+ *
+ * A theme uploaded file by file (by FTP) is incomplete for a few minutes: a file not there yet,
+ * or there and half written. A failed require_once ends the request in a fatal error for every
+ * visitor (25 October 2026: functions.php line 12, inc/options.php). So every file is checked
+ * first, each is loaded inside a try that catches the ParseError of a half-written file, and each
+ * must reach the flag on its last line.
+ * While anything is wrong, visitors and the admin get a 503 page and the theme stops loading.
+ * The login screen, cron, AJAX and the command line go on without the theme. What was wrong goes
+ * to the error log.
+ *
+ * @return bool Whether every file loaded.
+ */
+function injil_help_load_theme_files() {
+	$files = injil_help_theme_files();
+	$dir   = __DIR__ . '/inc/';
+	try {
+		foreach ( array_merge( $files['load'], $files['also'] ) as $name ) {
+			if ( ! is_readable( $dir . $name . '.php' ) ) {
+				throw new RuntimeException( 'inc/' . $name . '.php is missing' );
+			}
+		}
+		foreach ( $files['load'] as $name ) {
+			require_once $dir . $name . '.php';
+		}
+		// A file cut short at the end of a function still parses. Every file sets a flag on its last
+		// line; a file that was read and set none is incomplete. unlist-admin.php loads later, in the admin.
+		$read = array_flip( array_map( 'wp_normalize_path', get_included_files() ) );
+		foreach ( array_merge( $files['load'], $files['also'] ) as $name ) {
+			if ( isset( $read[ wp_normalize_path( $dir . $name . '.php' ) ] ) && empty( $GLOBALS['injil_help_loaded'][ $name ] ) ) {
+				throw new RuntimeException( 'inc/' . $name . '.php is incomplete' );
+			}
+		}
+		return true;
+	} catch ( Throwable $e ) {
+		error_log( 'The Injil: the theme is incomplete or being uploaded (' . $e->getMessage() . '); a 503 page is sent until it is whole.' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions
+		if ( ! wp_doing_cron() && ! wp_doing_ajax() && 'wp-login.php' !== ( $GLOBALS['pagenow'] ?? '' ) && 'cli' !== PHP_SAPI ) {
+			injil_help_serve_incomplete();
+		}
+		return false;
+	}
+}
+
+if ( ! injil_help_load_theme_files() ) {
+	return;
+}
+
+/**
+ * Hardening lives in inc/security.php: XML-RPC, application passwords (the block_app_passwords
+ * setting, on by default since 3.6.0) and REST writes from outside a browser session are shut,
+ * new content is checked for gambling spam, and Theme Options › Security carries the switches,
+ * the clean-up tools and the reports.
+ */
 
 /**
  * Styles: front end and editor.
@@ -48,6 +117,8 @@ add_action(
 				wp_enqueue_script( 'injil-help-ornament', get_stylesheet_directory_uri() . '/assets/js/ornament.js', array(), INJIL_HELP_VERSION, array( 'in_footer' => true, 'strategy' => 'defer' ) );
 			}
 		}
+		// Phone layout, touch targets and the focus ring; after the ornament so its rules come last.
+		wp_enqueue_style( 'injil-help-responsive', get_stylesheet_directory_uri() . '/assets/css/responsive.css', array( 'injil-help' ), INJIL_HELP_VERSION );
 	}
 );
 
@@ -55,6 +126,9 @@ add_action(
 	'after_setup_theme',
 	function () {
 		load_child_theme_textdomain( 'injil-help', get_stylesheet_directory() . '/languages' );
+		// Block themes get both from core; stated here so the theme does not depend on that.
+		add_theme_support( 'title-tag' );
+		add_theme_support( 'automatic-feed-links' );
 		add_editor_style( 'style.css' );
 	}
 );
@@ -131,15 +205,4 @@ add_action(
 	}
 );
 
-/* Favicon: custom URL, else the brandmark (always, or when no Site Icon is set). */
-add_action(
-	'wp_head',
-	function () {
-		$custom = injil_help_get_option( 'favicon_url' );
-		if ( $custom ) {
-			printf( '<link rel="icon" href="%s">' . "\n", esc_url( $custom ) );
-		} elseif ( injil_help_get_option( 'favicon_force' ) || ! has_site_icon() ) {
-			printf( '<link rel="icon" type="image/svg+xml" href="%s">' . "\n", esc_url( get_stylesheet_directory_uri() . '/assets/brandmark.svg' ) );
-		}
-	}
-);
+/* Favicon: inc/favicon.php. */
