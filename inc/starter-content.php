@@ -17,7 +17,7 @@ require_once get_stylesheet_directory() . '/inc/starter-content-pages.php';
  * Convert the compact page markup to blocks.
  *
  * "## " heading, "### " sub-heading, "- " list item, "> " quote, "@consensus|@minority|@islamic"
- * claim label, anything else a paragraph. Blank lines are ignored. Inline
+ * claim label, "[toc]" the contents list, anything else a paragraph. Blank lines are ignored. Inline
  * "{{fn:text}}" becomes a numbered footnote; the notes are listed at the end, or at a "[notes]"
  * token as a reference apparatus. "[v]" opens a numbered verse and "[qS:A]" marks a Qur'anic
  * verse; "[bible]" ... "[/bible]" wraps a gospel section for the Bible layout; "[p.classes] text"
@@ -171,6 +171,8 @@ function injil_help_markup_to_blocks( $lines ) {
 			$out .= '<!-- wp:paragraph {"className":"is-style-label-' . $m[1] . "\"} -->\n<p class=\"is-style-label-" . $m[1] . '">' . esc_html( $labels[ $m[1] ] ) . "</p>\n<!-- /wp:paragraph -->\n";
 		} elseif ( '[page-list]' === $line ) {
 			$out .= "<!-- wp:page-list /-->\n";
+		} elseif ( '[toc]' === $line ) {
+			$out .= "<!-- wp:shortcode -->\n[auto_toc]\n<!-- /wp:shortcode -->\n";
 		} else {
 			$out .= "<!-- wp:paragraph -->\n<p>" . wp_kses_post( $footnote( $line ) ) . "</p>\n<!-- /wp:paragraph -->\n";
 		}

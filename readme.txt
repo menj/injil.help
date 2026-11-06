@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.30.0
+Stable tag: 3.31.0
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -121,6 +121,9 @@ This file is the user-facing manual that WordPress and Git Updater read. The rep
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add the entry to CHANGELOG.md and to the Changelog section here, note anything an existing site must know under "Updating an existing site" in UPGRADING.md, merge to main, and tag the commit with the same number (for example v3.4.0). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Frequently Asked Questions ==
+= How do I add a contents list to a page? =
+Type [auto_toc] in a Shortcode block where the list should go. The list links to the page's level-two and level-three headings, and gives a heading an address if it has none. To have a list on every long page, switch on the option in Theme Options > Branding.
+
 = Why are some manuscript plates missing on a new site? =
 Remote plates are off by default. The theme copies each plate from Wikimedia Commons or Pexels into the Media Library, six files per admin screen load, and shows a plate once its copy is there. Load a few admin screens, or switch on Theme Options > Content > Load plates from Wikimedia Commons and Pexels.
 
@@ -157,6 +160,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.31.0 =
+* A contents list for pages: the [auto_toc] shortcode, and an option in Theme Options > Branding that adds the list to every page with 4 or more sections. The Glossary and the Objections page carry one.
 = 3.30.0 =
 * The Aḥmad page names the Companion behind the ḥadīth of the Prophet's five names, Jubayr ibn Muṭʿim, gives its numbers in al-Bukhārī and Muslim, and sets out three of its chains in the form HadithGraph reads. It also gives a short biography of Jubayr from Ibn ʿAbd al-Barr.
 = 3.29.0 =
@@ -338,6 +343,7 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 = 3.6.2 =
 * Links to apostleofdoom.org and bestofislam.org are within the running text only, thirty sentences naming the article and the site where a point is taken further; the declared row, the footer links and the sameAs entry of 3.6.1 are removed.
 = 3.6.1 =
+* Contents list: put [auto_toc] where you want a list of the page's sections (the level-two and level-three headings), or switch on Theme Options > Branding > Add a contents list to long pages to add one to every page with 4 or more sections. [auto_toc tags="h2,h3,h4"] changes the levels and [auto_toc title="In this page"] the title.
 * Content is full width by default: every page's text, tables and plates fill the page between the side gutters, and the header, footer and front page follow. Theme Options > Branding > Content width offers full (default), wide (1240px) and reading column (720px, the former default). At full and wide widths running prose is set in two columns on screens from 1280px, as the gospel sections are, so lines stay readable; headings, tables, plates, folds and asides span both columns.
 * The Gospel of Thomas page explains why Thomas is counted: a sayings gospel of the kind Q was, with the evidence, the contrary case labelled, the Qur'anic reason and three questions.
 * "Paul of Tarsus" throughout the site's own text.
@@ -456,6 +462,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * New screenshot.
 
 == Upgrade Notice ==
+= 3.31.0 =
+Upload the whole theme. The Glossary and Objections pages refresh on the first admin load and gain a contents list; any edits made to them are replaced.
 = 3.30.0 =
 Upload the whole theme. The Aḥmad page refreshes on the first admin load, and any edits made to it are replaced.
 = 3.29.0 =
@@ -500,6 +508,7 @@ Fonts (assets/fonts), each under its own licence:
 Images: assets/brandmark.svg, assets/images/divider.svg, assets/images/arrow-next*.webp and the icons in assets/icons are the theme's own, GPLv2 or later. assets/images/lanat-allah.svg is outlined from Dubidam Arabic. The default social image, assets/images/og-default.jpg, is the Birmingham Qur'an manuscript, public domain. The plates listed in inc/data/images.json and in the patterns are public domain or CC0 from Wikimedia Commons, Pexels photographs under the Pexels License, and one CC BY 2.0 photograph (Richard Mortel); each caption carries its credit and source.
 
 == Credits ==
+Contents list: the [auto_toc] shortcode follows the interface of Ikram Hawramani's WordPress Table-of-Contents Shortcode Done Properly (MIT licence, 2025). The code is the theme's own.
 Share and profile icons (assets/icons/social/): Minimalist Social Icons Pack 2.8, GPL; the profile row adds Instagram, YouTube, TikTok, Mastodon, GitHub and Substack from the same pack. The LinkedIn icon originates from Font Awesome Free (https://fontawesome.com), CC BY 4.0; the credit is carried on the Credits page. The brand marks remain trademarks of their owners. assets/icons/share.svg and link.svg are the theme's own.
 Default social image: Birmingham Qur'an manuscript (Cadbury Research Library, University of Birmingham), public domain, via Wikimedia Commons.
 The classical commentaries (inc/data/tafsir/): English renderings prepared for this website from the public-domain Arabic texts of al-Tabari, al-Baghawi, al-Qurtubi, Ibn Kathir, Tanwir al-Miqbas, al-Jalalayn, al-Durr al-Manthur and al-Sa'di as published at tafsir.app, greattafsirs.com and shamela.ws; the modern editors' apparatus is not translated. Released with the theme under its licence; no second translator has checked them, and the Arabic source is named on every page.

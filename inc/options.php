@@ -33,6 +33,7 @@ function injil_help_option_defaults() {
 		'parallax'         => 'strong',
 		'gospel_layout'    => 'columns',
 		'content_width'    => 'full',
+		'toc_auto'         => 0,
 		'block_app_passwords' => 1,
 		'block_xmlrpc'     => 1,
 		'block_rest_writes' => 1,
@@ -100,6 +101,7 @@ function injil_help_sanitize_options( $in ) {
 	$out['parallax']         = injil_help_pick( $in, 'parallax', array( 'strong', 'gentle', 'off' ), 'strong' );
 	$out['gospel_layout']    = injil_help_pick( $in, 'gospel_layout', array( 'columns', 'single', 'plain' ), 'columns' );
 	$out['content_width']    = injil_help_pick( $in, 'content_width', array( 'full', 'wide', 'reading' ), 'full' );
+	$out['toc_auto']         = empty( $in['toc_auto'] ) ? 0 : 1;
 	// The Security switches change only for someone who may manage options; anyone else keeps the stored values.
 	$stored = injil_help_get_option();
 	foreach ( array( 'block_app_passwords', 'block_xmlrpc', 'block_rest_writes', 'spam_gate', 'spam_gone' ) as $key ) {
@@ -516,6 +518,7 @@ function injil_help_render_options() {
 					),
 					__( 'How wide the text and tables of every page may run. Full width is the default, and the header, footer and front page widen with it. Reading column restores the former layout: a 720px column of text under the 1240px header, footer and front page. Tables and plates marked wide fill the width in every case.', 'injil-help' )
 				);
+				injil_help_ui_toggle( $o, 'toc_auto', __( 'Add a contents list to long pages', 'injil-help' ), __( 'A list of links to the sections, after the breadcrumb row, on every page with 4 or more level-two headings. Put [auto_toc] in a page to place the list yourself.', 'injil-help' ) );
 				injil_help_ui_card_close();
 
 				injil_help_ui_card_open( __( 'Ornament and motion', 'injil-help' ) );
