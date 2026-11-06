@@ -84,6 +84,9 @@ This file is the user-facing manual that WordPress and Git Updater read. The rep
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add the entry to CHANGELOG.md and to the Changelog section here, note anything an existing site must know under "Updating an existing site" in UPGRADING.md, merge to main, and tag the commit with the same number (for example v3.4.0). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Changelog ==
+= 3.13.0 =
+* Sayings of Jesus from 1 Clement, Barnabas, the Gospel of Mary, the Epistle of the Apostles, the Diatessaron and the Didache are tested against the Qur'an: 21 kept in sections 8, 9, 13, 18, 21, 22 and 24, and 26 set aside with reasons on a new page.
+
 = 3.12.1 =
 * The reading column is the default width again, and running text stops at a readable measure in every width, on phone, tablet and desktop alike.
 = 3.12.0 =

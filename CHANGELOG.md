@@ -2,6 +2,14 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.13.0
+
+Six early writings in the Gospel According to Islam.
+
+- Sayings of Jesus from 1 Clement, the Epistle of Barnabas, the Gospel of Mary, the Epistle of the Apostles, Tatian's Diatessaron and the Didache are tested against the Qur'an one by one. The 21 that do not contradict it are woven into sections 8, 9, 13, 18, 21, 22 and 24 as green, blue or gold items with a note (`inc/data/early-writings.json`). The Didache appears in notes only.
+- Two new pages: `/gospel-according-to-islam/early-writings/` names the sources, the translations used and the rule, and `/gospel-according-to-islam/early-writings/set-aside/` lists the 26 passages left out with the reason for each. They include the Epistle of the Apostles' prophecy of Paul (chapters 31 and 33), set aside because it has Jesus speak from heaven after God raised him (Qur'an 5:117), and its claims of shared nature.
+- The translations are in the public domain: Roberts and Donaldson (1 Clement, Barnabas), M. R. James (1924, the Epistle of the Apostles), Mark Mattison (the Gospel of Mary), Hope Hogg (the Diatessaron) and M. B. Riddle (the Didache). The Lightfoot pages at earlychristianwritings.com refused automated requests, so the Ante-Nicene Fathers texts were used for 1 Clement and Barnabas.
+
 ## 3.12.1
 
 The layout reads at every width.
