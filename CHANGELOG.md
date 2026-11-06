@@ -2,6 +2,19 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.31.0
+
+A contents list for pages, from the plugin the owner supplied on 6 November 2026: Ikram Hawramani's *WordPress Table-of-Contents Shortcode Done Properly* (MIT licence, 2025). The theme takes its shortcode interface and writes its own code, because the plugin cannot work inside a theme as written.
+
+- Added: the `[auto_toc]` shortcode (`inc/toc.php`) with `tags` and `title`, and `assets/css/toc.css`. It lists the headings of a page as a nested list and gives a heading without an id one made from its text.
+- Added: Theme Options > Branding > Layout > "Add a contents list to long pages" (`toc_auto`, off by default). A page with 4 or more level-two headings gets the list after the breadcrumb row.
+- Added: a `[toc]` line in the page markup. The Glossary and Objections pages use it.
+- Added: `tests/toc-test.php`, 34 checks.
+- Fixed in the port: the plugin looks for its shortcode at `the_content` priority 99, after WordPress has expanded it at 11, so it finds nothing. The theme leaves a marker at 11 and fills it at 13.
+- Fixed in the port: the plugin gives every heading a new id, which would break the notes anchors and the footnote links. The theme keeps an id the author gave and never repeats one on the page.
+- Fixed in the port: the plugin rewrites the whole text through `DOMDocument`. The theme changes only the opening tag of a heading that lacks an id. The nested list is also closed properly when the levels jump or fall, which the plugin's is not.
+- Changed: `SSOT.md` credits the plugin.
+
 ## 3.30.0
 
 The Aḥmad page now names the Companion and the chains behind the ḥadīth of the Prophet's five names, which 3.29.0 left unstated because the reference could not be checked then. The owner asked for both on 6 November 2026.

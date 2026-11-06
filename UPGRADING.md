@@ -52,6 +52,8 @@ The general steps, for any version:
 3. Open any admin screen as an administrator (page rewrites and the error pages need `edit_theme_options`, the development-file clean-up needs `update_themes`). The theme rewrites the pages whose text changed and keeps the ones you edited, writes its error pages, checks its `.htaccess` sections (at most hourly), and on a production site removes its development files.
 4. Read the note for the version you are moving to.
 
+**To 3.31.0.** Upload the whole theme. The Glossary and Objections pages refresh on the first admin load and gain a contents list, and any edits made to them are replaced. The automatic list is off until you switch it on in Theme Options > Branding.
+
 **To 3.30.0.** Upload the whole theme. The Aḥmad page refreshes on the first admin load, and any edits made to it are replaced.
 
 **To 3.29.0.** Upload the whole theme. The Glossary and the Aḥmad page refresh on the first admin load, and any edits made to those two pages are replaced.
