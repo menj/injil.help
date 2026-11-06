@@ -2,7 +2,7 @@
 /**
  * The Gospel According to Islam: the Introduction and the 27 section pages, built
  * from inc/data/gospel-islam.json (section titles, front matter), narrative.json
- * (the text and notes), thomas.json (the Gospel of Thomas sections) and substitution.json
+ * (the text and notes), thomas.json (the Gospel of Thomas sections), early-writings.json (sayings from six early writings) and substitution.json
  * (the early Christian witnesses to the substitution at the cross, at section 26). Credits are on the separate Credits page.
  *
  * @package injil-help
@@ -40,10 +40,10 @@ function injil_help_gospel_thomas_sections() {
 	return injil_help_data_file( 'thomas' );
 }
 
-/** Everything woven into a section after Shafaat's text: Thomas, the infancy gospels, then the substitution witnesses. Keyed by section number. */
+/** Everything woven into a section after Shafaat's text: Thomas, the early writings, the infancy gospels, then the substitution witnesses. Keyed by section number. */
 function injil_help_gospel_woven_sections() {
 	$out = array();
-	foreach ( array( injil_help_gospel_thomas_sections(), injil_help_data_file( 'infancy' ), injil_help_data_file( 'substitution' ) ) as $set ) {
+	foreach ( array( injil_help_gospel_thomas_sections(), injil_help_data_file( 'early-writings' ), injil_help_data_file( 'infancy' ), injil_help_data_file( 'substitution' ) ) as $set ) {
 		foreach ( (array) $set as $n => $lines ) {
 			$out[ (string) $n ] = array_merge( $out[ (string) $n ] ?? array(), array_values( (array) $lines ) );
 		}
