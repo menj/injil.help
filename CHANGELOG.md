@@ -2,6 +2,16 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.28.0
+
+Injīl and Tawrāt, which Lane's lexicon does not treat, now rest on the other classical dictionaries at arabiclexicon.hawramani.com. The owner asked for a second source on 6 November 2026.
+
+- Added: the Glossary entries for Injīl and Tawrāt report the classical views. Ibn Manẓūr calls Injīl a Hebrew or Syriac name and records the view that it is Arabic; al-Fayyūmī gives the derivation from *najaltuhu*. Abū Mūsā al-Madīnī reads Tawrāt as "brightness and light", and al-Rāghib al-Iṣfahānī as "the book they inherited from Mūsā".
+- Added: the pages on the Injīl and the Torah in Islam carry the same, with Jawharī's definition of the Injīl, Ibn Manẓūr's note on the ḥadīth "whose chests are their gospels", and the lexicons under Sources.
+- Changed: `SSOT.md` names the dictionaries and says the English renderings of their Arabic are the site's own.
+
+The modern view stays beside them: Jeffery traces Injīl to the Greek *euangelion*, and Tawrāt to the Hebrew *torah*.
+
 ## 3.27.0
 
 Lane's Arabic-English Lexicon now backs more of the Arabic on the site, under the owner's approval of 6 November 2026.
