@@ -2,6 +2,16 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.26.0
+
+The Glossary and the Aḥmad page cite Lane's Arabic-English Lexicon. The owner approved the source on 6 November 2026.
+
+- Added: short glosses from Lane for al-Masīḥ, al-Ḥawāriyyūn, Taḥrīf and Aḥmad in the Glossary. Each quotes a few words and links to the entry on arabiclexicon.hawramani.com.
+- Added: the Aḥmad page cites Lane for the root ḥ-m-d and lists the lexicon under Sources.
+- Changed: `SSOT.md` names Lane and the Hawramani site among the credits and says how a gloss is written.
+
+The theme fetches nothing from that site. The links open only when a reader clicks them.
+
 ## 3.25.10
 
 The settings and readme speak of the other sites in plain words, and the docs name the subfolder favicon step. No feature or setting removed.
