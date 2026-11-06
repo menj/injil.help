@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.28.0
+Stable tag: 3.29.0
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -157,6 +157,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.29.0 =
+* The Glossary has a new entry, Isnād and Rijāl, that points to Ikram Hawramani's Hadith Transmitters Encyclopedia and HadithGraph. The Aḥmad page uses them to show where a reader can check the chain behind a ḥadīth.
 = 3.28.0 =
 * Injīl and Tawrāt now carry what the classical Arabic lexicons say about them: Jawharī, Ibn Manẓūr, al-Fayyūmī and Abū Mūsā al-Madīnī on Injīl; Abū Mūsā al-Madīnī and al-Rāghib al-Iṣfahānī on Tawrāt. They appear in the Glossary and on the two topic pages.
 = 3.27.0 =
@@ -452,6 +454,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * New screenshot.
 
 == Upgrade Notice ==
+= 3.29.0 =
+Upload the whole theme. The Glossary and the Aḥmad page refresh on the first admin load, and any edits made to them are replaced.
 = 3.28.0 =
 Upload the whole theme. The Glossary and two Islamic Dilemma pages refresh on the first admin load, and any edits made to them are replaced.
 = 3.27.0 =

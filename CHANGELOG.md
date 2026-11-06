@@ -2,6 +2,16 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.29.0
+
+Two reading aids from hawramani.com, approved by the owner on 6 November 2026: the Hadith Transmitters Encyclopedia (hadithtransmitters.hawramani.com) and HadithGraph (hawramani.com/hadithgraph/).
+
+- Added: a Glossary entry for Isnād and Rijāl that explains the terms and links to both tools and to the instructions for HadithGraph.
+- Added: the Aḥmad page says where a reader can look up each transmitter in the chain of the ḥadīth it cites, and draw the chains. Both tools are listed under Sources there.
+- Changed: `SSOT.md` credits Ikram Hawramani's two tools as reading aids. The site quotes nothing from them.
+
+The theme fetches nothing from either site. The links open only when a reader clicks them. The two tools are third-party services: the Encyclopedia is a search over biographical dictionaries, and HadithGraph runs in the reader's browser on chains the reader types in.
+
 ## 3.28.0
 
 Injīl and Tawrāt, which Lane's lexicon does not treat, now rest on the other classical dictionaries at arabiclexicon.hawramani.com. The owner asked for a second source on 6 November 2026.

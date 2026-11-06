@@ -52,6 +52,8 @@ The general steps, for any version:
 3. Open any admin screen as an administrator (page rewrites and the error pages need `edit_theme_options`, the development-file clean-up needs `update_themes`). The theme rewrites the pages whose text changed and keeps the ones you edited, writes its error pages, checks its `.htaccess` sections (at most hourly), and on a production site removes its development files.
 4. Read the note for the version you are moving to.
 
+**To 3.29.0.** Upload the whole theme. The Glossary and the Aḥmad page refresh on the first admin load, and any edits made to those two pages are replaced.
+
 **To 3.28.0.** Upload the whole theme. The Glossary, the page on the Injīl and the page on the Torah in Islam refresh on the first admin load, and any edits made to them are replaced.
 
 **To 3.27.0.** Upload the whole theme. The Glossary, the page on the end of ʿĪsā's earthly mission and the table page refresh on the first admin load, and any edits made to them are replaced.
