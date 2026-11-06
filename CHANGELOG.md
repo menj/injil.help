@@ -2,6 +2,14 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.27.0
+
+Lane's Arabic-English Lexicon now backs more of the Arabic on the site, under the owner's approval of 6 November 2026.
+
+- Added: Lane glosses for Zabūr, Rūḥ, ʿAbd, Ahl al-Kitāb, Naṣārā, Tawaffā, al-Māʾida and Fiṭra in the Glossary, each a few quoted words with a link to the entry.
+- Added: the page on the end of ʿĪsā's earthly mission cites Lane on *tawaffā* (death or sleep), and the table page gives the Arabic derivations of *māʾida* beside the Ethiopic loanword view. Both list the lexicon under Sources.
+- Not added: Injīl, Tawrāt, Muhaymin, Āya, Shirk and Sūra. The Lane text on the Hawramani site has no usable entry for them.
+
 ## 3.26.0
 
 The Glossary and the Aḥmad page cite Lane's Arabic-English Lexicon. The owner approved the source on 6 November 2026.
