@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.26.0
+Stable tag: 3.27.0
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -157,6 +157,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.27.0 =
+* Eight more Glossary terms quote a few words of Lane's Arabic-English Lexicon: Zabūr, Rūḥ, ʿAbd, Ahl al-Kitāb, Naṣārā, Tawaffā, al-Māʾida and Fiṭra. The pages on the end of ʿĪsā's earthly mission and on the table from heaven cite Lane too.
 = 3.26.0 =
 * The Glossary and the Aḥmad page quote a few words of Lane's Arabic-English Lexicon for four terms, and link to his entry on arabiclexicon.hawramani.com.
 = 3.25.10 =
@@ -448,6 +450,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * New screenshot.
 
 == Upgrade Notice ==
+= 3.27.0 =
+Upload the whole theme. The Glossary and two Qur'an pages refresh on the first admin load, and any edits made to them are replaced.
 = 3.26.0 =
 Upload the whole theme. The Glossary and the Aḥmad page refresh on the first admin load, and any edits made to them are replaced.
 = 3.25.10 =
