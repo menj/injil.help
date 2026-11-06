@@ -2,6 +2,17 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.30.0
+
+The Aḥmad page now names the Companion and the chains behind the ḥadīth of the Prophet's five names, which 3.29.0 left unstated because the reference could not be checked then. The owner asked for both on 6 November 2026.
+
+- Added: the Companion is Jubayr ibn Muṭʿim, and the ḥadīth is in al-Bukhārī (3532) and Muslim (2354) as well as Mālik's *Muwaṭṭaʾ*. The numbers are al-Rūdānī's, from *Jamʿ al-fawāʾid* no. 6358.
+- Added: a short biography of Jubayr from Ibn ʿAbd al-Barr's *al-Istīʿāb*, with a link to his entry in the Hadith Transmitters Encyclopedia.
+- Added: three chains found in Mālik's *Muwaṭṭaʾ*, Ibn Wahb's *Jāmiʿ* and Ibn al-Ghaṭrīf's *Juzʾ*, written one to a line in the form HadithGraph reads. Each runs through al-Zuhrī, Muḥammad ibn Jubayr and Jubayr ibn Muṭʿim.
+- Changed: `SSOT.md` credits turath.io, whose full-text search was used to check the ḥadīth against the books. Nothing is quoted from it.
+
+Each chain was read in the Arabic text of the book it names. The chains of al-Bukhārī and Muslim themselves were not read, so none is given for them.
+
 ## 3.29.0
 
 Two reading aids from hawramani.com, approved by the owner on 6 November 2026: the Hadith Transmitters Encyclopedia (hadithtransmitters.hawramani.com) and HadithGraph (hawramani.com/hadithgraph/).
