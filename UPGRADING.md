@@ -52,6 +52,8 @@ The general steps, for any version:
 3. Open any admin screen as an administrator (page rewrites and the error pages need `edit_theme_options`, the development-file clean-up needs `update_themes`). The theme rewrites the pages whose text changed and keeps the ones you edited, writes its error pages, checks its `.htaccess` sections (at most hourly), and on a production site removes its development files.
 4. Read the note for the version you are moving to.
 
+**To 3.25.11.** Upload the whole theme. Nothing else changes.
+
 **To 3.25.10.** Upload the whole theme. Nothing else changes. On a site in a subfolder, put a copy of `assets/images/favicon.ico` in the domain root (or, with a Site Icon set, that icon as `favicon.ico`), since browsers ask for `/favicon.ico` there.
 
 **To 3.25.9.** Upload the whole theme. The new files are `inc/favicon.php` and eight in `assets/images/`: `favicon.svg`, `favicon.ico`, `favicon-32.png`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`, `icon-maskable-512.png` and `site.webmanifest`. Open one admin screen so the error pages are written again with the icon. If a `favicon.ico` file sits in the site root, the web server sends it and the theme never answers; delete it to use the theme's.

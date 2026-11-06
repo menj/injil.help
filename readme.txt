@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.25.10
+Stable tag: 3.25.11
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -157,6 +157,9 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.25.11 =
+* The Theme Options page uses the full width of the screen. The 1080 pixel cap is gone, and the explanation beside each switch has room to run.
+
 = 3.25.10 =
 * The settings and the readme speak of the other sites in plain words. Links to them stay.
 * The readme says where the browser icon goes on a site in a subfolder: a copy of favicon.ico in the domain root.
@@ -446,6 +449,9 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * New screenshot.
 
 == Upgrade Notice ==
+= 3.25.11 =
+Upload the whole theme. Nothing else changes.
+
 = 3.25.10 =
 Upload the whole theme. On a site in a subfolder, also put a copy of assets/images/favicon.ico in the domain root folder (or, with a Site Icon set, that icon as favicon.ico); otherwise nothing to do.
 
