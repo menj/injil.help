@@ -2,6 +2,16 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.32.0
+
+The layout reads at every width, and the Gospel According to Islam takes in six early writings.
+
+- Changed: the reading column is the default content width, 720px of text under the 1240px header, footer, front page and grids. Full width had been the default since 3.6.1 and ran each line of text across the whole screen, about 1,870px on a 1,920px display. A site on that default moves to the reading column once (option `injil_help_width_312`); choosing full width again under Theme Options > Branding keeps it.
+- Changed: in every width, running text stops at `--ih-measure`, 46rem: paragraphs, lists, headings, folds, answer capsules, asides and the intro of section heads. Grids, tables, plates, the hero and the dilemma diagram keep the full width. Checked at 390, 768, 1,024, 1,440 and 1,920px on twelve pages: nothing scrolls sideways.
+- Added: sayings of Jesus from 1 Clement, the Epistle of Barnabas, the Gospel of Mary, the Epistle of the Apostles, Tatian's Diatessaron and the Didache, each tested against the Qur'an. The 21 that do not contradict it are woven into sections 8, 9, 13, 18, 21, 22 and 24 of the Gospel According to Islam with a colour mark and a note (`inc/data/early-writings.json`). The Didache appears in notes only.
+- Added: `/gospel-according-to-islam/early-writings/`, which names the sources, the translations and the rule, and `/gospel-according-to-islam/early-writings/set-aside/`, which lists the 26 passages left out with the reason for each. They include the Epistle of the Apostles' prophecy of Paul (chapters 31 and 33), set aside because it has Jesus speak from heaven after God raised him (Qur'an 5:117).
+- Changed: the translations are in the public domain: Roberts and Donaldson (1 Clement, Barnabas), M. R. James, 1924 (the Epistle of the Apostles), Mark Mattison (the Gospel of Mary), Hope Hogg (the Diatessaron) and M. B. Riddle (the Didache). The Lightfoot pages at earlychristianwritings.com refused automated requests, so the Ante-Nicene Fathers texts were used for 1 Clement and Barnabas.
+
 ## 3.31.0
 
 A contents list for pages, from the plugin the owner supplied on 6 November 2026: Ikram Hawramani's *WordPress Table-of-Contents Shortcode Done Properly* (MIT licence, 2025). The theme takes its shortcode interface and writes its own code, because the plugin cannot work inside a theme as written.

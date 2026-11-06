@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.31.0
+Stable tag: 3.32.0
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -160,6 +160,10 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.32.0 =
+* The reading column is the default width again, and running text stops at a readable measure in every width, on phone, tablet and desktop.
+* Sayings of Jesus from six early writings are tested against the Qur'an: 21 kept in the Gospel According to Islam, and 26 set aside with reasons on a new page.
+
 = 3.31.0 =
 * A contents list for pages: the [auto_toc] shortcode, and an option in Theme Options > Branding that adds the list to every page with 4 or more sections. The Glossary and the Objections page carry one.
 = 3.30.0 =
@@ -462,6 +466,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * New screenshot.
 
 == Upgrade Notice ==
+= 3.32.0 =
+Upload the whole theme. Pages are narrower by default; a site saved on full width moves to the reading column once. Two new pages are written on the first admin load.
 = 3.31.0 =
 Upload the whole theme. The Glossary and Objections pages refresh on the first admin load and gain a contents list; any edits made to them are replaced.
 = 3.30.0 =
