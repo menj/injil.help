@@ -2,6 +2,14 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.37.0
+
+Pexels client, built into the theme at the owner's request.
+
+- Added: `inc/pexels.php`, a PHP port of the request in Pexels' official JavaScript client (MIT): search, curated, one photo and collections, a twelve-hour cache, a ten-minute flag and admin notice after a 401, and `injil_help_pexels_entry()` to build an `images.json` entry (key `pexels-{id}`, "Photo: name, Pexels License.").
+- Added: the option `pexels_key` (Theme Options › Content › Images and privacy), the constant `INJIL_HELP_PEXELS_KEY` and the filter `injil_help_pexels_key`. No key is in the repository; with none, nothing is requested.
+- Added: `tests/pexels-test.php`, 15 checks.
+
 ## 3.36.0
 
 Pixabay images, approved by the owner on 7 November 2026.
