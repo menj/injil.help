@@ -2,6 +2,15 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.33.0
+
+More manuscript images, matched to the verses each page covers. The owner repeated the list of image sources on 7 November 2026.
+
+- Added: 56 images from Wikimedia Commons, all public domain and all manuscripts: the early papyri of Matthew, Mark, Luke and John. A gospel section gets the leaves that carry its own verses, for example Papyrus 102 (Matthew 4:11-12) for the baptism and temptation, and Papyrus 52 (John 18:31-33) for the trial. The pages for Matthew and Luke take the rest of their papyri.
+- Each caption gives the papyrus number, the library and the passage, and the alt text says it is a Greek papyrus fragment. No image repeats on another page, and no image already on a page changed.
+- Result: 168 images on 70 pages; 22 pages have the full four, up from 7.
+- Not changed: the rule in `SSOT.md` that every image is a manuscript or an inscription.
+
 ## 3.32.0
 
 The layout reads at every width, and the Gospel According to Islam takes in six early writings.

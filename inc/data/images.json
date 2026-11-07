@@ -36,6 +36,12 @@
                 "alt": "Hebrew Sefer Torah Scroll side view, 2009-08-31: manuscript page",
                 "caption": "Hebrew Sefer Torah Scroll side view, 2009-08-31.",
                 "credit": "Bejinhan, CC BY-SA 3.0."
+            },
+            {
+                "file": "Florence, Biblioteca Medicea Laurenziana PSI I 1 (Papyrus 35) verso Matthew 25, 20-23.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 35, verso: Matthew 25:20-23",
+                "caption": "Papyrus 35, Florence, Biblioteca Medicea Laurenziana PSI I 1, verso: Matthew 25:20-23.",
+                "credit": "Public domain."
             }
         ]
     },
@@ -43,7 +49,27 @@
         "file": "Dublin, Chester Beatty Ms Papyrus 45 BP I ff.13-14 Luke 11.50-12.12; 12.18-37; 12.42-13.1; 13.jpg",
         "alt": "Papyrus 45, Chester Beatty Library, Dublin, about 200 to 250 CE: 2 leaves of the Gospel of Luke",
         "caption": "Papyrus 45 (Chester Beatty I), about 200 to 250 CE: Luke 11 to 13, among the oldest copies of any gospel. Chester Beatty Library, Dublin.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Oxford, Sackler Library Ms LXIV 4495 (Papyrus 111) recto Luke 17, 11-13.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 111, recto: Luke 17:11-13",
+                "caption": "Papyrus 111, Oxford, Sackler Library LXIV 4495, recto: Luke 17:11-13.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Oxford, Sackler Library Ms LXIV 4495 (Papyrus 111) verso Luke 17, 22-23.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 111, verso: Luke 17:22-23",
+                "caption": "Papyrus 111, Oxford, Sackler Library LXIV 4495, verso: Luke 17:22-23.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Vatican, Apostolic Library Ms Hanna Papyrus 1 - Papyrus Bodmer XIV–XV (Papyrus 75) fol 1B9r Luke 14, 3-14.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 75: fol 1B9r Luke 14:3-14",
+                "caption": "Papyrus 75, Vatican, Apostolic Library Hanna Papyrus 1 - Papyrus Bodmer XIV–XV: fol 1B9r Luke 14:3-14.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "gospels/thomas": {
         "file": "Gospel of Thomas - Nag Hammadi II-35.jpg",
@@ -489,6 +515,12 @@
                 "alt": "Uncial 0307, Matthew 11, 7th century: manuscript page",
                 "caption": "Uncial 0307, Matthew 11, 7th century.",
                 "credit": "Public domain."
+            },
+            {
+                "file": "Florence, National Archaeological Museum MS PSI inv.3407 (Papyrus 70) fragment a verso Matt 2, 13–16.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 70: fragment a verso Matthew 2:13–16",
+                "caption": "Papyrus 70, Florence, National Archaeological Museum MS PSI inv.3407: fragment a verso Matthew 2:13–16.",
+                "credit": "Public domain."
             }
         ]
     },
@@ -502,13 +534,53 @@
         "file": "Codex Sinaiticus Matthew 3,7-4,19.JPG",
         "alt": "Codex Sinaiticus Matthew 3,7-4,19: manuscript page",
         "caption": "Codex Sinaiticus Matthew 3,7-4,19.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Barcelona, Fundación Sant Lluc Evangelista Ms P.Monts.Roca inv. 1 (Papyrus 64) recto Matt 3, 9; 5, 20-22.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 64, recto: Matthew 3:9; 5:20-22",
+                "caption": "Papyrus 64, Barcelona, Fundación Sant Lluc Evangelista P.Monts.Roca inv. 1, recto: Matthew 3:9; 5:20-22.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Barcelona, Fundación Sant Lluc Evangelista Ms P.Monts.Roca inv inv. 1 (Papyrus 64) verso Matt 3, 15; 5,25-28.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 64, verso: Matthew 3:15; 5:25-28",
+                "caption": "Papyrus 64, Barcelona, Fundación Sant Lluc Evangelista P.Monts.Roca inv. 1, verso: Matthew 3:15; 5:25-28.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Oxford, Sackler Library Ms P. Oxy. 4401 (Papyrus 101) recto - Matt 3, 10-12.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 101, recto: Matthew 3:10-12",
+                "caption": "Papyrus 101, Oxford, Sackler Library P. Oxy. 4401, recto: Matthew 3:10-12.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "gospel-according-to-islam/baptism-temptation-and-return-to-nazareth": {
         "file": "Codex Alexandrinus f41v - Luke.jpg",
         "alt": "Codex Alexandrinus f41v - Luke: manuscript page",
         "caption": "Codex Alexandrinus f41v - Luke.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Oxford, Sackler Library Ms P.Oxy. LXIV 4402 (Papyrus 102) recto Matt 4, 11-12.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 102, recto: Matthew 4:11-12",
+                "caption": "Papyrus 102, Oxford, Sackler Library P.Oxy. LXIV 4402, recto: Matthew 4:11-12.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Oxford, Sackler Library Ms P.Oxy. LXIV 4402 (Papyrus 102) verso Matt 4, 22-23.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 102, verso: Matthew 4:22-23",
+                "caption": "Papyrus 102, Oxford, Sackler Library P.Oxy. LXIV 4402, verso: Matthew 4:22-23.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Oxford, Sackler Library Ms P. Oxy. 4401 (Papyrus 101) verso - Matt 3, 16-4, 3.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 101, verso: Matthew 3:16-4:3",
+                "caption": "Papyrus 101, Oxford, Sackler Library P. Oxy. 4401, verso: Matthew 3:16-4:3.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "gospel-according-to-islam/capernaum-first-disciples-and-healings": {
         "file": "Codex Vaticanus end or Luke.jpg",
@@ -534,7 +606,21 @@
         "file": "Codex Sinaiticus Matthew 4,19-5,22.JPG",
         "alt": "Codex Sinaiticus Matthew 4,19-5,22: manuscript page",
         "caption": "Codex Sinaiticus Matthew 4,19-5,22.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "University of Cologne, Institute of Archaeology Ms P.inv. 05516 (Papyrus 86) recto Matt 5, 13-16.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 86, recto: Matthew 5:13-16",
+                "caption": "Papyrus 86, University of Cologne, Institute of Archaeology P.inv. 05516, recto: Matthew 5:13-16.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "University of Cologne, Institute of Archaeology Ms P.inv. 05516 (Papyrus 86) verso Matt 5, 22-25.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 86, verso: Matthew 5:22-25",
+                "caption": "Papyrus 86, University of Cologne, Institute of Archaeology P.inv. 05516, verso: Matthew 5:22-25.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "gospel-according-to-islam/traditions-of-elders-and-syrophoenician-woman": {
         "file": "Codex Bezae 0205.JPG",
@@ -546,43 +632,183 @@
         "file": "Papyrus 66 Leaf 35v.png",
         "alt": "Papyrus 66 Leaf 35v, 2020-01-15: manuscript page",
         "caption": "Papyrus 66 Leaf 35v, 2020-01-15.",
-        "credit": "GNT316, CC BY-SA 4.0."
+        "credit": "GNT316, CC BY-SA 4.0.",
+        "more": [
+            {
+                "file": "Berlin, Staatliche Museen zu Berlin – Ägyptisches Museum und Papyrussammlung P. 11914 (Papyrus 63) fragment 1 recto John 3, 16-18; 4, 9.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 63: fragment 1 recto John 3:16-18; 4:9",
+                "caption": "Papyrus 63, Berlin, Staatliche Museen zu Berlin – Ägyptisches Museum und Papyrussammlung P. 11914: fragment 1 recto John 3:16-18; 4:9.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Berlin, Staatliche Museen zu Berlin – Ägyptisches Museum und Papyrussammlung P. 11914 (Papyrus 63) fragment 1 verso John 3, 14-15; 4, 10.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 63: fragment 1 verso John 3:14-15; 4:10",
+                "caption": "Papyrus 63, Berlin, Staatliche Museen zu Berlin – Ägyptisches Museum und Papyrussammlung P. 11914: fragment 1 verso John 3:14-15; 4:10.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Florence, Biblioteca Medicea Laurenziana PSI I 3 (Papyrus 36) recto John 3, 17-18, 31-32.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 36, recto: John 3:17-18:31-32",
+                "caption": "Papyrus 36, Florence, Biblioteca Medicea Laurenziana PSI I 3, recto: John 3:17-18:31-32.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "gospel-according-to-islam/bird-of-clay-beelzebub-and-unclean-spirit": {
         "file": "Qur'anic Verses WDL6805.png",
         "alt": "Qur'anic Verses WDL6805: manuscript page",
         "caption": "Qur'anic Verses WDL6805.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Allentown PA, Muhlenberg College Ms Theol. Pap. 3 (Papyrus 21) recto Matthew 12, 24-26.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 21, recto: Matthew 12:24-26",
+                "caption": "Papyrus 21, Allentown PA, Muhlenberg College Theol. Pap. 3, recto: Matthew 12:24-26.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Allentown PA, Muhlenberg College Ms Theol. Pap. 3 (Papyrus 21) verso Matthew 12, 32-33.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 21, verso: Matthew 12:32-33",
+                "caption": "Papyrus 21, Allentown PA, Muhlenberg College Theol. Pap. 3, verso: Matthew 12:32-33.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Oxford, Ashmolean Museum Ms P. Oxy. 2384 (Papyrus 70) verso Matt 12, 4-5.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 70, verso: Matthew 12:4-5",
+                "caption": "Papyrus 70, Oxford, Ashmolean Museum P. Oxy. 2384, verso: Matthew 12:4-5.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "gospel-according-to-islam/meaning-of-vision-leaven-and-tares": {
         "file": "Uncial 0237 verso.jpg",
         "alt": "Uncial 0237 verso, 2008-10-08 16:19:27: manuscript page",
         "caption": "Uncial 0237 verso, 2008-10-08 16:19:27.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "New York, Metropolitan Museum of Art Ms 14.1.527 (Papyrus 44) verso Matt 17, 1-3; 17, 6-7; 18, 15-17; 18, 19.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 44, verso: Matthew 17:1-3; 17:6-7; 18:15-17; 18:19",
+                "caption": "Papyrus 44, New York, Metropolitan Museum of Art 14.1.527, verso: Matthew 17:1-3; 17:6-7; 18:15-17; 18:19.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Oxford, Sackler Library Ms P.Oxy. LXIV 4403 (Papyrus 103) recto Matt 13, 55-56.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 103, recto: Matthew 13:55-56",
+                "caption": "Papyrus 103, Oxford, Sackler Library P.Oxy. LXIV 4403, recto: Matthew 13:55-56.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Berlin, Staatliche Museen zu Berlin Ms inv. 16388 (Papyrus 25) recto Matthew 18, 32–34; 19, 1–3.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 25, recto: Matthew 18:32–34; 19:1–3",
+                "caption": "Papyrus 25, Berlin, Staatliche Museen zu Berlin inv. 16388, recto: Matthew 18:32–34; 19:1–3.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "gospel-according-to-islam/rich-man-and-request-of-james-and-john": {
         "file": "Codex Washingtonianus W (032) Mk 16,12-17.JPG",
         "alt": "Codex Washingtonianus W (032) Mk 16,12-17: manuscript page",
         "caption": "Codex Washingtonianus W (032) Mk 16,12-17.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Berlin, Staatliche Museen zu Berlin Ms inv. 16388 (Papyrus 25) verso Matthew 19, 5–7 and 1, 9–10.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 25, verso: Matthew 19:5–7 and 1:9–10",
+                "caption": "Papyrus 25, Berlin, Staatliche Museen zu Berlin inv. 16388, verso: Matthew 19:5–7 and 1:9–10.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Oxford, Ashmolean Museum Ms P. Oxy. XXIV 2385 (Papyrus 71) recto Matt 19, 10-11.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 71, recto: Matthew 19:10-11",
+                "caption": "Papyrus 71, Oxford, Ashmolean Museum P. Oxy. XXIV 2385, recto: Matthew 19:10-11.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Oxford, Ashmolean Museum Ms P. Oxy. XXIV 2385 (Papyrus 71) verso Matt 19, 17-18.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 71, verso: Matthew 19:17-18",
+                "caption": "Papyrus 71, Oxford, Ashmolean Museum P. Oxy. XXIV 2385, verso: Matthew 19:17-18.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "gospel-according-to-islam/last-supper-future-of-temple-and-man-of-perfection": {
         "file": "Camebrige, Cambridge University Library Ms Add. 5893 Papyrus Oxyrhynchus 1078 (Papyrus 17) recto Hebrews 9, 12–14.jpg",
         "alt": "Camebrige, Cambridge University Library Ms Add. 5893 Papyrus Oxyrhynchus 1078 (Papyrus 17) recto Hebrews 9, 12–14: manuscript page",
         "caption": "Camebrige, Cambridge University Library Ms Add. 5893 Papyrus Oxyrhynchus 1078 (Papyrus 17) recto Hebrews 9, 12–14.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Ann Arbor, University of Michigan Ms P.Mich.inv. 1570 (Papyrus 37) recto Matt 26, 19-37.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 37, recto: Matthew 26:19-37",
+                "caption": "Papyrus 37, Ann Arbor, University of Michigan P.Mich.inv. 1570, recto: Matthew 26:19-37.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Ann Arbor, University of Michigan Ms P.Mich.inv. 1570 (Papyrus 37) verso Matt 26, 38-52.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 37, verso: Matthew 26:38-52",
+                "caption": "Papyrus 37, Ann Arbor, University of Michigan P.Mich.inv. 1570, verso: Matthew 26:38-52.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Florence, Biblioteca Medicea Laurenziana PSI I 1 (Papyrus 35) recto Matthew 25, 12-15.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 35, recto: Matthew 25:12-15",
+                "caption": "Papyrus 35, Florence, Biblioteca Medicea Laurenziana PSI I 1, recto: Matthew 25:12-15.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "gospel-according-to-islam/trial-barabbas-and-raising-of-jesus": {
         "file": "Qur'an of Khorasan bint Abi al-Qasim - Folios from Majlis Library no. 2002.jpg",
         "alt": "Qur'an of Khorasan bint Abi al-Qasim - Folios from Majlis Library no. 2002: manuscript page",
         "caption": "Qur'an of Khorasan bint Abi al-Qasim - Folios from Majlis Library no. 2002.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Oxford, Sackler Library Ms LXIV 4406 (Papyrus 105) recto Matt 27, 62-64.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 105, recto: Matthew 27:62-64",
+                "caption": "Papyrus 105, Oxford, Sackler Library LXIV 4406, recto: Matthew 27:62-64.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Manchester, John Rylands Library Ms Greek P 457 (Papyrus 52) recto John 18, 31-33.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 52, recto: John 18:31-33",
+                "caption": "Papyrus 52, Manchester, John Rylands Library Greek P 457, recto: John 18:31-33.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Oxford, Sackler Library Ms LXIV 4447 (Papyrus 108) verso John 18, 1-5.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 108, verso: John 18:1-5",
+                "caption": "Papyrus 108, Oxford, Sackler Library LXIV 4447, verso: John 18:1-5.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "gospel-according-to-islam/empty-tomb-reports-and-return": {
         "file": "Folio from a Qur’an, sura 5,12-13 (F1929.69).jpg",
         "alt": "Folio from a Qur’an, sura 5,12-13 (F1929.69): manuscript page",
         "caption": "Folio from a Qur’an, sura 5,12-13 (F1929.69).",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Oxford, Sackler Library Ms LXIV 4406 (Papyrus 105) verso Matt 28, 2-5.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 105, verso: Matthew 28:2-5",
+                "caption": "Papyrus 105, Oxford, Sackler Library LXIV 4406, verso: Matthew 28:2-5.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Oxford, Sackler Library Ms LXIV 4448 (Papyrus 109) recto John 21, 18-20.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 109, recto: John 21:18-20",
+                "caption": "Papyrus 109, Oxford, Sackler Library LXIV 4448, recto: John 21:18-20.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Oxford, Sackler Library Ms LXIV 4448 (Papyrus 109) verso John 21, 23-25.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 109, verso: John 21:23-25",
+                "caption": "Papyrus 109, Oxford, Sackler Library LXIV 4448, verso: John 21:23-25.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "paul": {
         "file": "Claromontanus 2 greek.jpg",
@@ -733,5 +959,149 @@
         "alt": "Folio from a Qur’an, Sura 5, verses 68-69 (S1997.102), 14th-15th century: manuscript page",
         "caption": "Folio from a Qur’an, Sura 5, verses 68-69 (S1997.102), 14th-15th century.",
         "credit": "Public domain."
+    },
+    "gospel-according-to-islam/publicans-fasting-and-question-from-john": {
+        "file": "Vienna, National Library of Austria Ms P. Vindob. G. 2323 PAP MAG (Papyrus 3) recto Luke 7, 36-45.jpg",
+        "alt": "Greek papyrus fragment, Papyrus 3, recto: Luke 7:36-45",
+        "caption": "Papyrus 3, Vienna, National Library of Austria P. Vindob. G. 2323 PAP MAG, recto: Luke 7:36-45.",
+        "credit": "Public domain."
+    },
+    "gospel-according-to-islam/jairus-daughter-and-death-of-john": {
+        "file": "Oxford, Sackler Library Ms P.Oxy. LXIV 4403 (Papyrus 103) verso Matt 14, 3-5.jpg",
+        "alt": "Greek papyrus fragment, Papyrus 103, verso: Matthew 14:3-5",
+        "caption": "Papyrus 103, Oxford, Sackler Library P.Oxy. LXIV 4403, verso: Matthew 14:3-5.",
+        "credit": "Public domain."
+    },
+    "gospel-according-to-islam/twelve-and-their-mission": {
+        "file": "Oxford, Sackler Library Ms LXIV 4494 (Papyrus 110) recto Matt 10, 13-14.jpg",
+        "alt": "Greek papyrus fragment, Papyrus 110, recto: Matthew 10:13-14",
+        "caption": "Papyrus 110, Oxford, Sackler Library LXIV 4494, recto: Matthew 10:13-14.",
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Oxford, Sackler Library Ms LXIV 4494 (Papyrus 110) verso Matt 10, 25-27.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 110, verso: Matthew 10:25-27",
+                "caption": "Papyrus 110, Oxford, Sackler Library LXIV 4494, verso: Matthew 10:25-27.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Oxford, Ashmolean Museum Ms P. Oxy. 2384 (Papyrus 70) recto Matt 11, 26-27.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 70, recto: Matthew 11:26-27",
+                "caption": "Papyrus 70, Oxford, Ashmolean Museum P. Oxy. 2384, recto: Matthew 11:26-27.",
+                "credit": "Public domain."
+            }
+        ]
+    },
+    "gospel-according-to-islam/signs-rich-man-and-lazarus-and-woes": {
+        "file": "Oslo, Oslo University Library Inv. 1661 (Papyrus 62) fragments 1-3-5-7 recto Mat 11,25–27.jpg",
+        "alt": "Greek papyrus fragment, Papyrus 62: fragments 1-3-5-7 recto Matthew 11:25–27",
+        "caption": "Papyrus 62, Oslo, Oslo University Library Inv. 1661: fragments 1-3-5-7 recto Matthew 11:25–27.",
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Oslo, Oslo University Library Inv. 1661 (Papyrus 62) fragments 10-12-14-16 verso Mat 11,28–30.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 62: fragments 10-12-14-16 verso Matthew 11:28–30",
+                "caption": "Papyrus 62, Oslo, Oslo University Library Inv. 1661: fragments 10-12-14-16 verso Matthew 11:28–30.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Oslo, Oslo University Library Inv. 1661 (Papyrus 62) fragments 2-4-6-8 verso Mat 11,25–27.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 62: fragments 2-4-6-8 verso Matthew 11:25–27",
+                "caption": "Papyrus 62, Oslo, Oslo University Library Inv. 1661: fragments 2-4-6-8 verso Matthew 11:25–27.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Oslo, Oslo University Library Inv. 1661 (Papyrus 62) fragments 9-11-13-15 recto Mat 11,28–30.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 62: fragments 9-11-13-15 recto Matthew 11:28–30",
+                "caption": "Papyrus 62, Oslo, Oslo University Library Inv. 1661: fragments 9-11-13-15 recto Matthew 11:28–30.",
+                "credit": "Public domain."
+            }
+        ]
+    },
+    "gospel-according-to-islam/greatness-samaritans-and-children": {
+        "file": "Vienna, National Library of Austria Ms P. Vindob. G. 2323 PAP MAG (Papyrus 3) verso Luke 10, 38-42.jpg",
+        "alt": "Greek papyrus fragment, Papyrus 3, verso: Luke 10:38-42",
+        "caption": "Papyrus 3, Vienna, National Library of Austria P. Vindob. G. 2323 PAP MAG, verso: Luke 10:38-42.",
+        "credit": "Public domain."
+    },
+    "gospel-according-to-islam/entry-into-jerusalem-and-cleansing-of-temple": {
+        "file": "Oxford, Sackler Library Ms LXIV 4404 (Papyrus 104) recto Matt 21, 34-37.jpg",
+        "alt": "Greek papyrus fragment, Papyrus 104, recto: Matthew 21:34-37",
+        "caption": "Papyrus 104, Oxford, Sackler Library LXIV 4404, recto: Matthew 21:34-37.",
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Oxford, Sackler Library Ms LXIV 4404 (Papyrus 104) verso Matt 21, 43-45.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 104, verso: Matthew 21:43-45",
+                "caption": "Papyrus 104, Oxford, Sackler Library LXIV 4404, verso: Matthew 21:43-45.",
+                "credit": "Public domain."
+            }
+        ]
+    },
+    "gospel-according-to-islam/questions-in-temple": {
+        "file": "Oxford, Sackler Library Ms P.Oxy. XXXIV 2683 (Papyrus 77) recto Matt 22, 30-34.jpg",
+        "alt": "Greek papyrus fragment, Papyrus 77, recto: Matthew 22:30-34",
+        "caption": "Papyrus 77, Oxford, Sackler Library P.Oxy. XXXIV 2683, recto: Matthew 22:30-34.",
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Oxford, Sackler Library Ms P.Oxy. XXXIV 2683 (Papyrus 77) verso Matt 22, 35-39.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 77, verso: Matthew 22:35-39",
+                "caption": "Papyrus 77, Oxford, Sackler Library P.Oxy. XXXIV 2683, verso: Matthew 22:35-39.",
+                "credit": "Public domain."
+            }
+        ]
+    },
+    "gospel-according-to-islam/hour-and-promise-of-counsellor": {
+        "file": "London, British Library Ms Oxyrhynchus 1781 (Papyrus 5) recto John 16, 14-22.jpg",
+        "alt": "Greek papyrus fragment, Papyrus 5, recto: John 16:14-22",
+        "caption": "Papyrus 5, London, British Library Oxyrhynchus 1781, recto: John 16:14-22.",
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "London, British Library Ms Oxyrhynchus 1781 (Papyrus 5) verso John 16, 22-30.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 5, verso: John 16:22-30",
+                "caption": "Papyrus 5, London, British Library Oxyrhynchus 1781, verso: John 16:22-30.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "University of Glasgow, Ms Gen 1026-13 - P. Oxy. 1228 (Papyrus 22) recto John 15, 25–16,2; 16, 21–32.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 22, recto: John 15:25–16:2; 16:21–32",
+                "caption": "Papyrus 22, University of Glasgow, Gen 1026-13 - P. Oxy. 1228, recto: John 15:25–16:2; 16:21–32.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Oxford, Sackler Library Ms LXIV 4446 (Papyrus 107) recto John 17, 1-2.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 107, recto: John 17:1-2",
+                "caption": "Papyrus 107, Oxford, Sackler Library LXIV 4446, recto: John 17:1-2.",
+                "credit": "Public domain."
+            }
+        ]
+    },
+    "gospel-according-to-islam/gethsemane-arrest-and-peters-denial": {
+        "file": "Ann Arbor, University of Michigan Ms P.Mich.inv. 6652 (Papyrus 53) recto Matt 26, 36-40.jpg",
+        "alt": "Greek papyrus fragment, Papyrus 53, recto: Matthew 26:36-40",
+        "caption": "Papyrus 53, Ann Arbor, University of Michigan P.Mich.inv. 6652, recto: Matthew 26:36-40.",
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Ann Arbor, University of Michigan Ms P.Mich.inv. 6652 (Papyrus 53) verso Matt 26, 29-35.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 53, verso: Matthew 26:29-35",
+                "caption": "Papyrus 53, Ann Arbor, University of Michigan P.Mich.inv. 6652, verso: Matthew 26:29-35.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Oxford, Magdalen College MS Gr 17 (Papyrus 64) recto Matthew 26, 7-8; 10; 14-15 copy.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 64, recto: Matthew 26:7-8; 10; 14-15",
+                "caption": "Papyrus 64, Oxford, Magdalen College MS Gr 17, recto: Matthew 26:7-8; 10; 14-15.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Oxford, Magdalen College MS Gr 17 (Papyrus 64) verso Matthew 26, 22-23; 31-33.jpg",
+                "alt": "Greek papyrus fragment, Papyrus 64, verso: Matthew 26:22-23; 31-33",
+                "caption": "Papyrus 64, Oxford, Magdalen College MS Gr 17, verso: Matthew 26:22-23; 31-33.",
+                "credit": "Public domain."
+            }
+        ]
     }
 }
