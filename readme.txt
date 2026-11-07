@@ -162,6 +162,9 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 == Changelog ==
 = 3.37.0 =
 * A Pexels API client in the theme (search, curated, one photo, collections) and a Pexels API key field under Theme Options > Content. The key is stored in your database, never in the theme.
+= 3.36.1 =
+* The Theme Options page uses the full width of the screen. The 1080 pixel cap is gone, and the explanation beside each switch has room to run.
+
 = 3.36.0 =
 * Twelve photographs from Pixabay (scrolls, a silver amulet, tablets, papyri, parchment, calligraphy) join the plates of nine pages. Each is copied into the Media Library and never loads from Pixabay in a reader's browser.
 = 3.35.0 =
@@ -478,6 +481,9 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 == Upgrade Notice ==
 = 3.37.0 =
 Upload the whole theme. Optional: add a Pexels API key under Theme Options > Content.
+= 3.36.1 =
+Upload the whole theme. Nothing else changes.
+
 = 3.36.0 =
 Upload the whole theme. Nine pages refresh on the first admin load, and any edits made to them are replaced.
 = 3.35.0 =

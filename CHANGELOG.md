@@ -9,6 +9,11 @@ Pexels client, built into the theme at the owner's request.
 - Added: `inc/pexels.php`, a PHP port of the request in Pexels' official JavaScript client (MIT): search, curated, one photo and collections, a twelve-hour cache, a ten-minute flag and admin notice after a 401, and `injil_help_pexels_entry()` to build an `images.json` entry (key `pexels-{id}`, "Photo: name, Pexels License.").
 - Added: the option `pexels_key` (Theme Options › Content › Images and privacy), the constant `INJIL_HELP_PEXELS_KEY` and the filter `injil_help_pexels_key`. No key is in the repository; with none, nothing is requested.
 - Added: `tests/pexels-test.php`, 15 checks.
+## 3.36.1
+
+The Theme Options page uses the full width of the screen. No feature or setting removed.
+
+- Changed: `assets/css/admin.css` drops the 1080px `max-width` on `.ih-options`, gives switch rows a flexible text column in place of the 1fr/1.6fr split, and loosens the width limits on the header text (70ch to 110ch) and the usage box (90ch to none). The rules at 782px and below are unchanged.
 
 ## 3.36.0
 
