@@ -2,6 +2,18 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.34.0
+
+The Glossary and two Qur'an pages draw on more of the classical dictionaries at arabiclexicon.hawramani.com. The owner approved the sources on 7 November 2026.
+
+- Added: Abū Ḥayyān's *Tuḥfat al-Arīb* on Injīl (from *najl*, "origin"), Zabūr, al-Masīḥ (six views of its derivation), Rūḥ ("God gave him life"), al-Ḥawāriyyūn ("the chosen of the prophets"), Āya, Fiṭra.
+- Added: al-Rāghib al-Iṣfahānī's *al-Mufradāt* on Zabūr, Kalima (the reasons ʿĪsā is called a word), Rūḥ (called a spirit for raising the dead), al-Ḥawāriyyūn (fullers, hunters, or purifiers of souls) and al-Māʾida (food or knowledge).
+- Added: al-Zamakhsharī's *Asās al-Balāgha* on Muhaymin and Fiṭra ("every child is born on the *fiṭra*"), and al-Fīrūzābādī's *al-Qāmūs al-Muḥīṭ* on Tawaffā.
+- Added: the page on the Messiah in Islam gives al-Rāghib's reasons for calling ʿĪsā a word and a spirit, and the table page gives his two views of what the disciples asked for. Both list him under Sources.
+- Changed: `SSOT.md` records the approved list of Arabic lexicons and the limit on quoting them.
+
+Each Arabic phrase was read in the entry it comes from.
+
 ## 3.33.0
 
 More manuscript images, matched to the verses each page covers. The owner repeated the list of image sources on 7 November 2026.
