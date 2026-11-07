@@ -32,7 +32,8 @@ function injil_help_option_defaults() {
 		'animate'          => 1,
 		'parallax'         => 'strong',
 		'gospel_layout'    => 'columns',
-		'content_width'    => 'full',
+		'content_width'    => 'reading',
+		'toc_auto'         => 0,
 		'block_app_passwords' => 1,
 		'block_xmlrpc'     => 1,
 		'block_rest_writes' => 1,
@@ -99,7 +100,8 @@ function injil_help_sanitize_options( $in ) {
 	$out['animate']          = empty( $in['animate'] ) ? 0 : 1;
 	$out['parallax']         = injil_help_pick( $in, 'parallax', array( 'strong', 'gentle', 'off' ), 'strong' );
 	$out['gospel_layout']    = injil_help_pick( $in, 'gospel_layout', array( 'columns', 'single', 'plain' ), 'columns' );
-	$out['content_width']    = injil_help_pick( $in, 'content_width', array( 'full', 'wide', 'reading' ), 'full' );
+	$out['content_width']    = injil_help_pick( $in, 'content_width', array( 'reading', 'wide', 'full' ), 'reading' );
+	$out['toc_auto']         = empty( $in['toc_auto'] ) ? 0 : 1;
 	// The Security switches change only for someone who may manage options; anyone else keeps the stored values.
 	$stored = injil_help_get_option();
 	foreach ( array( 'block_app_passwords', 'block_xmlrpc', 'block_rest_writes', 'spam_gate', 'spam_gone' ) as $key ) {
@@ -186,6 +188,25 @@ function injil_help_sanitize_ctx_line( $line ) {
 function injil_help_sanitize_ctx_slug( $line ) {
 	return trim( preg_replace( '/\s+/', ' ', wp_strip_all_tags( wp_check_invalid_utf8( (string) $line ) ) ) );
 }
+
+/**
+ * 3.12.0 makes the reading column the default. A site still on the former default, full width,
+ * moves to it once; anyone who then picks full width again under Theme Options keeps it.
+ */
+add_action(
+	'init',
+	function () {
+		if ( get_option( 'injil_help_width_312' ) ) {
+			return;
+		}
+		$saved = get_option( INJIL_HELP_OPTION );
+		if ( is_array( $saved ) && 'full' === ( $saved['content_width'] ?? '' ) ) {
+			$saved['content_width'] = 'reading';
+			update_option( INJIL_HELP_OPTION, $saved );
+		}
+		update_option( 'injil_help_width_312', 1, false );
+	}
+);
 
 add_action(
 	'admin_init',
@@ -510,12 +531,13 @@ function injil_help_render_options() {
 					'content_width',
 					__( 'Content width', 'injil-help' ),
 					array(
-						'full'    => array( __( 'Full width', 'injil-help' ), __( 'The content fills the page between the side gutters.', 'injil-help' ), 'dashicons-editor-expand' ),
+						'reading' => array( __( 'Reading column', 'injil-help' ), __( '720px of text under the 1240px header, footer and grids (default).', 'injil-help' ), 'dashicons-align-center' ),
 						'wide'    => array( __( 'Wide', 'injil-help' ), __( '1240px, the width of the header and footer.', 'injil-help' ), 'dashicons-align-wide' ),
-						'reading' => array( __( 'Reading column', 'injil-help' ), __( 'A 720px column of text.', 'injil-help' ), 'dashicons-align-center' ),
+						'full'    => array( __( 'Full width', 'injil-help' ), __( 'Grids, tables and the header fill the page between the side gutters.', 'injil-help' ), 'dashicons-editor-expand' ),
 					),
-					__( 'How wide the text and tables of every page may run. Full width is the default, and the header, footer and front page widen with it. Reading column restores the former layout: a 720px column of text under the 1240px header, footer and front page. Tables and plates marked wide fill the width in every case.', 'injil-help' )
+					__( 'How wide the page may run. The reading column is the default: 720px of text under the 1240px header, footer, front page and grids. Wide lets the page run to 1240px, and full width to the side gutters. In every case running text stops at a readable measure of about 46rem, and tables and plates marked wide fill the width.', 'injil-help' )
 				);
+				injil_help_ui_toggle( $o, 'toc_auto', __( 'Add a contents list to long pages', 'injil-help' ), __( 'A list of links to the sections, after the breadcrumb row, on every page with 4 or more level-two headings. Put [auto_toc] in a page to place the list yourself.', 'injil-help' ) );
 				injil_help_ui_card_close();
 
 				injil_help_ui_card_open( __( 'Ornament and motion', 'injil-help' ) );
@@ -696,7 +718,7 @@ function injil_help_render_options() {
 
 			<section class="ih-panel" id="panel-content" role="tabpanel" aria-labelledby="tab-content" tabindex="0">
 				<?php
-				injil_help_ui_usage( __( 'Choose how the gospel text is set and whether plates may load from Wikimedia Commons and Pexels. The list shows every starter page: green has been created, gold is missing. The first button creates the missing pages; the second rewrites every page from the theme, your edits included.', 'injil-help' ) );
+				injil_help_ui_usage( __( 'Choose how the gospel text is set and whether plates may load from Wikimedia Commons, Pexels and Pixabay. The list shows every starter page: green has been created, gold is missing. The first button creates the missing pages; the second rewrites every page from the theme, your edits included.', 'injil-help' ) );
 				injil_help_ui_card_open( __( 'Gospel text', 'injil-help' ) );
 				injil_help_ui_cards(
 					$o,
@@ -712,7 +734,7 @@ function injil_help_render_options() {
 				injil_help_ui_card_close();
 
 				injil_help_ui_card_open( __( 'Images and privacy', 'injil-help' ) );
-				injil_help_ui_toggle( $o, 'remote_images', __( 'Load plates from Wikimedia Commons and Pexels', 'injil-help' ), __( 'Off by default. The theme copies each plate into the Media Library a few at a time on admin screen loads, and visitors are served that copy. A plate with no copy yet is left out of the page. Switch this on to show those plates from their source in the meantime; the browsers of your readers then contact commons.wikimedia.org, upload.wikimedia.org and images.pexels.com.', 'injil-help' ) );
+				injil_help_ui_toggle( $o, 'remote_images', __( 'Load plates from Wikimedia Commons, Pexels and Pixabay', 'injil-help' ), __( 'Off by default. The theme copies each plate into the Media Library a few at a time on admin screen loads, and visitors are served that copy. A plate with no copy yet is left out of the page. Switch this on to show those plates from their source in the meantime; the browsers of your readers then contact commons.wikimedia.org, upload.wikimedia.org and images.pexels.com.', 'injil-help' ) );
 				injil_help_ui_card_close();
 
 				injil_help_ui_card_open( __( 'Starter pages', 'injil-help' ), __( 'The theme creates these pages when it is activated. When the theme is updated, the pages whose text changed are rewritten automatically, a few at a time as you move between admin screens, and pages you have edited are kept. Both buttons work in small batches, show their progress here and report what they did at the top of the screen.', 'injil-help' ) );

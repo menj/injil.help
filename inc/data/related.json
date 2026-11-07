@@ -9,7 +9,8 @@
         "method",
         "corrections",
         "resources/sources",
-        "bonus"
+        "bonus",
+        "gospel-according-to-islam/early-writings"
     ],
     "gospel-according-to-islam/family-of-amran-zacharias-and-john": [
         "quran/birth",
@@ -463,5 +464,15 @@
         "paul/james",
         "paul/seven-letters",
         "why-islam"
+    ],
+    "gospel-according-to-islam/early-writings": [
+        "gospel-according-to-islam/early-writings/set-aside",
+        "gospel-according-to-islam/how-composed",
+        "gospels/thomas/set-aside"
+    ],
+    "gospel-according-to-islam/early-writings/set-aside": [
+        "gospel-according-to-islam/early-writings",
+        "method",
+        "gospels/thomas/set-aside"
     ]
 }

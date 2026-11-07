@@ -5,7 +5,7 @@ Description: Custom child theme of Twenty Twenty-Five built for one site, The Ri
 Author: MENJ
 Author URI: https://menj.blog
 Template: twentytwentyfive
-Version: 3.25.11
+Version: 3.36.1
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -247,6 +247,10 @@ p.ih-cite{margin:0;font-size:13px;color:var(--wp--preset--color--muted)}
 .ih-width-full{--wp--style--global--content-size:none;--wp--style--global--wide-size:none}
 .ih-width-full .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)),.ih-width-full .is-layout-constrained > .alignwide{max-width:none}
 .ih-width-full .ih-aside,.ih-width-full .ih-overview{max-width:none}
+/* A readable measure for running text in every width: paragraphs, lists, headings, folds, capsules and asides stop at about 46rem however wide the page runs; grids, tables, plates, the hero and the diagram keep the full width. Direct children of the content are centred by the constrained layout; text inside wide bands stays where it starts. */
+:root{--ih-measure:46rem}
+body .wp-block-post-content.is-layout-constrained > :where(p,ul,ol,h2,h3,h4,h5,h6,blockquote,.wp-block-details,.wp-block-quote,.is-style-answer-capsule,.ih-aside,.ih-overview){max-width:min(var(--ih-measure),100%)}
+body .wp-block-post-content :where(p,li),body .ih-section-head > :where(p){max-width:var(--ih-measure)}
 .ih-aside{border:1.5px solid var(--wp--preset--color--accent-3);border-radius:var(--ih-r-md);padding:18px 22px;max-width:760px;margin-top:var(--wp--preset--spacing--30) !important}
 .ih-aside > * + *{margin-top:8px}
 .ih-next .ih-k{color:var(--wp--preset--color--accent-1)}

@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.25.11
+Stable tag: 3.36.1
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -88,7 +88,7 @@ Licensing: Sabon Next LT (Linotype) and Kagnue (Youthlabs Studio) are commercial
 * The keyword appears in the home kicker and lede, the home dilemma section, the first nav item, the first two FAQs and the footer. Link to /islamic-dilemma/ from every new article that touches Qur'an 5:47, taḥrīf or the identity of the Injīl, with varied anchor text.
 * The default social image can be replaced under Theme Options > SEO.
 == Images ==
-Manuscript images come from Wikimedia Commons, and five photographs of manuscripts and an inscription from Pexels, each with its credit and a link to its source page in the caption. All are public domain except the Kairouan Qur'an photograph (Richard Mortel, CC BY 2.0), which must keep its credit. Every image carries a descriptive alt attribute (what it is, its date and holding institution) and a short title; keep that pattern for new images, and write alt text for the subject, not for decoration. WordPress adds lazy loading itself. The default Open Graph image is a bundled copy of the Birmingham Qur'an manuscript (assets/images/og-default.jpg, public domain, 1280 × 833); replace it under Theme Options > SEO. To host the manuscript images yourself, download from the linked Commons page into the Media Library and swap the URL. From 3.20.0 readers are served the Media Library copy only, and a plate without one is hidden, unless Theme Options > Content allows remote plates; with that switch on, readers' browsers contact upload.wikimedia.org and images.pexels.com, and the privacy policy should say so. Thirty-five article pages also carry a plate listed in inc/data/images.json, and the same image becomes the page's featured image once the host has fetched it (six pages per admin screen load; a failed fetch is retried after a day). To change a page's image, edit its entry: the Commons file name without "File:", the alt text, the caption and the credit. Use only public-domain or CC0 files from Commons, or Pexels photographs credited as "Photo: name, Pexels License" with source, url and page set; check that the file exists.
+Manuscript images come from Wikimedia Commons, five photographs from Pexels and twelve from Pixabay (manuscripts, scrolls, tablets and inscriptions), each with its credit and a link to its source page in the caption. All are public domain except the Kairouan Qur'an photograph (Richard Mortel, CC BY 2.0), which must keep its credit. Every image carries a descriptive alt attribute (what it is, its date and holding institution) and a short title; keep that pattern for new images, and write alt text for the subject, not for decoration. WordPress adds lazy loading itself. The default Open Graph image is a bundled copy of the Birmingham Qur'an manuscript (assets/images/og-default.jpg, public domain, 1280 × 833); replace it under Theme Options > SEO. To host the manuscript images yourself, download from the linked Commons page into the Media Library and swap the URL. From 3.20.0 readers are served the Media Library copy only, and a plate without one is hidden, unless Theme Options > Content allows remote plates; with that switch on, readers' browsers contact upload.wikimedia.org and images.pexels.com, and the privacy policy should say so. Thirty-five article pages also carry a plate listed in inc/data/images.json, and the same image becomes the page's featured image once the host has fetched it (six pages per admin screen load; a failed fetch is retried after a day). To change a page's image, edit its entry: the Commons file name without "File:", the alt text, the caption and the credit. Use only public-domain or CC0 files from Commons, or Pexels photographs credited as "Photo: name, Pexels License" with source, url and page set; check that the file exists.
 
 == Branding ==
 * Brandmark: assets/brandmark.svg (an open codex with rays of light, Qur'an 5:46). It appears as the link before the site title in the header and at the top of the footer's first column (class ih-mark; the footer adds ih-mark-foot).
@@ -121,8 +121,11 @@ This file is the user-facing manual that WordPress and Git Updater read. The rep
 Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add the entry to CHANGELOG.md and to the Changelog section here, note anything an existing site must know under "Updating an existing site" in UPGRADING.md, merge to main, and tag the commit with the same number (for example v3.4.0). Git Updater reads the header (GitHub Theme URI, Primary Branch: main) and offers the update.
 
 == Frequently Asked Questions ==
+= How do I add a contents list to a page? =
+Type [auto_toc] in a Shortcode block where the list should go. The list links to the page's level-two and level-three headings, and gives a heading an address if it has none. To have a list on every long page, switch on the option in Theme Options > Branding.
+
 = Why are some manuscript plates missing on a new site? =
-Remote plates are off by default. The theme copies each plate from Wikimedia Commons or Pexels into the Media Library, six files per admin screen load, and shows a plate once its copy is there. Load a few admin screens, or switch on Theme Options > Content > Load plates from Wikimedia Commons and Pexels.
+Remote plates are off by default. The theme copies each plate from Wikimedia Commons, Pexels or Pixabay into the Media Library, six files per admin screen load, and shows a plate once its copy is there. Load a few admin screens, or switch on Theme Options > Content > Load plates from Wikimedia Commons and Pexels.
 
 = Can I use the theme on another site? =
 It is built for injil.help. Sabon Next LT and Kagnue are commercial fonts licensed to this site, so another site needs its own licences for them.
@@ -157,9 +160,33 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
-= 3.25.11 =
+= 3.36.1 =
 * The Theme Options page uses the full width of the screen. The 1080 pixel cap is gone, and the explanation beside each switch has room to run.
 
+= 3.36.0 =
+* Twelve photographs from Pixabay (scrolls, a silver amulet, tablets, papyri, parchment, calligraphy) join the plates of nine pages. Each is copied into the Media Library and never loads from Pixabay in a reader's browser.
+= 3.35.0 =
+* Five Glossary terms gain a classical gloss from Ibn Fāris and Ghulām Thaʿlab: Injīl, Kalima, Tawaffā, al-Māʾida and al-Masīḥ.
+= 3.34.0 =
+* More of the Glossary now rests on the classical dictionaries: Abū Ḥayyān, al-Rāghib al-Iṣfahānī, al-Zamakhsharī and al-Fīrūzābādī on Injīl, Zabūr, al-Masīḥ, Kalima, Rūḥ, al-Ḥawāriyyūn, Āya, Muhaymin, Tawaffā, al-Māʾida and Fiṭra. The page on the Messiah in Islam gives al-Rāghib's reasons for calling ʿĪsā a word and a spirit, and the table page gives his two views of what the disciples asked for.
+= 3.33.0 =
+* 56 more manuscript images, 168 in all on 70 pages. The gospel sections and the gospels' own pages now carry the early papyri and codex leaves of the verses they cover, each captioned with its papyrus number, library and passage. 22 pages now have the full four images.
+= 3.32.0 =
+* The reading column is the default width again, and running text stops at a readable measure in every width, on phone, tablet and desktop.
+* Sayings of Jesus from six early writings are tested against the Qur'an: 21 kept in the Gospel According to Islam, and 26 set aside with reasons on a new page.
+
+= 3.31.0 =
+* A contents list for pages: the [auto_toc] shortcode, and an option in Theme Options > Branding that adds the list to every page with 4 or more sections. The Glossary and the Objections page carry one.
+= 3.30.0 =
+* The Aḥmad page names the Companion behind the ḥadīth of the Prophet's five names, Jubayr ibn Muṭʿim, gives its numbers in al-Bukhārī and Muslim, and sets out three of its chains in the form HadithGraph reads. It also gives a short biography of Jubayr from Ibn ʿAbd al-Barr.
+= 3.29.0 =
+* The Glossary has a new entry, Isnād and Rijāl, that points to Ikram Hawramani's Hadith Transmitters Encyclopedia and HadithGraph. The Aḥmad page uses them to show where a reader can check the chain behind a ḥadīth.
+= 3.28.0 =
+* Injīl and Tawrāt now carry what the classical Arabic lexicons say about them: Jawharī, Ibn Manẓūr, al-Fayyūmī and Abū Mūsā al-Madīnī on Injīl; Abū Mūsā al-Madīnī and al-Rāghib al-Iṣfahānī on Tawrāt. They appear in the Glossary and on the two topic pages.
+= 3.27.0 =
+* Eight more Glossary terms quote a few words of Lane's Arabic-English Lexicon: Zabūr, Rūḥ, ʿAbd, Ahl al-Kitāb, Naṣārā, Tawaffā, al-Māʾida and Fiṭra. The pages on the end of ʿĪsā's earthly mission and on the table from heaven cite Lane too.
+= 3.26.0 =
+* The Glossary and the Aḥmad page quote a few words of Lane's Arabic-English Lexicon for four terms, and link to his entry on arabiclexicon.hawramani.com.
 = 3.25.10 =
 * The settings and the readme speak of the other sites in plain words. Links to them stay.
 * The readme says where the browser icon goes on a site in a subfolder: a copy of favicon.ico in the domain root.
@@ -331,6 +358,7 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 = 3.6.2 =
 * Links to apostleofdoom.org and bestofislam.org are within the running text only, thirty sentences naming the article and the site where a point is taken further; the declared row, the footer links and the sameAs entry of 3.6.1 are removed.
 = 3.6.1 =
+* Contents list: put [auto_toc] where you want a list of the page's sections (the level-two and level-three headings), or switch on Theme Options > Branding > Add a contents list to long pages to add one to every page with 4 or more sections. [auto_toc tags="h2,h3,h4"] changes the levels and [auto_toc title="In this page"] the title.
 * Content is full width by default: every page's text, tables and plates fill the page between the side gutters, and the header, footer and front page follow. Theme Options > Branding > Content width offers full (default), wide (1240px) and reading column (720px, the former default). At full and wide widths running prose is set in two columns on screens from 1280px, as the gospel sections are, so lines stay readable; headings, tables, plates, folds and asides span both columns.
 * The Gospel of Thomas page explains why Thomas is counted: a sayings gospel of the kind Q was, with the evidence, the contrary case labelled, the Qur'anic reason and three questions.
 * "Paul of Tarsus" throughout the site's own text.
@@ -449,9 +477,31 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * New screenshot.
 
 == Upgrade Notice ==
-= 3.25.11 =
+= 3.36.1 =
 Upload the whole theme. Nothing else changes.
 
+= 3.36.0 =
+Upload the whole theme. Nine pages refresh on the first admin load, and any edits made to them are replaced.
+= 3.35.0 =
+Upload the whole theme. The Glossary refreshes on the first admin load, and any edits made to it are replaced.
+= 3.34.0 =
+Upload the whole theme. The Glossary and two Qur'an pages refresh on the first admin load, and any edits made to them are replaced.
+= 3.33.0 =
+Upload the whole theme. The pages with new images refresh on the first admin load, and the images copy into the Media Library six at a time over the next admin loads. Any edits made to those pages are replaced.
+= 3.32.0 =
+Upload the whole theme. Pages are narrower by default; a site saved on full width moves to the reading column once. Two new pages are written on the first admin load.
+= 3.31.0 =
+Upload the whole theme. The Glossary and Objections pages refresh on the first admin load and gain a contents list; any edits made to them are replaced.
+= 3.30.0 =
+Upload the whole theme. The Aḥmad page refreshes on the first admin load, and any edits made to it are replaced.
+= 3.29.0 =
+Upload the whole theme. The Glossary and the Aḥmad page refresh on the first admin load, and any edits made to them are replaced.
+= 3.28.0 =
+Upload the whole theme. The Glossary and two Islamic Dilemma pages refresh on the first admin load, and any edits made to them are replaced.
+= 3.27.0 =
+Upload the whole theme. The Glossary and two Qur'an pages refresh on the first admin load, and any edits made to them are replaced.
+= 3.26.0 =
+Upload the whole theme. The Glossary and the Aḥmad page refresh on the first admin load, and any edits made to them are replaced.
 = 3.25.10 =
 Upload the whole theme. On a site in a subfolder, also put a copy of assets/images/favicon.ico in the domain root folder (or, with a Site Icon set, that icon as favicon.ico); otherwise nothing to do.
 
@@ -483,9 +533,10 @@ Fonts (assets/fonts), each under its own licence:
 * Dubidam Arabic (NamelaType): free personal-use licence per its metadata; a web licence is the site owner's to hold.
 * Arslan Wessam (Arslan, Dev-Point.com), Ferments (Haksen Studio), Estrangelo Edessa (Beth Mardutho) and Angel (JuliaL, freeware; Angel-README.txt beside it): free to use as their authors publish them.
 
-Images: assets/brandmark.svg, assets/images/divider.svg, assets/images/arrow-next*.webp and the icons in assets/icons are the theme's own, GPLv2 or later. assets/images/lanat-allah.svg is outlined from Dubidam Arabic. The default social image, assets/images/og-default.jpg, is the Birmingham Qur'an manuscript, public domain. The plates listed in inc/data/images.json and in the patterns are public domain or CC0 from Wikimedia Commons, Pexels photographs under the Pexels License, and one CC BY 2.0 photograph (Richard Mortel); each caption carries its credit and source.
+Images: assets/brandmark.svg, assets/images/divider.svg, assets/images/arrow-next*.webp and the icons in assets/icons are the theme's own, GPLv2 or later. assets/images/lanat-allah.svg is outlined from Dubidam Arabic. The default social image, assets/images/og-default.jpg, is the Birmingham Qur'an manuscript, public domain. The plates listed in inc/data/images.json and in the patterns are public domain or CC0 from Wikimedia Commons, Pexels photographs under the Pexels License, Pixabay photographs under the Pixabay Content License, and one CC BY 2.0 photograph (Richard Mortel); each caption carries its credit and source.
 
 == Credits ==
+Contents list: the [auto_toc] shortcode follows the interface of Ikram Hawramani's WordPress Table-of-Contents Shortcode Done Properly (MIT licence, 2025). The code is the theme's own.
 Share and profile icons (assets/icons/social/): Minimalist Social Icons Pack 2.8, GPL; the profile row adds Instagram, YouTube, TikTok, Mastodon, GitHub and Substack from the same pack. The LinkedIn icon originates from Font Awesome Free (https://fontawesome.com), CC BY 4.0; the credit is carried on the Credits page. The brand marks remain trademarks of their owners. assets/icons/share.svg and link.svg are the theme's own.
 Default social image: Birmingham Qur'an manuscript (Cadbury Research Library, University of Birmingham), public domain, via Wikimedia Commons.
 The classical commentaries (inc/data/tafsir/): English renderings prepared for this website from the public-domain Arabic texts of al-Tabari, al-Baghawi, al-Qurtubi, Ibn Kathir, Tanwir al-Miqbas, al-Jalalayn, al-Durr al-Manthur and al-Sa'di as published at tafsir.app, greattafsirs.com and shamela.ws; the modern editors' apparatus is not translated. Released with the theme under its licence; no second translator has checked them, and the Arabic source is named on every page.

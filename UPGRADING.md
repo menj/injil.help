@@ -52,7 +52,27 @@ The general steps, for any version:
 3. Open any admin screen as an administrator (page rewrites and the error pages need `edit_theme_options`, the development-file clean-up needs `update_themes`). The theme rewrites the pages whose text changed and keeps the ones you edited, writes its error pages, checks its `.htaccess` sections (at most hourly), and on a production site removes its development files.
 4. Read the note for the version you are moving to.
 
-**To 3.25.11.** Upload the whole theme. Nothing else changes.
+**To 3.36.1.** Upload the whole theme. Nothing else changes.
+
+**To 3.35.0.** Upload the whole theme. The Glossary refreshes on the first admin load, and any edits made to it are replaced.
+
+**To 3.34.0.** Upload the whole theme. The Glossary, the page on the Messiah in Islam and the table page refresh on the first admin load, and any edits made to them are replaced.
+
+**To 3.33.0.** Upload the whole theme. The pages with new images refresh on the first admin load, and the images copy into the Media Library six at a time over the next admin loads. Edits made to those pages are replaced.
+
+**To 3.32.0.** Upload the whole theme. The page width changes on its own: a site on the former default, full width, moves to the reading column the first time it loads; pick full width again under Theme Options > Branding to keep it. Two new pages are written on the first admin load, and sections 8, 9, 13, 18, 21, 22 and 24 of the Gospel According to Islam gain a block of early-writings sayings. A section page you edited keeps your text; delete it to take the new one.
+
+**To 3.31.0.** Upload the whole theme. The Glossary and Objections pages refresh on the first admin load and gain a contents list, and any edits made to them are replaced. The automatic list is off until you switch it on in Theme Options > Branding.
+
+**To 3.30.0.** Upload the whole theme. The Aḥmad page refreshes on the first admin load, and any edits made to it are replaced.
+
+**To 3.29.0.** Upload the whole theme. The Glossary and the Aḥmad page refresh on the first admin load, and any edits made to those two pages are replaced.
+
+**To 3.28.0.** Upload the whole theme. The Glossary, the page on the Injīl and the page on the Torah in Islam refresh on the first admin load, and any edits made to them are replaced.
+
+**To 3.27.0.** Upload the whole theme. The Glossary, the page on the end of ʿĪsā's earthly mission and the table page refresh on the first admin load, and any edits made to them are replaced.
+
+**To 3.26.0.** Upload the whole theme. The Glossary and the Aḥmad page refresh on the first admin load, and any edits made to those two pages are replaced.
 
 **To 3.25.10.** Upload the whole theme. Nothing else changes. On a site in a subfolder, put a copy of `assets/images/favicon.ico` in the domain root (or, with a Site Icon set, that icon as `favicon.ico`), since browsers ask for `/favicon.ico` there.
 
@@ -92,6 +112,7 @@ The `(.+/)?` covers WordPress in a subfolder of the `.htaccess` folder too, such
 Git Updater reads the theme header and offers the release whose tag matches `Version:`. After the update, the first load of any admin screen rewrites the starter pages whose text changed, keeps pages you edited (marked "edited, kept on update" on the Content tab), keeps no revisions, and flushes rewrite rules only if permalinks had to be set. "Update all pages from the theme" replaces every page, edited ones included, after a confirmation. Take a database backup before updating; open the Content tab once after.
 
 - **3.20.2.** Nothing to do. A page or Journal post that carries no hash from the theme is kept on every update from now on, so it keeps your text and does not take the new one. To give such a page the theme's text, press "Update all pages from the theme".
+- **3.36.0.** Upload the whole theme. Nine pages refresh on the first admin load. Pixabay plates appear once the Media Library holds their copies (six per admin screen load); they never load from Pixabay for readers.
 - **3.20.0.** Check the plates. Remote plates are now off, so a plate with no Media Library copy is hidden. The pages in `inc/data/images.json` already have their copies on a site that has run 3.18.0; the four plates of the front-page and section patterns are copied on the next few admin screen loads. Open the front page afterwards. If a plate is still missing (a failed fetch is retried after a day), switch on Theme Options › Content › Load plates from Wikimedia Commons and Pexels until it is there. The Privacy page is rewritten to say the images are served from the site, unless you edited it.
 - **3.18.0.** Nothing to do. The first admin load after the update creates the Journal page and writes the 8 posts with their own dates; those still to come show as Scheduled under Posts. They go live only if WP-Cron runs on the host, so check that it does (or run a real cron job against `wp-cron.php`). Purge any page cache so the new menu link shows.
 - **3.14.1.** Nothing to do. No address on this site changes. The links to the sister sites follow their new addresses, and the old ones redirect there anyway.

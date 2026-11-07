@@ -33,7 +33,7 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 |---|---|
 | Type | Block theme (theme.json v3), child of `twentytwentyfive` |
 | Folder, text domain, pattern prefix | `injil-help` |
-| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.25.11) |
+| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.36.1) |
 | PHP in `inc/` | options, social, progress, unlist, unlist-admin, search-permalinks, starter-content, journal, starter-content-pages, gospel-islam, quran-jesus, tafsir, images, seo, schema, schema-content, schema-extend, rank-math, share, contextual-links, login, security, security-detector, error-pages, error-page-html, article (26 files) |
 | Data | `inc/data/` 2.6 MB of JSON: 182 starter pages, the 8 Journal posts (`posts.json`), the gospel narrative, the Qur'anic passages, Thomas (woven sections and two full texts), the infancy gospels, the substitution witnesses, eight commentaries (315,000 words) |
 | Front-end assets | `style.css` 32 KB; `assets/css/ornament.css` 12 KB, `share.css` 3 KB, `bible.css` 3 KB, `login.css` 7 KB, `journal.css` 2 KB, `responsive.css` 2 KB (phone header, touch targets, focus ring, loaded on every view); `assets/js/ornament.js` 3 KB, `share.js` 2 KB; all plain, no build step |
@@ -69,7 +69,7 @@ injil-help/
 ├─ inc/
 │  ├─ options.php         Theme Options page, defaults, sanitiser, body classes, colour CSS
 │  ├─ starter-content.php markup parser, page writer, populate(), activation and update hooks
-│  ├─ images.php          Commons and Pexels plates in page content; featured images sideloaded a few pages per admin load; plates served from the Media Library; the image sitemap
+│  ├─ images.php          Commons, Pexels and Pixabay plates in page content; featured images sideloaded a few pages per admin load; plates served from the Media Library; the image sitemap
 │  ├─ starter-content-pages.php  the page list, merged from the JSON files and the builders
 │  ├─ gospel-islam.php    gospel sections from narrative.json + thomas + substitution + commentaries
 │  ├─ quran-jesus.php     the Qur'anic passages page from quran-jesus.json
@@ -83,6 +83,7 @@ injil-help/
 │  ├─ share.php           share row
 │  ├─ journal.php         the Journal: posts at /journal/<slug>/ from posts.json
 │  ├─ article.php         a post's parts: meta row, In short, contents, Sources block
+│  ├─ toc.php             the [auto_toc] contents list and the automatic list on long pages
 │  ├─ contextual-links.php links from known phrases in the text (shared map in data/network-links.json)
 │  ├─ social.php          profile links in the footer, shortcode and pattern
 │  ├─ progress.php        reading progress bar
@@ -97,7 +98,7 @@ injil-help/
 ├─ assets/css|js|fonts|icons|images
 ├─ errors/                static 403, 500, 502, 503, 504 pages for a site at the domain root
 ├─ bin/                   build-error-pages.php (command line only)
-├─ tests/                 ten command-line self-tests (export-ignore; refused by .htaccess)
+├─ tests/                 eleven command-line self-tests (export-ignore; refused by .htaccess)
 ├─ .htaccess              refuses .git*, .claude, tests, bin and *.md in the theme folder
 └─ languages/             .mo files
 ```
@@ -124,12 +125,12 @@ Everything the theme writes to the database is JSON in `inc/data/`: the page def
 | `gospel-islam.json` | section titles, section URL slugs, Introduction | `{section_titles: {n: title}, section_slugs: {n: slug}, front: {introduction: {title, paras[]}}}`; the slug is the section's URL segment (`/gospel-according-to-islam/john-baptist/`), never its number |
 | `related.json` | the curated map of related pages behind the "Read next" row | `{path: [path, …]}`, merged with what the builders set (`injil_help_related_map()`) |
 | `quran-jesus.json` | the Qur'anic passages | `{surahs: {n: name}, passages: [{surah, verses_range, heading, verses: {n: text}}]}` |
-| `thomas.json`, `infancy.json`, `substitution.json` | woven passages (Thomas, the infancy gospels, the substitution witnesses, merged in that order) | `{section: [markup lines]}` |
+| `thomas.json`, `early-writings.json`, `infancy.json`, `substitution.json` | woven passages (Thomas, the early writings, the infancy gospels, the substitution witnesses, merged in that order) | `{section: [markup lines]}` |
 | `thomas-mattison.json`, `thomas-patterson-meyer.json` | the full text of the Gospel of Thomas in two translations | `[markup lines]`, loaded through `body_file` |
 | `patterns/{name}.json` | all 34 block patterns: the 17 that supply whole pages (the pillar, the measure, the five section indexes, the FAQs, how the gospel was composed, the corrections log, the five discrepancy tables, the manuscripts table and the sayings-order test), the 8 front-page sections, the 404 page and the 7 building blocks for the editor | `{title, slug, description, categories, keywords?, content[]}`; `content` is the block markup, one line per item, joined with newlines by `injil_help_pattern_file()`, which also refuses a name that is not a plain slug and a file that is malformed |
 | `text.json` | the words the PHP builders put on pages: the commentaries index with its FAQs, the group and part pages, the colophon and the folds (`commentaries`); the running heads, navigation, titles and excerpts of the gospel sections (`gospel`); the title, introduction and source note of The Qur'an on Jesus (`quran_passages`); the "Read next" label (`related`) | `{group: {key: string \| [markup lines]}}`; format strings keep their `sprintf` placeholders; read with `injil_help_text( $group, $key )`. Without this file or `commentaries.json` the page list is empty, so nothing is published with gaps |
 | `commentaries.json` | the eight commentaries and the nine verse groups | `{works: {key: {short, title, author, died, about, source}}, groups: {slug: {former, surah, from, to, name, title, intro}}}`, in display order |
-| `images.json` | up to four images per page that has any, from Commons or Pexels | `{path: {file, alt, caption, credit, more: [{file, alt, caption, credit}]}}`, and for Pexels also `{source: "pexels", url, page}` with `file` set to `pexels-{id}`; `inc/images.php` puts the first plate near the top, spreads the `more` plates through the text, and sideloads each file into the Media Library as AVIF (WebP under 1000 pixels wide), the first as the featured image |
+| `images.json` | up to four images per page that has any, from Commons, Pexels or Pixabay | `{path: {file, alt, caption, credit, more: [{file, alt, caption, credit}]}}`, and for Pexels or Pixabay also `{source: "pexels"|"pixabay", url, page}` with `file` set to `pexels-{id}` or `pixabay-{id}`; `inc/images.php` puts the first plate near the top, spreads the `more` plates through the text, and sideloads each file into the Media Library as AVIF (WebP under 1000 pixels wide), the first as the featured image |
 | `tafsir/{work}.json` | one commentary | `{work, entries: [{surah, from, to, arabic_words, english_words, paragraphs[]}]}` |
 
 `injil_help_starter_pages()` (static-cached per request) concatenates: pillar, gospels, paul, quran, the Qur'an page built by `injil_help_quran_page()`, the commentary pages from `injil_help_tafsir_pages()`, gospel, the 28 gospel pages from `injil_help_gospel_islam_pages()`, bonus, resources, site. Parents precede children in that order, which `populate()` relies on to resolve `post_parent`.
@@ -206,7 +207,7 @@ Appearance › Theme Options (`inc/options.php`), one option array `injil_help_o
 | Tab | Keys |
 |---|---|
 | Colours | `colors` (nine palette slugs → hex; empty keeps theme.json) |
-| Branding | `login_design` 0\|1 and `login_message` (the log-in screen, `inc/login.php`); `content_width` full\|wide\|reading (default full: the content fills the page between the gutters; wide is the 1240px of the header and footer; reading is the 720px column of theme.json; body class `ih-width-{value}`; at full and wide, prose pages flow in two columns from 1280px with headings, tables, plates, folds and asides spanning both, while pages carrying `.ih-bible` keep the gospel's own columns), `ornament` rich\|subtle\|off, `animate` 0\|1, `parallax` strong\|gentle\|off, `footer_mark`, `favicon_force`, `favicon_url` |
+| Branding | `login_design` 0\|1 and `login_message` (the log-in screen, `inc/login.php`); `toc_auto` 0\|1 (default 0: the contents list on pages with 4 or more level-two headings); `content_width` reading\|wide\|full (default reading since 3.32.0: the 720px column of theme.json under the 1240px header, footer and grids; wide is the 1240px of the header and footer; full fills the page between the gutters; running text stops at `--ih-measure`, 46rem, in every case; a site saved on full moves to reading once, option `injil_help_width_312`; body class `ih-width-{value}`; at full and wide, prose pages flow in two columns from 1280px with headings, tables, plates, folds and asides spanning both, while pages carrying `.ih-bible` keep the gospel's own columns), `ornament` rich\|subtle\|off, `animate` 0\|1, `parallax` strong\|gentle\|off, `footer_mark`, `favicon_force`, `favicon_url` |
 | Sharing | `share`, `share_types` (post, page), `share_networks` (ordered subset of the network keys), `share_label`; `social_profiles` (network key to profile URL) and `social_footer` 0\|1 for the profile icons (3.21.0) |
 | Reading | `progress` 0\|1, `progress_types` (public post types), `progress_position` top\|bottom, `progress_height` 1-12, `progress_color`, `progress_track` (hex, empty follows the palette) (3.21.0) |
 | SEO | `schema` auto\|on\|off, `home_title`, `home_description`, `pillar_title`, `og_image`, `author_name`, `author_url`, `same_as` (one URL per line), `org_logo` |
@@ -267,6 +268,8 @@ All faces are bundled in `assets/fonts/` and declared as `fontFace` in `theme.js
 
 ## Share row
 
+`inc/toc.php` (3.31.0) adds the `[auto_toc]` shortcode (attributes `tags`, default `h2,h3`, and `title`, default Contents; an empty title shows none). The shortcode leaves a comment marker, because WordPress expands shortcodes at `the_content` priority 11 and a filter that looks for the shortcode after that finds none. The filter at priority 13, after the Journal's heading ids (12) and before the contextual links (15), reads the finished headings, gives each heading of a listed level that lacks an id one made from its text, and replaces the marker with a `nav.ih-toc` holding a nested `ol`. An id the author gave is kept, and a made id never repeats any id on the page. Only the opening tag of a heading without an id changes; the text is not parsed or rewritten as a whole. Outside the main text of a page (an excerpt, a feed, a widget, REST) the marker is removed and nothing else changes. With `toc_auto` on (Branding > Layout), a page with 4 or more level-two headings (filter `injil_help_toc_min`) gets the list after the breadcrumb row; a page with its own `[auto_toc]` keeps its own. `assets/css/toc.css` loads only on pages that carry a list. The page markup accepts a `[toc]` line, which becomes a shortcode block; the Glossary and Objections pages use it. The shortcode interface follows Ikram Hawramani's MIT-licensed *WordPress Table-of-Contents Shortcode Done Properly* (2025); the code is the theme's own.
+
 `inc/article.php` (3.25.7) builds the parts of a Journal post: `[injil_help_article_meta]` (reading time and the updated date, in the template's meta row), ids on the level-two headings (`the_content` priority 12), and at priority 16, after the contextual links and before the share row, "In short" from `_injil_help_points`, the contents list from three headings, and the `.ih-sources` frame around the Sources list and the Notes. Styles in `assets/css/article.css`. `injil_help_redirect_former()` in `inc/starter-content.php` keys its cached map by `injil_help_data_fingerprint()` and resolves old commentary addresses through `injil_help_former_commentary_target()`; `tests/former-redirect-test.php` checks the address shapes from the November 2026 log.
 
 `inc/share.php` appends the row to `the_content` (priority 20) on singular posts and pages of the chosen types, not on the front page, and not when the filter runs for an excerpt (`doing_filter('get_the_excerpt')`) or for a post that is not the queried one. Networks are a filterable table of `{key: [name, endpoint with {url} {title} {image}]}`; icons are masks over `assets/icons/social/{key}.svg`, coloured by the palette. `assets/js/share.js` reveals the Copy link button when `navigator.clipboard` is available in a secure context (with "Copied" and failure feedback) and the More… button when `navigator.share` exists.
@@ -279,6 +282,8 @@ Since 3.21.0 the theme does the work of four plugins. Each of the last three tur
 - Reading progress bar, `inc/progress.php`. On singular views of the chosen types (never the front page) `wp_body_open` prints `div.ih-progress` with `aria-hidden` and `hidden`; `assets/js/progress.js` unhides it and sets `--ih-read` from a passive scroll listener through `requestAnimationFrame`. It is decorative because the scroll bar carries the same information and a live `progressbar` would be announced on every scroll. Above 600 pixels a top bar sits under the admin bar; below, the admin bar (z-index 99999) covers it until it scrolls away.
 - Unlisted posts, `inc/unlist.php` and `inc/unlist-admin.php`, after Unlist Posts & Pages 1.2.1: `posts_where` (not singular, not an admin screen, not an AJAX call from this admin), `get_next_post_where` and `get_previous_post_where`, `wp_robots` (and Yoast's robots emptied), `rank_math/frontend/robots`, `wp_list_pages_excludes`, `get_pages`, `wp_sitemaps_posts_query_args`, `rank_math/sitemap/entry`, `rank_math/sitemap/posts_to_exclude`, the image sitemap, and the "Read next" row through `render_block_core/group`. Admin: the side box, the column, Quick Edit (`assets/js/unlist-admin.js`), Bulk Edit, the post state and the Unlisted view. The truth is the post meta `_injil_help_unlisted`; `injil_help_unlist_rebuild()` writes the option `injil_help_unlisted` from it and mirrors it to `unlist_posts`, and `injil_help_unlist_sync()` takes over a change the plugin made to that list. `injil_help_unlisted_live_ids()` reads whichever list is live.
 - Search addresses, `inc/search-permalinks.php`, after Pretty Search Permalinks 1.3: the base from `injil_help_search_base` on `init`; a field under Settings › Permalinks › Optional saved with the screen's `update-permalink` nonce; a 301 at `template_redirect` from `?s=` to `/{base}/{term}/` with `/page/N/` and other arguments kept, none for an empty term or a feed. `injil_help_search_pretty_url()` builds the address. Core already has the rules for the base; they are flushed once per change of `INJIL_HELP_RULES`.
+
+`php tests/toc-test.php` checks the contents list: the shortcode marker, ids that are kept and never repeated, nesting that stays balanced when levels jump or fall, the automatic list, and a marker that never reaches an excerpt.
 
 `php tests/plugin-features-test.php` checks the unlisted filtering and the search addresses.
 
@@ -301,7 +306,7 @@ Since 3.21.0 the theme does the work of four plugins. Each of the last three tur
 | `injil_help_search_reserved_bases( array )` | words the search base may not take |
 | `injil_help_breadcrumb_trail( array )`, `injil_help_breadcrumb_html( string )` | edit the breadcrumb trail, or its markup |
 | `injil_help_contextual_links_enabled( bool, WP_Post )`, `injil_help_contextual_links_map( array )` | switch contextual links off for one page; change the shared phrase map |
-| `injil_help_remote_images( bool )` | serve plates that have no Media Library copy from Commons and Pexels |
+| `injil_help_remote_images( bool )` | serve plates that have no Media Library copy from Commons and Pexels (never Pixabay) |
 | `injil_help_login_plugin_active( bool )` | whether a log-in plugin owns the log-in screen |
 | `injil_help_sec_rest_allow( array )` | REST route prefixes that may write with non-cookie authentication |
 | `injil_help_owner_digests( array )` | add SHA-1 digests of names the structured data must keep out of everything but the author node (`inc/schema-extend.php`); the built-in ones always stay |

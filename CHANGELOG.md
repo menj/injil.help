@@ -2,11 +2,122 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
-## 3.25.11
+## 3.36.1
 
 The Theme Options page uses the full width of the screen. No feature or setting removed.
 
 - Changed: `assets/css/admin.css` drops the 1080px `max-width` on `.ih-options`, gives switch rows a flexible text column in place of the 1fr/1.6fr split, and loosens the width limits on the header text (70ch to 110ch) and the usage box (90ch to none). The rules at 782px and below are unchanged.
+
+## 3.36.0
+
+Pixabay images, approved by the owner on 7 November 2026.
+
+- Added: 12 Pixabay photographs on nine pages (Torah in Islam, the raised Jesus, Aḥmad, Glossary, Timeline, Borrowing, Manuscripts). An entry has `"source": "pixabay"`, the 1280 px `url` and the `page`; the key is `pixabay-{id}`.
+- Changed: `inc/images.php`, `inc/schema.php` and `inc/schema-extend.php` handle the source; the credit reads "Photo: name, Pixabay Content License." and the structured data names the licence. A Pixabay plate shows only from its Media Library copy, since the licence forbids hotlinking.
+- Changed: `SSOT.md`, the credits page, the privacy policy and the readmes name Pixabay; the earlier ban is lifted.
+
+## 3.35.0
+
+Six more lexicons from arabiclexicon.hawramani.com, approved by the owner on 7 November 2026: al-Fīrūzābādī (already used), Ghulām Thaʿlab, Salmoné, Ḥamīd al-Dīn al-Farāhī, Ibn Abī Thābit and Ibn Fāris.
+
+- Added: Ibn Fāris's *Maqāyīs al-Lugha* on Kalima (the word extends to a story and a whole ode, with 4:46), Tawaffā (to take all of it and leave nothing), al-Māʾida (two roots, motion and feeding) and al-Masīḥ (one side of the face wiped, whence the Dajjāl).
+- Added: Ghulām Thaʿlab's *al-ʿAsharāt* on Injīl: the senses of *najl*, among them "child", and the view that Injīl is taken from all of them.
+- Changed: `SSOT.md` adds Ghulām Thaʿlab, Salmoné, al-Farāhī, Ibn Abī Thābit and Ibn Fāris to the approved lexicons.
+
+Salmoné, al-Farāhī and Ibn Abī Thābit are approved and not yet used: no Glossary term called for them.
+
+## 3.34.0
+
+The Glossary and two Qur'an pages draw on more of the classical dictionaries at arabiclexicon.hawramani.com. The owner approved the sources on 7 November 2026.
+
+- Added: Abū Ḥayyān's *Tuḥfat al-Arīb* on Injīl (from *najl*, "origin"), Zabūr, al-Masīḥ (six views of its derivation), Rūḥ ("God gave him life"), al-Ḥawāriyyūn ("the chosen of the prophets"), Āya, Fiṭra.
+- Added: al-Rāghib al-Iṣfahānī's *al-Mufradāt* on Zabūr, Kalima (the reasons ʿĪsā is called a word), Rūḥ (called a spirit for raising the dead), al-Ḥawāriyyūn (fullers, hunters, or purifiers of souls) and al-Māʾida (food or knowledge).
+- Added: al-Zamakhsharī's *Asās al-Balāgha* on Muhaymin and Fiṭra ("every child is born on the *fiṭra*"), and al-Fīrūzābādī's *al-Qāmūs al-Muḥīṭ* on Tawaffā.
+- Added: the page on the Messiah in Islam gives al-Rāghib's reasons for calling ʿĪsā a word and a spirit, and the table page gives his two views of what the disciples asked for. Both list him under Sources.
+- Changed: `SSOT.md` records the approved list of Arabic lexicons and the limit on quoting them.
+
+Each Arabic phrase was read in the entry it comes from.
+
+## 3.33.0
+
+More manuscript images, matched to the verses each page covers. The owner repeated the list of image sources on 7 November 2026.
+
+- Added: 56 images from Wikimedia Commons, all public domain and all manuscripts: the early papyri of Matthew, Mark, Luke and John. A gospel section gets the leaves that carry its own verses, for example Papyrus 102 (Matthew 4:11-12) for the baptism and temptation, and Papyrus 52 (John 18:31-33) for the trial. The pages for Matthew and Luke take the rest of their papyri.
+- Each caption gives the papyrus number, the library and the passage, and the alt text says it is a Greek papyrus fragment. No image repeats on another page, and no image already on a page changed.
+- Result: 168 images on 70 pages; 22 pages have the full four, up from 7.
+- Not changed: the rule in `SSOT.md` that every image is a manuscript or an inscription.
+
+## 3.32.0
+
+The layout reads at every width, and the Gospel According to Islam takes in six early writings.
+
+- Changed: the reading column is the default content width, 720px of text under the 1240px header, footer, front page and grids. Full width had been the default since 3.6.1 and ran each line of text across the whole screen, about 1,870px on a 1,920px display. A site on that default moves to the reading column once (option `injil_help_width_312`); choosing full width again under Theme Options > Branding keeps it.
+- Changed: in every width, running text stops at `--ih-measure`, 46rem: paragraphs, lists, headings, folds, answer capsules, asides and the intro of section heads. Grids, tables, plates, the hero and the dilemma diagram keep the full width. Checked at 390, 768, 1,024, 1,440 and 1,920px on twelve pages: nothing scrolls sideways.
+- Added: sayings of Jesus from 1 Clement, the Epistle of Barnabas, the Gospel of Mary, the Epistle of the Apostles, Tatian's Diatessaron and the Didache, each tested against the Qur'an. The 21 that do not contradict it are woven into sections 8, 9, 13, 18, 21, 22 and 24 of the Gospel According to Islam with a colour mark and a note (`inc/data/early-writings.json`). The Didache appears in notes only.
+- Added: `/gospel-according-to-islam/early-writings/`, which names the sources, the translations and the rule, and `/gospel-according-to-islam/early-writings/set-aside/`, which lists the 26 passages left out with the reason for each. They include the Epistle of the Apostles' prophecy of Paul (chapters 31 and 33), set aside because it has Jesus speak from heaven after God raised him (Qur'an 5:117).
+- Changed: the translations are in the public domain: Roberts and Donaldson (1 Clement, Barnabas), M. R. James, 1924 (the Epistle of the Apostles), Mark Mattison (the Gospel of Mary), Hope Hogg (the Diatessaron) and M. B. Riddle (the Didache). The Lightfoot pages at earlychristianwritings.com refused automated requests, so the Ante-Nicene Fathers texts were used for 1 Clement and Barnabas.
+
+## 3.31.0
+
+A contents list for pages, from the plugin the owner supplied on 6 November 2026: Ikram Hawramani's *WordPress Table-of-Contents Shortcode Done Properly* (MIT licence, 2025). The theme takes its shortcode interface and writes its own code, because the plugin cannot work inside a theme as written.
+
+- Added: the `[auto_toc]` shortcode (`inc/toc.php`) with `tags` and `title`, and `assets/css/toc.css`. It lists the headings of a page as a nested list and gives a heading without an id one made from its text.
+- Added: Theme Options > Branding > Layout > "Add a contents list to long pages" (`toc_auto`, off by default). A page with 4 or more level-two headings gets the list after the breadcrumb row.
+- Added: a `[toc]` line in the page markup. The Glossary and Objections pages use it.
+- Added: `tests/toc-test.php`, 34 checks.
+- Fixed in the port: the plugin looks for its shortcode at `the_content` priority 99, after WordPress has expanded it at 11, so it finds nothing. The theme leaves a marker at 11 and fills it at 13.
+- Fixed in the port: the plugin gives every heading a new id, which would break the notes anchors and the footnote links. The theme keeps an id the author gave and never repeats one on the page.
+- Fixed in the port: the plugin rewrites the whole text through `DOMDocument`. The theme changes only the opening tag of a heading that lacks an id. The nested list is also closed properly when the levels jump or fall, which the plugin's is not.
+- Changed: `SSOT.md` credits the plugin.
+
+## 3.30.0
+
+The Aḥmad page now names the Companion and the chains behind the ḥadīth of the Prophet's five names, which 3.29.0 left unstated because the reference could not be checked then. The owner asked for both on 6 November 2026.
+
+- Added: the Companion is Jubayr ibn Muṭʿim, and the ḥadīth is in al-Bukhārī (3532) and Muslim (2354) as well as Mālik's *Muwaṭṭaʾ*. The numbers are al-Rūdānī's, from *Jamʿ al-fawāʾid* no. 6358.
+- Added: a short biography of Jubayr from Ibn ʿAbd al-Barr's *al-Istīʿāb*, with a link to his entry in the Hadith Transmitters Encyclopedia.
+- Added: three chains found in Mālik's *Muwaṭṭaʾ*, Ibn Wahb's *Jāmiʿ* and Ibn al-Ghaṭrīf's *Juzʾ*, written one to a line in the form HadithGraph reads. Each runs through al-Zuhrī, Muḥammad ibn Jubayr and Jubayr ibn Muṭʿim.
+- Changed: `SSOT.md` credits turath.io, whose full-text search was used to check the ḥadīth against the books. Nothing is quoted from it.
+
+Each chain was read in the Arabic text of the book it names. The chains of al-Bukhārī and Muslim themselves were not read, so none is given for them.
+
+## 3.29.0
+
+Two reading aids from hawramani.com, approved by the owner on 6 November 2026: the Hadith Transmitters Encyclopedia (hadithtransmitters.hawramani.com) and HadithGraph (hawramani.com/hadithgraph/).
+
+- Added: a Glossary entry for Isnād and Rijāl that explains the terms and links to both tools and to the instructions for HadithGraph.
+- Added: the Aḥmad page says where a reader can look up each transmitter in the chain of the ḥadīth it cites, and draw the chains. Both tools are listed under Sources there.
+- Changed: `SSOT.md` credits Ikram Hawramani's two tools as reading aids. The site quotes nothing from them.
+
+The theme fetches nothing from either site. The links open only when a reader clicks them. The two tools are third-party services: the Encyclopedia is a search over biographical dictionaries, and HadithGraph runs in the reader's browser on chains the reader types in.
+
+## 3.28.0
+
+Injīl and Tawrāt, which Lane's lexicon does not treat, now rest on the other classical dictionaries at arabiclexicon.hawramani.com. The owner asked for a second source on 6 November 2026.
+
+- Added: the Glossary entries for Injīl and Tawrāt report the classical views. Ibn Manẓūr calls Injīl a Hebrew or Syriac name and records the view that it is Arabic; al-Fayyūmī gives the derivation from *najaltuhu*. Abū Mūsā al-Madīnī reads Tawrāt as "brightness and light", and al-Rāghib al-Iṣfahānī as "the book they inherited from Mūsā".
+- Added: the pages on the Injīl and the Torah in Islam carry the same, with Jawharī's definition of the Injīl, Ibn Manẓūr's note on the ḥadīth "whose chests are their gospels", and the lexicons under Sources.
+- Changed: `SSOT.md` names the dictionaries and says the English renderings of their Arabic are the site's own.
+
+The modern view stays beside them: Jeffery traces Injīl to the Greek *euangelion*, and Tawrāt to the Hebrew *torah*.
+
+## 3.27.0
+
+Lane's Arabic-English Lexicon now backs more of the Arabic on the site, under the owner's approval of 6 November 2026.
+
+- Added: Lane glosses for Zabūr, Rūḥ, ʿAbd, Ahl al-Kitāb, Naṣārā, Tawaffā, al-Māʾida and Fiṭra in the Glossary, each a few quoted words with a link to the entry.
+- Added: the page on the end of ʿĪsā's earthly mission cites Lane on *tawaffā* (death or sleep), and the table page gives the Arabic derivations of *māʾida* beside the Ethiopic loanword view. Both list the lexicon under Sources.
+- Not added: Injīl, Tawrāt, Muhaymin, Āya, Shirk and Sūra. The Lane text on the Hawramani site has no usable entry for them.
+
+## 3.26.0
+
+The Glossary and the Aḥmad page cite Lane's Arabic-English Lexicon. The owner approved the source on 6 November 2026.
+
+- Added: short glosses from Lane for al-Masīḥ, al-Ḥawāriyyūn, Taḥrīf and Aḥmad in the Glossary. Each quotes a few words and links to the entry on arabiclexicon.hawramani.com.
+- Added: the Aḥmad page cites Lane for the root ḥ-m-d and lists the lexicon under Sources.
+- Changed: `SSOT.md` names Lane and the Hawramani site among the credits and says how a gloss is written.
+
+The theme fetches nothing from that site. The links open only when a reader clicks them.
 
 ## 3.25.10
 
