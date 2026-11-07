@@ -365,6 +365,7 @@
     "resources/glossary": [
         "resources/timeline",
         "resources/sources",
+        "resources/dictionaries",
         "method",
         "islamic-dilemma/what-is-injil"
     ],
@@ -474,5 +475,10 @@
         "gospel-according-to-islam/early-writings",
         "method",
         "gospels/thomas/set-aside"
+    ],
+    "resources/dictionaries": [
+        "resources/glossary",
+        "resources/sources",
+        "islamic-dilemma/what-is-injil"
     ]
 }

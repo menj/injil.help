@@ -2,6 +2,13 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.38.0
+
+The dictionaries page.
+
+- Added: `resources/dictionaries` ("Arabic dictionaries"), the 44 lexicons of arabiclexicon.hawramani.com that the website consults, in seven groups, each with author, work, one plain line and a link. Page count 182 to 183.
+- Changed: the Resources index card and overview, and `related.json` for the glossary, sources and the new page.
+
 ## 3.37.0
 
 Pexels client, built into the theme at the owner's request.

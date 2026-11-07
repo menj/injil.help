@@ -33,9 +33,9 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 |---|---|
 | Type | Block theme (theme.json v3), child of `twentytwentyfive` |
 | Folder, text domain, pattern prefix | `injil-help` |
-| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.37.0) |
+| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.38.0) |
 | PHP in `inc/` | options, social, progress, unlist, unlist-admin, search-permalinks, starter-content, journal, starter-content-pages, gospel-islam, quran-jesus, tafsir, images, seo, schema, schema-content, schema-extend, rank-math, share, contextual-links, login, security, security-detector, error-pages, error-page-html, article (26 files) |
-| Data | `inc/data/` 2.6 MB of JSON: 182 starter pages, the 8 Journal posts (`posts.json`), the gospel narrative, the Qur'anic passages, Thomas (woven sections and two full texts), the infancy gospels, the substitution witnesses, eight commentaries (315,000 words) |
+| Data | `inc/data/` 2.6 MB of JSON: 183 starter pages, the 8 Journal posts (`posts.json`), the gospel narrative, the Qur'anic passages, Thomas (woven sections and two full texts), the infancy gospels, the substitution witnesses, eight commentaries (315,000 words) |
 | Front-end assets | `style.css` 32 KB; `assets/css/ornament.css` 12 KB, `share.css` 3 KB, `bible.css` 3 KB, `login.css` 7 KB, `journal.css` 2 KB, `responsive.css` 2 KB (phone header, touch targets, focus ring, loaded on every view); `assets/js/ornament.js` 3 KB, `share.js` 2 KB; all plain, no build step |
 | Fonts | 16 MB in `assets/fonts/`, 18 font families with 29 `fontFace` entries in `theme.json` |
 | Admin | one tabbed page, Appearance › Theme Options, option `injil_help_options` |
@@ -45,10 +45,10 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 
 - WordPress 6.6 or later, PHP 7.4 or later (tested on 8.x). Twenty Twenty-Five installed; it may be inactive but must not be deleted.
 - Pretty permalinks. The theme sets `/%postname%/` on activation if the structure is empty.
-- Memory: the starter-content run that creates or rewrites 182 pages in one request works within WordPress's default 40 MB; on hosts with a lower `memory_limit` raise it to 128 MB for the first admin load after activation or an update.
+- Memory: the starter-content run that creates or rewrites 183 pages in one request works within WordPress's default 40 MB; on hosts with a lower `memory_limit` raise it to 128 MB for the first admin load after activation or an update.
 - `max_input_vars` and `post_max_size`: the largest starter pages (gospel sections 1, 2 and 27, 370 to 560 KB of block HTML) exceed PHP's default `post_max_size` of 8 MB only on hosts that set it lower; saving them in the block editor needs `max_input_vars` of at least 5000. Reading them needs nothing.
 - Page cache: strongly advised. The large pages are generated once and served from the database; a full-page cache (host-level, or any cache plugin) keeps them off PHP entirely. An object cache helps the options page but is not required.
-- Database: the 182 pages add about 6 MB to `wp_posts`; revisions are suppressed for theme-written pages.
+- Database: the 183 pages add about 6 MB to `wp_posts`; revisions are suppressed for theme-written pages.
 - Outbound requests: none at runtime. Manuscript images are loaded by the visitor's browser from `upload.wikimedia.org`; nothing is fetched server-side.
 - No build tools, Composer or npm. Upload the folder and activate.
 
