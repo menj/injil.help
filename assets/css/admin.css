@@ -14,7 +14,6 @@
  --ih-a-off:#8c8f94;
  --ih-a-radius:10px;
  --ih-a-gap:16px;
- max-width:1080px;
 }
 .ih-options .dashicons{flex:none}
 
@@ -22,7 +21,7 @@
 .ih-header{display:flex;align-items:flex-start;gap:14px;margin:18px 0 6px}
 .ih-header__icon.dashicons{width:44px;height:44px;font-size:28px;line-height:44px;text-align:center;border-radius:var(--ih-a-radius);background:var(--ih-a-primary);color:#fff}
 .ih-options .ih-header h1{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0;padding:0;font-weight:600;font-size:23px;line-height:1.3}
-.ih-header__desc{margin:4px 0 0;color:var(--ih-a-muted);font-size:13px;max-width:70ch}
+.ih-header__desc{margin:4px 0 0;color:var(--ih-a-muted);font-size:13px;max-width:110ch}
 .ih-badge{display:inline-block;padding:2px 10px;border-radius:999px;background:color-mix(in srgb,var(--ih-a-primary) 12%,#fff);color:var(--ih-a-primary);font-size:12px;font-weight:600;line-height:20px}
 
 /* Tabs */
@@ -43,7 +42,7 @@
 .ih-options .ih-card__title{margin:16px 0 4px;padding:0;font-size:15px;font-weight:600;color:var(--ih-a-ink)}
 .ih-card__desc{margin:0 0 8px;color:var(--ih-a-muted)}
 .ih-usage{display:flex;gap:10px;align-items:flex-start;margin:0 0 var(--ih-a-gap);padding:12px 16px;border-radius:var(--ih-a-radius);background:color-mix(in srgb,var(--ih-a-primary) 7%,#fff);border-left:4px solid var(--ih-a-primary)}
-.ih-usage p{margin:0;max-width:90ch}
+.ih-usage p{margin:0}
 .ih-usage .dashicons{color:var(--ih-a-primary);margin-top:1px}
 
 /* Field rows: label left, control right */
@@ -53,7 +52,7 @@ fieldset.ih-field{padding:16px 0}
 .ih-field__label{display:block;font-weight:600;color:var(--ih-a-ink);font-size:14px;padding:0;margin:0 0 2px}
 .ih-field__text .description{margin:4px 0 0}
 .ih-field__control{min-width:0}
-.ih-field--toggle{align-items:center}
+.ih-field--toggle{align-items:center;grid-template-columns:minmax(0,1fr) auto}
 .ih-field--toggle .ih-field__control{justify-self:end}
 .ih-field-note{margin:0 0 12px}
 

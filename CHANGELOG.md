@@ -2,6 +2,12 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.36.1
+
+The Theme Options page uses the full width of the screen. No feature or setting removed.
+
+- Changed: `assets/css/admin.css` drops the 1080px `max-width` on `.ih-options`, gives switch rows a flexible text column in place of the 1fr/1.6fr split, and loosens the width limits on the header text (70ch to 110ch) and the usage box (90ch to none). The rules at 782px and below are unchanged.
+
 ## 3.36.0
 
 Pixabay images, approved by the owner on 7 November 2026.
