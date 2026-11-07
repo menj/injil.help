@@ -441,7 +441,36 @@
         "page": "https://www.pexels.com/photo/a-close-up-shot-of-a-sefer-torah-5986493/",
         "alt": "An open Torah scroll on its wooden rollers, the Hebrew text in columns",
         "caption": "A Sefer Torah: the five books of Moses written by hand on a parchment scroll, as the synagogue still reads them.",
-        "credit": "Photo: cottonbro studio, Pexels License"
+        "credit": "Photo: cottonbro studio, Pexels License",
+        "more": [
+            {
+                "file": "pixabay-5252775",
+                "alt": "Silver scrolls from Ketef Hinnom inscribed with the priestly blessing",
+                "caption": "The silver scrolls of Ketef Hinnom, found in a burial cave in Jerusalem; they carry the priestly blessing of Numbers 6:24-26.",
+                "credit": "Photo: blenderfan, Pixabay Content License.",
+                "source": "pixabay",
+                "url": "https://cdn.pixabay.com/photo/2020/06/02/22/05/ketef-5252775_1280.jpg",
+                "page": "https://pixabay.com/photos/ketef-hinnom-silver-scrolls-5252775/"
+            },
+            {
+                "file": "pixabay-3524065",
+                "alt": "A Torah scroll, open at a column of Hebrew text",
+                "caption": "A Torah scroll in a synagogue.",
+                "credit": "Photo: falco, Pixabay Content License.",
+                "source": "pixabay",
+                "url": "https://cdn.pixabay.com/photo/2018/07/08/15/03/bible-3524065_1280.jpg",
+                "page": "https://pixabay.com/photos/bible-torah-writing-scroll-read-3524065/"
+            },
+            {
+                "file": "pixabay-4299038",
+                "alt": "A Torah scroll",
+                "caption": "A Torah scroll.",
+                "credit": "Photo: nellyaltenburger, Pixabay Content License.",
+                "source": "pixabay",
+                "url": "https://cdn.pixabay.com/photo/2019/06/25/20/57/torah-4299038_1280.jpg",
+                "page": "https://pixabay.com/photos/torah-scroll-israel-jewish-4299038/"
+            }
+        ]
     },
     "why-islam": {
         "file": "pexels-18491910",
@@ -820,7 +849,27 @@
         "file": "Bifolio from a Koran.jpg",
         "alt": "Bifolio from a Koran: manuscript page",
         "caption": "Bifolio from a Koran.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "pixabay-2478729",
+                "alt": "An illuminated page of the Qur’an",
+                "caption": "An illuminated page of the Qur’an.",
+                "credit": "Photo: kaheel7, Pixabay Content License.",
+                "source": "pixabay",
+                "url": "https://cdn.pixabay.com/photo/2017/07/06/17/33/quran-2478729_1280.jpg",
+                "page": "https://pixabay.com/photos/quran-verse-islam-2478729/"
+            },
+            {
+                "file": "pixabay-1207509",
+                "alt": "Āyat al-Kursī, Qur’an 2:255, in Arabic calligraphy",
+                "caption": "Āyat al-Kursī (Qur’an 2:255) in Arabic calligraphy.",
+                "credit": "Photo: sonofara, Pixabay Content License.",
+                "source": "pixabay",
+                "url": "https://cdn.pixabay.com/photo/2016/02/18/16/30/ayat-al-kursi-1207509_1280.jpg",
+                "page": "https://pixabay.com/photos/ayat-al-kursi-islam-muslims-1207509/"
+            }
+        ]
     },
     "quran/ahmad": {
         "file": "Birmingham Quran manuscript folio 1 verso.jpg",
@@ -839,6 +888,15 @@
                 "alt": "Folio from the Blue Qur'an (CBL Is 1405A, f. 1b), 0950: manuscript page",
                 "caption": "Folio from the Blue Qur'an (CBL Is 1405A, f. 1b), 0950.",
                 "credit": "Public domain."
+            },
+            {
+                "file": "pixabay-64802",
+                "alt": "Arabic calligraphy in blue tilework",
+                "caption": "Arabic calligraphy in blue tilework.",
+                "credit": "Photo: Hans, Pixabay Content License.",
+                "source": "pixabay",
+                "url": "https://cdn.pixabay.com/photo/2012/11/06/23/44/font-64802_1280.jpg",
+                "page": "https://pixabay.com/photos/writing-characters-turkish-islam-64802/"
             }
         ]
     },
@@ -872,7 +930,27 @@
         "file": "P. Oxy. 655.jpg",
         "alt": "P. Oxy. 655: manuscript page",
         "caption": "P. Oxy. 655.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "pixabay-1866286",
+                "alt": "A medieval handwritten page on parchment",
+                "caption": "A medieval handwritten page on parchment.",
+                "credit": "Photo: mzmatuszewski0, Pixabay Content License.",
+                "source": "pixabay",
+                "url": "https://cdn.pixabay.com/photo/2016/11/28/22/57/medieval-1866286_1280.jpg",
+                "page": "https://pixabay.com/photos/medieval-page-writing-antique-card-1866286/"
+            },
+            {
+                "file": "pixabay-3817835",
+                "alt": "A Latin manuscript charter",
+                "caption": "A Latin manuscript charter.",
+                "credit": "Photo: artyangel, Pixabay Content License.",
+                "source": "pixabay",
+                "url": "https://cdn.pixabay.com/photo/2018/11/15/18/41/old-paper-3817835_1280.jpg",
+                "page": "https://pixabay.com/photos/old-paper-document-charter-latin-3817835/"
+            }
+        ]
     },
     "resources/borrowing": {
         "file": "Folio from a q manuscript 1180.jpg",
@@ -891,6 +969,15 @@
                 "alt": "Gospel in Syriac, Syria, Israel, or West Bank, c. 1700-1800 AD - Royal Ontario Museum - DSC09613, 2011-11-20 17:17:12: manuscript page",
                 "caption": "Gospel in Syriac, Syria, Israel, or West Bank, c. 1700-1800 AD - Royal Ontario Museum - DSC09613, 2011-11-20 17:17:12.",
                 "credit": "Daderot, CC0."
+            },
+            {
+                "file": "pixabay-2067823",
+                "alt": "Hieroglyphic text carved in stone",
+                "caption": "Hieroglyphic text carved in stone.",
+                "credit": "Photo: tumtac, Pixabay Content License.",
+                "source": "pixabay",
+                "url": "https://cdn.pixabay.com/photo/2017/02/15/07/45/text-2067823_1280.jpg",
+                "page": "https://pixabay.com/photos/text-egypt-pyramid-symbol-message-2067823/"
             }
         ]
     },
@@ -1101,6 +1188,35 @@
                 "alt": "Greek papyrus fragment, Papyrus 64, verso: Matthew 26:22-23; 31-33",
                 "caption": "Papyrus 64, Oxford, Magdalen College MS Gr 17, verso: Matthew 26:22-23; 31-33.",
                 "credit": "Public domain."
+            }
+        ]
+    },
+    "resources/timeline": {
+        "file": "pixabay-1827228",
+        "alt": "A clay tablet inscribed in cuneiform",
+        "caption": "A clay tablet in cuneiform script, from Mesopotamia.",
+        "credit": "Photo: mzmatuszewski0, Pixabay Content License.",
+        "source": "pixabay",
+        "url": "https://cdn.pixabay.com/photo/2016/11/15/19/14/ancient-1827228_1280.jpg",
+        "page": "https://pixabay.com/photos/ancient-sumerian-assyrian-1827228/",
+        "more": [
+            {
+                "file": "pixabay-63004",
+                "alt": "An ancient Egyptian papyrus with written text",
+                "caption": "An ancient Egyptian papyrus.",
+                "credit": "Photo: WikiImages, Pixabay Content License.",
+                "source": "pixabay",
+                "url": "https://cdn.pixabay.com/photo/2012/10/26/01/19/papyrus-63004_1280.jpg",
+                "page": "https://pixabay.com/photos/papyrus-hieroglyphs-ancient-egyptian-63004/"
+            },
+            {
+                "file": "pixabay-429863",
+                "alt": "Hieroglyphic inscription carved at Karnak",
+                "caption": "Hieroglyphs carved on a wall at Karnak, Luxor.",
+                "credit": "Photo: AlexPee07, Pixabay Content License.",
+                "source": "pixabay",
+                "url": "https://cdn.pixabay.com/photo/2014/08/28/14/55/hieroglyphics-429863_1280.jpg",
+                "page": "https://pixabay.com/photos/hieroglyphs-pharaohs-egypt-luxor-429863/"
             }
         ]
     }

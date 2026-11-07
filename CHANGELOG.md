@@ -2,6 +2,14 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.36.0
+
+Pixabay images, approved by the owner on 7 November 2026.
+
+- Added: 12 Pixabay photographs on nine pages (Torah in Islam, the raised Jesus, Aḥmad, Glossary, Timeline, Borrowing, Manuscripts). An entry has `"source": "pixabay"`, the 1280 px `url` and the `page`; the key is `pixabay-{id}`.
+- Changed: `inc/images.php`, `inc/schema.php` and `inc/schema-extend.php` handle the source; the credit reads "Photo: name, Pixabay Content License." and the structured data names the licence. A Pixabay plate shows only from its Media Library copy, since the licence forbids hotlinking.
+- Changed: `SSOT.md`, the credits page, the privacy policy and the readmes name Pixabay; the earlier ban is lifted.
+
 ## 3.35.0
 
 Six more lexicons from arabiclexicon.hawramani.com, approved by the owner on 7 November 2026: al-Fīrūzābādī (already used), Ghulām Thaʿlab, Salmoné, Ḥamīd al-Dīn al-Farāhī, Ibn Abī Thābit and Ibn Fāris.

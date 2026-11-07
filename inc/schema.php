@@ -472,6 +472,9 @@ function injil_help_collect_images( $html ) {
 		if ( false !== stripos( $caption, 'Pexels License' ) ) {
 			$node['license'] = 'https://www.pexels.com/license/';
 		}
+		if ( false !== stripos( $caption, 'Pixabay Content License' ) ) {
+			$node['license'] = 'https://pixabay.com/service/license-summary/';
+		}
 		if ( preg_match( '#Photo: ([^.,]+)#', $caption, $ph ) ) {
 			$node['creator']         = array(
 				'@type' => 'Person',

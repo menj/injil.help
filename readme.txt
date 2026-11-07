@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.35.0
+Stable tag: 3.36.0
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -88,7 +88,7 @@ Licensing: Sabon Next LT (Linotype) and Kagnue (Youthlabs Studio) are commercial
 * The keyword appears in the home kicker and lede, the home dilemma section, the first nav item, the first two FAQs and the footer. Link to /islamic-dilemma/ from every new article that touches Qur'an 5:47, taḥrīf or the identity of the Injīl, with varied anchor text.
 * The default social image can be replaced under Theme Options > SEO.
 == Images ==
-Manuscript images come from Wikimedia Commons, and five photographs of manuscripts and an inscription from Pexels, each with its credit and a link to its source page in the caption. All are public domain except the Kairouan Qur'an photograph (Richard Mortel, CC BY 2.0), which must keep its credit. Every image carries a descriptive alt attribute (what it is, its date and holding institution) and a short title; keep that pattern for new images, and write alt text for the subject, not for decoration. WordPress adds lazy loading itself. The default Open Graph image is a bundled copy of the Birmingham Qur'an manuscript (assets/images/og-default.jpg, public domain, 1280 × 833); replace it under Theme Options > SEO. To host the manuscript images yourself, download from the linked Commons page into the Media Library and swap the URL. From 3.20.0 readers are served the Media Library copy only, and a plate without one is hidden, unless Theme Options > Content allows remote plates; with that switch on, readers' browsers contact upload.wikimedia.org and images.pexels.com, and the privacy policy should say so. Thirty-five article pages also carry a plate listed in inc/data/images.json, and the same image becomes the page's featured image once the host has fetched it (six pages per admin screen load; a failed fetch is retried after a day). To change a page's image, edit its entry: the Commons file name without "File:", the alt text, the caption and the credit. Use only public-domain or CC0 files from Commons, or Pexels photographs credited as "Photo: name, Pexels License" with source, url and page set; check that the file exists.
+Manuscript images come from Wikimedia Commons, five photographs from Pexels and twelve from Pixabay (manuscripts, scrolls, tablets and inscriptions), each with its credit and a link to its source page in the caption. All are public domain except the Kairouan Qur'an photograph (Richard Mortel, CC BY 2.0), which must keep its credit. Every image carries a descriptive alt attribute (what it is, its date and holding institution) and a short title; keep that pattern for new images, and write alt text for the subject, not for decoration. WordPress adds lazy loading itself. The default Open Graph image is a bundled copy of the Birmingham Qur'an manuscript (assets/images/og-default.jpg, public domain, 1280 × 833); replace it under Theme Options > SEO. To host the manuscript images yourself, download from the linked Commons page into the Media Library and swap the URL. From 3.20.0 readers are served the Media Library copy only, and a plate without one is hidden, unless Theme Options > Content allows remote plates; with that switch on, readers' browsers contact upload.wikimedia.org and images.pexels.com, and the privacy policy should say so. Thirty-five article pages also carry a plate listed in inc/data/images.json, and the same image becomes the page's featured image once the host has fetched it (six pages per admin screen load; a failed fetch is retried after a day). To change a page's image, edit its entry: the Commons file name without "File:", the alt text, the caption and the credit. Use only public-domain or CC0 files from Commons, or Pexels photographs credited as "Photo: name, Pexels License" with source, url and page set; check that the file exists.
 
 == Branding ==
 * Brandmark: assets/brandmark.svg (an open codex with rays of light, Qur'an 5:46). It appears as the link before the site title in the header and at the top of the footer's first column (class ih-mark; the footer adds ih-mark-foot).
@@ -125,7 +125,7 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 Type [auto_toc] in a Shortcode block where the list should go. The list links to the page's level-two and level-three headings, and gives a heading an address if it has none. To have a list on every long page, switch on the option in Theme Options > Branding.
 
 = Why are some manuscript plates missing on a new site? =
-Remote plates are off by default. The theme copies each plate from Wikimedia Commons or Pexels into the Media Library, six files per admin screen load, and shows a plate once its copy is there. Load a few admin screens, or switch on Theme Options > Content > Load plates from Wikimedia Commons and Pexels.
+Remote plates are off by default. The theme copies each plate from Wikimedia Commons, Pexels or Pixabay into the Media Library, six files per admin screen load, and shows a plate once its copy is there. Load a few admin screens, or switch on Theme Options > Content > Load plates from Wikimedia Commons and Pexels.
 
 = Can I use the theme on another site? =
 It is built for injil.help. Sabon Next LT and Kagnue are commercial fonts licensed to this site, so another site needs its own licences for them.
@@ -160,6 +160,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.36.0 =
+* Twelve photographs from Pixabay (scrolls, a silver amulet, tablets, papyri, parchment, calligraphy) join the plates of nine pages. Each is copied into the Media Library and never loads from Pixabay in a reader's browser.
 = 3.35.0 =
 * Five Glossary terms gain a classical gloss from Ibn Fāris and Ghulām Thaʿlab: Injīl, Kalima, Tawaffā, al-Māʾida and al-Masīḥ.
 = 3.34.0 =
@@ -472,6 +474,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * New screenshot.
 
 == Upgrade Notice ==
+= 3.36.0 =
+Upload the whole theme. Nine pages refresh on the first admin load, and any edits made to them are replaced.
 = 3.35.0 =
 Upload the whole theme. The Glossary refreshes on the first admin load, and any edits made to it are replaced.
 = 3.34.0 =
@@ -523,7 +527,7 @@ Fonts (assets/fonts), each under its own licence:
 * Dubidam Arabic (NamelaType): free personal-use licence per its metadata; a web licence is the site owner's to hold.
 * Arslan Wessam (Arslan, Dev-Point.com), Ferments (Haksen Studio), Estrangelo Edessa (Beth Mardutho) and Angel (JuliaL, freeware; Angel-README.txt beside it): free to use as their authors publish them.
 
-Images: assets/brandmark.svg, assets/images/divider.svg, assets/images/arrow-next*.webp and the icons in assets/icons are the theme's own, GPLv2 or later. assets/images/lanat-allah.svg is outlined from Dubidam Arabic. The default social image, assets/images/og-default.jpg, is the Birmingham Qur'an manuscript, public domain. The plates listed in inc/data/images.json and in the patterns are public domain or CC0 from Wikimedia Commons, Pexels photographs under the Pexels License, and one CC BY 2.0 photograph (Richard Mortel); each caption carries its credit and source.
+Images: assets/brandmark.svg, assets/images/divider.svg, assets/images/arrow-next*.webp and the icons in assets/icons are the theme's own, GPLv2 or later. assets/images/lanat-allah.svg is outlined from Dubidam Arabic. The default social image, assets/images/og-default.jpg, is the Birmingham Qur'an manuscript, public domain. The plates listed in inc/data/images.json and in the patterns are public domain or CC0 from Wikimedia Commons, Pexels photographs under the Pexels License, Pixabay photographs under the Pixabay Content License, and one CC BY 2.0 photograph (Richard Mortel); each caption carries its credit and source.
 
 == Credits ==
 Contents list: the [auto_toc] shortcode follows the interface of Ikram Hawramani's WordPress Table-of-Contents Shortcode Done Properly (MIT licence, 2025). The code is the theme's own.
