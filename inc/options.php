@@ -718,7 +718,7 @@ function injil_help_render_options() {
 
 			<section class="ih-panel" id="panel-content" role="tabpanel" aria-labelledby="tab-content" tabindex="0">
 				<?php
-				injil_help_ui_usage( __( 'Choose how the gospel text is set and whether plates may load from Wikimedia Commons and Pexels. The list shows every starter page: green has been created, gold is missing. The first button creates the missing pages; the second rewrites every page from the theme, your edits included.', 'injil-help' ) );
+				injil_help_ui_usage( __( 'Choose how the gospel text is set and whether plates may load from Wikimedia Commons, Pexels and Pixabay. The list shows every starter page: green has been created, gold is missing. The first button creates the missing pages; the second rewrites every page from the theme, your edits included.', 'injil-help' ) );
 				injil_help_ui_card_open( __( 'Gospel text', 'injil-help' ) );
 				injil_help_ui_cards(
 					$o,
@@ -734,7 +734,7 @@ function injil_help_render_options() {
 				injil_help_ui_card_close();
 
 				injil_help_ui_card_open( __( 'Images and privacy', 'injil-help' ) );
-				injil_help_ui_toggle( $o, 'remote_images', __( 'Load plates from Wikimedia Commons and Pexels', 'injil-help' ), __( 'Off by default. The theme copies each plate into the Media Library a few at a time on admin screen loads, and visitors are served that copy. A plate with no copy yet is left out of the page. Switch this on to show those plates from their source in the meantime; the browsers of your readers then contact commons.wikimedia.org, upload.wikimedia.org and images.pexels.com.', 'injil-help' ) );
+				injil_help_ui_toggle( $o, 'remote_images', __( 'Load plates from Wikimedia Commons, Pexels and Pixabay', 'injil-help' ), __( 'Off by default. The theme copies each plate into the Media Library a few at a time on admin screen loads, and visitors are served that copy. A plate with no copy yet is left out of the page. Switch this on to show those plates from their source in the meantime; the browsers of your readers then contact commons.wikimedia.org, upload.wikimedia.org and images.pexels.com.', 'injil-help' ) );
 				injil_help_ui_card_close();
 
 				injil_help_ui_card_open( __( 'Starter pages', 'injil-help' ), __( 'The theme creates these pages when it is activated. When the theme is updated, the pages whose text changed are rewritten automatically, a few at a time as you move between admin screens, and pages you have edited are kept. Both buttons work in small batches, show their progress here and report what they did at the top of the screen.', 'injil-help' ) );

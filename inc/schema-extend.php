@@ -235,8 +235,8 @@ function injil_help_schema_enrich_image( $node, $html ) {
 		if ( $credit && ! isset( $node['creditText'] ) ) {
 			$node['creditText'] = $credit;
 		}
-		if ( 'pexels' === ( $entry['source'] ?? '' ) ) {
-			$node['license']            = 'https://www.pexels.com/license/';
+		if ( in_array( (string) ( $entry['source'] ?? '' ), array( 'pexels', 'pixabay' ), true ) ) {
+			$node['license']            = 'pixabay' === $entry['source'] ? 'https://pixabay.com/service/license-summary/' : 'https://www.pexels.com/license/';
 			$node['acquireLicensePage'] = $node['acquireLicensePage'] ?? (string) ( $entry['page'] ?? '' );
 		} else {
 			$node['acquireLicensePage'] = $node['acquireLicensePage'] ?? injil_help_commons_page( $entry['file'] );

@@ -33,7 +33,7 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 |---|---|
 | Type | Block theme (theme.json v3), child of `twentytwentyfive` |
 | Folder, text domain, pattern prefix | `injil-help` |
-| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.35.0) |
+| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.36.0) |
 | PHP in `inc/` | options, social, progress, unlist, unlist-admin, search-permalinks, starter-content, journal, starter-content-pages, gospel-islam, quran-jesus, tafsir, images, seo, schema, schema-content, schema-extend, rank-math, share, contextual-links, login, security, security-detector, error-pages, error-page-html, article (26 files) |
 | Data | `inc/data/` 2.6 MB of JSON: 182 starter pages, the 8 Journal posts (`posts.json`), the gospel narrative, the Qur'anic passages, Thomas (woven sections and two full texts), the infancy gospels, the substitution witnesses, eight commentaries (315,000 words) |
 | Front-end assets | `style.css` 32 KB; `assets/css/ornament.css` 12 KB, `share.css` 3 KB, `bible.css` 3 KB, `login.css` 7 KB, `journal.css` 2 KB, `responsive.css` 2 KB (phone header, touch targets, focus ring, loaded on every view); `assets/js/ornament.js` 3 KB, `share.js` 2 KB; all plain, no build step |
@@ -69,7 +69,7 @@ injil-help/
 ├─ inc/
 │  ├─ options.php         Theme Options page, defaults, sanitiser, body classes, colour CSS
 │  ├─ starter-content.php markup parser, page writer, populate(), activation and update hooks
-│  ├─ images.php          Commons and Pexels plates in page content; featured images sideloaded a few pages per admin load; plates served from the Media Library; the image sitemap
+│  ├─ images.php          Commons, Pexels and Pixabay plates in page content; featured images sideloaded a few pages per admin load; plates served from the Media Library; the image sitemap
 │  ├─ starter-content-pages.php  the page list, merged from the JSON files and the builders
 │  ├─ gospel-islam.php    gospel sections from narrative.json + thomas + substitution + commentaries
 │  ├─ quran-jesus.php     the Qur'anic passages page from quran-jesus.json
@@ -130,7 +130,7 @@ Everything the theme writes to the database is JSON in `inc/data/`: the page def
 | `patterns/{name}.json` | all 34 block patterns: the 17 that supply whole pages (the pillar, the measure, the five section indexes, the FAQs, how the gospel was composed, the corrections log, the five discrepancy tables, the manuscripts table and the sayings-order test), the 8 front-page sections, the 404 page and the 7 building blocks for the editor | `{title, slug, description, categories, keywords?, content[]}`; `content` is the block markup, one line per item, joined with newlines by `injil_help_pattern_file()`, which also refuses a name that is not a plain slug and a file that is malformed |
 | `text.json` | the words the PHP builders put on pages: the commentaries index with its FAQs, the group and part pages, the colophon and the folds (`commentaries`); the running heads, navigation, titles and excerpts of the gospel sections (`gospel`); the title, introduction and source note of The Qur'an on Jesus (`quran_passages`); the "Read next" label (`related`) | `{group: {key: string \| [markup lines]}}`; format strings keep their `sprintf` placeholders; read with `injil_help_text( $group, $key )`. Without this file or `commentaries.json` the page list is empty, so nothing is published with gaps |
 | `commentaries.json` | the eight commentaries and the nine verse groups | `{works: {key: {short, title, author, died, about, source}}, groups: {slug: {former, surah, from, to, name, title, intro}}}`, in display order |
-| `images.json` | up to four images per page that has any, from Commons or Pexels | `{path: {file, alt, caption, credit, more: [{file, alt, caption, credit}]}}`, and for Pexels also `{source: "pexels", url, page}` with `file` set to `pexels-{id}`; `inc/images.php` puts the first plate near the top, spreads the `more` plates through the text, and sideloads each file into the Media Library as AVIF (WebP under 1000 pixels wide), the first as the featured image |
+| `images.json` | up to four images per page that has any, from Commons, Pexels or Pixabay | `{path: {file, alt, caption, credit, more: [{file, alt, caption, credit}]}}`, and for Pexels or Pixabay also `{source: "pexels"|"pixabay", url, page}` with `file` set to `pexels-{id}` or `pixabay-{id}`; `inc/images.php` puts the first plate near the top, spreads the `more` plates through the text, and sideloads each file into the Media Library as AVIF (WebP under 1000 pixels wide), the first as the featured image |
 | `tafsir/{work}.json` | one commentary | `{work, entries: [{surah, from, to, arabic_words, english_words, paragraphs[]}]}` |
 
 `injil_help_starter_pages()` (static-cached per request) concatenates: pillar, gospels, paul, quran, the Qur'an page built by `injil_help_quran_page()`, the commentary pages from `injil_help_tafsir_pages()`, gospel, the 28 gospel pages from `injil_help_gospel_islam_pages()`, bonus, resources, site. Parents precede children in that order, which `populate()` relies on to resolve `post_parent`.
@@ -306,7 +306,7 @@ Since 3.21.0 the theme does the work of four plugins. Each of the last three tur
 | `injil_help_search_reserved_bases( array )` | words the search base may not take |
 | `injil_help_breadcrumb_trail( array )`, `injil_help_breadcrumb_html( string )` | edit the breadcrumb trail, or its markup |
 | `injil_help_contextual_links_enabled( bool, WP_Post )`, `injil_help_contextual_links_map( array )` | switch contextual links off for one page; change the shared phrase map |
-| `injil_help_remote_images( bool )` | serve plates that have no Media Library copy from Commons and Pexels |
+| `injil_help_remote_images( bool )` | serve plates that have no Media Library copy from Commons and Pexels (never Pixabay) |
 | `injil_help_login_plugin_active( bool )` | whether a log-in plugin owns the log-in screen |
 | `injil_help_sec_rest_allow( array )` | REST route prefixes that may write with non-cookie authentication |
 | `injil_help_owner_digests( array )` | add SHA-1 digests of names the structured data must keep out of everything but the author node (`inc/schema-extend.php`); the built-in ones always stay |

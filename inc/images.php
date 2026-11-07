@@ -1,11 +1,12 @@
 <?php
 /**
- * Images for the starter pages, from Wikimedia Commons or Pexels.
+ * Images for the starter pages, from Wikimedia Commons, Pexels or Pixabay.
  *
  * inc/data/images.json maps a page path to one image: { "path": { "file", "alt", "caption", "credit" } },
  * where "file" is the Commons file name without the "File:" prefix. A Pexels photo adds "source": "pexels",
  * "url" (the photo on images.pexels.com) and "page" (its page on pexels.com), and "file" is then only the
- * key the Media Library copy is found by, "pexels-{id}". Each page that has an entry gets a
+ * key the Media Library copy is found by, "pexels-{id}". A Pixabay photo does the same with "source": "pixabay",
+ * "url" (its 1280-pixel file on cdn.pixabay.com), "page" (its page on pixabay.com) and the key "pixabay-{id}". Each page that has an entry gets a
  * plate (a linked figure with the credit in its caption) near the top of its content, and, once the page
  * exists, the same image sideloaded into the Media Library and set as its featured image, which the
  * Open Graph tags and the structured data then use. The sideload runs a few pages at a time on admin
@@ -32,14 +33,30 @@ function injil_help_images() {
 	return $map;
 }
 
-/** The page an image is credited to and licensed from: its Commons page, or its Pexels page. */
-function injil_help_image_page( $img ) {
-	return 'pexels' === ( $img['source'] ?? '' ) ? (string) ( $img['page'] ?? '' ) : injil_help_commons_page( $img['file'] );
+/** The source of an image entry: commons (the default), pexels or pixabay. */
+function injil_help_image_source( $img ) {
+	$source = (string) ( $img['source'] ?? '' );
+	return in_array( $source, array( 'pexels', 'pixabay' ), true ) ? $source : 'commons';
 }
 
-/** A copy of an image at most $width pixels wide: from Commons, or from the Pexels image server, which scales on request. */
+/** The page an image is credited to and licensed from: its Commons, Pexels or Pixabay page. */
+function injil_help_image_page( $img ) {
+	return 'commons' === injil_help_image_source( $img ) ? injil_help_commons_page( $img['file'] ) : (string) ( $img['page'] ?? '' );
+}
+
+/**
+ * A copy of an image at most $width pixels wide: from Commons, from the Pexels image server, which scales
+ * on request, or from Pixabay's 1280-pixel file, which does not.
+ */
 function injil_help_image_url( $img, $width ) {
-	return 'pexels' === ( $img['source'] ?? '' ) ? (string) ( $img['url'] ?? '' ) . '?auto=compress&cs=tinysrgb&w=' . (int) $width : injil_help_commons_url( $img['file'], $width );
+	switch ( injil_help_image_source( $img ) ) {
+		case 'pexels':
+			return (string) ( $img['url'] ?? '' ) . '?auto=compress&cs=tinysrgb&w=' . (int) $width;
+		case 'pixabay':
+			return (string) ( $img['url'] ?? '' );
+		default:
+			return injil_help_commons_url( $img['file'], $width );
+	}
 }
 
 /** The Commons page of a file. */
@@ -57,7 +74,7 @@ function injil_help_image_block( $img ) {
 	$caption = trim( (string) ( $img['caption'] ?? '' ) );
 	$credit  = trim( (string) ( $img['credit'] ?? '' ) );
 	$text    = $caption . ( $caption && $credit ? ' ' : '' ) . $credit . ( $credit && '.' !== substr( $credit, -1 ) ? '.' : '' );
-	$text   .= ' <a href="' . esc_url( injil_help_image_page( $img ) ) . '">' . ( 'pexels' === ( $img['source'] ?? '' ) ? 'Pexels' : 'Wikimedia Commons' ) . '</a>.';
+	$text   .= ' <a href="' . esc_url( injil_help_image_page( $img ) ) . '">' . ( array( 'commons' => 'Wikimedia Commons', 'pexels' => 'Pexels', 'pixabay' => 'Pixabay' )[ injil_help_image_source( $img ) ] ) . '</a>.';
 	return '<!-- wp:image {"sizeSlug":"large","linkDestination":"custom","className":"ih-plate"} -->' . "\n"
 		. '<figure class="wp-block-image size-large ih-plate"><a href="' . esc_url( injil_help_image_page( $img ) ) . '"><img src="' . esc_url( injil_help_image_url( $img, 900 ) ) . '" alt="' . esc_attr( (string) ( $img['alt'] ?? '' ) ) . '"/></a><figcaption class="wp-element-caption">' . wp_kses_post( $text ) . '</figcaption></figure>' . "\n"
 		. "<!-- /wp:image -->\n";
@@ -415,13 +432,13 @@ function injil_help_pattern_images() {
 
 /* ---------- Plates served from the Media Library ---------- */
 
-/** The images.json key ("file") an image address points at: a Commons file name or a Pexels key; '' for any other address. */
+/** The images.json key ("file") an image address points at: a Commons file name, or a Pexels or Pixabay key; '' for any other address. */
 function injil_help_image_key_from_src( $src ) {
 	if ( preg_match( '#commons\.wikimedia\.org/wiki/Special:FilePath/([^?"\#]+)#', (string) $src, $m ) ) {
 		return str_replace( '_', ' ', rawurldecode( $m[1] ) );
 	}
 	foreach ( injil_help_images() as $img ) {
-		if ( 'pexels' === ( $img['source'] ?? '' ) && ! empty( $img['url'] ) && 0 === strpos( (string) $src, (string) $img['url'] ) ) {
+		if ( 'commons' !== injil_help_image_source( $img ) && ! empty( $img['url'] ) && 0 === strpos( (string) $src, (string) $img['url'] ) ) {
 			return (string) $img['file'];
 		}
 	}
@@ -472,10 +489,13 @@ add_filter(
 		$cover = false !== strpos( (string) $html, 'ih-cover-image' );
 		// No remote calls by default: a plate whose only copy is on Wikimedia Commons or Pexels is left
 		// out until the Media Library has it, unless Theme Options > Content allows remote plates.
-		if ( ! injil_help_remote_images_on() && preg_match_all( '/<img\b[^>]*\ssrc="([^"]+)"/i', (string) $html, $srcs ) ) {
+		// Pixabay's licence forbids hotlinking, so its plates are left out without a copy whatever the option says.
+		if ( preg_match_all( '/<img\b[^>]*\ssrc="([^"]+)"/i', (string) $html, $srcs ) ) {
+			$remote = injil_help_remote_images_on();
 			foreach ( $srcs[1] as $src ) {
-				$key = injil_help_image_key_from_src( html_entity_decode( $src ) );
-				if ( '' !== $key && ! injil_help_find_attachment( $key ) ) {
+				$src = html_entity_decode( $src );
+				$key = injil_help_image_key_from_src( $src );
+				if ( '' !== $key && ( ! $remote || false !== strpos( $src, 'pixabay.com' ) ) && ! injil_help_find_attachment( $key ) ) {
 					return '';
 				}
 			}
