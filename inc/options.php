@@ -61,6 +61,7 @@ function injil_help_option_defaults() {
 		'ctx_extra'        => '',
 		'ctx_exclude'      => '',
 		'remote_images'    => 0,
+		'pexels_key'       => '',
 		'progress'         => 1,
 		'progress_types'   => array( 'post', 'page' ),
 		'progress_position' => 'top',
@@ -132,6 +133,7 @@ function injil_help_sanitize_options( $in ) {
 	$out['ctx_extra']        = implode( "\n", array_filter( array_map( 'injil_help_sanitize_ctx_line', preg_split( '/\r\n|\r|\n/', (string) ( $in['ctx_extra'] ?? '' ) ) ) ) );
 	$out['ctx_exclude']      = implode( "\n", array_filter( array_map( 'injil_help_sanitize_ctx_slug', preg_split( '/\r\n|\r|\n/', (string) ( $in['ctx_exclude'] ?? '' ) ) ) ) );
 	$out['remote_images']    = empty( $in['remote_images'] ) ? 0 : 1;
+	$out['pexels_key']       = substr( (string) preg_replace( '/[^A-Za-z0-9]/', '', (string) ( $in['pexels_key'] ?? '' ) ), 0, 80 );
 	$out['progress']         = empty( $in['progress'] ) ? 0 : 1;
 	$out['progress_types']   = array_values( array_intersect( array_keys( injil_help_progress_type_choices() ), array_map( 'sanitize_key', (array) ( $in['progress_types'] ?? array() ) ) ) );
 	$out['progress_position'] = injil_help_pick( $in, 'progress_position', array( 'top', 'bottom' ), 'top' );
@@ -414,7 +416,7 @@ function injil_help_ui_input( $o, $key, $label, $type = 'text', $help = '', $att
 	if ( 'textarea' === $type ) {
 		$control = sprintf( '<textarea class="%5$s" id="%1$s" name="%2$s"%3$s>%4$s</textarea>', esc_attr( $id ), esc_attr( injil_help_ui_name( $key ) ), $more, esc_textarea( (string) $o[ $key ] ), esc_attr( $class ) );
 	} else {
-		$control = sprintf( '<input type="%1$s" class="%6$s" id="%2$s" name="%3$s" value="%4$s"%5$s>', 'url' === $type ? 'url' : 'text', esc_attr( $id ), esc_attr( injil_help_ui_name( $key ) ), esc_attr( (string) $o[ $key ] ), $more, esc_attr( $class ) );
+		$control = sprintf( '<input type="%1$s" class="%6$s" id="%2$s" name="%3$s" value="%4$s"%5$s>', 'url' === $type ? 'url' : ( 'password' === $type ? 'password' : 'text' ), esc_attr( $id ), esc_attr( injil_help_ui_name( $key ) ), esc_attr( (string) $o[ $key ] ), $more, esc_attr( $class ) );
 	}
 	injil_help_ui_row( $id, $label, $control, $help );
 }
@@ -735,6 +737,7 @@ function injil_help_render_options() {
 
 				injil_help_ui_card_open( __( 'Images and privacy', 'injil-help' ) );
 				injil_help_ui_toggle( $o, 'remote_images', __( 'Load plates from Wikimedia Commons, Pexels and Pixabay', 'injil-help' ), __( 'Off by default. The theme copies each plate into the Media Library a few at a time on admin screen loads, and visitors are served that copy. A plate with no copy yet is left out of the page. Switch this on to show those plates from their source in the meantime; the browsers of your readers then contact commons.wikimedia.org, upload.wikimedia.org and images.pexels.com.', 'injil-help' ) );
+				injil_help_ui_input( $o, 'pexels_key', __( 'Pexels API key', 'injil-help' ), 'password', __( 'Optional. Lets the theme search Pexels and build image entries (functions injil_help_pexels_search() and injil_help_pexels_entry()). Stored in the database; the constant INJIL_HELP_PEXELS_KEY in wp-config.php overrides it. Get a key at pexels.com/api.', 'injil-help' ), array( 'autocomplete' => 'off' ) );
 				injil_help_ui_card_close();
 
 				injil_help_ui_card_open( __( 'Starter pages', 'injil-help' ), __( 'The theme creates these pages when it is activated. When the theme is updated, the pages whose text changed are rewritten automatically, a few at a time as you move between admin screens, and pages you have edited are kept. Both buttons work in small batches, show their progress here and report what they did at the top of the screen.', 'injil-help' ) );
