@@ -52,6 +52,8 @@ The general steps, for any version:
 3. Open any admin screen as an administrator (page rewrites and the error pages need `edit_theme_options`, the development-file clean-up needs `update_themes`). The theme rewrites the pages whose text changed and keeps the ones you edited, writes its error pages, checks its `.htaccess` sections (at most hourly), and on a production site removes its development files.
 4. Read the note for the version you are moving to.
 
+**To 3.33.0.** Upload the whole theme. The pages with new images refresh on the first admin load, and the images copy into the Media Library six at a time over the next admin loads. Edits made to those pages are replaced.
+
 **To 3.32.0.** Upload the whole theme. The page width changes on its own: a site on the former default, full width, moves to the reading column the first time it loads; pick full width again under Theme Options > Branding to keep it. Two new pages are written on the first admin load, and sections 8, 9, 13, 18, 21, 22 and 24 of the Gospel According to Islam gain a block of early-writings sayings. A section page you edited keeps your text; delete it to take the new one.
 
 **To 3.31.0.** Upload the whole theme. The Glossary and Objections pages refresh on the first admin load and gain a contents list, and any edits made to them are replaced. The automatic list is off until you switch it on in Theme Options > Branding.
