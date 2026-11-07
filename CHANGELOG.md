@@ -2,6 +2,16 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.35.0
+
+Six more lexicons from arabiclexicon.hawramani.com, approved by the owner on 7 November 2026: al-Fīrūzābādī (already used), Ghulām Thaʿlab, Salmoné, Ḥamīd al-Dīn al-Farāhī, Ibn Abī Thābit and Ibn Fāris.
+
+- Added: Ibn Fāris's *Maqāyīs al-Lugha* on Kalima (the word extends to a story and a whole ode, with 4:46), Tawaffā (to take all of it and leave nothing), al-Māʾida (two roots, motion and feeding) and al-Masīḥ (one side of the face wiped, whence the Dajjāl).
+- Added: Ghulām Thaʿlab's *al-ʿAsharāt* on Injīl: the senses of *najl*, among them "child", and the view that Injīl is taken from all of them.
+- Changed: `SSOT.md` adds Ghulām Thaʿlab, Salmoné, al-Farāhī, Ibn Abī Thābit and Ibn Fāris to the approved lexicons.
+
+Salmoné, al-Farāhī and Ibn Abī Thābit are approved and not yet used: no Glossary term called for them.
+
 ## 3.34.0
 
 The Glossary and two Qur'an pages draw on more of the classical dictionaries at arabiclexicon.hawramani.com. The owner approved the sources on 7 November 2026.

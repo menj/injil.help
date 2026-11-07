@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.34.0
+Stable tag: 3.35.0
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -160,6 +160,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.35.0 =
+* Five Glossary terms gain a classical gloss from Ibn Fāris and Ghulām Thaʿlab: Injīl, Kalima, Tawaffā, al-Māʾida and al-Masīḥ.
 = 3.34.0 =
 * More of the Glossary now rests on the classical dictionaries: Abū Ḥayyān, al-Rāghib al-Iṣfahānī, al-Zamakhsharī and al-Fīrūzābādī on Injīl, Zabūr, al-Masīḥ, Kalima, Rūḥ, al-Ḥawāriyyūn, Āya, Muhaymin, Tawaffā, al-Māʾida and Fiṭra. The page on the Messiah in Islam gives al-Rāghib's reasons for calling ʿĪsā a word and a spirit, and the table page gives his two views of what the disciples asked for.
 = 3.33.0 =
@@ -470,6 +472,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * New screenshot.
 
 == Upgrade Notice ==
+= 3.35.0 =
+Upload the whole theme. The Glossary refreshes on the first admin load, and any edits made to it are replaced.
 = 3.34.0 =
 Upload the whole theme. The Glossary and two Qur'an pages refresh on the first admin load, and any edits made to them are replaced.
 = 3.33.0 =
