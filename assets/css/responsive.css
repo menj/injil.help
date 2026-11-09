@@ -39,3 +39,12 @@
 
 /* Long words in a plate caption break rather than spill past the panel (text spacing, WCAG 1.4.12). */
 .ih-plate figcaption{overflow-wrap:anywhere}
+
+/* Mobile-first audit (3.38.1). Long unbroken words in any caption wrap instead of widening it. */
+.wp-element-caption{overflow-wrap:anywhere}
+
+/* The footer brand mark is 32px square; an invisible 6px margin on each side makes the tap area 44px. */
+@media (max-width:599px),(pointer:coarse){
+ .ih-mark-foot{position:relative}
+ .ih-mark-foot::after{content:"";position:absolute;inset:-6px}
+}

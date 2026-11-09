@@ -5,7 +5,7 @@ Description: Custom child theme of Twenty Twenty-Five built for one site, The Ri
 Author: MENJ
 Author URI: https://menj.blog
 Template: twentytwentyfive
-Version: 3.38.0
+Version: 3.38.1
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -199,14 +199,14 @@ p.ih-cite{margin:0;font-size:13px;color:var(--wp--preset--color--muted)}
 .ih-cover .is-style-outline .ih-gloss{color:var(--wp--preset--color--gold-tint)}
 
 /* Home and section blocks */
-.ih-section{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);margin-block-start:var(--wp--preset--spacing--50) !important}
+.ih-section{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);margin-block-start:var(--wp--preset--spacing--50) !important}
 .ih-section > *{margin:0 !important}
-@media (max-width:1199px){.ih-section{grid-template-columns:1fr}}
+@media (min-width:1200px){.ih-section{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}}
 /* Card grids always end on a full row: the front-page sections set nine or six cards in three columns, the FAQ band eight in four (two below 1200px); one column on phones. The column count is fixed, not auto-fill, so a row is never left half empty. */
-.ih-section > .ih-entries:not(.ih-entries-list){display:grid !important;grid-template-columns:repeat(3,minmax(0,1fr)) !important}
-.ih-answers:not(.ih-answers-list){display:grid !important;grid-template-columns:repeat(4,minmax(0,1fr)) !important}
-@media (max-width:1199px){.ih-answers:not(.ih-answers-list){grid-template-columns:repeat(2,minmax(0,1fr)) !important}}
-@media (max-width:640px){.ih-section > .ih-entries:not(.ih-entries-list),.ih-answers:not(.ih-answers-list){grid-template-columns:1fr !important}}
+.ih-section > .ih-entries:not(.ih-entries-list){display:grid !important;grid-template-columns:minmax(0,1fr) !important}
+.ih-answers:not(.ih-answers-list){display:grid !important;grid-template-columns:minmax(0,1fr) !important}
+@media (min-width:641px){.ih-section > .ih-entries:not(.ih-entries-list){grid-template-columns:repeat(3,minmax(0,1fr)) !important}.ih-answers:not(.ih-answers-list){grid-template-columns:repeat(2,minmax(0,1fr)) !important}}
+@media (min-width:1200px){.ih-answers:not(.ih-answers-list){grid-template-columns:repeat(4,minmax(0,1fr)) !important}}
 .ih-section-head > * + *{margin-block-start:var(--wp--preset--spacing--10)}
 .ih-section-head h1,.ih-section-head h2{margin-top:6px}
 .ih-section-head h2{font-size:40px;line-height:1.05}

@@ -2,7 +2,15 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
-## 3.38.0
+## 3.38.1
+
+Mobile-first audit on 9 November 2026, measured at 320, 360, 375, 390, 414, 480, 768, 1024 and 1280 pixels on 14 page types. No page scrolled sideways before or after. No feature removed, no class, id or hook renamed.
+
+- Fixed: layout shift on the Bible pages, the wide-table pages and the Journal list (0.10 to 0.20 in the lab at 320 to 414 pixels). The theme now preloads the two faces the reading copy and the labels use, EB Garamond and Evangelion CPA, plus Kagnue on the Bible sections (the chapter numeral), from `functions.php`. The shift fell to between 0.00 and 0.002.
+- Changed: the front-page section grid, the answer cards and the entry cards in `style.css` now start from one column and add columns with `min-width` queries (641 and 1200 pixels), in place of `max-width` queries that took columns away. The column count is identical at every width from 320 to 1280 pixels.
+- Fixed: a caption with one very long word wraps inside its figure (`responsive.css`).
+- Fixed: the footer brand mark has a 44-pixel tap area on phones and touch screens, and the log-in screen links, the "Remember me" label and the password eye have 44-pixel targets (`responsive.css`, `login.css`).
+
 
 The dictionaries page.
 
