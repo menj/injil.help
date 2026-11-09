@@ -679,6 +679,7 @@ function injil_help_populate_page( $order, $def, $overwrite = false, $force = fa
 		);
 		if ( $done && ! is_wp_error( $done ) ) {
 			injil_help_stamp_page( $existing->ID, $content, $def['title'], $excerpt );
+			injil_help_log( $def['title'], $force ? __( 'restored to the theme\'s text', 'injil-help' ) : __( 'took the theme\'s new text', 'injil-help' ) );
 			return 'updated';
 		}
 		return 'failed';
@@ -720,6 +721,7 @@ function injil_help_populate_page( $order, $def, $overwrite = false, $force = fa
 			update_post_meta( $id, '_wp_page_template', $def['template'] );
 		}
 		injil_help_stamp_page( $id, $content, $def['title'], $excerpt );
+		injil_help_log( $def['title'], __( 'created', 'injil-help' ) );
 		return 'created';
 	}
 	return 'failed';
@@ -744,6 +746,10 @@ function injil_help_populate_finish( $complete = true ) {
 	}
 	if ( $complete ) {
 		update_option( 'injil_help_populated', INJIL_HELP_VERSION );
+		// Superseded and dropped items go to the Trash unless edited, unless a guard stops removals (inc/supersede.php).
+		if ( function_exists( 'injil_help_retire_run' ) ) {
+			injil_help_retire_run();
+		}
 	}
 	delete_option( 'injil_help_featured' ); // the featured-image pass runs again on the next admin loads
 }
@@ -899,6 +905,23 @@ function injil_help_populate_summary( $tally ) {
 	if ( $tally['failed'] ) {
 		/* translators: %d: number of pages */
 		$parts[] = sprintf( _n( '%d could not be written', '%d could not be written', $tally['failed'], 'injil-help' ), $tally['failed'] );
+	}
+	// What the retirement did, once (inc/supersede.php).
+	$retired = function_exists( 'injil_help_retire_run' ) ? get_transient( 'injil_help_retire_report' ) : false;
+	if ( is_array( $retired ) ) {
+		if ( ! empty( $retired['trashed'] ) ) {
+			/* translators: %d: number of items */
+			$parts[] = sprintf( __( '%d moved to the Trash (replaced or no longer in the theme)', 'injil-help' ), count( $retired['trashed'] ) );
+		}
+		if ( ! empty( $retired['kept'] ) ) {
+			/* translators: %d: number of items */
+			$parts[] = sprintf( _n( '%d no longer in the theme, kept because you edited it', '%d no longer in the theme, kept because you edited them', count( $retired['kept'] ), 'injil-help' ), count( $retired['kept'] ) );
+		}
+		if ( ! empty( $retired['failed'] ) ) {
+			/* translators: %d: number of items */
+			$parts[] = sprintf( __( '%d could not be moved to the Trash', 'injil-help' ), count( $retired['failed'] ) );
+		}
+		delete_transient( 'injil_help_retire_report' );
 	}
 	return $parts ? ucfirst( implode( ', ', $parts ) ) . '.' : __( 'Nothing to do.', 'injil-help' );
 }

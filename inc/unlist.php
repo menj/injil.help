@@ -107,7 +107,12 @@ function injil_help_unlist_sync() {
 /** The unlisted IDs the theme applies, after taking over any change the plugin made. */
 function injil_help_unlisted_ids() {
 	injil_help_unlist_sync();
-	return injil_help_unlist_normalise( get_option( INJIL_HELP_UNLISTED, array() ) );
+	$ids = (array) get_option( INJIL_HELP_UNLISTED, array() );
+	// Items that a newer item supersedes are hidden the same way (inc/supersede.php).
+	if ( function_exists( 'injil_help_superseded_ids' ) ) {
+		$ids = array_merge( $ids, injil_help_superseded_ids() );
+	}
+	return injil_help_unlist_normalise( $ids );
 }
 
 /**

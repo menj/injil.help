@@ -180,6 +180,7 @@ function ih_page( $path, $status = 'publish', $id = 0 ) {
 
 require $ih_theme . '/inc/starter-content.php';
 require $ih_theme . '/inc/security.php';
+require $ih_theme . '/inc/supersede.php';
 
 $fail = 0;
 function ih_check( $ok, $what ) {

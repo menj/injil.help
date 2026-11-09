@@ -201,6 +201,7 @@ function wp_insert_term( $name ) {
 require $GLOBALS['ih_theme'] . '/inc/options.php';
 require $GLOBALS['ih_theme'] . '/inc/starter-content.php';
 require $GLOBALS['ih_theme'] . '/inc/journal.php';
+require $GLOBALS['ih_theme'] . '/inc/supersede.php';
 
 $fail = 0;
 function ih_fail( $what, $msg ) {
