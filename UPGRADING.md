@@ -2,6 +2,10 @@
 
 How to move a site from one version to the next, and where the theme is going. The roadmap comes first; the notes for each version are under "Updating an existing site" at the end.
 
+## Accessibility audit (WCAG 2.2 AA), 3.38.2
+
+Measured on a scratch WordPress with axe-core at 1280 and 375 pixels, keyboard walks of the skip link, header, search and every page type, 320-pixel reflow, text-spacing overrides and the debug log. Found: IH-1 (search and index results skipped from level one to level three, moderate, 1.3.1), IH-2 (result links 22 pixels tall at 375 pixels, minor, 2.5.8), IH-3 (a scrolling table not reachable by keyboard, serious, 2.1.1). All fixed in 3.38.2. Open, for manual review: IH-4 (the core login screen has two level-one headings and no main landmark; core markup, not changed), IH-5 (a screen-reader pass with NVDA or VoiceOver is not done), IH-6 (video and audio embeds in starter pages are not audited for captions). Run `tests/a11y-axe.js` before a release.
+
 ## Roadmap
 
 These are plans, not promises. Each item rests on something on record: this file's earlier list, the code, the server logs of October and November 2026, a limit the README documents, or a feature another of the owner's themes already has. Items leave this list when they ship and go into `CHANGELOG.md`. GitHub had no open issues or pull requests when the list was last checked (2026-11-05), and the code carries no TODO markers. Each item names the files it touches, so it can be picked up cold.
@@ -141,6 +145,7 @@ Git Updater reads the theme header and offers the release whose tag matches `Ver
 - **3.20.2.** Nothing to do. A page or Journal post that carries no hash from the theme is kept on every update from now on, so it keeps your text and does not take the new one. To give such a page the theme's text, press "Update all pages from the theme".
 - **3.38.0.** Upload the whole theme. The new page /resources/dictionaries/ is created on the first admin load, and the Resources index is rewritten (edits to it are replaced).
 - **3.38.1.** Upload the whole theme. Nothing else to do. Clear the page cache so phones fetch the new stylesheets.
+- **3.38.2.** Upload the whole theme. Nothing else to do.
 - **3.37.0.** Upload the whole theme. To use the Pexels client, set the key under Theme Options > Content or define `INJIL_HELP_PEXELS_KEY` in `wp-config.php`. Nothing else changes.
 - **3.36.0.** Upload the whole theme. Nine pages refresh on the first admin load. Pixabay plates appear once the Media Library holds their copies (six per admin screen load); they never load from Pixabay for readers.
 - **3.20.0.** Check the plates. Remote plates are now off, so a plate with no Media Library copy is hidden. The pages in `inc/data/images.json` already have their copies on a site that has run 3.18.0; the four plates of the front-page and section patterns are copied on the next few admin screen loads. Open the front page afterwards. If a plate is still missing (a failed fetch is retried after a day), switch on Theme Options › Content › Load plates from Wikimedia Commons and Pexels until it is there. The Privacy page is rewritten to say the images are served from the site, unless you edited it.

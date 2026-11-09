@@ -2,6 +2,14 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.38.2
+
+WCAG 2.2 AA audit.
+
+- Fixed: search and index result titles jumped from level one to level three (1.3.1, 2.4.6); they are now level two, sized as before. Their links keep a 24-pixel target (2.5.8).
+- Fixed: a table that scrolls sideways could not be reached by keyboard (2.1.1). `inc/a11y.php` gives each core table figure `tabindex="0"`, `role="region"` and a numbered name.
+- Added: `tests/a11y-axe.js`, an axe-core run at 1280 and 375 pixels; `RESOURCES.md`, the one record of copyright and asset licences.
+
 ## 3.38.1
 
 Mobile-first audit on 9 November 2026, measured at 320, 360, 375, 390, 414, 480, 768, 1024 and 1280 pixels on 14 page types. No page scrolled sideways before or after. No feature removed, no class, id or hook renamed.

@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.38.1
+Stable tag: 3.38.2
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -160,6 +160,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.38.2 =
+* Accessibility (WCAG 2.2 AA): search and archive result titles are second-level headings with a 24-pixel link target; a table that scrolls sideways takes keyboard focus and has a name. New tests/a11y-axe.js, and RESOURCES.md holds the licence record.
 = 3.38.1 =
 * Mobile-first audit at nine widths from 320 to 1280 pixels. Pages no longer jump while the fonts load, the footer logo and the log-in links are easier to tap on a phone, and long words in captions wrap. The front-page card grids now build up from one column. Nothing is removed.
 = 3.38.0 =
@@ -483,6 +485,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * New screenshot.
 
 == Upgrade Notice ==
+= 3.38.2 =
+Upload the whole theme. Nothing else to do.
 = 3.38.1 =
 Upload the whole theme. Nothing else to do.
 = 3.38.0 =

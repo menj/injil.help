@@ -5,7 +5,7 @@ Description: Custom child theme of Twenty Twenty-Five built for one site, The Ri
 Author: MENJ
 Author URI: https://menj.blog
 Template: twentytwentyfive
-Version: 3.38.1
+Version: 3.38.2
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -89,6 +89,8 @@ h1,h2,h3{text-wrap:balance}
 .ih-parts h3 a:hover{color:var(--wp--preset--color--accent-1);text-decoration:underline}
 
 /* Query list */
+.ih-list .wp-block-post-title{font-size:var(--wp--preset--font-size--large)}
+.ih-list .wp-block-post-title a{display:inline-block;min-height:24px}
 .ih-list .wp-block-post-template{display:grid;gap:var(--wp--preset--spacing--20)}
 .ih-list .wp-block-post-template > li{background:var(--wp--preset--color--accent-5);border-radius:var(--ih-r-md);padding:var(--wp--preset--spacing--30);margin:0}
 
