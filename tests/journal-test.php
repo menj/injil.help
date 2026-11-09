@@ -198,6 +198,7 @@ function wp_insert_term( $name ) {
 	return array( 'term_id' => $GLOBALS['ih_terms'][ $name ] );
 }
 
+if ( ! function_exists( 'get_page_uri' ) ) { function get_page_uri( $p ) { return is_object( $p ) ? ( $p->post_name ?? '' ) : ''; } }
 require $GLOBALS['ih_theme'] . '/inc/options.php';
 require $GLOBALS['ih_theme'] . '/inc/starter-content.php';
 require $GLOBALS['ih_theme'] . '/inc/journal.php';

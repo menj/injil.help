@@ -4,7 +4,7 @@ All notable changes to The Injil theme. The `Changelog` section of `readme.txt` 
 
 ## 3.38.5
 
-New material now supersedes old material. No feature removed and no option key or identifier renamed. The data file ships empty, so nothing changes until an address pair is added.
+New material now supersedes old material. No feature removed and no option key or identifier renamed. The data file ships empty, so nothing is superseded until an address pair is added. A rename needs a `former` slug, and items the data no longer holds move to the Trash on the second update after this release (the first records a baseline).
 
 - Added: `inc/supersede.php` and `inc/data/supersedes.json`, a map of old address to new address for pages and Journal posts (`journal/<slug>`).
 - Added: a superseded item answers with a 301 to its replacement (also from the Trash), joins the unlisted posts so lists, search, feeds and sitemaps leave it out, and is moved to the Trash by the update unless it was edited. A chain of replacements ends at the live item, and a cycle supersedes nothing.

@@ -389,7 +389,10 @@ function injil_help_dropped_items() {
 	);
 	foreach ( $posts as $post ) {
 		if ( 'page' === $post->post_type ) {
-			if ( empty( $paths[ get_page_uri( $post ) ] ) ) {
+			// The path the theme gave the page, never its present address: a page the owner moved is not a dropped one,
+			// and a page written before the path was recorded is left alone until a run records it.
+			$wrote = (string) get_post_meta( $post->ID, INJIL_HELP_PATH_META, true );
+			if ( '' !== $wrote && empty( $paths[ $wrote ] ) ) {
 				$out[] = array( 'post' => $post, 'address' => get_page_uri( $post ) );
 			}
 		} else {
@@ -452,7 +455,9 @@ function injil_help_retire_run() {
 		}
 	}
 	injil_help_superseded_pairs( true );
-	foreach ( injil_help_dropped_items() as $item ) {
+	// Dropped items need a baseline from an earlier good run: the first run only records it.
+	$dropped = (int) get_option( INJIL_HELP_COUNT_OPTION, 0 ) > 0 ? injil_help_dropped_items() : array();
+	foreach ( $dropped as $item ) {
 		$post = $item['post'];
 		if ( isset( $pairs[ $post->ID ] ) ) {
 			continue;
@@ -540,11 +545,12 @@ function injil_help_sync_preview() {
 			'retired'   => in_array( $address, $retired, true ) && injil_help_post_at( injil_help_supersedes_map()[ $address ] ),
 			'blocked'   => $blocked,
 			'renamable' => ! $post && array_filter( array_map( static function ( $old ) {
-				return injil_help_journal_find( sanitize_title( (string) $old ) );
+				$former = injil_help_journal_find( sanitize_title( (string) $old ) );
+				return $former && 'trash' !== $former->post_status && injil_help_is_unedited( $former );
 			}, (array) ( $entry['former'] ?? array() ) ) ),
 		);
 		$action = injil_help_classify( $f );
-		if ( 'current' === $action && $post && 'trash' !== $post->post_status && md5( injil_help_journal_content( $entry ) ) !== get_post_meta( $post->ID, INJIL_HELP_HASH_META, true ) ) {
+		if ( 'current' === $action && $post && 'trash' !== $post->post_status && ( md5( injil_help_journal_content( $entry ) ) !== get_post_meta( $post->ID, INJIL_HELP_HASH_META, true ) || injil_help_head_hash( $entry['title'], (string) ( $entry['excerpt'] ?? '' ) ) !== get_post_meta( $post->ID, INJIL_HELP_HEAD_META, true ) ) ) {
 			$action = 'refresh';
 		}
 		if ( 'current' !== $action ) {

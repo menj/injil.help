@@ -178,6 +178,7 @@ function ih_page( $path, $status = 'publish', $id = 0 ) {
 	return $p;
 }
 
+if ( ! function_exists( 'get_page_uri' ) ) { function get_page_uri( $p ) { return is_object( $p ) ? ( $p->post_name ?? '' ) : ''; } }
 require $ih_theme . '/inc/starter-content.php';
 require $ih_theme . '/inc/security.php';
 require $ih_theme . '/inc/supersede.php';

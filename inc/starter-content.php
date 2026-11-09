@@ -581,6 +581,7 @@ function injil_help_find_page( $path ) {
 }
 
 const INJIL_HELP_HASH_META  = '_injil_help_hash'; // md5 of the content the theme wrote
+const INJIL_HELP_PATH_META  = '_injil_help_path'; // the path the theme gave the page when it wrote it (from 3.38.5)
 const INJIL_HELP_HEAD_META  = '_injil_help_head'; // md5 of the title and excerpt it wrote (from 3.6.1; absent on older pages)
 
 /** The hash of a page's title and excerpt as the theme wrote them. */
@@ -590,6 +591,7 @@ function injil_help_head_hash( $title, $excerpt ) {
 
 /** Record what the theme wrote, so a later edit to the content, the title or the excerpt is detected. */
 function injil_help_stamp_page( $id, $content, $title, $excerpt ) {
+	update_post_meta( $id, INJIL_HELP_PATH_META, get_page_uri( $id ) ); // where the theme put it, so a page the owner moved is never taken for a dropped one
 	update_post_meta( $id, INJIL_HELP_HASH_META, md5( $content ) );
 	update_post_meta( $id, INJIL_HELP_HEAD_META, injil_help_head_hash( $title, $excerpt ) );
 }
@@ -653,6 +655,10 @@ function injil_help_populate_page( $order, $def, $overwrite = false, $force = fa
 		injil_help_clear_former_copies( $def, $existing->ID );
 	}
 	if ( $existing && ! $overwrite ) {
+		// Record where the theme put a page it wrote, for pages written before 3.38.5.
+		if ( '' !== (string) get_post_meta( $existing->ID, INJIL_HELP_HASH_META, true ) && '' === (string) get_post_meta( $existing->ID, INJIL_HELP_PATH_META, true ) && get_page_uri( $existing ) === $def['path'] ) {
+			update_post_meta( $existing->ID, INJIL_HELP_PATH_META, $def['path'] );
+		}
 		return 'unchanged';
 	}
 	$content = injil_help_page_content( $def );

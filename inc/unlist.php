@@ -123,7 +123,9 @@ function injil_help_unlisted_ids() {
  */
 function injil_help_unlisted_live_ids() {
 	if ( class_exists( 'Unlist_Posts' ) || defined( 'UNLIST_POSTS_VER' ) ) {
-		return (bool) apply_filters( 'unlist_posts_enabled', true ) ? injil_help_unlist_normalise( get_option( 'unlist_posts', array() ) ) : array();
+		$plugin = (bool) apply_filters( 'unlist_posts_enabled', true ) ? (array) get_option( 'unlist_posts', array() ) : array();
+		// Superseded items leave the sitemaps whichever side is live (inc/supersede.php).
+		return injil_help_unlist_normalise( function_exists( 'injil_help_superseded_ids' ) ? array_merge( $plugin, injil_help_superseded_ids() ) : $plugin );
 	}
 	return injil_help_unlist_on() ? injil_help_unlisted_ids() : array();
 }

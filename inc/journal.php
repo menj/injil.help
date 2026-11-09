@@ -156,6 +156,10 @@ function injil_help_journal_maybe_seed() {
 	$tally = injil_help_journal_seed();
 	if ( ! $tally['failed'] ) {
 		update_option( 'injil_help_journal_seeded', INJIL_HELP_VERSION, false );
+		// A replacement that this seeding just wrote is live now, so retire what it replaces (inc/supersede.php).
+		if ( function_exists( 'injil_help_retire_run' ) ) {
+			injil_help_retire_run();
+		}
 	}
 }
 
