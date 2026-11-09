@@ -447,16 +447,21 @@ function injil_help_retire_run() {
 	foreach ( injil_help_supersedes_map() as $old => $new ) {
 		$new_p = injil_help_post_at( $new );
 		$old_p = injil_help_post_at( $old, true );
-		if ( $new_p && ! $old_p ) {
+		$known = (array) get_option( INJIL_HELP_REDIRECT_OPTION, array() );
+		if ( $new_p && ! $old_p && empty( $known[ $old ] ) ) {
+			// No live item stands at the old address, so a visitor would meet a 404: send it to the replacement.
 			$trashed = 0 === strpos( $old, INJIL_HELP_JOURNAL_BASE . '/' ) ? injil_help_journal_find( substr( $old, strlen( INJIL_HELP_JOURNAL_BASE ) + 1 ) ) : null;
-			if ( $trashed && 'trash' === $trashed->post_status ) {
-				injil_help_note_redirect( $old, $new_p->ID, $trashed->ID );
-			}
+			injil_help_note_redirect( $old, $new_p->ID, $trashed ? $trashed->ID : 0 );
 		}
 	}
 	injil_help_superseded_pairs( true );
-	// Dropped items need a baseline from an earlier good run: the first run only records it.
-	$dropped = (int) get_option( INJIL_HELP_COUNT_OPTION, 0 ) > 0 ? injil_help_dropped_items() : array();
+	// Dropped items need a baseline from an earlier good run: the first run only records it. The baseline of the
+	// first call in a request decides for the whole request, so a baseline made now cannot enable removals now.
+	static $baseline_at_start = null;
+	if ( null === $baseline_at_start ) {
+		$baseline_at_start = (int) get_option( INJIL_HELP_COUNT_OPTION, 0 );
+	}
+	$dropped = $baseline_at_start > 0 ? injil_help_dropped_items() : array();
 	foreach ( $dropped as $item ) {
 		$post = $item['post'];
 		if ( isset( $pairs[ $post->ID ] ) ) {
