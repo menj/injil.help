@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.38.3
+Stable tag: 3.38.4
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -160,6 +160,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.38.4 =
+* Canon wording: the glossary, the Easter letter of Athanasius answer and the Muratorian fragment line now say the lists settled over the fourth and fifth centuries through teachers and regional councils. Three new Journal posts: Who chose the four gospels?, Did Nicaea choose the books? and The 22-book Syriac Bible. Samuel Davidson, The Canon of the Bible (1877), is added to the source library.
 = 3.38.3 =
 * Theme Options (accessibility): range sliders have a 24-pixel target; the Security tab tables that scroll sideways take keyboard focus and have names.
 = 3.38.2 =
@@ -487,6 +489,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * New screenshot.
 
 == Upgrade Notice ==
+= 3.38.4 =
+Upload the whole theme. Three Journal posts are scheduled and four pages (the glossary, responses, timeline and source library) are rewritten from the theme on the first admin load (edited pages are kept).
 = 3.38.3 =
 Upload the whole theme. Nothing else to do.
 = 3.38.2 =
@@ -556,6 +560,7 @@ Fonts (assets/fonts), each under its own licence:
 Images: assets/brandmark.svg, assets/images/divider.svg, assets/images/arrow-next*.webp and the icons in assets/icons are the theme's own, GPLv2 or later. assets/images/lanat-allah.svg is outlined from Dubidam Arabic. The default social image, assets/images/og-default.jpg, is the Birmingham Qur'an manuscript, public domain. The plates listed in inc/data/images.json and in the patterns are public domain or CC0 from Wikimedia Commons, Pexels photographs under the Pexels License, Pixabay photographs under the Pixabay Content License, and one CC BY 2.0 photograph (Richard Mortel); each caption carries its credit and source.
 
 == Credits ==
+Canon history: Samuel Davidson, The Canon of the Bible: Its Formation, History, and Fluctuations (3rd revised ed., New York: Peter Eckler, 1877; Project Gutenberg eBook 30132), a public-domain work cited by page for what each Father, council and manuscript said about the lists of books. Its dates for the gospels have been revised since and the site does not use them.
 Contents list: the [auto_toc] shortcode follows the interface of Ikram Hawramani's WordPress Table-of-Contents Shortcode Done Properly (MIT licence, 2025). The code is the theme's own.
 Share and profile icons (assets/icons/social/): Minimalist Social Icons Pack 2.8, GPL; the profile row adds Instagram, YouTube, TikTok, Mastodon, GitHub and Substack from the same pack. The LinkedIn icon originates from Font Awesome Free (https://fontawesome.com), CC BY 4.0; the credit is carried on the Credits page. The brand marks remain trademarks of their owners. assets/icons/share.svg and link.svg are the theme's own.
 Default social image: Birmingham Qur'an manuscript (Cadbury Research Library, University of Birmingham), public domain, via Wikimedia Commons.
