@@ -490,7 +490,7 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 
 == Upgrade Notice ==
 = 3.38.4 =
-Upload the whole theme. Three Journal posts are scheduled and three pages are rewritten from the theme on the first admin load (edited pages are kept).
+Upload the whole theme. Three Journal posts are scheduled and four pages (the glossary, responses, timeline and source library) are rewritten from the theme on the first admin load (edited pages are kept).
 = 3.38.3 =
 Upload the whole theme. Nothing else to do.
 = 3.38.2 =
