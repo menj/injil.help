@@ -2,6 +2,14 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.38.4
+
+Canon claims and three Journal posts.
+
+- Changed: the glossary entry for the canon, the answer on how Christians receive the list of books and the Muratorian fragment line on the timeline (`inc/data/pages/resources.json`). The lists settled over the fourth and fifth centuries through teachers, bishops and regional councils, and the Muratorian date is stated as contested.
+- Added: Journal posts `who-chose-four-gospels`, `did-nicaea-choose-books` and `syriac-bible-twenty-two-books`, with short titles in `inc/data/seo-titles.json`.
+- Added: Samuel Davidson, The Canon of the Bible (1877), in the source library, the timeline sources and the responses sources; and under Credits in `readme.txt`.
+
 ## 3.38.3
 
 Theme Options settings UI audit.
