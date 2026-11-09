@@ -86,7 +86,7 @@ fieldset.ih-field{padding:16px 0}
 
 /* Range slider with live value */
 .ih-range{display:flex;align-items:center;gap:14px}
-.ih-range__input{flex:1;accent-color:var(--ih-a-primary);min-width:0}
+.ih-range__input{flex:1;accent-color:var(--ih-a-primary);min-width:0;min-height:24px}
 .ih-range__value{min-width:2.5em;padding:2px 8px;border-radius:6px;background:color-mix(in srgb,var(--ih-a-primary) 12%,#fff);color:var(--ih-a-primary);font-weight:600;text-align:center;font-variant-numeric:tabular-nums}
 
 /* Colour pickers in a grid */

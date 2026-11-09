@@ -146,6 +146,7 @@ Git Updater reads the theme header and offers the release whose tag matches `Ver
 - **3.38.0.** Upload the whole theme. The new page /resources/dictionaries/ is created on the first admin load, and the Resources index is rewritten (edits to it are replaced).
 - **3.38.1.** Upload the whole theme. Nothing else to do. Clear the page cache so phones fetch the new stylesheets.
 - **3.38.2.** Upload the whole theme. Nothing else to do.
+- **3.38.3.** Upload the whole theme. Nothing else to do.
 - **3.37.0.** Upload the whole theme. To use the Pexels client, set the key under Theme Options > Content or define `INJIL_HELP_PEXELS_KEY` in `wp-config.php`. Nothing else changes.
 - **3.36.0.** Upload the whole theme. Nine pages refresh on the first admin load. Pixabay plates appear once the Media Library holds their copies (six per admin screen load); they never load from Pixabay for readers.
 - **3.20.0.** Check the plates. Remote plates are now off, so a plate with no Media Library copy is hidden. The pages in `inc/data/images.json` already have their copies on a site that has run 3.18.0; the four plates of the front-page and section patterns are copied on the next few admin screen loads. Open the front page afterwards. If a plate is still missing (a failed fetch is retried after a day), switch on Theme Options › Content › Load plates from Wikimedia Commons and Pexels until it is there. The Privacy page is rewritten to say the images are served from the site, unless you edited it.

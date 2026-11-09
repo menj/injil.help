@@ -1583,7 +1583,7 @@ function injil_help_sec_render_tools() {
 			<span class="ih-sec-status" id="ih-sec-status" role="status" aria-live="polite"></span>
 		</div>
 		<div class="ih-sec-progress" hidden><span id="ih-sec-progress"></span></div>
-		<div class="ih-sec-scroll">
+		<div tabindex="0" role="region" aria-label="<?php esc_attr_e( 'Scan results', 'injil-help' ); ?>" class="ih-sec-scroll">
 			<table class="widefat striped ih-sec-table" id="ih-sec-results" hidden>
 				<thead>
 					<tr>
@@ -1676,7 +1676,7 @@ function injil_help_sec_render_reports() {
 		</div>
 
 		<h3><?php esc_html_e( 'Administrator accounts', 'injil-help' ); ?></h3>
-		<div class="ih-sec-scroll">
+		<div tabindex="0" role="region" aria-label="<?php esc_attr_e( 'Administrator accounts', 'injil-help' ); ?>" class="ih-sec-scroll">
 			<table class="widefat striped ih-sec-table">
 				<thead><tr><th scope="col"><?php esc_html_e( 'Account', 'injil-help' ); ?></th><th scope="col"><?php esc_html_e( 'Last login', 'injil-help' ); ?></th><th scope="col"><?php esc_html_e( 'Sessions', 'injil-help' ); ?></th><th scope="col"><?php esc_html_e( 'Application passwords', 'injil-help' ); ?></th></tr></thead>
 				<tbody>
@@ -1711,7 +1711,7 @@ function injil_help_sec_render_reports() {
 		?>
 		<p class="description"><?php esc_html_e( 'Counted per day, in UTC, for the last 30 days. A correct password refused on XML-RPC means the password is known to someone else: change it.', 'injil-help' ); ?></p>
 		<?php if ( $counts ) : ?>
-			<div class="ih-sec-scroll">
+			<div tabindex="0" role="region" aria-label="<?php esc_attr_e( 'Accounts being guessed', 'injil-help' ); ?>" class="ih-sec-scroll">
 				<table class="widefat striped ih-sec-table">
 					<thead><tr><th scope="col"><?php esc_html_e( 'Day', 'injil-help' ); ?></th><?php foreach ( $labels as $label ) : ?><th scope="col"><?php echo esc_html( $label ); ?></th><?php endforeach; ?></tr></thead>
 					<tbody>
@@ -1755,7 +1755,7 @@ function injil_help_sec_render_reports() {
 		<?php $activity = injil_help_sec_activity(); ?>
 		<h3><?php esc_html_e( 'Posts per day, last 30 days', 'injil-help' ); ?></h3>
 		<?php if ( $activity['days'] ) : ?>
-			<div class="ih-sec-scroll">
+			<div tabindex="0" role="region" aria-label="<?php esc_attr_e( 'Posts per day', 'injil-help' ); ?>" class="ih-sec-scroll">
 				<table class="widefat striped ih-sec-table ih-sec-days">
 					<thead><tr><th scope="col"><?php esc_html_e( 'Day', 'injil-help' ); ?></th><th scope="col"><?php esc_html_e( 'Account and count', 'injil-help' ); ?></th></tr></thead>
 					<tbody>
@@ -1810,7 +1810,7 @@ function injil_help_sec_render_reports() {
 		$log = is_array( $log ) ? array_reverse( $log ) : array();
 		?>
 		<?php if ( $log ) : ?>
-			<div class="ih-sec-scroll ih-sec-scroll--tall">
+			<div tabindex="0" role="region" aria-label="<?php esc_attr_e( 'Starter content with gambling links', 'injil-help' ); ?>" class="ih-sec-scroll ih-sec-scroll--tall">
 				<table class="widefat striped ih-sec-table">
 					<thead><tr><th scope="col"><?php esc_html_e( 'Time', 'injil-help' ); ?></th><th scope="col"><?php esc_html_e( 'Event', 'injil-help' ); ?></th><th scope="col"><?php esc_html_e( 'Detail', 'injil-help' ); ?></th><th scope="col"><?php esc_html_e( 'Account', 'injil-help' ); ?></th><th scope="col"><?php esc_html_e( 'Route', 'injil-help' ); ?></th><th scope="col"><?php esc_html_e( 'IP', 'injil-help' ); ?></th></tr></thead>
 					<tbody>

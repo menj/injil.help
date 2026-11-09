@@ -2,6 +2,13 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.38.3
+
+Theme Options settings UI audit.
+
+- Audited against the admin design brief: tabs (arrow keys, Home, End), cards, toggle switches, choice cards, live range values, colour cards, header and footer all pass at 782 and 375 pixels. No table layouts.
+- Fixed: range sliders were 16 pixels tall (2.5.8); they are now at least 24. The five scroll areas on the Security tab take keyboard focus and have names (2.1.1).
+
 ## 3.38.2
 
 WCAG 2.2 AA audit.
