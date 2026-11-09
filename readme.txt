@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.38.0
+Stable tag: 3.38.1
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -160,6 +160,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.38.1 =
+* Mobile-first audit at nine widths from 320 to 1280 pixels. Pages no longer jump while the fonts load, the footer logo and the log-in links are easier to tap on a phone, and long words in captions wrap. The front-page card grids now build up from one column. Nothing is removed.
 = 3.38.0 =
 * New page /resources/dictionaries/: the 44 Arabic lexicons the website consults (Lisān al-ʿArab, al-Rāghib, Ibn Fāris, Lane and the rest), each with its author, work and a link. The Resources index and the glossary point to it.
 = 3.37.0 =
@@ -481,6 +483,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * New screenshot.
 
 == Upgrade Notice ==
+= 3.38.1 =
+Upload the whole theme. Nothing else to do.
 = 3.38.0 =
 Upload the whole theme. One new page is created and the Resources index refreshes on the first admin load.
 = 3.37.0 =

@@ -33,7 +33,7 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 |---|---|
 | Type | Block theme (theme.json v3), child of `twentytwentyfive` |
 | Folder, text domain, pattern prefix | `injil-help` |
-| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.38.0) |
+| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.38.1) |
 | PHP in `inc/` | options, social, progress, unlist, unlist-admin, search-permalinks, starter-content, journal, starter-content-pages, gospel-islam, quran-jesus, tafsir, images, seo, schema, schema-content, schema-extend, rank-math, share, contextual-links, login, security, security-detector, error-pages, error-page-html, article (26 files) |
 | Data | `inc/data/` 2.6 MB of JSON: 183 starter pages, the 8 Journal posts (`posts.json`), the gospel narrative, the Qur'anic passages, Thomas (woven sections and two full texts), the infancy gospels, the substitution witnesses, eight commentaries (315,000 words) |
 | Front-end assets | `style.css` 32 KB; `assets/css/ornament.css` 12 KB, `share.css` 3 KB, `bible.css` 3 KB, `login.css` 7 KB, `journal.css` 2 KB, `responsive.css` 2 KB (phone header, touch targets, focus ring, loaded on every view); `assets/js/ornament.js` 3 KB, `share.js` 2 KB; all plain, no build step |
@@ -331,7 +331,7 @@ Actions used: `after_switch_theme`, `admin_init`, `admin_post_injil_help_populat
 ## Performance
 
 - No render-blocking scripts: both front-end scripts are deferred and tiny; CSS totals under 50 KB uncompressed.
-- Fonts are the heaviest asset class (16 MB on disk, but a page loads only the faces its text uses, by `font-family` fallback). Preloading `SabonNextLT.ttf` and `EBGaramond-Variable.ttf` is worthwhile; subsetting is on the roadmap.
+- Fonts are the heaviest asset class (16 MB on disk, but a page loads only the faces its text uses, by `font-family` fallback). Since 3.38.1 `functions.php` prints a preload for `EBGaramond-Variable.ttf` (reading copy) and `EvangelionCPA-Regular.ttf` (labels) in `wp_head`, and `Kagnue-Regular.ttf` on pages with an `ih-bible` block; that took layout shift on the Bible and table pages from 0.10 to 0.20 down to 0.00 to 0.002 in the lab. Subsetting and a WOFF2 conversion are on the roadmap.
 - The commentary pages and the gospel sections 1, 2, 3, 14 and 27 are the only pages above 100 KB of HTML. Serve them through a page cache. The fold blocks keep them collapsed, so first paint is unaffected.
 - `injil_help_starter_pages()` is built once per request and only in admin (Content tab, populate) or when the schema needs an entry count; it is not on the front-end hot path.
 

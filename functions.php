@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'INJIL_HELP_VERSION', '3.38.0' );
+define( 'INJIL_HELP_VERSION', '3.38.1' );
 
 /**
  * The theme's PHP files in inc/, in the order functions.php loads them. The files they pull in
@@ -120,6 +120,31 @@ add_action(
 		// Phone layout, touch targets and the focus ring; after the ornament so its rules come last.
 		wp_enqueue_style( 'injil-help-responsive', get_stylesheet_directory_uri() . '/assets/css/responsive.css', array( 'injil-help' ), INJIL_HELP_VERSION );
 	}
+);
+
+/**
+ * Preload the two faces the reading copy and the labels use (EB Garamond, Evangelion CPA) so the
+ * first paint has them and the swap from the fallback face moves less text (layout shift). The
+ * `fallback` font-display from theme.json stays.
+ */
+add_action(
+	'wp_head',
+	function () {
+		$faces = array( 'EBGaramond-Variable.ttf', 'EvangelionCPA-Regular.ttf' );
+		// The Bible sections set the chapter numeral in Kagnue; its late swap moved the text beside it.
+		if ( is_singular() && false !== strpos( (string) get_post_field( 'post_content', get_queried_object_id() ), 'ih-bible' ) ) {
+			$faces[] = 'Kagnue-Regular.ttf';
+		}
+		foreach ( $faces as $file ) {
+			if ( is_readable( get_stylesheet_directory() . '/assets/fonts/' . $file ) ) {
+				printf(
+					'<link rel="preload" href="%s" as="font" type="font/ttf" crossorigin>' . "\n",
+					esc_url( get_stylesheet_directory_uri() . '/assets/fonts/' . $file )
+				);
+			}
+		}
+	},
+	2
 );
 
 add_action(
