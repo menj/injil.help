@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.38.4
+Stable tag: 3.38.5
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -160,6 +160,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.38.5 =
+* A newer page or Journal post can replace an older one. The old address redirects to the new one, the old item leaves lists, search, feeds and sitemaps, and moves to the Trash unless you edited it. A Journal post that takes a new slug keeps its post and the old address redirects. Items the theme no longer ships move to the Trash unless edited. Theme Options, Content shows a dry run of the next update, a log of the last 100 changes and a side-by-side comparison of an edited item with the theme's copy.
 = 3.38.4 =
 * Canon wording: the glossary, the Easter letter of Athanasius answer and the Muratorian fragment line now say the lists settled over the fourth and fifth centuries through teachers and regional councils. Three new Journal posts: Who chose the four gospels?, Did Nicaea choose the books? and The 22-book Syriac Bible. Samuel Davidson, The Canon of the Bible (1877), is added to the source library.
 = 3.38.3 =
@@ -489,6 +491,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * New screenshot.
 
 == Upgrade Notice ==
+= 3.38.5 =
+Upload the whole theme. Nothing else to do. Under Theme Options, Content you can now see what the next update would do and what the last ones did.
 = 3.38.4 =
 Upload the whole theme. Three Journal posts are scheduled and four pages (the glossary, responses, timeline and source library) are rewritten from the theme on the first admin load (edited pages are kept).
 = 3.38.3 =

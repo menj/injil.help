@@ -33,7 +33,7 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 |---|---|
 | Type | Block theme (theme.json v3), child of `twentytwentyfive` |
 | Folder, text domain, pattern prefix | `injil-help` |
-| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.38.4) |
+| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.38.5) |
 | PHP in `inc/` | options, social, progress, unlist, unlist-admin, search-permalinks, starter-content, journal, starter-content-pages, gospel-islam, quran-jesus, tafsir, images, seo, schema, schema-content, schema-extend, rank-math, share, contextual-links, login, security, security-detector, error-pages, error-page-html, article (26 files) |
 | Data | `inc/data/` 2.6 MB of JSON: 183 starter pages, the 11 Journal posts (`posts.json`), the gospel narrative, the Qur'anic passages, Thomas (woven sections and two full texts), the infancy gospels, the substitution witnesses, eight commentaries (315,000 words) |
 | Front-end assets | `style.css` 32 KB; `assets/css/ornament.css` 12 KB, `share.css` 3 KB, `bible.css` 3 KB, `login.css` 7 KB, `journal.css` 2 KB, `responsive.css` 2 KB (phone header, touch targets, focus ring, loaded on every view); `assets/js/ornament.js` 3 KB, `share.js` 2 KB; all plain, no build step |
@@ -99,7 +99,7 @@ injil-help/
 ├─ assets/css|js|fonts|icons|images
 ├─ errors/                static 403, 500, 502, 503, 504 pages for a site at the domain root
 ├─ bin/                   build-error-pages.php (command line only)
-├─ tests/                 twelve command-line self-tests and `a11y-axe.js`, an axe-core run (export-ignore; refused by .htaccess)
+├─ tests/                 thirteen command-line self-tests and `a11y-axe.js`, an axe-core run (export-ignore; refused by .htaccess)
 ├─ .htaccess              refuses .git*, .claude, tests, bin and *.md in the theme folder
 └─ languages/             .mo files
 ```
@@ -283,6 +283,8 @@ Since 3.21.0 the theme does the work of four plugins. Each of the last three tur
 - Reading progress bar, `inc/progress.php`. On singular views of the chosen types (never the front page) `wp_body_open` prints `div.ih-progress` with `aria-hidden` and `hidden`; `assets/js/progress.js` unhides it and sets `--ih-read` from a passive scroll listener through `requestAnimationFrame`. It is decorative because the scroll bar carries the same information and a live `progressbar` would be announced on every scroll. Above 600 pixels a top bar sits under the admin bar; below, the admin bar (z-index 99999) covers it until it scrolls away.
 - Unlisted posts, `inc/unlist.php` and `inc/unlist-admin.php`, after Unlist Posts & Pages 1.2.1: `posts_where` (not singular, not an admin screen, not an AJAX call from this admin), `get_next_post_where` and `get_previous_post_where`, `wp_robots` (and Yoast's robots emptied), `rank_math/frontend/robots`, `wp_list_pages_excludes`, `get_pages`, `wp_sitemaps_posts_query_args`, `rank_math/sitemap/entry`, `rank_math/sitemap/posts_to_exclude`, the image sitemap, and the "Read next" row through `render_block_core/group`. Admin: the side box, the column, Quick Edit (`assets/js/unlist-admin.js`), Bulk Edit, the post state and the Unlisted view. The truth is the post meta `_injil_help_unlisted`; `injil_help_unlist_rebuild()` writes the option `injil_help_unlisted` from it and mirrors it to `unlist_posts`, and `injil_help_unlist_sync()` takes over a change the plugin made to that list. `injil_help_unlisted_live_ids()` reads whichever list is live.
 - Search addresses, `inc/search-permalinks.php`, after Pretty Search Permalinks 1.3: the base from `injil_help_search_base` on `init`; a field under Settings › Permalinks › Optional saved with the screen's `update-permalink` nonce; a 301 at `template_redirect` from `?s=` to `/{base}/{term}/` with `/page/N/` and other arguments kept, none for an empty term or a feed. `injil_help_search_pretty_url()` builds the address. Core already has the rules for the base; they are flushed once per change of `INJIL_HELP_RULES`.
+
+`php tests/supersede-test.php` checks the superseded items: the map and its cycles, the guards, what counts as edited, redirect chains, the log and the dry-run rules.
 
 `php tests/pexels-test.php` checks the Pexels client: the key sources, no request without a key, the address and header, the endpoint list, the cache, a 401 and the images.json entry.
 

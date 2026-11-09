@@ -99,6 +99,10 @@ function injil_help_journal_seed( $now = null ) {
 		$excerpt = (string) ( $entry['excerpt'] ?? '' );
 		$status  = injil_help_journal_status( $entry['date'], $now );
 		$post    = injil_help_journal_find( $entry['slug'] );
+		if ( ! $post ) {
+			// An entry that took a new slug keeps its post: renamed in place, the old address redirects.
+			$post = injil_help_journal_rename( $entry );
+		}
 		if ( $post && ( 'trash' === $post->post_status || injil_help_page_is_edited( $post ) ) ) {
 			++$tally['kept'];
 			continue;
@@ -138,6 +142,7 @@ function injil_help_journal_seed( $now = null ) {
 		update_post_meta( $id, INJIL_HELP_POST_META, $entry['slug'] );
 		injil_help_stamp_page( $id, $content, $entry['title'], $excerpt );
 		++$tally[ $post ? 'updated' : 'created' ];
+		injil_help_log( $entry['title'], $post ? __( 'took the theme\'s new text', 'injil-help' ) : __( 'created', 'injil-help' ) );
 	}
 	$GLOBALS['injil_help_seeding'] = false;
 	return $tally;
@@ -151,6 +156,10 @@ function injil_help_journal_maybe_seed() {
 	$tally = injil_help_journal_seed();
 	if ( ! $tally['failed'] ) {
 		update_option( 'injil_help_journal_seeded', INJIL_HELP_VERSION, false );
+		// A replacement that this seeding just wrote is live now, so retire what it replaces (inc/supersede.php).
+		if ( function_exists( 'injil_help_retire_run' ) ) {
+			injil_help_retire_run();
+		}
 	}
 }
 

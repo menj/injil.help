@@ -2,6 +2,18 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.38.5
+
+New material now supersedes old material. No feature removed and no option key or identifier renamed. The data file ships empty, so nothing is superseded until an address pair is added. A rename needs a `former` slug, and items the data no longer holds move to the Trash on the second update after this release (the first records a baseline).
+
+- Added: `inc/supersede.php` and `inc/data/supersedes.json`, a map of old address to new address for pages and Journal posts (`journal/<slug>`).
+- Added: a superseded item answers with a 301 to its replacement (also from the Trash), joins the unlisted posts so lists, search, feeds and sitemaps leave it out, and is moved to the Trash by the update unless it was edited. A chain of replacements ends at the live item, and a cycle supersedes nothing.
+- Added: a Journal entry may list `former` slugs. An unedited post under one is renamed in place and the old address redirects.
+- Added: items the theme wrote that its data no longer holds move to the Trash when unedited, and are kept when edited. A post with no content hash counts as edited.
+- Added: guards. Removals stop when the number of items falls more than 10 percent below the last good run, when the page or Journal data cannot be read, and when `INJIL_HELP_DISABLE_SUPERSEDE` is true in `wp-config.php`.
+- Added: Theme Options, Content shows a dry run of the next update, a log of the last 100 changes (`injil_help_sync_log`) and, for an edited item, a comparison with the theme's copy. The update notice also reports what the retirement did.
+- Added: `tests/supersede-test.php`, 29 checks.
+
 ## 3.38.4
 
 Canon claims and three Journal posts.
