@@ -162,6 +162,16 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 == Changelog ==
 = 3.39.0 =
 * 45 more manuscript images on 15 pages: Qur'an folios (Hijazi, Kufic, Maghribi, Mamluk and Qajar) on eight Qur'an and Islamic Dilemma pages, Codex Claromontanus and Papyrus 46 on three Paul pages, and Nag Hammadi Codex II pages on the four Thomas pages. 225 images in all; 60 of 71 pages now have the full four.
+= 3.38.5 =
+* A newer page or Journal post can replace an older one. The old address redirects to the new one, the old item leaves lists, search, feeds and sitemaps, and moves to the Trash unless you edited it. A Journal post that takes a new slug keeps its post and the old address redirects. Items the theme no longer ships move to the Trash unless edited. Theme Options, Content shows a dry run of the next update, a log of the last 100 changes and a side-by-side comparison of an edited item with the theme's copy.
+= 3.38.4 =
+* Canon wording: the glossary, the Easter letter of Athanasius answer and the Muratorian fragment line now say the lists settled over the fourth and fifth centuries through teachers and regional councils. Three new Journal posts: Who chose the four gospels?, Did Nicaea choose the books? and The 22-book Syriac Bible. Samuel Davidson, The Canon of the Bible (1877), is added to the source library.
+= 3.38.3 =
+* Theme Options (accessibility): range sliders have a 24-pixel target; the Security tab tables that scroll sideways take keyboard focus and have names.
+= 3.38.2 =
+* Accessibility (WCAG 2.2 AA): search and archive result titles are second-level headings with a 24-pixel link target; a table that scrolls sideways takes keyboard focus and has a name. New tests/a11y-axe.js, and RESOURCES.md holds the licence record.
+= 3.38.1 =
+* Mobile-first audit at nine widths from 320 to 1280 pixels. Pages no longer jump while the fonts load, the footer logo and the log-in links are easier to tap on a phone, and long words in captions wrap. The front-page card grids now build up from one column. Nothing is removed.
 = 3.38.0 =
 * New page /resources/dictionaries/: the 44 Arabic lexicons the website consults (Lisān al-ʿArab, al-Rāghib, Ibn Fāris, Lane and the rest), each with its author, work and a link. The Resources index and the glossary point to it.
 = 3.37.0 =
@@ -485,6 +495,16 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 == Upgrade Notice ==
 = 3.39.0 =
 Upload the whole theme. Fifteen pages refresh on the first admin load, and the new images are copied into the Media Library six per admin screen load.
+= 3.38.5 =
+Upload the whole theme. Nothing else to do. Under Theme Options, Content you can now see what the next update would do and what the last ones did.
+= 3.38.4 =
+Upload the whole theme. Three Journal posts are scheduled and four pages (the glossary, responses, timeline and source library) are rewritten from the theme on the first admin load (edited pages are kept).
+= 3.38.3 =
+Upload the whole theme. Nothing else to do.
+= 3.38.2 =
+Upload the whole theme. Nothing else to do.
+= 3.38.1 =
+Upload the whole theme. Nothing else to do.
 = 3.38.0 =
 Upload the whole theme. One new page is created and the Resources index refreshes on the first admin load.
 = 3.37.0 =
@@ -548,6 +568,7 @@ Fonts (assets/fonts), each under its own licence:
 Images: assets/brandmark.svg, assets/images/divider.svg, assets/images/arrow-next*.webp and the icons in assets/icons are the theme's own, GPLv2 or later. assets/images/lanat-allah.svg is outlined from Dubidam Arabic. The default social image, assets/images/og-default.jpg, is the Birmingham Qur'an manuscript, public domain. The plates listed in inc/data/images.json and in the patterns are public domain or CC0 from Wikimedia Commons, Pexels photographs under the Pexels License, Pixabay photographs under the Pixabay Content License, and one CC BY 2.0 photograph (Richard Mortel); each caption carries its credit and source.
 
 == Credits ==
+Canon history: Samuel Davidson, The Canon of the Bible: Its Formation, History, and Fluctuations (3rd revised ed., New York: Peter Eckler, 1877; Project Gutenberg eBook 30132), a public-domain work cited by page for what each Father, council and manuscript said about the lists of books. Its dates for the gospels have been revised since and the site does not use them.
 Contents list: the [auto_toc] shortcode follows the interface of Ikram Hawramani's WordPress Table-of-Contents Shortcode Done Properly (MIT licence, 2025). The code is the theme's own.
 Share and profile icons (assets/icons/social/): Minimalist Social Icons Pack 2.8, GPL; the profile row adds Instagram, YouTube, TikTok, Mastodon, GitHub and Substack from the same pack. The LinkedIn icon originates from Font Awesome Free (https://fontawesome.com), CC BY 4.0; the credit is carried on the Credits page. The brand marks remain trademarks of their owners. assets/icons/share.svg and link.svg are the theme's own.
 Default social image: Birmingham Qur'an manuscript (Cadbury Research Library, University of Birmingham), public domain, via Wikimedia Commons.

@@ -867,6 +867,9 @@ add_filter(
  */
 function injil_help_render_starter_pages() {
 	$missing = 0;
+	if ( function_exists( 'injil_help_render_compare' ) ) {
+		injil_help_render_compare();
+	}
 	?>
 	<ul class="ih-pages">
 		<?php foreach ( injil_help_starter_pages() as $def ) : ?>
@@ -885,6 +888,11 @@ function injil_help_render_starter_pages() {
 			</li>
 		<?php endforeach; ?>
 	</ul>
+	<?php
+	if ( function_exists( 'injil_help_render_dry_run' ) ) {
+		injil_help_render_dry_run();
+	}
+	?>
 	<p class="ih-actions">
 		<a class="button button-primary" data-ih-populate="create" href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=injil_help_populate' ), 'injil_help_populate' ) ); ?>"><?php echo esc_html( $missing ? sprintf( /* translators: %d: missing pages */ __( 'Create %d missing pages', 'injil-help' ), $missing ) : __( 'Check again', 'injil-help' ) ); ?></a>
 		<a class="button" data-ih-populate="update" data-confirm="<?php echo esc_attr__( 'Rewrite every listed page from the theme? Edits you made to those pages will be lost.', 'injil-help' ); ?>" href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=injil_help_populate&overwrite=1' ), 'injil_help_populate' ) ); ?>"><?php esc_html_e( 'Update all pages from the theme', 'injil-help' ); ?></a>

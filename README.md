@@ -35,7 +35,7 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 | Folder, text domain, pattern prefix | `injil-help` |
 | Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.39.0) |
 | PHP in `inc/` | options, social, progress, unlist, unlist-admin, search-permalinks, starter-content, journal, starter-content-pages, gospel-islam, quran-jesus, tafsir, images, seo, schema, schema-content, schema-extend, rank-math, share, contextual-links, login, security, security-detector, error-pages, error-page-html, article (26 files) |
-| Data | `inc/data/` 2.6 MB of JSON: 183 starter pages, the 8 Journal posts (`posts.json`), the gospel narrative, the Qur'anic passages, Thomas (woven sections and two full texts), the infancy gospels, the substitution witnesses, eight commentaries (315,000 words) |
+| Data | `inc/data/` 2.6 MB of JSON: 183 starter pages, the 11 Journal posts (`posts.json`), the gospel narrative, the Qur'anic passages, Thomas (woven sections and two full texts), the infancy gospels, the substitution witnesses, eight commentaries (315,000 words) |
 | Front-end assets | `style.css` 32 KB; `assets/css/ornament.css` 12 KB, `share.css` 3 KB, `bible.css` 3 KB, `login.css` 7 KB, `journal.css` 2 KB, `responsive.css` 2 KB (phone header, touch targets, focus ring, loaded on every view); `assets/js/ornament.js` 3 KB, `share.js` 2 KB; all plain, no build step |
 | Fonts | 16 MB in `assets/fonts/`, 18 font families with 29 `fontFace` entries in `theme.json` |
 | Admin | one tabbed page, Appearance › Theme Options, option `injil_help_options` |
@@ -99,7 +99,7 @@ injil-help/
 ├─ assets/css|js|fonts|icons|images
 ├─ errors/                static 403, 500, 502, 503, 504 pages for a site at the domain root
 ├─ bin/                   build-error-pages.php (command line only)
-├─ tests/                 twelve command-line self-tests (export-ignore; refused by .htaccess)
+├─ tests/                 thirteen command-line self-tests and `a11y-axe.js`, an axe-core run (export-ignore; refused by .htaccess)
 ├─ .htaccess              refuses .git*, .claude, tests, bin and *.md in the theme folder
 └─ languages/             .mo files
 ```
@@ -284,6 +284,8 @@ Since 3.21.0 the theme does the work of four plugins. Each of the last three tur
 - Unlisted posts, `inc/unlist.php` and `inc/unlist-admin.php`, after Unlist Posts & Pages 1.2.1: `posts_where` (not singular, not an admin screen, not an AJAX call from this admin), `get_next_post_where` and `get_previous_post_where`, `wp_robots` (and Yoast's robots emptied), `rank_math/frontend/robots`, `wp_list_pages_excludes`, `get_pages`, `wp_sitemaps_posts_query_args`, `rank_math/sitemap/entry`, `rank_math/sitemap/posts_to_exclude`, the image sitemap, and the "Read next" row through `render_block_core/group`. Admin: the side box, the column, Quick Edit (`assets/js/unlist-admin.js`), Bulk Edit, the post state and the Unlisted view. The truth is the post meta `_injil_help_unlisted`; `injil_help_unlist_rebuild()` writes the option `injil_help_unlisted` from it and mirrors it to `unlist_posts`, and `injil_help_unlist_sync()` takes over a change the plugin made to that list. `injil_help_unlisted_live_ids()` reads whichever list is live.
 - Search addresses, `inc/search-permalinks.php`, after Pretty Search Permalinks 1.3: the base from `injil_help_search_base` on `init`; a field under Settings › Permalinks › Optional saved with the screen's `update-permalink` nonce; a 301 at `template_redirect` from `?s=` to `/{base}/{term}/` with `/page/N/` and other arguments kept, none for an empty term or a feed. `injil_help_search_pretty_url()` builds the address. Core already has the rules for the base; they are flushed once per change of `INJIL_HELP_RULES`.
 
+`php tests/supersede-test.php` checks the superseded items: the map and its cycles, the guards, what counts as edited, redirect chains, the log and the dry-run rules.
+
 `php tests/pexels-test.php` checks the Pexels client: the key sources, no request without a key, the address and header, the endpoint list, the cache, a 401 and the images.json entry.
 
 `php tests/toc-test.php` checks the contents list: the shortcode marker, ids that are kept and never repeated, nesting that stays balanced when levels jump or fall, the automatic list, and a marker that never reaches an excerpt.
@@ -331,7 +333,7 @@ Actions used: `after_switch_theme`, `admin_init`, `admin_post_injil_help_populat
 ## Performance
 
 - No render-blocking scripts: both front-end scripts are deferred and tiny; CSS totals under 50 KB uncompressed.
-- Fonts are the heaviest asset class (16 MB on disk, but a page loads only the faces its text uses, by `font-family` fallback). Preloading `SabonNextLT.ttf` and `EBGaramond-Variable.ttf` is worthwhile; subsetting is on the roadmap.
+- Fonts are the heaviest asset class (16 MB on disk, but a page loads only the faces its text uses, by `font-family` fallback). Since 3.38.1 `functions.php` prints a preload for `EBGaramond-Variable.ttf` (reading copy) and `EvangelionCPA-Regular.ttf` (labels) in `wp_head`, and `Kagnue-Regular.ttf` on pages with an `ih-bible` block; that took layout shift on the Bible and table pages from 0.10 to 0.20 down to 0.00 to 0.002 in the lab. Subsetting and a WOFF2 conversion are on the roadmap.
 - The commentary pages and the gospel sections 1, 2, 3, 14 and 27 are the only pages above 100 KB of HTML. Serve them through a page cache. The fold blocks keep them collapsed, so first paint is unaffected.
 - `injil_help_starter_pages()` is built once per request and only in admin (Content tab, populate) or when the schema needs an entry count; it is not on the front-end hot path.
 

@@ -174,3 +174,10 @@ body.interim-login #login{width:auto;max-width:none;padding:16px 16px 0;margin:0
 body.interim-login .ih-login-gloss{margin-bottom:12px}
 body.interim-login .ih-login-gloss .ih-quran{font-size:22px;line-height:1.7}
 body.interim-login .login h1 a,body.interim-login h1 a{padding-top:60px;background-size:52px 52px;font-size:22px;margin-bottom:10px}
+
+/* Mobile-first audit (3.38.1): touch targets of 44px on phones and coarse pointers (WCAG 2.5.8 asks 24px). */
+@media (max-width:599px),(pointer:coarse){
+ .login #nav a,.login #backtoblog a,.login .privacy-policy-link{display:inline-block;padding-block:13px}
+ .login .forgetmenot label{display:inline-flex;align-items:center;min-height:44px}
+ .login .button.wp-hide-pw{min-width:44px;min-height:44px}
+}

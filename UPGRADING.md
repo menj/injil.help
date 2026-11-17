@@ -2,6 +2,10 @@
 
 How to move a site from one version to the next, and where the theme is going. The roadmap comes first; the notes for each version are under "Updating an existing site" at the end.
 
+## Accessibility audit (WCAG 2.2 AA), 3.38.2
+
+Measured on a scratch WordPress with axe-core at 1280 and 375 pixels, keyboard walks of the skip link, header, search and every page type, 320-pixel reflow, text-spacing overrides and the debug log. Found: IH-1 (search and index results skipped from level one to level three, moderate, 1.3.1), IH-2 (result links 22 pixels tall at 375 pixels, minor, 2.5.8), IH-3 (a scrolling table not reachable by keyboard, serious, 2.1.1). All fixed in 3.38.2. Open, for manual review: IH-4 (the core login screen has two level-one headings and no main landmark; core markup, not changed), IH-5 (a screen-reader pass with NVDA or VoiceOver is not done), IH-6 (video and audio embeds in starter pages are not audited for captions). Run `tests/a11y-axe.js` before a release.
+
 ## Roadmap
 
 These are plans, not promises. Each item rests on something on record: this file's earlier list, the code, the server logs of October and November 2026, a limit the README documents, or a feature another of the owner's themes already has. Items leave this list when they ship and go into `CHANGELOG.md`. GitHub had no open issues or pull requests when the list was last checked (2026-11-05), and the code carries no TODO markers. Each item names the files it touches, so it can be picked up cold.
@@ -42,6 +46,33 @@ These are plans, not promises. Each item rests on something on record: this file
 - Theme Options › Commentaries: show or hide the folds, choose the works and their order, and whether folds open by default.
 - A moderated question form on the FAQs page.
 - Answer the bare `/wp-json/oembed/1.0/embed` probes earlier. The November 2026 log shows 168 of them answering 404 with a full WordPress load each.
+
+## Mobile-first audit, 3.38.1
+
+Measured on 9 November 2026 in a scratch WordPress with Chromium and axe-core, at 320, 360, 375, 390, 414, 480, 768, 1024 and 1280 pixels, on the front page, a long Journal post with a wide table, a code block, an embed, a gallery and long unbroken URLs, a category archive, the Journal list, search with and without results, the 404 page, the log-in screen, two Bible sections, three wide-table pages, a section page and the contact page.
+
+The theme was already close: no page scrolled sideways at any of the nine widths, before or after. The issues were small.
+
+| Finding | Severity | Risk of the fix | Action |
+|---|---|---|---|
+| Layout shift of 0.10 to 0.20 on the Bible, wide-table and Journal pages at 320 to 414 px, from the fonts swapping in after first paint | Medium | Low | Fixed: preload of EB Garamond, Evangelion CPA and (Bible sections) Kagnue |
+| Section, answer and entry card grids built with `max-width` queries that took columns away | Low | Low | Fixed: one column first, `min-width` queries add columns; column count identical at 17 test widths |
+| Footer brand mark 32 px square | Low | Low | Fixed: invisible 44 px tap area |
+| Log-in links, "Remember me" label and password eye under 44 px | Low | Low | Fixed in `login.css` |
+| A caption with one long word could widen its figure | Low | Low | Fixed: `overflow-wrap:anywhere` |
+| Gallery captions scroll inside the image when long (core behaviour, axe `scrollable-region-focusable`) | Medium | Medium | Not changed; see below |
+| Two heading-order notices on search results and a section page (content level) | Low | Medium | Not changed; the 3.38.1 accessibility work covers search and archive titles |
+| Block navigation button has no `aria-expanded` of its own (core behaviour); Escape closes the menu and focus returns to the button | Low | Medium | Not changed |
+| Fonts are TTF, 16 MB on disk; a page loads about 2.6 MB of them (EB Garamond 831 KB, SBL Greek 1.1 MB) | Medium | High | Flagged |
+| 17 other `max-width` queries in `style.css` and the module stylesheets | Low | High | Flagged |
+| No comment form in the templates, so no form inputs to review besides search and log-in | Info | None | None |
+
+Remaining risks and follow-up:
+
+- Convert the fonts to WOFF2 and subset them, then preload the smaller files. Why: the reading face and the Greek face are 1.9 MB together on every page.
+- Move the remaining `max-width` queries (`is-style-gospel-verse`, `is-style-objection-reply`, the header and footer groups, the ornament and share rules) to `min-width`, one block at a time with a screenshot at 781 and 782 pixels. Why: they work, but they remove styles at small sizes in place of adding them at large ones.
+- Decide whether gallery captions should clip or grow. Why: core gives them `overflow:auto` inside the image; a long caption on a small image scrolls.
+- Check the pages with a real phone and a screen reader. The lab used Chromium with touch emulation.
 
 ## Updating an existing site
 
@@ -114,6 +145,11 @@ Git Updater reads the theme header and offers the release whose tag matches `Ver
 - **3.20.2.** Nothing to do. A page or Journal post that carries no hash from the theme is kept on every update from now on, so it keeps your text and does not take the new one. To give such a page the theme's text, press "Update all pages from the theme".
 - **3.39.0.** Upload the whole theme. Fifteen pages are rewritten on the first admin load; the new plates reach the Media Library six per admin screen load, and a plate without a copy stays hidden until then.
 - **3.38.0.** Upload the whole theme. The new page /resources/dictionaries/ is created on the first admin load, and the Resources index is rewritten (edits to it are replaced).
+- **3.38.1.** Upload the whole theme. Nothing else to do. Clear the page cache so phones fetch the new stylesheets.
+- **3.38.2.** Upload the whole theme. Nothing else to do.
+- **3.38.3.** Upload the whole theme. Nothing else to do.
+- **3.38.4.** Upload the whole theme. Three Journal posts are scheduled for January 2027, and the glossary, responses, timeline and source-library pages are rewritten from the theme on the first admin load unless you edited them.
+- **3.38.5.** Upload the whole theme. Nothing else to do. Nothing is superseded or renamed until a pair is added to `inc/data/supersedes.json` or a `former` slug is set on a Journal entry. Pages and posts the theme wrote that its data no longer holds move to the Trash from the second update on (the first records the baseline and each page's path), unless edited. A post that carries no content hash is treated as edited and kept.
 - **3.37.0.** Upload the whole theme. To use the Pexels client, set the key under Theme Options > Content or define `INJIL_HELP_PEXELS_KEY` in `wp-config.php`. Nothing else changes.
 - **3.36.0.** Upload the whole theme. Nine pages refresh on the first admin load. Pixabay plates appear once the Media Library holds their copies (six per admin screen load); they never load from Pixabay for readers.
 - **3.20.0.** Check the plates. Remote plates are now off, so a plate with no Media Library copy is hidden. The pages in `inc/data/images.json` already have their copies on a site that has run 3.18.0; the four plates of the front-page and section patterns are copied on the next few admin screen loads. Open the front page afterwards. If a plate is still missing (a failed fetch is retried after a day), switch on Theme Options › Content › Load plates from Wikimedia Commons and Pexels until it is there. The Privacy page is rewritten to say the images are served from the site, unless you edited it.

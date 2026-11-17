@@ -581,6 +581,7 @@ function injil_help_find_page( $path ) {
 }
 
 const INJIL_HELP_HASH_META  = '_injil_help_hash'; // md5 of the content the theme wrote
+const INJIL_HELP_PATH_META  = '_injil_help_path'; // the path the theme gave the page when it wrote it (from 3.38.5)
 const INJIL_HELP_HEAD_META  = '_injil_help_head'; // md5 of the title and excerpt it wrote (from 3.6.1; absent on older pages)
 
 /** The hash of a page's title and excerpt as the theme wrote them. */
@@ -590,6 +591,7 @@ function injil_help_head_hash( $title, $excerpt ) {
 
 /** Record what the theme wrote, so a later edit to the content, the title or the excerpt is detected. */
 function injil_help_stamp_page( $id, $content, $title, $excerpt ) {
+	update_post_meta( $id, INJIL_HELP_PATH_META, get_page_uri( $id ) ); // where the theme put it, so a page the owner moved is never taken for a dropped one
 	update_post_meta( $id, INJIL_HELP_HASH_META, md5( $content ) );
 	update_post_meta( $id, INJIL_HELP_HEAD_META, injil_help_head_hash( $title, $excerpt ) );
 }
@@ -653,6 +655,10 @@ function injil_help_populate_page( $order, $def, $overwrite = false, $force = fa
 		injil_help_clear_former_copies( $def, $existing->ID );
 	}
 	if ( $existing && ! $overwrite ) {
+		// Record where the theme put a page it wrote, for pages written before 3.38.5.
+		if ( '' !== (string) get_post_meta( $existing->ID, INJIL_HELP_HASH_META, true ) && '' === (string) get_post_meta( $existing->ID, INJIL_HELP_PATH_META, true ) && get_page_uri( $existing ) === $def['path'] ) {
+			update_post_meta( $existing->ID, INJIL_HELP_PATH_META, $def['path'] );
+		}
 		return 'unchanged';
 	}
 	$content = injil_help_page_content( $def );
@@ -679,6 +685,7 @@ function injil_help_populate_page( $order, $def, $overwrite = false, $force = fa
 		);
 		if ( $done && ! is_wp_error( $done ) ) {
 			injil_help_stamp_page( $existing->ID, $content, $def['title'], $excerpt );
+			injil_help_log( $def['title'], $force ? __( 'restored to the theme\'s text', 'injil-help' ) : __( 'took the theme\'s new text', 'injil-help' ) );
 			return 'updated';
 		}
 		return 'failed';
@@ -720,6 +727,7 @@ function injil_help_populate_page( $order, $def, $overwrite = false, $force = fa
 			update_post_meta( $id, '_wp_page_template', $def['template'] );
 		}
 		injil_help_stamp_page( $id, $content, $def['title'], $excerpt );
+		injil_help_log( $def['title'], __( 'created', 'injil-help' ) );
 		return 'created';
 	}
 	return 'failed';
@@ -744,6 +752,10 @@ function injil_help_populate_finish( $complete = true ) {
 	}
 	if ( $complete ) {
 		update_option( 'injil_help_populated', INJIL_HELP_VERSION );
+		// Superseded and dropped items go to the Trash unless edited, unless a guard stops removals (inc/supersede.php).
+		if ( function_exists( 'injil_help_retire_run' ) ) {
+			injil_help_retire_run();
+		}
 	}
 	delete_option( 'injil_help_featured' ); // the featured-image pass runs again on the next admin loads
 }
@@ -899,6 +911,23 @@ function injil_help_populate_summary( $tally ) {
 	if ( $tally['failed'] ) {
 		/* translators: %d: number of pages */
 		$parts[] = sprintf( _n( '%d could not be written', '%d could not be written', $tally['failed'], 'injil-help' ), $tally['failed'] );
+	}
+	// What the retirement did, once (inc/supersede.php).
+	$retired = function_exists( 'injil_help_retire_run' ) ? get_transient( 'injil_help_retire_report' ) : false;
+	if ( is_array( $retired ) ) {
+		if ( ! empty( $retired['trashed'] ) ) {
+			/* translators: %d: number of items */
+			$parts[] = sprintf( __( '%d moved to the Trash (replaced or no longer in the theme)', 'injil-help' ), count( $retired['trashed'] ) );
+		}
+		if ( ! empty( $retired['kept'] ) ) {
+			/* translators: %d: number of items */
+			$parts[] = sprintf( _n( '%d no longer in the theme, kept because you edited it', '%d no longer in the theme, kept because you edited them', count( $retired['kept'] ), 'injil-help' ), count( $retired['kept'] ) );
+		}
+		if ( ! empty( $retired['failed'] ) ) {
+			/* translators: %d: number of items */
+			$parts[] = sprintf( __( '%d could not be moved to the Trash', 'injil-help' ), count( $retired['failed'] ) );
+		}
+		delete_transient( 'injil_help_retire_report' );
 	}
 	return $parts ? ucfirst( implode( ', ', $parts ) ) . '.' : __( 'Nothing to do.', 'injil-help' );
 }

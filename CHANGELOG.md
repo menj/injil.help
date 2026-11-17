@@ -9,6 +9,51 @@ More plates for pages that had one.
 - Added: 45 images from Wikimedia Commons (all public domain) on 15 pages. Qur'an folios on `islamic-dilemma`, `islamic-dilemma/secular-form`, `islamic-dilemma/balance-of-truth`, `islamic-dilemma/what-is-injil`, `method`, `why-islam`, `servant-of-god` and `quran/birth` (Sūrat al-Māʾida and Sūrat Maryam leaves where the file names the sūra); Codex Claromontanus and Papyrus 46 on `paul`, `paul/false-apostles` and `paul/leave-gospel-of-paul`; Nag Hammadi Codex II pages on the four Thomas pages (under 1000 px, so stored as WebP).
 - Total: 225 images on 71 pages; 11 pages still have one image.
 
+## 3.38.5
+
+New material now supersedes old material. No feature removed and no option key or identifier renamed. The data file ships empty, so nothing is superseded until an address pair is added. A rename needs a `former` slug, and items the data no longer holds move to the Trash on the second update after this release (the first records a baseline).
+
+- Added: `inc/supersede.php` and `inc/data/supersedes.json`, a map of old address to new address for pages and Journal posts (`journal/<slug>`).
+- Added: a superseded item answers with a 301 to its replacement (also from the Trash), joins the unlisted posts so lists, search, feeds and sitemaps leave it out, and is moved to the Trash by the update unless it was edited. A chain of replacements ends at the live item, and a cycle supersedes nothing.
+- Added: a Journal entry may list `former` slugs. An unedited post under one is renamed in place and the old address redirects.
+- Added: items the theme wrote that its data no longer holds move to the Trash when unedited, and are kept when edited. A post with no content hash counts as edited.
+- Added: guards. Removals stop when the number of items falls more than 10 percent below the last good run, when the page or Journal data cannot be read, and when `INJIL_HELP_DISABLE_SUPERSEDE` is true in `wp-config.php`.
+- Added: Theme Options, Content shows a dry run of the next update, a log of the last 100 changes (`injil_help_sync_log`) and, for an edited item, a comparison with the theme's copy. The update notice also reports what the retirement did.
+- Added: `tests/supersede-test.php`, 29 checks.
+
+## 3.38.4
+
+Canon claims and three Journal posts.
+
+- Changed: the glossary entry for the canon, the answer on how Christians receive the list of books and the Muratorian fragment line on the timeline (`inc/data/pages/resources.json`). The lists settled over the fourth and fifth centuries through teachers, bishops and regional councils, and the Muratorian date is stated as contested.
+- Added: Journal posts `who-chose-four-gospels`, `did-nicaea-choose-books` and `syriac-bible-twenty-two-books`, with short titles in `inc/data/seo-titles.json`.
+- Added: Samuel Davidson, The Canon of the Bible (1877), in the source library, the timeline sources and the responses sources; and under Credits in `readme.txt`.
+
+## 3.38.3
+
+Theme Options settings UI audit.
+
+- Audited against the admin design brief: tabs (arrow keys, Home, End), cards, toggle switches, choice cards, live range values, colour cards, header and footer all pass at 782 and 375 pixels. No table layouts.
+- Fixed: range sliders were 16 pixels tall (2.5.8); they are now at least 24. The five scroll areas on the Security tab take keyboard focus and have names (2.1.1).
+
+## 3.38.2
+
+WCAG 2.2 AA audit.
+
+- Fixed: search and index result titles jumped from level one to level three (1.3.1, 2.4.6); they are now level two, sized as before. Their links keep a 24-pixel target (2.5.8).
+- Fixed: a table that scrolls sideways could not be reached by keyboard (2.1.1). `inc/a11y.php` gives each core table figure `tabindex="0"`, `role="region"` and a numbered name.
+- Added: `tests/a11y-axe.js`, an axe-core run at 1280 and 375 pixels; `RESOURCES.md`, the one record of copyright and asset licences.
+
+## 3.38.1
+
+Mobile-first audit on 9 November 2026, measured at 320, 360, 375, 390, 414, 480, 768, 1024 and 1280 pixels on 14 page types. No page scrolled sideways before or after. No feature removed, no class, id or hook renamed.
+
+- Fixed: layout shift on the Bible pages, the wide-table pages and the Journal list (0.10 to 0.20 in the lab at 320 to 414 pixels). The theme now preloads the two faces the reading copy and the labels use, EB Garamond and Evangelion CPA, plus Kagnue on the Bible sections (the chapter numeral), from `functions.php`. The shift fell to between 0.00 and 0.002.
+- Changed: the front-page section grid, the answer cards and the entry cards in `style.css` now start from one column and add columns with `min-width` queries (641 and 1200 pixels), in place of `max-width` queries that took columns away. The column count is identical at every width from 320 to 1280 pixels.
+- Fixed: a caption with one very long word wraps inside its figure (`responsive.css`).
+- Fixed: the footer brand mark has a 44-pixel tap area on phones and touch screens, and the log-in screen links, the "Remember me" label and the password eye have 44-pixel targets (`responsive.css`, `login.css`).
+
+
 ## 3.38.0
 
 The dictionaries page.
