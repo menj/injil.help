@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.40.0
+Stable tag: 3.41.0
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -160,6 +160,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.41.0 =
+* Four Glossary entries gain more of the classical lexicons: Ibn al-Athīr's al-Nihāya on Zabūr and Muhaymin, al-Jawharī and al-Fayyūmī on Shirk, and al-Ṣāḥib ibn ʿAbbād and al-Jurjānī on Rūḥ.
 = 3.40.0 =
 * 33 more manuscript images on the 11 pages that had one: papyri of Matthew, Luke, John and Acts, and codex leaves of the letters. Every page with an image now has four. 258 images in all on 71 pages.
 = 3.39.0 =
@@ -495,6 +497,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * New screenshot.
 
 == Upgrade Notice ==
+= 3.41.0 =
+Upload the whole theme. The Glossary refreshes on the first admin load, and any edits made to it are replaced.
 = 3.40.0 =
 Upload the whole theme. Eleven pages refresh on the first admin load, and the new images are copied into the Media Library six per admin screen load.
 = 3.39.0 =
