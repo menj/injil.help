@@ -2,6 +2,13 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.39.0
+
+More plates for pages that had one.
+
+- Added: 45 images from Wikimedia Commons (all public domain) on 15 pages. Qur'an folios on `islamic-dilemma`, `islamic-dilemma/secular-form`, `islamic-dilemma/balance-of-truth`, `islamic-dilemma/what-is-injil`, `method`, `why-islam`, `servant-of-god` and `quran/birth` (Sūrat al-Māʾida and Sūrat Maryam leaves where the file names the sūra); Codex Claromontanus and Papyrus 46 on `paul`, `paul/false-apostles` and `paul/leave-gospel-of-paul`; Nag Hammadi Codex II pages on the four Thomas pages (under 1000 px, so stored as WebP).
+- Total: 225 images on 71 pages; 11 pages still have one image.
+
 ## 3.38.0
 
 The dictionaries page.

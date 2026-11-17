@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.38.0
+Stable tag: 3.39.0
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -160,6 +160,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.39.0 =
+* 45 more manuscript images on 15 pages: Qur'an folios (Hijazi, Kufic, Maghribi, Mamluk and Qajar) on eight Qur'an and Islamic Dilemma pages, Codex Claromontanus and Papyrus 46 on three Paul pages, and Nag Hammadi Codex II pages on the four Thomas pages. 225 images in all; 60 of 71 pages now have the full four.
 = 3.38.0 =
 * New page /resources/dictionaries/: the 44 Arabic lexicons the website consults (Lisān al-ʿArab, al-Rāghib, Ibn Fāris, Lane and the rest), each with its author, work and a link. The Resources index and the glossary point to it.
 = 3.37.0 =
@@ -481,6 +483,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * New screenshot.
 
 == Upgrade Notice ==
+= 3.39.0 =
+Upload the whole theme. Fifteen pages refresh on the first admin load, and the new images are copied into the Media Library six per admin screen load.
 = 3.38.0 =
 Upload the whole theme. One new page is created and the Resources index refreshes on the first admin load.
 = 3.37.0 =

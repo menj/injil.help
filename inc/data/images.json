@@ -101,25 +101,105 @@
         "file": "Gospel of Thomas - Nag Hammadi II-36.jpg",
         "alt": "Nag Hammadi Codex II, page 36, the Gospel of Thomas in Coptic",
         "caption": "Nag Hammadi Codex II, page 36 of the Gospel of Thomas, the Coptic text behind this translation.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Gospel of Thomas - Nag Hammadi II-32.jpg",
+                "alt": "Nag Hammadi Codex II, page 32, the Gospel of Thomas in Coptic",
+                "caption": "Nag Hammadi Codex II, page 32, the Gospel of Thomas in Coptic.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Gospel of Thomas - Nag Hammadi II-33.jpg",
+                "alt": "Nag Hammadi Codex II, page 33, the Gospel of Thomas in Coptic",
+                "caption": "Nag Hammadi Codex II, page 33, the Gospel of Thomas in Coptic.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Gospel of Thomas - Nag Hammadi II-34.jpg",
+                "alt": "Nag Hammadi Codex II, page 34, the Gospel of Thomas in Coptic",
+                "caption": "Nag Hammadi Codex II, page 34, the Gospel of Thomas in Coptic.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "gospels/thomas/sayings-patterson-meyer": {
         "file": "Gospel of Thomas - Nag Hammadi II-39.jpg",
         "alt": "Nag Hammadi Codex II, page 39, the Gospel of Thomas in Coptic",
         "caption": "Nag Hammadi Codex II, page 39 of the Gospel of Thomas.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Gospel of Thomas - Nag Hammadi II-37.jpg",
+                "alt": "Nag Hammadi Codex II, page 37, the Gospel of Thomas in Coptic",
+                "caption": "Nag Hammadi Codex II, page 37, the Gospel of Thomas in Coptic.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Gospel of Thomas - Nag Hammadi II-38.jpg",
+                "alt": "Nag Hammadi Codex II, page 38, the Gospel of Thomas in Coptic",
+                "caption": "Nag Hammadi Codex II, page 38, the Gospel of Thomas in Coptic.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Gospel of Thomas - Nag Hammadi II-40.jpg",
+                "alt": "Nag Hammadi Codex II, page 40, the Gospel of Thomas in Coptic",
+                "caption": "Nag Hammadi Codex II, page 40, the Gospel of Thomas in Coptic.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "gospels/thomas/set-aside": {
         "file": "Gospel of Thomas - Nag Hammadi II-51.jpg",
         "alt": "Nag Hammadi Codex II, page 51, the last page of the Gospel of Thomas with its title",
         "caption": "Nag Hammadi Codex II, page 51: the end of the Gospel of Thomas and its title, written at the close as ancient scribes did.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Gospel of Thomas - Nag Hammadi II-41.jpg",
+                "alt": "Nag Hammadi Codex II, page 41, the Gospel of Thomas in Coptic",
+                "caption": "Nag Hammadi Codex II, page 41, the Gospel of Thomas in Coptic.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Gospel of Thomas - Nag Hammadi II-42.jpg",
+                "alt": "Nag Hammadi Codex II, page 42, the Gospel of Thomas in Coptic",
+                "caption": "Nag Hammadi Codex II, page 42, the Gospel of Thomas in Coptic.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Gospel of Thomas - Nag Hammadi II-43.jpg",
+                "alt": "Nag Hammadi Codex II, page 43, the Gospel of Thomas in Coptic",
+                "caption": "Nag Hammadi Codex II, page 43, the Gospel of Thomas in Coptic.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "gospels/thomas/correlation": {
         "file": "Preface and Sayings of Jesus - Gospel of Thomas (3rd C), verso - BL Papyrus 1531.jpg",
         "alt": "Papyrus Oxyrhynchus 654, third century: the prologue and first sayings of the Gospel of Thomas in Greek, British Library Papyrus 1531",
         "caption": "Papyrus Oxyrhynchus 654, third century: the prologue and sayings 1 to 7 of Thomas in Greek, older than the Coptic copy. British Library, Papyrus 1531.",
-        "credit": "CC0 1.0, British Library."
+        "credit": "CC0 1.0, British Library.",
+        "more": [
+            {
+                "file": "Gospel of Thomas - Nag Hammadi II-44.jpg",
+                "alt": "Nag Hammadi Codex II, page 44, the Gospel of Thomas in Coptic",
+                "caption": "Nag Hammadi Codex II, page 44, the Gospel of Thomas in Coptic.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Gospel of Thomas - Nag Hammadi II-45.jpg",
+                "alt": "Nag Hammadi Codex II, page 45, the Gospel of Thomas in Coptic",
+                "caption": "Nag Hammadi Codex II, page 45, the Gospel of Thomas in Coptic.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Gospel of Thomas - Nag Hammadi II-46.jpg",
+                "alt": "Nag Hammadi Codex II, page 46, the Gospel of Thomas in Coptic",
+                "caption": "Nag Hammadi Codex II, page 46, the Gospel of Thomas in Coptic.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "gospels/synoptic-problem": {
         "file": "P45 Marc 8.35-9.1.jpg",
@@ -241,7 +321,27 @@
         "file": "Maghribi script sura 5.jpg",
         "alt": "A Qur’an manuscript in Maghribi script showing Sūrat al-Māʾida, the fifth sūra",
         "caption": "Sūrat al-Māʾida in a Qur’an written in Maghribi script. Verses 46 to 48 of this sūra, the Injīl given to ʿĪsā and the Qur’an as guardian over the earlier scripture, are the ground on which the dilemma is answered.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Interlinear Qur'an (5- 89-95) WDL6787, page 1.jpg",
+                "alt": "Interlinear Qur’an, first page of Sūrat al-Māʾida 5:89-95, with a translation between the lines",
+                "caption": "Interlinear Qur’an, Sūrat al-Māʾida 5:89-95, first page (World Digital Library 6787).",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Interlinear Qur'an (5- 89-95) WDL6787, page 2.jpg",
+                "alt": "Interlinear Qur’an, second page of Sūrat al-Māʾida 5:89-95",
+                "caption": "Interlinear Qur’an, Sūrat al-Māʾida 5:89-95, second page (World Digital Library 6787).",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Qur'an folio (BnF, Arabe 334, f. 125r).jpg",
+                "alt": "Qur’an folio in a Maghribi hand, Bibliothèque nationale de France, Arabe 334",
+                "caption": "Qur’an folio, Bibliothèque nationale de France, Arabe 334, f. 125r.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "quran/table": {
         "file": "Juan de Juanes 002.jpg",
@@ -339,7 +439,27 @@
         "file": "Paul-epitre-galates-2-3es.jpg",
         "alt": "Papyrus 46: the first page of the Epistle to the Galatians in Greek",
         "caption": "Papyrus 46, about 200 CE: the opening of Galatians, where Paul of Tarsus curses those who preach another gospel (1:6 to 9). The men he cursed are the subject of this page.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Ann Arbor, University of Michigan P.Mich.inv. 6238 (Papyrus 46) fol. 157v Eph 6, 8–18.jpg",
+                "alt": "Papyrus 46, folio 157v: Ephesians 6:8-18 in Greek, University of Michigan",
+                "caption": "Papyrus 46, University of Michigan, folio 157v: Ephesians 6:8-18.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Ann Arbor, University of Michigan P.Mich.inv. 6238 (Papyrus 46) fol. 79v 1 Cor 2, 11–3, 5.jpg",
+                "alt": "Papyrus 46, folio 79v: 1 Corinthians 2:11 to 3:5 in Greek, University of Michigan",
+                "caption": "Papyrus 46, University of Michigan, folio 79v: 1 Corinthians 2:11 to 3:5.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "P.Mich.inv. 6238.jpg",
+                "alt": "Papyrus 46, a page of the earliest known collection of the letters of Paul, about the year 200",
+                "caption": "Papyrus 46, University of Michigan inv. 6238, a page of the earliest known collection of the letters of Paul.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "paul/ebionites": {
         "file": "Jerusalem Modell BW 2.JPG",
@@ -359,19 +479,79 @@
         "file": "Birmingham Quran manuscript.jpg",
         "alt": "The Birmingham Qur’an manuscript, 2 leaves in Hijazi script, radiocarbon-dated to the seventh century",
         "caption": "The Birmingham Qur’an manuscript (Mingana 1572a), Hijazi script, radiocarbon-dated to between 568 and 645 CE. Cadbury Research Library, University of Birmingham.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Hijazi script - Qur'anic verses.jpg",
+                "alt": "Qur’an leaf in Hijazi script, seventh century, with verses of the Qur’an",
+                "caption": "Qur’an leaf in Hijazi script, first of two.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Hijazi script 2 - Qur'anic verses.jpg",
+                "alt": "Qur’an leaf in Hijazi script, seventh century, second leaf",
+                "caption": "Qur’an leaf in Hijazi script, second of two.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Qur'an folio in Hijazi script (BnF, Arabe 334, f. 32r).jpg",
+                "alt": "Qur’an folio in Hijazi script, Bibliothèque nationale de France, Arabe 334",
+                "caption": "Qur’an folio in Hijazi script, Bibliothèque nationale de France, Arabe 334, f. 32r.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "method": {
         "file": "Kufic Quran, sura 7, verses 86-87.jpg",
         "alt": "A Qur’an leaf in Kufic script, eighth or ninth century, with verses of Sūrat al-Aʿrāf",
         "caption": "A Qur’an leaf in early Kufic script, eighth or ninth century: Sūrat al-Aʿrāf 86 to 87. The measure this website applies is the Qur’an’s own.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Qur'an folio 11th century kufic.jpg",
+                "alt": "Qur’an folio in Kufic script, eleventh century, in black ink with coloured verse markers",
+                "caption": "Qur’an folio in Kufic script, eleventh century, verso.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Qur'an folio 11th century kufic (recto).jpg",
+                "alt": "Qur’an folio in Kufic script, eleventh century, recto",
+                "caption": "Qur’an folio in Kufic script, eleventh century, recto.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Pars Museum Kufic Qur'an MS 548, Folios 36a and 37b.jpg",
+                "alt": "Two pages of a Kufic Qur’an, Pars Museum MS 548, folios 36a and 37b",
+                "caption": "Kufic Qur’an, Pars Museum MS 548, folios 36a and 37b.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "quran/birth": {
         "file": "Virgin Mary and Jesus (old Persian miniature).jpg",
         "alt": "Mary and the infant Jesus in an old Persian miniature",
         "caption": "Mary and the infant Jesus in a Persian miniature. Muslim painters drew the story of Maryam from the Qur’an’s nineteenth sūra.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "African - Illuminated Incipit with Headpiece for Chapter 19 - Walters W5681B - Full Page.jpg",
+                "alt": "Illuminated opening of Sūrat Maryam, chapter 19 of the Qur’an, in an African manuscript",
+                "caption": "Opening of Sūrat Maryam (Q 19), African Qur’an manuscript, Walters Art Museum W.568.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Folio Quran Met 45.140.jpg",
+                "alt": "Qur’an folio with an illuminated chapter heading, Metropolitan Museum of Art 45.140",
+                "caption": "Qur’an folio, Metropolitan Museum of Art 45.140.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Folio Quran Met 55.44.jpg",
+                "alt": "Qur’an folio with a gold-framed page of calligraphy, Metropolitan Museum of Art 55.44",
+                "caption": "Qur’an folio, Metropolitan Museum of Art 55.44.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "quran/servant": {
         "file": "Christ Pantocrator Deesis mosaic Hagia Sophia.jpg",
@@ -432,7 +612,27 @@
         "page": "https://www.pexels.com/photo/close-up-of-ancient-manuscript-with-latin-text-30019470/",
         "alt": "A medieval Latin manuscript open at two hand-written pages",
         "caption": "A medieval manuscript in Latin. The gospels reached the Middle Ages only in hand copies like this one, made by scribes many centuries after ʿĪsā.",
-        "credit": "Photo: Magda Ehlers, Pexels License"
+        "credit": "Photo: Magda Ehlers, Pexels License",
+        "more": [
+            {
+                "file": "An Early Qur'an Leaf In Hijazi Script On Vellum, Arabian Peninsula, Second Half 7th Century AD (1).jpg",
+                "alt": "Early Qur’an leaf in Hijazi script on vellum, Arabian Peninsula, second half of the seventh century",
+                "caption": "Early Qur’an leaf in Hijazi script on vellum, second half of the seventh century (1).",
+                "credit": "Public domain."
+            },
+            {
+                "file": "An Early Qur'an Leaf In Hijazi Script On Vellum, Arabian Peninsula, Second Half 7th Century AD (2).jpg",
+                "alt": "Early Qur’an leaf in Hijazi script on vellum, the other side",
+                "caption": "Early Qur’an leaf in Hijazi script on vellum, second half of the seventh century (2).",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Unknown, Arabia, late 7th Century - Pages from a Qur'an in Hijazi - Google Art Project (GgEJ-sdJCJRzQg).jpg",
+                "alt": "Two pages from a Qur’an in Hijazi script, Arabia, late seventh century",
+                "caption": "Pages from a Qur’an in Hijazi script, Arabia, late seventh century (Google Art Project).",
+                "credit": "Public domain."
+            }
+        ]
     },
     "islamic-dilemma/torah-in-islam": {
         "file": "pexels-5986493",
@@ -479,7 +679,27 @@
         "page": "https://www.pexels.com/photo/old-book-with-handwriting-18491910/",
         "alt": "A Qur'an manuscript open at Sūrat al-Anbiyāʾ, verses 105 to 112",
         "caption": "A Qur'an manuscript open at al-Anbiyāʾ 21:105-112: “Say: it is revealed to me that your god is one God; will you then submit?” (21:108).",
-        "credit": "Photo: Adam Noor, Pexels License"
+        "credit": "Photo: Adam Noor, Pexels License",
+        "more": [
+            {
+                "file": "A Rare and Early Hijazi Qur'an Folio, Arabia, Second Half 7th-Early 8th Century (1).jpg",
+                "alt": "Early Hijazi Qur’an folio on parchment, Arabia, second half of the seventh century or early eighth",
+                "caption": "Early Hijazi Qur’an folio, Arabia, second half of the seventh century to early eighth (1).",
+                "credit": "Public domain."
+            },
+            {
+                "file": "A Rare and Early Hijazi Qur'an Folio, Arabia, Second Half 7th-Early 8th Century (2).jpg",
+                "alt": "Early Hijazi Qur’an folio on parchment, the other side of the leaf",
+                "caption": "Early Hijazi Qur’an folio, Arabia, second half of the seventh century to early eighth (2).",
+                "credit": "Public domain."
+            },
+            {
+                "file": "An Important and Early Hijazi Qur'an Folio, Arabia, Second Half 7th Century (1).jpg",
+                "alt": "Hijazi Qur’an folio on vellum, Arabia, second half of the seventh century",
+                "caption": "Hijazi Qur’an folio, Arabia, second half of the seventh century (1).",
+                "credit": "Public domain."
+            }
+        ]
     },
     "servant-of-god": {
         "file": "pexels-29342494",
@@ -488,7 +708,27 @@
         "page": "https://www.pexels.com/photo/close-up-of-illuminated-manuscript-text-29342494/",
         "alt": "An illuminated Arabic manuscript, its headings in gold on red and blue bands",
         "caption": "An illuminated Arabic manuscript: headings in gold on red and blue bands, with the text in black between them.",
-        "credit": "Photo: mohamed abdelghaffar, Pexels License"
+        "credit": "Photo: mohamed abdelghaffar, Pexels License",
+        "more": [
+            {
+                "file": "Qur'an copied for sadr al-a'zam (prime minister) Amin al-Dawla, signed Muhammad Hassan al-Isfahani, Qajar Iran, dated April-May 1822.jpg",
+                "alt": "A Qajar Qur’an copied for the prime minister Amīn al-Dawla, an illuminated double page",
+                "caption": "Qur’an copied for the prime minister Amīn al-Dawla, signed Muḥammad Ḥasan al-Iṣfahānī, Qajar Iran.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Koran Page - Google Art Project.jpg",
+                "alt": "Qur’an page in gold Kufic script, Google Art Project",
+                "caption": "Qur’an page in gold Kufic script.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Folio from a Qur’an - Sura 21, verses 111-12; Sura 22, 1-2 (F1945.16).jpg",
+                "alt": "Folio from a Qur’an with Sūrat al-Anbiyāʾ 21:111-112 and Sūrat al-Ḥajj 22:1-2, Freer Gallery F1945.16",
+                "caption": "Folio from a Qur’an, Sūrat al-Anbiyāʾ 21:111-112 and al-Ḥajj 22:1-2, Freer Gallery of Art F1945.16.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "paul/leave-gospel-of-paul": {
         "file": "pexels-6493630",
@@ -497,7 +737,27 @@
         "page": "https://www.pexels.com/photo/close-up-of-greek-writing-on-the-stone-6493630/",
         "alt": "A Greek inscription cut in a cracked marble block",
         "caption": "A Greek inscription in marble. Paul of Tarsus wrote his letters in Greek, to churches in the Greek-speaking cities of the Roman east.",
-        "credit": "Photo: ROMAN ODINTSOV, Pexels License"
+        "credit": "Photo: ROMAN ODINTSOV, Pexels License",
+        "more": [
+            {
+                "file": "Codex Claromontanus 468v.jpg",
+                "alt": "Codex Claromontanus, folio 468v, with a Greek and Latin text of the letters of Paul",
+                "caption": "Codex Claromontanus, folio 468v.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Codex claromontanus 2 latin.jpg",
+                "alt": "Codex Claromontanus, a page of the Latin text beside the Greek",
+                "caption": "Codex Claromontanus, a page of the Latin text.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Codex Claromontanus 3 Canons pages DB.jpg",
+                "alt": "Codex Claromontanus, three pages with the list of the books of the Bible, the Claromontanus canon",
+                "caption": "Codex Claromontanus, three pages with its list of the books of the Bible.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "gospel-according-to-islam/family-of-amran-zacharias-and-john": {
         "file": "Papyrus manuscript of the Gospel of Luke (Papyrus 97) (CBL BP XVII).jpg",
@@ -843,7 +1103,27 @@
         "file": "Claromontanus 2 greek.jpg",
         "alt": "Claromontanus 2 greek, 1854: manuscript page",
         "caption": "Claromontanus 2 greek, 1854.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Codex Claromontanus 467v.jpg",
+                "alt": "Codex Claromontanus, folio 467v, Greek and Latin text of the Pauline letters in parallel columns",
+                "caption": "Codex Claromontanus, folio 467v, Greek and Latin text in parallel lines.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Codex Claromontanus 468r.jpg",
+                "alt": "Codex Claromontanus, folio 468r, a sixth-century Greek and Latin codex of the letters of Paul",
+                "caption": "Codex Claromontanus, folio 468r.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Codex claromontanus 3 greek.jpg",
+                "alt": "Codex Claromontanus, a page of the Greek text of a letter of Paul",
+                "caption": "Codex Claromontanus, a page of the Greek text.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "quran/raised": {
         "file": "Bifolio from a Koran.jpg",
@@ -1045,7 +1325,27 @@
         "file": "Folio from a Qur’an, Sura 5, verses 68-69 (S1997.102).jpg",
         "alt": "Folio from a Qur’an, Sura 5, verses 68-69 (S1997.102), 14th-15th century: manuscript page",
         "caption": "Folio from a Qur’an, Sura 5, verses 68-69 (S1997.102), 14th-15th century.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Folio from a Mamluk Qur’an (F1938.15).jpg",
+                "alt": "Folio from a Mamluk Qur’an in gold and blue illumination, Freer Gallery F1938.15",
+                "caption": "Folio from a Mamluk Qur’an, Freer Gallery of Art F1938.15.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Mamluk Qur’an manuscript (F1999.9).jpg",
+                "alt": "Double page from a Mamluk Qur’an, Freer Gallery F1999.9, with a gold and blue border",
+                "caption": "Double page from a Mamluk Qur’an, Freer Gallery of Art F1999.9.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Folio from a Qur’an; Sura 35,18-31 (F1945.19).jpg",
+                "alt": "Folio from a Qur’an with Sūrat Fāṭir 35:18-31, Freer Gallery F1945.19",
+                "caption": "Folio from a Qur’an, Sūrat Fāṭir 35:18-31, Freer Gallery of Art F1945.19.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "gospel-according-to-islam/publicans-fasting-and-question-from-john": {
         "file": "Vienna, National Library of Austria Ms P. Vindob. G. 2323 PAP MAG (Papyrus 3) recto Luke 7, 36-45.jpg",
