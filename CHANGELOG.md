@@ -2,6 +2,13 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.39.0
+
+More plates for pages that had one.
+
+- Added: 45 images from Wikimedia Commons (all public domain) on 15 pages. Qur'an folios on `islamic-dilemma`, `islamic-dilemma/secular-form`, `islamic-dilemma/balance-of-truth`, `islamic-dilemma/what-is-injil`, `method`, `why-islam`, `servant-of-god` and `quran/birth` (Sūrat al-Māʾida and Sūrat Maryam leaves where the file names the sūra); Codex Claromontanus and Papyrus 46 on `paul`, `paul/false-apostles` and `paul/leave-gospel-of-paul`; Nag Hammadi Codex II pages on the four Thomas pages (under 1000 px, so stored as WebP).
+- Total: 225 images on 71 pages; 11 pages still have one image.
+
 ## 3.38.5
 
 New material now supersedes old material. No feature removed and no option key or identifier renamed. The data file ships empty, so nothing is superseded until an address pair is added. A rename needs a `former` slug, and items the data no longer holds move to the Trash on the second update after this release (the first records a baseline).
@@ -46,6 +53,8 @@ Mobile-first audit on 9 November 2026, measured at 320, 360, 375, 390, 414, 480,
 - Fixed: a caption with one very long word wraps inside its figure (`responsive.css`).
 - Fixed: the footer brand mark has a 44-pixel tap area on phones and touch screens, and the log-in screen links, the "Remember me" label and the password eye have 44-pixel targets (`responsive.css`, `login.css`).
 
+
+## 3.38.0
 
 The dictionaries page.
 
