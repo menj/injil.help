@@ -2,6 +2,14 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.40.0
+
+The last single-image pages.
+
+- Added: 33 public-domain and CC0 images from Wikimedia Commons on the 11 pages that had one. The five Gospel According to Islam sections take Matthew, Luke and codex leaves. The four discrepancy pages take papyri of the passages they argue over: Papyrus 1 and Papyrus 4 for the genealogies and the nativity, Papyrus 45 and Papyrus 37 for the Last Supper, Papyrus 90 and Papyrus 45 for the trial and crucifixion. Acts and Galatians take Papyrus 53 and Romans from Codex Alexandrinus; James takes the catholic epistles in Alexandrinus and Sinaiticus.
+- Note: for the five gospel sections no papyrus covers the exact verses, so the captions name the passage each leaf carries and nothing more.
+- Total: 258 images on 71 pages, four on every page.
+
 ## 3.39.0
 
 More plates for pages that had one.

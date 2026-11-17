@@ -257,13 +257,53 @@
         "file": "KellsFol029rIncipitMatthew.jpg",
         "alt": "Book of Kells, folio 29r: Liber generationis, the opening of Matthew’s genealogy of Jesus",
         "caption": "Book of Kells, about 800 CE, folio 29r: Liber generationis, the first words of Matthew’s genealogy. Trinity College Dublin.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Philadelphia, Penn Museum Ms Papyrus 1 (E2746) verso Matthew, 1-14–20.jpg",
+                "alt": "Papyrus 1, Penn Museum: Matthew 1:14-20 in Greek, the end of the genealogy",
+                "caption": "Papyrus 1, Penn Museum E2746, verso: Matthew 1:14-20.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Papyrus BnF Suppl. gr. 1120 ii 3 (Gregory-Aland papyrus P4) - Gospel of Matthew's title, euangelion kata Maththaion.jpg",
+                "alt": "Papyrus 4, Paris: the title of Matthew, euangelion kata Maththaion, in Greek",
+                "caption": "Papyrus 4, BnF Suppl. gr. 1120: the title of Matthew.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Papyrus BnF Suppl. gr. 1120 ii 3 (Gregory-Aland papyrus P4) - Gospel of Matthew - flyleaf.jpg",
+                "alt": "Papyrus 4, Paris: the flyleaf of the Gospel of Matthew",
+                "caption": "Papyrus 4, BnF Suppl. gr. 1120: the flyleaf of Matthew.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "gospels/discrepancies/last-supper": {
         "file": "The Last Supper - Leonardo Da Vinci - High Resolution 32x16.jpg",
         "alt": "Leonardo da Vinci, The Last Supper, 1495 to 1498, Santa Maria delle Grazie, Milan",
         "caption": "Leonardo da Vinci, The Last Supper (1495 to 1498), Santa Maria delle Grazie, Milan: the meal John places before the Passover and the synoptics at it.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Vienna, Austrian National Library Pap. G. 31974 (Papyrus 45) verso Matt 26, 19-39.jpg",
+                "alt": "Papyrus 45, Vienna, verso: Matthew 26:19-39 in Greek, the Last Supper and Gethsemane",
+                "caption": "Papyrus 45, Vienna Pap. G. 31974, verso: Matthew 26:19-39.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Papyrus 37 - recto.jpg",
+                "alt": "Papyrus 37, recto: a leaf of Matthew 26 in Greek",
+                "caption": "Papyrus 37, recto: Matthew 26.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Papyrus 37 - verso.jpg",
+                "alt": "Papyrus 37, verso: a leaf of Matthew 26 in Greek",
+                "caption": "Papyrus 37, verso: Matthew 26.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "paul/seven-letters": {
         "file": "Ann Arbor, University of Michigan P.Mich.inv. 6238 (Papyrus 46) fol. 158r Eph 6, 20–Gal 1, 8.jpg",
@@ -289,7 +329,27 @@
         "file": "Conversion on the Way to Damascus-Caravaggio (c.1600-1).jpg",
         "alt": "Caravaggio, Conversion on the Way to Damascus, about 1601, Santa Maria del Popolo, Rome",
         "caption": "Caravaggio, Conversion on the Way to Damascus (about 1601), Santa Maria del Popolo, Rome: the scene Acts tells 3 times and Galatians once, differently.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Ann Arbor, University of Michigan Ms P.Mich.inv. 6652 (Papyrus 53) recto Acts 9, 40-10, 1.jpg",
+                "alt": "Papyrus 53, University of Michigan, recto: Acts 9:40 to 10:1 in Greek",
+                "caption": "Papyrus 53, University of Michigan P.Mich.inv. 6652, recto: Acts 9:40 to 10:1.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Ann Arbor, University of Michigan Ms P.Mich.inv. 6652 (Papyrus 53) verso Acts 9, 34-38.jpg",
+                "alt": "Papyrus 53, University of Michigan, verso: Acts 9:34-38 in Greek",
+                "caption": "Papyrus 53, University of Michigan P.Mich.inv. 6652, verso: Acts 9:34-38.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Codex Alexandrinus 088a - Ro 1,1 ff.jpg",
+                "alt": "Codex Alexandrinus, the opening of Paul’s Letter to the Romans",
+                "caption": "Codex Alexandrinus: the opening of Romans (1:1).",
+                "credit": "Public domain."
+            }
+        ]
     },
     "paul/paul-against-jesus": {
         "file": "Rembrandt - Apostle Paul - WGA19120.jpg",
@@ -315,7 +375,27 @@
         "file": "Saint James the Just.jpg",
         "alt": "Icon of James the Just, brother of Jesus and leader of the Jerusalem church",
         "caption": "James the Just, the brother of Jesus who led the Jerusalem church, in a traditional icon.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Colophon Alexandrinus Jude.JPG",
+                "alt": "Codex Alexandrinus, the colophon at the end of the Letter of Jude",
+                "caption": "Codex Alexandrinus: the end of Jude.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "End of 2 Peter and Beginning of 1 John in Alexandrinus.JPG",
+                "alt": "Codex Alexandrinus, the end of 2 Peter and the beginning of 1 John",
+                "caption": "Codex Alexandrinus: the end of 2 Peter and the start of 1 John.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "End of 1 John and beginning of 2 John in Sinaiticus.jpg",
+                "alt": "Codex Sinaiticus, the end of 1 John and the beginning of 2 John",
+                "caption": "Codex Sinaiticus: the end of 1 John and the start of 2 John.",
+                "credit": "CC0."
+            }
+        ]
     },
     "islamic-dilemma": {
         "file": "Maghribi script sura 5.jpg",
@@ -597,13 +677,53 @@
         "file": "Giotto - Scrovegni - -17- - Nativity, Birth of Jesus.jpg",
         "alt": "Giotto, The Nativity, Scrovegni Chapel, Padua, about 1305",
         "caption": "Giotto, The Nativity (about 1305), Scrovegni Chapel, Padua: the manger of Luke; Matthew has a house, magi and a star.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Philadelphia, Penn Museum Ms Papyrus 1 (E2746) recto Matthew, 1-1–9,12.jpg",
+                "alt": "Papyrus 1, Penn Museum: Matthew 1:1 to 9:12 in Greek, the birth narrative and the early ministry",
+                "caption": "Papyrus 1, Penn Museum E2746, recto: Matthew 1:1 to 9:12.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Codex Beratinus 0011b.jpg",
+                "alt": "Codex Beratinus, a purple parchment codex of Matthew and Mark, a page",
+                "caption": "Codex Beratinus, a page.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Papyrus 44 - Metropolitan Museum of Art 14.1.527.jpg",
+                "alt": "Papyrus 44, Metropolitan Museum of Art: a fragment of Matthew and John in Greek",
+                "caption": "Papyrus 44, Metropolitan Museum of Art 14.1.527, recto.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "gospels/discrepancies/crucifixion": {
         "file": "Giotto - Scrovegni - -35- - Crucifixion.jpg",
         "alt": "Giotto, The Crucifixion, Scrovegni Chapel, Padua, about 1305",
         "caption": "Giotto, The Crucifixion (about 1305), Scrovegni Chapel, Padua. The four accounts of the day, the hour and the last words differ, and the Qur’an says it was made to appear so to them (4:157).",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Oxford, Sackler Library Ms P. Oxy. 3523 (Papyrus 90) recto John 18, 36-19, 1.jpg",
+                "alt": "Papyrus 90, Oxford, recto: John 18:36 to 19:1 in Greek, Pilate and Jesus",
+                "caption": "Papyrus 90, P.Oxy. 3523, recto: John 18:36 to 19:1.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Oxford, Sackler Library Ms P. Oxy. 3523 (Papyrus 90) verso, John 19, 2-7.jpg",
+                "alt": "Papyrus 90, Oxford, verso: John 19:2-7 in Greek, the crown of thorns",
+                "caption": "Papyrus 90, P.Oxy. 3523, verso: John 19:2-7.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Vienna, Austrian National Library Pap. G. 31974 (Papyrus 45) recto Matt 25, 41-26, 10.jpg",
+                "alt": "Papyrus 45, Vienna, recto: Matthew 25:41 to 26:10 in Greek",
+                "caption": "Papyrus 45, Vienna Pap. G. 31974, recto: Matthew 25:41 to 26:10.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "islamic-dilemma/what-is-injil": {
         "file": "pexels-30019470",
@@ -817,7 +937,27 @@
         "file": "Uncial 0191 (K. 9031).jpg",
         "alt": "Uncial 0191 (K. 9031): manuscript page",
         "caption": "Uncial 0191 (K. 9031).",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Codex Alexandrinus 084b.jpg",
+                "alt": "Codex Alexandrinus, a page of the fifth-century Greek Bible in two columns",
+                "caption": "Codex Alexandrinus, a page of Greek text in two columns.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Washington Manuscript III - The Four Gospels (Codex Washingtonensis).jpg",
+                "alt": "Codex Washingtonianus, the four gospels in Greek, a page of the manuscript",
+                "caption": "Codex Washingtonianus, the four gospels.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Codex W (032) 193b.jpg",
+                "alt": "Codex Washingtonianus, folio 193b, a page of the Greek gospels",
+                "caption": "Codex Washingtonianus (W 032), folio 193b.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "gospel-according-to-islam/john-baptist": {
         "file": "Codex Sinaiticus Matthew 3,7-4,19.JPG",
@@ -915,7 +1055,27 @@
         "file": "Codex Bezae 0205.JPG",
         "alt": "Codex Bezae 0205: manuscript page",
         "caption": "Codex Bezae 0205.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Papyrus 21 recto (Mt 12,24-26).jpg",
+                "alt": "Papyrus 21, recto: Matthew 12:24-26 in Greek, fourth century",
+                "caption": "Papyrus 21, Muhlenberg College, recto: Matthew 12:24-26.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Papyrus 21 verso.jpg",
+                "alt": "Papyrus 21, verso: Matthew 12:32-33 in Greek",
+                "caption": "Papyrus 21, Muhlenberg College, verso: Matthew 12:32-33.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Papyrus 21 - Papyrus Oxyrhynchus 1227 - Muhlenberg College, Theol. Pap. 3 - Gospel of Matthew 12,24-26.32-33.jpg",
+                "alt": "Papyrus 21, Papyrus Oxyrhynchus 1227: the fragment of Matthew 12 in high resolution",
+                "caption": "Papyrus 21, Papyrus Oxyrhynchus 1227: Matthew 12:24-26 and 32-33.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "gospel-according-to-islam/blind-man-and-samaritan-woman": {
         "file": "Papyrus 66 Leaf 35v.png",
@@ -1351,13 +1511,53 @@
         "file": "Vienna, National Library of Austria Ms P. Vindob. G. 2323 PAP MAG (Papyrus 3) recto Luke 7, 36-45.jpg",
         "alt": "Greek papyrus fragment, Papyrus 3, recto: Luke 7:36-45",
         "caption": "Papyrus 3, Vienna, National Library of Austria P. Vindob. G. 2323 PAP MAG, recto: Luke 7:36-45.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "P062-Mat-11.25-30-recto-1-3-5-7-IV.jpg",
+                "alt": "Papyrus 62, Oslo: Matthew 11:25-30 in Greek, fragments 1, 3, 5 and 7 of the recto",
+                "caption": "Papyrus 62, Oslo University Library Inv. 1661: Matthew 11:25-30, recto, fragments 1, 3, 5 and 7.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "P062-Mat-11.25-30-verso-2-4-6-8-IV.jpg",
+                "alt": "Papyrus 62, Oslo: Matthew 11:25-30, fragments 2, 4, 6 and 8 of the verso",
+                "caption": "Papyrus 62, Oslo University Library Inv. 1661: Matthew 11:25-30, verso, fragments 2, 4, 6 and 8.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "P062-Mat-11.25-30-recto-9-11-13-15-IV.jpg",
+                "alt": "Papyrus 62, Oslo: Matthew 11:25-30, fragments 9, 11, 13 and 15 of the recto",
+                "caption": "Papyrus 62, Oslo University Library Inv. 1661: Matthew 11:25-30, recto, fragments 9, 11, 13 and 15.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "gospel-according-to-islam/jairus-daughter-and-death-of-john": {
         "file": "Oxford, Sackler Library Ms P.Oxy. LXIV 4403 (Papyrus 103) verso Matt 14, 3-5.jpg",
         "alt": "Greek papyrus fragment, Papyrus 103, verso: Matthew 14:3-5",
         "caption": "Papyrus 103, Oxford, Sackler Library P.Oxy. LXIV 4403, verso: Matthew 14:3-5.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "P110-Mat-10 25-27-POxy4494-IV.jpg",
+                "alt": "Papyrus 110, Oxyrhynchus 4494: Matthew 10:25-27 in Greek",
+                "caption": "Papyrus 110, Oxyrhynchus 4494: Matthew 10:25-27.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "P110-Mat-10 13-14-POxy4494-IV.jpg",
+                "alt": "Papyrus 110, Oxyrhynchus 4494: Matthew 10:13-14 in Greek",
+                "caption": "Papyrus 110, Oxyrhynchus 4494: Matthew 10:13-14.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Florence, National Archaeological Museum MS PSI inv.3407 (Papyrus 70) fragment b recto Matt 24, 3-6.jpg",
+                "alt": "Papyrus 70, Florence: Matthew 24:3-6 in Greek, fragment b recto",
+                "caption": "Papyrus 70, Florence, PSI inv. 3407, fragment b recto: Matthew 24:3-6.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "gospel-according-to-islam/twelve-and-their-mission": {
         "file": "Oxford, Sackler Library Ms LXIV 4494 (Papyrus 110) recto Matt 10, 13-14.jpg",
@@ -1409,7 +1609,27 @@
         "file": "Vienna, National Library of Austria Ms P. Vindob. G. 2323 PAP MAG (Papyrus 3) verso Luke 10, 38-42.jpg",
         "alt": "Greek papyrus fragment, Papyrus 3, verso: Luke 10:38-42",
         "caption": "Papyrus 3, Vienna, National Library of Austria P. Vindob. G. 2323 PAP MAG, verso: Luke 10:38-42.",
-        "credit": "Public domain."
+        "credit": "Public domain.",
+        "more": [
+            {
+                "file": "Papyrus 25 - Staatliche Museen zu Berlin inv. 16388 - Gospel of Matthew 18,32-34 19,1-3.5-7.9-10 - recto.jpg",
+                "alt": "Papyrus 25, Berlin, recto: Matthew 18:32-34 and 19:1-3, 5-7, 9-10 in Greek",
+                "caption": "Papyrus 25, Berlin inv. 16388, recto: Matthew 18:32-34 and 19:1-10.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Papyrus 25 - Staatliche Museen zu Berlin inv. 16388 - Gospel of Matthew 18,32-34 19,1-3.5-7.9-10 - verso.jpg",
+                "alt": "Papyrus 25, Berlin, verso: the same fragment of Matthew 18 and 19",
+                "caption": "Papyrus 25, Berlin inv. 16388, verso.",
+                "credit": "Public domain."
+            },
+            {
+                "file": "Luke 13.29-35 and 14.10 (CBL BP I, f.15r).jpg",
+                "alt": "Chester Beatty papyrus, folio 15r: Luke 13:29-35 and 14:10 in Greek",
+                "caption": "Chester Beatty papyrus, f. 15r: Luke 13:29-35 and 14:10.",
+                "credit": "Public domain."
+            }
+        ]
     },
     "gospel-according-to-islam/entry-into-jerusalem-and-cleansing-of-temple": {
         "file": "Oxford, Sackler Library Ms LXIV 4404 (Papyrus 104) recto Matt 21, 34-37.jpg",
