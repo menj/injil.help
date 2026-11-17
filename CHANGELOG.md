@@ -2,6 +2,13 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.41.0
+
+More of the approved lexicons in the Glossary.
+
+- Added: Ibn al-Athīr, *al-Nihāya*, on Zabūr (*zabartu al-kitāb*, writing with care; *mizbar*, the pen) and Muhaymin (the watcher, the witness, the one entrusted, the one who stands over creation, and the view that the word comes from *amāna*). Al-Jawharī and al-Fayyūmī on Shirk (partnership first, then disbelief; also a share). Al-Ṣāḥib ibn ʿAbbād and al-Jurjānī on Rūḥ (the coolness of a breeze; the subtle, knowing faculty). Each quotation was checked against the entry text and links to it.
+- Note: arabiclexicon.hawramani.com presented an expired TLS certificate when this release was built, so the entries of the lexicons not yet cited could not be read. Salmoné, al-Farāhī, Ibn Abī Thābit, Mawdūdī, al-Hilālī, Ibn Qutayba, Ibn Mālik, al-Suyūṭī (*al-Muhadhdhib*), the Cairo Academy and ʿUmar wait for the site to be reachable. Nothing from them was quoted unchecked.
+
 ## 3.40.0
 
 The last single-image pages.
