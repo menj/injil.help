@@ -143,6 +143,7 @@ The `(.+/)?` covers WordPress in a subfolder of the `.htaccess` folder too, such
 Git Updater reads the theme header and offers the release whose tag matches `Version:`. After the update, the first load of any admin screen rewrites the starter pages whose text changed, keeps pages you edited (marked "edited, kept on update" on the Content tab), keeps no revisions, and flushes rewrite rules only if permalinks had to be set. "Update all pages from the theme" replaces every page, edited ones included, after a confirmation. Take a database backup before updating; open the Content tab once after.
 
 - **3.20.2.** Nothing to do. A page or Journal post that carries no hash from the theme is kept on every update from now on, so it keeps your text and does not take the new one. To give such a page the theme's text, press "Update all pages from the theme".
+- **3.44.0.** Upload the whole theme. The new Journal post is created on the first admin load.
 - **3.43.1.** Upload the whole theme. The Acts and Galatians page is rewritten on the first admin load; edits to it are replaced.
 - **3.43.0.** Upload the whole theme. The Acts and Galatians page is rewritten on the first admin load; edits to it are replaced.
 - **3.42.0.** Upload the whole theme. Page text becomes justified and hyphenated on every page and post. To keep ragged text, switch it off under Theme Options > Reading > Justified text. Deactivate the Auto Justify Content plugin if it is installed, since the two would both set the text.
