@@ -37,8 +37,35 @@ function injil_help_justify_active() {
 function injil_help_justify_clean_selectors( $value ) {
 	$value = trim( (string) preg_replace( '/\s+/', ' ', (string) $value ) );
 	$value = (string) preg_replace( '/[^a-zA-Z0-9.#\-_\s,:\[\]=()"\'>+~*]/', '', $value );
-	$parts = array_filter( array_map( 'trim', explode( ',', $value ) ) );
-	return implode( ', ', $parts );
+	return implode( ', ', injil_help_justify_split( $value ) );
+}
+
+/**
+ * A selector list split at its top-level commas only, so a comma inside :is( ... ), :not( ... ) or [ ... ]
+ * stays with its selector. Parts are trimmed; empty parts are dropped.
+ *
+ * @param string $list Selector list.
+ * @return string[]
+ */
+function injil_help_justify_split( $list ) {
+	$parts = array();
+	$depth = 0;
+	$cur   = '';
+	foreach ( str_split( (string) $list ) as $ch ) {
+		if ( '(' === $ch || '[' === $ch ) {
+			++$depth;
+		} elseif ( ( ')' === $ch || ']' === $ch ) && $depth > 0 ) {
+			--$depth;
+		}
+		if ( ',' === $ch && 0 === $depth ) {
+			$parts[] = $cur;
+			$cur     = '';
+			continue;
+		}
+		$cur .= $ch;
+	}
+	$parts[] = $cur;
+	return array_values( array_filter( array_map( 'trim', $parts ), 'strlen' ) );
 }
 
 add_filter(
@@ -66,7 +93,7 @@ add_action(
 		wp_enqueue_style( 'injil-help-justify', get_stylesheet_directory_uri() . '/assets/css/justify.css', array( 'injil-help' ), INJIL_HELP_VERSION );
 		$sel = injil_help_justify_clean_selectors( injil_help_get_option( 'justify_exclude' ) );
 		if ( '' !== $sel ) {
-			$list = implode( ', ', array_map( static fn( $s ) => $s . ', ' . $s . ' p, ' . $s . ' li', explode( ', ', $sel ) ) );
+			$list = implode( ', ', array_map( static fn( $s ) => $s . ', ' . $s . ' p, ' . $s . ' li', injil_help_justify_split( $sel ) ) );
 			wp_add_inline_style( 'injil-help-justify', $list . '{text-align:start !important;-webkit-hyphens:manual !important;hyphens:manual !important}' );
 		}
 	},

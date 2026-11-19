@@ -116,6 +116,18 @@ function update_option( $k, $v ) {
 	$GLOBALS['ih_options'][ $k ] = $v;
 	return true;
 }
+function add_option( $k, $v ) {
+	if ( array_key_exists( $k, $GLOBALS['ih_options'] ) ) {
+		return false;
+	}
+	$GLOBALS['ih_options'][ $k ] = $v;
+	return true;
+}
+function delete_option( $k ) {
+	unset( $GLOBALS['ih_options'][ $k ] );
+	return true;
+}
+defined( 'MINUTE_IN_SECONDS' ) || define( 'MINUTE_IN_SECONDS', 60 );
 function wp_doing_ajax() {
 	return false;
 }
@@ -312,6 +324,13 @@ if ( 'trash' !== get_post( $sample )->post_status ) {
 }
 
 // ---------- Seeding ----------
+// A second request that finds the lock taken writes nothing and reports a failure.
+$GLOBALS['ih_options']['injil_help_journal_seeding'] = time();
+$busy = injil_help_journal_seed( $now );
+if ( 1 !== $busy['failed'] || $busy['created'] ) {
+	ih_fail( 'lock', 'a seeding run did not stand aside for the lock: ' . json_encode( $busy ) );
+}
+unset( $GLOBALS['ih_options']['injil_help_journal_seeding'] );
 $tally = injil_help_journal_seed( $now );
 if ( count( $entries ) !== $tally['created'] || $tally['failed'] ) {
 	ih_fail( 'seed', 'first run: ' . json_encode( $tally ) );

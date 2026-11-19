@@ -74,8 +74,10 @@ function injil_help_toc_text( $html ) {
  */
 function injil_help_toc_headings( $html, $levels ) {
 	$seen = array();
-	if ( preg_match_all( '/\sid\s*=\s*["\']([^"\']+)["\']/i', (string) $html, $ids ) ) {
-		$seen = array_fill_keys( $ids[1], true );
+	if ( preg_match_all( '/\sid\s*=\s*(?:"([^"]+)"|\'([^\']+)\'|([^\s"\'>]+))/i', (string) $html, $ids, PREG_SET_ORDER ) ) {
+		foreach ( $ids as $id ) {
+			$seen[ $id[1] . ( $id[2] ?? '' ) . ( $id[3] ?? '' ) ] = true;
+		}
 	}
 	$items = array();
 	$html  = (string) preg_replace_callback(
@@ -87,8 +89,8 @@ function injil_help_toc_headings( $html, $levels ) {
 			if ( ! in_array( $level, $levels, true ) || '' === $text ) {
 				return $m[0];
 			}
-			if ( preg_match( '/\sid\s*=\s*["\']([^"\']+)["\']/i', $attrs, $own ) ) {
-				$items[] = array( $level, $own[1], $text );
+			if ( preg_match( '/\sid\s*=\s*(?:"([^"]+)"|\'([^\']+)\'|([^\s"\'>]+))/i', $attrs, $own ) ) {
+				$items[] = array( $level, $own[1] . ( $own[2] ?? '' ) . ( $own[3] ?? '' ), $text );
 				return $m[0];
 			}
 			$base = sanitize_title( $text );
@@ -176,7 +178,7 @@ add_filter(
 			$min = (int) apply_filters( 'injil_help_toc_min', 4 );
 			if ( preg_match_all( '#<h2\b#i', $content ) >= $min ) {
 				// After the breadcrumb row, which opens the content (inc/seo.php).
-				$at      = preg_match( '#<nav class="ih-breadcrumb"[^>]*>.*?</nav>#s', $content, $b, PREG_OFFSET_CAPTURE ) ? $b[0][1] + strlen( $b[0][0] ) : 0;
+				$at      = preg_match( '#<nav\b[^>]*\bclass="[^"]*\bih-breadcrumb\b[^"]*"[^>]*>.*?</nav>#s', $content, $b, PREG_OFFSET_CAPTURE ) ? $b[0][1] + strlen( $b[0][0] ) : 0;
 				$content = substr( $content, 0, $at ) . injil_help_toc_auto_marker() . substr( $content, $at );
 			}
 		}
@@ -215,6 +217,18 @@ add_filter(
 	13
 );
 
+/**
+ * Whether a page's stored text can carry a list: the shortcode with at least one heading to list, or the automatic list on a
+ * page with enough level-two headings. The stylesheet loads only then.
+ */
+function injil_help_toc_page_has_list( $text ) {
+	$text = (string) $text;
+	if ( has_shortcode( $text, 'auto_toc' ) && preg_match( '#<h[1-6]\b#i', $text ) ) {
+		return true;
+	}
+	return injil_help_toc_auto_wanted() && preg_match_all( '#<h2\b#i', $text ) >= (int) apply_filters( 'injil_help_toc_min', 4 );
+}
+
 /** The stylesheet, on the pages that carry a list: the shortcode in the text, or the automatic list. */
 add_action(
 	'wp_enqueue_scripts',
@@ -223,7 +237,7 @@ add_action(
 			return;
 		}
 		$post = get_queried_object();
-		if ( ( $post instanceof WP_Post && has_shortcode( $post->post_content, 'auto_toc' ) ) || injil_help_toc_auto_wanted() ) {
+		if ( $post instanceof WP_Post && injil_help_toc_page_has_list( $post->post_content ) ) {
 			wp_enqueue_style( 'injil-help-toc', get_stylesheet_directory_uri() . '/assets/css/toc.css', array( 'injil-help' ), INJIL_HELP_VERSION );
 		}
 	}

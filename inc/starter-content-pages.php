@@ -163,18 +163,27 @@ function injil_help_starter_pages_list() {
 	if ( ! injil_help_data_file( 'text' ) || ! injil_help_data_file( 'commentaries' ) ) {
 		return array();
 	}
+	// A page file that cannot be read (missing, or cut short while an update is still uploading) fails the whole list, so a run
+	// never finishes and records the version with a section of pages left out; the next admin load tries again.
+	$files = array();
+	foreach ( array( 'pillar', 'gospels', 'paul', 'quran', 'gospel', 'bonus', 'resources', 'site' ) as $name ) {
+		$files[ $name ] = injil_help_pages_file( $name );
+		if ( ! $files[ $name ] ) {
+			return array();
+		}
+	}
 	$pages = array_merge(
-		injil_help_pages_file( 'pillar' ),
-		injil_help_pages_file( 'gospels' ),
-		injil_help_pages_file( 'paul' ),
-		injil_help_pages_file( 'quran' ),
+		$files['pillar'],
+		$files['gospels'],
+		$files['paul'],
+		$files['quran'],
 		array( injil_help_quran_page() ),
 		injil_help_tafsir_pages(),
-		injil_help_pages_file( 'gospel' ),
+		$files['gospel'],
 		injil_help_gospel_islam_pages(),
-		injil_help_pages_file( 'bonus' ),
-		injil_help_pages_file( 'resources' ),
-		injil_help_pages_file( 'site' )
+		$files['bonus'],
+		$files['resources'],
+		$files['site']
 	);
 	return $pages;
 }

@@ -2,6 +2,21 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.44.1
+
+Fixes from the CodeAnt review of 3.26.0 to 3.44.0, checked one by one against the code and the data.
+
+- Fixed: further plates (`more`) now appear on pages built from a pattern. `injil_help_add_page_image()` returned before spreading them on the Islamic Dilemma pillar, the criterion page, the Thomas correlation page, the four discrepancy tables and `paul`, so the images added in 3.39.0 and 3.40.0 for those pages never showed. A pattern that already holds its own plate (`paul`) gets its further plates too, and a pattern whose top-level blocks are groups takes a plate after any block when no paragraph follows.
+- Fixed: a Pixabay image among the `more` plates is now found by `injil_help_image_key_from_src()`, so it is hidden until its Media Library copy exists, as the licence needs; the image sitemap leaves a Pixabay image out while there is no copy.
+- Fixed: a page file that cannot be read (missing, or cut short while an update is still uploading) now fails the whole starter-page list, so a run never records the new version with a section of pages left out. It tries again on the next admin load.
+- Fixed: Journal seeding takes the same atomic lock as page writing (`injil_help_journal_seeding`), so two admin requests cannot both insert a post and leave a duplicate with a suffixed address.
+- Fixed: Justified text. The stylesheet spares `.no-justify`, which the settings and the readme promise, and Arabic, Qur'anic and right-to-left paragraphs. A selector with a comma inside `:is()` or `:not()` is no longer split in two (`injil_help_justify_split()`).
+- Fixed: the contents list. An unquoted heading id is kept, not duplicated. The automatic list finds the breadcrumb even when Rank Math adds its own class. `toc.css` loads only on a page whose stored text can carry a list.
+- Fixed: eight plates are taken off gospel-section pages whose text does not hold the verses on the leaf (Matthew 12:4-5, 13:55-56, 18:32 to 19:3, 19:5-7, 11:26-27, Luke 7:36-45, Luke 10:38-42, John 18:1-5), and a citation typo (John 3:17-18; 3:31-32). On two pages the next plate becomes the featured image. Counting what each page shows, 45 pages carry four images, 18 carry three and 8 carry two; 250 images in all. The "four on every page" and "60 of 71" in the 3.39.0 and 3.40.0 notes were wrong.
+- Fixed: the Glossary entries for al-Masīḥ and al-Ḥawāriyyūn quote Lane in marks, as the rule says. The Aḥmad page names the two Sufyāns that its HadithGraph chain could mean. The dictionaries page says why Lane links to the site's home page.
+- Fixed: the upgrade notes said edits to a rewritten page would be replaced. The update keeps a page you edited; Theme Options > Content > Update all pages from the theme replaces it. Notes also say the job starts on the first admin load, since a large site finishes over the next few. `readme.txt` no longer calls the Pexels and Pixabay photographs public domain, says where an API key is stored, and drops a contents-list entry filed under 3.6.1.
+- Changed: `tests/justify-test.php` (19 checks), `tests/toc-test.php` (35, skips the parser check without ext-dom) and `tests/journal-test.php` (a lock check).
+
 ## 3.44.0
 
 A Journal post from the two screenshots.
@@ -41,7 +56,7 @@ The last single-image pages.
 
 - Added: 33 public-domain and CC0 images from Wikimedia Commons on the 11 pages that had one. The five Gospel According to Islam sections take Matthew, Luke and codex leaves. The four discrepancy pages take papyri of the passages they argue over: Papyrus 1 and Papyrus 4 for the genealogies and the nativity, Papyrus 45 and Papyrus 37 for the Last Supper, Papyrus 90 and Papyrus 45 for the trial and crucifixion. Acts and Galatians take Papyrus 53 and Romans from Codex Alexandrinus; James takes the catholic epistles in Alexandrinus and Sinaiticus.
 - Note: for the five gospel sections no papyrus covers the exact verses, so the captions name the passage each leaf carries and nothing more.
-- Total: 258 images on 71 pages, four on every page.
+- Total: 258 images on 71 pages.
 
 ## 3.39.0
 

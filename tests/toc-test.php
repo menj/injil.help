@@ -116,6 +116,9 @@ function ih_balanced( $html ) {
 			return false;
 		}
 	}
+	if ( ! class_exists( 'DOMDocument' ) ) {
+		return true; // the counts above still ran; the parser check needs ext-dom
+	}
 	$dom = new DOMDocument();
 	libxml_use_internal_errors( true );
 	$dom->loadHTML( '<?xml encoding="utf-8" ?><body>' . $html . '</body>' );
@@ -164,6 +167,10 @@ ih_check( substr_count( $out, '<li>' ) === 7, 'every heading of a wanted level i
 $out = ih_filter( '<!--ih-toc:2,3,4:Contents--><h2>A</h2><h4>B</h4><h3>C</h3><h2>D</h2>' );
 ih_check( false !== strpos( $out, '<li><a href="#a">A</a><ol><li><a href="#b">B</a></li><li><a href="#c">C</a></li></ol></li><li><a href="#d">D</a></li>' ), 'h2, h4, h3: one nested list' );
 
+// An unquoted id on a heading is kept, and made ids do not repeat it.
+$out = ih_filter( '<!--ih-toc:2:Contents--><h2 id=start>Start</h2><h2>Start</h2>' );
+ih_check( false !== strpos( $out, 'href="#start"' ) && false !== strpos( $out, 'id="start-2"' ) && 1 === substr_count( $out, 'id=start' ), 'an unquoted id is kept and not duplicated' );
+
 // The levels of a marker decide what it lists; other headings get no id.
 $out = ih_filter( '<!--ih-toc:2:Contents--><h2>One</h2><h3>Two</h3>' );
 ih_check( false !== strpos( $out, 'href="#one"' ) && false === strpos( $out, 'href="#two"' ), 'a marker lists only its levels' );
@@ -186,7 +193,7 @@ ih_check( '<h2>A</h2>' === $out, 'outside the main text the marker goes and head
 $GLOBALS['ih_view']['main'] = true;
 
 // The automatic list.
-$long = '<nav class="ih-breadcrumb"><a href="/">Home</a></nav><p>Intro.</p><h2>A</h2><h2>B</h2><h2>C</h2><h2>D</h2>';
+$long = '<nav class="rank-math-breadcrumb ih-breadcrumb"><a href="/">Home</a></nav><p>Intro.</p><h2>A</h2><h2>B</h2><h2>C</h2><h2>D</h2>';
 $out  = ih_filter( $long );
 ih_check( false === strpos( $out, '<nav class="ih-toc"' ), 'the automatic list is off by default' );
 $GLOBALS['ih_opt']['toc_auto'] = 1;
