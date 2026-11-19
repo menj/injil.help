@@ -16,7 +16,7 @@ require_once get_stylesheet_directory() . '/inc/starter-content-pages.php';
 /**
  * Convert the compact page markup to blocks.
  *
- * "## " heading, "### " sub-heading, "- " list item, "> " quote, "@consensus|@minority|@islamic"
+ * "## " heading, "### " sub-heading, "- " list item, "> " quote, "[fig] file | alt | caption" an image from assets/images/journal/, "@consensus|@minority|@islamic"
  * claim label, "[toc]" the contents list, anything else a paragraph. Blank lines are ignored. Inline
  * "{{fn:text}}" becomes a numbered footnote; the notes are listed at the end, or at a "[notes]"
  * token as a reference apparatus. "[v]" opens a numbered verse and "[qS:A]" marks a Qur'anic
@@ -165,6 +165,15 @@ function injil_help_markup_to_blocks( $lines ) {
 			$out .= "<!-- wp:heading {\"level\":3} -->\n<h3 class=\"wp-block-heading\">" . wp_kses_post( $footnote( substr( $line, 4 ) ) ) . "</h3>\n<!-- /wp:heading -->\n";
 		} elseif ( 0 === strpos( $line, '## ' ) ) {
 			$out .= "<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">" . wp_kses_post( $footnote( substr( $line, 3 ) ) ) . "</h2>\n<!-- /wp:heading -->\n";
+		} elseif ( 0 === strpos( $line, '[fig] ' ) ) {
+			// "[fig] file | alt | caption": an image in assets/images/journal/, with its width and height.
+			$parts = array_map( 'trim', explode( '|', substr( $line, 6 ), 3 ) );
+			$path  = get_stylesheet_directory() . '/assets/images/journal/' . basename( $parts[0] );
+			$size  = is_readable( $path ) ? getimagesize( $path ) : false;
+			if ( $size && 3 === count( $parts ) ) {
+				$src  = get_stylesheet_directory_uri() . '/assets/images/journal/' . rawurlencode( basename( $parts[0] ) );
+				$out .= "<!-- wp:image {\"sizeSlug\":\"large\",\"className\":\"ih-fig\"} -->\n<figure class=\"wp-block-image size-large ih-fig\"><img src=\"" . esc_url( $src ) . '" alt="' . esc_attr( $parts[1] ) . '" width="' . (int) $size[0] . '" height="' . (int) $size[1] . '" loading="lazy" decoding="async"/><figcaption class="wp-element-caption">' . wp_kses_post( $parts[2] ) . "</figcaption></figure>\n<!-- /wp:image -->\n";
+			}
 		} elseif ( 0 === strpos( $line, '> ' ) ) {
 			$out .= "<!-- wp:quote -->\n<blockquote class=\"wp-block-quote\"><!-- wp:paragraph -->\n<p>" . wp_kses_post( $footnote( substr( $line, 2 ) ) ) . "</p>\n<!-- /wp:paragraph --></blockquote>\n<!-- /wp:quote -->\n";
 		} elseif ( preg_match( '/^@(consensus|minority|islamic)$/', $line, $m ) ) {

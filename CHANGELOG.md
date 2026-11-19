@@ -2,6 +2,13 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.44.0
+
+A Journal post from the two screenshots.
+
+- Added: the Journal post `paul-and-altered-gospel` ("Paul and the altered gospel", category Paul of Tarsus, 19 November 2026): Augustine, Letter 82 (Schaff text), and the *NLT Study Bible* note on Galatians 2:11-14, with the owner's two screenshots set in the post. The Augustine screenshot comes from a Bible app that names neither work nor translator, so the post cites the public-domain Schaff text and says so.
+- Added: the markup line `[fig] file | alt | caption` in `inc/starter-content.php`, for an image in `assets/images/journal/`, and the `.ih-fig` rules in `assets/css/article.css`. The two screenshots are stored as WebP (153 KB and 164 KB).
+
 ## 3.43.1
 
 - Added: a paragraph on `paul/acts-galatians` citing the *NLT Study Bible* (Tyndale House Publishers), note on Galatians 2:11-14: Paul's accusers likely claimed he altered the gospel, and he answers by showing he defended its truth when Peter failed. Quoted verbatim and whole (four sentences) as a block quote, with its credit in the lead-in and a Sources line.

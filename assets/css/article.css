@@ -28,3 +28,8 @@
 @media (max-width:600px){
  .ih-contents,.ih-sources{padding:var(--wp--preset--spacing--20)}
 }
+
+/* A screenshot set in a Journal post: centred, never wider than a phone screen, caption beneath. */
+.ih-fig{margin-block:var(--wp--preset--spacing--40,2rem)}
+.ih-fig img{display:block;width:100%;max-width:520px;height:auto;margin-inline:auto;border:1px solid color-mix(in srgb,var(--wp--preset--color--contrast,#1d1d1d) 16%,transparent)}
+.ih-fig figcaption{max-width:520px;margin-inline:auto;text-align:start;hyphens:manual}
