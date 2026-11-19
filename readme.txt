@@ -161,7 +161,7 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 
 == Changelog ==
 = 3.43.1 =
-* The Acts and Galatians page cites the NLT Study Bible's note on Galatians 2:11-14 for the charge that Paul altered the gospel, in a short paraphrase with four quoted words.
+* The Acts and Galatians page cites the NLT Study Bible's note on Galatians 2:11-14 for the charge that Paul altered the gospel, quoted in full as a block quote of two sentences with its credit.
 = 3.43.0 =
 * The Acts and Galatians page gains two paragraphs at Antioch: Augustine's reply to Jerome on whether Paul's rebuke of Peter was real (Letter 82), and what Galatians 1:6-12 shows about a single gospel that could be kept or altered, which the page ties to the Injīl.
 = 3.42.0 =
