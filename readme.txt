@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.43.0
+Stable tag: 3.43.1
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -160,6 +160,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.43.1 =
+* The Acts and Galatians page cites the NLT Study Bible's note on Galatians 2:11-14 for the charge that Paul altered the gospel, quoted whole as a block quote with its credit.
 = 3.43.0 =
 * The Acts and Galatians page gains two paragraphs at Antioch: Augustine's reply to Jerome on whether Paul's rebuke of Peter was real (Letter 82), and what Galatians 1:6-12 shows about a single gospel that could be kept or altered, which the page ties to the Injīl.
 = 3.42.0 =
@@ -501,6 +503,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * New screenshot.
 
 == Upgrade Notice ==
+= 3.43.1 =
+Upload the whole theme. The Acts and Galatians page refreshes on the first admin load, and any edits made to it are replaced.
 = 3.43.0 =
 Upload the whole theme. The Acts and Galatians page refreshes on the first admin load, and any edits made to it are replaced.
 = 3.42.0 =
