@@ -33,7 +33,7 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 |---|---|
 | Type | Block theme (theme.json v3), child of `twentytwentyfive` |
 | Folder, text domain, pattern prefix | `injil-help` |
-| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.41.0) |
+| Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.42.0) |
 | PHP in `inc/` | options, social, progress, unlist, unlist-admin, search-permalinks, starter-content, journal, starter-content-pages, gospel-islam, quran-jesus, tafsir, images, seo, schema, schema-content, schema-extend, rank-math, share, contextual-links, login, security, security-detector, error-pages, error-page-html, article (26 files) |
 | Data | `inc/data/` 2.6 MB of JSON: 183 starter pages, the 11 Journal posts (`posts.json`), the gospel narrative, the Qur'anic passages, Thomas (woven sections and two full texts), the infancy gospels, the substitution witnesses, eight commentaries (315,000 words) |
 | Front-end assets | `style.css` 32 KB; `assets/css/ornament.css` 12 KB, `share.css` 3 KB, `bible.css` 3 KB, `login.css` 7 KB, `journal.css` 2 KB, `responsive.css` 2 KB (phone header, touch targets, focus ring, loaded on every view); `assets/js/ornament.js` 3 KB, `share.js` 2 KB; all plain, no build step |
@@ -83,6 +83,7 @@ injil-help/
 │  ├─ share.php           share row
 │  ├─ journal.php         the Journal: posts at /journal/<slug>/ from posts.json
 │  ├─ article.php         a post's parts: meta row, In short, contents, Sources block
+│  ├─ justify.php         justified text: body classes, the options and the selectors to leave alone (the rules are in assets/css/justify.css)
 │  ├─ pexels.php          the Pexels API client (search, curated, photo, collection) and the images.json entry for a photo
 │  ├─ toc.php             the [auto_toc] contents list and the automatic list on long pages
 │  ├─ contextual-links.php links from known phrases in the text (shared map in data/network-links.json)
@@ -99,7 +100,7 @@ injil-help/
 ├─ assets/css|js|fonts|icons|images
 ├─ errors/                static 403, 500, 502, 503, 504 pages for a site at the domain root
 ├─ bin/                   build-error-pages.php (command line only)
-├─ tests/                 thirteen command-line self-tests and `a11y-axe.js`, an axe-core run (export-ignore; refused by .htaccess)
+├─ tests/                 fourteen command-line self-tests and `a11y-axe.js`, an axe-core run (export-ignore; refused by .htaccess)
 ├─ .htaccess              refuses .git*, .claude, tests, bin and *.md in the theme folder
 └─ languages/             .mo files
 ```
@@ -285,6 +286,8 @@ Since 3.21.0 the theme does the work of four plugins. Each of the last three tur
 - Search addresses, `inc/search-permalinks.php`, after Pretty Search Permalinks 1.3: the base from `injil_help_search_base` on `init`; a field under Settings › Permalinks › Optional saved with the screen's `update-permalink` nonce; a 301 at `template_redirect` from `?s=` to `/{base}/{term}/` with `/page/N/` and other arguments kept, none for an empty term or a feed. `injil_help_search_pretty_url()` builds the address. Core already has the rules for the base; they are flushed once per change of `INJIL_HELP_RULES`.
 
 `php tests/supersede-test.php` checks the superseded items: the map and its cycles, the guards, what counts as edited, redirect chains, the log and the dry-run rules.
+
+`php tests/justify-test.php` checks justified text: where it applies, the body classes, the cleaning of typed selectors and the stylesheet.
 
 `php tests/pexels-test.php` checks the Pexels client: the key sources, no request without a key, the address and header, the endpoint list, the cache, a 401 and the images.json entry.
 
