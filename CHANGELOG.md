@@ -2,6 +2,12 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.43.0
+
+Antioch in the Acts and Galatians page.
+
+- Added: two paragraphs on `paul/acts-galatians` under Antioch. Jerome read the quarrel as staged; Augustine, in Letter 82 (about 405, sections 5 and 24 to 25, Schaff's NPNF translation), held that this brought suspicion on the whole of Scripture and weighed Paul's oath in Galatians 1:20 above the commentators. Galatians 1:6-12 shows both sides arguing from one delivered gospel, which the page ties to the Injīl of Q 5:46. The Augustine quotations are short fragments checked against the NPNF text; a Sources line is added.
+
 ## 3.42.0
 
 Justified text, built into the theme.
