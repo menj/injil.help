@@ -4,7 +4,7 @@ All notable changes to The Injil theme. The `Changelog` section of `readme.txt` 
 
 ## 3.43.1
 
-- Added: a paragraph on `paul/acts-galatians` citing the *NLT Study Bible* (Tyndale House Publishers), note on Galatians 2:11-14: Paul's accusers likely claimed he altered the gospel, and he answers by showing he defended its truth when Peter failed. Set as a block quote of the note's first two sentences, with its credit in the lead-in and a Sources line; the rest of the note is not reproduced.
+- Added: a paragraph on `paul/acts-galatians` citing the *NLT Study Bible* (Tyndale House Publishers), note on Galatians 2:11-14: Paul's accusers likely claimed he altered the gospel, and he answers by showing he defended its truth when Peter failed. Quoted verbatim and whole (four sentences) as a block quote, with its credit in the lead-in and a Sources line.
 - Changed: "The same letter" in the next paragraph reads "Galatians itself", since the paragraph before it now names Augustine's letter.
 
 ## 3.43.0
