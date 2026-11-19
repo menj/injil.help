@@ -13,14 +13,14 @@ Custom child theme of Twenty Twenty-Five built for one site: The Rightly-Guided 
 == Description ==
 The Injil is the block theme of The Rightly-Guided Injīl. It answers the Islamic Dilemma with the Qur'an as the measure (5:48) and sets The Gospel According to Islam, after Ahmad Shafaat's text of 1985, like a printed Bible.
 
-It writes the site's 182 pages and the Journal on activation, prints one JSON-LD graph per page, and carries its own fonts, ornament layer, share row, contextual links and hardening. Everything a site owner changes lives under Appearance > Theme Options.
+It writes the site's 183 pages and the Journal on activation, prints one JSON-LD graph per page, and carries its own fonts, ornament layer, share row, contextual links and hardening. Everything a site owner changes lives under Appearance > Theme Options.
 
 The theme makes no remote calls from the reader's browser by default. See Privacy below.
 
 == Installation ==
 1. Install and keep Twenty Twenty-Five (the parent). Do not delete it.
 2. Upload this folder to wp-content/themes/injil-help/ and activate "The Injil". Set Settings > General > Site Title to "The Rightly-Guided Injīl" (the header and footer read it from there).
-3. (Automatic) On activation the theme sets pretty permalinks and starts writing the 182 pages listed under Theme Options > Content. It writes them about 20 seconds at a time, on activation and then on each admin screen load, and a notice at the top of the admin shows the progress. Click through a few admin screens until the notice says the pages are done; the site is then complete for visitors.
+3. (Automatic) On activation the theme sets pretty permalinks and starts writing the 183 pages listed under Theme Options > Content. It writes them about 20 seconds at a time, on activation and then on each admin screen load, and a notice at the top of the admin shows the progress. Click through a few admin screens until the notice says the pages are done; the site is then complete for visitors.
 4. Optional: create categories for the parts (The Five Gospels, Paul of Tarsus, Jesus in the Qur'an, The Gospel According to Islam, Resources) if you intend to publish posts.
 5. To install by FTP instead of the uploader, turn on hidden files in your FTP program first (in FileZilla: Server > Force showing hidden files), so the theme's .htaccess goes up with the rest, then upload the folder and activate the theme as in step 2.
 6. To rebuild a page by hand: the section pages (/gospels/, /paul/, /quran/, /gospel-according-to-islam/, /resources/, /answers/) use the "Section index" template with their "Section index: ..." pattern (or "FAQs page"); /method/ is the "Criterion statement" pattern, /corrections/ the "Corrections log", /islamic-dilemma/ the pillar-page pattern; every other page is built from inc/data/ and is restored from Theme Options > Content.
@@ -67,6 +67,8 @@ Modelled on apostleofdoom.org: a title-page hero; each part of the study as a bl
 * Manuscript plates copied into the Media Library a few at a time, so readers are served local files. Remote plates are opt-in.
 * A settings screen of cards and tabs, usable by keyboard and on a phone.
 * Profile icons in the footer, from the addresses set under Theme Options > Sharing > Profile links, and through the [injil_help_social] shortcode or the Profile links pattern. The icons take the colour of the text around them.
+* Justified text for the text of pages and posts, hyphenated, with a switch for phones; set under Theme Options > Reading.
+* A page of the 44 Arabic dictionaries the website consults (/resources/dictionaries/), and the [auto_toc] contents list.
 * A reading progress bar on single posts and pages, set under Theme Options > Reading.
 * Unlisted posts and pages: open at their address, missing from every listing, feed, search and sitemap, and marked noindex. Tick Unlist in the editor sidebar or in Quick Edit.
 * Search results at /search/term/, with the base set under Settings > Permalinks.
@@ -99,11 +101,11 @@ Appearance > Theme Options holds every setting, in eight tabs. Each tab opens wi
 * Colours: nine palette overrides in a grid of colour pickers; an empty field keeps the default.
 * Branding: content width, ornament (Rich, Subtle, Off) and parallax depth as cards; the reveal animation, the footer brandmark and the forced brandmark favicon as switches; a custom favicon URL; the log-in screen design and a note above its form.
 * Sharing: the share row on or off, on posts and on pages; one switch per network, in the order shown; the label of the row; the profile links and whether their icons show in the footer.
-* Reading: the reading progress bar, the post types that show it, its place (top or bottom), height and colours.
+* Reading: justified text (on or off, every page or Journal posts only, hyphenation, phones ragged, selectors to leave alone), then the reading progress bar, the post types that show it, its place (top or bottom), height and colours.
 * Contextual links: links to this site and to other sites, each with a slider for the most on one page (4 and 3 by default); more phrases, one per line as phrase | address; pages that get no links.
 * SEO: the theme's SEO output (Automatic, Always on, Always off) as cards; home title and description; pillar page title; default social image URL; author name and URL, profile links (sameAs) and organisation logo for the structured data.
 * Security (administrators): the five hardening switches, then the spam scan, the clean-up buttons and the reports.
-* Content: the gospel layout as cards; the switch for remote plates; every starter page with its status, and the buttons that create missing pages or rewrite all of them.
+* Content: the gospel layout as cards; the switch for remote plates; an optional Pexels API key; every starter page with its status, and the buttons that create missing pages or rewrite all of them.
 Below the tabs, the Error pages section shows the pages WordPress uses when it cannot build a page, installs them, and gives the lines for .htaccess.
 The screen's own colours follow the Colours tab. Its stylesheet and script load on that screen only.
 
@@ -123,6 +125,12 @@ Bump Version in style.css and INJIL_HELP_VERSION in functions.php together, add 
 == Frequently Asked Questions ==
 = How do I add a contents list to a page? =
 Type [auto_toc] in a Shortcode block where the list should go. The list links to the page's level-two and level-three headings, and gives a heading an address if it has none. To have a list on every long page, switch on the option in Theme Options > Branding.
+
+= How do I switch off justified text? =
+Theme Options > Reading > Justified text. Switch it off, limit it to Journal posts, turn hyphenation off, or keep phones ragged. Add the class no-justify to a paragraph to skip it. If the Auto Justify Content plugin is active, deactivate it, since the theme now does the same job.
+
+= What is the Pexels API key for? =
+It is optional. The theme includes a small client for the Pexels API, and the key lets code that uses it search for photos. Get a key at pexels.com/api and enter it under Theme Options > Content, or define INJIL_HELP_PEXELS_KEY in wp-config.php. The key stays in your database and never in the theme files.
 
 = Why are some manuscript plates missing on a new site? =
 Remote plates are off by default. The theme copies each plate from Wikimedia Commons, Pexels or Pixabay into the Media Library, six files per admin screen load, and shows a plate once its copy is there. Load a few admin screens, or switch on Theme Options > Content > Load plates from Wikimedia Commons and Pexels.
@@ -593,7 +601,7 @@ Images: assets/brandmark.svg, assets/images/divider.svg, assets/images/arrow-nex
 
 == Credits ==
 Canon history: Samuel Davidson, The Canon of the Bible: Its Formation, History, and Fluctuations (3rd revised ed., New York: Peter Eckler, 1877; Project Gutenberg eBook 30132), a public-domain work cited by page for what each Father, council and manuscript said about the lists of books. Its dates for the gospels have been revised since and the site does not use them.
-Contents list: the [auto_toc] shortcode follows the interface of Ikram Hawramani's WordPress Table-of-Contents Shortcode Done Properly (MIT licence, 2025). The code is the theme's own.
+Pexels client: inc/pexels.php follows the request in Pexels' official JavaScript client (MIT licence). Justified text: assets/css/justify.css and inc/justify.php adapt the owner's Auto Justify Content plugin (GPL). Contents list: the [auto_toc] shortcode follows the interface of Ikram Hawramani's WordPress Table-of-Contents Shortcode Done Properly (MIT licence, 2025). The code is the theme's own.
 Share and profile icons (assets/icons/social/): Minimalist Social Icons Pack 2.8, GPL; the profile row adds Instagram, YouTube, TikTok, Mastodon, GitHub and Substack from the same pack. The LinkedIn icon originates from Font Awesome Free (https://fontawesome.com), CC BY 4.0; the credit is carried on the Credits page. The brand marks remain trademarks of their owners. assets/icons/share.svg and link.svg are the theme's own.
 Default social image: Birmingham Qur'an manuscript (Cadbury Research Library, University of Birmingham), public domain, via Wikimedia Commons.
 The classical commentaries (inc/data/tafsir/): English renderings prepared for this website from the public-domain Arabic texts of al-Tabari, al-Baghawi, al-Qurtubi, Ibn Kathir, Tanwir al-Miqbas, al-Jalalayn, al-Durr al-Manthur and al-Sa'di as published at tafsir.app, greattafsirs.com and shamela.ws; the modern editors' apparatus is not translated. Released with the theme under its licence; no second translator has checked them, and the Arabic source is named on every page.
