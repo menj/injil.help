@@ -36,7 +36,7 @@ A block child theme of Twenty Twenty-Five built for one site, The Rightly-Guided
 | Version | `Version:` in `style.css` = `INJIL_HELP_VERSION` in `functions.php` (3.44.0) |
 | PHP in `inc/` | options, social, progress, unlist, unlist-admin, search-permalinks, starter-content, journal, starter-content-pages, gospel-islam, quran-jesus, tafsir, images, seo, schema, schema-content, schema-extend, rank-math, share, contextual-links, login, security, security-detector, error-pages, error-page-html, article (26 files) |
 | Data | `inc/data/` 2.6 MB of JSON: 183 starter pages, the 12 Journal posts (`posts.json`), the gospel narrative, the Qur'anic passages, Thomas (woven sections and two full texts), the infancy gospels, the substitution witnesses, eight commentaries (315,000 words) |
-| Front-end assets | `style.css` 32 KB; `assets/css/ornament.css` 12 KB, `share.css` 3 KB, `bible.css` 3 KB, `login.css` 7 KB, `journal.css` 2 KB, `responsive.css` 2 KB (phone header, touch targets, focus ring, loaded on every view); `assets/js/ornament.js` 3 KB, `share.js` 2 KB; all plain, no build step |
+| Front-end assets | `style.css` 32 KB; `assets/css/ornament.css` 12 KB, `share.css` 3 KB, `bible.css` 3 KB, `login.css` 7 KB, `journal.css` 2 KB, `responsive.css` 2 KB, `justify.css` 1 KB, `toc.css`, `article.css`, `progress.css`, `security.css` (each loaded only where it applies) (phone header, touch targets, focus ring, loaded on every view); `assets/js/ornament.js` 3 KB, `share.js` 2 KB; all plain, no build step |
 | Fonts | 16 MB in `assets/fonts/`, 18 font families with 29 `fontFace` entries in `theme.json` |
 | Admin | one tabbed page, Appearance › Theme Options, option `injil_help_options` |
 | Updates | Git Updater via the `GitHub Theme URI` and `Primary Branch: main` headers; tag `vX.Y.Z` |
@@ -83,6 +83,8 @@ injil-help/
 │  ├─ share.php           share row
 │  ├─ journal.php         the Journal: posts at /journal/<slug>/ from posts.json
 │  ├─ article.php         a post's parts: meta row, In short, contents, Sources block
+│  ├─ a11y.php            front-end accessibility helpers: scrolling table figures take keyboard focus and a name (WCAG 2.1.1)
+│  ├─ supersede.php       a newer page or Journal post replaces an older one: 301, hiding, Trash, renamed posts, retired items, sync log, dry run (`INJIL_HELP_DISABLE_SUPERSEDE`)
 │  ├─ justify.php         justified text: body classes, the options and the selectors to leave alone (the rules are in assets/css/justify.css)
 │  ├─ pexels.php          the Pexels API client (search, curated, photo, collection) and the images.json entry for a photo
 │  ├─ toc.php             the [auto_toc] contents list and the automatic list on long pages
@@ -152,6 +154,7 @@ A `body` is a list of lines. `injil_help_markup_to_blocks()` turns them into blo
 | Line | Becomes |
 |---|---|
 | `- text` | list item; consecutive items form one `core/list`. A leading `[agree]`, `[beyond]`, `[unclear]`, `[conflict]` or `[notneeded]` adds class `ih-s ih-s-{key}` and a badge |
+| `[fig] file \| alt \| caption` | `core/image` of `assets/images/journal/file` with its width and height and a caption (3.44.0; used by Journal posts for their own screenshots, stored as WebP) |
 | `? Question` + next line | `core/details` with `is-style-faq`, the next line as its paragraph |
 | `[details] Title` … `[/details]` | `core/details` with `is-style-fold` wrapping every block in between |
 | `### text`, `## text` | `core/heading` level 3 or 2 |
@@ -211,11 +214,11 @@ Appearance › Theme Options (`inc/options.php`), one option array `injil_help_o
 | Colours | `colors` (nine palette slugs → hex; empty keeps theme.json) |
 | Branding | `login_design` 0\|1 and `login_message` (the log-in screen, `inc/login.php`); `toc_auto` 0\|1 (default 0: the contents list on pages with 4 or more level-two headings); `content_width` reading\|wide\|full (default reading since 3.32.0: the 720px column of theme.json under the 1240px header, footer and grids; wide is the 1240px of the header and footer; full fills the page between the gutters; running text stops at `--ih-measure`, 46rem, in every case; a site saved on full moves to reading once, option `injil_help_width_312`; body class `ih-width-{value}`; at full and wide, prose pages flow in two columns from 1280px with headings, tables, plates, folds and asides spanning both, while pages carrying `.ih-bible` keep the gospel's own columns), `ornament` rich\|subtle\|off, `animate` 0\|1, `parallax` strong\|gentle\|off, `footer_mark`, `favicon_force`, `favicon_url` |
 | Sharing | `share`, `share_types` (post, page), `share_networks` (ordered subset of the network keys), `share_label`; `social_profiles` (network key to profile URL) and `social_footer` 0\|1 for the profile icons (3.21.0) |
-| Reading | `progress` 0\|1, `progress_types` (public post types), `progress_position` top\|bottom, `progress_height` 1-12, `progress_color`, `progress_track` (hex, empty follows the palette) (3.21.0) |
+| Reading | `justify` 0\|1 (default 1), `justify_scope` all\|posts, `justify_hyphens` 0\|1 (default 1), `justify_desktop` 0\|1 (default 0), `justify_exclude` (selectors, cleaned by `injil_help_justify_clean_selectors()`) (3.42.0: justified text, `inc/justify.php`, `assets/css/justify.css`); `progress` 0\|1, `progress_types` (public post types), `progress_position` top\|bottom, `progress_height` 1-12, `progress_color`, `progress_track` (hex, empty follows the palette) (3.21.0) |
 | SEO | `schema` auto\|on\|off, `home_title`, `home_description`, `pillar_title`, `og_image`, `author_name`, `author_url`, `same_as` (one URL per line), `org_logo` |
 | Contextual links | `ctx_own`, `ctx_sister` 0\|1 (links to this site and to the other sites); `ctx_own_max`, `ctx_sister_max` (caps per page, 4 and 3); `ctx_extra` (one `phrase \| address` per line, wins over the shared map); `ctx_exclude` (pages that get no links) |
 | Security | `block_app_passwords`, `block_xmlrpc`, `block_rest_writes`, `spam_gate`, `spam_gone`, each 0\|1, default 1 (see [Security](#security)); changed only by a user with `manage_options`. Below the form: the spam scan, clean-up buttons, reports and the security log |
-| Content | `gospel_layout` columns\|single\|plain (the Bible layout of the gospel sections); `remote_images` 0\|1, default 0 (3.20.0: a plate with no Media Library copy is hidden unless it is 1; filter `injil_help_remote_images`); lists every starter page as present (linked, green dot) or missing (gold dot) and runs the two populate actions |
+| Content | `gospel_layout` columns\|single\|plain (the Bible layout of the gospel sections); `pexels_key` (3.37.0: the Pexels API key, letters and digits only; the constant `INJIL_HELP_PEXELS_KEY` overrides it); `remote_images` 0\|1, default 0 (3.20.0: a plate with no Media Library copy is hidden unless it is 1; filter `injil_help_remote_images`); lists every starter page as present (linked, green dot) or missing (gold dot) and runs the two populate actions |
 
 `injil_help_get_option( $key )` merges the stored array over `injil_help_option_defaults()`. `injil_help_color_css()` emits the overrides as `:root` custom properties on the front end and in the editor (`enqueue_block_assets`). The page's own CSS and JS are `assets/css/admin.css` and `assets/js/admin.js` (a WAI-ARIA tablist with arrow keys, Home and End and the selection carried through the save; live slider values; colour pickers), loaded only on that screen's hook suffix. Since 3.20.0 the screen is built of cards by the `injil_help_ui_*()` helpers: a switch per boolean, selector cards for enumerations, range sliders, inputs, and a usage note per tab; the admin CSS reads the palette tokens so it follows the Colours tab.
 
@@ -285,6 +288,10 @@ Since 3.21.0 the theme does the work of four plugins. Each of the last three tur
 - Unlisted posts, `inc/unlist.php` and `inc/unlist-admin.php`, after Unlist Posts & Pages 1.2.1: `posts_where` (not singular, not an admin screen, not an AJAX call from this admin), `get_next_post_where` and `get_previous_post_where`, `wp_robots` (and Yoast's robots emptied), `rank_math/frontend/robots`, `wp_list_pages_excludes`, `get_pages`, `wp_sitemaps_posts_query_args`, `rank_math/sitemap/entry`, `rank_math/sitemap/posts_to_exclude`, the image sitemap, and the "Read next" row through `render_block_core/group`. Admin: the side box, the column, Quick Edit (`assets/js/unlist-admin.js`), Bulk Edit, the post state and the Unlisted view. The truth is the post meta `_injil_help_unlisted`; `injil_help_unlist_rebuild()` writes the option `injil_help_unlisted` from it and mirrors it to `unlist_posts`, and `injil_help_unlist_sync()` takes over a change the plugin made to that list. `injil_help_unlisted_live_ids()` reads whichever list is live.
 - Search addresses, `inc/search-permalinks.php`, after Pretty Search Permalinks 1.3: the base from `injil_help_search_base` on `init`; a field under Settings › Permalinks › Optional saved with the screen's `update-permalink` nonce; a 301 at `template_redirect` from `?s=` to `/{base}/{term}/` with `/page/N/` and other arguments kept, none for an empty term or a feed. `injil_help_search_pretty_url()` builds the address. Core already has the rules for the base; they are flushed once per change of `INJIL_HELP_RULES`.
 
+`php tests/error-pages-test.php` checks the error pages: each drop-in carries its own page, status and headers, the installer keeps files it did not write, and the static pages in `errors/` are current.
+
+`php tests/schema-graph-test.php` checks the structured data of every starter page: valid JSON, unique `@id`s, every reference resolved, image nodes with creditText and licence, and no banned value.
+
 `php tests/supersede-test.php` checks the superseded items: the map and its cycles, the guards, what counts as edited, redirect chains, the log and the dry-run rules.
 
 `php tests/justify-test.php` checks justified text: where it applies, the body classes, the cleaning of typed selectors and the stylesheet.
@@ -314,6 +321,8 @@ Since 3.21.0 the theme does the work of four plugins. Each of the last three tur
 | `injil_help_search_reserved_bases( array )` | words the search base may not take |
 | `injil_help_breadcrumb_trail( array )`, `injil_help_breadcrumb_html( string )` | edit the breadcrumb trail, or its markup |
 | `injil_help_contextual_links_enabled( bool, WP_Post )`, `injil_help_contextual_links_map( array )` | switch contextual links off for one page; change the shared phrase map |
+| `injil_help_pexels_key( string )` | the Pexels API key, after the constant and the option (`inc/pexels.php`) |
+| `injil_help_toc_min( int )` | level-two headings a page needs for the automatic contents list (default 4) |
 | `injil_help_remote_images( bool )` | serve plates that have no Media Library copy from Commons and Pexels (never Pixabay) |
 | `injil_help_login_plugin_active( bool )` | whether a log-in plugin owns the log-in screen |
 | `injil_help_sec_rest_allow( array )` | REST route prefixes that may write with non-cookie authentication |
@@ -328,6 +337,8 @@ Constants, each optional, set in `wp-config.php`:
 | `INJIL_HELP_ALLOW_XMLRPC` | `true` keeps XML-RPC on for a client other than Jetpack, and leaves the xmlrpc.php lines out of `.htaccess` |
 | `INJIL_HELP_ALLOW_CORE_FILES` | `true` takes "The Injil: deny direct core files" out of `.htaccess` |
 | `INJIL_HELP_KEEP_DEV_FILES` | `true` keeps `.git`, `.claude`, `tests` and the notes on a production site |
+| `INJIL_HELP_PEXELS_KEY` | the Pexels API key; wins over the Theme Options field. Never commit it |
+| `INJIL_HELP_DISABLE_SUPERSEDE` | `true` turns the replacing of old pages and posts off (`inc/supersede.php`) |
 | `INJIL_HELP_SPAM_THRESHOLD` | spam score at which a post is held (default 3) |
 | `INJIL_HELP_SCHEMA_AUTHOR_NAME`, `INJIL_HELP_SCHEMA_AUTHOR_URL` | the schema author, defined in `inc/schema.php` unless set first (`SSOT.md`, Structured data and SEO) |
 
