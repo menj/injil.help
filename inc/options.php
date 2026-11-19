@@ -34,6 +34,11 @@ function injil_help_option_defaults() {
 		'gospel_layout'    => 'columns',
 		'content_width'    => 'reading',
 		'toc_auto'         => 0,
+		'justify'          => 1,
+		'justify_scope'    => 'all',
+		'justify_hyphens'  => 1,
+		'justify_desktop'  => 0,
+		'justify_exclude'  => '',
 		'block_app_passwords' => 1,
 		'block_xmlrpc'     => 1,
 		'block_rest_writes' => 1,
@@ -103,6 +108,11 @@ function injil_help_sanitize_options( $in ) {
 	$out['gospel_layout']    = injil_help_pick( $in, 'gospel_layout', array( 'columns', 'single', 'plain' ), 'columns' );
 	$out['content_width']    = injil_help_pick( $in, 'content_width', array( 'reading', 'wide', 'full' ), 'reading' );
 	$out['toc_auto']         = empty( $in['toc_auto'] ) ? 0 : 1;
+	$out['justify']          = empty( $in['justify'] ) ? 0 : 1;
+	$out['justify_scope']    = injil_help_pick( $in, 'justify_scope', array( 'all', 'posts' ), 'all' );
+	$out['justify_hyphens']  = empty( $in['justify_hyphens'] ) ? 0 : 1;
+	$out['justify_desktop']  = empty( $in['justify_desktop'] ) ? 0 : 1;
+	$out['justify_exclude']  = function_exists( 'injil_help_justify_clean_selectors' ) ? injil_help_justify_clean_selectors( $in['justify_exclude'] ?? '' ) : '';
 	// The Security switches change only for someone who may manage options; anyone else keeps the stored values.
 	$stored = injil_help_get_option();
 	foreach ( array( 'block_app_passwords', 'block_xmlrpc', 'block_rest_writes', 'spam_gate', 'spam_gone' ) as $key ) {
@@ -624,6 +634,22 @@ function injil_help_render_options() {
 			<section class="ih-panel" id="panel-reading" role="tabpanel" aria-labelledby="tab-reading" tabindex="0">
 				<?php
 				injil_help_ui_usage( __( 'A thin bar at the edge of the window fills as the reader scrolls a post or page. Switch it on, pick the post types, the edge and the height, and choose its colours. An empty colour follows the palette. The front page never shows the bar.', 'injil-help' ) );
+				injil_help_ui_card_open( __( 'Justified text', 'injil-help' ), __( 'Paragraphs and list items of the page text are set justified. Centred paragraphs, labels, glosses and the notes keep their own alignment.', 'injil-help' ) );
+				injil_help_ui_toggle( $o, 'justify', __( 'Justify the text', 'injil-help' ), __( 'On by default. Switch it off to set all text ragged on the right.', 'injil-help' ) );
+				injil_help_ui_cards(
+					$o,
+					'justify_scope',
+					__( 'Where', 'injil-help' ),
+					array(
+						'all'   => array( __( 'Every page and post', 'injil-help' ), __( 'The text of every page and Journal post.', 'injil-help' ), 'dashicons-admin-page' ),
+						'posts' => array( __( 'Journal posts only', 'injil-help' ), __( 'Pages keep ragged text.', 'injil-help' ), 'dashicons-admin-post' ),
+					)
+				);
+				injil_help_ui_toggle( $o, 'justify_hyphens', __( 'Hyphenate long words', 'injil-help' ), __( 'Avoids wide gaps in narrow columns. The browser needs the page language, which the theme sets.', 'injil-help' ) );
+				injil_help_ui_toggle( $o, 'justify_desktop', __( 'Keep phones ragged', 'injil-help' ), __( 'Justify only at 768 pixels and wider.', 'injil-help' ) );
+				injil_help_ui_input( $o, 'justify_exclude', __( 'Leave these alone', 'injil-help' ), 'text', __( 'Optional. CSS selectors separated by commas, for example .no-justify, .quote-box. Add the class no-justify to any paragraph to skip it.', 'injil-help' ), array( 'placeholder' => '.no-justify' ) );
+				injil_help_ui_card_close();
+
 				injil_help_ui_card_open( __( 'Reading progress bar', 'injil-help' ) );
 				injil_help_ui_toggle( $o, 'progress', __( 'Show the reading progress bar', 'injil-help' ), __( 'Search engines and screen readers ignore it: the bar is decoration, and the scroll bar already gives the same information.', 'injil-help' ) );
 				foreach ( injil_help_progress_type_choices() as $ptype => $plabel ) {

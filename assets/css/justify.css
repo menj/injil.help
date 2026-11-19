@@ -1,0 +1,25 @@
+/*
+ * Justified text (inc/justify.php). Loaded only where the Justified text option applies.
+ * Paragraphs and list items of the page text; centred or right-aligned paragraphs, the small
+ * labels and glosses, and the notes are left as they are. Based on Auto Justify Content (MENJ, GPLv2 or later).
+ */
+body.ih-justify :is(.wp-block-post-content, .entry-content) :is(p, li):not(.has-text-align-center, .has-text-align-right, .has-text-align-left, .ih-no-justify, .ih-gloss, .ih-cite, .ih-k, .ih-d, .ih-eyebrow, .ih-footnotes li, figcaption) {
+	text-align: justify;
+	text-justify: inter-word;
+	text-align-last: start;
+}
+
+body.ih-justify.ih-justify-hyphens :is(.wp-block-post-content, .entry-content) :is(p, li):not(.has-text-align-center, .has-text-align-right, .has-text-align-left, .ih-no-justify, .ih-gloss, .ih-cite, .ih-k, .ih-d, .ih-eyebrow, .ih-footnotes li, figcaption) {
+	-webkit-hyphens: auto;
+	hyphens: auto;
+	overflow-wrap: break-word;
+}
+
+/* Narrow screens keep ragged text when the option says so. */
+@media (max-width: 767.98px) {
+	body.ih-justify.ih-justify-desktop :is(.wp-block-post-content, .entry-content) :is(p, li):not(.has-text-align-center, .has-text-align-right, .has-text-align-left, .ih-no-justify, .ih-gloss, .ih-cite, .ih-k, .ih-d, .ih-eyebrow, .ih-footnotes li, figcaption) {
+		text-align: start;
+		-webkit-hyphens: manual;
+		hyphens: manual;
+	}
+}

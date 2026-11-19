@@ -2,6 +2,14 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.42.0
+
+Justified text, built into the theme.
+
+- Added: `inc/justify.php` and `assets/css/justify.css`, the theme's own version of the owner's Auto Justify Content plugin. Rules are a static stylesheet switched by body classes, with no `!important`; only selectors an editor adds are printed inline. Paragraphs and list items of the page text are justified with inter-word spacing and a left last line; hyphenation, a phones-ragged switch and a scope of every page or Journal posts only are options. Centred paragraphs, labels, glosses, citations and the notes are spared.
+- Added: Theme Options > Reading > Justified text (five options), and `tests/justify-test.php`, 15 checks.
+- Left out: the plugin's Elementor selectors and its separate settings screen, since the theme has neither Elementor content nor a second options page.
+
 ## 3.41.0
 
 More of the approved lexicons in the Glossary.

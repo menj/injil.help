@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.41.0
+Stable tag: 3.42.0
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -160,6 +160,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.42.0 =
+* Justified text, built in from the Auto Justify Content plugin: Theme Options > Reading > Justified text switches it on or off, limits it to Journal posts, turns hyphenation on or off, keeps phones ragged, and lists selectors to leave alone. It is on by default for pages and posts.
 = 3.41.0 =
 * Four Glossary entries gain more of the classical lexicons: Ibn al-Athīr's al-Nihāya on Zabūr and Muhaymin, al-Jawharī and al-Fayyūmī on Shirk, and al-Ṣāḥib ibn ʿAbbād and al-Jurjānī on Rūḥ.
 = 3.40.0 =
@@ -497,6 +499,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * New screenshot.
 
 == Upgrade Notice ==
+= 3.42.0 =
+Upload the whole theme. Page text is now justified and hyphenated by default. Switch it off under Theme Options > Reading if you prefer ragged text. If you run the Auto Justify Content plugin, deactivate it.
 = 3.41.0 =
 Upload the whole theme. The Glossary refreshes on the first admin load, and any edits made to it are replaced.
 = 3.40.0 =
