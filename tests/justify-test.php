@@ -78,7 +78,10 @@ t_check( '.no-justify, .quote-box' === injil_help_justify_clean_selectors( " .no
 $dirty = injil_help_justify_clean_selectors( '.a{color:red}/*x*/;' );
 t_check( false === strpos( $dirty, '{' ) && false === strpos( $dirty, ';' ) && false === strpos( $dirty, '/' ), 'braces, semicolons and slashes are removed' );
 t_check( '' === injil_help_justify_clean_selectors( '  ' ), 'empty stays empty' );
-t_check( false === strpos( injil_help_justify_clean_selectors( '</style><script>' ), '<' ), 'angle brackets are removed' );
+t_check( false === strpos( injil_help_justify_clean_selectors( '</style><script>' ), '<' ), 'a less-than sign is removed' );
+t_check( '.a > .b' === injil_help_justify_clean_selectors( '.a > .b' ), 'a greater-than sign stays, as the child combinator' );
+t_check( array( '.quote :is(.arabic, .citation)', '.b' ) === injil_help_justify_split( '.quote :is(.arabic, .citation), .b' ), 'a comma inside :is() does not split the selector' );
+t_check( '.quote :is(.arabic, .citation), .b' === injil_help_justify_clean_selectors( '.quote :is(.arabic, .citation),.b' ), 'a selector with a nested comma comes back whole' );
 
 // The stylesheet.
 $css = (string) file_get_contents( dirname( __DIR__ ) . '/assets/css/justify.css' );
@@ -86,6 +89,7 @@ t_check( substr_count( $css, '{' ) === substr_count( $css, '}' ), 'stylesheet br
 t_check( false === strpos( $css, '!important' ), 'stylesheet has no !important' );
 t_check( false !== strpos( $css, 'text-align: justify' ) && false !== strpos( $css, 'hyphens: auto' ) && false !== strpos( $css, 'max-width: 767.98px' ), 'stylesheet justifies, hyphenates and has the narrow-screen rule' );
 t_check( false !== strpos( $css, '.ih-footnotes li' ) && false !== strpos( $css, '.has-text-align-center' ), 'stylesheet spares the notes and centred text' );
+t_check( false !== strpos( $css, '.no-justify' ) && false !== strpos( $css, '.ih-quran' ) && false !== strpos( $css, '[dir="rtl"]' ), 'stylesheet spares no-justify, Arabic and right-to-left paragraphs' );
 
 echo $fail ? "\n$fail failed, $pass passed\n" : "All $pass checks passed\n";
 exit( $fail ? 1 : 0 );

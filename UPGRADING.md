@@ -12,6 +12,7 @@ These are plans, not promises. Each item rests on something on record: this file
 
 ### Next
 
+- Fill the 26 pages that carry fewer than four plates (18 with three, 8 with two), from Commons and Pixabay. Why: a count of what each page shows found 45 pages at four, and the 3.39.0 and 3.40.0 notes had said every page had four.
 - Quote the ten lexicons not yet used in the Glossary: Salmoné, al-Farāhī, Ibn Abī Thābit, Mawdūdī, al-Hilālī, Ibn Qutayba, Ibn Mālik, al-Suyūṭī (*al-Muhadhdhib*), the Cairo Academy and ʿUmar. Why: the owner asked for all 44 lexicons to be used (7 November 2026); 3.41.0 could not read their entries because arabiclexicon.hawramani.com presented an expired certificate, and nothing is quoted unchecked.
 - Bring the remaining checks into the repository and run them in CI. Why: the fourteen tests in `tests/` are in the repository, but the page and link check, the block-balance render and the structured-data check still live in a scratch folder (README, Development workflow). Put them beside the tests with one command, and run everything in a GitHub Actions workflow on every push and pull request; add a JSON Schema per data file under `inc/data/schema/`.
 - Fail loudly on bad data. Why: `injil_help_pages_file()` and `injil_help_data_file()` return an empty array for a missing or malformed file, which silently leaves pages missing. Keep the safe return, record the failure, show an admin notice naming the file, and add a Site Health test that reports every data file.
@@ -32,7 +33,7 @@ These are plans, not promises. Each item rests on something on record: this file
 - Arabic beside the English in the commentaries, behind a toggle. Why: the public-domain Arabic (about 200,000 words) is in hand; ship it as separate JSON loaded on demand. Waits on the page-size choice.
 - Content: commentaries on the remaining verses about Jesus and his family (19:2-15, 2:87, 2:253, 3:65-80, 4:171-172, 5:17, 5:72-78, 9:30-31, 33:7, 42:13, 61:14); more commentators (Muqātil ibn Sulaymān, al-Māturīdī, al-Zamakhsharī, Ibn ʿAṭiyya, al-Rāzī, al-Bayḍāwī, al-Nasafī, Ibn ʿĀshūr, al-Ṭūsī, al-Ṭabrisī); a second translator's reading of 4:155-159, 3:54-58 and 5:116-120; a hadith page; the Arabic Infancy Gospel, the Gospel of the Hebrews and the Ebionites and the Diatessaron. Why: each is listed in this file's earlier plan and adds to pages that exist; each waits on its sources being worked through.
 - Paul of Tarsus: Acts against the letters, Marcion and the first canon, the Jerusalem church after James. Why: in the earlier plan; waits on writing.
-- Images for the pages that still have none (the resurrection discrepancy page, the Resources index and the dictionaries page among them), and the Birmingham and Sanaa folios at full resolution with zoom. Why: 71 pages carry four plates each since 3.40.0, and the pages named in the earlier plan now have them; plates come from the Media Library (3.20.0).
+- Images for the pages that still have none (the Resources index and the dictionaries page among them), and the Birmingham and Sanaa folios at full resolution with zoom. Why: 71 pages carry four plates each since 3.40.0, and the pages named in the earlier plan now have them; plates come from the Media Library (3.20.0).
 
 ### Ideas
 
@@ -87,25 +88,25 @@ The general steps, for any version:
 
 **To 3.36.1.** Upload the whole theme. Nothing else changes.
 
-**To 3.35.0.** Upload the whole theme. The Glossary refreshes on the first admin load, and any edits made to it are replaced.
+**To 3.35.0.** Upload the whole theme. The Glossary refreshes from the first admin load. A page you have edited is kept; Theme Options > Content > Update all pages from the theme replaces it.
 
-**To 3.34.0.** Upload the whole theme. The Glossary, the page on the Messiah in Islam and the table page refresh on the first admin load, and any edits made to them are replaced.
+**To 3.34.0.** Upload the whole theme. The Glossary, the page on the Messiah in Islam and the table page refresh from the first admin load. A page you have edited is kept; Theme Options > Content > Update all pages from the theme replaces it.
 
-**To 3.33.0.** Upload the whole theme. The pages with new images refresh on the first admin load, and the images copy into the Media Library six at a time over the next admin loads. Edits made to those pages are replaced.
+**To 3.33.0.** Upload the whole theme. The pages with new images refresh from the first admin load, and the images copy into the Media Library six at a time over the next admin loads. A page you have edited is kept; Theme Options > Content > Update all pages from the theme replaces it.
 
-**To 3.32.0.** Upload the whole theme. The page width changes on its own: a site on the former default, full width, moves to the reading column the first time it loads; pick full width again under Theme Options > Branding to keep it. Two new pages are written on the first admin load, and sections 8, 9, 13, 18, 21, 22 and 24 of the Gospel According to Islam gain a block of early-writings sayings. A section page you edited keeps your text; delete it to take the new one.
+**To 3.32.0.** Upload the whole theme. The page width changes on its own: a site on the former default, full width, moves to the reading column the first time it loads; pick full width again under Theme Options > Branding to keep it. Two new pages are written from the first admin load, and sections 8, 9, 13, 18, 21, 22 and 24 of the Gospel According to Islam gain a block of early-writings sayings. A section page you edited keeps your text; delete it to take the new one.
 
-**To 3.31.0.** Upload the whole theme. The Glossary and Objections pages refresh on the first admin load and gain a contents list, and any edits made to them are replaced. The automatic list is off until you switch it on in Theme Options > Branding.
+**To 3.31.0.** Upload the whole theme. The Glossary and Objections pages refresh from the first admin load and gain a contents list. A page you have edited is kept; Theme Options > Content > Update all pages from the theme replaces it. The automatic list is off until you switch it on in Theme Options > Branding.
 
-**To 3.30.0.** Upload the whole theme. The Aḥmad page refreshes on the first admin load, and any edits made to it are replaced.
+**To 3.30.0.** Upload the whole theme. The Aḥmad page refreshes from the first admin load. A page you have edited is kept; Theme Options > Content > Update all pages from the theme replaces it.
 
-**To 3.29.0.** Upload the whole theme. The Glossary and the Aḥmad page refresh on the first admin load, and any edits made to those two pages are replaced.
+**To 3.29.0.** Upload the whole theme. The Glossary and the Aḥmad page refresh from the first admin load. A page you have edited is kept; Theme Options > Content > Update all pages from the theme replaces it.
 
-**To 3.28.0.** Upload the whole theme. The Glossary, the page on the Injīl and the page on the Torah in Islam refresh on the first admin load, and any edits made to them are replaced.
+**To 3.28.0.** Upload the whole theme. The Glossary, the page on the Injīl and the page on the Torah in Islam refresh from the first admin load. A page you have edited is kept; Theme Options > Content > Update all pages from the theme replaces it.
 
-**To 3.27.0.** Upload the whole theme. The Glossary, the page on the end of ʿĪsā's earthly mission and the table page refresh on the first admin load, and any edits made to them are replaced.
+**To 3.27.0.** Upload the whole theme. The Glossary, the page on the end of ʿĪsā's earthly mission and the table page refresh from the first admin load. A page you have edited is kept; Theme Options > Content > Update all pages from the theme replaces it.
 
-**To 3.26.0.** Upload the whole theme. The Glossary and the Aḥmad page refresh on the first admin load, and any edits made to those two pages are replaced.
+**To 3.26.0.** Upload the whole theme. The Glossary and the Aḥmad page refresh from the first admin load. A page you have edited is kept; Theme Options > Content > Update all pages from the theme replaces it.
 
 **To 3.25.10.** Upload the whole theme. Nothing else changes. On a site in a subfolder, put a copy of `assets/images/favicon.ico` in the domain root (or, with a Site Icon set, that icon as `favicon.ico`), since browsers ask for `/favicon.ico` there.
 
@@ -145,21 +146,22 @@ The `(.+/)?` covers WordPress in a subfolder of the `.htaccess` folder too, such
 Git Updater reads the theme header and offers the release whose tag matches `Version:`. After the update, the first load of any admin screen rewrites the starter pages whose text changed, keeps pages you edited (marked "edited, kept on update" on the Content tab), keeps no revisions, and flushes rewrite rules only if permalinks had to be set. "Update all pages from the theme" replaces every page, edited ones included, after a confirmation. Take a database backup before updating; open the Content tab once after.
 
 - **3.20.2.** Nothing to do. A page or Journal post that carries no hash from the theme is kept on every update from now on, so it keeps your text and does not take the new one. To give such a page the theme's text, press "Update all pages from the theme".
-- **3.44.0.** Upload the whole theme. The new Journal post is created on the first admin load.
-- **3.43.1.** Upload the whole theme. The Acts and Galatians page is rewritten on the first admin load; edits to it are replaced.
-- **3.43.0.** Upload the whole theme. The Acts and Galatians page is rewritten on the first admin load; edits to it are replaced.
+- **3.44.1.** Upload the whole theme. Pages built from patterns gain their further plates, and eight gospel-section pages lose a plate that did not match them, from the first admin load; the plates copy into the Media Library six per admin screen load. A page you have edited is kept.
+- **3.44.0.** Upload the whole theme. The new Journal post is created from the first admin load.
+- **3.43.1.** Upload the whole theme. The Acts and Galatians page is rewritten from the first admin load. A copy you have edited is kept.
+- **3.43.0.** Upload the whole theme. The Acts and Galatians page is rewritten from the first admin load. A copy you have edited is kept.
 - **3.42.0.** Upload the whole theme. Page text becomes justified and hyphenated on every page and post. To keep ragged text, switch it off under Theme Options > Reading > Justified text. Deactivate the Auto Justify Content plugin if it is installed, since the two would both set the text.
-- **3.41.0.** Upload the whole theme. The Glossary is rewritten on the first admin load; edits to it are replaced.
-- **3.40.0.** Upload the whole theme. Eleven pages are rewritten on the first admin load; the new plates reach the Media Library six per admin screen load.
-- **3.39.0.** Upload the whole theme. Fifteen pages are rewritten on the first admin load; the new plates reach the Media Library six per admin screen load, and a plate without a copy stays hidden until then.
-- **3.38.0.** Upload the whole theme. The new page /resources/dictionaries/ is created on the first admin load, and the Resources index is rewritten (edits to it are replaced).
+- **3.41.0.** Upload the whole theme. The Glossary is rewritten from the first admin load. A copy you have edited is kept.
+- **3.40.0.** Upload the whole theme. Eleven pages are rewritten from the first admin load; the new plates reach the Media Library six per admin screen load.
+- **3.39.0.** Upload the whole theme. Fifteen pages are rewritten from the first admin load; the new plates reach the Media Library six per admin screen load, and a plate without a copy stays hidden until then.
+- **3.38.0.** Upload the whole theme. The new page /resources/dictionaries/ is created from the first admin load, and the Resources index is rewritten (a copy you have edited is kept).
 - **3.38.1.** Upload the whole theme. Nothing else to do. Clear the page cache so phones fetch the new stylesheets.
 - **3.38.2.** Upload the whole theme. Nothing else to do.
 - **3.38.3.** Upload the whole theme. Nothing else to do.
-- **3.38.4.** Upload the whole theme. Three Journal posts are scheduled for January 2027, and the glossary, responses, timeline and source-library pages are rewritten from the theme on the first admin load unless you edited them.
+- **3.38.4.** Upload the whole theme. Three Journal posts are scheduled for January 2027, and the glossary, responses, timeline and source-library pages are rewritten from the theme from the first admin load unless you edited them.
 - **3.38.5.** Upload the whole theme. Nothing else to do. Nothing is superseded or renamed until a pair is added to `inc/data/supersedes.json` or a `former` slug is set on a Journal entry. Pages and posts the theme wrote that its data no longer holds move to the Trash from the second update on (the first records the baseline and each page's path), unless edited. A post that carries no content hash is treated as edited and kept.
 - **3.37.0.** Upload the whole theme. To use the Pexels client, set the key under Theme Options > Content or define `INJIL_HELP_PEXELS_KEY` in `wp-config.php`. Nothing else changes.
-- **3.36.0.** Upload the whole theme. Nine pages refresh on the first admin load. Pixabay plates appear once the Media Library holds their copies (six per admin screen load); they never load from Pixabay for readers.
+- **3.36.0.** Upload the whole theme. Nine pages refresh from the first admin load. Pixabay plates appear once the Media Library holds their copies (six per admin screen load); they never load from Pixabay for readers.
 - **3.20.0.** Check the plates. Remote plates are now off, so a plate with no Media Library copy is hidden. The pages in `inc/data/images.json` already have their copies on a site that has run 3.18.0; the four plates of the front-page and section patterns are copied on the next few admin screen loads. Open the front page afterwards. If a plate is still missing (a failed fetch is retried after a day), switch on Theme Options › Content › Load plates from Wikimedia Commons and Pexels until it is there. The Privacy page is rewritten to say the images are served from the site, unless you edited it.
 - **3.18.0.** Nothing to do. The first admin load after the update creates the Journal page and writes the 8 posts with their own dates; those still to come show as Scheduled under Posts. They go live only if WP-Cron runs on the host, so check that it does (or run a real cron job against `wp-cron.php`). Purge any page cache so the new menu link shows.
 - **3.14.1.** Nothing to do. No address on this site changes. The links to the sister sites follow their new addresses, and the old ones redirect there anyway.

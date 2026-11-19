@@ -114,13 +114,19 @@ function injil_help_top_blocks( $html ) {
  */
 function injil_help_add_page_image( $path, $content, $is_pattern ) {
 	$images = injil_help_images();
-	if ( empty( $images[ $path ]['file'] ) || false !== strpos( $content, 'ih-plate' ) ) {
+	if ( empty( $images[ $path ]['file'] ) ) {
 		return $content;
+	}
+	$more = (array) ( $images[ $path ]['more'] ?? array() );
+	if ( false !== strpos( $content, 'ih-plate' ) ) {
+		// The content already carries its own plate (a pattern's): only the further plates are spread through it.
+		return injil_help_add_more_images( $content, $more );
 	}
 	$block = injil_help_image_block( $images[ $path ] );
 	if ( $is_pattern ) {
-		$pos = strpos( $content, "<!-- /wp:group -->\n" );
-		return false === $pos ? $block . $content : substr( $content, 0, $pos + 19 ) . $block . substr( $content, $pos + 19 );
+		$pos     = strpos( $content, "<!-- /wp:group -->\n" );
+		$content = false === $pos ? $block . $content : substr( $content, 0, $pos + 19 ) . $block . substr( $content, $pos + 19 );
+		return injil_help_add_more_images( $content, $more );
 	}
 	$done = false;
 	if ( preg_match_all( '/<!-- wp:paragraph( \{[^}]*\})? -->.*?<!-- \/wp:paragraph -->\n/s', $content, $m, PREG_OFFSET_CAPTURE ) ) {
@@ -137,7 +143,7 @@ function injil_help_add_page_image( $path, $content, $is_pattern ) {
 	if ( ! $done ) {
 		$content = $block . $content;
 	}
-	return injil_help_add_more_images( $content, (array) ( $images[ $path ]['more'] ?? array() ) );
+	return injil_help_add_more_images( $content, $more );
 }
 
 /** Spread a page's further plates through its content: each after a paragraph, at even steps, before the notes. */
@@ -163,9 +169,12 @@ function injil_help_add_more_images( $content, $more ) {
 	$n     = count( $more );
 	for ( $k = 1; $k <= $n; $k++ ) {
 		$idx = max( (int) round( $first + ( $end - 1 - $first ) * $k / ( $n + 1 ) ), $prev + 2 );
-		while ( $idx < $end && 0 !== strpos( $blocks[ $idx ], '<!-- wp:paragraph' ) ) {
-			++$idx;
+		// After a paragraph where there is one; a pattern's top-level blocks are groups, so any block will do when no paragraph follows.
+		$at = $idx;
+		while ( $at < $end && 0 !== strpos( $blocks[ $at ], '<!-- wp:paragraph' ) ) {
+			++$at;
 		}
+		$idx = $at < $end ? $at : $idx;
 		if ( $idx >= $end || isset( $after[ $idx ] ) ) {
 			break;
 		}
@@ -438,8 +447,11 @@ function injil_help_image_key_from_src( $src ) {
 		return str_replace( '_', ' ', rawurldecode( $m[1] ) );
 	}
 	foreach ( injil_help_images() as $img ) {
-		if ( 'commons' !== injil_help_image_source( $img ) && ! empty( $img['url'] ) && 0 === strpos( (string) $src, (string) $img['url'] ) ) {
-			return (string) $img['file'];
+		// The page's first plate and each of its further plates ("more").
+		foreach ( array_merge( array( $img ), array_filter( (array) ( $img['more'] ?? array() ), 'is_array' ) ) as $one ) {
+			if ( 'commons' !== injil_help_image_source( $one ) && ! empty( $one['url'] ) && ! empty( $one['file'] ) && 0 === strpos( (string) $src, (string) $one['url'] ) ) {
+				return (string) $one['file'];
+			}
 		}
 	}
 	return '';
@@ -543,7 +555,8 @@ function injil_help_image_sitemap_entries() {
 		if ( ! $page || 'publish' !== $page->post_status || empty( $img['file'] ) || ( function_exists( 'injil_help_unlisted_live_ids' ) && in_array( (int) $page->ID, injil_help_unlisted_live_ids(), true ) ) ) {
 			continue;
 		}
-		$url = has_post_thumbnail( $page->ID ) ? (string) get_the_post_thumbnail_url( $page->ID, 'full' ) : injil_help_image_url( $img, 1600 );
+		// Pixabay's licence forbids hotlinking: without a Media Library copy its image is left out of the sitemap.
+		$url = has_post_thumbnail( $page->ID ) ? (string) get_the_post_thumbnail_url( $page->ID, 'full' ) : ( 'pixabay' === injil_help_image_source( $img ) ? '' : injil_help_image_url( $img, 1600 ) );
 		if ( '' !== $url ) {
 			$out[] = array(
 				'loc'   => (string) get_permalink( $page ),

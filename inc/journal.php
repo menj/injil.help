@@ -92,6 +92,16 @@ function injil_help_journal_category( $name ) {
  */
 function injil_help_journal_seed( $now = null ) {
 	$tally = array( 'created' => 0, 'updated' => 0, 'current' => 0, 'kept' => 0, 'failed' => 0 );
+	// add_option() is an atomic insert, so only one request can seed at a time: two at once could each find no post and each insert
+	// the slug, leaving a duplicate with a suffixed address. A lock older than two minutes is stale. A request that finds the lock
+	// taken writes nothing and reports a failure, so the version is not recorded and the next admin load tries again.
+	if ( ! add_option( 'injil_help_journal_seeding', time(), '', false ) ) {
+		if ( time() - (int) get_option( 'injil_help_journal_seeding' ) < 2 * MINUTE_IN_SECONDS ) {
+			$tally['failed'] = 1;
+			return $tally;
+		}
+		update_option( 'injil_help_journal_seeding', time(), false );
+	}
 
 	$GLOBALS['injil_help_seeding'] = true; // the spam gate exempts the theme's own writing (injil_help_sec_is_seeded() in inc/security.php)
 	foreach ( injil_help_journal_entries() as $entry ) {
@@ -145,6 +155,7 @@ function injil_help_journal_seed( $now = null ) {
 		injil_help_log( $entry['title'], $post ? __( 'took the theme\'s new text', 'injil-help' ) : __( 'created', 'injil-help' ) );
 	}
 	$GLOBALS['injil_help_seeding'] = false;
+	delete_option( 'injil_help_journal_seeding' );
 	return $tally;
 }
 

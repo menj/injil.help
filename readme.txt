@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.44.0
+Stable tag: 3.44.1
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -13,14 +13,14 @@ Custom child theme of Twenty Twenty-Five built for one site: The Rightly-Guided 
 == Description ==
 The Injil is the block theme of The Rightly-Guided Injīl. It answers the Islamic Dilemma with the Qur'an as the measure (5:48) and sets The Gospel According to Islam, after Ahmad Shafaat's text of 1985, like a printed Bible.
 
-It writes the site's 183 pages and the Journal on activation, prints one JSON-LD graph per page, and carries its own fonts, ornament layer, share row, contextual links and hardening. Everything a site owner changes lives under Appearance > Theme Options.
+It writes the site's 183 pages and the Journal on activation, prints one JSON-LD graph per page, and carries its own fonts, ornament layer, share row, contextual links and hardening. The theme's own settings live under Appearance > Theme Options; the site title is set under Settings > General and the page text in the editor.
 
 The theme makes no remote calls from the reader's browser by default. See Privacy below.
 
 == Installation ==
 1. Install and keep Twenty Twenty-Five (the parent). Do not delete it.
 2. Upload this folder to wp-content/themes/injil-help/ and activate "The Injil". Set Settings > General > Site Title to "The Rightly-Guided Injīl" (the header and footer read it from there).
-3. (Automatic) On activation the theme sets pretty permalinks and starts writing the 183 pages listed under Theme Options > Content. It writes them about 20 seconds at a time, on activation and then on each admin screen load, and a notice at the top of the admin shows the progress. Click through a few admin screens until the notice says the pages are done; the site is then complete for visitors.
+3. (Automatic) On activation the theme sets pretty permalinks and starts writing the 183 pages listed under Theme Options > Content. It writes them about 20 seconds at a time, on activation and then on each admin screen load, and a notice at the top of the admin shows the progress. Click through a few admin screens until the notice says the pages are done; the site is then complete for visitors. Manuscript images are copied into the Media Library on the same admin loads, six at a time, and a plate shows once its copy is there, so a few appear a little later.
 4. Optional: create categories for the parts (The Five Gospels, Paul of Tarsus, Jesus in the Qur'an, The Gospel According to Islam, Resources) if you intend to publish posts.
 5. To install by FTP instead of the uploader, turn on hidden files in your FTP program first (in FileZilla: Server > Force showing hidden files), so the theme's .htaccess goes up with the rest, then upload the folder and activate the theme as in step 2.
 6. To rebuild a page by hand: the section pages (/gospels/, /paul/, /quran/, /gospel-according-to-islam/, /resources/, /answers/) use the "Section index" template with their "Section index: ..." pattern (or "FAQs page"); /method/ is the "Criterion statement" pattern, /corrections/ the "Corrections log", /islamic-dilemma/ the pillar-page pattern; every other page is built from inc/data/ and is restored from Theme Options > Content.
@@ -90,7 +90,7 @@ Licensing: Sabon Next LT (Linotype) and Kagnue (Youthlabs Studio) are commercial
 * The keyword appears in the home kicker and lede, the home dilemma section, the first nav item, the first two FAQs and the footer. Link to /islamic-dilemma/ from every new article that touches Qur'an 5:47, taḥrīf or the identity of the Injīl, with varied anchor text.
 * The default social image can be replaced under Theme Options > SEO.
 == Images ==
-Manuscript images come from Wikimedia Commons, five photographs from Pexels and twelve from Pixabay (manuscripts, scrolls, tablets and inscriptions), each with its credit and a link to its source page in the caption. All are public domain except the Kairouan Qur'an photograph (Richard Mortel, CC BY 2.0), which must keep its credit. Every image carries a descriptive alt attribute (what it is, its date and holding institution) and a short title; keep that pattern for new images, and write alt text for the subject, not for decoration. WordPress adds lazy loading itself. The default Open Graph image is a bundled copy of the Birmingham Qur'an manuscript (assets/images/og-default.jpg, public domain, 1280 × 833); replace it under Theme Options > SEO. To host the manuscript images yourself, download from the linked Commons page into the Media Library and swap the URL. From 3.20.0 readers are served the Media Library copy only, and a plate without one is hidden, unless Theme Options > Content allows remote plates; with that switch on, readers' browsers contact upload.wikimedia.org and images.pexels.com, and the privacy policy should say so. Thirty-five article pages also carry a plate listed in inc/data/images.json, and the same image becomes the page's featured image once the host has fetched it (six pages per admin screen load; a failed fetch is retried after a day). To change a page's image, edit its entry: the Commons file name without "File:", the alt text, the caption and the credit. Use only public-domain or CC0 files from Commons, or Pexels photographs credited as "Photo: name, Pexels License" with source, url and page set; check that the file exists.
+Manuscript images come from Wikimedia Commons, five photographs from Pexels and twelve from Pixabay (manuscripts, scrolls, tablets and inscriptions), each with its credit and a link to its source page in the caption. The Commons images are public domain or CC0, except the Kairouan Qur'an photograph (Richard Mortel, CC BY 2.0). The Pexels photographs are under the Pexels License and the Pixabay photographs under the Pixabay Content License. Each caption names the photographer and the licence, and every credit must stay. Every image carries a descriptive alt attribute (what it is, its date and holding institution) and a short title; keep that pattern for new images, and write alt text for the subject, not for decoration. WordPress adds lazy loading itself. The default Open Graph image is a bundled copy of the Birmingham Qur'an manuscript (assets/images/og-default.jpg, public domain, 1280 × 833); replace it under Theme Options > SEO. To host the manuscript images yourself, download from the linked Commons page into the Media Library and swap the URL. From 3.20.0 readers are served the Media Library copy only, and a plate without one is hidden, unless Theme Options > Content allows remote plates; with that switch on, readers' browsers contact upload.wikimedia.org and images.pexels.com, and the privacy policy should say so. Thirty-five article pages also carry a plate listed in inc/data/images.json, and the same image becomes the page's featured image once the host has fetched it (six pages per admin screen load; a failed fetch is retried after a day). To change a page's image, edit its entry: the Commons file name without "File:", the alt text, the caption and the credit. Use only public-domain or CC0 files from Commons, or Pexels photographs credited as "Photo: name, Pexels License" with source, url and page set; check that the file exists.
 
 == Branding ==
 * Brandmark: assets/brandmark.svg (an open codex with rays of light, Qur'an 5:46). It appears as the link before the site title in the header and at the top of the footer's first column (class ih-mark; the footer adds ih-mark-foot).
@@ -130,7 +130,7 @@ Type [auto_toc] in a Shortcode block where the list should go. The list links to
 Theme Options > Reading > Justified text. Switch it off, limit it to Journal posts, turn hyphenation off, or keep phones ragged. Add the class no-justify to a paragraph to skip it. If the Auto Justify Content plugin is active, deactivate it, since the theme now does the same job.
 
 = What is the Pexels API key for? =
-It is optional. The theme includes a small client for the Pexels API, and the key lets code that uses it search for photos. Get a key at pexels.com/api and enter it under Theme Options > Content, or define INJIL_HELP_PEXELS_KEY in wp-config.php. The key stays in your database and never in the theme files.
+It is optional. The theme includes a small client for the Pexels API, and the key lets code that uses it search for photos. Get a key at pexels.com/api and enter it under Theme Options > Content, or define INJIL_HELP_PEXELS_KEY in wp-config.php. A key entered in the settings is stored in your database, and a key in wp-config.php is read from that file; neither is in the theme files.
 
 = Why are some manuscript plates missing on a new site? =
 Remote plates are off by default. The theme copies each plate from Wikimedia Commons, Pexels or Pixabay into the Media Library, six files per admin screen load, and shows a plate once its copy is there. Load a few admin screens, or switch on Theme Options > Content > Load plates from Wikimedia Commons and Pexels.
@@ -168,6 +168,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.44.1 =
+* Fixes from a code review. Extra plates now show on the pages built from a pattern (the Islamic Dilemma page, the criterion page, the Thomas and discrepancy pages, Paul), a Pixabay plate never loads from Pixabay without its copy, an unreadable page file no longer lets the update finish with pages missing, Journal seeding cannot make a duplicate post, justified text spares no-justify and Arabic paragraphs, and the contents list handles unquoted ids and Rank Math breadcrumbs. Eight plates that did not match their gospel section are removed. The upgrade notes now say that a page you edited is kept on update.
 = 3.44.0 =
 * New Journal post, "Paul and the altered gospel": Augustine and the NLT Study Bible on Galatians 2:11-14, with the two source screenshots set in the post. Posts can now carry theme images with the markup line [fig].
 = 3.43.1 =
@@ -179,9 +181,9 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 = 3.41.0 =
 * Four Glossary entries gain more of the classical lexicons: Ibn al-Athīr's al-Nihāya on Zabūr and Muhaymin, al-Jawharī and al-Fayyūmī on Shirk, and al-Ṣāḥib ibn ʿAbbād and al-Jurjānī on Rūḥ.
 = 3.40.0 =
-* 33 more manuscript images on the 11 pages that had one: papyri of Matthew, Luke, John and Acts, and codex leaves of the letters. Every page with an image now has four. 258 images in all on 71 pages.
+* 33 more manuscript images on the 11 pages that had one: papyri of Matthew, Luke, John and Acts, and codex leaves of the letters. 258 images in all on 71 pages.
 = 3.39.0 =
-* 45 more manuscript images on 15 pages: Qur'an folios (Hijazi, Kufic, Maghribi, Mamluk and Qajar) on eight Qur'an and Islamic Dilemma pages, Codex Claromontanus and Papyrus 46 on three Paul pages, and Nag Hammadi Codex II pages on the four Thomas pages. 225 images in all; 60 of 71 pages now have the full four.
+* 45 more manuscript images on 15 pages: Qur'an folios (Hijazi, Kufic, Maghribi, Mamluk and Qajar) on eight Qur'an and Islamic Dilemma pages, Codex Claromontanus and Papyrus 46 on three Paul pages, and Nag Hammadi Codex II pages on the four Thomas pages. 225 images in all on 71 pages.
 = 3.38.5 =
 * A newer page or Journal post can replace an older one. The old address redirects to the new one, the old item leaves lists, search, feeds and sitemaps, and moves to the Trash unless you edited it. A Journal post that takes a new slug keeps its post and the old address redirects. Items the theme no longer ships move to the Trash unless edited. Theme Options, Content shows a dry run of the next update, a log of the last 100 changes and a side-by-side comparison of an edited item with the theme's copy.
 = 3.38.4 =
@@ -394,7 +396,6 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 = 3.6.2 =
 * Links to apostleofdoom.org and bestofislam.org are within the running text only, thirty sentences naming the article and the site where a point is taken further; the declared row, the footer links and the sameAs entry of 3.6.1 are removed.
 = 3.6.1 =
-* Contents list: put [auto_toc] where you want a list of the page's sections (the level-two and level-three headings), or switch on Theme Options > Branding > Add a contents list to long pages to add one to every page with 4 or more sections. [auto_toc tags="h2,h3,h4"] changes the levels and [auto_toc title="In this page"] the title.
 * Content is full width by default: every page's text, tables and plates fill the page between the side gutters, and the header, footer and front page follow. Theme Options > Branding > Content width offers full (default), wide (1240px) and reading column (720px, the former default). At full and wide widths running prose is set in two columns on screens from 1280px, as the gospel sections are, so lines stay readable; headings, tables, plates, folds and asides span both columns.
 * The Gospel of Thomas page explains why Thomas is counted: a sayings gospel of the kind Q was, with the evidence, the contrary case labelled, the Qur'anic reason and three questions.
 * "Paul of Tarsus" throughout the site's own text.
@@ -465,7 +466,7 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Theme Options page colours follow the Colours tab; badge text and icons use the parchment token instead of white.
 * languages/ folder added for translation files; readme corrected on page rewriting.
 = 3.2.1 =
-* Starter pages now update themselves: after a theme update, the first admin screen load rewrites every starter page from the new text (once per version). Edits made to those pages are replaced. Theme Options > Content also has an "Update all pages from the theme" button.
+* Starter pages now update themselves: after a theme update, the first admin screen load rewrites every starter page from the new text (once per version). A page you have edited is kept; Theme Options > Content > Update all pages from the theme replaces it. Theme Options > Content also has an "Update all pages from the theme" button.
 * Main navigation links no longer underline on hover.
 = 3.2.0 =
 * The Gospel According to Islam now follows The Narrative of Jesus, Son of Mary: the text in paragraphs rather than numbered verses, grouped into six chapters over the same 27 section pages (/gospel-according-to-islam/1/ to /27/), opening with Al-Fatiha and closing with the Qur'an's own statements on God's oneness. Alham Ahmed's Qur'anic passages stand where they fall in the story, under their own headings, and all 235 notes run in one numbering. Where a note says "note 19" it is now a link to that note on its page.
@@ -513,24 +514,26 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * New screenshot.
 
 == Upgrade Notice ==
+= 3.44.1 =
+Upload the whole theme. Pages built from patterns gain their extra plates and eight gospel-section pages refresh from the first admin load; a page you edited is kept.
 = 3.44.0 =
-Upload the whole theme. One Journal post is added on the first admin load.
+Upload the whole theme. One Journal post is added from the first admin load.
 = 3.43.1 =
-Upload the whole theme. The Acts and Galatians page refreshes on the first admin load, and any edits made to it are replaced.
+Upload the whole theme. The Acts and Galatians page refreshes from the first admin load. A page you have edited is kept; Theme Options > Content > Update all pages from the theme replaces it.
 = 3.43.0 =
-Upload the whole theme. The Acts and Galatians page refreshes on the first admin load, and any edits made to it are replaced.
+Upload the whole theme. The Acts and Galatians page refreshes from the first admin load. A page you have edited is kept; Theme Options > Content > Update all pages from the theme replaces it.
 = 3.42.0 =
 Upload the whole theme. Page text is now justified and hyphenated by default. Switch it off under Theme Options > Reading if you prefer ragged text. If you run the Auto Justify Content plugin, deactivate it.
 = 3.41.0 =
-Upload the whole theme. The Glossary refreshes on the first admin load, and any edits made to it are replaced.
+Upload the whole theme. The Glossary refreshes from the first admin load. A page you have edited is kept; Theme Options > Content > Update all pages from the theme replaces it.
 = 3.40.0 =
-Upload the whole theme. Eleven pages refresh on the first admin load, and the new images are copied into the Media Library six per admin screen load.
+Upload the whole theme. Eleven pages refresh from the first admin load, and the new images are copied into the Media Library six per admin screen load.
 = 3.39.0 =
-Upload the whole theme. Fifteen pages refresh on the first admin load, and the new images are copied into the Media Library six per admin screen load.
+Upload the whole theme. Fifteen pages refresh from the first admin load, and the new images are copied into the Media Library six per admin screen load.
 = 3.38.5 =
 Upload the whole theme. Nothing else to do. Under Theme Options, Content you can now see what the next update would do and what the last ones did.
 = 3.38.4 =
-Upload the whole theme. Three Journal posts are scheduled and four pages (the glossary, responses, timeline and source library) are rewritten from the theme on the first admin load (edited pages are kept).
+Upload the whole theme. Three Journal posts are scheduled and four pages (the glossary, responses, timeline and source library) are rewritten from the theme from the first admin load (edited pages are kept).
 = 3.38.3 =
 Upload the whole theme. Nothing else to do.
 = 3.38.2 =
@@ -538,34 +541,34 @@ Upload the whole theme. Nothing else to do.
 = 3.38.1 =
 Upload the whole theme. Nothing else to do.
 = 3.38.0 =
-Upload the whole theme. One new page is created and the Resources index refreshes on the first admin load.
+Upload the whole theme. One new page is created and the Resources index refreshes from the first admin load.
 = 3.37.0 =
 Upload the whole theme. Optional: add a Pexels API key under Theme Options > Content.
 = 3.36.1 =
 Upload the whole theme. Nothing else changes.
 
 = 3.36.0 =
-Upload the whole theme. Nine pages refresh on the first admin load, and any edits made to them are replaced.
+Upload the whole theme. Nine pages refresh from the first admin load. A page you have edited is kept; Theme Options > Content > Update all pages from the theme replaces it.
 = 3.35.0 =
-Upload the whole theme. The Glossary refreshes on the first admin load, and any edits made to it are replaced.
+Upload the whole theme. The Glossary refreshes from the first admin load. A page you have edited is kept; Theme Options > Content > Update all pages from the theme replaces it.
 = 3.34.0 =
-Upload the whole theme. The Glossary and two Qur'an pages refresh on the first admin load, and any edits made to them are replaced.
+Upload the whole theme. The Glossary and two Qur'an pages refresh from the first admin load. A page you have edited is kept; Theme Options > Content > Update all pages from the theme replaces it.
 = 3.33.0 =
-Upload the whole theme. The pages with new images refresh on the first admin load, and the images copy into the Media Library six at a time over the next admin loads. Any edits made to those pages are replaced.
+Upload the whole theme. The pages with new images refresh from the first admin load, and the images copy into the Media Library six at a time over the next admin loads. A page you have edited is kept; Theme Options > Content > Update all pages from the theme replaces it.
 = 3.32.0 =
-Upload the whole theme. Pages are narrower by default; a site saved on full width moves to the reading column once. Two new pages are written on the first admin load.
+Upload the whole theme. Pages are narrower by default; a site saved on full width moves to the reading column once. Two new pages are written from the first admin load.
 = 3.31.0 =
-Upload the whole theme. The Glossary and Objections pages refresh on the first admin load and gain a contents list; any edits made to them are replaced.
+Upload the whole theme. The Glossary and Objections pages refresh from the first admin load and gain a contents list. A page you have edited is kept; Theme Options > Content > Update all pages from the theme replaces it.
 = 3.30.0 =
-Upload the whole theme. The Aḥmad page refreshes on the first admin load, and any edits made to it are replaced.
+Upload the whole theme. The Aḥmad page refreshes from the first admin load. A page you have edited is kept; Theme Options > Content > Update all pages from the theme replaces it.
 = 3.29.0 =
-Upload the whole theme. The Glossary and the Aḥmad page refresh on the first admin load, and any edits made to them are replaced.
+Upload the whole theme. The Glossary and the Aḥmad page refresh from the first admin load. A page you have edited is kept; Theme Options > Content > Update all pages from the theme replaces it.
 = 3.28.0 =
-Upload the whole theme. The Glossary and two Islamic Dilemma pages refresh on the first admin load, and any edits made to them are replaced.
+Upload the whole theme. The Glossary and two Islamic Dilemma pages refresh from the first admin load. A page you have edited is kept; Theme Options > Content > Update all pages from the theme replaces it.
 = 3.27.0 =
-Upload the whole theme. The Glossary and two Qur'an pages refresh on the first admin load, and any edits made to them are replaced.
+Upload the whole theme. The Glossary and two Qur'an pages refresh from the first admin load. A page you have edited is kept; Theme Options > Content > Update all pages from the theme replaces it.
 = 3.26.0 =
-Upload the whole theme. The Glossary and the Aḥmad page refresh on the first admin load, and any edits made to them are replaced.
+Upload the whole theme. The Glossary and the Aḥmad page refresh from the first admin load. A page you have edited is kept; Theme Options > Content > Update all pages from the theme replaces it.
 = 3.25.10 =
 Upload the whole theme. On a site in a subfolder, also put a copy of assets/images/favicon.ico in the domain root folder (or, with a Site Icon set, that icon as favicon.ico); otherwise nothing to do.
 
