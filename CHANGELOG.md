@@ -2,6 +2,14 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.46.0
+
+The Qur'an parallels page, from M. R. James.
+
+- Added: a section on `resources/borrowing` ("Did the Qur'an borrow its stories?") that sets M. R. James's 1924 translation (public domain) beside the Qur'an at seven points: Anna's vow, Mary fed by an angel, the angel's news, the birth in the cave with the midwife and Salome, the clay sparrows, the withering curse and the palm. Each quotation was checked against the text of the PDF, and each Qur'anic reference is given by verse.
+- Added: James's own dates and descriptions. The Protevangelium is as old as the second century; the Infancy Gospel of Thomas survives in late Greek copies, with a sixth-century Syriac version and a fifth or sixth-century Latin palimpsest as the earliest authorities; Pseudo-Matthew is a Latin compilation possibly of the eighth or ninth century, with no manuscript before the eleventh; the Arabic Gospel of the Infancy is a late compilation whose cradle speech sits in a chapter James calls a late note prefixed. The page draws only the conclusion that, on his dating, the palm and the cradle speech are in books later than the Qur'an or of uncertain date.
+- Added: James in the page's Sources.
+
 ## 3.45.0
 
 Sources from biblicalstudies.org.uk and its mirror, read from the PDFs the owner supplied. The site's own pages were not read, since it sits behind a bot check and its robots.txt refuses AI crawlers.

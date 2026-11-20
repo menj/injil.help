@@ -146,6 +146,7 @@ The `(.+/)?` covers WordPress in a subfolder of the `.htaccess` folder too, such
 Git Updater reads the theme header and offers the release whose tag matches `Version:`. After the update, the first load of any admin screen rewrites the starter pages whose text changed, keeps pages you edited (marked "edited, kept on update" on the Content tab), keeps no revisions, and flushes rewrite rules only if permalinks had to be set. "Update all pages from the theme" replaces every page, edited ones included, after a confirmation. Take a database backup before updating; open the Content tab once after.
 
 - **3.20.2.** Nothing to do. A page or Journal post that carries no hash from the theme is kept on every update from now on, so it keeps your text and does not take the new one. To give such a page the theme's text, press "Update all pages from the theme".
+- **3.46.0.** Upload the whole theme. Resources > Did the Qur'an borrow its stories? is rewritten from the first admin load; a page you have edited is kept.
 - **3.45.0.** Upload the whole theme. The Ebionites, James, Torah in Islam and Source library pages are rewritten from the first admin load; a page you have edited is kept.
 - **3.44.1.** Upload the whole theme. Pages built from patterns gain their further plates, and eight gospel-section pages lose a plate that did not match them, from the first admin load; the plates copy into the Media Library six per admin screen load. A page you have edited is kept.
 - **3.44.0.** Upload the whole theme. The new Journal post is created from the first admin load.
