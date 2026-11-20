@@ -2,6 +2,14 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.45.0
+
+Sources from biblicalstudies.org.uk and its mirror, read from the PDFs the owner supplied. The site's own pages were not read, since it sits behind a bot check and its robots.txt refuses AI crawlers.
+
+- Added: M. R. James, *The Apocryphal New Testament* (1924, public domain), on `paul/ebionites` (Epiphanius on the Gospel of the Ebionites: the baptism voice "This day have I begotten thee", "begotten of the seed of a man", "created, as one of the archangels", pp. 9 to 10, with the Qur'an's 3:59 and 112:3 set beside it) and on `paul/james` (Jerome on the Gospel according to the Hebrews: the risen Lord appears to James, pp. 3 to 4). Each quotation was checked against the PDF text.
+- Added: on `islamic-dilemma/torah-in-islam`, W. F. Albright's 1951 judgment on the accuracy of the Hebrew consonantal text as quoted by G. Ch. Aalders (*Evangelical Quarterly* 24.1, 1952), and two sentences of Peter Ackroyd (*The Old Testament Tradition*, 1963, pp. 13 to 14) on the prophets and Jesus recalling people to what was known. The in-copyright works are quoted briefly with credit.
+- Added: the three works in the Source library and in the pages' Sources lists.
+
 ## 3.44.1
 
 Fixes from the CodeAnt review of 3.26.0 to 3.44.0, checked one by one against the code and the data.
