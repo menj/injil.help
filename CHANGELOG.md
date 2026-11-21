@@ -2,6 +2,10 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.46.1
+
+- Added: a paragraph on `paul/ebionites` with M. R. James's cautions on the evidence (1924, public domain): the Ebionites of Irenaeus are "a more primitive sect" than those of Epiphanius; the fragments Epiphanius quotes are a different book from the Gospel according to the Hebrews, whose baptism differs, although Eusebius says the Ebionites used only that gospel; and the Ebionite gospel was "designed to support a particular set of views", as the Passover saying shows. Each quotation was checked against the PDF text.
+
 ## 3.46.0
 
 The Qur'an parallels page, from M. R. James.

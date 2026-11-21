@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.46.0
+Stable tag: 3.46.1
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -168,6 +168,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.46.1 =
+* The Ebionites page adds M. R. James's cautions about the evidence: which Ebionites each father describes, how the Ebionite gospel differs from the Gospel according to the Hebrews, and the Passover saying that shows its purpose.
 = 3.46.0 =
 * The page on whether the Qur'an borrowed its stories now sets M. R. James's 1924 translations of the infancy gospels beside the Qur'an at seven points (the vow, the food, the angel, the birth, the clay birds, the curse and the palm), with James's own dates for each book.
 = 3.45.0 =
@@ -518,6 +520,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * New screenshot.
 
 == Upgrade Notice ==
+= 3.46.1 =
+Upload the whole theme. The Ebionites page refreshes from the first admin load; a page you edited is kept.
 = 3.46.0 =
 Upload the whole theme. The page on the Qur'an and the infancy gospels refreshes from the first admin load; a page you edited is kept.
 = 3.45.0 =
