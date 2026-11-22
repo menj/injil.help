@@ -1691,5 +1691,77 @@
                 "page": "https://pixabay.com/photos/hieroglyphs-pharaohs-egypt-luxor-429863/"
             }
         ]
+    },
+    "journal/woman-taken-in-adultery": {
+        "file": "Papyrus66.jpg",
+        "alt": "Papyrus 66, a Greek copy of the Gospel of John from about 200",
+        "caption": "Papyrus 66, a copy of John made about 200 and kept in the Bodmer collection. It runs from John 7:52 straight on to 8:12, with no story of the woman taken in adultery between them.",
+        "credit": "Public domain."
+    },
+    "journal/aramaic-words-of-jesus": {
+        "file": "Assyrian Gospel 1.jpg",
+        "alt": "A Syriac gospel manuscript from Urmia, late eighteenth century",
+        "caption": "A gospel book in Syriac, copied at Urmia in the late eighteenth century and now in the Library of Congress. Syriac is a form of Aramaic, the language Jesus spoke.",
+        "credit": "Public domain."
+    },
+    "journal/kalimah-and-logos": {
+        "file": "Double page from the Sultan Baybars Qur'an. The beginning of Sura Al-Imran (BL Add Ms 22406, ff.86v-87r).jpg",
+        "alt": "The opening of Sūrat Āl ʿImrān in the Qur’an of Sultan Baybars, in gold thuluth script",
+        "caption": "The opening of Sūrat Āl ʿImrān in the Qur’an copied for Sultan Baybars in Cairo, 1304 to 1306 (British Library, Add MS 22406). At 3:45 this sūra calls Jesus “a word from Him”.",
+        "credit": "Public domain."
+    },
+    "journal/jesus-at-prayer": {
+        "file": "Ann Arbor, University of Michigan Ms P.Mich.inv. 6652 (Papyrus 53) recto Matt 26, 36-40.jpg",
+        "alt": "Greek papyrus fragment, Papyrus 53, recto: Matthew 26:36-40",
+        "caption": "Papyrus 53, from the third century: Matthew 26:36-40, where Jesus falls on his face in Gethsemane and prays to his Father.",
+        "credit": "Public domain."
+    },
+    "journal/advent-and-return-of-jesus": {
+        "file": "Qur'an manuscript Surat al-Nisa'. (1).tif",
+        "alt": "The opening verses of Sūrat al-Nisāʾ in a Kufic Qur’an, with the title in gold",
+        "caption": "The first verses of Sūrat al-Nisāʾ, with the title and the count of its 176 verses in gold Kufic. Later in the same sūra, at 4:159, the People of the Book believe in Jesus before his death, which the commentators read as his return.",
+        "credit": "Public domain."
+    },
+    "journal/first-commandment-of-jesus": {
+        "file": "2nd century Hebrew decalogue.jpg",
+        "alt": "The Nash Papyrus, Hebrew text of the Ten Commandments and the Shema",
+        "caption": "The Nash Papyrus, bought in Egypt by W. L. Nash and published by Stanley A. Cook in 1903. It holds the Ten Commandments and the Shema, “Hear, O Israel”, the words Jesus gives as the first commandment in Mark 12:29.",
+        "credit": "Public domain."
+    },
+    "journal/codex-sinaiticus": {
+        "file": "Shorter ending of Mark 16 from Codex Sinaiticus.png",
+        "alt": "Codex Sinaiticus, fourth century: the Gospel of Mark ending at 16:8",
+        "caption": "Codex Sinaiticus, fourth century: Mark stops at 16:8, and the twelve verses later Bibles print after it are not there. British Library.",
+        "credit": "Public domain."
+    },
+    "journal/peace-on-day-he-was-born": {
+        "file": "Folio from a Qur'an Manuscript with Verses from the Surat al-Maryam MET DP374591.jpg",
+        "alt": "A leaf of a Qur’an manuscript with verses from Sūrat Maryam",
+        "caption": "A leaf from a Qur’an with verses of Sūrat Maryam, the sūra in which the newborn Jesus speaks from the cradle (19:30-34). Metropolitan Museum of Art.",
+        "credit": "CC0."
+    },
+    "journal/who-chose-four-gospels": {
+        "file": "Muratorian Fragment.jpg",
+        "alt": "The Muratorian Fragment, a Latin list of New Testament books",
+        "caption": "The Muratorian Fragment, a Latin list of the books read in church, in an eighth-century copy at the Biblioteca Ambrosiana, Milan (Cod. J 101 sup.). Its first lines are lost, and it opens on Luke as “the third book of the gospel”.",
+        "credit": "Public domain."
+    },
+    "journal/did-nicaea-choose-books": {
+        "file": "Rylands Nicene Creed papyrus.jpg",
+        "alt": "A Greek papyrus with the oldest surviving copy of the Nicene Creed",
+        "caption": "The oldest surviving copy of the creed of Nicaea, on papyrus, at the John Rylands Library, Manchester. The council wrote a creed and canons; neither names the books of the Bible.",
+        "credit": "Public domain."
+    },
+    "journal/syriac-bible-twenty-two-books": {
+        "file": "Nouveau Testament Syriaque 1540 btv1b53110173d 156.jpg",
+        "alt": "A page of a West Syriac New Testament manuscript of 1569",
+        "caption": "A West Syriac New Testament finished in 1569 by the priest and monk Yuwannis bar Šemʿun of Jerusalem. Bibliothèque nationale de France.",
+        "credit": "CC0."
+    },
+    "journal/paul-and-altered-gospel": {
+        "file": "Bifolio from Paul's Letter to the Romans, the end of Paul's Letter to the Philippians and the beginning of Paul's Letter to the Colossians.jpg",
+        "alt": "A double leaf of Papyrus 46 with Romans 11, the end of Philippians and the start of Colossians",
+        "caption": "Two leaves of Papyrus 46, the oldest surviving collection of Paul’s letters, from about 200: Romans 11, then the end of Philippians and the start of Colossians.",
+        "credit": "Public domain."
     }
 }

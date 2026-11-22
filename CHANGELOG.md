@@ -2,6 +2,13 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.47.0
+
+Images for the Journal.
+
+- Added: a plate for each of the 12 Journal entries, under `journal/<slug>` in `inc/data/images.json`. All are public-domain or CC0 manuscripts from Wikimedia Commons, chosen for the post: Papyrus 66 (John 7:52 runs on to 8:12 with no adultery story), a Syriac gospel book from Urmia, the opening of Āl ʿImrān in the Baybars Qur’an, Papyrus 53 (Gethsemane in Matthew 26), the opening of al-Nisāʾ, the Nash Papyrus (the Shema), the shorter ending of Mark in Codex Sinaiticus, a leaf of Sūrat Maryam, the Muratorian Fragment, the Rylands papyrus of the creed of Nicaea, a West Syriac New Testament of 1569 and Papyrus 46.
+- Changed: `injil_help_journal_content()` puts the entry's plate under its first paragraph, as the pages have it, and `injil_help_image_target()` finds the post for a `journal/` key through `injil_help_journal_find()`, so the admin pass sets it as the featured image and the image sitemap lists it. An entry you have edited keeps its text.
+
 ## 3.46.1
 
 - Added: a paragraph on `paul/ebionites` with M. R. James's cautions on the evidence (1924, public domain): the Ebionites of Irenaeus are "a more primitive sect" than those of Epiphanius; the fragments Epiphanius quotes are a different book from the Gospel according to the Hebrews, whose baptism differs, although Eusebius says the Ebionites used only that gospel; and the Ebionite gospel was "designed to support a particular set of views", as the Passover saying shows. Each quotation was checked against the PDF text.
