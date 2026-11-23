@@ -24,6 +24,19 @@ defined( 'ABSPATH' ) || exit;
 
 const INJIL_HELP_COMMONS_META = '_injil_help_commons';
 
+/**
+ * The post an images.json key belongs to: a Journal entry for "journal/<slug>" (found by the entry it was written
+ * from, so a renamed post keeps its image), otherwise the starter page at that path. Null when there is none.
+ */
+function injil_help_image_target( $path ) {
+	$base = ( defined( 'INJIL_HELP_JOURNAL_BASE' ) ? INJIL_HELP_JOURNAL_BASE : 'journal' ) . '/';
+	if ( 0 === strpos( (string) $path, $base ) && function_exists( 'injil_help_journal_find' ) ) {
+		$post = injil_help_journal_find( substr( (string) $path, strlen( $base ) ) );
+		return $post && 'trash' !== $post->post_status ? $post : null;
+	}
+	return function_exists( 'injil_help_find_page' ) ? injil_help_find_page( $path ) : null;
+}
+
 /** The image map, or an empty array when the file is missing or malformed. */
 function injil_help_images() {
 	static $map = null;
@@ -330,7 +343,7 @@ add_action(
 		$budget  = 6;
 		$pending = false;
 		foreach ( injil_help_images() as $path => $img ) {
-			$page = injil_help_find_page( $path );
+			$page = injil_help_image_target( $path );
 			if ( ! $page ) {
 				continue;
 			}
@@ -551,7 +564,7 @@ function injil_help_image_sitemap_entries() {
 		);
 	}
 	foreach ( injil_help_images() as $path => $img ) {
-		$page = function_exists( 'injil_help_find_page' ) ? injil_help_find_page( $path ) : null;
+		$page = injil_help_image_target( $path );
 		if ( ! $page || 'publish' !== $page->post_status || empty( $img['file'] ) || ( function_exists( 'injil_help_unlisted_live_ids' ) && in_array( (int) $page->ID, injil_help_unlisted_live_ids(), true ) ) ) {
 			continue;
 		}

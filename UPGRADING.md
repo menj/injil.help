@@ -86,6 +86,8 @@ The general steps, for any version:
 3. Open any admin screen as an administrator (page rewrites and the error pages need `edit_theme_options`, the development-file clean-up needs `update_themes`). The theme rewrites the pages whose text changed and keeps the ones you edited, writes its error pages, checks its `.htaccess` sections (at most hourly), and on a production site removes its development files.
 4. Read the note for the version you are moving to.
 
+**To 3.47.0.** Upload the whole theme. The 12 Journal entries take their plates from the first admin load, and the images copy into the Media Library six at a time over the next admin loads, each becoming its entry's featured image. An entry you have edited keeps its text; it gets the plate as its featured image unless it already has a featured image of its own, which is kept.
+
 **To 3.36.1.** Upload the whole theme. Nothing else changes.
 
 **To 3.35.0.** Upload the whole theme. The Glossary refreshes from the first admin load. A page you have edited is kept; Theme Options > Content > Update all pages from the theme replaces it.

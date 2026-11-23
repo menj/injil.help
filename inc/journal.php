@@ -49,6 +49,9 @@ function injil_help_journal_content( $entry ) {
 		'related' => (array) ( $entry['related'] ?? array() ),
 	);
 	$content = injil_help_markup_to_blocks( (array) $entry['body'] );
+	if ( function_exists( 'injil_help_add_page_image' ) ) {
+		$content = injil_help_add_page_image( $def['path'], $content, false ); // the entry's plate from images.json, under its first paragraph
+	}
 	return $content . injil_help_related_blocks( $def, $content );
 }
 
@@ -156,6 +159,11 @@ function injil_help_journal_seed( $now = null ) {
 	}
 	$GLOBALS['injil_help_seeding'] = false;
 	delete_option( 'injil_help_journal_seeding' );
+	if ( $tally['created'] || $tally['updated'] ) {
+		// The featured-image pass (inc/images.php) may have run earlier in this request, before these posts
+		// existed, and stamped the version done; clear the stamp so it runs again and gives them their plates.
+		delete_option( 'injil_help_featured' );
+	}
 	return $tally;
 }
 
