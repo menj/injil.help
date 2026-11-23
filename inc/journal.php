@@ -159,6 +159,11 @@ function injil_help_journal_seed( $now = null ) {
 	}
 	$GLOBALS['injil_help_seeding'] = false;
 	delete_option( 'injil_help_journal_seeding' );
+	if ( $tally['created'] || $tally['updated'] ) {
+		// The featured-image pass (inc/images.php) may have run earlier in this request, before these posts
+		// existed, and stamped the version done; clear the stamp so it runs again and gives them their plates.
+		delete_option( 'injil_help_featured' );
+	}
 	return $tally;
 }
 

@@ -7,7 +7,8 @@ All notable changes to The Injil theme. The `Changelog` section of `readme.txt` 
 Images for the Journal.
 
 - Added: a plate for each of the 12 Journal entries, under `journal/<slug>` in `inc/data/images.json`. All are public-domain or CC0 manuscripts from Wikimedia Commons, chosen for the post: Papyrus 66 (John 7:52 runs on to 8:12 with no adultery story), a Syriac gospel book from Urmia, the opening of Āl ʿImrān in the Baybars Qur’an, Papyrus 53 (Gethsemane in Matthew 26), the opening of al-Nisāʾ, the Nash Papyrus (the Shema), the shorter ending of Mark in Codex Sinaiticus, a leaf of Sūrat Maryam, the Muratorian Fragment, the Rylands papyrus of the creed of Nicaea, a West Syriac New Testament of 1569 and Papyrus 46.
-- Changed: `injil_help_journal_content()` puts the entry's plate under its first paragraph, as the pages have it, and `injil_help_image_target()` finds the post for a `journal/` key through `injil_help_journal_find()`, so the admin pass sets it as the featured image and the image sitemap lists it. An entry you have edited keeps its text.
+- Changed: `injil_help_journal_content()` puts the entry's plate under its first paragraph, as the pages have it, and `injil_help_image_target()` finds the post for a `journal/` key through `injil_help_journal_find()`, so the admin pass sets it as the featured image and the image sitemap lists it. An entry you have edited keeps its text, and one with a featured image of its own keeps that.
+- Fixed: a Journal seeding that writes a post clears the featured-image stamp, so a post seeded after the image pass ran in the same request still gets its plate.
 
 ## 3.46.1
 
