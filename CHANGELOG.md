@@ -2,6 +2,13 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.50.0
+
+The same-God page.
+
+- Added: `islamic-dilemma/same-god` ("Do Muslims and Christians worship the same God?", title tag "Same God? Muslims and Christians"): what the Qur'an says (29:46; 3:64; 4:171; 5:72-73; 19:36), what Vatican II says (*Nostra Aetate* 3, *Lumen Gentium* 16, checked against the Vatican and US bishops' texts), *A Common Word* (13 October 2007) and the Yale reply, Volf's book, the Wheaton College case of 2015 to 2016, the word Allāh, where the two agree and part, and six questions. Page count 184 to 185. Written for the searches on "do Christians and Muslims worship the same God", which run at about a thousand a month.
+- Changed: the Messiah in Islam page links to it.
+
 ## 3.49.0
 
 The Gospel of Barnabas page.
