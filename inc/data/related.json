@@ -486,5 +486,11 @@
         "quran/raised",
         "resources/borrowing",
         "gospels/thomas"
+    ],
+    "islamic-dilemma/same-god": [
+        "quran/servant",
+        "islamic-dilemma/what-is-injil",
+        "islamic-dilemma/torah-in-islam",
+        "resources/glossary"
     ]
 }
