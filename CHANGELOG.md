@@ -2,6 +2,14 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.51.0
+
+Two pages for the searches left over from the keyword files.
+
+- Added: `islamic-dilemma/name-of-jesus` (title tag "Muslim name for Jesus: ʿĪsā"): ʿĪsā ibn Maryam 25 times, al-Masīḥ 11 times, the Qur'an's other titles, the Hebrew, Greek and Syriac forms (Jeffery, 1938), Yasūʿ, and six questions. The origin of ʿĪsā is stated as scholars' reading, with the competing guesses named.
+- Added: `islamic-dilemma/son-of-god` (title tag "Is Jesus the Son of God?"): the title in the Hebrew scriptures (Exodus 4:22, 2 Samuel 7:14, Psalm 2:7, Job 1:6, Luke 3:38), in the gospels (Luke 1:35, Matthew 3:17, Mark 14:61-62, Mark 13:32, John 10:34-36, 20:17), in the creed of 381, and in the Qur'an (19:35; 9:30; 4:171; 3:59; 43:59), and six questions. Page count 185 to 187. The Bible and Qur'an wordings were written from memory, not from a text open at the time, and are marked for a check.
+- Changed: the same-God page links to both.
+
 ## 3.50.1
 
 - Added: on `islamic-dilemma/same-god`, two short quotations from *Peace-Building by, Between, and Beyond Muslims and Evangelical Christians* (Abu-Nimer and Augsburger, Lexington Books, 2009; in copyright, quoted with credit): J. Dudley Woodberry, chapter 14, and Asma Afsaruddin, chapter 16. Both were read in the EPUB the owner supplied.

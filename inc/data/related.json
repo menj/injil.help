@@ -492,5 +492,17 @@
         "islamic-dilemma/what-is-injil",
         "islamic-dilemma/torah-in-islam",
         "resources/glossary"
+    ],
+    "islamic-dilemma/name-of-jesus": [
+        "quran/servant",
+        "quran/birth",
+        "islamic-dilemma/son-of-god",
+        "resources/glossary"
+    ],
+    "islamic-dilemma/son-of-god": [
+        "quran/servant",
+        "islamic-dilemma/same-god",
+        "islamic-dilemma/name-of-jesus",
+        "gospels/john"
     ]
 }
