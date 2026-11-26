@@ -2,6 +2,14 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.48.0
+
+Three lexicon glosses, and two taken out.
+
+- Added: Ḥamīd al-Dīn al-Farāhī, *Mufradāt al-Qurʾān* (arabiclexicon.hawramani.com, read again once the site's certificate was renewed), on three Glossary entries and only where the word bears on this website's questions: Injīl (the name is Greek and means glad tidings; a name shared between the whole book sent down and what remained with the People of the Book), Muhaymin (the one relied upon, and the agent) and Naṣārā (the two parties, of Simon and of Paul). Each quotation was checked against the entry text and links to it.
+- Removed: two marginal lexicon sentences from 3.41.0, *mizbar* for the pen under Zabūr and "the coolness of a breeze" under Rūḥ, because they do not bear on the site's questions.
+- Note: the other pending lexicons have no entry for any Glossary term that matters here, so none of their text is used. Their entries are on the dictionaries page for readers.
+
 ## 3.47.0
 
 Images for the Journal.

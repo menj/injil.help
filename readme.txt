@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.47.0
+Stable tag: 3.48.0
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -168,6 +168,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.48.0 =
+* Three Glossary entries (Injīl, Muhaymin, Naṣārā) gain a short gloss from al-Farāhī's Mufradāt al-Qurʾān, and two marginal lexicon sentences are removed from Zabūr and Rūḥ.
 = 3.47.0 =
 * Each of the 12 Journal entries now opens with a manuscript plate from Wikimedia Commons, which is also its featured image: Papyrus 66 for the woman taken in adultery, the Nash Papyrus for the Shema, the Muratorian Fragment for the four gospels, the oldest copy of the creed of Nicaea, Papyrus 46 for Paul, and Qur’an leaves for the posts on the Qur’an.
 = 3.46.1 =
@@ -522,6 +524,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * New screenshot.
 
 == Upgrade Notice ==
+= 3.48.0 =
+Upload the whole theme. The Glossary refreshes from the first admin load; a page you edited is kept.
 = 3.47.0 =
 Upload the whole theme. The Journal entries take their plates from the first admin load, and the images copy into the Media Library six at a time; an entry you edited is kept.
 = 3.46.1 =
