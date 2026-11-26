@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.50.0
+Stable tag: 3.50.1
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -168,6 +168,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.50.1 =
+* The same-God page cites a joint Muslim and Evangelical volume (Abu-Nimer and Augsburger, 2009) for a statement from each side.
 = 3.50.0 =
 * New page /islamic-dilemma/same-god/: do Muslims and Christians worship the same God? What the Qur'an says, what Vatican II and the churches have said, where the two agree and part, and questions and answers. The Messiah in Islam page links to it.
 = 3.49.0 =
@@ -528,6 +530,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * New screenshot.
 
 == Upgrade Notice ==
+= 3.50.1 =
+Upload the whole theme. The same-God page refreshes from the first admin load; a page you edited is kept.
 = 3.50.0 =
 Upload the whole theme. One page is created and one is refreshed from the first admin load; a page you edited is kept.
 = 3.49.0 =

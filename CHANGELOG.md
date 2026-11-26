@@ -2,6 +2,10 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.50.1
+
+- Added: on `islamic-dilemma/same-god`, two short quotations from *Peace-Building by, Between, and Beyond Muslims and Evangelical Christians* (Abu-Nimer and Augsburger, Lexington Books, 2009; in copyright, quoted with credit): J. Dudley Woodberry, chapter 14, and Asma Afsaruddin, chapter 16. Both were read in the EPUB the owner supplied.
+
 ## 3.50.0
 
 The same-God page.
