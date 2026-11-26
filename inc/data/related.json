@@ -480,5 +480,11 @@
         "resources/glossary",
         "resources/sources",
         "islamic-dilemma/what-is-injil"
+    ],
+    "gospels/barnabas": [
+        "islamic-dilemma/what-is-injil",
+        "quran/raised",
+        "resources/borrowing",
+        "gospels/thomas"
     ]
 }
