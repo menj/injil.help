@@ -2,6 +2,14 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.49.0
+
+The Gospel of Barnabas page.
+
+- Added: `gospels/barnabas` ("The Gospel of Barnabas: what it says and when it was written", title tag "Gospel of Barnabas: what it is"). Built from the 1907 Ragg edition (public domain), whose introduction and English text were read in full: the Vienna manuscript (Cod. 2662) and its history through Cramer, Toland and Prince Eugene; the lost Spanish text; Ragg's evidence for a late date (the watermark, the Vulgate, medieval Italian scenes, Dante, the jubilee every hundred years); four claims of the book (Jesus is not the Messiah, Muhammad is, Judas dies in his place, Jesus is not God); where it parts from the Qur'an; the Gelasian Decree; six questions. Page count 183 to 184. The page was written for the searches on "gospel of barnabas", which run at several hundred a month.
+- Changed: the What is the Injil page, the raised page and the Five Gospels index link to it; `related.json` and `seo-titles.json` have its entries.
+- Note: no manuscript images are set on the page yet. Commons returned a rate limit when asked for some.
+
 ## 3.48.0
 
 Three lexicon glosses, and two taken out.
