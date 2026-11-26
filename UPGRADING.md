@@ -86,8 +86,6 @@ The general steps, for any version:
 3. Open any admin screen as an administrator (page rewrites and the error pages need `edit_theme_options`, the development-file clean-up needs `update_themes`). The theme rewrites the pages whose text changed and keeps the ones you edited, writes its error pages, checks its `.htaccess` sections (at most hourly), and on a production site removes its development files.
 4. Read the note for the version you are moving to.
 
-**To 3.47.0.** Upload the whole theme. The 12 Journal entries take their plates from the first admin load, and the images copy into the Media Library six at a time over the next admin loads, each becoming its entry's featured image. An entry you have edited keeps its text; it gets the plate as its featured image unless it already has a featured image of its own, which is kept.
-
 **To 3.36.1.** Upload the whole theme. Nothing else changes.
 
 **To 3.35.0.** Upload the whole theme. The Glossary refreshes from the first admin load. A page you have edited is kept; Theme Options > Content > Update all pages from the theme replaces it.
@@ -148,6 +146,7 @@ The `(.+/)?` covers WordPress in a subfolder of the `.htaccess` folder too, such
 Git Updater reads the theme header and offers the release whose tag matches `Version:`. After the update, the first load of any admin screen rewrites the starter pages whose text changed, keeps pages you edited (marked "edited, kept on update" on the Content tab), keeps no revisions, and flushes rewrite rules only if permalinks had to be set. "Update all pages from the theme" replaces every page, edited ones included, after a confirmation. Take a database backup before updating; open the Content tab once after.
 
 - **3.20.2.** Nothing to do. A page or Journal post that carries no hash from the theme is kept on every update from now on, so it keeps your text and does not take the new one. To give such a page the theme's text, press "Update all pages from the theme".
+- **3.47.0.** Upload the whole theme. The 12 Journal entries take their plates from the first admin load, and the images copy into the Media Library six at a time over the next admin loads, each becoming its entry's featured image. An entry you have edited keeps its text; it gets the plate as its featured image unless it already has a featured image of its own, which is kept.
 - **3.46.1.** Upload the whole theme. The Ebionites page is rewritten from the first admin load; a page you have edited is kept.
 - **3.46.0.** Upload the whole theme. Resources > Did the Qur'an borrow its stories? is rewritten from the first admin load; a page you have edited is kept.
 - **3.45.0.** Upload the whole theme. The Ebionites, James, Torah in Islam and Source library pages are rewritten from the first admin load; a page you have edited is kept.
