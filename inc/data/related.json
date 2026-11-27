@@ -487,22 +487,22 @@
         "resources/borrowing",
         "gospels/thomas"
     ],
-    "islamic-dilemma/same-god": [
+    "quran/same-god": [
         "quran/servant",
         "islamic-dilemma/what-is-injil",
         "islamic-dilemma/torah-in-islam",
         "resources/glossary"
     ],
-    "islamic-dilemma/name-of-jesus": [
+    "quran/name-of-jesus": [
         "quran/servant",
         "quran/birth",
-        "islamic-dilemma/son-of-god",
+        "quran/son-of-god",
         "resources/glossary"
     ],
-    "islamic-dilemma/son-of-god": [
+    "quran/son-of-god": [
         "quran/servant",
-        "islamic-dilemma/same-god",
-        "islamic-dilemma/name-of-jesus",
+        "quran/same-god",
+        "quran/name-of-jesus",
         "gospels/john"
     ]
 }

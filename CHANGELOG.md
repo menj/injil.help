@@ -2,6 +2,13 @@
 
 All notable changes to The Injil theme. The `Changelog` section of `readme.txt` mirrors this file; `UPGRADING.md` says what each release means for an existing site. Versions follow `Version:` in `style.css` and the tag on `main`.
 
+## 3.51.1
+
+The three question pages move to the Qur'an section.
+
+- Changed: `islamic-dilemma/same-god`, `islamic-dilemma/name-of-jesus` and `islamic-dilemma/son-of-god` are now `quran/same-god`, `quran/name-of-jesus` and `quran/son-of-god`. They sit in the Jesus in the Qur'an section, where their subject belongs, and the Qur'an section index lists them in a new paragraph. Title tags, Read next links and internal links follow. The text of the pages is unchanged.
+- Note: there is no redirect, as the owner decided. An address from 3.50.0 or 3.51.0 answers 404. On a site that already loaded the old pages, the first admin load after the update takes the three old pages to the Trash if they were not edited.
+
 ## 3.51.0
 
 Two pages for the searches left over from the keyword files.

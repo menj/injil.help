@@ -3,7 +3,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-pa
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.51.0
+Stable tag: 3.51.1
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -168,6 +168,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * Say so in the site's privacy policy if you switch remote plates on.
 
 == Changelog ==
+= 3.51.1 =
+* The pages on the same God, the Muslim name for Jesus and the Son of God move from /islamic-dilemma/ to /quran/ (/quran/same-god/, /quran/name-of-jesus/, /quran/son-of-god/). There is no redirect from the old addresses.
 = 3.51.0 =
 * Two new pages: /islamic-dilemma/name-of-jesus/ (the Muslim name for Jesus, Isa, its Syriac source and the Arabic Christian Yasu) and /islamic-dilemma/son-of-god/ (Son of God in the Hebrew scriptures, the gospels, the creeds and the Qur'an), each with questions and answers. The same-God page links to both.
 = 3.50.1 =
@@ -532,6 +534,8 @@ The theme sets no cookies and loads no scripts, fonts or styles from another ser
 * New screenshot.
 
 == Upgrade Notice ==
+= 3.51.1 =
+Upload the whole theme. Three pages move to /quran/ with no redirect; an unedited copy at the old address goes to the Trash on the first admin load. Update any link you made to the old addresses.
 = 3.51.0 =
 Upload the whole theme. Two pages are created and one is refreshed from the first admin load; a page you edited is kept.
 = 3.50.1 =
